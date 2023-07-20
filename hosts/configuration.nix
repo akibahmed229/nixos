@@ -6,23 +6,6 @@
       ./desktop/hardware-configuration.nix
     ];
 
-  
-  # Setting For OpenRGB
-  services.hardware.openrgb = {
-    enable = true;
-    motherboard = "intel";
-  };  
-
-  # Insecure permite
-  nixpkgs.config.permittedInsecurePackages = [
-    "python-2.7.18.6"
-  ];
-
-  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ 
-    "steam"
-  ]);
-
-
   # Use the systemd-boot EFI boot loader.
   #  boot.loader.systemd-boot.enable = true;
   #  boot.loader.efi.canTouchEfiVariables = true;
@@ -45,6 +28,22 @@
   };	
  
 
+  # Setting For OpenRGB
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "intel";
+  };  
+
+  # Insecure permite
+  nixpkgs.config.permittedInsecurePackages = [
+    "python-2.7.18.6"
+  ];
+
+  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ 
+    "steam"
+  ]);
+
+  # networking options
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -103,9 +102,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  
   # Default Shell zsh
-  # users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
     isNormalUser = true;
@@ -135,7 +134,6 @@
     zip
     unzip
     p7zip
-    #tmux
     ranger
     exa
     bat
@@ -168,10 +166,7 @@
     bottles
     gparted
     #libreoffice
-    notepadqq
-    steam
-    steam-run
-    heroic-unwrapped
+    notepadqq 
     mangohud	
     goverlay
     anydesk
@@ -187,8 +182,22 @@
     i2c-tools
     libverto
     fail2ban
-    gnome.gnome-tweaks
-    dconf
+    # Heoric game luncher
+    heroic-unwrapped
+    # Steam
+    steam
+    steam-run
+    # luturis
+	  lutris
+	  (lutris.override {
+	       extraPkgs = pkgs: [
+		        # List package dependencies here
+		        wineWowPackages.stable
+		        winetricks
+	         ];
+	  })   
+
+    # Xdg-desktop-portal
     xdg-desktop-portal-gtk
     xorg.xkill
     xorg.libX11
@@ -197,7 +206,9 @@
     xorg.libXft
     xorg.libXinerama
     xorg.xinit
-
+    # Gnome software 
+    gnome.gnome-tweaks
+    dconf
     # Gnome Extension
     gnomeExtensions.blur-my-shell
     #gnomeExtensions.burn-my-windows
@@ -214,7 +225,15 @@
     gnomeExtensions.quick-settings-tweaker
     gnomeExtensions.tiling-assistant
     gnomeExtensions.vitals
+
   ];
+
+    # Gaming
+    programs.steam = {
+	  enable = true;
+	  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+	  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+	  };	       
 
   # Eableing OpenGl support
   hardware.opengl = {
@@ -229,74 +248,39 @@
   };
   hardware.opengl.driSupport32Bit = true;
 
-
   # Zsh and Oh-My-Zsh setup
-  #programs = {
-  #  zsh = {
-  #    enable = true;
-  #    autosuggestions.enable = true;
-  #    enableBashCompletion = true;
-  #    syntaxHighlighting.enable = true;
-  #    shellInit = ''
-  #      source ./.zshrc
-  #    '';
-  #    syntaxHighlighting.highlighters = [
-  #     "main" "brackets" "pattern" "cursor" "regexp" "root" "line"
-  #    ];
-  #    syntaxHighlighting.styles = { "alias" = "fg=magenta,bold"; };
-  #    autosuggestions.highlightStyle = "fg=cyan";
-  #    ohMyZsh = {
-  #     enable = true;
-  #      plugins = [
-  #        "git"
-  #        "sudo"
-  #        "terraform"
-  #        "systemadmin"
-  #        "vi-mode"
-  #      ];
-  #      theme = "agnoster";
-  #    };
-  #  };
-  #};
-
-  # Tmux Config
-  # programs.tmux ={
-  #   enable = true;
-  #  secureSocket = false;
-  #  plugins = with pkgs; [
-  #    tmuxPlugins.sensible
-  #    tmuxPlugins.catppuccin
-  #    tmuxPlugins.vim-tmux-navigator
-  #    tmuxPlugins.yank
-  #  ];
-  #  extraConfig = ''	
-  #    source ./tmux.conf
-  #  '';
-  #};
-
-
-  # NeoVim configuration
-  programs.neovim = {
-    enable = true;
-    #defaultEditor = true;
-    #configure = {
-      # customRC = '' 
-      # luafile ${./nvim/init.lua}
-      # '';
-    #};
-  };
-
-
-  # Gaming
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };	       
+  programs = {
+      zsh = {
+        enable = true;
+	autosuggestions.enable = true;
+	enableBashCompletion = true;
+	syntaxHighlighting.enable = true;
+	shellInit = ''
+		source /home/${user}/flake/hosts/desktop/.zshrc
+	'';
+	syntaxHighlighting.highlighters = [
+	"main" "brackets" "pattern" "cursor" "regexp" "root" "line"
+	];
+	syntaxHighlighting.styles = { "alias" = "fg=magenta,bold"; };
+	autosuggestions.highlightStyle = "fg=cyan";
+        ohMyZsh = {
+          enable = true;
+          plugins = [
+	          "git"
+            "sudo"
+            "flake"
+            "terraform"
+            "systemadmin"
+            "vi-mode"
+            ];
+	   theme = "agnoster";
+         };
+      };
+    };
 
   # Font Setting
   fonts = {
-    fonts = with pkgs; [
+   fonts = with pkgs; [
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -307,13 +291,12 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = [ "Meslo LG M Regular Nerd Font Complete Mono" ];
-        serif = [ "Noto Serif" "Source Han Serif" ];
-        sansSerif = [ "Noto Sans" "Source Han Sans" ];
-      };
-    };
+	      monospace = [ "Meslo LG M Regular Nerd Font Complete Mono" ];
+	      serif = [ "Noto Serif" "Source Han Serif" ];
+	      sansSerif = [ "Noto Sans" "Source Han Sans" ];
+      		};
+  	  };
   };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

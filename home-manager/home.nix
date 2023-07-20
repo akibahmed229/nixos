@@ -1,11 +1,11 @@
-{ config, pkgs,user ,... }:
+{ config, pkgs, user,... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
-
+  home.homeDirectory = "/home/${user}"; 
+   
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -21,8 +21,7 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    hardinfo
-    whatsapp-for-linux
+   
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -35,6 +34,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    whatsapp-for-linux
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -77,6 +78,38 @@
     # EDITOR = "emacs";
   };
 
+   # Getting accelerated video playback
+   nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+   };
+    
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Tmux Config
+  programs.tmux ={
+	  enable = true;
+	  secureSocket = false;
+	  plugins = with pkgs; [
+		  tmuxPlugins.sensible
+		  tmuxPlugins.catppuccin
+	  	tmuxPlugins.vim-tmux-navigator
+		  tmuxPlugins.yank
+	  ];
+	    extraConfig = ''	
+	        source /home/${user}/flake/hosts/desktop/tmux.conf
+	   '';
+  };
+
+   # NeoVim configuration
+   # programs.neovim = {
+   # enable = true;
+   # defaultEditor = true;
+   # configure = {
+        # customRC = '' 
+	  # luafile ${./nvim/init.lua}
+      # '';
+    #  };
+    #};
+
 }
