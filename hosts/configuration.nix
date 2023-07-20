@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs,user ,... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./desktop/hardware-configuration.nix
     ];
 
   
@@ -107,7 +107,7 @@
   # Default Shell zsh
   # users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.akib = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "Akib Ahmed";
     extraGroups = [ "ALL" "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" ];

@@ -2,39 +2,36 @@
   description = "My NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.05"; # stable packages
+
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable packages 
+
     home-manager = {
-        url = "github:nix-community/home-manager/release-23.05";
+        url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
 
-  outputs = { self, nixpkgs, home-manager}:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ...}:
   let
-    lib = nixpkgs.lib;
-    system =  lib.mkDefault "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
+      system = "x86_64-linux";
+      user = "akib";
+
+      pkgs = import nixpkgs { 
+        inherit system;
+        config = { allowUnfree = true; };
+        };
+
+     lib = nixpkgs.lib;   
   in {
     nixosConfigurations = {
-      akib = lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.akib = {
-              imports = [
-                ./home-manager/home.nix
-              ];
-            };
-          }
-        ];
-      };
+      desktop = (                                               # NixOS configurations
+        import ./hosts {                                        # Imports ./hosts/default.nix
+          inherit (nixpkgs) lib;
+          inherit inputs user system home-manager;
+        }
+      );
     };
-   };
-  }
+  };
 
+}
