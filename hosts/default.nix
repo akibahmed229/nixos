@@ -1,11 +1,10 @@
-{lib, inputs, system, home-manager, user, ...}:
+{ lib, inputs, system, home-manager, user, ... }:
 
 {
   desktop = lib.nixosSystem {
     inherit system;
-    spacialArgs = { inherit user inputs};
     modules = [
-    ./configuration.nix
+      ./configuration.nix
 
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
@@ -20,3 +19,4 @@
     ];
   };
 }
+

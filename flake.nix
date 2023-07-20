@@ -14,24 +14,19 @@
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ...}:
   let
-      system = "x86_64-linux";
-      user = "akib";
-
-      pkgs = import nixpkgs { 
-        inherit system;
-        config = { allowUnfree = true; };
-        };
-
-     lib = nixpkgs.lib;   
-  in {
-    nixosConfigurations = {
-      desktop = (                                               # NixOS configurations
-        import ./hosts {                                        # Imports ./hosts/default.nix
+    system = "x86_64-linux";
+    user = "akib";
+    pkgs = import nixpkgs {
+      inherit system;
+      config = { allowUnfree = true; };
+    };
+    in {
+    lib = nixpkgs.lib;
+        nixosConfigurations = (                                               # NixOS configurations
+          import ./hosts {                                                    # Imports ./hosts/default.nix
           inherit (nixpkgs) lib;
-          inherit inputs user system home-manager;
+          inherit inputs user system home-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
-    };
   };
-
 }
