@@ -256,7 +256,7 @@
 	enableBashCompletion = true;
 	syntaxHighlighting.enable = true;
 	shellInit = ''
-		source /home/${user}/flake/hosts/desktop/.zshrc
+		source ../hosts/desktop/.zshrc
 	'';
 	syntaxHighlighting.highlighters = [
 	"main" "brackets" "pattern" "cursor" "regexp" "root" "line"
@@ -268,7 +268,6 @@
           plugins = [
 	          "git"
             "sudo"
-            "flake"
             "terraform"
             "systemadmin"
             "vi-mode"
