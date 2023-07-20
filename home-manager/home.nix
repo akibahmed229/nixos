@@ -97,7 +97,7 @@
 		  tmuxPlugins.yank
 	  ];
 	    extraConfig = ''	
-	        source ../hosts/desktop/tmux.conf
+	        source /home/${user}/flake/hosts/desktop/tmux.conf
 	   '';
   };
 
