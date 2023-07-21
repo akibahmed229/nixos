@@ -159,7 +159,7 @@ Feel free to explore and experiment with Home Manager to tailor your user enviro
 
 # File Structure :-
 ```
-| |____flake
+|____flake
 | |____flake.lock
 | |____home-manager
 | | |____alacritty
@@ -181,4 +181,5 @@ Feel free to explore and experiment with Home Manager to tailor your user enviro
 | |____LICENSE
 | |____.gitignore
 | |____.git
+
 ```
