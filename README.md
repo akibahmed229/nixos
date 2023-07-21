@@ -157,7 +157,7 @@ For more detailed information and usage instructions, refer to [Chapter 2 of the
 
 Feel free to explore and experiment with Home Manager to tailor your user environment configuration to your specific needs. Enjoy the flexibility and simplicity of managing your system with Nix and Home Manager!
 
-# File Structure :-
+# File Structure
 ```
 |____flake
 | |____flake.lock
