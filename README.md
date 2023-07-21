@@ -157,4 +157,28 @@ For more detailed information and usage instructions, refer to [Chapter 2 of the
 
 Feel free to explore and experiment with Home Manager to tailor your user environment configuration to your specific needs. Enjoy the flexibility and simplicity of managing your system with Nix and Home Manager!
 
+# File Structure :-
+
+| |____flake
+| |____flake.lock
+| |____home-manager
+| | |____alacritty
+| | | |____alacritty.yml
+| | |____OpenRGB
+| | | |____Mouse.orp
+| | | |____Keyboard.orp
+| | | |____Mobo.orp
+| | |____home.nix
+| |____hosts
+| | |____desktop
+| | | |____tmux.conf
+| | | |____.zshrc
+| | | |____hardware-configuration.nix
+| | |____default.nix
+| | |____configuration.nix
+| |____flake.nix
+| |____README.md
+| |____LICENSE
+| |____.gitignore
+| |____.git
 
