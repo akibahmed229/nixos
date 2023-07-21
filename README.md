@@ -2,27 +2,26 @@
 
 ## Table of Contents
 1. [NixOS Btrfs Installation Guide](#1nixos-btrfs-installation-guide)
-    1. [Prerequisites](#prerequisites)
+    1. [Prerequisites](#installation-prerequisites)
     2. [Installation Steps](#installation-steps)
-    3. [NixOS Configuration Options](#nixos-configuration-options)
-    4. [NixOS Configuration Examples](#nixos-configuration-examples)
 
 2. [Home Manager Installation and Usage Guide](#2home-manager-installation-and-usage-guide)
-   1. [Standalone Installation](#1-standalone-installation)
-   2. [NixOS Module](#2-nixos-module)
-   3. [Using Home Manager](#using-home-manager)
-
+   1. [Prerequisites](#home-manager-prerequisites)
+   2. [Standalone Installation](#1-standalone-installation)
+   3. [NixOS Module](#2-nixos-module)
+ 
 3. [Using Nix Flakes on NixOS with Home Manager](#3using-nix-flakes-on-nixos-with-home-manager)
-    1. [Prerequisites](#prerequisites-1)
-    2. [Installation](#installation-1)
-    3. [Usage](#usage)
+    1. [Prerequisites](#flakes-prerequisites)
+    2. [Enable Flake](#enable-flake)
+    3. [Update System Configuration](#update-system-configuration)
+    4. [Using Flakes on Fresh Install](#using-flakes-on-fresh-install)
 
 
 # 1.NixOS Btrfs Installation Guide
 
 This guide provides step-by-step instructions for installing NixOS on a Btrfs filesystem using a copy-on-write (CoW) approach for Linux systems.
 
-## Prerequisites
+## Installation Prerequisites
 
 Before you begin, ensure you have the following:
 
@@ -92,7 +91,7 @@ Home Manager is a powerful tool that allows you to manage user configurations wi
 
 ## 1. Standalone Installation
 
-### Prerequisites
+### Home Manager Prerequisites
 
 Before you begin, ensure you have the following:
 
@@ -181,7 +180,7 @@ Sure, I'd be happy to help you create a more detailed and organized guide for us
 
 This guide will walk you through setting up and using Nix Flakes on NixOS, along with Home Manager as a module. Flakes provide a declarative and reproducible way to manage NixOS configurations and packages. Home Manager allows you to manage user-specific configurations for applications.
 
-## Prerequisites
+## Flake Prerequisites
 
 - You should be familiar with NixOS and its basic concepts.
 - Ensure you have Nix installed on your system.
