@@ -1,4 +1,22 @@
-# NixOS Things ...
+# NixOS Stuf ...
+
+## Table of Contents
+1. [NixOS Btrfs Installation Guide](#1nixos-btrfs-installation-guide)
+    1. [Prerequisites](#prerequisites)
+    2. [Installation Steps](#installation-steps)
+    3. [NixOS Configuration Options](#nixos-configuration-options)
+    4. [NixOS Configuration Examples](#nixos-configuration-examples)
+
+2. [Home Manager Installation and Usage Guide](#2home-manager-installation-and-usage-guide)
+   1. [Standalone Installation](#1-standalone-installation)
+   2. [NixOS Module](#2-nixos-module)
+   3. [Using Home Manager](#using-home-manager)
+
+3. [Using Nix Flakes on NixOS with Home Manager](#3using-nix-flakes-on-nixos-with-home-manager)
+    1. [Prerequisites](#prerequisites-1)
+    2. [Installation](#installation-1)
+    3. [Usage](#usage)
+
 
 # 1.NixOS Btrfs Installation Guide
 
