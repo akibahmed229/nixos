@@ -256,7 +256,7 @@ If you want to use your flakes on a fresh NixOS install, follow these steps:
 4. Clone your NixOS configuration repository:
 
    ```bash
-   git clone git@github.com:akibahmed229/nixos.git /mnt/etc/nixos
+   git clone git@github.com:akibahmed229/nixos.git /mnt/<path>
    ```
 
 5. Install NixOS with your flake:
@@ -286,7 +286,7 @@ After booting into your fresh NixOS system, log in as the user with sudo privile
 2. Move your built NixOS configuration to the desired location:
 
    ```bash
-   sudo mv /mnt/etc/nixos/flake /etc/nixos
+   sudo mv /mnt/<path> /home/<user>/flake 
    ```
 
 3. You can now continue using `sudo nixos-rebuild switch --flake .#hostname` to update your system configuration and Home Manager whenever needed.
@@ -318,5 +318,4 @@ Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS syst
 | |____LICENSE
 | |____.gitignore
 | |____.git
-
 ```
