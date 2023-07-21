@@ -157,7 +157,144 @@ For more detailed information and usage instructions, refer to [Chapter 2 of the
 
 Feel free to explore and experiment with Home Manager to tailor your user environment configuration to your specific needs. Enjoy the flexibility and simplicity of managing your system with Nix and Home Manager!
 
-# File Structure
+Sure, I'd be happy to help you create a more detailed and organized guide for using flakes on NixOS in your GitHub repository's README.md. Here's the revised and expanded guide:
+
+# 3.Using Nix Flakes on NixOS with Home Manager
+
+This guide will walk you through setting up and using Nix Flakes on NixOS, along with Home Manager as a module. Flakes provide a declarative and reproducible way to manage NixOS configurations and packages. Home Manager allows you to manage user-specific configurations for applications.
+
+## Prerequisites
+
+- You should be familiar with NixOS and its basic concepts.
+- Ensure you have Nix installed on your system.
+
+## Enable Flakes
+
+To enable flakes in your NixOS configuration, follow these steps:
+
+1. Open your `configuration.nix` using a text editor:
+
+   ```bash
+   sudo nano /etc/nixos/configuration.nix
+   ```
+
+2. Add the following options to the configuration:
+
+   ```nix
+   { pkgs, ... }: {
+     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+   }
+   ```
+
+   Save the file and exit the text editor.
+
+3. Rebuild your system to enable flakes:
+
+   ```bash
+    sudo nixos-rebuild switch
+    ```
+
+## Initialize Flake
+
+1. Create a directory to store your flakes:
+
+   ```bash
+   mkdir ~/flake
+   cd ~/flake
+   ```
+
+2. Initialize the flake using the `nix flake init` command:
+
+   ```bash
+   nix flake init
+   ```
+
+## Build the System with Flake
+
+To update your system and Home Manager using flakes, run the following command:
+
+```bash
+sudo nixos-rebuild switch --flake .#hostname
+```
+
+Replace `hostname` with your system's hostname.
+
+## Update System Configuration
+
+If you make changes to your `flake.nix` or update your flake sources, you can update your system with the new configuration using the following commands:
+
+1. Update the flake sources:
+
+   ```bash
+   sudo nix flake update
+   ```
+
+2. Rebuild your system with the updated flake:
+
+   ```bash
+   sudo nixos-rebuild switch --flake .#hostname
+   ```
+
+## Using Flakes on Fresh Install
+
+If you want to use your flakes on a fresh NixOS install, follow these steps:
+
+1. Boot into the NixOS installation ISO.
+
+2. Switch to the root user:
+
+   ```bash
+   sudo su
+   ```
+
+3. Install Nix using Nixpkgs in the ISO:
+
+   ```bash
+   nix-env -IA nixos.git
+   ```
+
+4. Clone your NixOS configuration repository:
+
+   ```bash
+   git clone git@github.com:akibahmed229/nixos.git /mnt/etc/nixos
+   ```
+
+5. Install NixOS with your flake:
+
+   ```bash
+   nixos-install --flake .#hostname
+   ```
+
+   Replace `hostname` with your system's hostname.
+
+6. Reboot your system:
+
+   ```bash
+   reboot
+   ```
+
+## Finalizing the Setup
+
+After booting into your fresh NixOS system, log in as the user with sudo privileges and complete the following steps:
+
+1. Remove the default `configuration.nix`:
+
+   ```bash
+   sudo rm -r /etc/nixos/configuration.nix
+   ```
+
+2. Move your built NixOS configuration to the desired location:
+
+   ```bash
+   sudo mv /mnt/etc/nixos/flake /etc/nixos
+   ```
+
+3. You can now continue using `sudo nixos-rebuild switch --flake .#hostname` to update your system configuration and Home Manager whenever needed.
+
+## Using Nix Flakes on NixOS with Home Manager
+Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS system configuration and user-specific application configurations in a declarative and reproducible way. Nix Flakes provide a convenient way to define your system and package configurations, while Home Manager handles individual user configurations for various applications. With this setup, you can easily update your entire system or specific applications using a single command, ensuring consistency and simplicity in managing your NixOS environment.
+
+# 4.File Structure
 ```
 |____flake
 | |____flake.lock
