@@ -1,8 +1,6 @@
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-  <h1>NixOS Stuff...</h1>
-</div>
+# ..........................NixOS Stuff.............................
 
-# Table of Contents
+## Table of Contents
 
 1. [NixOS Btrfs Installation Guide](#1nixos-btrfs-installation-guide)
     1. [Prerequisites](#installation-prerequisites)
