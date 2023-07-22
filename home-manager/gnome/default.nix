@@ -5,8 +5,11 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [
+      ./home.nix
+  ];
+
   programs = {
-    zsh.enable = true;
     dconf.enable = true;
     kdeconnect = {                                # For GSConnect
       enable = true;
@@ -21,8 +24,6 @@
       layout = "us";                              # Keyboard layout & €-sign
       xkbOptions = "eurosign:e";
       libinput.enable = true;
-      modules = [ pkgs.xf86_input_wacom ];        # Both needed for wacom tablet usage
-      wacom.enable = true;
 
       displayManager.gdm.enable = true;           # Display Manager
       desktopManager.gnome.enable = true;         # Window Manager
@@ -31,8 +32,6 @@
       gnome.gnome-settings-daemon
     ];
   };
-
-  hardware.pulseaudio.enable = false;
 
   environment = {
     systemPackages = with pkgs; [                 # Packages installed

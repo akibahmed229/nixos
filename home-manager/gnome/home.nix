@@ -12,38 +12,22 @@
       favorite-apps = [
         "org.gnome.Settings.desktop"
         "Alacritty.desktop"
-        "firefox.desktop"
-        "emacs.desktop"
         "org.gnome.Nautilus.desktop"
-        "com.obsproject.Studio.desktop"
-        "plexmediaplayer.desktop"
-        "smartcode-stremio.desktop"
         "discord.desktop"
         "steam.desktop"
-        "retroarch.desktop"
-        "com.parsecgaming.parsec.desktop"
-        "org.remmina.Remmina.desktop"
         "virt-manager.desktop"
-        # "blueman-manager.desktop"
-        # "pavucontrol.desktop"
       ];
       disable-user-extensions = false;
       enabled-extensions = [
-        "trayIconsReloaded@selfmade.pl"
         "blur-my-shell@aunetx"
         "drive-menu@gnome-shell-extensions.gcampax.github.com"
         "dash-to-panel@jderose9.github.com"
-        "just-perfection-desktop@just-perfection"
         "caffeine@patapon.info"
         "clipboard-indicator@tudmotu.com"
-        "horizontal-workspace-indicator@tty2.io"
-        "bluetooth-quick-connect@bjarosze.gmail.com"
-        "battery-indicator@jgotti.org"
+        # "bluetooth-quick-connect@bjarosze.gmail.com"
         "gsconnect@andyholmes.github.io"
-        "pip-on-top@rafostar.github.com"
         "forge@jmmaranan.com"
-        # "dash-to-dock@micxgx.gmail.com"             # Dash to panel alternative
-        # "fullscreen-avoider@noobsai.github.com"     # Incompatible with dash-to-panel
+        "dash-to-dock@micxgx.gmail.com"             # Dash to panel alternative
       ];
     };
 
@@ -121,11 +105,6 @@
       command = "alacritty";
       name = "open-terminal";
     };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-      binding = "<Super>t";
-      command = "emacs";
-      name = "open-editor";
-    };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       binding = "<Super>e";
       command = "nautilus";
@@ -133,24 +112,42 @@
     };
 
     "org/gnome/shell/extension/dash-to-panel" = {     # Possibly need to set this manually
-      panel-position = ''{"0":"TOP","1":"Top"}'';
-      panel-sizes = ''{"0":24,"1":24}'';
-      panel-element-positions-monitors-sync = true;
-      appicon-margin = 0;
-      appicon-padding = 4;
-      dot-position = "TOP";
-      dot-style-focused = "SOLID";
-      dot-style-unfocused = "DOTS";
-      animate-appicon-hover = true;
-      animate-appicon-hover-animation-travel = "{'SIMPLE': 0.14999999999999999, 'RIPPLE': 0.40000000000000002, 'PLANK': 0.0}";
-      isolate-monitors = true;
-    };
-    "org/gnome/shell/extensions/just-perfection" = {
-      theme = true;
-      activities-button = false;
-      app-menu = false;
-      clock-menu-position = 1;
-      clock-menu-position-offset = 7;
+    animate-appicon-hover=true
+    animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
+    appicon-margin=1
+    appicon-padding=2
+    available-monitors=[0]
+    dot-position='BOTTOM'
+    dot-style-focused='SOLID'
+    dot-style-unfocused='DASHES'
+    group-apps=true
+    hot-keys=false
+    hotkeys-overlay-combo='TEMPORARILY'
+    intellihide=true
+    intellihide-hide-from-windows=true
+    intellihide-use-pressure=true
+    isolate-workspaces=false
+    leftbox-padding=-1
+    leftbox-size=0
+    panel-anchors='{"0":"MIDDLE"}'
+    panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedBR"},{"element":"leftBox","visible":true,"position":"centerMonitor"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+    panel-lengths='{"0":99}'
+    panel-positions='{"0":"TOP"}'
+    panel-sizes='{"0":32}'
+    primary-monitor=0
+    show-appmenu=false
+    show-favorites=false
+    status-icon-padding=-1
+    stockgs-force-hotcorner=false
+    stockgs-keep-dash=true
+    stockgs-keep-top-panel=false
+    trans-panel-opacity=0.0
+    trans-use-custom-bg=false
+    trans-use-custom-opacity=true
+    trans-use-dynamic-opacity=false
+    tray-padding=-1
+    tray-size=0 
+    window-preview-title-position='TOP'
     };
     "org/gnome/shell/extensions/caffeine" = {
       enable-fullscreen = true;
@@ -169,18 +166,10 @@
       customize = true;
       sigma = 0;
     };
-    "org/gnome/shell/extensions/horizontal-workspace-indicator" = {
-      widget-position = "left";
-      widget-orientation = "horizontal";
-      icons-style = "circles";
-    };
-    "org/gnome/shell/extensions/bluetooth-quick-connect" = {
-      show-battery-icon-on = true;
-      show-battery-value-on = true;
-    };
-    "org/gnome/shell/extensions/pip-on-top" = {
-      stick = true;
-    };
+   # "org/gnome/shell/extensions/bluetooth-quick-connect" = {
+   #   show-battery-icon-on = true;
+   #   show-battery-value-on = true;
+   # };
     "org/gnome/shell/extensions/forge" = {
       window-gap-size = 8;
       dnd-center-layout = "stacked";
@@ -203,37 +192,42 @@
       window-swap-last-active = ["@as []"];
       window-toggle-float = ["<Shift><Super>f"];
     };
-    # "org/gnome/shell/extensions/dash-to-dock" = {   # If dock if preferred
-    #   multi-monitor = true;
-    #   dock-fixed = true;
-    #   dash-max-icon-size = 16;
-    #   custom-theme-shrink = true;
-    #   transparency-mode = "FIXED";
-    #   background-opacity = 0.0;
-    #   show-apps-at-top = true;
-    #   show-trash = true;
-    #   hot-keys = false;
-    #   click-action = "previews";
-    #   scroll-action = "cycle-windows";
-    # };
+    "org/gnome/shell/extensions/dash-to-dock" = {   # If dock if preferred
+       multi-monitor = true;
+       dock-fixed = true;
+       dash-max-icon-size = 16;
+       custom-theme-shrink = true;
+       transparency-mode = "FIXED";
+       background-opacity = 0.0;
+       show-apps-at-top = true;
+       show-trash = true;
+       hot-keys = false;
+       click-action = "previews";
+       scroll-action = "cycle-windows";
+     };
   };
 
   home.packages = with pkgs; [
-    gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.removable-drive-menu
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.battery-indicator-upower
-    gnomeExtensions.just-perfection
-    gnomeExtensions.caffeine
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.workspace-indicator-2
-    gnomeExtensions.bluetooth-quick-connect
-    gnomeExtensions.gsconnect                         # kdeconnect enabled in default.nix
-    gnomeExtensions.pip-on-top
-    gnomeExtensions.pop-shell
+    # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.forge
-    # gnomeExtensions.fullscreen-avoider
-    # gnomeExtensions.dash-to-dock
+    gnomeExtensions.removable-drive-menu
+    gnomeExtensions.clipboard-indicator
+    # gnomeExtensions.bluetooth-quick-connect
+    # Gnome Extension
+    gnomeExtensions.blur-my-shell
+    #gnomeExtensions.burn-my-windows
+    gnomeExtensions.caffeine
+    gnomeExtensions.custom-hot-corners-extended
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.coverflow-alt-tab
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.user-avatar-in-quick-settings
+    gnomeExtensions.gnome-40-ui-improvements
+    gnomeExtensions.gsconnect
+    #gnomeExtensions.impatience
+    gnomeExtensions.quick-settings-tweaker
+    gnomeExtensions.tiling-assistant
+    gnomeExtensions.vitals
   ];
 }

@@ -119,24 +119,24 @@
     xorg.libXinerama
     xorg.xinit
     # Gnome software 
-    gnome.gnome-tweaks
-    dconf
+    # gnome.gnome-tweaks
+    # dconf
     # Gnome Extension
-    gnomeExtensions.blur-my-shell
+    #gnomeExtensions.blur-my-shell
     #gnomeExtensions.burn-my-windows
-    gnomeExtensions.caffeine
-    gnomeExtensions.custom-hot-corners-extended
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.coverflow-alt-tab
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.user-avatar-in-quick-settings
-    gnomeExtensions.gnome-40-ui-improvements
-    gnomeExtensions.gsconnect
+    # gnomeExtensions.caffeine
+    # gnomeExtensions.custom-hot-corners-extended
+    # gnomeExtensions.clipboard-indicator
+    # gnomeExtensions.coverflow-alt-tab
+    # gnomeExtensions.dash-to-dock
+    # gnomeExtensions.dash-to-panel
+    # gnomeExtensions.user-avatar-in-quick-settings
+    # gnomeExtensions.gnome-40-ui-improvements
+    # gnomeExtensions.gsconnect
     #gnomeExtensions.impatience
-    gnomeExtensions.quick-settings-tweaker
-    gnomeExtensions.tiling-assistant
-    gnomeExtensions.vitals
+    # gnomeExtensions.quick-settings-tweaker
+    # gnomeExtensions.tiling-assistant
+    # gnomeExtensions.vitals
 
   ];
 
