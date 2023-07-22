@@ -15,6 +15,11 @@
         "org.gnome.Nautilus.desktop"
         "discord.desktop"
         "steam.desktop"
+        "visual-studio-code.desktop"
+        "brave-browser.desktop"
+        "android-studio.desktop"
+        "spotify.desktop"
+        "software-manager.desktop"
         "virt-manager.desktop"
       ];
       disable-user-extensions = false;
@@ -110,7 +115,7 @@
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Super>Return";
+      binding = "<Primary><Alt>t";
       command = "alacritty";
       name = "open-terminal";
     };
