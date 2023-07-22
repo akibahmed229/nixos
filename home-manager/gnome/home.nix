@@ -20,6 +20,8 @@
       disable-user-extensions = false;
       enabled-extensions = [
         "blur-my-shell@aunetx"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "apps-menu@gnome-shell-extensions.gcampax.github.com"
         "drive-menu@gnome-shell-extensions.gcampax.github.com"
         "dash-to-panel@jderose9.github.com"
         "caffeine@patapon.info"
@@ -28,6 +30,13 @@
         "gsconnect@andyholmes.github.io"
         "forge@jmmaranan.com"
         "dash-to-dock@micxgx.gmail.com"             # Dash to panel alternative
+        "Vitals@CoreCoding.com"
+        "quick-settings-avatar@d-go"
+        "quick-settings-tweaks@qwreey"
+        "gnome-ui-tune@itstime.tech"
+        "custom-hot-corners-extended@G-dH.github.com"
+        "impatience@gfxmonk.net"
+        "burn-my-windows@schneegans.github.com"
       ];
     };
 
@@ -112,42 +121,42 @@
     };
 
     "org/gnome/shell/extension/dash-to-panel" = {     # Possibly need to set this manually
-    animate-appicon-hover=true
-    animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
-    appicon-margin=1
-    appicon-padding=2
-    available-monitors=[0]
-    dot-position='BOTTOM'
-    dot-style-focused='SOLID'
-    dot-style-unfocused='DASHES'
-    group-apps=true
-    hot-keys=false
-    hotkeys-overlay-combo='TEMPORARILY'
-    intellihide=true
-    intellihide-hide-from-windows=true
-    intellihide-use-pressure=true
-    isolate-workspaces=false
-    leftbox-padding=-1
-    leftbox-size=0
-    panel-anchors='{"0":"MIDDLE"}'
-    panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedBR"},{"element":"leftBox","visible":true,"position":"centerMonitor"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
-    panel-lengths='{"0":99}'
-    panel-positions='{"0":"TOP"}'
-    panel-sizes='{"0":32}'
-    primary-monitor=0
-    show-appmenu=false
-    show-favorites=false
-    status-icon-padding=-1
-    stockgs-force-hotcorner=false
-    stockgs-keep-dash=true
-    stockgs-keep-top-panel=false
-    trans-panel-opacity=0.0
-    trans-use-custom-bg=false
-    trans-use-custom-opacity=true
-    trans-use-dynamic-opacity=false
-    tray-padding=-1
-    tray-size=0 
-    window-preview-title-position='TOP'
+    animate-appicon-hover = true;
+    animate-appicon-hover-animation-extent = "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}";
+    appicon-margin = 1;
+    appicon-padding = 2;
+    available-monitors = [0];
+    dot-position = "BOTTOM";
+    dot-style-focused = "SOLID";
+    dot-style-unfocused = "DASHES";
+    group-apps = true;
+    hot-keys = false;
+    hotkeys-overlay-combo = "TEMPORARILY";
+    intellihide = true;
+    intellihide-hide-from-windows = true;
+    intellihide-use-pressure = true;
+    isolate-workspaces = false;
+    leftbox-padding = -1;
+    leftbox-size = 0;
+    panel-anchors = ''{"0":"MIDDLE"}'';
+    panel-element-positions = ''{"0":[{"element":"showAppsButton","visible":false,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedBR"},{"element":"leftBox","visible":true,"position":"centerMonitor"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'';
+    panel-lengths = ''{"0":99}'';
+    panel-positions = ''{"0":"TOP"}'';
+    panel-sizes = ''{"0":32}'';
+    primary-monitor = 0;
+    show-appmenu = false;
+    show-favorites = false;
+    status-icon-padding = -1;
+    stockgs-force-hotcorner = false;
+    stockgs-keep-dash = true;
+    stockgs-keep-top-panel = false;
+    trans-panel-opacity = 0.0;
+    trans-use-custom-bg = false;
+    trans-use-custom-opacity = true;
+    trans-use-dynamic-opacity = false;
+    tray-padding = -1;
+    tray-size = 0; 
+    window-preview-title-position = "TOP";
     };
     "org/gnome/shell/extensions/caffeine" = {
       enable-fullscreen = true;
@@ -160,11 +169,11 @@
     };
     "org/gnome/shell/extensions/blur-my-shell/panel" = {
       customize = true;
-      sigma = 0;
+      sigma = 30;
     };
     "org/gnome/shell/extensions/blur-my-shell/overview" = { # Temporary = D2D Bug
       customize = true;
-      sigma = 0;
+      sigma = 30;
     };
    # "org/gnome/shell/extensions/bluetooth-quick-connect" = {
    #   show-battery-icon-on = true;
@@ -194,16 +203,19 @@
     };
     "org/gnome/shell/extensions/dash-to-dock" = {   # If dock if preferred
        multi-monitor = true;
-       dock-fixed = true;
-       dash-max-icon-size = 16;
+       intelligent-autohide = true;
+       dash-max-icon-size = 48;
        custom-theme-shrink = true;
+       custom-theme-shrink-height = 1;
        transparency-mode = "FIXED";
-       background-opacity = 0.0;
+       background-opacity = 20.0;
        show-apps-at-top = true;
        show-trash = true;
        hot-keys = false;
-       click-action = "previews";
+       click-action = "minimize-or-overview";
        scroll-action = "cycle-windows";
+       isolate-monitors = true;
+
      };
   };
 
@@ -213,9 +225,8 @@
     gnomeExtensions.removable-drive-menu
     gnomeExtensions.clipboard-indicator
     # gnomeExtensions.bluetooth-quick-connect
-    # Gnome Extension
     gnomeExtensions.blur-my-shell
-    #gnomeExtensions.burn-my-windows
+    gnomeExtensions.burn-my-windows
     gnomeExtensions.caffeine
     gnomeExtensions.custom-hot-corners-extended
     gnomeExtensions.clipboard-indicator
@@ -229,5 +240,6 @@
     gnomeExtensions.quick-settings-tweaker
     gnomeExtensions.tiling-assistant
     gnomeExtensions.vitals
+    gnomeExtensions.pop-shell
   ];
 }

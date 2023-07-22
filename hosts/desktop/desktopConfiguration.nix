@@ -4,6 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../home-manager/gnome/default.nix
     ];
   
   # Setting For OpenRGB
@@ -118,26 +119,6 @@
     xorg.libXft
     xorg.libXinerama
     xorg.xinit
-    # Gnome software 
-    # gnome.gnome-tweaks
-    # dconf
-    # Gnome Extension
-    #gnomeExtensions.blur-my-shell
-    #gnomeExtensions.burn-my-windows
-    # gnomeExtensions.caffeine
-    # gnomeExtensions.custom-hot-corners-extended
-    # gnomeExtensions.clipboard-indicator
-    # gnomeExtensions.coverflow-alt-tab
-    # gnomeExtensions.dash-to-dock
-    # gnomeExtensions.dash-to-panel
-    # gnomeExtensions.user-avatar-in-quick-settings
-    # gnomeExtensions.gnome-40-ui-improvements
-    # gnomeExtensions.gsconnect
-    #gnomeExtensions.impatience
-    # gnomeExtensions.quick-settings-tweaker
-    # gnomeExtensions.tiling-assistant
-    # gnomeExtensions.vitals
-
   ];
 
     # Gaming
@@ -200,8 +181,6 @@
   # List services that you want to enable:
   # Enabling docker
   virtualisation.docker.enable = true;	
-  # Enabling dfconf 
-  programs.dconf.enable = true;
   # Enable Flatpack
   services.flatpak.enable = true;
   # Enable the OpenSSH daemon.

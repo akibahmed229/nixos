@@ -5,10 +5,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-      ./home.nix
-  ];
-
   programs = {
     dconf.enable = true;
     kdeconnect = {                                # For GSConnect

@@ -6,10 +6,6 @@
       ./desktop/desktopConfiguration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  #  boot.loader.systemd-boot.enable = true;
-  #  boot.loader.efi.canTouchEfiVariables = true;
-
   # Dual Booting using grub
   boot.loader={
     efi = {
@@ -49,19 +45,6 @@
   };
   i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ typing-booster ];
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-  
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e,caps:escape";
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -81,10 +64,6 @@
     # no need to redefine it in your config for now)
     # wireplumber.enable = true;
   };
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Default Shell zsh
   users.defaultUserShell = pkgs.zsh;
@@ -122,5 +101,3 @@
   	  };
   };
 }
-
-
