@@ -54,12 +54,12 @@
     # '';
 
     ".config/alacritty" = {
-        source = ./alacritty;
+        source = ../programs/alacritty;
         recursive = true;
     };
    
     ".config/OpenRGB" = {
-        source = ./OpenRGB;
+        source = ../programs/OpenRGB;
         recursive = true;
     };
 
@@ -98,7 +98,7 @@
 		  tmuxPlugins.yank
 	  ];
 	    extraConfig = ''	
-	        source /home/${user}/flake/hosts/desktop/tmux.conf
+	        source /home/${user}/flake/programs/tmux/tmux.conf
 	   '';
   };
 

@@ -267,7 +267,7 @@
 	enableBashCompletion = true;
 	syntaxHighlighting.enable = true;
 	shellInit = ''
-		source /home/${user}/flake/hosts/desktop/.zshrc
+		source /home/${user}/flake/programs/zsh/.zshrc
 	'';
 	syntaxHighlighting.highlighters = [
 	"main" "brackets" "pattern" "cursor" "regexp" "root" "line"
