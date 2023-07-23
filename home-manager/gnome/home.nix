@@ -10,17 +10,16 @@
   dconf.settings = {
     "org/gnome/shell" = {
       favorite-apps = [
-        "org.gnome.Settings.desktop"
-        "Alacritty.desktop"
-        "org.gnome.Nautilus.desktop"
-        "discord.desktop"
-        "steam.desktop"
-        "visual-studio-code.desktop"
         "brave-browser.desktop"
+        "Alacritty.desktop"
+        "code.desktop"
         "android-studio.desktop"
+        "com.discordapp.Discord.desktop"
+        "com.github.eneshecan.WhatsAppForLinux.desktop"
         "spotify.desktop"
-        "software-manager.desktop"
-        "virt-manager.desktop"
+        "steam.desktop"
+        "org.gnome.Nautilus.desktop"
+        "org.gnome.Software.desktop"
       ];
       disable-user-extensions = false;
       enabled-extensions = [
