@@ -1,10 +1,8 @@
 { config, pkgs, user, ... }:
 
 {
-  imports =
-    [ 
+  imports = 
       [(import ./desktop/desktopConfiguration.nix)]
-    ];
 
   # Dual Booting using grub
   boot.loader={

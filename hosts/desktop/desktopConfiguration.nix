@@ -2,10 +2,10 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+     # Include the results of the hardware scan.
      [(import ./hardware-configuration.nix)] ++
      [(import ../../home-manager/gnome/default.nix)]
-    ];
+    
   
   # Setting For OpenRGB
   services.hardware.openrgb = {
