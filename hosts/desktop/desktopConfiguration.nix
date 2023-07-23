@@ -33,7 +33,7 @@
     bibata-cursors
     neofetch
     unstable.vscode	
-    android-studio
+    unstable.android-studio
     zip
     unzip
     p7zip
@@ -51,12 +51,11 @@
     python3Full
     nodejs_20
     yarn
-    alacritty
+    unstable.alacritty
     python310Packages.pip
     python310Packages.pyls-spyder
     flatpak
     appimage-run
-    bottles
     spotify
     bleachbit
     obs-studio
@@ -84,13 +83,15 @@
     i2c-tools
     libverto
     fail2ban
+    # bottles
+    unstable.bottles
     # Heoric game luncher
-    heroic-unwrapped
+    unstable.heroic-unwrapped
     # Steam
-    steam
-    steam-run
+    unstable.steam
+    unstable.steam-run
     # luturis
-	  lutris
+	  unstable.lutris
 	  (lutris.override {
 	       extraPkgs = pkgs: [
 		        # List package dependencies here
