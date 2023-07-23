@@ -115,7 +115,7 @@
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Ctrl><Alt>t";
+      binding = "<Super>Return";
       command = "alacritty";
       name = "open-terminal";
     };
