@@ -3,8 +3,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../home-manager/gnome/default.nix
+     [(import ./hardware-configuration.nix)]++
+     [(import ../../home-manager/gnome/default.nix)]
     ];
   
   # Setting For OpenRGB
