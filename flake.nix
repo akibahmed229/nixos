@@ -10,9 +10,11 @@
         url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
         inputs.nixpkgs.follows = "nixpkgs";
       };
+
+    hyprland.url = "github:hyprwm/Hyprland";
     };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }:
   let
     system = "x86_64-linux";
     user = "akib";
@@ -29,7 +31,7 @@
         nixosConfigurations = (                                               # NixOS configurations
           import ./hosts {                                                    # Imports ./hosts/default.nix
           inherit (nixpkgs) lib;
-          inherit inputs unstable user system home-manager;   # Also inherit home-manager so it does not need to be defined here.
+          inherit inputs unstable user system home-manager hyprland;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
   };
