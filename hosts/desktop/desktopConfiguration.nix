@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }:
+{ config, pkgs, user, unstable, ... }:
 
 {
   imports =
@@ -32,7 +32,7 @@
     trash-cli
     bibata-cursors
     neofetch
-    vscode	
+    unstable.vscode	
     android-studio
     zip
     unzip

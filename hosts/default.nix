@@ -1,9 +1,9 @@
-{ lib, inputs, system, home-manager, user, ... }:
+{ lib, inputs, unstable, system, home-manager, user, ... }:
 
 {
   desktop = lib.nixosSystem {
     inherit system;
-    specialArgs = { inherit user inputs; };
+    specialArgs = { inherit user inputs unstable; };
     modules = [
       ./configuration.nix
 
