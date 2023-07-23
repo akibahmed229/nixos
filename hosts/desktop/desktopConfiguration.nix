@@ -3,7 +3,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-     [(import ./hardware-configuration.nix)]++
+     [(import ./hardware-configuration.nix)] ++
      [(import ../../home-manager/gnome/default.nix)]
     ];
   
