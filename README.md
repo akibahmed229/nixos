@@ -317,23 +317,34 @@ Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS syst
 |____flake
 | |____flake.lock
 | |____home-manager
+| | |____gnome
+| | | |____default.nix
+| | | |____home.nix
+| | |____hyprland
+| | | |____default.nix
+| | | |____home.nix
+| | |____kde
+| | | |____default.nix
+| | | |____home.nix
+| | |____home.nix
+| |____hosts
+| | |____desktop
+| | | |____desktopConfiguration.nix
+| | | |____hardware-configuration.nix
+| | |____configuration.nix
+| | |____default.nix
+| |____LICENSE
+| |____README.md
+| |____programs
 | | |____alacritty
 | | | |____alacritty.yml
 | | |____OpenRGB
 | | | |____Mouse.orp
 | | | |____Keyboard.orp
 | | | |____Mobo.orp
-| | |____home.nix
-| |____hosts
-| | |____desktop
+| | |____tmux
 | | | |____tmux.conf
+| | |____zsh
 | | | |____.zshrc
-| | | |____hardware-configuration.nix
-| | |____default.nix
-| | |____configuration.nix
 | |____flake.nix
-| |____README.md
-| |____LICENSE
-| |____.gitignore
-| |____.git
 ```
