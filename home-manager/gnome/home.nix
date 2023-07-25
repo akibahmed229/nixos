@@ -67,10 +67,10 @@
       button-layout = ":minimize,close";
     };
     "org/gnome/desktop/wm/keybindings" = {
-      # maximize = ["<Super>Up"];                     # For floating
-      # unmaximize = ["<Super>Down"];
-      maximize = ["@as []"];                          # For tilers
-      unmaximize = ["@as []"];
+      maximize = ["<Ctrl><Super>Up"];                     # For floating
+      unmaximize = ["<Ctrl><Super>Down"];
+      # maximize = ["@as []"];                          # For tilers
+      # unmaximize = ["@as []"];
       switch-to-workspace-left = ["<Alt>Left"];
       switch-to-workspace-right = ["<Alt>Right"];
       switch-to-workspace-1 = ["<Alt>1"];
@@ -97,10 +97,10 @@
       edge-tiling = false;                            # Disabled when tiling
     };
     "org/gnome/mutter/keybindings" = {
-      #toggle-tiled-left = ["<Super>Left"];           # For floating
-      #toggle-tiled-right = ["<Super>Right"];
-      toggle-tiled-left = ["@as []"];                 # For tilers
-      toggle-tiled-right = ["@as []"];
+      toggle-tiled-left = ["<Ctrl><Super>Left"];           # For floating
+      toggle-tiled-right = ["<Ctrl><Super>Right"];
+      #toggle-tiled-left = ["@as []"];                 # For tilers
+      #toggle-tiled-right = ["@as []"];
     };
 
     "org/gnome/settings-daemon/plugins/power" = {
