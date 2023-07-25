@@ -189,6 +189,7 @@
     };
     "org/gnome/shell/extensions/forge/keybindings" = {      # Set active colors manually
       focus-border-toggle = true;
+      focus-border-color = "#ff00ff";
       float-always-on-top-enabled = true;
       window-focus-up = ["<Super>Up"];
       window-focus-down = ["<Super>Down"];
