@@ -1,5 +1,10 @@
 <p align="center"><img src="https://i.imgur.com/X5zKxvp.png" width=300px></p>
 
+p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
+
+<h2 align="center">Akib</h2>
+
+
 ## Table of Contents
 
 1. [NixOS Btrfs Installation Guide](#1nixos-btrfs-installation-guide)
