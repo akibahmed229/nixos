@@ -100,7 +100,7 @@
 		  tmuxPlugins.catppuccin
 	  	tmuxPlugins.vim-tmux-navigator
 		  tmuxPlugins.yank
-      tmuxPlugins.resurrect
+      tmuxPlugins.tmux-fzf
 	  ];
 	    extraConfig = ''	
 	        source /home/${user}/flake/programs/tmux/tmux.conf
