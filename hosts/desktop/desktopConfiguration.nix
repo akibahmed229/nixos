@@ -149,6 +149,7 @@
   programs = {
       zsh = {
         enable = true;
+  shellAliases = {la = "exa --icons -la";};
 	autosuggestions.enable = true;
 	enableBashCompletion = true;
 	syntaxHighlighting.enable = true;
