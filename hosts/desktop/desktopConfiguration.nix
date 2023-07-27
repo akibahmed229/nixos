@@ -22,8 +22,9 @@
     "steam"
   ]);
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # remove bloat
+  documentation.nixos.enable = false;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
