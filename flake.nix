@@ -26,8 +26,8 @@
     inherit system;
     config = { allowUnfree = true; };
   };
+  lib = nixpkgs.lib;
   in {
-    lib = nixpkgs.lib;
     nixosConfigurations = (                                               # NixOS configurations
         import ./hosts {                                                    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
