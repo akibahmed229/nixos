@@ -7,22 +7,23 @@
 
 ## Table of Contents
 
-1. [NixOS Btrfs Installation Guide](#1nixos-btrfs-installation-guide)
+1. [NixOS Btrfs Installation Guide](#1-nixos-btrfs-installation-guide)
     1. [Prerequisites](#installation-prerequisites)
     2. [Installation Steps](#installation-steps)
 
-2. [Home Manager Installation and Usage Guide](#2home-manager-installation-and-usage-guide)
+2. [Home Manager Installation and Usage Guide](#2-home-manager-installation-and-usage-guide)
    1. [Prerequisites](#home-manager-prerequisites)
    2. [Standalone Installation](#1-standalone-installation)
    3. [NixOS Module](#2-nixos-module)
  
-3. [Using Nix Flakes on NixOS with Home Manager](#3using-nix-flakes-on-nixos-with-home-manager)
+3. [Using Nix Flakes on NixOS with Home Manager](#3-using-nix-flakes-on-nixos-with-home-manager)
     1. [Prerequisites](#flakes-prerequisites)
     2. [Enable Flake](#enable-flake)
     3. [Update System Configuration](#update-system-configuration)
     4. [Using Flakes on Fresh Install](#using-flakes-on-fresh-install)
 
-4. [FAQ](#faq)
+4. [FAQ](#4-faq)
+5. [File Structure](#5-file-structure)
 
 # 1. NixOS Btrfs Installation Guide
 
