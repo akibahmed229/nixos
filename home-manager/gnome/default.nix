@@ -18,11 +18,11 @@
       enable = true;
 
       layout = "us";                              # Keyboard layout & €-sign
-      xkbOptions = "eurosign:e";
+        xkbOptions = "eurosign:e";
       libinput.enable = true;
 
       displayManager.gdm.enable = true;           # Display Manager
-      desktopManager.gnome.enable = true;         # Window Manager
+        desktopManager.gnome.enable = true;         # Window Manager
     };
     udev.packages = with pkgs; [
       gnome.gnome-settings-daemon
@@ -36,7 +36,7 @@
       gnome.adwaita-icon-theme
     ];
     gnome.excludePackages = (with pkgs; [         # Gnome ignored packages
-      gnome-tour
+        gnome-tour
     ]) ++ (with pkgs.gnome; [
       gedit
       epiphany
