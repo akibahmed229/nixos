@@ -1,9 +1,9 @@
-{ lib, inputs, unstable, system, home-manager, hyprland, user, ... }:
+{ lib, inputs, unstable, system, home-manager, hyprland, plasma-manager, user, ... }:
 
 {
   desktop = lib.nixosSystem {
     inherit system;
-    specialArgs = { inherit user inputs unstable; };
+    specialArgs = { inherit user inputs unstable plasma-manager; };
     modules = [
       ./configuration.nix
 
@@ -13,6 +13,7 @@
           home-manager.extraSpecialArgs = { inherit user; };
           home-manager.users.${user} = {
             imports = [
+              inputs.plasma-manager.homeManagerModules.plasma-manager
               ../home-manager/home.nix
             ];
           };
