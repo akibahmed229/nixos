@@ -79,11 +79,19 @@
     ];
   };
 
+# environment variables Setting
+  environment = {
+    variables = {
+      TERMINAL = "alacritty";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+
 # Font Setting
-  fonts = {
-    fonts = with pkgs; [
-      noto-fonts
-        noto-fonts-cjk
+    fonts = {
+      fonts = with pkgs; [
+        noto-fonts
+          noto-fonts-cjk
         noto-fonts-emoji
         font-awesome
         source-han-sans
