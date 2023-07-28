@@ -22,8 +22,9 @@
     3. [Update System Configuration](#update-system-configuration)
     4. [Using Flakes on Fresh Install](#using-flakes-on-fresh-install)
 
+4. [FAQ](#faq)
 
-# 1.NixOS Btrfs Installation Guide
+# 1. NixOS Btrfs Installation Guide
 
 This guide provides step-by-step instructions for installing NixOS on a Btrfs filesystem using a copy-on-write (CoW) approach for Linux systems.
 
@@ -91,7 +92,7 @@ Remember to replace `/dev/sdX` with the appropriate disk identifier for your sys
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
 
-# 2.Home Manager Installation and Usage Guide
+# 2. Home Manager Installation and Usage Guide
 
 Home Manager is a powerful tool that allows you to manage user configurations with Nix. It provides a standalone installation method as well as a NixOS module for system-wide user environment configuration. This guide provides step-by-step instructions for installing and using Home Manager in different scenarios.
 
@@ -182,7 +183,7 @@ Feel free to explore and experiment with Home Manager to tailor your user enviro
 
 Sure, I'd be happy to help you create a more detailed and organized guide for using flakes on NixOS in your GitHub repository's README.md. Here's the revised and expanded guide:
 
-# 3.Using Nix Flakes on NixOS with Home Manager
+# 3. Using Nix Flakes on NixOS with Home Manager
 
 This guide will walk you through setting up and using Nix Flakes on NixOS, along with Home Manager as a module. Flakes provide a declarative and reproducible way to manage NixOS configurations and packages. Home Manager allows you to manage user-specific configurations for applications.
 
@@ -317,7 +318,50 @@ After booting into your fresh NixOS system, log in as the user with sudo privile
 ## Using Nix Flakes on NixOS with Home Manager
 Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS system configuration and user-specific application configurations in a declarative and reproducible way. Nix Flakes provide a convenient way to define your system and package configurations, while Home Manager handles individual user configurations for various applications. With this setup, you can easily update your entire system or specific applications using a single command, ensuring consistency and simplicity in managing your NixOS environment.
 
-# 4.File Structure
+# 4. FAQ
+- What is NixOS?
+  - NixOS is a Linux distribution built on top of the Nix package manager.
+  - It uses declarative configurations and allow reliable system upgrades.
+- What is a Flake?
+  - Flakes are an upcoming feature of the Nix package manager.
+  - Flakes allow you to specify your major code dependencies in a declarative way.
+  - It does this by creating a flake.lock file. Some major code dependencies are:
+    - nixpkgs
+    - home-manager
+- What is Nix-Darwin?
+  - Nix-Darwin is a way to use Nix modules on macOS using the Darwin Unix-based core set of components.
+  - Just like NixOS, it allows to build declarative reproducible configurations.
+- Should I switch to NixOS?
+  - Is water wet?
+- Where can I learn about everything Nix?
+  - Nix and NixOS
+    - [[https://nixos.org/][Website]]
+    - [[https://nixos.org/learn.html][Manuals]]
+    - [[https://nixos.org/manual/nix/stable/introduction.html][Manual 2]]
+    - [[https://search.nixos.org/packages][Packages]] and [[https://search.nixos.org/options?][Options]]
+    - [[https://nixos.wiki/][Unofficial Wiki]]
+    - [[https://nixos.wiki/wiki/Resources][Wiki Resources]]
+    - [[https://nixos.org/guides/nix-pills/][Nix Pills]]
+    - [[https://www.ianthehenry.com/posts/how-to-learn-nix/][Some]] [[https://christine.website/blog][Blogs]]
+    - [[https://nixos.wiki/wiki/Configuration_Collection][Config Collection]]
+    - [[https://nixos.wiki/wiki/Configuration_Collection][Config Collection]]
+  - Home-manager
+    - [[https://github.com/nix-community/home-manager][Official Repo]]
+    - [[https://nix-community.github.io/home-manager/][Manual]]
+    - [[https://nix-community.github.io/home-manager/options.html][Appendix A]]
+    - [[https://nix-community.github.io/home-manager/nixos-options.html][Appendix B]]
+    - [[https://nix-community.github.io/home-manager/tools.html][Appendix D]]
+    - [[https://nixos.wiki/wiki/Home_Manager][NixOS wiki]]
+  - Flakes
+    - [[https://nixos.wiki/wiki/Flakes][NixOS wiki]]
+    - [[https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html][Manual]]
+    - [[https://www.tweag.io/blog/2020-05-25-flakes/][Some]] [[https://christine.website/blog/nix-flakes-3-2022-04-07][Blogs]]
+  - Nix-Darwin
+    - [[https://github.com/LnL7/nix-darwin/][Official Repo]]
+    - [[https://daiderd.com/nix-darwin/manual/index.html][Manual]]
+    - [[https://github.com/LnL7/nix-darwin/wiki][Mini-Wiki]]
+
+# 5. File Structure
 ```
 |____flake
 | |____flake.lock
