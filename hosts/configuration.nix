@@ -86,6 +86,7 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
+  };
 
 # Font Setting
     fonts = {
