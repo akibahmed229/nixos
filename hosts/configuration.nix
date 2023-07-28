@@ -78,6 +78,7 @@
         brave
     ];
   };
+  security.sudo.wheelNeedsPassword = false; # User does not need to give password when using sudo.
 
 # environment variables Setting
   environment = {
