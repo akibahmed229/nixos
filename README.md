@@ -336,31 +336,31 @@ Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS syst
   - Is water wet?
 - Where can I learn about everything Nix?
   - Nix and NixOS
-    - [[https://nixos.org/][Website]]
-    - [[https://nixos.org/learn.html][Manuals]]
-    - [[https://nixos.org/manual/nix/stable/introduction.html][Manual 2]]
-    - [[https://search.nixos.org/packages][Packages]] and [[https://search.nixos.org/options?][Options]]
-    - [[https://nixos.wiki/][Unofficial Wiki]]
-    - [[https://nixos.wiki/wiki/Resources][Wiki Resources]]
-    - [[https://nixos.org/guides/nix-pills/][Nix Pills]]
-    - [[https://www.ianthehenry.com/posts/how-to-learn-nix/][Some]] [[https://christine.website/blog][Blogs]]
-    - [[https://nixos.wiki/wiki/Configuration_Collection][Config Collection]]
-    - [[https://nixos.wiki/wiki/Configuration_Collection][Config Collection]]
+    - [Website](https://nixos.org/)
+    - [Manuals](https://nixos.org/learn.html)
+    - [Manual](https://nixos.org/manual/nix/stable/introduction.html)
+    - [Packages](https://search.nixos.org/packages) and [Options](https://search.nixos.org/options?)
+    - [Unofficial Wiki](https://nixos.wiki/)
+    - [Wiki Resources](https://nixos.wiki/wiki/Resources)
+    - [Nix Pills](https://nixos.org/guides/nix-pills/)
+    - [Some](https://www.ianthehenry.com/posts/how-to-learn-nix/) [Blogs](https://christine.website/blog)
+    - [Config Collection](https://nixos.wiki/wiki/Configuration_Collection)
+    - [Config Collection](https://nixos.wiki/wiki/Configuration_Collection)
   - Home-manager
-    - [[https://github.com/nix-community/home-manager][Official Repo]]
-    - [[https://nix-community.github.io/home-manager/][Manual]]
-    - [[https://nix-community.github.io/home-manager/options.html][Appendix A]]
-    - [[https://nix-community.github.io/home-manager/nixos-options.html][Appendix B]]
-    - [[https://nix-community.github.io/home-manager/tools.html][Appendix D]]
-    - [[https://nixos.wiki/wiki/Home_Manager][NixOS wiki]]
+    - [Official Repo](https://github.com/nix-community/home-manager)
+    - [Manual](https://nix-community.github.io/home-manager/)
+    - [Appendix A](https://nix-community.github.io/home-manager/options.html)
+    - [Appendix B](https://nix-community.github.io/home-manager/nixos-options.html)
+    - [Appendix D](https://nix-community.github.io/home-manager/tools.html)
+    - [NixOS wiki](https://nixos.wiki/wiki/Home_Manager)
   - Flakes
-    - [[https://nixos.wiki/wiki/Flakes][NixOS wiki]]
-    - [[https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html][Manual]]
-    - [[https://www.tweag.io/blog/2020-05-25-flakes/][Some]] [[https://christine.website/blog/nix-flakes-3-2022-04-07][Blogs]]
+    - [NixOS wiki](https://nixos.wiki/wiki/Flakes)
+    - [Manual](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html)
+    - [Some](https://www.tweag.io/blog/2020-05-25-flakes/) [Blogs](https://christine.website/blog/nix-flakes-3-2022-04-07)
   - Nix-Darwin
-    - [[https://github.com/LnL7/nix-darwin/][Official Repo]]
-    - [[https://daiderd.com/nix-darwin/manual/index.html][Manual]]
-    - [[https://github.com/LnL7/nix-darwin/wiki][Mini-Wiki]]
+    - [Official Repo](https://github.com/LnL7/nix-darwin/)
+    - [Manual](https://daiderd.com/nix-darwin/manual/index.html)
+    - [Mini-Wiki](https://github.com/LnL7/nix-darwin/wiki)
 
 # 5. File Structure
 ```
