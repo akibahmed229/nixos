@@ -14,7 +14,7 @@
           "Alacritty.desktop"
           "code.desktop"
           "android-studio.desktop"
-          "com.discordapp.Discord.desktop"
+          "discord.desktop"
           "com.github.eneshecan.WhatsAppForLinux.desktop"
           "spotify.desktop"
           "steam.desktop"

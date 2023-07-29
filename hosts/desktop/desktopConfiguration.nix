@@ -4,7 +4,7 @@
   imports =
 # Include the results of the hardware scan.
     [(import ./hardware-configuration.nix)] ++
-    [(import ../../home-manager/kde/default.nix)];
+    [(import ../../home-manager/gnome/default.nix)];
 
 
 # Setting For OpenRGB
@@ -78,6 +78,9 @@
       qemu
       bridge-utils
       virt-manager
+      whatsapp-for-linux
+      btop
+      discord
 #davinci-resolve
       ffmpeg_6
       gst_all_1.gstreamer

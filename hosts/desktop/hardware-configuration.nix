@@ -44,25 +44,25 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
-  { device = "/dev/sda4";
+  { device = "/dev/nvme0n1p1";
     fsType = "btrfs";
-    options = [ "subvol=root" "compress=zstd" "space_cache=v2" "discard=async" ];
+    options = [ "subvol=root" "ssd" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/home" =
-  { device = "/dev/sda4";
+  { device = "/dev/nvme0n1p1";
     fsType = "btrfs";
-    options = [ "subvol=home" "compress=zstd" "space_cache=v2" "discard=async" ];
+    options = [ "subvol=home" "ssd" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/nix" =
-  { device = "/dev/sda4";
+  { device = "/dev/nvme0n1p1";
     fsType = "btrfs";
-    options = [ "subvol=nix" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
+    options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/boot" =
-  { device = "/dev/disk/by-uuid/F876-516F";
+  { device = "/dev/disk/by-uuid/5B41-FD3C";
     fsType = "vfat";
   };
 

@@ -2,7 +2,7 @@
 
 {
   imports =   
-    [(import ./kde/home.nix)]; 
+    [(import ./gnome/home.nix)]; 
 
 
 # Home Manager needs a bit of information about you and the paths it should
@@ -38,9 +38,6 @@
 # (pkgs.writeShellScriptBin "my-hello" ''
 #   echo "Hello, ${config.home.username}!"
 # '')
-
-    whatsapp-for-linux
-      btop
     ];
 
 # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -13,7 +13,7 @@
           home-manager.extraSpecialArgs = { inherit user; };
           home-manager.users.${user} = {
             imports = [
-              inputs.plasma-manager.homeManagerModules.plasma-manager
+              # inputs.plasma-manager.homeManagerModules.plasma-manager
               ../home-manager/home.nix
             ];
           };
