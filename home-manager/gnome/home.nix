@@ -25,7 +25,7 @@
       enabled-extensions = [
         "blur-my-shell@aunetx"
           "user-theme@gnome-shell-extensions.gcampax.github.com"
-          "apps-menu@gnome-shell-extensions.gcampax.github.com"
+# "apps-menu@gnome-shell-extensions.gcampax.github.com"
           "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "dash-to-panel@jderose9.github.com"
           "caffeine@patapon.info"
