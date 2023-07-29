@@ -2,7 +2,8 @@
 
 {
   imports =   
-    [(import ./gnome/home.nix)]; 
+  # [(import ./gnome/home.nix)]; # uncomment to use KDE Plasma 
+    [(import ./gnome/home.nix)]; # uncomment to use GNOME  
 
 
 # Home Manager needs a bit of information about you and the paths it should

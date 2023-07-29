@@ -4,7 +4,8 @@
   imports =
 # Include the results of the hardware scan.
     [(import ./hardware-configuration.nix)] ++
-    [(import ../../home-manager/gnome/default.nix)];
+# [(import ../../home-manager/gnome/default.nix)]; # uncomment to use KDE Plasma
+    [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
 
 
 # Setting For OpenRGB

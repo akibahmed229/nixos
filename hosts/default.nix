@@ -13,7 +13,7 @@
           home-manager.extraSpecialArgs = { inherit user; };
           home-manager.users.${user} = {
             imports = [
-              # inputs.plasma-manager.homeManagerModules.plasma-manager
+              # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
               ../home-manager/home.nix
             ];
           };
