@@ -12,11 +12,9 @@
     };
     grub = {
       enable = true;
-      devices = {
-          "/dev/nvme0n1p1" = {
-          requiredBy = [ "root" ];
-        };
-      }; # install grub
+      devices = [
+      "/dev/nvme0n1p1"
+      ]; # install grub
         efiSupport = true;
       useOSProber = true; # To find Other boot manager like windows 
         configurationLimit = 5; # Store number of config 
