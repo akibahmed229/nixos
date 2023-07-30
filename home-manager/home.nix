@@ -92,7 +92,7 @@
 # Tmux Config
   programs.tmux ={
     enable = true;
-    secureSocket = false;
+   # secureSocket = false;
     plugins = with pkgs; [
       tmuxPlugins.sensible
         tmuxPlugins.catppuccin
