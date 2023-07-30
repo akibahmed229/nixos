@@ -46,13 +46,13 @@
   fileSystems."/" =
   { device = "/dev/nvme0n1p1";
     fsType = "btrfs";
-    options = [ "subvol=root" "ssd" "compress=zstd" "space_cache=v2" "discard=async" ];
+    options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/home" =
   { device = "/dev/nvme0n1p1";
     fsType = "btrfs";
-    options = [ "subvol=home" "ssd" "compress=zstd" "space_cache=v2" "discard=async" ];
+    options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/nix" =
