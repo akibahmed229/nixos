@@ -31,6 +31,7 @@
           "caffeine@patapon.info"
           "clipboard-indicator@tudmotu.com"
 # "bluetooth-quick-connect@bjarosze.gmail.com"
+          "CoverflowAltTab@palatis.blogspot.com"
           "gsconnect@andyholmes.github.io"
           "forge@jmmaranan.com"
           "dash-to-dock@micxgx.gmail.com"             # Dash to panel alternative
