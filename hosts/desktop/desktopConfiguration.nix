@@ -209,10 +209,11 @@
 # Open ports in the firewall.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [ 80 443 22];
     allowedUDPPortRanges = [
     { from = 4000; to = 4007; }
     { from = 8000; to = 8010; }
+    { from = 9000; to = 9010; } # Adding UDP port range 9000-9010 for illustration
     ];
   };
   networking.enableIPv6 = true;  
