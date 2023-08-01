@@ -225,6 +225,13 @@
     };
   };
 
+  home.file = {
+      ".config/gtk-4.0" = {
+        source = ./gtkcss;
+        recursive = true;
+    };
+  };
+
   home.packages = with pkgs; [
 # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.forge
