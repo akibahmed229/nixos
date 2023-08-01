@@ -320,20 +320,6 @@ After booting into your fresh NixOS system, log in as the user with sudo privile
 Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS system configuration and user-specific application configurations in a declarative and reproducible way. Nix Flakes provide a convenient way to define your system and package configurations, while Home Manager handles individual user configurations for various applications. With this setup, you can easily update your entire system or specific applications using a single command, ensuring consistency and simplicity in managing your NixOS environment.
 
 # 4. FAQ
-- What is NixOS?
-  - NixOS is a Linux distribution built on top of the Nix package manager.
-  - It uses declarative configurations and allow reliable system upgrades.
-- What is a Flake?
-  - Flakes are an upcoming feature of the Nix package manager.
-  - Flakes allow you to specify your major code dependencies in a declarative way.
-  - It does this by creating a flake.lock file. Some major code dependencies are:
-    - nixpkgs
-    - home-manager
-- What is Nix-Darwin?
-  - Nix-Darwin is a way to use Nix modules on macOS using the Darwin Unix-based core set of components.
-  - Just like NixOS, it allows to build declarative reproducible configurations.
-- Should I switch to NixOS?
-  - Is water wet?
 - Where can I learn about everything Nix?
   - Nix and NixOS
     - [Website](https://nixos.org/)
