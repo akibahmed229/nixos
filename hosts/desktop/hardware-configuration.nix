@@ -44,19 +44,19 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
-  { device = "/dev/nvme0n1p1";
+  { device = "/dev/disk/by-uuid/39b3395f-7b43-4e03-9f73-ccf8989a2174";
     fsType = "btrfs";
     options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/home" =
-  { device = "/dev/nvme0n1p1";
+  { device = "/dev/disk/by-uuid/39b3395f-7b43-4e03-9f73-ccf8989a2174";
     fsType = "btrfs";
     options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/nix" =
-  { device = "/dev/nvme0n1p1";
+  { device = "/dev/disk/by-uuid/39b3395f-7b43-4e03-9f73-ccf8989a2174";
     fsType = "btrfs";
     options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
   };
