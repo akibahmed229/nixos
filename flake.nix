@@ -21,11 +21,6 @@
         inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
     };
-
-    nvchad = {
-    url = "github:NvChad/NvChad"; # Replace with the actual URL for nvchad
-    inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, plasma-manager, ... }:
