@@ -22,6 +22,11 @@
       libinput.enable = true;
 
       displayManager.gdm.enable = true;           # Display Manager
+        displayManager.gdm.settings = {
+          greeter = {
+            Exclude = root; 
+          };
+        };
         desktopManager.gnome.enable = true;         # Window Manager
     };
     udev.packages = with pkgs; [
