@@ -1,4 +1,4 @@
-{ lib, inputs, self, unstable, system, home-manager, hyprland, plasma-manager, user, ... }:
+{ lib, inputs, unstable, system, home-manager, hyprland, plasma-manager, user, ... }:
 
 {
   desktop = lib.nixosSystem {
