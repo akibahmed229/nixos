@@ -308,6 +308,11 @@ schemes:
       # soft contrast: background = '0x32302f'
       foreground: '#ebdbb2'
 
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+      text: '#1b2b34'
+      cursor: '#ffffff'
+
     # Normal colors
     normal:
       black:   '#282828'
@@ -568,7 +573,7 @@ schemes:
 # *SolarizedDark
 # *TomorrowNight
 
-colors: *TomorrowNight
+colors: *GruvboxDark
 
 # Visual Bell
 #
