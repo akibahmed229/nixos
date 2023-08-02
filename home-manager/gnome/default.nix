@@ -24,7 +24,7 @@
       displayManager.gdm.enable = true;           # Display Manager
         displayManager.gdm.settings = {
           greeter = {
-            Exclude = root; 
+            Exclude = "root";                      # Hide root user
           };
         };
         desktopManager.gnome.enable = true;         # Window Manager
