@@ -40,7 +40,7 @@
     nixosConfigurations = (                                               # NixOS configurations
         import ./hosts {                                                    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
-        inherit inputs self unstable user system home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs unstable user system home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
         );
   };
