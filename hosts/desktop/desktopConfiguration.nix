@@ -90,6 +90,7 @@
       i2c-tools
       libverto
       fail2ban
+      fzf
       unstable.dwt1-shell-color-scripts
 # bottles
       unstable.bottles
