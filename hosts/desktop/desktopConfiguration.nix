@@ -156,7 +156,7 @@
   programs = {
     zsh = {
       enable = true;
-      shellAliases = {la = "exa --icons -la";};
+      shellAliases = {la = "exa --icons -la  --group-directories-first";};
       autosuggestions.enable = true;
       enableBashCompletion = true;
       syntaxHighlighting.enable = true;
