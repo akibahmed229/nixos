@@ -7,8 +7,8 @@
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable packages 
 
       home-manager = {
-        url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
-          inputs.nixpkgs.follows = "nixpkgs";
+        url = "github:nix-community/home-manager?ref=release-23.05"; # Match the version with nixpkgs
+        inputs.nixpkgs.follows = "nixpkgs";
       };
 
     hyprland = {
