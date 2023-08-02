@@ -21,18 +21,19 @@
         xkbOptions = "eurosign:e";
       libinput.enable = true;
 
-      displayManager.gdm.enable = true;           # Display Manager
-        displayManager.gdm.settings = {
-          greeter = {
-            # Hide root user
-            IncludeAll=false; 
-          };
-        };
-        desktopManager.gnome.enable = true;         # Window Manager
+      displayManager.gdm.enable = true;           # Display Manager 
+      desktopManager.gnome.enable = true;         # Window Manager
     };
     udev.packages = with pkgs; [
       gnome.gnome-settings-daemon
     ];
+  };
+
+  services.xserver.displayManager.gdm.settings = {
+     greeter = {
+       # Hide root user
+       IncludeAll=false; 
+     };
   };
 
   environment = {
