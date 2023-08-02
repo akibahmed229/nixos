@@ -568,7 +568,7 @@ schemes:
 # *SolarizedDark
 # *TomorrowNight
 
-colors: *GruvboxDark
+colors: *TomorrowNight
 
 # Visual Bell
 #
