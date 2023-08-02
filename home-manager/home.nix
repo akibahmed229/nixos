@@ -65,7 +65,7 @@
       recursive = true;
     };
  
-    ".config/nvim/".source = self.packages.nvchad;
+    ".config/nvim/".source = "${self.packages.nvchad}";
   
   };
 
