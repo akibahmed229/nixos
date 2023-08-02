@@ -3,7 +3,7 @@
 {
   desktop = lib.nixosSystem {
     inherit system;
-    specialArgs = { inherit user inputs self unstable; };
+    specialArgs = { inherit user inputs unstable; };
     modules = [
       ./configuration.nix
 
