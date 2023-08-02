@@ -90,6 +90,7 @@
       i2c-tools
       libverto
       fail2ban
+      unstable.dwt1-shell-color-scripts
 # bottles
       unstable.bottles
 # Heoric game luncher
