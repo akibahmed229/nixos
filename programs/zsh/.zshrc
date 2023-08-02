@@ -1,5 +1,6 @@
                 # setopt
-                neofetch                        # Run neofetch on Zsh shell initialization
+                #neofetch                        # Run neofetch on Zsh shell initialization
+                colorscript random
                 setopt hist_ignore_all_dups     # Ignore duplicate commands in history
                 setopt hist_ignore_space        # Ignore commands starting with a space in h>
                 setopt hist_reduce_blanks       # Remove redundant blanks from history
