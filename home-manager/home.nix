@@ -1,4 +1,4 @@
-{ config, pkgs, user, inputs, ... }:
+{ config, pkgs, self, user, inputs, ... }:
 
 {
   imports =   
@@ -65,8 +65,9 @@
       recursive = true;
     };
  
-    ".config/nvim/".source = inputs.nvim;
-  
+    ".config/nvim/" = {
+     source =  "${self.packages.nvchad}";
+    };
   };
 
 # You can also manage environment variables but you will have to manually
@@ -110,6 +111,9 @@
 # NeoVim configuration
   programs.neovim = {
     enable = true;
+    package = with pkgs; [
+    	unstable.vimPlugins.nvchad
+    ];
   };
 # programs.neovim = {
 # enable = true;
