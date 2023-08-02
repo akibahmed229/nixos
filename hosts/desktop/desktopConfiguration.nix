@@ -4,6 +4,7 @@
   imports =
 # Include the results of the hardware scan.
     [(import ./hardware-configuration.nix)] ++
+    [(import ../../programs/flatpak/flatpak.nix)]++
 # [(import ../../home-manager/gnome/default.nix)]; # uncomment to use KDE Plasma
     [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
 
