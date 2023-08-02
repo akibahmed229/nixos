@@ -64,7 +64,9 @@
       source = ../programs/OpenRGB;
       recursive = true;
     };
-
+ 
+    ".config/nvim/".source = "${self'.packages.nvchad}";
+  
   };
 
 # You can also manage environment variables but you will have to manually
@@ -106,6 +108,9 @@
   };
 
 # NeoVim configuration
+  programs.neovim = {
+    enable = true;
+  };
 # programs.neovim = {
 # enable = true;
 # defaultEditor = true;
