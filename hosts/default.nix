@@ -1,4 +1,4 @@
-{ lib, inputs, self, unstable, system, home-manager, hyprland, plasma-manager, user, ... }:
+{ lib, inputs, unstable, system, home-manager, hyprland, plasma-manager, user, ... }:
 
 {
   desktop = lib.nixosSystem {
@@ -10,7 +10,7 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit self user; };
+          home-manager.extraSpecialArgs = { inherit user; };
           home-manager.users.${user} = {
             imports = [
               # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 

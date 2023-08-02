@@ -1,4 +1,4 @@
-{ config, pkgs, self, user, inputs, ... }:
+{ config, pkgs, user, ... }:
 
 {
   imports =   
@@ -64,10 +64,7 @@
       source = ../programs/OpenRGB;
       recursive = true;
     };
- 
-    ".config/nvim/" = {
-     source =  "${self.packages.nvchad}";
-    };
+
   };
 
 # You can also manage environment variables but you will have to manually
@@ -109,12 +106,6 @@
   };
 
 # NeoVim configuration
-  programs.neovim = {
-    enable = true;
-    package = with pkgs; [
-    	unstable.vimPlugins.nvchad
-    ];
-  };
 # programs.neovim = {
 # enable = true;
 # defaultEditor = true;
