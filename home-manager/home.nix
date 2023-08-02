@@ -1,4 +1,4 @@
-{ config, pkgs, user, inputs, self,  ... }:
+{ config, pkgs, user, inputs, ... }:
 
 {
   imports =   
@@ -65,7 +65,7 @@
       recursive = true;
     };
  
-    ".config/nvim/".source = "${self.packages.nvchad}";
+    ".config/nvim/".source = inputs.nvim;
   
   };
 
