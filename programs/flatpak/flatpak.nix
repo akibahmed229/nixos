@@ -27,6 +27,8 @@
                   "org.mozilla.firefox"
                   "org.qbittorrent.qBittorrent"
                   "org.signal.Signal"
+                  "org.telegram.desktop"
+                  "org.nickvision.tubeconverter"
         )
 
         ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
