@@ -281,7 +281,7 @@ If you want to use your flakes on a fresh NixOS install, follow these steps:
 4. Clone your NixOS configuration repository:
 
    ```bash
-   git clone git@github.com:akibahmed229/nixos.git /mnt/<path>
+   git clone https://github.com/akibahmed229/nixos.git /mnt/<path>
    ```
 
 5. Install NixOS with your flake:
