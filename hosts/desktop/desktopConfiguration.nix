@@ -121,7 +121,11 @@
     winetricks
 # native wayland support (unstable)
     wineWowPackages.waylandFull
-# Xdg-desktop-portal
+# pppoe connection
+    ppp
+    rp-pppoe
+# xdg desktop portal    
+    xdg-desktop-portal
     xdg-desktop-portal-gtk
     xorg.xkill
     xorg.libX11
