@@ -123,7 +123,7 @@
     wineWowPackages.waylandFull
 # pppoe connection
     ppp
-    rppppoe
+    rpPPPoE
 # xdg desktop portal    
     xdg-desktop-portal
     xdg-desktop-portal-gtk
