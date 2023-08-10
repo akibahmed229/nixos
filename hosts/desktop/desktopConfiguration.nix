@@ -46,6 +46,7 @@
       exa
       bat
       rtx
+      nvme-cli
       distrobox
       cargo
       simplehttp2server
