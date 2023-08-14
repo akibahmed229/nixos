@@ -66,6 +66,12 @@
     fsType = "vfat";
   };
 
+# adding the linux extra file systems 
+  fileSystems."/run/media/akib/linux extra" =
+  { device = "/dev/disk/by-uuid/6afc5b90-913c-4d82-a4c1-a61b7ac1db32";
+    fsType = "ntfs";
+  };
+
   swapDevices = [ ];
 
 # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
