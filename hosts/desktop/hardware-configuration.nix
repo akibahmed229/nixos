@@ -67,8 +67,8 @@
   };
 
 # adding the linux extra file systems 
-  fileSystems."/run/media" =
-  { device = "/dev/sda2";
+  fileSystems."/run/media/akib/linux extra" =
+  { device = "/dev/disk/by-label/linux\x20extra";
     fsType = "ntfs";
   };
 
