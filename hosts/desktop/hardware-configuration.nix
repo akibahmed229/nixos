@@ -9,7 +9,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-
 # use the latest Linux kernel
 # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -64,12 +63,6 @@
   fileSystems."/boot" =
   { device = "/dev/disk/by-uuid/5B41-FD3C";
     fsType = "vfat";
-  };
-
-# adding the linux extra file systems 
-  fileSystems."/run/media/akib/linux extra" =
-  { device = "/dev/disk/by-label/linux\x20extra";
-    fsType = "ntfs";
   };
 
   swapDevices = [ ];
