@@ -43,25 +43,25 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
-  { device = "/dev/disk/by-uuid/39b3395f-7b43-4e03-9f73-ccf8989a2174";
+  { device = "/dev/disk/by-uuid/03b4508c-ee61-4fd0-9e92-4559a8632572";
     fsType = "btrfs";
     options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/home" =
-  { device = "/dev/disk/by-uuid/39b3395f-7b43-4e03-9f73-ccf8989a2174";
+  { device = "/dev/disk/by-uuid/03b4508c-ee61-4fd0-9e92-4559a8632572";
     fsType = "btrfs";
     options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/nix" =
-  { device = "/dev/disk/by-uuid/39b3395f-7b43-4e03-9f73-ccf8989a2174";
+  { device = "/dev/disk/by-uuid/03b4508c-ee61-4fd0-9e92-4559a8632572";
     fsType = "btrfs";
     options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/boot" =
-  { device = "/dev/disk/by-uuid/5B41-FD3C";
+  { device = "/dev/disk/by-uuid/18F8-5F93";
     fsType = "vfat";
   };
 
