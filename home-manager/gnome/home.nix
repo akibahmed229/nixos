@@ -119,10 +119,25 @@
       command = "alacritty";
       name = "open-terminal";
     };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       binding = "<Super>e";
       command = "nautilus";
       name = "open-file-browser";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Super><Ctrl>w";
+      command = "whatsapp-for-linux";
+      name = "open-whatsapp";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+      binding = "<Super><Ctrl>t";
+      command = "org.telegram.desktop";
+      name = "open-telegrame";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
+      binding = "<Super><Ctrl>d";
+      command = "discord";
+      name = "open-discord";
     };
 
     "org/gnome/shell/extension/dash-to-panel" = {     # Possibly need to set this manually
