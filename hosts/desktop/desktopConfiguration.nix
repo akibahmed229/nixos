@@ -39,6 +39,7 @@
       neofetch
       unstable.vscode	
       unstable.android-studio
+      android-tools
       zip
       unzip
       p7zip
