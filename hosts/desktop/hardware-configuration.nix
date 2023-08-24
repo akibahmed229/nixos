@@ -94,7 +94,7 @@ fileSystems."/mnt/sda2" = {
 #  postDown = "pppoe-stop";
 # };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  nixpkgs.hostPlatform = "x86_64-linux";
   powerManagement.cpuFreqGovernor = "performance";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = true;
 }
