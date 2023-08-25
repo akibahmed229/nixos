@@ -270,5 +270,8 @@
       gnomeExtensions.tiling-assistant
       gnomeExtensions.vitals
       gnomeExtensions.pop-shell
+      gnomeExtensions.rounded-window-corners
+      gnomeExtensions.just-perfection
+      gnomeExtensions.advanced-alttab-window-switcher
       ];
 }
