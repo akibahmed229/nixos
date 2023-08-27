@@ -126,6 +126,14 @@
 # pppoe connection
     ppp
     rpPPPoE
+# Login manager customizetion for gdm
+    gobject-introspection
+    meson
+    gettext
+    rubyPackages_3_3.glib2
+    libadwaita
+    polkit
+    python310Packages.pygobject3
 # xdg desktop portal    
     xdg-desktop-portal
     xdg-desktop-portal-gtk
