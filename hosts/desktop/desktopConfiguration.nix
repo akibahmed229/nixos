@@ -130,7 +130,7 @@
     gobject-introspection
     meson
     gettext
-    rubyPackages_3_3.glib2
+    rubyPackages.glib2
     libadwaita
     polkit
     python310Packages.pygobject3
