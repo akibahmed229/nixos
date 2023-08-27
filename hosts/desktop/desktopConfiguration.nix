@@ -128,6 +128,7 @@
     rpPPPoE
 # Login manager customizetion for gdm
     gobject-introspection
+    gnome.gdm
     meson
     gettext
     rubyPackages.glib2
