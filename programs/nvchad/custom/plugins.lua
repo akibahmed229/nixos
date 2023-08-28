@@ -4,18 +4,57 @@ local overrides = require("custom.configs.overrides")
 local plugins = {
 
   -- Override plugin definition options
+  
+  {
+    "rcarriga/nvim-dap-ui",
+    dependnecies = "mfussenegger/nvim-dap",
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    config = function(_,opts)
+      require("core.utils").load_mappings("dap")
+    end
+  },
+
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = { "python" },
+    dependnecies = { 
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+    },
+    config = function()
+      local path = "~/.local/share/nvim/mason/packages/debugpy/vemv/bin/python"
+      require("dap-python").setup(path)
+      require("core.utils").load_mappings("dap_python")
+    end,
+  },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = { "python" },
+    opts = function()
+      return require "custom.configs.null-ls"
+    end,
+  },
 
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      -- format & linting
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "custom.configs.null-ls"
-        end,
-      },
-    },
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
@@ -25,7 +64,15 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = {
+      ensure_installed = {
+        "black",
+        "debugpy",
+        "pyright",
+        "ruff",
+        "pyright",
+      },
+    },
   },
 
   {
@@ -53,10 +100,11 @@ local plugins = {
     event = "InsertEnter",
     opts = overrides.copilot, 
   },
+
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
-  }
+  },
 
   -- To make a plugin not be loaded
   -- {
