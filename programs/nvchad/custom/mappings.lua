@@ -11,24 +11,6 @@ M.general = {
   },
 }
 
-M.dap = {
-  pulgin = true,
-  n = {
-    ["<leader>dp"] = {"<cmd> DapToggleBreakpoint <CR>"},
-  }
-}
-
-M.dap_python = {
-  pulgin = true,
-  n = { 
-    ["<leader>dpr"] = {
-      function()
-        require('dap-python').test_method()
-      end
-    },
-  }
-}
-
 -- more keybinds!
 
 return M
