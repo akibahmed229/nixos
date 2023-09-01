@@ -40,6 +40,7 @@
       unstable.vscode	
       unstable.android-studio
       android-tools
+      android-udev-rules
       zip
       unzip
       p7zip
