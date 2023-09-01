@@ -70,7 +70,7 @@
   users.users.${user} = {
     isNormalUser = true;
     description = "Akib Ahmed";
-    extraGroups = [ "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" ];
+    extraGroups = [ "ALL" "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" ];
     packages = with pkgs; [
       wget
         thunderbird
