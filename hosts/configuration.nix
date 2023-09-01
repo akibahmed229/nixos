@@ -70,7 +70,7 @@
   users.users.${user} = {
     isNormalUser = true;
     description = "Akib Ahmed";
-    extraGroups = [ "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" ];
+    extraGroups = [ "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" ];
     packages = with pkgs; [
       wget
         thunderbird
@@ -79,6 +79,10 @@
     ];
   };
   security.sudo.wheelNeedsPassword = false; # User does not need to give password when using sudo.
+
+
+# Enable ADB for Android
+  programs.adb.enable = true;
 
 # environment variables Setting
   environment = {
