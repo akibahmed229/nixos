@@ -56,12 +56,13 @@
       git
       gcc
       jdk
-      python3Full
+      python311Full
+      python311Packages.pygame
       nodejs_20
       yarn
       unstable.alacritty
-      python310Packages.pip
-      python310Packages.pyls-spyder
+      python311Packages.pip
+      python311Packages.pyls-spyder
       flatpak
       appimage-run
       spotify
