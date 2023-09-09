@@ -78,6 +78,7 @@
       gparted
 #libreoffice
       notepadqq 
+      gradience
       mangohud	
       goverlay
       anydesk
