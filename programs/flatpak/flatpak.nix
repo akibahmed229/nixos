@@ -31,6 +31,7 @@
                   "org.nickvision.tubeconverter"
                   "com.mattjakeman.ExtensionManager"
                   "org.libreoffice.LibreOffice"
+                  "io.github.Figma_Linux.figma_linux"
         )
 
         ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
