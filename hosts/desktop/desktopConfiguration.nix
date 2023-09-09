@@ -62,6 +62,7 @@
       yarn
       unstable.alacritty
       python311Packages.pip
+      python311Packages.virtualenv
       python311Packages.pyls-spyder
       flatpak
       appimage-run
