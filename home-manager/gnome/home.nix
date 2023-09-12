@@ -132,11 +132,11 @@
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
       binding = "<Super><Ctrl>t";
       command = "flatpak run org.telegram.desktop";
-      name = "open-telegrame";
+      name = "open-telegram";
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
       binding = "<Super><Ctrl>d";
-      command = "discord";
+      command = "Discord";
       name = "open-discord";
     };
 
