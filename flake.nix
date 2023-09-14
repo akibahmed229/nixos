@@ -43,12 +43,5 @@
         inherit inputs unstable user system home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
         );
-
-      devShells.${system}.python = pkgs.mkShell {
-       packages = with pkgs; [ 
-          python311Packages.pygame
-        ];
-      # ...
-    };
   };
 }
