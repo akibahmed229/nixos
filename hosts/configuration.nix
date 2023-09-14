@@ -2,8 +2,7 @@
 
 {
   imports = 
-    [(import ./desktop/desktopConfiguration.nix)] ++
-    [(import ../shells/python.nix)];
+    [(import ./desktop/desktopConfiguration.nix)];
     
 
 # Dual Booting using grub
