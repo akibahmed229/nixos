@@ -44,7 +44,7 @@
         }
         );
 
-      devShells.${system}.puthon = pkgs.mkShell {
+      devShells.${system}.python = pkgs.mkShell {
        packages = with pkgs; [ 
           python311Packages.pygame
         ];
