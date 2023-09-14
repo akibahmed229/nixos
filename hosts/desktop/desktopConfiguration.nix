@@ -54,6 +54,7 @@
       distrobox
       cargo
       direnv
+      devbox
       simplehttp2server
       speedtest-cli
       git
