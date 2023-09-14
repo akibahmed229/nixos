@@ -53,6 +53,7 @@
       nvme-cli
       distrobox
       cargo
+      direnv
       simplehttp2server
       speedtest-cli
       git
