@@ -45,7 +45,7 @@
         );
 
     devShells.${system}.default = (
-          import ./shells {
+          import ./shells/python.nix {
             inherit pkgs;
           }
         );
