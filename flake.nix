@@ -25,23 +25,29 @@
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, plasma-manager, ... }:
     let
-  system = "x86_64-linux";
-  user = "akib";
-  pkgs = import nixpkgs {
-    inherit system;
-    config = { allowUnfree = true; };
-  };
-  unstable = import nixpkgs-unstable {
-    inherit system;
-    config = { allowUnfree = true; };
-  };
-  lib = nixpkgs.lib;
+      system = "x86_64-linux";
+      user = "akib";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = { allowUnfree = true; };
+      };
+      unstable = import nixpkgs-unstable {
+      inherit system;
+      config = { allowUnfree = true; };
+      };
+      lib = nixpkgs.lib;
   in {
     nixosConfigurations = (                                               # NixOS configurations
         import ./hosts {                                                    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
         inherit inputs unstable user system home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
+        );
+
+    devShells.${system}.default = (
+          import ./shells {
+            inherit pkgs;
+          }
         );
   };
 }
