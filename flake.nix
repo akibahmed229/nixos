@@ -42,7 +42,7 @@
         inherit (nixpkgs) lib;
         inherit inputs unstable user system home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
-        );
+      );
 
     devShells.${system}.default = (
           import ./shells/python.nix {
