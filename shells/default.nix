@@ -8,7 +8,7 @@ pkgs.mkShell {
   # Your shell configuration here
 
   # Include the Python environment as a build input
-  buildInputs = [ pythonEnv ];
+  buildInputs = with pkgs; [ pythonEnv ];
 
   # Set the shellHook from pythonEnv
   shellHook = pythonEnv.shellHook;
