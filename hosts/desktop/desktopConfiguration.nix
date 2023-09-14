@@ -38,6 +38,8 @@
       bibata-cursors
       neofetch
       unstable.vscode	
+      unstable.jetbrains.pycharm-community
+      unstable.jetbrains.idea-community
       unstable.android-studio
       android-tools
       android-udev-rules
