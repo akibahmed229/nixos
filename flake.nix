@@ -4,12 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.05"; # stable packages
 
-      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable packages 
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable packages 
 
-      home-manager = {
-        url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
-          inputs.nixpkgs.follows = "nixpkgs";
-      };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hyprland = {
       url = "github:hyprwm/Hyprland";                  # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
@@ -25,7 +25,7 @@
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, plasma-manager, ... }:
     let
-    system = "x86_64-linux";
+  system = "x86_64-linux";
   user = "akib";
   pkgs = import nixpkgs {
     inherit system;
@@ -43,5 +43,12 @@
         inherit inputs unstable user system home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
         );
+
+      devShells.${system}.puthon = pkgs.mkShell {
+       packages = with pkgs; [ 
+          python311Packages.pygame
+        ];
+      # ...
+    };
   };
 }
