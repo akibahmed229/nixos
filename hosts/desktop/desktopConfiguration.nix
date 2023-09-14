@@ -64,7 +64,6 @@
       python311Packages.virtualenv
       python311Packages.pyls-spyder
       python311Packages.pygame
-      python311Packages.pygame-gui
       flatpak
       appimage-run
       spotify
