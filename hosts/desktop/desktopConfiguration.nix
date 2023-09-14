@@ -5,7 +5,7 @@
 # Include the results of the hardware scan.
     [(import ./hardware-configuration.nix)] ++
     [(import ../../programs/flatpak/flatpak.nix)]++
-# [(import ../../home-manager/gnome/default.nix)]; # uncomment to use KDE Plasma
+# [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
     [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
 
 
@@ -65,8 +65,6 @@
       unstable.alacritty
       python311Packages.pip
       python311Packages.virtualenv
-      python311Packages.pyls-spyder
-      python311Packages.pygame
       flatpak
       appimage-run
       spotify
