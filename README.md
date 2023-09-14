@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
 
-<h2 align="center">Akib | My NixOS Config</h2>
+<h2 align="center">Akib | NixOS Config</h2>
 
 
 ## Table of Contents
@@ -17,8 +17,8 @@
    3. [NixOS Module](#2-nixos-module)
  
 3. [Using Nix Flakes on NixOS with Home Manager](#3-using-nix-flakes-on-nixos-with-home-manager)
-    1. [Prerequisites](#flakes-prerequisites)
-    2. [Enable Flake](#enable-flake)
+    1. [Prerequisites](#flake-prerequisites)
+    2. [Enable Flake](#enable-flakes)
     3. [Update System Configuration](#update-system-configuration)
     4. [Using Flakes on Fresh Install](#using-flakes-on-fresh-install)
 
