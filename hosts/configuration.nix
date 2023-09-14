@@ -1,8 +1,9 @@
-{ config, pkgs, user, unstable, ... }:
+{ config, pkgs, user, unstable, nixpkgs, ... }:
 
 {
   imports = 
     [(import ./desktop/desktopConfiguration.nix)];
+    #[(import ../shells/python.nix)];
     
 
 # Dual Booting using grub
