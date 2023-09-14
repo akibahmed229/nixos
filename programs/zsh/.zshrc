@@ -31,3 +31,6 @@
                 # export CLICOLOR='1'                                                     # >
                 # ps1
                 export PS1="%B%n@%m %~ %#%b "
+
+                eval "$(direnv hook zsh)"
+
