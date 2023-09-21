@@ -103,14 +103,14 @@
       fzf
       unstable.dwt1-shell-color-scripts
 # bottles
-      unstable.bottles
+      bottles
 # Heoric game luncher
-      unstable.heroic-unwrapped
+      heroic-unwrapped
 # Steam
-      unstable.steam
-      unstable.steam-run
+      steam
+      steam-run
 # luturis
-      unstable.lutris
+      lutris
       (lutris.override {
        extraPkgs = pkgs: [
 # List package dependencies here
