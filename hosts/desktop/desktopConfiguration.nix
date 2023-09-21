@@ -59,6 +59,7 @@
       speedtest-cli
       git
       gcc
+      clang
       jdk
       python311Full
       nodejs_20
@@ -133,14 +134,14 @@
     ppp
     rpPPPoE
 # Login manager customizetion for gdm
-    gobject-introspection
-    gnome.gdm
+    #gobject-introspection
+    #gnome.gdm
     meson
-    gettext
-    rubyPackages.glib2
+    #gettext
+    #rubyPackages.glib2
     libadwaita
     polkit
-    python310Packages.pygobject3
+    #python310Packages.pygobject3
 # xdg desktop portal    
     xdg-desktop-portal
     xdg-desktop-portal-gtk
