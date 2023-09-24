@@ -2,7 +2,7 @@
 
 {
   imports =   
-  # [(import ./gnome/home.nix)]; # uncomment to use KDE Plasma 
+  # [(import ./kde/home.nix)]; # uncomment to use KDE Plasma 
     [(import ./gnome/home.nix)]; # uncomment to use GNOME  
 
 
