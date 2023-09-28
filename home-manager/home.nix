@@ -108,14 +108,16 @@
   };
 
 # NeoVim configuration
-# programs.neovim = {
-# enable = true;
-# defaultEditor = true;
+ programs.neovim = {
+  enable = true;
+  defaultEditor = true;
+  vimAlias = true;
+  viAlias = true;
 # configure = {
 # customRC = '' 
 # luafile ${./nvim/init.lua}
 # '';
 #  };
-#};
+ };
 
 }
