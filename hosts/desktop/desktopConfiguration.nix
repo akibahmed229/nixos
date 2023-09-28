@@ -215,6 +215,8 @@
 # List services that you want to enable:
 # Enabling docker
   virtualisation.docker.enable = true;	
+# Enable WayDroid
+  virtualisation.waydroid.enable = true;
 # Enable Flatpack
   services.flatpak.enable = true;
 # Enable the OpenSSH daemon.
