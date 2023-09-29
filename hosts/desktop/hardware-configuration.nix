@@ -11,7 +11,7 @@
 
 # use the latest Linux kernel
 # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = unstable.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
 # 12th Gen (Alder Lake)
   # boot.kernelParams = [ "i915.force_probe=4680" ];
