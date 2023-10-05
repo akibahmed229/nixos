@@ -23,6 +23,12 @@
 # The home.packages option allows you to install Nix packages into your
 # environment.
     home.packages = with pkgs; [
+      tree
+      bibata-cursors
+      adw-gtk3
+      gruvbox-dark-gtk
+      gruvbox-dark-icons-gtk
+
 # # Adds the 'hello' command to your environment. It prints a friendly
 # # "Hello, world!" when run.
 # pkgs.hello
@@ -65,6 +71,26 @@
       recursive = true;
     };
 
+  };
+
+  gtk = {
+    enable = true;
+    cursorTheme.name = "Bibata-Modern-Classic";
+    cursorTheme.package =  pkgs.bibata-cursors;
+    theme.package = pkgs.gruvbox-dark-gtk;
+    theme.name = "Gruvbox-Dark-GTK";
+    iconTheme.package = pkgs.gruvbox-dark-icons-gtk;
+    iconTheme.name = "Gruvbox-Dark-Icons-GTK";
+  };
+
+  home = {
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+      size = 38;
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
+    };
   };
 
 # You can also manage environment variables but you will have to manually
