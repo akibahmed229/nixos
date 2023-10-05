@@ -78,9 +78,9 @@
     cursorTheme.name = "Bibata-Modern-Classic";
     cursorTheme.package =  pkgs.bibata-cursors;
     theme.package = pkgs.gruvbox-dark-gtk;
-    theme.name = "Gruvbox-Dark-GTK";
+    theme.name = "Gruvbox-dark";
     iconTheme.package = pkgs.gruvbox-dark-icons-gtk;
-    iconTheme.name = "Gruvbox-Dark-Icons-GTK";
+    iconTheme.name = "Oomox-gruvbox-dark";
   };
 
   home = {
