@@ -246,6 +246,10 @@
         source = ./gtkcss;
         recursive = true;
     };
+    ".config/gtk-3.0" = {
+      source = ./gtkcss;
+      recursive = true;
+    };
   };
 
   home.packages = with pkgs; [
