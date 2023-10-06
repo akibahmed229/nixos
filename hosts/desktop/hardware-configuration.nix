@@ -67,15 +67,15 @@
     fsType = "vfat";
   };
 
-fileSystems."/mnt/sda1" = {
-  device = "/dev/sda1";
-  fsType = "ntfs";  # Specify the file system type
-};
-
-fileSystems."/mnt/sda2" = {
-  device = "/dev/sda2";
-  fsType = "ntfs";  # Specify the file system type
-};
+  fileSystems."/mnt/sda1" = {
+    device = "/dev/sda1";
+    fsType = "ntfs";  # Specify the file system type
+  };
+  
+  fileSystems."/mnt/sda2" = {
+    device = "/dev/sda2";
+    fsType = "ntfs";  # Specify the file system type
+  };
 
   swapDevices = [ ];
 
