@@ -13,8 +13,10 @@
 # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = unstable.linuxPackages_zen;
 
-# 12th Gen (Alder Lake)
-  # boot.kernelParams = [ "i915.force_probe=4680" ];
+  boot.kernelParams = [ 
+    "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
+    "nohibernate" # Disable hibernation
+    ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)
     "ehci_pci" # USB 2.0 (Enhanced Host Controller Interface)
