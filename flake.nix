@@ -1,4 +1,15 @@
 {
+# ____flake.nix # NixOS configuration file for Nix Flakes   
+#       |___hosts/default.nix 
+#                |___configuration.nix
+#                |   |___./desktop/desktopconfiguration.nix
+#                |              |___hardware-configuration.nix
+#                |              |___../../home-manager/gnome/default.nix
+#                |              |___../../pograms/flatpak/flatpak.nix
+#                |
+#                |___../home-manager/home.nix
+#                              |___gnome/home.nix 
+
   description = "My NixOS configuration";
 
   inputs = {
