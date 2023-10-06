@@ -62,8 +62,8 @@
     options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
   };
 
-  fileSystems."/boot" =
-  { device = "/dev/disk/by-uuid/18F8-5F93";
+  fileSystems."/boot" ={
+    device = "/dev/disk/by-uuid/18F8-5F93";
     fsType = "vfat";
   };
 
