@@ -77,8 +77,8 @@
     enable = true;
     cursorTheme.name = "Bibata-Modern-Classic";
     cursorTheme.package =  pkgs.bibata-cursors;
-    #theme.package = pkgs.adw-gtk3;
-    #theme.name = "adw-gtk3";
+    theme.package = pkgs.adw-gtk3;
+    theme.name = "Adw-gtk3-dark";
     #iconTheme.package = pkgs.gruvbox-dark-icons-gtk;
     #iconTheme.name = "Oomox-gruvbox-dark";
   };
