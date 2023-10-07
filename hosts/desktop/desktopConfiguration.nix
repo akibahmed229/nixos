@@ -91,7 +91,7 @@
       virt-manager
       whatsapp-for-linux
       btop
-      discord
+      #discord
 #davinci-resolve
       ffmpeg_6
       gst_all_1.gstreamer
@@ -173,6 +173,10 @@
     ];
   };
   hardware.opengl.driSupport32Bit = true;
+# Getting accelerated video playback
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
 
   # Overlay pulls latest version of Discord
   nixpkgs.overlays = [                          
