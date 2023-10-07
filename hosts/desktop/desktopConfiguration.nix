@@ -91,7 +91,7 @@
       virt-manager
       whatsapp-for-linux
       btop
-      #discord
+      discord
 #davinci-resolve
       ffmpeg_6
       gst_all_1.gstreamer
