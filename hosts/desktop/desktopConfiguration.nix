@@ -190,6 +190,32 @@
       })
   ];
 
+# Enabling samba file sharing over local network 
+  services.samba = {
+    enable = true;  # Dont forget to set a password for the user with smbpasswd -a ${user}
+    shares = {
+      home = {
+        "path" = "/home/${user}";
+        "comment" = "Home Directories";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
+      sda2 = {
+        "path" = "/mnt/sda2";
+        "comment" = "sda2";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
+    };
+    openFirewall = true;
+  };
+
 # Zsh and Oh-My-Zsh setup
   programs = {
     zsh = {
