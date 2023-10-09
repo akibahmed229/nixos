@@ -98,6 +98,7 @@
       openrgb-with-all-plugins
       openrgb-plugin-hardwaresync
       i2c-tools
+      polychromatic
       libverto
       fail2ban
       fzf
