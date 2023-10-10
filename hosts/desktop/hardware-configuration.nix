@@ -77,7 +77,34 @@
     fsType = "ntfs";  # Specify the file system type
   };
 
+  # Enabling samba file sharing over local network 
+  services.samba = {
+    enable = true;  # Dont forget to set a password for the user with smbpasswd -a ${user}
+    shares = {
+      # home = {
+      #   "path" = "/home/${user}";
+      #   "comment" = "Home Directories";
+      #   "browseable" = "yes";
+      #   "read only" = "no";
+      #   "guest ok" = "yes";
+      #   "create mask" = "0644";
+      #   "directory mask" = "0755";
+      # };
+      sda2 = {
+        "path" = "/mnt/sda2";
+        "comment" = "sda2";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
+    };
+    openFirewall = true;
+  };
+
   swapDevices = [ ];
+  zramSwap.enable = true;
 
 # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
 # (the default) this is the recommended approach. When using systemd-networkd it's
