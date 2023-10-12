@@ -17,6 +17,9 @@
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable"; # unstable packages 
 
+    programsdb.url = "github:wamserma/flake-programs-sqlite";
+    programsdb.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
         inputs.nixpkgs.follows = "nixpkgs";
@@ -60,5 +63,7 @@
             inherit pkgs;
           }
         );
+
+    programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
   };
 }
