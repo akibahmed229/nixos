@@ -1,4 +1,4 @@
-{ config, pkgs, user, unstable, ... }:
+{ config, pkgs, user, unstable, inputs, ... }:
 
 {
   imports =
@@ -228,6 +228,9 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  # This value determines the NixOS release from which the default
+  programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
 
 # List services that you want to enable:
 # Enabling docker
