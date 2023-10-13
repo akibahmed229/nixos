@@ -242,8 +242,10 @@
 # Enable the OpenSSH daemon.
   services.openssh= { 
     enable = true;
+    ports = [ 8080 ];
     settings = {
       PermitRootLogin = "no";
+      PasswordAuthentication = false;   
       };
   };
   
