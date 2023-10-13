@@ -70,7 +70,11 @@
       source = ../programs/OpenRGB;
       recursive = true;
     };
-
+  
+    ".ssh" = {
+      source = ../programs/ssh;
+      recursive = true;
+    };
   };
 
   gtk = {
