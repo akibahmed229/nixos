@@ -12,6 +12,7 @@
 
   description = "My NixOS configuration";
 
+# inputs for the flake
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.05"; # stable packages
 
@@ -37,7 +38,10 @@
     };
   };
 
+# outputs for the flake
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, plasma-manager, ... }:
+
+# variables
     let
       system = "x86_64-linux";
       user = "akib";
@@ -50,7 +54,10 @@
       config = { allowUnfree = true; };
       };
       lib = nixpkgs.lib;
+# using the above variables to define the system configuration
   in {
+
+# NixOS configuration
     nixosConfigurations = (                                               # NixOS configurations
         import ./hosts {                                                    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
@@ -58,12 +65,12 @@
         }
       );
 
+# DevShell configuration
     devShells.${system}.default = (
           import ./shells/python.nix {
             inherit pkgs;
           }
         );
 
-    programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
   };
 }
