@@ -240,7 +240,13 @@
 # Enable Flatpack
   services.flatpak.enable = true;
 # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh= { 
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      };
+  };
+  
 # Enable virtualisation
   virtualisation.libvirtd = {
     enable = true;
