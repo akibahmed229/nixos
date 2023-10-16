@@ -24,7 +24,7 @@
                   "md.obsidian.Obsidian"
                   "org.gnome.Logs"
                   "org.gnome.Snapshot"
-                  "org.mozilla.firefox"
+                  #"org.mozilla.firefox"
                   "org.qbittorrent.qBittorrent"
                   "org.signal.Signal"
                   "org.telegram.desktop"
