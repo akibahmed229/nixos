@@ -48,6 +48,9 @@
         darkreader
         tridactyl
         youtube-shorts-block
+        gsconnect
+        gnome-shell-integration
+        gruvbox-dark-theme
       ];
 
     };
