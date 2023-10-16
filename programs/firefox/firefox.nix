@@ -31,6 +31,7 @@
       ];
 
       settings = {
+        "media.mediasource.enabled" = true;
         "dom.security.https_only_mode" = true;
         "browser.download.panel.shown" = true;
         "identity.fxaccounts.enabled" = false;
