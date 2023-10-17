@@ -10,7 +10,7 @@
   dconf.settings = {
     "org/gnome/shell" = {
       favorite-apps = [
-        "brave-browser.desktop"
+          "firefox.desktop"
           "Alacritty.desktop"
           "code.desktop"
           "android-studio.desktop"
