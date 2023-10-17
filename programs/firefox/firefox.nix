@@ -28,6 +28,42 @@
           keyword = "wiki";
           url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
         }
+        {
+          name = "youtube";
+          tags = [ "video" ];
+          keyword = "yt";
+          url = "https://www.youtube.com/results?search_query=%s";
+        }
+        {
+          name = "github";
+          tags = [ "git" ];
+          keyword = "gh";
+          url = "github.com/akibahmed229";
+        }
+        {
+          name = "reddit";
+          tags = [ "social" ];
+          keyword = "r";
+          url = "https://www.reddit.com/r/%s";
+        }
+        {
+          name = "DIU Blender";
+          tags = [ "education" ];
+          keyword = "varsity";
+          url = "https://elearn.daffodilvarsity.edu.bd/";
+        }
+        {
+          name = "DIU Strudent Portal";
+          tags = [ "education" ];
+          keyword = "portal";
+          url = "http://studentportal.diu.edu.bd";
+        }
+        {
+          name = "Gmail";
+          tags = [ "email" ];
+          keyword = "mail"; 
+          url = "https://mail.google.com/mail/u/0/#inbox";
+        }
       ];
 
       settings = {
