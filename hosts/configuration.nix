@@ -72,10 +72,9 @@
     description = "Akib Ahmed";
     extraGroups = [ "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" ];
     packages = with pkgs; [
-      wget
+        wget
         thunderbird
         vlc
-        brave
     ];
   };
   security.sudo.wheelNeedsPassword = false; # User does not need to give password when using sudo.
