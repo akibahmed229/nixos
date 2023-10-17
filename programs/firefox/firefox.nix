@@ -64,6 +64,18 @@
           keyword = "mail"; 
           url = "https://mail.google.com/mail/u/0/#inbox";
         }
+        {
+          name = "Nix Packages";
+          tags = [ "nix" ];
+          keyword = "nixpkgs";
+          url = "https://search.nixos.org/packages";
+        }
+        {
+          name = "Nix Home-Manager options";
+          tags = [ "nix" ];
+          keyword = "nixhm";
+          url ="https://nix-community.github.io/home-manager/options.html";
+        }
       ];
 
       settings = {
