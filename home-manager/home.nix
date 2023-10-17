@@ -4,7 +4,8 @@
   imports =   
   # [(import ./kde/home.nix)]; # uncomment to use KDE Plasma 
     [(import ./gnome/home.nix)]++ # uncomment to use GNOME  
-    [(import ../programs/firefox/firefox.nix)];
+    [(import ../programs/firefox/firefox.nix)]++
+    [(import ../programs/lf/lf.nix)];
 
 
 # Home Manager needs a bit of information about you and the paths it should
