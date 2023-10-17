@@ -76,6 +76,24 @@
           keyword = "nixhm";
           url ="https://nix-community.github.io/home-manager/options.html";
         }
+        {
+          name = "Chat Gpt";
+          tags = [ "chat" "gpt" "ai"];
+          keyword = "chat";
+          url = "https://chat.openai.com/";
+        }
+        {
+          name = "Google Bird";
+          tags = [ "ai" "google" "bird" ];
+          keyword = "chat";
+          url = "https://bard.google.com/chat";
+        }
+        {
+          name = "Binge Ai";
+          tags = [ "ai" "binge" ];
+          keyword = "binge";
+          url = "https://www.bing.com/search?q=Bing+AI&showconv=1";
+        }
       ];
 
       settings = {
