@@ -26,13 +26,13 @@
           name = "wikipedia";
           tags = [ "wiki" ];
           keyword = "wiki";
-          url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
+          url = "https://en.wikipedia.org/wiki/Main_Page";
         }
         {
           name = "youtube";
           tags = [ "video" ];
           keyword = "yt";
-          url = "https://www.youtube.com/results?search_query=%s";
+          url = "https://www.youtube.com/";
         }
         {
           name = "github";
@@ -44,7 +44,7 @@
           name = "reddit";
           tags = [ "social" ];
           keyword = "r";
-          url = "https://www.reddit.com/r/%s";
+          url = "https://www.reddit.com/";
         }
         {
           name = "DIU Blender";
