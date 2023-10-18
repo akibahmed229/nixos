@@ -118,7 +118,6 @@
         gsconnect
         gnome-shell-integration
         gruvbox-dark-theme
-        (grammarly.override{ enable = true; nixpkgs.config.permittedInsecurePackages = [ "grammarly-8.907.0" ]; })
       ];
 
     };
