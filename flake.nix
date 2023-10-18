@@ -25,6 +25,11 @@
       url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
         inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master"; # unstable home-manager
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hyprland = {
       url = "github:hyprwm/Hyprland";                  # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
