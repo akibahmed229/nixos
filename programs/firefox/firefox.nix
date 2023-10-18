@@ -1,6 +1,8 @@
 { pkgs, inputs, ... }:
 
 {
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "grammarly" ];
+         
   programs.firefox = {
     enable = true;
     profiles.yurii = {
