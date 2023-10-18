@@ -18,17 +18,19 @@
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable"; # unstable packages 
 
-    programsdb.url = "github:wamserma/flake-programs-sqlite";
-    programsdb.inputs.nixpkgs.follows = "nixpkgs";
+    programsdb = {
+       url = "github:wamserma/flake-programs-sqlite";
+       inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
-        inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     
     home-manager-unstable = {
       url = "github:nix-community/home-manager/master"; # unstable home-manager
-        inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
@@ -38,7 +40,7 @@
 
     plasma-manager = {  # KDE Plasma user settings
       url = "github:pjones/plasma-manager"; # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports list in ./hosts/default.nix
-        inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
     };
 
@@ -55,17 +57,21 @@
 # variables
     let
       system = "x86_64-linux";
+      lib = nixpkgs.lib;
+
       user = "akib";
       theme = "gruvbox-dark-soft";
+
       pkgs = import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
       };
+
       unstable = import nixpkgs-unstable {
-      inherit system;
-      config = { allowUnfree = true; };
-      };
-      lib = nixpkgs.lib;
+        inherit system;
+        config = { allowUnfree = true; };
+        };
+
 # using the above variables to define the system configuration
   in {
 
