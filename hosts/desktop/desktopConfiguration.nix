@@ -35,7 +35,7 @@
     neovim
       htop
       trash-cli
-      bibata-cursors
+      cava
       neofetch
       unstable.vscode	
       unstable.jetbrains.pycharm-community
