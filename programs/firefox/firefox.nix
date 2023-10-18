@@ -1,8 +1,6 @@
 { pkgs, inputs, ... }:
 
 {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (inputs.lib.getName pkg) [ "grammarly" ];
-         
   programs.firefox = {
     enable = true;
     profiles.yurii = {
@@ -120,7 +118,7 @@
         gsconnect
         gnome-shell-integration
         gruvbox-dark-theme
-        grammarly
+        (grammarly.override{ enable = true; allowUnfree = true; })
       ];
 
     };
