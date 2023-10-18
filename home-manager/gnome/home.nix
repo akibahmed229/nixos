@@ -4,7 +4,7 @@
 # Dconf settings can be found by running "$ dconf watch /"
 #
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, theme, ... }:
 
 {
   dconf.settings = {
@@ -243,11 +243,11 @@
 
   home.file = {
       ".config/gtk-4.0" = {
-        source = ./gtkcss;
+        source = ./${theme};
         recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = ./gtkcss;
+      source = ./${theme};
       recursive = true;
     };
   };
