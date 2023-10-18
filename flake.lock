@@ -9,11 +9,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1697660468,
-        "narHash": "sha256-WZzb1SDId9HLph6u6svcKFclLA5mZwSoKII+kCKBCwg=",
+        "lastModified": 1697662944,
+        "narHash": "sha256-2b/Xg44io8kZIOKvi54erLsSB48VZ26C9KfH9nhxoQI=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "a02110cad6da921a2c9103ac094b954db0a4e720",
+        "rev": "a5ea6685026a7bbc1e240cfbebf90f1d5a8a4aaf",
         "type": "gitlab"
       },
       "original": {
@@ -55,6 +55,27 @@
       "original": {
         "owner": "nix-community",
         "ref": "release-23.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager-unstable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1697662575,
+        "narHash": "sha256-fVtd4Le9edB831xyGWu0aqSfg6YVbkCNMX/IE3SUIdk=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "3433206e51766b4164dad368a81325efbf343fbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
         "repo": "home-manager",
         "type": "github"
       }
@@ -110,11 +131,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1697226376,
-        "narHash": "sha256-cumLLb1QOUtWieUnLGqo+ylNt3+fU8Lcv5Zl+tYbRUE=",
+        "lastModified": 1697583813,
+        "narHash": "sha256-SRXK2EBMZHlOAs/5bjphhX9XnIKR6peTV6i7yoL6/Lg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "898cb2064b6e98b8c5499f37e81adbdf2925f7c5",
+        "rev": "b5f8ec6be261dfc44c3b56b220e2793d1b61512b",
         "type": "github"
       },
       "original": {
@@ -188,6 +209,7 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
+        "home-manager-unstable": "home-manager-unstable",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
