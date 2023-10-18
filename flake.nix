@@ -51,6 +51,7 @@
     let
       system = "x86_64-linux";
       user = "akib";
+      theme = "gruvbox-dark-soft";
       pkgs = import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
@@ -67,7 +68,7 @@
     nixosConfigurations = (                                               # NixOS configurations
         import ./hosts {                                                    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
-        inherit inputs unstable user system home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs unstable user system theme home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
 
