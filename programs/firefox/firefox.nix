@@ -118,6 +118,7 @@
         gsconnect
         gnome-shell-integration
         gruvbox-dark-theme
+        grammarly
       ];
 
     };
