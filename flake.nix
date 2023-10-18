@@ -32,12 +32,12 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland";                  # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
+      url = "github:hyprwm/Hyprland"; # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
       inputs.nixpkgs.follows = "nixpkgs";
     };  
 
-    plasma-manager = {                                                    # KDE Plasma user settings
-      url = "github:pjones/plasma-manager";                               # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports list in ./hosts/default.nix
+    plasma-manager = {  # KDE Plasma user settings
+      url = "github:pjones/plasma-manager"; # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports list in ./hosts/default.nix
         inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
     };
@@ -70,8 +70,8 @@
   in {
 
 # NixOS configuration
-    nixosConfigurations = (                                               # NixOS configurations
-        import ./hosts {                                                    # Imports ./hosts/default.nix
+    nixosConfigurations = ( # NixOS configurations
+        import ./hosts {    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
         inherit inputs unstable user system theme home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
