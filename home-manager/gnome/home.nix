@@ -243,11 +243,11 @@
 
   home.file = {
       ".config/gtk-4.0" = {
-        source = $../../themes/gtk/${theme};
+        source = ../../themes/gtk/${theme};
         recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = $../../themes/gtk/${theme};
+      source = ../../themes/gtk/${theme};
       recursive = true;
     };
   };
