@@ -3,7 +3,7 @@
 #  Can be run with "$ nix develop" or "$ nix develop </path/to/flake.nix>#<host>"
 #
 {
-  description = "My NixOS configuration";
+  description = "My Development Shell Configuration";
 
 # inputs for the flake
   inputs = {
