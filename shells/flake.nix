@@ -33,12 +33,11 @@
 # using the above variables to define the system configuration
   in {
 # DevShell configuration
-    devShells.${system}.python = (
-          import ./python.nix {
+    devShells.${system} = (
+          import ./default.nix {
             inherit pkgs;
           }
         );
-    
   };
 }
 
