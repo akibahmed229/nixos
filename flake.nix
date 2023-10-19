@@ -85,13 +85,5 @@
         inherit inputs unstable user system theme state-version home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
-
-# DevShell configuration
-    devShells.${system}.default = (
-          import ./shells/python.nix {
-            inherit pkgs;
-          }
-        );
-
   };
 }
