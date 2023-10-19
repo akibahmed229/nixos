@@ -30,7 +30,7 @@
         config = { allowUnfree = true; };
         };
 
-# using the above variables to define the system configuration
+# using the above variables to define the development configuration
   in {
 # DevShell configuration
     devShells.${system} = (
