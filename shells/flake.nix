@@ -38,7 +38,12 @@
             inherit pkgs;
           }
         );
-
+    
+    devShells.${system}.nodejs = (
+          import ./nodejs.nix {
+            inherit pkgs;
+          }
+        );
   };
 }
 
