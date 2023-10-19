@@ -1,15 +1,16 @@
 { pkgs ? import <nixpkgs> {} }:
 
   pkgs.mkShell {
+  name = "python-dev-environment";
   packages = [  
        (pkgs.python311.withPackages (python-pkgs: [
           python-pkgs.pygame
      ]))
     ];
     
-     nativeBuildInputs = with pkgs; [
-        python311Packages.pygame
-     ];
+  nativeBuildInputs = with pkgs; [
+     python311Packages.pygame
+  ];
 
   # Workaround: make vscode's python extension read the .venv
   shellHook = ''
