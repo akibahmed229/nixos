@@ -140,6 +140,9 @@
   defaultEditor = true;
   vimAlias = true;
   viAlias = true;
+  package = with pkgs.vimPlugins; [
+    clangd_extensions-nvim
+  ];
 # configure = {
 # customRC = '' 
 # luafile ${./nvim/init.lua}
