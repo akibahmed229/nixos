@@ -6,6 +6,8 @@
 #                |              |___hardware-configuration.nix
 #                |              |___../../home-manager/gnome/default.nix
 #                |              |___../../pograms/flatpak/flatpak.nix
+#                |              |___../../pograms/firefox/firefox.nix
+#                |              |___../../pograms/lf/lf.nix
 #                |
 #                |___../home-manager/home.nix
 #                              |___gnome/home.nix 
