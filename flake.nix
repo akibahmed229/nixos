@@ -30,7 +30,7 @@
     
     home-manager-unstable = {
       url = "github:nix-community/home-manager/master"; # unstable home-manager
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
     };
 
     hyprland = {
