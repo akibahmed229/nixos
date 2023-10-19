@@ -60,6 +60,7 @@
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
+      state-version = "23.05";
 
       user = "akib";
       theme = "gruvbox-dark-soft";
@@ -81,7 +82,7 @@
     nixosConfigurations = ( # NixOS configurations
         import ./hosts {    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
-        inherit inputs unstable user system theme home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs unstable user system theme state-version home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
 
