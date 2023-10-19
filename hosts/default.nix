@@ -28,7 +28,7 @@
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
-      ./configuration.nix
+      ./virt/virtconfiguration.nix
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
