@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{system, pkgs ? import <nixpkgs> {}, inputs }:
 
   pkgs.mkShell {
   name = "python-dev-environment";
@@ -10,6 +10,7 @@
     
   nativeBuildInputs = with pkgs; [
      python311Packages.pygame
+     #inputs.python27-pkgs.legacyPackages.${system}.python27Packages.pygame_sdl2
   ];
 
   # Workaround: make vscode's python extension read the .venv
