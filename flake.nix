@@ -25,6 +25,11 @@
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = { 
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05"; # stable home-manager
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +59,7 @@
   };
 
 # outputs for the flake
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, plasma-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nix-index-database, home-manager, hyprland, plasma-manager, ... }:
 
 # variables
     let
@@ -82,7 +87,7 @@
     nixosConfigurations = ( # NixOS configurations
         import ./hosts {    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
-        inherit inputs unstable user system theme state-version home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs unstable user system theme state-version nix-index-database home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
   };
