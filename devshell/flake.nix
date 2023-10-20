@@ -1,7 +1,7 @@
 #
 #  Example of a flake shell
 #  Can be run with "$ nix develop" or "$ nix develop </path/to/flake.nix>#<host>"
-#
+# https://www.nixhub.io/ --> site to search for different versions of packages
 {
   description = "My Development Shell Configuration";
 
@@ -10,6 +10,9 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.05"; # stable packages
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable"; # unstable packages 
+  
+    # Example of old packages
+    python27-pkgs = "github:nixos/nixpkgs/272744825d28f9cea96fe77fe685c8ba2af8eb12";
   };
 
 # outputs for the flake
@@ -35,7 +38,7 @@
 # DevShell configuration
     devShells.${system} = (
           import ./shell {
-            inherit pkgs;
+            inherit system pkgs inputs;
           }
         );
   };
