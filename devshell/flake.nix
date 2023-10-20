@@ -12,7 +12,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable"; # unstable packages 
   
     # Example of old packages
-    python27-pkgs = "github:nixos/nixpkgs/272744825d28f9cea96fe77fe685c8ba2af8eb12";
+    python27-pkgs.url = "github:nixos/nixpkgs/272744825d28f9cea96fe77fe685c8ba2af8eb12";
   };
 
 # outputs for the flake
