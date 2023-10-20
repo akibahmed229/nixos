@@ -196,6 +196,8 @@
       })
   ];
 
+programs.command-not-found.enable = false;
+
 # Zsh and Oh-My-Zsh setup
   programs = {
     zsh = {
