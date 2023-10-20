@@ -32,10 +32,27 @@
         "type": "github"
       }
     },
+    "python27-pkgs": {
+      "locked": {
+        "lastModified": 1606071860,
+        "narHash": "sha256-9DDVLft8vbQOZVPOgO4zOFZzT92Mj6OYDPWjSxtbwGo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "272744825d28f9cea96fe77fe685c8ba2af8eb12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "272744825d28f9cea96fe77fe685c8ba2af8eb12",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "python27-pkgs": "python27-pkgs"
       }
     }
   },
