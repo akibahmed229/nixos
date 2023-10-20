@@ -1,5 +1,6 @@
 {
-  description = "update-input";
+  # sudo nix run nix-update-input/ # to update the input of a flake
+  description = "This will update the input of a flake for each one.";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
