@@ -24,10 +24,6 @@
       "steam"
   ]);
 
-  # This value determines the NixOS release from which the default
-  programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
-
-
 
 # remove bloat
   documentation.nixos.enable = false;
@@ -196,7 +192,9 @@
       })
   ];
 
-programs.command-not-found.enable = false;
+  # This value determines the NixOS release from which the default
+  programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
+  programs.command-not-found.enable = false;
 
 # Zsh and Oh-My-Zsh setup
   programs = {
