@@ -135,19 +135,19 @@
   };
 
 # NeoVim configuration
- programs.neovim = {
-  enable = true;
-  defaultEditor = true;
-  vimAlias = true;
-  viAlias = true;
-  #coc = {
-  #  enable = true;
-  #};
-# configure = {
-# customRC = '' 
-# luafile ${./nvim/init.lua}
-# '';
-#  };
- };
+ #programs.neovim = {
+ # enable = true;
+ # defaultEditor = true;
+ # vimAlias = true;
+ # viAlias = true;
+ # #coc = {
+ # #  enable = true;
+ # #};
+## configure = {
+## customRC = '' 
+## luafile ${./nvim/init.lua}
+## '';
+##  };
+ #};
 
 }
