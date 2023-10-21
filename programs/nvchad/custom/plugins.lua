@@ -4,6 +4,7 @@ local overrides = require("custom.configs.overrides")
 local plugins = {
 
   -- Override plugin definition options
+  
   {
     "jose-elias-alvarez/null-ls.nvim",
     ft = { "python" },
@@ -25,6 +26,7 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "clangd",
         "black",
         "pyright",
         "ruff",
