@@ -1,9 +1,6 @@
 { config, pkgs, user, unstable, nixpkgs, ... }:
 
 {
-  imports = 
-    [(import ./desktop/desktopConfiguration.nix)];
-
 # Dual Booting using grub
   boot.loader={
     efi = {
