@@ -1,3 +1,5 @@
+# NixOS configuration with home-manager as a module in flakes
+
 { lib, inputs, unstable, system, theme, state-version, nix-index-database, home-manager, hyprland, plasma-manager, user, ... }:
 
 {
@@ -30,7 +32,6 @@
   };
   
 # Host virt-managet configuration
-
   virt = lib.nixosSystem {
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
