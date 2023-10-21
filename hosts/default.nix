@@ -7,6 +7,7 @@
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
       ./configuration.nix
+      ./desktop/desktopConfiguration.nix
        nix-index-database.nixosModules.nix-index
        # optional to also wrap and install comma
        # { programs.nix-index-database.comma.enable = true; }
