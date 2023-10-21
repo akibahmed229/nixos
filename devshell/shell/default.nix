@@ -1,3 +1,5 @@
+# where all the possible development environments are defined 
+
 {system, pkgs, inputs,... }:
 
 {
