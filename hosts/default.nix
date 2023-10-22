@@ -9,7 +9,7 @@
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
       ./configuration.nix
-      ./desktop/desktopConfiguration.nix
+      ./desktop
        nix-index-database.nixosModules.nix-index
        # optional to also wrap and install comma
        # { programs.nix-index-database.comma.enable = true; }
@@ -36,7 +36,7 @@
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
-      ./virt/virtconfiguration.nix
+      ./virt
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
