@@ -62,7 +62,11 @@
 
       lualine-nvim
       nvim-web-devicons
-
+   
+      { 
+        plugin = mason-nvim;
+        config = toLuaFile ./nvim/plugin/mason.lua;
+      }
       {
         plugin = (nvim-treesitter.withPlugins (p: [
           p.tree-sitter-nix
