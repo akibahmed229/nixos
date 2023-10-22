@@ -140,6 +140,10 @@
   defaultEditor = true;
   vimAlias = true;
   viAlias = true;
+
+    extraLuaConfig = ''
+      ${builtins.readFile ../programs/nvchad/custom}
+    '';
  # #coc = {
  # #  enable = true;
  # #};
