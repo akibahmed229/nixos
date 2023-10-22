@@ -136,11 +136,11 @@
   };
 
 # NeoVim configuration
- programs.neovim = {
-  enable = true;
-  defaultEditor = true;
-  vimAlias = true;
-  viAlias = true;
+# programs.neovim = {
+#  enable = true;
+#  defaultEditor = true;
+#  vimAlias = true;
+#  viAlias = true;
 
  #extraLuaConfig = ''
   #${builtins.filterSource (path: type: type == "regular") ../programs/nvim}
@@ -153,6 +153,6 @@
 ## luafile ${./nvim/init.lua}
 ## '';
 ##  };
-};
+#};
 
 }
