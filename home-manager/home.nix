@@ -135,11 +135,11 @@
   };
 
 # NeoVim configuration
- #programs.neovim = {
- # enable = true;
- # defaultEditor = true;
- # vimAlias = true;
- # viAlias = true;
+ programs.neovim = {
+  enable = true;
+  defaultEditor = true;
+  vimAlias = true;
+  viAlias = true;
  # #coc = {
  # #  enable = true;
  # #};
@@ -148,6 +148,6 @@
 ## luafile ${./nvim/init.lua}
 ## '';
 ##  };
- #};
+};
 
 }
