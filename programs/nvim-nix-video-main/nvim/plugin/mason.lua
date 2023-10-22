@@ -1,4 +1,5 @@
-require("mason").setup({ opts = {
+require("mason").setup()
+require("mason-lspconfig").setup(
       ensure_installed = {
         "clangd",
         "black",
@@ -6,5 +7,4 @@ require("mason").setup({ opts = {
         "ruff",
         "pyright",
       },
-},
 })
