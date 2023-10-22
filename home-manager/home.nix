@@ -5,7 +5,7 @@
   # [(import ./kde/home.nix)]; # uncomment to use KDE Plasma 
     [(import ./gnome/home.nix)]++ # uncomment to use GNOME  
     [(import ../programs/firefox/firefox.nix)]++
-    [(import ../programs/nvim-nix-video-main/home.nix)]++
+    #[(import ../programs/nvim-nix-video-main/home.nix)]++
     [(import ../programs/lf/lf.nix)];
 
 
@@ -31,7 +31,6 @@
       adw-gtk3
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
-      vimPlugins.packer-nvim
 
 # # Adds the 'hello' command to your environment. It prints a friendly
 # # "Hello, world!" when run.
@@ -137,11 +136,11 @@
   };
 
 # NeoVim configuration
- #programs.neovim = {
- # enable = true;
- # defaultEditor = true;
- # vimAlias = true;
- # viAlias = true;
+ programs.neovim = {
+  enable = true;
+  defaultEditor = true;
+  vimAlias = true;
+  viAlias = true;
 
  #extraLuaConfig = ''
   #${builtins.filterSource (path: type: type == "regular") ../programs/nvim}
@@ -154,6 +153,6 @@
 ## luafile ${./nvim/init.lua}
 ## '';
 ##  };
-#};
+};
 
 }
