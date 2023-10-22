@@ -1,5 +1,3 @@
-#
-#  Example of a flake shell
 #  Can be run with "$ nix develop" or "$ nix develop </path/to/flake.nix>#<host>"
 # https://www.nixhub.io/ --> site to search for different versions of packages
 {
