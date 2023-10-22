@@ -63,10 +63,13 @@
       lualine-nvim
       nvim-web-devicons
    
-      mason-nvim
+      {
+       plugin = mason-nvim;
+       config = toLuaFile ./nvim/plugin/mason.lua;
+      }
       { 
         plugin = mason-lspconfig-nvim;
-        config = toLuaFile ./nvim/plugin/mason.lua;
+        config = toLuaFile ./nvim/plugin/mason-lspconfig.lua;
       }
       {
         plugin = (nvim-treesitter.withPlugins (p: [
