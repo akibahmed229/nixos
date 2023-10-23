@@ -35,10 +35,10 @@
   in {
 # DevShell configuration
     devShells.${system} = (
-          import ./shell {
-            inherit system pkgs inputs;
-          }
-        );
+      import ./shell {
+        inherit system pkgs inputs;
+      }
+    );
   };
 }
 
