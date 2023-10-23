@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ lib, pkgs, ... }:
 {
-  nvim = import ./nvchad { inherit pkgs; };
+  nvim = import ./nvchad { inherit lib pkgs; };
 }

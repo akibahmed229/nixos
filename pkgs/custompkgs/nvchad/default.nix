@@ -1,4 +1,4 @@
-{ lib, stdenv, pkgs ? import <nixpkgs> {}, ... }:
+{ lib, pkgs ? import <nixpkgs> {}, ... }:
 let 
 custom = ./custom;
 in
