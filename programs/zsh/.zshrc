@@ -30,9 +30,6 @@
                 # export LS_COLORS='rs=0:di=38;5;27:ln=38;5;51:ex=38;5;21:*.txt=38;5;226'  #>
                 # export CLICOLOR='1'                                                     # >
                 # ps1
-                export PS1="%B%n@%m %~ %#%b "
-                export PATH="$HOME/.local/bin:$PATH"
-                export PATH="$HOME/.cargo/bin:$PATH"
-                export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/run/wrappers/bin:/home/akib/.cargo/bin:/home/akib/.local/bin:/home/akib/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:/home/akib/.nix-profile/bin:/etc/profiles/per-user/akib/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:$PATH"
+                #export PS1="%B%n@%m %~ %#%b "
                 #eval "$(direnv hook zsh)"
 
