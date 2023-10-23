@@ -1,4 +1,4 @@
-{system, pkgs ? import <nixpkgs> {}, inputs }:
+{ pkgs ? import <nixpkgs> {}}:
 
   pkgs.mkShell {
   name = "C/C++ GTK 3 development environment";
