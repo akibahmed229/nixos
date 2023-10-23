@@ -60,7 +60,6 @@
       speedtest-cli
       git
       gcc
-      clang-tools
       jdk
       python311Full
       nodejs_20
