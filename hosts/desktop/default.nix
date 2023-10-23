@@ -65,8 +65,6 @@
       nodejs_20
       yarn
       unstable.alacritty
-      python311Packages.pip
-      python311Packages.virtualenv
       flatpak
       appimage-run
       spotify
