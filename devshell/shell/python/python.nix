@@ -4,12 +4,15 @@
   name = "python-dev-environment";
   packages = [  
        (pkgs.python311.withPackages (python-pkgs: [
-          python-pkgs.pygame
+          #python-pkgs.pygame
      ]))
     ];
     
   nativeBuildInputs = with pkgs; [
-     python311Packages.pygame
+      python311Packages.pygame
+      python311Packages.pip
+      python311Packages.virtualenv
+
      #inputs.python27-pkgs.legacyPackages.${system}.python27Packages.pygame_sdl2
   ];
 
