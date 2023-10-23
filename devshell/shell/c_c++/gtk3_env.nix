@@ -12,10 +12,11 @@
      clang-tools
   ];
 
-  # Workaround: make vscode's python extension read the .venv
   shellHook = ''
-      echo "Welcome to the C/C++ GTK 3 development environment"
+    echo "Welcome to the C/C++ GTK 3 development environment."
+    export LD_LIBRARY_PATH=${pkgs.gtk3}/lib:$LD_LIBRARY_PATH
   '';
+
   }
 
 
