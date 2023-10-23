@@ -3,7 +3,7 @@
 { lib, inputs, unstable, system, theme, state-version, nix-index-database, home-manager, hyprland, plasma-manager, user, ... }:
 
 {
-# Host desktop configuration
+# Host desktop configuration ( main system)
   desktop = lib.nixosSystem {
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
@@ -31,7 +31,7 @@
     ];
   };
   
-# Host virt-managet configuration
+# Host virt-managet configuration ( virtualization system)
   virt = lib.nixosSystem {
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
