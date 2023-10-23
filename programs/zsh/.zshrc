@@ -31,6 +31,8 @@
                 # export CLICOLOR='1'                                                     # >
                 # ps1
                 export PS1="%B%n@%m %~ %#%b "
-
+                export PATH="$HOME/.local/bin:$PATH"
+                export PATH="$HOME/.cargo/bin:$PATH"
+                export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/run/wrappers/bin:$PATH"
                 #eval "$(direnv hook zsh)"
 
