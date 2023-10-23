@@ -7,6 +7,9 @@
     
   nativeBuildInputs = with pkgs; [
      gtk3
+     pkg-config
+     cmake
+     clang-tools
   ];
 
   # Workaround: make vscode's python extension read the .venv
