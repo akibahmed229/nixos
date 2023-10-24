@@ -1,5 +1,5 @@
+# sudo nix run <path/to/flake.nix>/ # to update the input of a flake
 {
-  # sudo nix run nix-update-input/ # to update the input of a flake
   description = "This will update the input of a flake for each input.";
 
   inputs = {
