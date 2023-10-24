@@ -1,3 +1,4 @@
+#  Can be run with "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
 {
 # ____flake.nix # NixOS configuration file for Nix Flakes   
 #       |___hosts/default.nix 
