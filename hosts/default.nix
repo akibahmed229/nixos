@@ -17,7 +17,7 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit user inputs theme state-version; };
+          home-manager.extraSpecialArgs = { inherit user inputs unstable theme state-version; };
           home-manager.users.${user} = {
             imports = [
               # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
