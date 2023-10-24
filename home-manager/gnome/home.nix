@@ -196,7 +196,7 @@
       show-notification = false;
     };
     "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = 0.9;
+      brightness = 0.8;
     };
     "org/gnome/shell/extensions/blur-my-shell/panel" = {
       customize = true;
