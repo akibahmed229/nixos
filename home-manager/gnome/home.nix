@@ -205,8 +205,6 @@
     };
     "org/gnome/shell/extensions/forge/keybindings" = {      # Set active colors manually
       focus-border-toggle = true;
-      tiled-focus-border-color = "#ff00ff";
-
       float-always-on-top-enabled = true;
       window-focus-up = ["<Super>Up"];
       window-focus-down = ["<Super>Down"];
@@ -239,6 +237,9 @@
       isolate-monitors = true;
 
     };
+   # "/org/gnome/shell/extensions/vitals" = {
+   #  hot-sensors ="/org/gnome/shell/extensions/vitals/hot-sensors ['_processor_usage_', '_memory_usage_', '_processor_frequency_', '__temperature_avg__']";
+   # };
   };
 
   home.file = {
