@@ -268,27 +268,27 @@
   home.packages = with pkgs; [
 # gnomeExtensions.tray-icons-reloaded
       unstable.gnomeExtensions.forge
-      gnomeExtensions.removable-drive-menu
-      gnomeExtensions.clipboard-indicator
-# gnomeExtensions.bluetooth-quick-connect
-      gnomeExtensions.blur-my-shell
-      gnomeExtensions.burn-my-windows
-      gnomeExtensions.caffeine
-      gnomeExtensions.custom-hot-corners-extended
-      gnomeExtensions.clipboard-indicator
-      gnomeExtensions.coverflow-alt-tab
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.dash-to-panel
-      gnomeExtensions.user-avatar-in-quick-settings
-      gnomeExtensions.gnome-40-ui-improvements
-      gnomeExtensions.gsconnect
+      unstable.gnomeExtensions.space-bar
+      unstable.gnomeExtensions.removable-drive-menu
+      unstable.gnomeExtensions.clipboard-indicator
+      unstable.gnomeExtensions.blur-my-shell
+      unstable.gnomeExtensions.burn-my-windows
+      unstable.gnomeExtensions.caffeine
+      unstable.gnomeExtensions.custom-hot-corners-extended
+      unstable.gnomeExtensions.clipboard-indicator
+      unstable.gnomeExtensions.coverflow-alt-tab
+      unstable.gnomeExtensions.dash-to-dock
+      unstable.gnomeExtensions.dash-to-panel
+      unstable.gnomeExtensions.user-avatar-in-quick-settings
+      unstable.gnomeExtensions.gnome-40-ui-improvements
+      unstable.gnomeExtensions.gsconnect
       unstable.gnomeExtensions.impatience
-      gnomeExtensions.quick-settings-tweaker
-      gnomeExtensions.tiling-assistant
-      gnomeExtensions.vitals
-      gnomeExtensions.pop-shell
-      gnomeExtensions.rounded-window-corners
-      gnomeExtensions.just-perfection
-      gnomeExtensions.advanced-alttab-window-switcher
+      unstable.gnomeExtensions.quick-settings-tweaker
+      unstable.gnomeExtensions.tiling-assistant
+      unstable.gnomeExtensions.vitals
+      unstable.gnomeExtensions.pop-shell
+      unstable.gnomeExtensions.rounded-window-corners
+      unstable.gnomeExtensions.just-perfection
+      unstable.gnomeExtensions.advanced-alttab-window-switcher
       ];
 }
