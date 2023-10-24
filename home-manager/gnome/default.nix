@@ -56,7 +56,6 @@
       yelp
       gnome-contacts
       gnome-initial-setup
-      kgx
     ]);
   };
 
