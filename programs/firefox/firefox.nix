@@ -3,7 +3,7 @@
 {
   programs.firefox = {
     enable = true;
-    profiles.yurii = {
+    profiles.akib = {
 
       search.engines = {
         "Nix Packages" = {
