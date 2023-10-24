@@ -2,7 +2,7 @@
 # Gnome configuration
 #
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, unstable,... }:
 
 {
   programs = {
@@ -38,9 +38,9 @@
 
   environment = {
     systemPackages = with pkgs; [                 # Packages installed
-      gnome.dconf-editor
-      gnome.gnome-tweaks
-      gnome.adwaita-icon-theme
+      unstable.gnome.dconf-editor
+      unstable.gnome.gnome-tweaks
+      unstable.gnome.adwaita-icon-theme
     ];
     gnome.excludePackages = (with pkgs; [         # Gnome ignored packages
         gnome-tour
@@ -56,6 +56,7 @@
       yelp
       gnome-contacts
       gnome-initial-setup
+      kgx
     ]);
   };
 
