@@ -4,7 +4,7 @@
 # Dconf settings can be found by running "$ dconf watch /"
 #
 
-{ config, lib, pkgs, theme, ... }:
+{ config, lib, pkgs, unstable, theme, ... }:
 
 {
   dconf.settings = {
@@ -237,9 +237,9 @@
       isolate-monitors = true;
 
     };
-   # "/org/gnome/shell/extensions/vitals" = {
-   #  hot-sensors ="/org/gnome/shell/extensions/vitals/hot-sensors ['_processor_usage_', '_memory_usage_', '_processor_frequency_', '__temperature_avg__']";
-   # };
+   "org/gnome/shell/extensions/vitals" = {
+     hot-sensors = "['_processor_usage_', '_memory_usage_', '_processor_frequency_', '__temperature_avg__']";
+    };
   };
 
   home.file = {
@@ -255,7 +255,7 @@
 
   home.packages = with pkgs; [
 # gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.forge
+      unstable.gnomeExtensions.forge
       gnomeExtensions.removable-drive-menu
       gnomeExtensions.clipboard-indicator
 # gnomeExtensions.bluetooth-quick-connect
@@ -270,7 +270,7 @@
       gnomeExtensions.user-avatar-in-quick-settings
       gnomeExtensions.gnome-40-ui-improvements
       gnomeExtensions.gsconnect
-#gnomeExtensions.impatience
+      unstable.gnomeExtensions.impatience
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tiling-assistant
       gnomeExtensions.vitals
