@@ -1,6 +1,6 @@
 #  Can be run with "$ nix build" or "$ nix build </path/to/flake.nix>#<host>"
 {
-  description = "hello-world flake";
+  description = "My Derivation flake for custom pkgs";
 
   inputs =
     {
