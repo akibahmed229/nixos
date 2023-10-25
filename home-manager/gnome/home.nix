@@ -31,6 +31,8 @@
           "caffeine@patapon.info"
           "clipboard-indicator@tudmotu.com"
 # "bluetooth-quick-connect@bjarosze.gmail.com"
+          "rounded-window-corners@yilozt"
+          "space-bar@luchrioh"
           "CoverflowAltTab@palatis.blogspot.com"
           "gsconnect@andyholmes.github.io"
           "forge@jmmaranan.com"
@@ -60,6 +62,8 @@
     "org/gnome/desktop/calendar" = {
       show-weekdate = true;
     };
+
+# Mutter window manager keybindings
     "org/gnome/desktop/wm/preferences" = {
       action-right-click-titlebar = "toggle-maximize";
       action-middle-click-titlebar = "minimize";
@@ -107,11 +111,15 @@
     "org/gnome/settings-daemon/plugins/power" = {
       sleep-interactive-ac-type = "nothing";
     };
+
+# Custom keybindings gnome default
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -140,6 +148,7 @@
       name = "open-discord";
     };
 
+# Dash-to-panel for status bar config
     "org/gnome/shell/extension/dash-to-panel" = {     # Possibly need to set this manually
       animate-appicon-hover = true;
       animate-appicon-hover-animation-extent = "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}";
@@ -210,6 +219,8 @@
 #   show-battery-icon-on = true;
 #   show-battery-value-on = true;
 # };
+
+# Forge Tiling window manager config
     "org/gnome/shell/extensions/forge" = {
       window-gap-size = 8;
       dnd-center-layout = "stacked";
@@ -232,6 +243,8 @@
       window-swap-last-active = ["@as []"];
       window-toggle-float = ["<Shift><Super>f"];
     };
+
+# Dash-to-Dock config 
     "org/gnome/shell/extensions/dash-to-dock" = {   # If dock if preferred
       multi-monitor = true;
       intelligent-autohide = true;
@@ -249,8 +262,25 @@
       isolate-monitors = true;
 
     };
+# Vitals config for system monitor
    "org/gnome/shell/extensions/vitals" = {
      hot-sensors = ["_processor_usage_" "_memory_usage_" "_processor_frequency_" "__temperature_avg__"];
+    };
+
+# Space-Bar config for showing which workspace in
+    "/org/gnome/shell/extensions/space-bar/appearance" = {
+     active-workspace-background-color = "rgb(104,128,118)";
+     active-workspace-border-color = "rgb(255,255,255)";
+     active-workspace-text-color = "rgb(47,45,45)";
+    };
+    "/org/gnome/shell/extensions/space-bar/behavior" = {
+      indicator-style = "workspaces-bar";
+      position = "center";
+      position-index = 0; 
+      smart-workspace-names = true;
+    };
+    "/org/gnome/shell/extensions/space-bar/shortcuts" = {
+      open-menu "['<Shift><Control><Alt>w']"
     };
   };
 
