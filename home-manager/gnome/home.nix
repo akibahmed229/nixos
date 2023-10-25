@@ -176,6 +176,7 @@
       primary-monitor = 0;
       show-appmenu = false;
       show-favorites = false;
+      show-running-apps = false;
       status-icon-padding = -1;
       stockgs-force-hotcorner = false;
       stockgs-keep-dash = true;
@@ -275,7 +276,7 @@
     };
     "org/gnome/shell/extensions/space-bar/behavior" = {
       indicator-style = "workspaces-bar";
-      position = "center";
+      position = "left";
       position-index = 0; 
       smart-workspace-names = true;
     };
