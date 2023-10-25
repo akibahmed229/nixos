@@ -280,7 +280,7 @@
       smart-workspace-names = true;
     };
     "/org/gnome/shell/extensions/space-bar/shortcuts" = {
-      open-menu "['<Shift><Control><Alt>w']"
+      open-menu = ["<Shift><Control><Alt>w"];
     };
   };
 
