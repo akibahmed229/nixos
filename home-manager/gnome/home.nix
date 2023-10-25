@@ -120,6 +120,7 @@
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -146,6 +147,11 @@
       binding = "<Super><Ctrl>d";
       command = "Discord";
       name = "open-discord";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
+      binding = "<Super><Ctrl>f";
+      command = "firefox";
+      name = "open-firefox";
     };
 
 # Dash-to-panel for status bar config
