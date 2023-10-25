@@ -26,6 +26,8 @@
 # The home.packages option allows you to install Nix packages into your
 # environment.
     home.packages = with pkgs; [
+    	xdg-utils
+	    wl-clipboard
       tree
       bibata-cursors
       adw-gtk3
