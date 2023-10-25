@@ -268,18 +268,18 @@
     };
 
 # Space-Bar config for showing which workspace in
-    "/org/gnome/shell/extensions/space-bar/appearance" = {
+    "org/gnome/shell/extensions/space-bar/appearance" = {
      active-workspace-background-color = "rgb(104,128,118)";
      active-workspace-border-color = "rgb(255,255,255)";
      active-workspace-text-color = "rgb(47,45,45)";
     };
-    "/org/gnome/shell/extensions/space-bar/behavior" = {
+    "org/gnome/shell/extensions/space-bar/behavior" = {
       indicator-style = "workspaces-bar";
       position = "center";
       position-index = 0; 
       smart-workspace-names = true;
     };
-    "/org/gnome/shell/extensions/space-bar/shortcuts" = {
+    "org/gnome/shell/extensions/space-bar/shortcuts" = {
       open-menu = ["<Shift><Control><Alt>w"];
     };
   };
