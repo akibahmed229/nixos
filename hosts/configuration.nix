@@ -40,7 +40,9 @@
   };
   i18n.inputMethod = {
     enabled = "ibus";
-    ibus.engines = with unstable.ibus-engines; [ typing-booster ];
+    ibus.engines = with unstable; [ 
+    (ibus-engines.typing-booster.override { langs = [ "en_US" ]; })
+    ];
   };
 
 # Enable CUPS to print documents.
