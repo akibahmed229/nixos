@@ -89,7 +89,19 @@
       virt-manager
       whatsapp-for-linux
       btop
-      discord
+     (pkgs.discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+      vencord = (pkgs.vencord.overrideAttrs {
+        src = fetchFromGitHub {
+          owner = "Vendicated";
+          repo = "Vencord";
+          rev = "70943455161031d63a4481249d14833afe94f5a5";
+          hash = "sha256-i/n7qPQ/dloLUYR6sj2fPJnvvL80/OQC3s6sOqhu2dQ=";
+        };
+      });
+   })
+
 #davinci-resolve
       ffmpeg_6
       gst_all_1.gstreamer
@@ -184,10 +196,13 @@
           _: { src = builtins.fetchTarball {
             url = "https://discord.com/api/download?platform=linux&format=tar.gz";
             sha256 = "0yzgkzb0200w9qigigmb84q4icnpm2hj4jg400payz7igxk95kqk";
-          };}
+          };
+          }
         );
       })
   ];
+
+
 
   # This value determines the NixOS release from which the default
   programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
