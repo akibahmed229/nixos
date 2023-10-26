@@ -312,13 +312,13 @@
       unstable.gnomeExtensions.caffeine
       unstable.gnomeExtensions.custom-hot-corners-extended
       unstable.gnomeExtensions.clipboard-indicator
-      gnomeExtensions.coverflow-alt-tab
+      unstable.gnomeExtensions.coverflow-alt-tab
       unstable.gnomeExtensions.dash-to-dock
       unstable.gnomeExtensions.dash-to-panel
       unstable.gnomeExtensions.user-avatar-in-quick-settings
       unstable.gnomeExtensions.gnome-40-ui-improvements
       unstable.gnomeExtensions.gsconnect
-      gnomeExtensions.impatience
+      unstable.gnomeExtensions.impatience
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.vitals
       gnomeExtensions.rounded-window-corners
