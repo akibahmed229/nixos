@@ -67,7 +67,6 @@
       unstable.alacritty
       flatpak
       appimage-run
-      spotify
       bleachbit
       obs-studio
       gimp
