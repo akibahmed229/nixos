@@ -64,6 +64,9 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
 
 # outputs for the flake
