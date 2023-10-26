@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }:
+# nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
+{ pkgs, inputs, lib, ... }:
 
 {
   programs.firefox = {
