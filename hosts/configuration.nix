@@ -38,7 +38,10 @@
     keyMap = "us";
 #   useXkbConfig = true; # use xkbOptions in tty.
   };
-  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ typing-booster ];
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with unstable.ibus-engines; [ typing-booster ];
+  };
 
 # Enable CUPS to print documents.
   services.printing.enable = true;
