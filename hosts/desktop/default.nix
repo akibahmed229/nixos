@@ -38,7 +38,7 @@
       trash-cli
       cava
       neofetch
-      unstable.vscode	
+      vscode	
       unstable.jetbrains.pycharm-community
       unstable.jetbrains.idea-community
       unstable.android-studio
