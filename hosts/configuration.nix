@@ -9,7 +9,7 @@
     };
     grub = {
       enable = true;
-      devices = ["nodev"]; # install grub
+      devices = ["nodev"]; # install grub on efi
         efiSupport = true;
       useOSProber = true; # To find Other boot manager like windows 
         configurationLimit = 5; # Store number of config 
