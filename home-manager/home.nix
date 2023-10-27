@@ -1,4 +1,4 @@
-{ config, pkgs, user, state-version, ... }:
+{ config, pkgs, user, state-version, lib,... }:
 
 {
   imports =   
@@ -6,9 +6,15 @@
     [(import ./gnome/home.nix)]++ # uncomment to use GNOME  
     [(import ../programs/firefox/firefox.nix)]++
     #[(import ../programs/nvim-nix-video-main/home.nix)]++
-    [(import ../programs/discord/discord.nix)]++
     [(import ../programs/spotify/spicetify.nix)]++
+    [(import ../programs/discord/discord.nix)]++
     [(import ../programs/lf/lf.nix)];
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
+    "spotify"
+    "grammarly"
+  ];
 
 
 # Home Manager needs a bit of information about you and the paths it should
