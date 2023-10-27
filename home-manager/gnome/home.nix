@@ -44,6 +44,7 @@
           "custom-hot-corners-extended@G-dH.github.com"
           "impatience@gfxmonk.net"
           "burn-my-windows@schneegans.github.com"
+          "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
       ];
     };
 
@@ -288,6 +289,9 @@
     };
     "org/gnome/shell/extensions/space-bar/shortcuts" = {
       open-menu = ["<Shift><Control><Alt>w"];
+    };
+    "org/gnome/shell/extensions/auto-move-windows" = {
+      application-list = ["firefox.desktop:1" "Alacritty.desktop:2" "discord.desktop:3" "com.github.eneshecan.WhatsAppForLinux.desktop:3" "org.telegram.desktop.desktop:3" "spotify.desktop:4"];
     };
   };
 
