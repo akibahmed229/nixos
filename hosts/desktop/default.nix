@@ -180,7 +180,10 @@
   programs = {
     zsh = {
       enable = true;
-      shellAliases = {la = "exa --icons -la  --group-directories-first";};
+      shellAliases = {
+        la = "exa --icons -la  --group-directories-first";
+        ls = "exa --icons --grid --group-directories-first";
+      };
       autosuggestions.enable = true;
       enableBashCompletion = true;
       syntaxHighlighting.enable = true;
