@@ -1,18 +1,18 @@
 #  Can be run with "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-{
-# ____flake.nix # NixOS configuration file for Nix Flakes   
-#       |___hosts/default.nix 
-#                |___configuration.nix
-#                |   |___./desktop/desktopconfiguration.nix
-#                |              |___hardware-configuration.nix
-#                |              |___../../home-manager/gnome/default.nix
-#                |              |___../../pograms/flatpak/flatpak.nix
-#                |              |___../../pograms/firefox/firefox.nix
-#                |              |___../../pograms/lf/lf.nix
-#                |
-#                |___../home-manager/home.nix
-#                              |___gnome/home.nix 
 
+# Structure of the flake
+# flake.nix   
+# |___hosts/default.nix 
+#          |configuration.nix
+#          |./desktop/default.nix
+#          |         |./hardware-configuration.nix
+#          |         |../../home-manager/gnome/default.nix
+#          |         |../../pograms/...
+#          |
+#          |../home-manager/home.nix
+#          |               |./gnome/home.nix 
+#          |                       |../../pograms/...
+{
   description = "My NixOS configuration";
 
 # inputs for the flake
