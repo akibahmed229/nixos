@@ -38,6 +38,7 @@
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
+      ./configuration.nix
       ./virt
 
         home-manager.nixosModules.home-manager {
