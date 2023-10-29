@@ -23,23 +23,23 @@
       ];
       disable-user-extensions = false;
       enabled-extensions = [
-        "blur-my-shell@aunetx"
+          "blur-my-shell@aunetx"
           "user-theme@gnome-shell-extensions.gcampax.github.com"
-# "apps-menu@gnome-shell-extensions.gcampax.github.com"
-          "drive-menu@gnome-shell-extensions.gcampax.github.com"
+          # "apps-menu@gnome-shell-extensions.gcampax.github.com"
+          # "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "dash-to-panel@jderose9.github.com"
           "caffeine@patapon.info"
           "clipboard-indicator@tudmotu.com"
-# "bluetooth-quick-connect@bjarosze.gmail.com"
+          # "bluetooth-quick-connect@bjarosze.gmail.com"
           "rounded-window-corners@yilozt"
           "space-bar@luchrioh"
-          "CoverflowAltTab@palatis.blogspot.com"
+          # "CoverflowAltTab@palatis.blogspot.com"
           "gsconnect@andyholmes.github.io"
           "forge@jmmaranan.com"
           "dash-to-dock@micxgx.gmail.com"             # Dash to panel alternative
           "Vitals@CoreCoding.com"
           "quick-settings-avatar@d-go"
-          "quick-settings-tweaks@qwreey"
+          #"quick-settings-tweaks@qwreey"
           "gnome-ui-tune@itstime.tech"
           "custom-hot-corners-extended@G-dH.github.com"
           "impatience@gfxmonk.net"
@@ -84,6 +84,10 @@
       switch-to-workspace-3 = ["<Alt>3"];
       switch-to-workspace-4 = ["<Alt>4"];
       switch-to-workspace-5 = ["<Alt>5"];
+      switch-to-workspace-6 = ["<Alt>6"];
+      switch-to-workspace-7 = ["<Alt>7"];
+      switch-to-workspace-8 = ["<Alt>8"];
+      switch-to-workspace-9 = ["<Alt>9"];
       move-to-workspace-left = ["<Shift><Alt>Left"];
       move-to-workspace-right = ["<Shift><Alt>Right"];
       move-to-workspace-1 = ["<Shift><Alt>1"];
@@ -91,6 +95,10 @@
       move-to-workspace-3 = ["<Shift><Alt>3"];
       move-to-workspace-4 = ["<Shift><Alt>4"];
       move-to-workspace-5 = ["<Shift><Alt>5"];
+      move-to-workspace-6 = ["<Shift><Alt>6"];
+      move-to-workspace-7 = ["<Shift><Alt>7"];
+      move-to-workspace-8 = ["<Shift><Alt>8"];
+      move-to-workspace-9 = ["<Shift><Alt>9"];
       move-to-monitor-left = ["<Super><Alt>Left"];
       move-to-monitor-right = ["<Super><Alt>Right"];
       close = ["<Super>q" "<Alt>F4"];
@@ -310,23 +318,23 @@
 # gnomeExtensions.tray-icons-reloaded
       unstable.gnomeExtensions.forge
       unstable.gnomeExtensions.space-bar
-      unstable.gnomeExtensions.removable-drive-menu
+      #unstable.gnomeExtensions.removable-drive-menu
       unstable.gnomeExtensions.blur-my-shell
       unstable.gnomeExtensions.burn-my-windows
       unstable.gnomeExtensions.caffeine
       unstable.gnomeExtensions.custom-hot-corners-extended
       unstable.gnomeExtensions.clipboard-indicator
-      unstable.gnomeExtensions.coverflow-alt-tab
+      #unstable.gnomeExtensions.coverflow-alt-tab
       unstable.gnomeExtensions.dash-to-dock
       unstable.gnomeExtensions.dash-to-panel
       unstable.gnomeExtensions.user-avatar-in-quick-settings
       unstable.gnomeExtensions.gnome-40-ui-improvements
       unstable.gnomeExtensions.gsconnect
       unstable.gnomeExtensions.impatience
-      gnomeExtensions.quick-settings-tweaker
+      #gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.vitals
       gnomeExtensions.rounded-window-corners
-      gnomeExtensions.just-perfection
-      gnomeExtensions.advanced-alttab-window-switcher
+      #gnomeExtensions.just-perfection
+      #gnomeExtensions.advanced-alttab-window-switcher
       ];
 }
