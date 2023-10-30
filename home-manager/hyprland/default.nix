@@ -11,11 +11,17 @@
 #               └─ default.nix *
 #
 
-{ config, lib, pkgs, system, ... }:
+{ config, lib, pkgs, unstable, system, ... }:
 let
   exec = "exec Hyprland";
 in
 {
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${unstable.system}.hyprland;
+    xwayland.enable = true;
+  };
+
   environment = {
     loginShellInit = ''
       if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
