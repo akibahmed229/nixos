@@ -31,8 +31,6 @@ in
       XDG_SESSION_DESKTOP="Hyprland";
     };
     systemPackages = with pkgs; [
-      waybar
-      dunst
       wl-clipboard
       kitty
       wofi
@@ -56,10 +54,4 @@ in
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
-  nixpkgs.overlays = [    # Waybar with experimental features
-    (final: prev: {
-      waybar = hyprland.packages.${system}.waybar-hyprland;
-    })
-  ];
 }
