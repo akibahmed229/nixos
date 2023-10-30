@@ -27,7 +27,7 @@
                   #"org.mozilla.firefox"
                   "org.qbittorrent.qBittorrent"
                   "org.signal.Signal"
-                  "org.telegram.desktop"
+                  #"org.telegram.desktop"
                   "org.nickvision.tubeconverter"
                   "com.mattjakeman.ExtensionManager"
                   "org.libreoffice.LibreOffice"
