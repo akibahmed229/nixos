@@ -27,7 +27,8 @@
           "user-theme@gnome-shell-extensions.gcampax.github.com"
           # "apps-menu@gnome-shell-extensions.gcampax.github.com"
           # "drive-menu@gnome-shell-extensions.gcampax.github.com"
-          "dash-to-panel@jderose9.github.com"
+          #"dash-to-panel@jderose9.github.com"
+          #"dash-to-dock@micxgx.gmail.com"             # Dash to panel alternative
           "caffeine@patapon.info"
           "clipboard-indicator@tudmotu.com"
           # "bluetooth-quick-connect@bjarosze.gmail.com"
@@ -36,12 +37,11 @@
           # "CoverflowAltTab@palatis.blogspot.com"
           "gsconnect@andyholmes.github.io"
           "forge@jmmaranan.com"
-          "dash-to-dock@micxgx.gmail.com"             # Dash to panel alternative
           "Vitals@CoreCoding.com"
           "quick-settings-avatar@d-go"
           #"quick-settings-tweaks@qwreey"
           "gnome-ui-tune@itstime.tech"
-          "custom-hot-corners-extended@G-dH.github.com"
+          #"custom-hot-corners-extended@G-dH.github.com"
           "impatience@gfxmonk.net"
           "burn-my-windows@schneegans.github.com"
           "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
@@ -50,7 +50,7 @@
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      enable-hot-corners = false;
+      enable-hot-corners = true;
       clock-show-weekday = true;
 #gtk-theme = "Adwaita-dark";
     };
@@ -164,56 +164,56 @@
     };
 
 # Dash-to-panel for status bar config
-    "org/gnome/shell/extension/dash-to-panel" = {     # Possibly need to set this manually
-      animate-appicon-hover = true;
-      animate-appicon-hover-animation-extent = "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}";
-      appicon-margin = 0;
-      appicon-padding = 3;
-      available-monitors = [0];
-      dot-position = "BOTTOM";
-      dot-style-focused = "DASHES";
-      dot-style-unfocused = "DOTS";
-      group-apps = true;
-      hot-keys = false;
-      hotkeys-overlay-combo = "TEMPORARILY";
-      intellihide = true;
-      intellihide-behaviour = "ALL_WINDOWS";
-      intellihide-hide-from-windows = true;
-      intellihide-use-pressure = true;
-      isolate-workspaces = false;
-      leftbox-padding = -1;
-      leftbox-size = 0;
-      panel-anchors = ''{"0":"MIDDLE"}'';
-      panel-element-positions = ''{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'';
-      panel-lengths = ''{"0":100}'';
-      panel-positions = ''{"0":"TOP"}'';
-      panel-sizes = ''{"0":32}'';
-      primary-monitor = 0;
-      show-appmenu = false;
-      show-favorites = false;
-      show-running-apps = false;
-      status-icon-padding = -1;
-      stockgs-force-hotcorner = false;
-      stockgs-keep-dash = true;
-      stockgs-keep-top-panel = false;
-      taskbar-locked = false;
-      trans-bg-color = "#3c3836";
-      trans-dynamic-anim-target = 0.8;
-      trans-dynamic-anim-time = 300;
-      trans-dynamic-behavior = "ALL_WINDOWS";
-      trans-dynamic-distance = 20;
-      trans-gradient-bottom-color = "#3c3836";
-      trans-gradient-bottom-opacity = 0.4;
-      trans-gradient-top-color = "#3d3d3c";
-      trans-gradient-top-opacity = 0.25;
-      trans-panel-opacity = 0.5;
-      trans-use-custom-bg = false;
-      trans-use-custom-opacity = true;
-      trans-use-dynamic-opacity = true;
-      tray-padding = -1;
-      tray-size = 0; 
-      window-preview-title-position = "TOP";
-    };
+    #"org/gnome/shell/extension/dash-to-panel" = {     # Possibly need to set this manually
+    #  animate-appicon-hover = true;
+    #  animate-appicon-hover-animation-extent = "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}";
+    #  appicon-margin = 0;
+    #  appicon-padding = 3;
+    #  available-monitors = [0];
+    #  dot-position = "BOTTOM";
+    #  dot-style-focused = "DASHES";
+    #  dot-style-unfocused = "DOTS";
+    #  group-apps = true;
+    #  hot-keys = false;
+    #  hotkeys-overlay-combo = "TEMPORARILY";
+    #  intellihide = true;
+    #  intellihide-behaviour = "ALL_WINDOWS";
+    #  intellihide-hide-from-windows = true;
+    #  intellihide-use-pressure = true;
+    #  isolate-workspaces = false;
+    #  leftbox-padding = -1;
+    #  leftbox-size = 0;
+    #  panel-anchors = ''{"0":"MIDDLE"}'';
+    #  panel-element-positions = ''{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'';
+    #  panel-lengths = ''{"0":100}'';
+    #  panel-positions = ''{"0":"TOP"}'';
+    #  panel-sizes = ''{"0":32}'';
+    #  primary-monitor = 0;
+    #  show-appmenu = false;
+    #  show-favorites = false;
+    #  show-running-apps = false;
+    #  status-icon-padding = -1;
+    #  stockgs-force-hotcorner = false;
+    #  stockgs-keep-dash = true;
+    #  stockgs-keep-top-panel = false;
+    #  taskbar-locked = false;
+    #  trans-bg-color = "#3c3836";
+    #  trans-dynamic-anim-target = 0.8;
+    #  trans-dynamic-anim-time = 300;
+    #  trans-dynamic-behavior = "ALL_WINDOWS";
+    #  trans-dynamic-distance = 20;
+    #  trans-gradient-bottom-color = "#3c3836";
+    #  trans-gradient-bottom-opacity = 0.4;
+    #  trans-gradient-top-color = "#3d3d3c";
+    #  trans-gradient-top-opacity = 0.25;
+    #  trans-panel-opacity = 0.5;
+    #  trans-use-custom-bg = false;
+    #  trans-use-custom-opacity = true;
+    #  trans-use-dynamic-opacity = true;
+    #  tray-padding = -1;
+    #  tray-size = 0; 
+    #  window-preview-title-position = "TOP";
+    #};
     "org/gnome/shell/extensions/caffeine" = {
       enable-fullscreen = true;
       restore-state = true;
@@ -261,23 +261,23 @@
     };
 
 # Dash-to-Dock config 
-    "org/gnome/shell/extensions/dash-to-dock" = {   # If dock if preferred
-      multi-monitor = true;
-      intelligent-autohide = true;
-      dash-max-icon-size = 48;
-      custom-theme-shrink = true;
-      custom-theme-shrink-height = 1;
-      background-color = ''rgb(47,45,45)'';
-      transparency-mode = "FIXED";
-      background-opacity = 0.8;
-      show-apps-at-top = true;
-      show-trash = true;
-      hot-keys = false;
-      click-action = "minimize-or-overview";
-      scroll-action = "cycle-windows";
-      isolate-monitors = true;
+   # "org/gnome/shell/extensions/dash-to-dock" = {   # If dock if preferred
+   #   multi-monitor = true;
+   #   intelligent-autohide = true;
+   #   dash-max-icon-size = 48;
+   #   custom-theme-shrink = true;
+   #   custom-theme-shrink-height = 1;
+   #   background-color = ''rgb(47,45,45)'';
+   #   transparency-mode = "FIXED";
+   #   background-opacity = 0.8;
+   #   show-apps-at-top = true;
+   #   show-trash = true;
+   #   hot-keys = false;
+   #   click-action = "minimize-or-overview";
+   #   scroll-action = "cycle-windows";
+   #   isolate-monitors = true;
 
-    };
+   # };
 # Vitals config for system monitor
    "org/gnome/shell/extensions/vitals" = {
      hot-sensors = ["_processor_usage_" "_memory_usage_" "_processor_frequency_" "__temperature_avg__"];
@@ -320,13 +320,13 @@
       unstable.gnomeExtensions.space-bar
       #unstable.gnomeExtensions.removable-drive-menu
       unstable.gnomeExtensions.blur-my-shell
-      unstable.gnomeExtensions.burn-my-windows
+      #unstable.gnomeExtensions.burn-my-windows
       unstable.gnomeExtensions.caffeine
-      unstable.gnomeExtensions.custom-hot-corners-extended
+      #unstable.gnomeExtensions.custom-hot-corners-extended
       unstable.gnomeExtensions.clipboard-indicator
       #unstable.gnomeExtensions.coverflow-alt-tab
-      unstable.gnomeExtensions.dash-to-dock
-      unstable.gnomeExtensions.dash-to-panel
+      #unstable.gnomeExtensions.dash-to-dock
+      #unstable.gnomeExtensions.dash-to-panel
       unstable.gnomeExtensions.user-avatar-in-quick-settings
       unstable.gnomeExtensions.gnome-40-ui-improvements
       unstable.gnomeExtensions.gsconnect
