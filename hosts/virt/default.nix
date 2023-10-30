@@ -2,20 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, state-version, ... }:
 
 {
   imports =
     [(import ./hardware-configuration.nix)]++
     [(import ../../home-manager/hyprland/default.nix)];
 
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -49,6 +42,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "${state-version}"; # Did you read the comment?
 
 }
