@@ -101,9 +101,10 @@
     fonts = {
       fonts = with pkgs; [
         noto-fonts
-          noto-fonts-cjk
+        noto-fonts-cjk
         noto-fonts-emoji
         font-awesome
+        jetbrains-mono
         source-han-sans
         (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
