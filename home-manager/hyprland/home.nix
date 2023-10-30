@@ -16,6 +16,8 @@
 {
   #imports = [(import ./others/hyprutility.nix)];
 
+  programs.zsh.enable = true;
+  
   wayland.windowManager.hyprland.enable = true;
 
   wayland.windowManager.hyprland.extraConfig = ''
