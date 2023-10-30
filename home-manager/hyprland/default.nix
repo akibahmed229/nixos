@@ -31,6 +31,8 @@ in
       XDG_SESSION_DESKTOP="Hyprland";
     };
     systemPackages = with pkgs; [
+      waybar
+      dunst
       wl-clipboard
       kitty
       wofi
