@@ -129,7 +129,8 @@
 # Tmux Config
   programs.tmux ={
     enable = true;
-   # secureSocket = false;
+    secureSocket = false;
+    shell = "${pkgs.zsh}/bin/zsh"; # or zsh
     plugins = with pkgs; [
       tmuxPlugins.sensible
         tmuxPlugins.catppuccin
@@ -137,8 +138,17 @@
         tmuxPlugins.vim-tmux-navigator
         tmuxPlugins.yank
         tmuxPlugins.tmux-fzf
-        tmuxPlugins.resurrect
-        tmuxPlugins.continuum
+    {
+      plugin = tmuxPlugins.resurrect;
+      extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+    }
+    {
+      plugin = tmuxPlugins.continuum;
+      extraConfig = ''
+        set -g @continuum-restore 'on'
+        set -g @continuum-save-interval '60' # minutes
+        '';
+    }
     ];
     extraConfig = ''	
       source /home/${user}/flake/programs/tmux/tmux.conf
