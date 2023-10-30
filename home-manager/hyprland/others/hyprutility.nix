@@ -3,9 +3,7 @@
 
   programs.waybar = {
     enable = true;
-    settings ={ 
-      ${builtins.readFile ./waybar/config}
-      };
+    settings = "${builtins.readFile ./waybar/config}";
 
     style = ''
       ${builtins.readFile ./waybar/style.css}
