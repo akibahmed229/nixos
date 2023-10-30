@@ -14,7 +14,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [(import ./others/hyprutility.nix)];
+  #imports = [(import ./others/hyprutility.nix)];
 
   wayland.windowManager.hyprland.enable = true;
 
@@ -199,6 +199,14 @@
   home.file = {
     ".config/hypr" = {
       source = ./others/hyprpaper;
+      recursive = true;
+    };
+    ".config/waybar" = {
+      source = ./others/waybar;
+      recursive = true;
+    };
+    ".config/dunst" = {
+      source = ./others/dunst;
       recursive = true;
     };
   };
