@@ -11,7 +11,7 @@
 #               └─ home.nix *
 #
 
-{ config, lib, pkgs, host, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [(import ./others/hyprutility.nix)];

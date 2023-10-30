@@ -11,9 +11,8 @@
 #               └─ default.nix *
 #
 
-{ config, lib, pkgs, host, system, hyprland, ... }:
+{ config, lib, pkgs, system, ... }:
 let
-  # exec = with host; if hostName == "work" then "exec nvidia-offload Hyprland" else "exec Hyprland"; # Starting Hyprland with nvidia (bit laggy so disabling)
   exec = "exec Hyprland";
 in
 {
