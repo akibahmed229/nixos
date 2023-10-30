@@ -149,7 +149,7 @@
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
       binding = "<Super><Ctrl>t";
-      command = "flatpak run org.telegram.desktop";
+      command = "telegram-desktop";
       name = "open-telegram";
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
