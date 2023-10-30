@@ -133,6 +133,7 @@
     plugins = with pkgs; [
       tmuxPlugins.sensible
         tmuxPlugins.catppuccin
+        tmuxPlugins.gruvbox
         tmuxPlugins.vim-tmux-navigator
         tmuxPlugins.yank
         tmuxPlugins.tmux-fzf
