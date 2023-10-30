@@ -6,9 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+    [(import ./hardware-configuration.nix)]++
+    [(import ../../home-manager/hyprland/default.nix)];
 
 
   # Enable the X11 windowing system.
