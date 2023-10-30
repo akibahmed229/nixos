@@ -13,245 +13,193 @@
 
 { config, lib, pkgs, host, ... }:
 
-let
-  touchpad = with host;
-    if hostName == "laptop" || hostName == "work" then ''
-        touchpad {
-          natural_scroll=true
-          middle_button_emulation=true
-          tap-to-click=true
-        }
-      }
-      '' else "";
-  gestures = with host;
-    if hostName == "laptop" || hostName == "work" then ''
-      gestures {
-        workspace_swipe=true
-        workspace_swipe_fingers=3
-        workspace_swipe_distance=100
-      }
-    '' else "";
-  workspaces = with host;
-    if hostName == "desktop" then ''
-      monitor=${toString mainMonitor},1920x1080@60,1920x0,1
-      monitor=${toString secondMonitor},1920x1080@60,0x0,1
-    '' else if hostName == "work" then ''
-      monitor=${toString mainMonitor},1920x1080@60,0x0,1
-      monitor=${toString secondMonitor},1920x1200@60,1920x0,1
-      monitor=${toString thirdMonitor},1920x1200@60,3840x0,1
-    '' else ''
-      monitor=${toString mainMonitor},1920x1080@60,0x0,1
-    '';
-  monitors = with host;
-    if hostName == "desktop" then ''
-      workspace=${toString mainMonitor},1
-      workspace=${toString mainMonitor},2
-      workspace=${toString mainMonitor},3
-      workspace=${toString mainMonitor},4
-      workspace=${toString mainMonitor},5
-      workspace=${toString secondMonitor},6
-    '' else if hostName == "work" then ''
-      workspace=${toString mainMonitor},1
-      workspace=${toString mainMonitor},2
-      workspace=${toString mainMonitor},3
-      workspace=${toString secondMonitor},4
-      workspace=${toString secondMonitor},5
-      workspace=${toString secondMonitor},6
-      workspace=${toString thirdMonitor},7
-
-      bindl=,switch:off:Lid Switch,exec,hyprctl keyword monitor "${toString mainMonitor}, 1920x1080, 1"
-      bindl=,switch:off:Lid Switch,exec,${pkgs.waybar}/bin/waybar
-      bindl=,switch:off:Lid Switch,exec,${pkgs.swaybg}/bin/swaybg -m center -i $HOME/.config/wall
-      bindl=,switch:on:Lid Switch,exec,hyprctl keyword monitor "${toString mainMonitor}, disable"
-    '' else "";
-  execute = with host;
-    if hostName == "desktop" then ''
-      #exec-once=${pkgs.mpvpaper}/bin/mpvpaper -sf -v -o "--loop --panscan=1" '*' $HOME/.config/wall.mp4  # Moving wallpaper (small performance hit)
-      exec-once=${pkgs.swaybg}/bin/swaybg -m center -i $HOME/.config/wall
-    '' else if hostName == "work" then ''
-      exec-once=${pkgs.swaybg}/bin/swaybg -m center -i $HOME/.config/wall
-      exec-once=${pkgs.networkmanagerapplet}/bin/nm-applet --indicator
-      #exec-once=${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse /GDrive
-      exec-once=${pkgs.rclone}/bin/rclone mount --daemon gdrive: /GDrive
-    '' else "";
-in
-let
-  hyprlandConf = with host; ''
-    ${workspaces}
-    ${monitors}
-
-    general {
-      #main_mod=SUPER
-      border_size=3
-      gaps_in=5
-      gaps_out=7
-      col.active_border=0x80ffffff
-      col.inactive_border=0x66333333
-      layout=dwindle
-    }
-
-    decoration {
-      rounding=5
-      multisample_edges=true
-      active_opacity=0.93
-      inactive_opacity=0.93
-      fullscreen_opacity=1
-      blur=true
-      drop_shadow=false
-    }
-
-    animations {
-      enabled=true
-      bezier = myBezier,0.1,0.7,0.1,1.05
-      animation=fade,1,7,default
-      animation=windows,1,7,myBezier
-      animation=windowsOut,1,3,default,popin 60%
-      animation=windowsMove,1,7,myBezier
-    }
-
-    input {
-      kb_layout=us
-      #kb_options=caps:ctrl_modifier
-      follow_mouse=2
-      repeat_delay=250
-      numlock_by_default=1
-      accel_profile=flat
-      sensitivity=0.8
-      ${touchpad}
-    }
-
-    ${gestures}
-
-    dwindle {
-      pseudotile=false
-      force_split=2
-    }
-
-    debug {
-      damage_tracking=2
-    }
-
-    bindm=SUPER,mouse:272,movewindow
-    bindm=SUPER,mouse:273,resizewindow
-
-    bind=SUPER,Return,exec,${pkgs.alacritty}/bin/alacritty
-    bind=SUPER,Q,killactive,
-    bind=SUPER,Escape,exit,
-    bind=SUPER,L,exec,${pkgs.swaylock}/bin/swaylock
-    bind=SUPER,E,exec,${pkgs.pcmanfm}/bin/pcmanfm
-    bind=SUPER,H,togglefloating,
-    #bind=SUPER,Space,exec,${pkgs.rofi}/bin/rofi -show drun
-    bind=SUPER,Space,exec, pkill wofi || ${pkgs.wofi}/bin/wofi --show drun
-    bind=SUPER,P,pseudo,
-    bind=SUPER,F,fullscreen,
-    bind=SUPER,R,forcerendererreload
-    bind=SUPERSHIFT,R,exec,${pkgs.hyprland}/bin/hyprctl reload
-    bind=SUPER,T,exec,${pkgs.emacs}/bin/emacsclient -c
-
-    bind=SUPER,left,movefocus,l
-    bind=SUPER,right,movefocus,r
-    bind=SUPER,up,movefocus,u
-    bind=SUPER,down,movefocus,d
-
-    bind=SUPERSHIFT,left,movewindow,l
-    bind=SUPERSHIFT,right,movewindow,r
-    bind=SUPERSHIFT,up,movewindow,u
-    bind=SUPERSHIFT,down,movewindow,d
-
-    bind=ALT,1,workspace,1
-    bind=ALT,2,workspace,2
-    bind=ALT,3,workspace,3
-    bind=ALT,4,workspace,4
-    bind=ALT,5,workspace,5
-    bind=ALT,6,workspace,6
-    bind=ALT,7,workspace,7
-    bind=ALT,8,workspace,8
-    bind=ALT,9,workspace,9
-    bind=ALT,0,workspace,10
-    bind=ALT,right,workspace,+1
-    bind=ALT,left,workspace,-1
-
-    bind=ALTSHIFT,1,movetoworkspace,1
-    bind=ALTSHIFT,2,movetoworkspace,2
-    bind=ALTSHIFT,3,movetoworkspace,3
-    bind=ALTSHIFT,4,movetoworkspace,4
-    bind=ALTSHIFT,5,movetoworkspace,5
-    bind=ALTSHIFT,6,movetoworkspace,6
-    bind=ALTSHIFT,7,movetoworkspace,7
-    bind=ALTSHIFT,8,movetoworkspace,8
-    bind=ALTSHIFT,9,movetoworkspace,9
-    bind=ALTSHIFT,0,movetoworkspace,10
-    bind=ALTSHIFT,right,movetoworkspace,+1
-    bind=ALTSHIFT,left,movetoworkspace,-1
-
-    bind=CTRL,right,resizeactive,20 0
-    bind=CTRL,left,resizeactive,-20 0
-    bind=CTRL,up,resizeactive,0 -20
-    bind=CTRL,down,resizeactive,0 20
-
-    bind=,print,exec,${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f - -o ~/Pictures/$(date +%Hh_%Mm_%Ss_%d_%B_%Y).png && notify-send "Saved to ~/Pictures/$(date +%Hh_%Mm_%Ss_%d_%B_%Y).png"
-
-    bind=,XF86AudioLowerVolume,exec,${pkgs.pamixer}/bin/pamixer -d 10
-    bind=,XF86AudioRaiseVolume,exec,${pkgs.pamixer}/bin/pamixer -i 10
-    bind=,XF86AudioMute,exec,${pkgs.pamixer}/bin/pamixer -t
-    bind=SUPER_L,c,exec,${pkgs.pamixer}/bin/pamixer --default-source -t
-    bind=,XF86AudioMicMute,exec,${pkgs.pamixer}/bin/pamixer --default-source -t
-    bind=,XF86MonBrightnessDown,exec,${pkgs.light}/bin/light -U 10
-    bind=,XF86MonBrightnessUP,exec,${pkgs.light}/bin/light -A 10
-
-    #windowrule=float,^(Rofi)$
-    windowrule=float,title:^(Volume Control)$
-    windowrule=float,title:^(Picture-in-Picture)$
-    windowrule=pin,title:^(Picture-in-Picture)$
-    windowrule=move 75% 75% ,title:^(Picture-in-Picture)$
-    windowrule=size 24% 24% ,title:^(Picture-in-Picture)$
-
-    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    exec-once=${pkgs.waybar}/bin/waybar
-    exec-once=${pkgs.blueman}/bin/blueman-applet
-    ${execute}
-  '';
-in
 {
-  xdg.configFile."hypr/hyprland.conf".text = hyprlandConf;
+  imports = [(import ./others/hyprutility.nix)];
 
-  programs.swaylock.settings = {
-    #image = "$HOME/.config/wall";
-    color = "000000f0";
-    font-size = "24";
-    indicator-idle-visible = false;
-    indicator-radius = 100;
-    indicator-thickness = 20;
-    inside-color = "00000000";
-    inside-clear-color = "00000000";
-    inside-ver-color = "00000000";
-    inside-wrong-color = "00000000";
-    key-hl-color = "79b360";
-    line-color = "000000f0";
-    line-clear-color = "000000f0";
-    line-ver-color = "000000f0";
-    line-wrong-color = "000000f0";
-    ring-color = "ffffff50";
-    ring-clear-color = "bbbbbb50";
-    ring-ver-color = "bbbbbb50";
-    ring-wrong-color = "b3606050";
-    text-color = "ffffff";
-    text-ver-color = "ffffff";
-    text-wrong-color = "ffffff";
-    show-failed-attempts = true;
-  };
+  wayland.windowManager.hyprland.enable = true;
 
-  services.swayidle = with host; if hostName == "laptop" || hostName == "work" then {
-    enable = true;
-    events = [
-      { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -f"; }
-      { event = "lock"; command = "lock"; }
-    ];
-    timeouts = [
-      { timeout= 300; command = "${pkgs.swaylock}/bin/swaylock -f";}
-    ];
-    systemdTarget = "xdg-desktop-portal-hyprland.service";
-  } else {
-    enable = false;
+  wayland.windowManager.hyprland.extraConfig = ''
+    
+      # This is an example Hyprland config file.
+      #
+      # Refer to the wiki for more information.
+      
+      #
+      # Please note not all available settings / options are set here.
+      # For a full list, see the wiki
+      #
+      
+      # See https://wiki.hyprland.org/Configuring/Monitors/
+      # monitor=,preferred,auto,auto
+      monitor=,1920x1080,auto,1
+      
+      # See https://wiki.hyprland.org/Configuring/Keywords/ for more
+      
+      # Execute your favorite apps at launch
+      exec-once = waybar
+      exec-once = hyprpaper
+      
+      # Source a file (multi-file configs)
+      # source = ~/.config/hypr/myColors.conf
+      
+      # Some default env vars.
+      env = XCURSOR_SIZE,24
+      
+      # For KVM virtual machines
+      env = WLR_NO_HARDWARE_CURSORS, 1
+      env = WLR_RENDERER_ALLOW_SOFTWARE, 1
+      
+      # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+      input {
+          kb_layout = us
+          # kb_layout = de
+          kb_variant =
+          kb_model =
+          kb_options =
+          kb_rules =
+      
+          follow_mouse = 1
+      
+          touchpad {
+              natural_scroll = false
+          }
+      
+          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+      }
+      
+      general {
+          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+      
+          gaps_in = 5
+          gaps_out = 20
+          border_size = 2
+          col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+          col.inactive_border = rgba(595959aa)
+          layout = dwindle
+      }
+      
+      decoration {
+          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+      
+          rounding = 10
+      
+          blur {
+              enabled = true
+              size = 3
+              passes = 1
+          }
+      
+          drop_shadow = true
+          shadow_range = 4
+          shadow_render_power = 3
+          col.shadow = rgba(1a1a1aee)
+      }
+      
+      animations {
+          enabled = true
+      
+          # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+      
+          bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+      
+          animation = windows, 1, 7, myBezier
+          animation = windowsOut, 1, 7, default, popin 80%
+          animation = border, 1, 10, default
+          animation = borderangle, 1, 8, default
+          animation = fade, 1, 7, default
+          animation = workspaces, 1, 6, default
+      }
+      
+      dwindle {
+          # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+          pseudotile = true # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+          preserve_split = true # you probably want this
+      }
+      
+      master {
+          # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+          new_is_master = true
+      }
+      
+      gestures {
+          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+          workspace_swipe = false
+      }
+      
+      misc {
+          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+          disable_hyprland_logo = true
+          disable_splash_rendering = true
+      }
+      
+      # Example per-device config
+      # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
+      device:epic-mouse-v1 {
+          sensitivity = -0.5
+      }
+      
+      # Example windowrule v1
+      # windowrule = float, ^(kitty)$
+      # Example windowrule v2
+      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+      
+      
+      # See https://wiki.hyprland.org/Configuring/Keywords/ for more
+      $mainMod = SUPER
+      
+      # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+      # bind = $mainMod, Q, exec, kitty
+      bind = $mainMod, RETURN, exec, alacritty
+      # bind = $mainMod, C, killactive,
+      bind = $mainMod, Q, killactive,
+      bind = $mainMod, M, exit,
+      bind = $mainMod, E, exec, dolphin
+      # bind = $mainMod, V, togglefloating,
+      bind = $mainMod, T, togglefloating,
+      bind = $mainMod, F, fullscreen
+      # bind = $mainMod, R, exec, wofi --show drun
+      bind = $mainMod CTRL, RETURN, exec, rofi -show drun
+      bind = $mainMod, P, pseudo, # dwindle
+      bind = $mainMod, J, togglesplit, # dwindle
+      bind = $mainMod, B, exec, chromium
+      
+      # Move focus with mainMod + arrow keys
+      bind = $mainMod, left, movefocus, l
+      bind = $mainMod, right, movefocus, r
+      bind = $mainMod, up, movefocus, u
+      bind = $mainMod, down, movefocus, d
+      
+      # workspaces
+      # binds $mainMod  + [shift +] {1..10} to [move to] workspace {1..10}
+      ${builtins.concatStringsSep "\n" (builtins.genList (
+          x: let
+            ws = let
+              c = (x + 1) / 10;
+            in
+              builtins.toString (x + 1 - (c * 10));
+          in ''
+            bind = $mainMod , ${ws}, workspace, ${toString (x + 1)}
+            bind = $mainMod  SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}
+          ''
+        )
+        10)}
+
+       
+      # Scroll through existing workspaces with mainMod + scroll
+      bind = $mainMod, mouse_down, workspace, e+1
+      bind = $mainMod, mouse_up, workspace, e-1
+      
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      bindm = $mainMod, mouse:272, movewindow
+      bindm = $mainMod, mouse:273, resizewindow
+    # ...
+  ''; 
+
+  home.file = {
+    ".config/hypr" = {
+      source = ./others/hyprpaper;
+      recursive = true;
+    };
   };
 }
