@@ -87,6 +87,7 @@
       bridge-utils
       virt-manager
       whatsapp-for-linux
+      telegram-desktop
       btop
 #davinci-resolve
       ffmpeg_6
