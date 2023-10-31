@@ -51,6 +51,7 @@
               ../home-manager/home.nix
               ../home-manager/hyprland/home.nix
               hyprland.homeManagerModules.default # uncommnet to use hyprland
+              {wayland.windowManager.hyprland.enable = true;}
             ];
           };
         }
