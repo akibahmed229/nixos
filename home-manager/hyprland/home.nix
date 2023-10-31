@@ -200,10 +200,10 @@
   #};
 
   home.file = {
-    ".config/hypr" = {
-      source = ./others/hypr/hyprpaper.conf;
-      recursive = true;
-    };
+    #".config/hypr" = {
+    #  source = ./others/hypr/hyprpaper.conf;
+    #  recursive = true;
+    #};
     ".config/waybar" = {
       source = ./others/waybar;
       recursive = true;
