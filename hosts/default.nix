@@ -50,8 +50,6 @@
               # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
               ../home-manager/home.nix
               ../home-manager/hyprland/home.nix
-              hyprland.homeManagerModules.default # uncommnet to use hyprland
-              {wayland.windowManager.hyprland.enable = true;}
             ];
           };
         }
