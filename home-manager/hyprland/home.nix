@@ -86,7 +86,7 @@
           blur {
               enabled = true
               size = 3
-              passes = 1
+              #passes = 1
           }
       
           drop_shadow = true
