@@ -23,11 +23,11 @@ in
   };
 
   environment = {
-    loginShellInit = ''
-      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-        ${exec}
-      fi
-    '';                                   # Will automatically open Hyprland when logged into tty1
+    #loginShellInit = ''
+    #  if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+    #    ${exec}
+    #  fi
+    #'';                                   # Will automatically open Hyprland when logged into tty1
 
    # variables = {
    #   #WLR_NO_HARDWARE_CURSORS="1";         # Possible variables needed in vm
