@@ -40,6 +40,7 @@
     modules = [
       ./configuration.nix
       ./virt
+      hyprland.homeManagerModules.default # uncommnet to use hyprland
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
@@ -50,7 +51,6 @@
               # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
               ../home-manager/home.nix
               ../home-manager/hyprland/home.nix
-              #hyprland.homeManagerModules.default # uncommnet to use hyprland
             ];
           };
         }
