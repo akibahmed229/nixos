@@ -16,8 +16,8 @@
 {
   #imports = [(import ./others/hyprutility.nix)];
   
-  wayland.windowManager.hyprland =  {
-  enable = true;
+  #wayland.windowManager.hyprland =  {
+  #enable = true;
   #settings = { };
   #extraConfig = ''
   #  
@@ -195,9 +195,9 @@
   #    bindm = $mainMod, mouse:273, resizewindow
   #  # ...
   #''; 
-    xwayland = { enable = true; };
-    systemdIntegration = true;
-  };
+  #  xwayland = { enable = true; };
+  #  systemdIntegration = true;
+  #};
 
   home.file = {
     ".config/hypr" = {
