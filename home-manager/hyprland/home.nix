@@ -16,8 +16,8 @@
 {
   #imports = [(import ./others/hyprutility.nix)];
   
-  #wayland.windowManager.hyprland.enable = true;
-
+  hyprland.homeManagerModules.default # uncommnet to use hyprland
+  wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.extraConfig = ''
     
       # This is an example Hyprland config file.
