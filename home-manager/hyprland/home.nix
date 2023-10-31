@@ -201,7 +201,7 @@
 
   home.file = {
     ".config/hypr" = {
-      source = ./others/hypr/hyprpaper.conf;
+      source = ./others/hypr;
       recursive = true;
     };
     ".config/waybar" = {
