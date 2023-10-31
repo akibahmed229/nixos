@@ -40,7 +40,7 @@ in
       waybar
       dunst
       wl-clipboard
-      kitty
+      #kitty
       wofi
       alacritty
     ];
