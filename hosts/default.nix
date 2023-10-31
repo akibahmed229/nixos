@@ -36,7 +36,7 @@
 # Host virt-managet configuration ( virtualization system)
   virt = lib.nixosSystem {
     inherit system;
-    specialArgs = { inherit user inputs unstable state-version; };
+    specialArgs = { inherit user inputs unstable hyprland state-version; };
     modules = [
       ./configuration.nix
       ./virt
