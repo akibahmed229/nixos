@@ -17,7 +17,6 @@
   #imports = [(import ./others/hyprutility.nix)];
   
   wayland.windowManager.hyprland =  {
-  settings = { };
   extraConfig = ''
     
       # This is an example Hyprland config file.
