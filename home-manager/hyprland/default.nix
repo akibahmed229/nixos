@@ -11,7 +11,7 @@
 #               └─ default.nix *
 #
 
-{ config, lib, pkgs, unstable, hyprland, system, ... }:
+{ inputs, config, lib, pkgs, unstable, hyprland, system, ... }:
 let
   exec = "exec Hyprland";
 in
