@@ -23,19 +23,19 @@ in
   };
 
   environment = {
-    #loginShellInit = ''
-    #  if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-    #    ${exec}
-    #  fi
-    #'';                                   # Will automatically open Hyprland when logged into tty1
+    loginShellInit = ''
+      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+        ${exec}
+      fi
+    '';                                   # Will automatically open Hyprland when logged into tty1
 
-   # variables = {
-   #   #WLR_NO_HARDWARE_CURSORS="1";         # Possible variables needed in vm
-   #   #WLR_RENDERER_ALLOW_SOFTWARE="1";
-   #   XDG_CURRENT_DESKTOP="Hyprland";
-   #   XDG_SESSION_TYPE="wayland";
-   #   XDG_SESSION_DESKTOP="Hyprland";
-   # };
+    variables = {
+      #WLR_NO_HARDWARE_CURSORS="1";         # Possible variables needed in vm
+      #WLR_RENDERER_ALLOW_SOFTWARE="1";
+      XDG_CURRENT_DESKTOP="Hyprland";
+      XDG_SESSION_TYPE="wayland";
+      XDG_SESSION_DESKTOP="Hyprland";
+    };
     systemPackages = with pkgs; [
       waybar
       dunst
