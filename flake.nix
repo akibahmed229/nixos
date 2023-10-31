@@ -48,6 +48,7 @@
     # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
     hyprland = {
       url = "github:hyprwm/Hyprland"; 
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };  
 
     # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports list in ./hosts/default.nix
