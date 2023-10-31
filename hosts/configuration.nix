@@ -100,9 +100,9 @@
 # Font Setting
     fonts = {
       fonts = with pkgs; [
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
+        #noto-fonts
+        #noto-fonts-cjk
+        #noto-fonts-emoji
         font-awesome
         jetbrains-mono
         source-han-sans
