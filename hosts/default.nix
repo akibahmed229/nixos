@@ -40,6 +40,7 @@
     modules = [
       ./configuration.nix
       ./virt
+      hyprland.homeManagerModules.default # uncommnet to use hyprland
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
