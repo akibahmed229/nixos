@@ -18,7 +18,7 @@
   
   wayland.windowManager.hyprland =  {
   enable = true;
-  #settings = { };
+  settings = { };
   extraConfig = ''
     
       # This is an example Hyprland config file.
