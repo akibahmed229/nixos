@@ -84,11 +84,11 @@
       
           rounding = 10
       
-          blur {
-              enabled = true
-              size = 3
-              #passes = 1
-          }
+          #blur {
+          #    enabled = true
+          #    size = 3
+          #    passes = 1
+          #}
       
           drop_shadow = true
           shadow_range = 4
