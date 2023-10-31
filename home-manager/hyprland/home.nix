@@ -16,7 +16,7 @@
 {
   #imports = [(import ./others/hyprutility.nix)];
   
-  #wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = true;
 
   wayland.windowManager.hyprland.extraConfig = ''
     
