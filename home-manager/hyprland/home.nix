@@ -16,6 +16,8 @@
 {
   #imports = [(import ./others/hyprutility.nix)];
   
+
+  xdg.configFile."hypr/hyprland.conf".source = ./others/hypr/hyprland.conf;
   #wayland.windowManager.hyprland.enable = true;
   home.file = {
     ".config/hypr" = {

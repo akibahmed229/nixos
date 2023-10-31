@@ -49,6 +49,4 @@ in
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
-  xdg.configFile."hypr/hyprland.conf".text = builtins.readFile ./others/hypr/hyprland.conf;
 }
