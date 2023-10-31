@@ -42,6 +42,7 @@ in
       wl-clipboard
       kitty
       wofi
+      alacritty
     ];
   };
 
