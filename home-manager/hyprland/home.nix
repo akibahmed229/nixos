@@ -16,7 +16,6 @@
 {
   #imports = [(import ./others/hyprutility.nix)];
   
-  hyprland.homeManagerModules.default # uncommnet to use hyprland
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.extraConfig = ''
     
