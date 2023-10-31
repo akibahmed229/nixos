@@ -44,13 +44,6 @@ in
     ];
   };
 
-  programs = {
-    hyprland = {
-      enable = true;
-      #nvidiaPatches = with host; if hostName == "work" then true else false;
-    };
-  };
-
   xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
