@@ -58,6 +58,7 @@
       devbox
       simplehttp2server
       speedtest-cli
+      onionshare
       git
       gcc
       jdk
