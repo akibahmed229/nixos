@@ -305,7 +305,7 @@
       indicator-style = "workspaces-bar";
       position = "left";
       position-index = 0; 
-      smart-workspace-names = true;
+      smart-workspace-names = false;
     };
     "org/gnome/shell/extensions/space-bar/shortcuts" = {
       open-menu = ["<Shift><Control><Alt>w"];
