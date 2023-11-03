@@ -74,8 +74,8 @@
         {
           name = "Nix Home-Manager options";
           tags = [ "nix" ];
-          keyword = "nixhm";
-          url ="https://nix-community.github.io/home-manager/options.html";
+          keyword = "nix home-manager options";
+          url ="https://mipmip.github.io/home-manager-option-search/";
         }
         {
           name = "Chat Gpt";
