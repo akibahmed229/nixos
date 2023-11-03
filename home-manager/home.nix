@@ -125,17 +125,8 @@
         tmuxPlugins.vim-tmux-navigator
         tmuxPlugins.yank
         tmuxPlugins.tmux-fzf
-    {
-      plugin = tmuxPlugins.resurrect;
-      extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-    }
-    {
-      plugin = tmuxPlugins.continuum;
-      extraConfig = ''
-        set -g @continuum-restore 'on'
-        set -g @continuum-save-interval '60' # minutes
-        '';
-    }
+        tmuxPlugins.resurrect
+        tmuxPlugins.continuum
     ];
     extraConfig = ''	
       source /home/${user}/flake/programs/tmux/tmux.conf
