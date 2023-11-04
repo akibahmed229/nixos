@@ -70,6 +70,8 @@
 
 # Default Shell zsh
   users.defaultUserShell = pkgs.zsh;
+  environment.shell = pkgs.zsh;
+  environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib"];
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
