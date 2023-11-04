@@ -70,7 +70,7 @@
 
 # Default Shell zsh
   users.defaultUserShell = pkgs.zsh;
-  environment.shells = pkgs.zsh;
+  environment.shells = [ pkgs.zsh ];
   environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib"];
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
