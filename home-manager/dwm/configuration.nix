@@ -56,13 +56,14 @@
   hardware.pulseaudio.enable = true;
 
   environment.shellInit = '' 
-	#xrandr -s 1920x1080
-	#wall=$(find /home/akib/windowmanager/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
-	#xwallpaper --zoom $wall
+	xrandr -s 1920x1080
+	wall=$(find /home/akib/windowmanager/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+	xwallpaper --zoom $wall
 	#wal -c
 	#wal -i $wall
-	##xcompmgr &
+	#xcompmgr &
 	picom &
+	slstatus &
   '';
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -99,6 +100,9 @@
       picom
      (st.overrideAttrs {
         src = /home/akib/windowmanager/st;
+     })
+     (slstatus.overrideAttrs {
+	src = /home/akib/windowmanager/slstatus;
      })
     ];
   };
