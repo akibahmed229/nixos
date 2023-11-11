@@ -57,6 +57,7 @@
           "impatience@gfxmonk.net"
           "burn-my-windows@schneegans.github.com"
           "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
+          "native-window-placement@gnome-shell-extensions.gcampax.github.com"
       ];
     };
 
