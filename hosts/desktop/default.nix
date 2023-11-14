@@ -102,6 +102,7 @@
       openrgb-plugin-hardwaresync
       i2c-tools
       polychromatic
+      linuxKernel.packages.linux_zen.openrazer
       libverto
       fail2ban
       fzf
