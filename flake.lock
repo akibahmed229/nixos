@@ -109,11 +109,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1699833473,
-        "narHash": "sha256-LfKVb8lf+KQ5pusxc4wC6hZYeLnz9l0SAcVDsx6F/T0=",
+        "lastModified": 1699976817,
+        "narHash": "sha256-7aaALnD4HvCMe7dsSPfhEMY31Jtq5yMwr3GxIxWiLL4=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "2e26542e3bba3533e71e13f2257823d96da2318a",
+        "rev": "49597688e975c23b4f3bb53e77617ed3cd1e4937",
         "type": "github"
       },
       "original": {
@@ -185,11 +185,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1699099776,
-        "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
+        "lastModified": 1699781429,
+        "narHash": "sha256-UYefjidASiLORAjIvVsUHG6WBtRhM67kTjEY4XfZOFs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "85f1ba3e51676fa8cc604a3d863d729026a6b8eb",
+        "rev": "e44462d6021bfe23dfb24b775cc7c390844f773d",
         "type": "github"
       },
       "original": {
@@ -225,11 +225,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699638264,
-        "narHash": "sha256-EGT10Ig8OFUY5T0nwnNuLa4z++yjaqfSQT/5Tyo1Z60=",
+        "lastModified": 1699974118,
+        "narHash": "sha256-gnJAGIQb8c+DRYBh1BB04VuaR3LeA2MDt1HoOPu2CYc=",
         "owner": "pjones",
         "repo": "plasma-manager",
-        "rev": "56c325e68d69b9682bcb1be99650b6c28bedb93d",
+        "rev": "709f01ba922d3b81890ab76aeb916e051f88ea49",
         "type": "github"
       },
       "original": {
@@ -246,11 +246,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1699803738,
-        "narHash": "sha256-hztOM2GgCZH641lItuhHwqF/dsBAouw+0LrX2stNpQg=",
+        "lastModified": 1699971939,
+        "narHash": "sha256-MuIVwYaWisKkg5MEsGLF5dXPAMpqe5Eoprw97Nk2LJo=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "dc78a85ba2f967c5467ed5510502f111eb427f76",
+        "rev": "1a18488d97d9a3128d747adf8550016f08abef31",
         "type": "github"
       },
       "original": {
@@ -279,11 +279,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1699814602,
-        "narHash": "sha256-ImNe2wKOjXuBVlxEmAQeB8Zj6V9qI1X/Mx7+u1r7eAg=",
+        "lastModified": 1699901025,
+        "narHash": "sha256-iE2LG6GfIKidDWmUovXgzQ/MpkxJLNxsBSUj6x2zHfU=",
         "owner": "the-argus",
         "repo": "spicetify-nix",
-        "rev": "0b21524744ea7e8ed4a16655560cf6ae9951819f",
+        "rev": "fe3f9e5d3bb5438d6a363f5a0c728ea836217b8f",
         "type": "github"
       },
       "original": {
