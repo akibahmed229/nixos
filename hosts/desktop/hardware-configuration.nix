@@ -70,11 +70,13 @@
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
     fsType = "ntfs";  # Specify the file system type
+    options = [ "rw" ]; # Mount the file system read-write
   };
   
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
     fsType = "ntfs";  # Specify the file system type
+    options = [ "rw" ]; # Mount the file system read-write
   };
 
   # Enabling samba file sharing over local network 
