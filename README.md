@@ -349,15 +349,13 @@ Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS syst
     - [Mini-Wiki](https://github.com/LnL7/nix-darwin/wiki)
 
 # 5. File Structure
-```
-Flake.nix : Main flake file for defining the system configuration
-flake.lock : Lock file for the flake 
-devShell/flake.nix : Flake file where I define my dev shell
-pkgs/flake.nix : Flake file where I define my nix derivation / custom packages
-nix-update-input/flake.nix : Flake to update the nixpkgs input
-home-manager : Home manager configuration files && desktop environment configuration files
-hosts : Host specific configuration files
-programs : Program specific configuration files
-public : Basicly my wallpaper folder
-themes : GTK and QT themes
-```
+- Flake.nix : Main flake file for defining the system configuration
+    - home-manager : Home manager configuration files && desktop environment configuration files
+    - hosts : Host specific configuration files
+    - programs : Program specific configuration files
+    - public : Basicly my wallpaper folder
+    - themes : GTK and QT themes
+- flake.lock : Lock file for the flake 
+- devShell/flake.nix : Flake file where I define my dev shell
+- pkgs/flake.nix : Flake file where I define my nix derivation / custom packages
+- nix-update-input/flake.nix : Flake to update the nixpkgs input
