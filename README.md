@@ -350,98 +350,14 @@ Using Nix Flakes on NixOS with Home Manager allows you to manage your NixOS syst
 
 # 5. File Structure
 ```
-├── flake.lock
-├── flake.nix
-├── home-manager
-│   ├── gnome
-│   │   ├── default.nix
-│   │   ├── gtkcss
-│   │   │   └── gtk.css
-│   │   └── home.nix
-│   ├── home.nix
-│   ├── hyprland
-│   │   ├── default.nix
-│   │   └── home.nix
-│   └── kde
-│       ├── default.nix
-│       └── home.nix
-├── hosts
-│   ├── configuration.nix
-│   ├── default.nix
-│   ├── desktop
-│   │   ├── desktopConfiguration.nix
-│   │   └── hardware-configuration.nix
-│   └── virt
-│       ├── hardware-configuration.nix
-│       └── virtconfiguration.nix
-├── LICENSE
-├── programs
-│   ├── alacritty
-│   │   └── alacritty.yml
-│   ├── flatpak
-│   │   └── flatpak.nix
-│   ├── nvchad
-│   │   └── custom
-│   │       ├── chadrc.lua
-│   │       ├── configs
-│   │       │   ├── lspconfig.lua
-│   │       │   ├── null-ls.lua
-│   │       │   └── overrides.lua
-│   │       ├── highlights.lua
-│   │       ├── init.lua
-│   │       ├── mappings.lua
-│   │       ├── plugins.lua
-│   │       └── README.md
-│   ├── nvim
-│   │   ├── after
-│   │   │   └── plugin
-│   │   │       ├── colors.lua
-│   │   │       ├── fugitive.lua
-│   │   │       ├── harpoon.lua
-│   │   │       ├── lsp.lua
-│   │   │       ├── nerdtree.lua
-│   │   │       ├── telescope.lua
-│   │   │       ├── terminal.lua
-│   │   │       ├── treesitter.lua
-│   │   │       └── undotree.lua
-│   │   ├── init.lua
-│   │   ├── lua
-│   │   │   └── akibahmed
-│   │   │       ├── init.lua
-│   │   │       ├── packer.lua
-│   │   │       ├── remap.lua
-│   │   │       └── set.lua
-│   │   ├── plugin
-│   │   │   └── packer_compiled.lua
-│   │   └── README.md
-│   ├── OpenRGB
-│   │   ├── Keyboard.orp
-│   │   ├── Mobo.orp
-│   │   └── Mouse.orp
-│   ├── ranger
-│   │   └── rc.conf
-│   ├── tmux
-│   │   └── tmux.conf
-│   └── zsh
-├── public
-│   ├── profile
-│   │   └── Ahmed-logo.jpg
-│   └── wallpaper
-│       ├── earth.png
-│       ├── Gameing.gif
-│       ├── gouku.png
-│       ├── gruvbox_astro.jpg
-│       ├── gruvbox_linux.png
-│       ├── gruvbox_minimal_space.png
-│       ├── gruvbox-ogc.png
-│       ├── gruvbox_pinkfloyd.jpg
-│       ├── gruvbox_simple.png
-│       ├── nixos.png
-│       ├── nix-wallpaper-nineish-dark-gray.png
-│       ├── wallhaven-1p398w_1920x1080.png
-│       └── windows.png
-├── README.md
-└── shells
-    ├── default.nix
-    └── python.nix
+Flake.nix : Main flake file for defining the system configuration
+flake.lock : Lock file for the flake 
+devShell/flake.nix : Flake file where I define my dev shell
+pkgs/flake.nix : Flake file where I define my nix derivation / custom packages
+nix-update-input/flake.nix : Flake to update the nixpkgs input
+home-manager : Home manager configuration files && desktop environment configuration files
+hosts : Host specific configuration files
+programs : Program specific configuration files
+public : Basicly my wallpaper folder
+themes : GTK and QT themes
 ```
