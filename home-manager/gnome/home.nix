@@ -330,9 +330,9 @@
   home.packages = with pkgs; [
 # gnomeExtensions.tray-icons-reloaded
       unstable.gnomeExtensions.forge
-      unstable.gnomeExtensions.space-bar
+      gnomeExtensions.space-bar
       #unstable.gnomeExtensions.removable-drive-menu
-      unstable.gnomeExtensions.blur-my-shell
+      gnomeExtensions.blur-my-shell
       #unstable.gnomeExtensions.burn-my-windows
       unstable.gnomeExtensions.caffeine
       #unstable.gnomeExtensions.custom-hot-corners-extended
@@ -340,8 +340,8 @@
       #unstable.gnomeExtensions.coverflow-alt-tab
       #unstable.gnomeExtensions.dash-to-dock
       #unstable.gnomeExtensions.dash-to-panel
-      unstable.gnomeExtensions.user-avatar-in-quick-settings
-      unstable.gnomeExtensions.gnome-40-ui-improvements
+      gnomeExtensions.user-avatar-in-quick-settings
+      gnomeExtensions.gnome-40-ui-improvements
       unstable.gnomeExtensions.gsconnect
       unstable.gnomeExtensions.impatience
       #gnomeExtensions.quick-settings-tweaker
