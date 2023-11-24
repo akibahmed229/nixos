@@ -334,9 +334,9 @@
       #unstable.gnomeExtensions.removable-drive-menu
       gnomeExtensions.blur-my-shell
       #unstable.gnomeExtensions.burn-my-windows
-      unstable.gnomeExtensions.caffeine
+      gnomeExtensions.caffeine
       #unstable.gnomeExtensions.custom-hot-corners-extended
-      unstable.gnomeExtensions.clipboard-indicator
+      gnomeExtensions.clipboard-indicator
       #unstable.gnomeExtensions.coverflow-alt-tab
       #unstable.gnomeExtensions.dash-to-dock
       #unstable.gnomeExtensions.dash-to-panel
