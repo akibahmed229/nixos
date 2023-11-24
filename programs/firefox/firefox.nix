@@ -24,12 +24,6 @@
 
       bookmarks = [
         {
-          name = "wikipedia";
-          tags = [ "wiki" ];
-          keyword = "wiki";
-          url = "https://en.wikipedia.org/wiki/Main_Page";
-        }
-        {
           name = "youtube";
           tags = [ "video" ];
           keyword = "yt";
