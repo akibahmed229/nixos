@@ -111,7 +111,7 @@
         tridactyl
         youtube-shorts-block
         gsconnect
-        gnome-shell-integration
+        #gnome-shell-integration
         gruvbox-dark-theme
       ];
 
