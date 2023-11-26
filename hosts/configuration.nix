@@ -2,7 +2,7 @@
 
 {
 # Dual Booting using grub
-  boot.loader={
+  boot.loader = {
     efi = {
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
