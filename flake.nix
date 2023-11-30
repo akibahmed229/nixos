@@ -1,17 +1,56 @@
 #  Can be run with "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
 
 # Structure of the flake
-# flake.nix   
-# |___hosts/default.nix 
-#          |configuration.nix
-#          |./desktop/default.nix
-#          |         |./hardware-configuration.nix
-#          |         |../../home-manager/gnome/default.nix
-#          |         |../../pograms/...
-#          |
-#          |../home-manager/home.nix
-#          |               |./gnome/home.nix 
-#          |                       |../../pograms/...
+#├── flake.nix
+#├── home-manager
+#│   ├── dwm
+#│   │   ├── dwm/
+#│   │   ├── slstatus/
+#│   │   └── st/
+#│   │   └── dmenu/
+#│   │   └── default.nix
+#│   ├── gnome
+#│   │   ├── default.nix
+#│   │   └── home.nix
+#│   ├── home.nix
+#│   ├── hyprland
+#│   │   ├── default.nix
+#│   │   ├── home.nix
+#│   │   └── others/
+#│   └── kde
+#│       ├── default.nix
+#│       └── home.nix
+#├── hosts
+#│   ├── configuration.nix
+#│   ├── default.nix
+#│   ├── desktop
+#│   │   ├── default.nix
+#│   │   └── hardware-configuration.nix
+#│   └── virt
+#│       ├── default.nix
+#│       └── hardware-configuration.nix
+#├── LICENSE
+#├── programs
+#│   ├── alacritty
+#│   ├── discord
+#│   ├── firefox
+#│   ├── flatpak
+#│   ├── lf
+#│   ├── neofetch
+#│   ├── nvim
+#│   ├── nvim-nix-video-main
+#│   ├── OpenRGB
+#│   ├── ranger
+#│   ├── spotify
+#│   ├── ssh
+#│   ├── tmux
+#│   └── zsh
+#├── public
+#│   ├── profile/
+#│   └── wallpaper/
+#├── README.md
+#└── themes
+#    └── gtk/
 {
   description = "My NixOS configuration";
 
