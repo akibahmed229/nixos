@@ -45,7 +45,7 @@
           "clipboard-indicator@tudmotu.com"
           # "bluetooth-quick-connect@bjarosze.gmail.com"
           "rounded-window-corners@yilozt"
-          "space-bar@luchrioh"
+          #"space-bar@luchrioh"
           # "CoverflowAltTab@palatis.blogspot.com"
           "gsconnect@andyholmes.github.io"
           "forge@jmmaranan.com"
@@ -330,7 +330,7 @@
   home.packages = with pkgs; [
 # gnomeExtensions.tray-icons-reloaded
       unstable.gnomeExtensions.forge
-      gnomeExtensions.space-bar
+      #gnomeExtensions.space-bar
       #unstable.gnomeExtensions.removable-drive-menu
       gnomeExtensions.blur-my-shell
       #unstable.gnomeExtensions.burn-my-windows
@@ -346,7 +346,7 @@
       unstable.gnomeExtensions.impatience
       #gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.vitals
-      gnomeExtensions.rounded-window-corners
+      unstable.gnomeExtensions.rounded-window-corners
       #gnomeExtensions.just-perfection
       #gnomeExtensions.advanced-alttab-window-switcher
       ];

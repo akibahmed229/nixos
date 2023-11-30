@@ -18,7 +18,7 @@
 # inputs for the flake
   inputs = { 
     # stable packages
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
     # unstable packages 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
@@ -36,7 +36,7 @@
   
     # stable home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05"; 
+      url = "github:nix-community/home-manager/release-23.11"; 
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # unstable home-manager
@@ -77,7 +77,7 @@
       # The system to build.
       system = "x86_64-linux";
       lib = nixpkgs.lib;
-      state-version = "23.05";
+      state-version = "23.11";
       
       # The user to build for.
       user = "akib";

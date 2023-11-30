@@ -26,7 +26,7 @@
 
 
 # remove bloat
-  documentation.nixos.enable = false;
+#  documentation.nixos.enable = false;
 
 # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -48,7 +48,7 @@
       unzip
       p7zip
       ranger
-      exa
+      eza
       bat
       rtx
       nvme-cli
@@ -189,8 +189,8 @@
     zsh = {
       enable = true;
       shellAliases = {
-        la = "exa --icons -la  --group-directories-first";
-        ls = "exa --icons --grid --group-directories-first";
+        la = "eza --icons -la  --group-directories-first";
+        ls = "eza --icons --grid --group-directories-first";
       };
       autosuggestions.enable = true;
       enableBashCompletion = true;
