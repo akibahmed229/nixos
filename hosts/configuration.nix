@@ -96,6 +96,7 @@
       TERMINAL = "alacritty";
       EDITOR = "nvim";
       VISUAL = "nvim";
+      QT_QPA_PLATFORM= "wayland";
     };
   };
 
