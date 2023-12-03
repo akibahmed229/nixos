@@ -44,6 +44,7 @@
       unstable.android-studio
       android-tools
       android-udev-rules
+      espanso-wayland
       zip
       unzip
       p7zip
@@ -102,7 +103,6 @@
       openrgb-plugin-hardwaresync
       i2c-tools
       polychromatic
-      linuxKernel.packages.linux_zen.openrazer
       libverto
       fail2ban
       fzf
