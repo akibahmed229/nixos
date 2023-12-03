@@ -40,7 +40,9 @@
     "i2c-dev" # An acronym for the “Inter-IC” bus, a simple bus protocol which is widely used where low data rate communications suffice.
     "i2c-piix4" 
   ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.openrazer
+  ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
