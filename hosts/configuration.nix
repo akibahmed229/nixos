@@ -8,6 +8,7 @@
       efiSysMountPoint = "/boot";
     };
     grub = {
+      splashImage = ../public/wallpaper/nixos.png;
       enable = true;
       devices = ["nodev"]; # install grub on efi
       efiSupport = true;
