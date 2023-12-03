@@ -16,6 +16,9 @@
   boot.kernelParams = [ 
     "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
     "nohibernate" # Disable hibernation
+    "intel_iommu=on" # Enable IOMMU 
+    "acpi_backlight=vendor" # Fix backlight control 
+    "acpi_osi=Linux" # Fix backlight control 
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)
@@ -108,7 +111,10 @@
   };
 
   swapDevices = [ ];
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    memoryPercent = 30;
+  };
 
 # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
 # (the default) this is the recommended approach. When using systemd-networkd it's
