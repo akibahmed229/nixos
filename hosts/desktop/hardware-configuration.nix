@@ -113,7 +113,7 @@
   swapDevices = [ ];
   zramSwap = {
     enable = true;
-    memoryPercent = 30;
+    memoryPercent = 20;
   };
 
 # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -134,6 +134,6 @@
 # };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
+  hardware.cpu.intel.updateMicrocode = lib.mkForce config.hardware.enableRedistributableFirmware;
 }
