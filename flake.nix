@@ -4,22 +4,12 @@
 #├── flake.nix
 #├── home-manager
 #│   ├── dwm
-#│   │   ├── dwm/
-#│   │   ├── slstatus/
-#│   │   └── st/
-#│   │   └── dmenu/
-#│   │   └── default.nix
 #│   ├── gnome
 #│   │   ├── default.nix
 #│   │   └── home.nix
 #│   ├── home.nix
 #│   ├── hyprland
-#│   │   ├── default.nix
-#│   │   ├── home.nix
-#│   │   └── others/
 #│   └── kde
-#│       ├── default.nix
-#│       └── home.nix
 #├── hosts
 #│   ├── configuration.nix
 #│   ├── default.nix
@@ -31,20 +21,6 @@
 #│       └── hardware-configuration.nix
 #├── LICENSE
 #├── programs
-#│   ├── alacritty
-#│   ├── discord
-#│   ├── firefox
-#│   ├── flatpak
-#│   ├── lf
-#│   ├── neofetch
-#│   ├── nvim
-#│   ├── nvim-nix-video-main
-#│   ├── OpenRGB
-#│   ├── ranger
-#│   ├── spotify
-#│   ├── ssh
-#│   ├── tmux
-#│   └── zsh
 #├── public
 #│   ├── profile/
 #│   └── wallpaper/
