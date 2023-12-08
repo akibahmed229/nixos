@@ -11,7 +11,8 @@
 
 # use the latest Linux kernel
 # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+#  boot.kernelPackages = pkgs.linuxPackages_zen_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   boot.kernelParams = [ 
     "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
@@ -134,6 +135,6 @@
 # };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
+  powerManagement.cpuFreqGovernor = lib.mkOverride 1 "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkForce config.hardware.enableRedistributableFirmware;
 }
