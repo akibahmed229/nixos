@@ -22,7 +22,7 @@
   services.xserver.windowManager.dwm.enable = true;
   # DWM overlay
   services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
-	src = /home/akib/windowmanager/dwm;
+	src = ./dwm;
   };
 
   environment.systemPackages = with pkgs; [
