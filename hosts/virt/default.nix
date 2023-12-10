@@ -7,7 +7,7 @@
 {
   imports =
     [(import ./hardware-configuration.nix)]++
-    [(import ../../home-manager/hyprland/default.nix)];
+    [(import ../../home-manager/dwm/default.nix)];
 
 
   # List packages installed in system profile. To search, run:
