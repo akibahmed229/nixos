@@ -23,6 +23,18 @@
   programs = {
     zsh = {
       enable = true;
+      ohMyZsh = {
+        enable = true;
+        plugins = [
+          "git"
+            "sudo"
+            "terraform"
+            "systemadmin"
+            "vi-mode"
+        ];
+        theme = "agnoster";
+      };
+
     };
   };
   # Some programs need SUID wrappers, can be configured further or are
