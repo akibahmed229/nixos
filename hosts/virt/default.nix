@@ -17,6 +17,9 @@
   #  wget
   ];
 
+  programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
+  programs.command-not-found.enable = false;
+
   programs = {
     zsh = {
       enable = true;
