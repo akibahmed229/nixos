@@ -1,4 +1,5 @@
 #  Can be run with "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
+#  Can be run on fresh install "$ nixos-install --flake github:akibahmed229/nixos/#<host>
 
 # Structure of the flake
 #├── flake.nix
