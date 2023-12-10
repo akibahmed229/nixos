@@ -12,7 +12,7 @@
 	#wal -c
 	#wal -i $wall
 	#xcompmgr &
-	picom &
+	#picom &
 	slstatus &
   '';
 
@@ -50,10 +50,13 @@
       xorg.xrdb
       picom
      (st.overrideAttrs {
-        src = /home/akib/windowmanager/st;
+        src = ./st;
      })
      (slstatus.overrideAttrs {
-	src = /home/akib/windowmanager/slstatus;
+	      src = ./slstatus;
+     })
+     (dmenu.overrideAttrs {
+	      src = ./dmenu;
      })
     ];
   };
