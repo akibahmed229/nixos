@@ -4,10 +4,7 @@
 { config, lib, pkgs, unstable, modulesPath, ... }:
 
 {
-  imports =
-    [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
 # use the latest Linux kernel
 # boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -20,6 +17,9 @@
     "intel_iommu=on" # Enable IOMMU 
     "acpi_backlight=vendor" # Fix backlight control 
     "acpi_osi=Linux" # Fix backlight control 
+    "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power 
+    "loglevel=7"         # Increase kernel log verbosity
+    "no_console_suspend" # Prevent consoles from being suspended
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)
