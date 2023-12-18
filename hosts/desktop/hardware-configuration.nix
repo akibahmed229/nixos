@@ -76,13 +76,13 @@
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
     fsType = "ntfs";  # Specify the file system type
-    options = [ "defaults,rw,uid=1000,gid=1000,umask=0022" ]; # Mount options 
+    options = [ "defaults,rw" ]; # Mount options 
   };
   
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
     fsType = "ntfs";  # Specify the file system type
-    options = [ "defaults,rw,uid=1000,gid=1000,umask=0022" ]; # Mount options 
+    options = [ "defaults,rw" ]; # Mount options 
   };
 
   # Enabling samba file sharing over local network 
