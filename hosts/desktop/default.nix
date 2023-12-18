@@ -107,6 +107,7 @@
       fail2ban
       fzf
       unstable.dwt1-shell-color-scripts
+      gamemode
 # bottles
       bottles
 # Heoric game luncher
