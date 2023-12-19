@@ -41,6 +41,7 @@
       unstable.gnome.dconf-editor
       unstable.gnome.gnome-tweaks
       unstable.gnome.adwaita-icon-theme
+      gnome-menus
     ];
     gnome.excludePackages = (with pkgs; [         # Gnome ignored packages
         gnome-tour
