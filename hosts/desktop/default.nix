@@ -152,12 +152,12 @@
     xorg.xinit
     ]) ++ (with unstable; [
 # List unstable packages here
-      jetbrains.pycharm-community
-      jetbrains.idea-community
-      android-studio
-      alacritty
-      dwt1-shell-color-scripts
-    ]);
+    jetbrains.pycharm-community
+    jetbrains.idea-community
+    android-studio
+    alacritty
+    dwt1-shell-color-scripts
+  ]);
 
 # Gaming
   programs.steam = {
