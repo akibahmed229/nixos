@@ -32,16 +32,14 @@
   nixpkgs.config.allowUnfree = true;
 # List packages installed in system profile. To search, run:
 # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
+# List programs you want in your system Stable packages
       neovim-unwrapped
       htop
       trash-cli
       cava
       neofetch
       vscode	
-      unstable.jetbrains.pycharm-community
-      unstable.jetbrains.idea-community
-      unstable.android-studio
       android-tools
       android-udev-rules
       espanso-wayland
@@ -66,7 +64,6 @@
       python311Full
       nodejs_20
       yarn
-      unstable.alacritty
       flatpak
       appimage-run
       bleachbit
@@ -106,7 +103,6 @@
       libverto
       fail2ban
       fzf
-      unstable.dwt1-shell-color-scripts
       gamemode
 # bottles
       bottles
@@ -141,7 +137,6 @@
     rpPPPoE
 # Login manager customizetion for gdm
     #gobject-introspection
-    #gnome.gdm
     meson
     #gettext
     #rubyPackages.glib2
@@ -155,7 +150,14 @@
     xorg.libXft
     xorg.libXinerama
     xorg.xinit
-    ];
+    ]) ++ (with unstable; [
+# List unstable packages here
+      jetbrains.pycharm-community
+      jetbrains.idea-community
+      android-studio
+      alacritty
+      dwt1-shell-color-scripts
+    ]);
 
 # Gaming
   programs.steam = {
