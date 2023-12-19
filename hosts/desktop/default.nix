@@ -293,7 +293,7 @@
 # Enable Auto Update
 # system.copySystemConfiguration = true;
   system.autoUpgrade.enable = true;  
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-23.05";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-${state-version}";
 
 # This value determines the NixOS release from which the default
 # settings for stateful data, like file locations and database versions
