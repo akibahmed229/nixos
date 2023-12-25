@@ -1,8 +1,8 @@
-{ config, pkgs, user, unstable, nixpkgs, ... }:
+{ config, pkgs, user, unstable, nixpkgs, lib, ... }:
 
 {
 # Dual Booting using grub
-  boot.loader = {
+  boot.loader = lib.mkDefault {
     efi = {
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
@@ -10,7 +10,17 @@
     grub = {
       splashImage = ../public/wallpaper/nixos.png;
       enable = true;
-      devices = ["nodev"]; # install grub on efi
+      #devices = ["nodev"]; # install grub on efi
+      mirroredBoots = [
+      {
+      devices = ["/dev/disk/by-uuid/03b4508c-ee61-4fd0-9e92-4559a8632572"];
+      path = "/dev/disk/by-uuid/18F8-5F93";
+      }
+      {
+      devices = ["/dev/disk/by-label/nixos"];
+      path = "/dev/disk/by-label/boot";
+      }
+      ];
       efiSupport = true;
       useOSProber = true; # To find Other boot manager like windows 
       configurationLimit = 5; # Store number of config 
@@ -22,8 +32,8 @@
 # networking options
   networking.hostName = "Ahmed"; # Define your hostname.
 # Pick only one of the below networking options.
-# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
 # Set your time zone.
     time.timeZone = "Asia/Dhaka";
