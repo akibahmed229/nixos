@@ -38,6 +38,9 @@
     # unstable packages 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    # live image builder for nixos
+    nixos.url = "nixpkgs/23.11-beta";
+
     # flake-programs-sqlite makes use of a mapping from git commit hashes to channel names.
     programsdb = {
        url = "github:wamserma/flake-programs-sqlite";
@@ -86,7 +89,7 @@
   };
 
 # outputs for the flake
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nix-index-database, home-manager, hyprland, plasma-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nixos, nix-index-database, home-manager, hyprland, plasma-manager, ... }:
 
 # variables
     let
@@ -116,7 +119,7 @@
     nixosConfigurations = ( 
         import ./hosts {    # Imports ./hosts/default.nix
         inherit (nixpkgs) lib;
-        inherit inputs unstable user system theme state-version nix-index-database home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs unstable nixos user system theme state-version nix-index-database home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
   };
