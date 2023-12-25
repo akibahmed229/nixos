@@ -8,7 +8,7 @@
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
-     "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+    # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
       ./configuration.nix
       ./desktop
        nix-index-database.nixosModules.nix-index

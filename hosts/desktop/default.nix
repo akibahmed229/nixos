@@ -239,7 +239,7 @@
   services.openssh= { 
     enable = true;
     ports = [ 8080 ];
-    settings = lib.mkForce {
+    settings = lib.mkDefault {
       PermitRootLogin = "no";
       PasswordAuthentication = false;   
       };
