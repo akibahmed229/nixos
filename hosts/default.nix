@@ -1,6 +1,6 @@
 # NixOS configuration with home-manager as a module in flakes
 
-{ lib, inputs, unstable, system, theme, state-version, nix-index-database, home-manager, hyprland, plasma-manager, user, ... }:
+{ lib, inputs, unstable, nixos, system, theme, state-version, nix-index-database, home-manager, hyprland, plasma-manager, user, ... }:
 
 {
 # Host desktop configuration ( main system)
@@ -8,6 +8,7 @@
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
+     "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
       ./configuration.nix
       ./desktop
        nix-index-database.nixosModules.nix-index
