@@ -39,7 +39,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # live image builder for nixos
-    nixos.url = "nixpkgs/23.11-beta";
+    nixos.url = "github:nixos/nixpkgs/23.11-beta";
 
     # flake-programs-sqlite makes use of a mapping from git commit hashes to channel names.
     programsdb = {

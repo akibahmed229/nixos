@@ -1,4 +1,4 @@
-{ config, pkgs, user, unstable, inputs, state-version, ... }:
+{ config, pkgs, user, unstable, inputs, lib, state-version, ... }:
 
 {
   imports =
@@ -239,7 +239,7 @@
   services.openssh= { 
     enable = true;
     ports = [ 8080 ];
-    settings = {
+    settings = lib.mkForce {
       PermitRootLogin = "no";
       PasswordAuthentication = false;   
       };
