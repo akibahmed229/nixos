@@ -7,13 +7,13 @@
         "python27-pkgs": "python27-pkgs"
       },
       "locked": {
-        "lastModified": 1703588350,
+        "lastModified": 1,
         "narHash": "sha256-XDRTLAOwy6OQE+R9KLK+1KO2H+k72EBulU/d1gc5EJI=",
-        "path": "/home/akib/flake/devshell",
+        "path": "./devshell",
         "type": "path"
       },
       "original": {
-        "path": "/home/akib/flake/devshell",
+        "path": "./devshell",
         "type": "path"
       }
     },

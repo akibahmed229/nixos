@@ -87,6 +87,10 @@
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix.url = "github:the-argus/spicetify-nix";
 
+    # My development environment import from folder ./devshell/shell/default.nix
+    devshell = {
+      url = "path:./devshell";
+    };
   };
 
 # outputs for the flake
@@ -123,11 +127,5 @@
         inherit inputs unstable nixos user system theme state-version nix-index-database home-manager hyprland plasma-manager;   # Also inherit home-manager so it does not need to be defined here.
         }
       );
-
-        # My development environment import from folder ./devshell/shell/default.nix
-    devshell = {
-      url = "path:/home/akib/flake/devshell";
-    };
-
   };
 }
