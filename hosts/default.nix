@@ -22,12 +22,14 @@
           home-manager.users.${user} = {
             imports = [
               # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
+              hyprland.homeManagerModules.default # uncommnet to use hyprland
+              { wayland.windowManager.hyprland.systemd.enable = true; }
               ../home-manager/home.nix
               ../home-manager/gnome/home.nix
+              ../home-manager/hyprland/home.nix
               nix-index-database.hmModules.nix-index
               # optional to also wrap and install comma
               # { programs.nix-index-database.comma.enable = true; }
-              # hyprland.homeManagerModules.default # uncommnet to use hyprland
             ];
           };
         }

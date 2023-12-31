@@ -22,12 +22,12 @@ in
     xwayland.enable = true;
   };
 
-  environment = {
-    loginShellInit = ''
-      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-        ${exec}
-      fi
-    '';                                   # Will automatically open Hyprland when logged into tty1
+ environment = {
+#    loginShellInit = ''
+#      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+#        ${exec}
+#      fi
+#    '';                                   # Will automatically open Hyprland when logged into tty1
 
     variables = {
       #WLR_NO_HARDWARE_CURSORS="1";         # Possible variables needed in vm
@@ -43,11 +43,18 @@ in
       kitty
       wofi
       alacritty
+      hyprpaper
+      preload
+      networkmanagerapplet
     ];
   };
 
   xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs;[ 
+    #xdg-desktop-portal-gtk 
+    xdg-desktop-portal-wlr
+    #xdg-desktop-portal-hyprland
+    ];
   };
 }
