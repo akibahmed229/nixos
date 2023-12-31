@@ -74,5 +74,9 @@
       source = ./others/dunst;
       recursive = true;
     };
+    ".config/wofi" = {
+      source = ./others/wofi;
+      recursive = true;
+    };
   };
 }
