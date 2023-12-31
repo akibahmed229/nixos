@@ -58,14 +58,14 @@
       );
   };
 
-  extraConfig = builtins.readFile ./others/hypr/hyprland.conf;
+  extraConfig = builtins.readFile ./others/hyprland/hyprland.conf;
   };
 
   home.file = {
-    #".config/hypr" = {
-    #  source = ./others/hypr/hyprpaper.conf;
-    #  recursive = true;
-    #};
+    ".config/hypr" = {
+      source = ./others/hyprpaper;
+      recursive = true;
+    };
     ".config/waybar" = {
       source = ./others/waybar;
       recursive = true;
