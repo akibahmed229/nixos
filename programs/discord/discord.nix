@@ -15,16 +15,16 @@
      })
   ];
 
-# Overlay pulls latest version of Discord
-#  nixpkgs.overlays = [                          
- #   (self: super: {
-#     discord = super.discord.overrideAttrs (
-#         _: { src = builtins.fetchTarball {
-#         url = #"https://discord.com/api/download?platform=linux&format=tar.gz";
-     #    sha256 = "0yzgkzb0200w9qigigmb84q4icnpm2hj4jg400payz7igxk95kqk";
- #        };
-#         }
- #        );
-#     })
-#  ];
+ # Overlay pulls latest version of Discord
+   nixpkgs.overlays = [                          
+   (self: super: {
+    discord = super.discord.overrideAttrs (
+        _: { src = builtins.fetchTarball {
+        url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+        sha256 = "sha256:0gmqzzs9ac6f48m3qixp3l3bipf2zmywai0aksy3j48s1qqiwz3j";
+        };
+        }
+        );
+    })
+   ];
 }
