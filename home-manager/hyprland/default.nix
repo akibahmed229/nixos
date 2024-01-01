@@ -46,6 +46,7 @@ in
       hyprpaper
       preload
       networkmanagerapplet
+      mpd
     ];
   };
 

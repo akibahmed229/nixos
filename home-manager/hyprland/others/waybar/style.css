@@ -5,11 +5,13 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    background-color: rgb(60,56,54);
     color: #ffffff;
+    opacity: 0.9;
     transition-property: background-color;
     transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+    border-radius: 20px;
 }
 
 window#waybar.hidden {
@@ -90,6 +92,9 @@ button:hover {
 #mpd {
     padding: 0 10px;
     color: #ffffff;
+    border-radius: 10px;
+    margin: 4px 0;
+    opacity: 1;
 }
 
 #window,
@@ -108,7 +113,8 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+    background-color: rgb(142,192,124);
+    color: #000000;
 }
 
 #battery {
@@ -143,16 +149,18 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
+    background-color: rgb(69,133,136);
     color: #000000;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: rgb(69,133,136);
+    color: #000000;
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: rgb(69,133,136);
+    color: #000000;
 }
 
 #backlight {
@@ -160,7 +168,8 @@ label:focus {
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: rgb(69,133,136);
+    color: #000000;
 }
 
 #network.disconnected {
@@ -168,7 +177,7 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
+    background-color: rgb(69,133,136);
     color: #000000;
 }
 
@@ -201,7 +210,7 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: rgb(215,153,33);
 }
 
 #temperature.critical {
