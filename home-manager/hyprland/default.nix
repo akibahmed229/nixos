@@ -56,6 +56,7 @@
       preload
       networkmanagerapplet
       mpd
+      xfce.thunar
     ];
   };
 
