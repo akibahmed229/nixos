@@ -64,12 +64,14 @@
       source = ../programs/alacritty;
       recursive = true;
     };
-
     ".config/OpenRGB" = {
       source = ../programs/OpenRGB;
       recursive = true;
     };
-  
+    ".config/neofetch" = {
+      source = ../programs/neofetch;
+      recursive = true;
+    };
     ".ssh" = {
       source = ../programs/ssh;
       recursive = true;
