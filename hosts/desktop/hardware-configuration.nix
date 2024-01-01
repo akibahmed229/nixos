@@ -51,25 +51,25 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
-  { device = "/dev/disk/by-uuid/03b4508c-ee61-4fd0-9e92-4559a8632572";
+  { device = "/dev/disk/by-label/nixos";
     fsType = "btrfs";
     options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/home" =
-  { device = "/dev/disk/by-uuid/03b4508c-ee61-4fd0-9e92-4559a8632572";
+  { device = "/dev/disk/by-label/nixos";
     fsType = "btrfs";
     options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/nix" =
-  { device = "/dev/disk/by-uuid/03b4508c-ee61-4fd0-9e92-4559a8632572";
+  { device = "/dev/disk/by-label/nixos";
     fsType = "btrfs";
     options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
   };
 
   fileSystems."/boot" ={
-    device = "/dev/disk/by-uuid/18F8-5F93";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
@@ -114,7 +114,7 @@
   swapDevices = [ ];
   zramSwap = {
     enable = true;
-    memoryPercent = 20;
+    memoryPercent = 10;
     algorithm = "lz4";
   };
 

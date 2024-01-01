@@ -11,7 +11,7 @@
 #               └─ home.nix *
 #
 
-{ config, lib, pkgs, hyprland, ... }:
+{ config, lib, pkgs, hyprland, theme, ... }:
 
 {
     imports =   
