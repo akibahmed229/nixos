@@ -82,7 +82,7 @@
       mangohud	
       goverlay
       anydesk
-      geekbench
+    #  geekbench
       qemu
       bridge-utils
       virt-manager
