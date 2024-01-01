@@ -14,6 +14,18 @@
 { config, lib, pkgs, hyprland, ... }:
 
 {
+    imports =   
+    [(import ../../programs/firefox/firefox.nix)]++
+    #[(import ../programs/nvim-nix-video-main/home.nix)]++
+    [(import ../../programs/spotify/spicetify.nix)]++
+    [(import ../../programs/discord/discord.nix)]++
+    [(import ../../programs/lf/lf.nix)];
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
+    "spotify"
+  ];
+
   #imports = [(import ./others/hyprutility.nix)];
   wayland.windowManager.hyprland =  {
   enable = true;
@@ -76,6 +88,10 @@
     };
     ".config/wofi" = {
       source = ./others/wofi;
+      recursive = true;
+    };
+    ".config//libinput" = {
+      source = ./others/libinput;
       recursive = true;
     };
   };

@@ -6,8 +6,8 @@
     [(import ./hardware-configuration.nix)] ++
     [(import ../../programs/flatpak/flatpak.nix)]++
 # [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
-    [(import ../../home-manager/hyprland/default.nix)]++ # uncomment to use Hyprland
-    [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
+    [(import ../../home-manager/hyprland/default.nix)]; # uncomment to use Hyprland
+#    [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
 
 
 # Setting For OpenRGB

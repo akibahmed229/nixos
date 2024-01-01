@@ -25,7 +25,7 @@
               hyprland.homeManagerModules.default # uncommnet to use hyprland
               { wayland.windowManager.hyprland.systemd.enable = true; }
               ../home-manager/home.nix
-              ../home-manager/gnome/home.nix
+              #../home-manager/gnome/home.nix
               ../home-manager/hyprland/home.nix
               nix-index-database.hmModules.nix-index
               # optional to also wrap and install comma

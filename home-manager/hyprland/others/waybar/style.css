@@ -5,9 +5,9 @@
 }
 
 window#waybar {
-    background-color: rgb(60,56,54);
+    background-color: transparent;
     color: #ffffff;
-    opacity: 0.9;
+    border: 2px solid rgba(60, 56, 54, 0.9);
     transition-property: background-color;
     transition-duration: .5s;
     transition-timing-function: ease-in-out;
@@ -53,7 +53,7 @@ button:hover {
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
-    color: #ffffff;
+    color: #8ec07c;
 }
 
 #workspaces button:hover {
@@ -85,6 +85,7 @@ button:hover {
 #pulseaudio,
 #wireplumber,
 #custom-media,
+#custom-logo,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -92,14 +93,14 @@ button:hover {
 #mpd {
     padding: 0 10px;
     color: #ffffff;
-    border-radius: 10px;
+    border-radius: 13px;
     margin: 4px 0;
-    opacity: 1;
 }
 
 #window,
 #workspaces {
     margin: 0 4px;
+    margin-left: 10px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -209,6 +210,13 @@ label:focus {
     background-color: #ffa000;
 }
 
+#custom-logo {
+    color: #ff358f;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
 #temperature {
     background-color: rgb(215,153,33);
 }
@@ -219,6 +227,7 @@ label:focus {
 
 #tray {
     background-color: #2980b9;
+    margin-right: 10px;
 }
 
 #tray > .passive {

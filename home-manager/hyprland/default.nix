@@ -16,6 +16,24 @@ let
   exec = "exec Hyprland";
 in
 {
+  services ={
+    xserver = {
+      enable = true;
+      layout = "us";
+      xkbOptions = "eorsign:e";
+      displayManager ={
+        gdm.enable = true;
+      };
+    };
+  };
+
+  programs = {
+    dconf.enable = true;
+    kdeconnect= {
+      enable = true;
+    };
+  };
+
   programs.hyprland = {
     enable = true;  
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -53,7 +71,7 @@ in
   xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
     enable = true;
     extraPortals = with pkgs;[ 
-    #xdg-desktop-portal-gtk 
+    xdg-desktop-portal-gtk 
     xdg-desktop-portal-wlr
     #xdg-desktop-portal-hyprland
     ];
