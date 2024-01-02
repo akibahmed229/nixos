@@ -48,7 +48,7 @@
     systemPackages = with pkgs; [
       waybar
       dunst
-      kitty
+      #kitty
       wofi
       alacritty
       hyprpaper
@@ -56,10 +56,11 @@
       networkmanagerapplet
       mpd
       xfce.thunar
-      # for theming
+      # for theming qt and gtk
       qt6Packages.qt6ct
       qt6.qtwayland
       lxappearance
+      nwg-look
       # for clipboard
       cliphist
       wl-clipboard
