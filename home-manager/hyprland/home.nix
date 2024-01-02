@@ -31,12 +31,14 @@
   enable = true;
   xwayland = { enable = true; };
   settings = {
+    # See https://wiki.hyprland.org/Configuring/Keywords/ for more
     "$mod" = "SUPER";
     bind = [
+      ## Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       "$mod, RETURN, exec, alacritty"
       "$mod, Q, killactive,"
       "$mod, M, exit,"
-      "$mod, E, exec, dolphin"
+      "$mod, E, exec, thunar"
       "$mod, T, togglefloating,"
       "$mod, F, fullscreen"
       "$mod, W, exec, wofi --show drun"
