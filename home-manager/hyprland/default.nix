@@ -48,7 +48,6 @@
     systemPackages = with pkgs; [
       waybar
       dunst
-      wl-clipboard
       kitty
       wofi
       alacritty
@@ -57,6 +56,15 @@
       networkmanagerapplet
       mpd
       xfce.thunar
+      # for theming
+      qt6Packages.qt6ct
+      qt6.qtwayland
+      lxappearance
+      # for clipboard
+      cliphist
+      wl-clipboard
+      # stroge mount
+      udiskie
     ];
   };
 

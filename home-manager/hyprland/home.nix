@@ -32,25 +32,27 @@
   xwayland = { enable = true; };
   settings = {
     "$mod" = "SUPER";
-    bind =
-      [
-     "$mod, RETURN, exec, alacritty"
-     "$mod, Q, killactive,"
-     "$mod, M, exit,"
-     "$mod, E, exec, dolphin"
-     "$mod, T, togglefloating,"
-     "$mod, F, fullscreen"
-     "$mod, W, exec, wofi --show drun"
-     "$mod, P, pseudo, # dwindle"
-     "$mod, J, togglesplit, # dwindle"
+    bind = [
+      "$mod, RETURN, exec, alacritty"
+      "$mod, Q, killactive,"
+      "$mod, M, exit,"
+      "$mod, E, exec, dolphin"
+      "$mod, T, togglefloating,"
+      "$mod, F, fullscreen"
+      "$mod, W, exec, wofi --show drun"
+      "$mod, P, pseudo, # dwindle"
+      "$mod, J, togglesplit, # dwindle"
     
       # Move focus with mainMod + arrow keys
       "$mod, left, movefocus, l"
       "$mod, right, movefocus, r"
       "$mod, up, movefocus, u"
       "$mod, down, movefocus, d"
-      "$mod, F, exec, firefox"
-      ", Print, exec, grimblast copy area"
+      "$mod, B, exec, firefox"
+      "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+      # Scroll through existing workspaces with mainMod + scroll
+      "$mod, mouse_down, workspace, e+1"
+      "$mod, mouse_up, workspace, e-1"
       ]
         ++ (
         # workspaces
@@ -68,6 +70,20 @@
           )
           10)
       );
+     
+     bindm = [
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      "$mod, mouse:272, movewindow"
+      "$mod, mouse:273, resizewindow"
+     ];
+
+     windowrule = [
+      # Example windowrule v1
+      # windowrule = float, ^(kitty)$
+      # Example windowrule v2
+      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+     ];
   };
 
   extraConfig = builtins.readFile ./others/hyprland/hyprland.conf;
