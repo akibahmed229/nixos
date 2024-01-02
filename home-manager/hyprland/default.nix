@@ -75,6 +75,8 @@
       evince
       gnome.gnome-weather
       rhythmbox
+      gnome.gnome-calculator
+      gnome.gnome-clocks
       # screen shot
       grim
       slurp
