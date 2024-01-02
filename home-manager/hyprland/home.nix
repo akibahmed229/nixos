@@ -61,7 +61,7 @@
       "$mod, W, exec, wofi --show drun"
       "$mod, P, pseudo," # dwindle
       "$mod, J, togglesplit," # dwindle
-      "$mod, Print, exec, grim -g '$(slurp)' - | swappy -f -"
+      ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
     
       # Move focus with mainMod + arrow keys
       "$mod, left, movefocus, l"
