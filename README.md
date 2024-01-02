@@ -11,8 +11,8 @@
     1. [Prerequisites](#installation-prerequisites)
     2. [Installation Steps](#installation-steps)
 
-2. [FAQ](#4-faq)
-3. [File Structure](#5-file-structure)
+2. [FAQ](#2-faq)
+3. [File Structure](#3-file-structure)
 
 # 1. Btrfs Installation My version of NixOS
 
