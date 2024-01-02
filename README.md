@@ -7,7 +7,7 @@
 
 ## Table of Contents
 
-1. [NixOS Btrfs Installation Guide](#1-nixos-btrfs-installation-guide)
+1. [NixOS Btrfs Installation Guide](#1-btrfs-installation-my-version-of-nixos)
     1. [Prerequisites](#installation-prerequisites)
     2. [Installation Steps](#installation-steps)
 
@@ -25,7 +25,7 @@
 4. [FAQ](#4-faq)
 5. [File Structure](#5-file-structure)
 
-# 1. NixOS Btrfs Installation Guide
+# 1. Btrfs Installation My version of NixOS
 
 This guide provides step-by-step instructions for installing NixOS on a Btrfs filesystem using a copy-on-write (CoW) approach for Linux systems.
 
@@ -43,16 +43,17 @@ Before you begin, ensure you have the following:
 Open a terminal and execute the following command to partition the disk:
 
 ```bash
-printf "label: gpt\n,550M,U\n,,L\n" | sfdisk /dev/sdX
+fdisk /dev/sdx
 ```
+create gpt partion with two partion first one for root,home,nix & second one for efi boot pertion
 
 2. **Format Partitions and Create Subvolumes**
 
 In the same terminal, format the partitions and create subvolumes:
 
 ```bash
-mkfs.fat -F 32 /dev/sdX1
-mkfs.btrfs /dev/sdX2
+mkfs.fat -F 32 -n boot /dev/sdX1
+mkfs.btrfs -L nixos /dev/sdX2
 mkdir -p /mnt
 mount /dev/sdX2 /mnt
 btrfs subvolume create /mnt/root
@@ -66,12 +67,12 @@ umount /mnt
 Mount the partitions and subvolumes using the following commands:
 
 ```bash
-mount -o compress=zstd,subvol=root /dev/sdX2 /mnt
+mount -o compress=zstd,subvol=root /dev/disk/by-label/nixos /mnt
 mkdir /mnt/{home,nix}
-mount -o compress=zstd,subvol=home /dev/sdX2 /mnt/home
-mount -o compress=zstd,noatime,subvol=nix /dev/sdX2 /mnt/nix
+mount -o compress=zstd,subvol=home /dev/disk/by-label/nixos /mnt/home
+mount -o compress=zstd,noatime,subvol=nix /dev/disk/by-label/nixos /mnt/nix
 mkdir /mnt/boot
-mount /dev/sdX1 /mnt/boot
+mount /dev/disk/by-label/boot /mnt/boot
 ```
 
 4. **Install NixOS**
@@ -79,9 +80,7 @@ mount /dev/sdX1 /mnt/boot
 To install NixOS on the mounted partitions, follow these steps:
 
 ```bash
-nixos-generate-config --root /mnt
-nano /mnt/etc/nixos/configuration.nix # manually add mount options
-nixos-install
+nixos-install --flake github:akibahmed229/nixos/#desktop
 ```
 
 Note: During the configuration step, you can manually edit the `/mnt/etc/nixos/configuration.nix` file to set mount options and customize your NixOS installation.
