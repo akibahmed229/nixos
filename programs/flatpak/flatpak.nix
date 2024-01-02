@@ -29,7 +29,7 @@
                   "org.signal.Signal"
                   #"org.telegram.desktop"
                   "org.nickvision.tubeconverter"
-                  "com.mattjakeman.ExtensionManager"
+                  #"com.mattjakeman.ExtensionManager"
                   "org.libreoffice.LibreOffice"
                   "io.github.Figma_Linux.figma_linux"
         )
