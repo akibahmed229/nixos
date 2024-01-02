@@ -1,7 +1,7 @@
 [Default]
 save_dir=$HOME/Pictures
-save_filename_formate=screenshot-%Y%m%d-%I%M%S.png
-show_panel-false
+save_filename_format=screenshot-%Y%m%d-%I%M%S.png
+show_panel=false
 line_size=5
 text_size=20
 text_font=sans-serif
