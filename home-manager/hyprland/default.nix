@@ -67,6 +67,8 @@
       # stroge mount
       udiskie
       ntfs3g
+      # sound
+      pavucontrol
     ];
   };
 

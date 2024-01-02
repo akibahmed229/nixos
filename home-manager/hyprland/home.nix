@@ -31,6 +31,23 @@
   enable = true;
   xwayland = { enable = true; };
   settings = {
+    # Execute your favorite apps at launch
+    exec-once = [
+      "waybar"
+      "hyprpaper"
+      "nm-applet --indicator" # simple network manager indicator
+      "udiskie &" # USB Mass storage devices mounting
+      "wl-paste --type text --watch cliphist store" #Stores only text data
+      "wl-paste --type image --watch cliphist store" #Stores only image data
+
+      ## app that i want to start after login
+      "discord"
+      "firefox"
+      "spotify"
+      "alacritty"
+      "openrgb"
+    ];
+
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
     "$mod" = "SUPER";
     bind = [
@@ -55,6 +72,13 @@
       # Scroll through existing workspaces with mainMod + scroll
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
+
+      # window 
+      "$mod SHIFT, right, resizeactive, 100 0"
+      "$mod SHIFT, left, resizeactive, -100 0"
+      "$mod SHIFT, up, resizeactive, 0 -100"
+      "$mod SHIFT, down, resizeactive, 0 100"
+
       ]
         ++ (
         # workspaces
@@ -85,6 +109,20 @@
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+
+      # Window open rule
+      "workspace 1,Alacritty"
+      "workspace 2,firefox"
+      "workspace 3,discord"
+      "workspace 4,Spotify"
+      "workspace 5,virt-manager"
+
+      # Floating window rule
+      "float,^(pavucontrol)$"
+      "float,^(blueman-manager)$"
+      "float,^(nm-connection-editor)$"
+      "float,^(openrgb)$"
+
      ];
   };
 

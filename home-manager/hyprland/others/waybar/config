@@ -5,9 +5,9 @@
     "margin-left": 10,
     "margin-right": 10,
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 35, // Waybar height (to be removed for auto height)
+    "height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 5, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["custom/logo", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
