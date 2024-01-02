@@ -77,4 +77,14 @@
     #xdg-desktop-portal-hyprland
     ];
   };
+
+  services.udisks2 = {
+    enable = true;
+    mountOnMedia = true;
+  };
+
+  security.polkit = {
+    enable = true;
+  };
+
 }
