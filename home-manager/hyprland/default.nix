@@ -69,6 +69,17 @@
       ntfs3g
       # sound
       pavucontrol
+      # software of gnome of daily usage
+      gnome.gnome-software
+      gnome.eog
+      evince
+      gnome.gnome-weather
+      rhythmbox
+      # screen shot
+      grim
+      slurp
+      swappy
+      imagemagick
     ];
   };
 

@@ -59,8 +59,9 @@
       "$mod, T, togglefloating,"
       "$mod, F, fullscreen"
       "$mod, W, exec, wofi --show drun"
-      "$mod, P, pseudo, # dwindle"
-      "$mod, J, togglesplit, # dwindle"
+      "$mod, P, pseudo," # dwindle
+      "$mod, J, togglesplit," # dwindle
+      "$mod, Print, exec, grim -g '$(slurp)' - | swappy -f -"
     
       # Move focus with mainMod + arrow keys
       "$mod, left, movefocus, l"
@@ -148,6 +149,10 @@
     };
     ".config//libinput" = {
       source = ./others/libinput;
+      recursive = true;
+    };
+    ".config/swappy" = {
+      source = ./others/swappy;
       recursive = true;
     };
     ".config/gtk-4.0" = {
