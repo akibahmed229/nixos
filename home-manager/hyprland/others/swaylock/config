@@ -6,10 +6,10 @@ timestr=%R
 datestr=%a, %e of %B
 
 # Add current screenshot as wallpaper
-screenshots
+#screenshots
 
 # Add an image as a background 
-# image=~/flake/public/wallpaper/nixos.png
+image=~/flake/public/wallpaper/nixos.png
 
 # Fade in time
 fade-in=1
