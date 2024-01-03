@@ -88,6 +88,8 @@
       imagemagick
       # Screen  lock 
       wlogout 
+      swaylock-effects
+      swaylock
       # fot sddm theme 
       libsForQt5.qt5.qtquickcontrols2   
       libsForQt5.qt5.qtgraphicaleffects
@@ -95,10 +97,11 @@
   };
   
   # swaylock config
-  programs.sway = {
-    enable = true;
-    extraPackages = with pkgs; [swaylock-effects];
-  };
+  security.pam.services.swaylock = {};
+  #programs.sway = {
+  #  enable = true;
+  #  extraPackages = with pkgs; [swaylock-effects];
+  #};
 
   xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
     enable = true;
