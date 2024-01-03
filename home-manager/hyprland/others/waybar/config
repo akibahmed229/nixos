@@ -11,7 +11,7 @@
     // Choose the order of the modules
     "modules-left": ["custom/logo", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "clock", "tray"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "clock", "tray", "custom/exit" ],
     // Modules configuration
      //"hyprland/workspaces": {
      //    "disable-scroll": true,
@@ -143,7 +143,8 @@
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click": "nm-connection-editor",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -164,6 +165,12 @@
         },
         "on-click": "pavucontrol"
     },
+    "custom/exit": {
+        "format": "",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",

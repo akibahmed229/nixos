@@ -86,6 +86,7 @@ button:hover {
 #wireplumber,
 #custom-media,
 #custom-logo,
+#custom-exit,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -211,10 +212,17 @@ label:focus {
 }
 
 #custom-logo {
-    color: #ff358f;
+    color: #458588;
     font-weight: bold;
     font-size: 20px;
     margin-left: 5px;
+}
+
+#custom-exit {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10px;
 }
 
 #temperature {
@@ -227,7 +235,6 @@ label:focus {
 
 #tray {
     background-color: #2980b9;
-    margin-right: 10px;
 }
 
 #tray > .passive {
