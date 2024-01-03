@@ -87,9 +87,13 @@
       imagemagick
       # Screen  lock 
       wlogout 
-      swaylock
-      swaylock-effects
     ];
+  };
+  
+  # swaylock config
+  programs.sway = {
+    enable = true;
+    extraPackages = with pkgs; [swaylock-effects];
   };
 
   xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
