@@ -20,6 +20,7 @@
       xkbOptions = "eorsign:e";
       displayManager ={
         sddm.enable = true;
+        sddm.theme = "${import ../../pkgs/custompkgs/sddm/sddm.nix {inherit pkgs; }}";
       };
     };
   };
