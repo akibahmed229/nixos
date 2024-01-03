@@ -61,15 +61,17 @@
       "$mod, R, exec, wofi --show drun"
       "$mod, P, pseudo," # dwindle
       "$mod, J, togglesplit," # dwindle
+      "$mod, B, exec, firefox"
+      "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
       ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
+      "$mod, L, exec, swaylock"
+      "$mod SHIFT, DELETE, exec, wlogout"
     
       # Move focus with mainMod + arrow keys
       "$mod, left, movefocus, l"
       "$mod, right, movefocus, r"
       "$mod, up, movefocus, u"
       "$mod, down, movefocus, d"
-      "$mod, B, exec, firefox"
-      "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
       # Scroll through existing workspaces with mainMod + scroll
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
