@@ -19,7 +19,7 @@
       layout = "us";
       xkbOptions = "eorsign:e";
       displayManager ={
-        gdm.enable = true;
+        sddm.enable = true;
       };
     };
   };
@@ -87,6 +87,9 @@
       imagemagick
       # Screen  lock 
       wlogout 
+      # fot sddm theme 
+      libsforqt5.qt5.qtquickcontrols2   
+      libsforqt5.qt5.qtgraphicaleffects
     ];
   };
   
