@@ -58,7 +58,7 @@
       "$mod, E, exec, thunar"
       "$mod, T, togglefloating,"
       "$mod, F, fullscreen"
-      "$mod, W, exec, wofi --show drun"
+      "$mod, R, exec, wofi --show drun"
       "$mod, P, pseudo," # dwindle
       "$mod, J, togglesplit," # dwindle
       ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
@@ -153,6 +153,14 @@
     };
     ".config/swappy" = {
       source = ./others/swappy;
+      recursive = true;
+    };
+    ".config/wlogout" = {
+      source = ./others/wlogout;
+      recursive = true;
+    };
+    ".config/swaylock" = {
+      source = ./others/swaylock;
       recursive = true;
     };
     ".config/gtk-4.0" = {
