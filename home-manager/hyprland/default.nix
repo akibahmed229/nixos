@@ -56,8 +56,11 @@
       networkmanagerapplet
       mpd
       xfce.thunar
-      # for theming qt and gtk
+      # for  qt and gtk
+      libsForQt5.polkit-kde-agent
       qt6Packages.qt6ct
+      libsForQt5.qt5ct
+      libsForQt5.qt5.qtwayland
       qt6.qtwayland
       lxappearance
       nwg-look
@@ -82,6 +85,10 @@
       slurp
       swappy
       imagemagick
+      # Screen  lock 
+      wlogout 
+      swaylock
+      swaylock-effects
     ];
   };
 
