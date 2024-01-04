@@ -37,10 +37,10 @@ key-hl-color=00000066
 separator-color=00000000
 
 inside-color=00000033
-inside-clear-color=ffffff00
+inside-clear-color=d79921
 inside-caps-lock-color=ffffff00
 inside-ver-color=ffffff00
-inside-wrong-color=ffffff00
+inside-wrong-color=cc241d
 
 ring-color=ffffff
 ring-clear-color=ffffff
