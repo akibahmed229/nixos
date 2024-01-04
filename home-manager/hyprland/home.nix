@@ -81,6 +81,10 @@
       "$mod SHIFT, left, resizeactive, -100 0"
       "$mod SHIFT, up, resizeactive, 0 -100"
       "$mod SHIFT, down, resizeactive, 0 100"
+      "$mod ALT, right, movewindow, r"
+      "$mod ALT, left, movewindow, l"
+      "$mod ALT, up, movewindow, u"
+      "$mod ALT, down, movewindow, d"
 
       ]
         ++ (
