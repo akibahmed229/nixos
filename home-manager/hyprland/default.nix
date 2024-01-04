@@ -69,7 +69,7 @@
       cliphist
       wl-clipboard
       # stroge mount
-      udiskie
+      #udiskie
       ntfs3g
       # sound
       pavucontrol
@@ -113,6 +113,7 @@
     ];
   };
 
+  services.gvfs.enable = true;
   services.udisks2 = {
     enable = true;
     mountOnMedia = true;
