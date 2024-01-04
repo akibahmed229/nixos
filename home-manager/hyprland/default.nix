@@ -113,6 +113,7 @@
     ];
   };
 
+  # To auto mount usb and other useb devices pluged in 
   services.gvfs.enable = true;
   services.udisks2 = {
     enable = true;
