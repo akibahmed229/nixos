@@ -68,10 +68,10 @@ button:hover {
     background-color: #8ec09c;
 }
 
-/* #workspaces button.focused {
-    background-color: #64727D;
+#workspaces button.focused {
+    background-color: #64828D;
     box-shadow: inset 0 -3px #ffffff;
-} */
+} 
 
 #workspaces button.active {
     background-color: rgb(215,153,33);
