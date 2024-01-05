@@ -13,22 +13,21 @@
     "modules-center": ["hyprland/window"],
     "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "clock", "tray", "custom/exit" ],
     // Modules configuration
-     //"hyprland/workspaces": {
-     //    "disable-scroll": true,
-     //    "all-outputs": true,
-     //    "warp-on-scroll": false,
-     //    "format": "{icon}",
-     //    "format-icons": {
-     //        "1": "",
-     //        "2": "",
-     //        "3": "",
-     //        "4": "",
-     //        "5": "",
-     //        "urgent": "",
-     //        "focused": "",
-     //        "default": ""
-     //    }
-    //},
+    "hyprland/workspaces": {
+  	"format": "{name}",
+  	"format-icons": {
+  		"1": "",
+  		"2": "",
+  		"3": "",
+  		"4": "",
+  		"5": "",
+  		"active":  "",
+  		"default": ""
+     	},
+         "persistent-workspaces": {
+               "*": 5, // 5 workspaces by default on every monitor
+         }
+    },
     "custom/logo": {
       "exec": "echo \"\"",
       "interval": 5,

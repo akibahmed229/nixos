@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: jetbrainsmono nerd font, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
 }
 
@@ -41,32 +41,41 @@ button {
     box-shadow: inset 0 -3px transparent;
     /* Avoid rounded borders under each button name */
     border: none;
-    border-radius: 0;
+    border-radius: 0; 
+  
+    font-family: JetBrainsMono Nerd Font, sans-sherif;
+    font-weight: bold;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+   /* box-shadow: inset 0 -3px #ffffff; */
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #8ec07c;
+    padding: 0 10px;
+    background-color: #8ec07c;
+    color: #000000;
+    font-size: 25px;
+    font-family: JetBrainsMono Nerd Font, sans-sherif;
+    font-weight: bold;
+    border-radius: 13px;
+    margin: 4px 3px;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background-color: #8ec09c;
 }
 
-#workspaces button.focused {
+/* #workspaces button.focused {
     background-color: #64727D;
     box-shadow: inset 0 -3px #ffffff;
-}
+} */
 
-#workspaces button.urgent {
-    background-color: #eb4d4b;
+#workspaces button.active {
+    background-color: rgb(215,153,33);
+    color: #ffffff;
 }
 
 #mode {
@@ -96,6 +105,7 @@ button:hover {
     color: #ffffff;
     border-radius: 13px;
     margin: 4px 0;
+    font-family: jetbrainsmono nerd font, sans-sherif;
 }
 
 #window,
@@ -213,9 +223,10 @@ label:focus {
 
 #custom-logo {
     color: #458588;
-    font-weight: bold;
     font-size: 20px;
+    font-family: JetBrainsMono Nerd Font, sans-sherif;
     margin-left: 5px;
+    font-weight: bold;
 }
 
 #custom-exit {
@@ -234,7 +245,7 @@ label:focus {
 }
 
 #tray {
-    background-color: #2980b9;
+    background-color: #298079;
 }
 
 #tray > .passive {
