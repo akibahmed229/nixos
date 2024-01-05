@@ -9,7 +9,7 @@
     };
     grub = {
       enable = true;
-      theme = (pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "Hi, there Select your Pefered OS"; });
+      theme = (pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "Yo, sleek operator!"; });
       splashImage = ../public/wallpaper/nixos.png;
       devices = ["nodev"]; # install grub on efi
       efiSupport = true;
