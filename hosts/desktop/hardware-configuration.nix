@@ -8,7 +8,7 @@
 
 # use the latest Linux kernel
 # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = unstable.linuxPackages_zen;
 #  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   boot.kernelParams = [ 
