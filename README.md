@@ -34,7 +34,7 @@ Open a terminal and execute the following command to partition the disk:
 ```bash
 fdisk /dev/sdx
 ```
-create gpt partion with two partion first one for root,home,nix & second one for efi boot pertion
+create gpt label with two partion first one for root,home,nix & second one for efi boot pertion
 
 2. **Format Partitions and Create Subvolumes**
 
