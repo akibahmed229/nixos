@@ -8,8 +8,9 @@
       efiSysMountPoint = "/boot";
     };
     grub = {
-      splashImage = ../public/wallpaper/nixos.png;
       enable = true;
+      theme = (pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "Hi, there Select your Pefered OS"; });
+      splashImage = ../public/wallpaper/nixos.png;
       devices = ["nodev"]; # install grub on efi
       efiSupport = true;
       useOSProber = true; # To find Other boot manager like windows 
