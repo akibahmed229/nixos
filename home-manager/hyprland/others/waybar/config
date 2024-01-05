@@ -23,16 +23,14 @@
   		"5": "",
   		"active":  "",
   		"default": "",
-      "focused": "",
      	},
          "persistent-workspaces": {
                "*": 5, // 5 workspaces by default on every monitor
          }
     },
     "custom/logo": {
-      "exec": "echo \"\"",
-      "interval": 5,
-      "format": "{}"
+      "format": "", 
+      "tooltip": false
     },
     "keyboard-state": {
         "numlock": true,
@@ -141,7 +139,7 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-ethernet": "{ipaddr}/{cidr}   ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
@@ -154,7 +152,7 @@
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": "  {volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -172,7 +170,6 @@
         "on-click": "wlogout",
         "tooltip": false
     },
-
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
