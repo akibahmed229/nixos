@@ -2,7 +2,7 @@ ignore-empty-password
 font="Fira Sans Semibold"
 
 clock
-timestr=%R
+timestr=%I:%M %p
 datestr=%a, %e of %B
 
 # Add current screenshot as wallpaper
