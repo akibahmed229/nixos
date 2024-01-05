@@ -16,7 +16,6 @@
 {
     imports =   
     [(import ../../programs/firefox/firefox.nix)]++
-    #[(import ../programs/nvim-nix-video-main/home.nix)]++
     [(import ../../programs/spotify/spicetify.nix)]++
     [(import ../../programs/discord/discord.nix)]++
     [(import ../../programs/lf/lf.nix)];
