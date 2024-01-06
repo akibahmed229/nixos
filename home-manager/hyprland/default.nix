@@ -75,7 +75,6 @@
       # sound
       pavucontrol
       # software of gnome of daily usage
-      gnome.gnome-software
       gnome.eog
       evince
       gnome.gnome-weather
