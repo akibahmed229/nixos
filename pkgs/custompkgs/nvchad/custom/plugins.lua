@@ -7,7 +7,7 @@ local plugins = {
   
   {
     "jose-elias-alvarez/null-ls.nvim",
-    ft = { "python" },
+    event = "VeryLazy",
     opts = function()
       return require "custom.configs.null-ls"
     end,
@@ -27,10 +27,16 @@ local plugins = {
     opts = {
       ensure_installed = {
         "clangd",
+        "clang-format",
+        "codelldb",
         "black",
         "pyright",
         "ruff",
         "pyright",
+        "eslint-lsp",
+        "js-debug-adapter",
+        "prettier",
+        "typescript-language-server"
       },
     },
   },
