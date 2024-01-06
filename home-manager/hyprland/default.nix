@@ -30,6 +30,7 @@
     kdeconnect= {
       enable = true;
     };
+    seahorse.enable = true;
   };
 
   programs.hyprland = {
@@ -105,6 +106,11 @@
 
   xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
     enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = ["gtk"];
+      hyprland.default = ["gtk" "hyprland"];
+    };
     extraPortals = with pkgs;[ 
     xdg-desktop-portal-gtk 
     xdg-desktop-portal-wlr
@@ -113,7 +119,22 @@
     ];
   };
 
+  services.dbus = {
+      implementation = "broker";
+      # needed for GNOME services outside of GNOME Desktop
+      packages = [pkgs.gcr];
+  };
+  
+  services.udev = {
+      packages = with pkgs; [gnome.gnome-settings-daemon];
+      extraRules = ''
+        # add my android device to adbusers
+        SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
+      '';
+    };
+
   # To auto mount usb and other useb devices pluged in 
+  services.gnome.gnome-keyring.enable = true;
   services.gvfs.enable = true;
   services.udisks2 = {
     enable = true;
