@@ -56,7 +56,7 @@
       hyprpaper
       preload
       networkmanagerapplet
-      mpd
+      # mpd
       xfce.thunar
       # for  qt and gtk
       libsForQt5.polkit-kde-agent
@@ -92,7 +92,11 @@
       swaylock
       # fot sddm theme 
       libsForQt5.qt5.qtquickcontrols2   
-      libsForQt5.qt5.qtgraphicaleffects
+      libsForQt5.qt5.qtgraphicaleffects 
+      # for music
+      playerctl
+      # color grab 
+      pywal
     ];
   };
   
