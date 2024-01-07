@@ -5,10 +5,9 @@
 #├── flake.nix
 #├── home-manager
 #│   ├── hyprland
-#│   |  ├── default.nix 
-#│   |  ├── home.nix 
-#│   |  ├── /others 
-#│   └── kde
+#│      ├── default.nix 
+#│      ├── home.nix 
+#│      ├── /others 
 #├── hosts
 #│   ├── configuration.nix
 #│   ├── default.nix
