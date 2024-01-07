@@ -11,7 +11,7 @@
     // Choose the order of the modules
     "modules-left": ["custom/logo", "hyprland/workspaces", "custom/playerctl", "custom/playerlabel" ],
     "modules-center": [ "hyprland/window" ],
-    "modules-right": [ "pulseaudio", "network", "memory", "cpu", "temperature", "clock", "tray", "custom/exit" ],
+    "modules-right": [ "network", "pulseaudio", "memory", "temperature", "cpu", "clock", "tray", "custom/exit" ],
     // Modules configuration
     "hyprland/workspaces": {
   	"format": "{name}",
