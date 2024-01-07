@@ -4,12 +4,10 @@
 # Structure of the flake
 #├── flake.nix
 #├── home-manager
-#│   ├── dwm
-#│   ├── gnome
-#│   │   ├── default.nix
-#│   │   └── home.nix
-#│   ├── home.nix
 #│   ├── hyprland
+#│   |  ├── default.nix 
+#│   |  ├── home.nix 
+#│   |  ├── /others 
 #│   └── kde
 #├── hosts
 #│   ├── configuration.nix
@@ -18,16 +16,8 @@
 #│   │   ├── default.nix
 #│   │   └── hardware-configuration.nix
 #│   └── virt
-#│       ├── default.nix
-#│       └── hardware-configuration.nix
-#├── LICENSE
 #├── programs
-#├── public
-#│   ├── profile/
-#│   └── wallpaper/
-#├── README.md
 #└── themes
-#    └── gtk/
 {
   description = "My NixOS configuration";
 
