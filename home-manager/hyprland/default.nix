@@ -13,39 +13,39 @@
 
 { inputs, config, lib, pkgs, unstable, hyprland, system, ... }:
 {
-  services ={
+  services = {
     xserver = {
       enable = true;
       layout = "us";
       xkbOptions = "eorsign:e";
-      displayManager ={
+      displayManager = {
         sddm.enable = true;
-        sddm.theme = "${import ../../pkgs/custompkgs/sddm/sddm.nix {inherit pkgs; }}";
+        sddm.theme = "${import ../../pkgs/sddm/sddm.nix {inherit pkgs; }}";
       };
     };
   };
 
   programs = {
     dconf.enable = true;
-    kdeconnect= {
+    kdeconnect = {
       enable = true;
     };
     seahorse.enable = true;
   };
 
   programs.hyprland = {
-    enable = true;  
+    enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
   };
 
- environment = {
+  environment = {
     variables = {
       #WLR_NO_HARDWARE_CURSORS="1";         # Possible variables needed in vm
       #WLR_RENDERER_ALLOW_SOFTWARE="1";
-      XDG_CURRENT_DESKTOP="Hyprland";
-      XDG_SESSION_TYPE="wayland";
-      XDG_SESSION_DESKTOP="Hyprland";
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "Hyprland";
     };
     systemPackages = with pkgs; [
       waybar
@@ -88,54 +88,55 @@
       swappy
       imagemagick
       # Screen  lock 
-      wlogout 
+      wlogout
       swaylock-effects
       swaylock
       # fot sddm theme 
-      libsForQt5.qt5.qtquickcontrols2   
-      libsForQt5.qt5.qtgraphicaleffects 
+      libsForQt5.qt5.qtquickcontrols2
+      libsForQt5.qt5.qtgraphicaleffects
       # for music
       playerctl
       # color grab 
       pywal
     ];
   };
-  
+
   # swaylock config
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
   #programs.sway = {
   #  enable = true;
   #  extraPackages = with pkgs; [swaylock-effects];
   #};
 
-  xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
+  xdg.portal = {
+    # Required for flatpak with window managers and for file browsing
     enable = true;
     xdgOpenUsePortal = true;
     config = {
-      common.default = ["gtk"];
-      hyprland.default = ["gtk" "hyprland"];
+      common.default = [ "gtk" ];
+      hyprland.default = [ "gtk" "hyprland" ];
     };
-    extraPortals = with pkgs;[ 
-    xdg-desktop-portal-gtk 
-    xdg-desktop-portal-wlr
-    xdg-desktop-portal-kde
-    #xdg-desktop-portal-hyprland
+    extraPortals = with pkgs;[
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-kde
+      #xdg-desktop-portal-hyprland
     ];
   };
 
   services.dbus = {
-      implementation = "broker";
-      # needed for GNOME services outside of GNOME Desktop
-      packages = [pkgs.gcr];
+    implementation = "broker";
+    # needed for GNOME services outside of GNOME Desktop
+    packages = [ pkgs.gcr ];
   };
-  
+
   services.udev = {
-      packages = with pkgs; [gnome.gnome-settings-daemon];
-      extraRules = ''
-        # add my android device to adbusers
-        SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
-      '';
-    };
+    packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    extraRules = ''
+      # add my android device to adbusers
+      SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
+    '';
+  };
 
   # To auto mount usb and other useb devices pluged in 
   services.gnome.gnome-keyring.enable = true;

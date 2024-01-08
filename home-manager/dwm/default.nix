@@ -22,42 +22,42 @@
   services.xserver.windowManager.dwm.enable = true;
   # DWM overlay
   services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
-	src = ./dwm;
+    src = ./dwm;
   };
 
   environment.systemPackages = with pkgs; [
-      firefox
-      git
-      htop
-      gnumake
-      neofetch
-      pywal
-      xwallpaper
-      alacritty
-      dmenu
-      gcc
-      xcompmgr
-      rPackages.pkgmaker
-      xorg.xrandr
-      xorg.xinit
-      xorg.makedepend
-      xorg.libX11
-      xorg.libX11.dev
-      xorg.libxcb
-      xorg.libXft
-      xorg.xkill
-      xorg.libXinerama
-      xorg.xrdb
-      picom
-     (st.overrideAttrs {
-        src = ./st;
-     })
-     (slstatus.overrideAttrs {
-	      src = ./slstatus;
-     })
-     (dmenu.overrideAttrs {
-	      src = ./dmenu;
-     })
+    firefox
+    git
+    htop
+    gnumake
+    neofetch
+    pywal
+    xwallpaper
+    alacritty
+    dmenu
+    gcc
+    xcompmgr
+    rPackages.pkgmaker
+    xorg.xrandr
+    xorg.xinit
+    xorg.makedepend
+    xorg.libX11
+    xorg.libX11.dev
+    xorg.libxcb
+    xorg.libXft
+    xorg.xkill
+    xorg.libXinerama
+    xorg.xrdb
+    picom
+    (st.overrideAttrs {
+      src = ./st;
+    })
+    (slstatus.overrideAttrs {
+      src = ./slstatus;
+    })
+    (dmenu.overrideAttrs {
+      src = ./dmenu;
+    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

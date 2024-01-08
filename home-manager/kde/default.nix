@@ -7,7 +7,8 @@
 {
   programs = {
     dconf.enable = true;
-    kdeconnect = {                                # For GSConnect
+    kdeconnect = {
+      # For GSConnect
       enable = true;
       package = pkgs.gnomeExtensions.gsconnect;
     };
@@ -17,33 +18,34 @@
     xserver = {
       enable = true;
 
-      layout = "us";                              # Keyboard layout & €-sign
+      layout = "us"; # Keyboard layout & €-sign
       xkbOptions = "eurosign:e";
       libinput.enable = true;
 
       displayManager = {
-        sddm.enable = true;          # Display Manager
-        defaultSession = "plasmawayland";        # Default session
+        sddm.enable = true; # Display Manager
+        defaultSession = "plasmawayland"; # Default session
       };
 
       desktopManager.plasma5 = {
-        enable = true;                            # Desktop Manager
+        enable = true; # Desktop Manager
       };
     };
   };
 
   environment = {
-    systemPackages = with pkgs.libsForQt5; [                 # Packages installed
+    systemPackages = with pkgs.libsForQt5; [
+      # Packages installed
       packagekit-qt
       bismuth
     ];
-    
+
     plasma5.excludePackages = with pkgs.libsForQt5; [
-          elisa
-          khelpcenter
-          # konsole
-          oxygen
-        ];
+      elisa
+      khelpcenter
+      # konsole
+      oxygen
+    ];
   };
 
   xdg.portal.enable = true;

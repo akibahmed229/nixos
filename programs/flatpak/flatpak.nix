@@ -4,7 +4,7 @@
 # Only use when you know what you're doing
 #
 
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
   services.flatpak.enable = true;

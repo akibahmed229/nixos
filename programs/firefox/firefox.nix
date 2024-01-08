@@ -56,7 +56,7 @@
         {
           name = "Gmail";
           tags = [ "email" ];
-          keyword = "mail"; 
+          keyword = "mail";
           url = "https://mail.google.com/mail/u/0/#inbox";
         }
         {
@@ -69,11 +69,11 @@
           name = "Nix Home-Manager options";
           tags = [ "nix" ];
           keyword = "nix home-manager options";
-          url ="https://mipmip.github.io/home-manager-option-search/";
+          url = "https://mipmip.github.io/home-manager-option-search/";
         }
         {
           name = "Chat Gpt";
-          tags = [ "chat" "gpt" "ai"];
+          tags = [ "chat" "gpt" "ai" ];
           keyword = "chat";
           url = "https://chat.openai.com/";
         }
@@ -101,7 +101,7 @@
 
       userChrome = ''                         
         /* some css */                        
-      '';                                      
+      '';
 
       extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
         bitwarden

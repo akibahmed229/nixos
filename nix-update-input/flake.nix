@@ -16,7 +16,8 @@
           "aarch64-darwin"
         ]
           (system: function nixpkgs.legacyPackages.${system});
-    in {
+    in
+    {
       packages = forAllSystems (pkgs: {
         default = pkgs.writeShellScriptBin "update-input" ''
           input=$(                                           \

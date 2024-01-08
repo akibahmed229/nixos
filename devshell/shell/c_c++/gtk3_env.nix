@@ -1,15 +1,15 @@
-{ pkgs ? import <nixpkgs> {}}:
+{ pkgs ? import <nixpkgs> { } }:
 
-  pkgs.mkShell {
+pkgs.mkShell {
   name = "C/C++ GTK 3 development environment";
-  packages = [  
-    ];
-    
+  packages = [
+  ];
+
   nativeBuildInputs = with pkgs; [
-     gtk3
-     pkg-config
-     cmake
-     clang-tools
+    gtk3
+    pkg-config
+    cmake
+    clang-tools
   ];
 
   shellHook = ''
@@ -17,6 +17,6 @@
     export LD_LIBRARY_PATH=${pkgs.gtk3}/lib:$LD_LIBRARY_PATH
   '';
 
-  }
+}
 
 

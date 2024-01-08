@@ -6,15 +6,15 @@
 
 {
   imports =
-    [(import ./hardware-configuration.nix)]++
-    [(import ../../home-manager/dwm/default.nix)];
+    [ (import ./hardware-configuration.nix) ] ++
+    [ (import ../../home-manager/dwm/default.nix) ];
 
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
@@ -27,10 +27,10 @@
         enable = true;
         plugins = [
           "git"
-            "sudo"
-            "terraform"
-            "systemadmin"
-            "vi-mode"
+          "sudo"
+          "terraform"
+          "systemadmin"
+          "vi-mode"
         ];
         theme = "agnoster";
       };
