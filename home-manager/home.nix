@@ -1,4 +1,4 @@
-{ config, pkgs, user, state-version, lib, ... }:
+{  config, pkgs, user, state-version, lib, inputs, ... }:
 
 {
 
@@ -74,6 +74,10 @@
     };
     ".ssh" = {
       source = ../programs/ssh;
+      recursive = true;
+    };
+    ".config/nvim" = {
+      source = "${inputs.self.packages.nvchad}";
       recursive = true;
     };
   };
