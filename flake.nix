@@ -86,6 +86,17 @@
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       state-version = "23.11";
+      # Supported systems for your flake packages, shell, etc.
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = nixpkgs.lib.genAttrs systems;
       
       # The user to build for.
       user = "akib";
@@ -103,6 +114,10 @@
 
 # using the above variables to define the system configuration
   in {
+     # Accessible through 'nix build', 'nix shell', etc
+    packages = forAllSystems (system: import ./devshell/shell nixpkgs.legacyPackages.${system});
+
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.${user});
 
 # NixOS configuration
     nixosConfigurations = ( 
