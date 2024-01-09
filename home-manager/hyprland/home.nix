@@ -20,11 +20,10 @@
 
 {
   imports =
-    [ (import ../hyprland/others/hyprutility.nix) ] ++
     [ (import ../../programs/firefox/firefox.nix) ] ++
     [ (import ../../programs/spotify/spicetify.nix) ] ++
     [ (import ../../programs/discord/discord.nix) ] ++
-    [ (import ../../programs/lf/lf.nix) ]; 
+    [ (import ../../programs/lf/lf.nix) ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "discord"
@@ -151,48 +150,48 @@
     extraConfig = builtins.readFile ./others/hyprland/hyprland.conf;
   };
 
- # home.file = {
- #   ".config/hypr" = {
- #     source = ./others/hyprpaper;
- #     recursive = true;
- #   };
- #   ".config/waybar" = {
- #     source = ./others/waybar;
- #     recursive = true;
- #   };
- #   ".config/dunst" = {
- #     source = ./others/dunst;
- #     recursive = true;
- #   };
- #   ".config/wofi" = {
- #     source = ./others/wofi;
- #     recursive = true;
- #   };
- #   ".config//libinput" = {
- #     source = ./others/libinput;
- #     recursive = true;
- #   };
- #   ".config/swappy" = {
- #     source = ./others/swappy;
- #     recursive = true;
- #   };
- #   ".config/wlogout" = {
- #     source = ./others/wlogout;
- #     recursive = true;
- #   };
- #   ".config/swaylock" = {
- #     source = ./others/swaylock;
- #     recursive = true;
- #   };
- #   ".config/gtk-4.0" = {
- #     source = ../../themes/gtk/${theme};
- #     recursive = true;
- #   };
- #   ".config/gtk-3.0" = {
- #     source = ../../themes/gtk/${theme};
- #     recursive = true;
- #   };
- # };
+  home.file = {
+    ".config/hypr" = {
+      source = ./others/hyprpaper;
+      recursive = true;
+    };
+    ".config/waybar" = {
+      source = ./others/waybar;
+      recursive = true;
+    };
+    ".config/dunst" = {
+      source = ./others/dunst;
+      recursive = true;
+    };
+    ".config/wofi" = {
+      source = ./others/wofi;
+      recursive = true;
+    };
+    ".config/wlogout" = {
+      source = ./others/wlogout;
+      recursive = true;
+    };
+    ".config/swaylock" = {
+      source = ./others/swaylock;
+      recursive = true;
+    };
+    ".config/swappy" = {
+      source = ./others/swappy;
+      recursive = true;
+    };
+    ".config//libinput" = {
+      source = ./others/libinput;
+      recursive = true;
+    };
+    ".config/gtk-4.0" = {
+      source = ../../themes/gtk/${theme};
+      recursive = true;
+    };
+    ".config/gtk-3.0" = {
+      source = ../../themes/gtk/${theme};
+      recursive = true;
+    };
+  };
 
   services.udiskie = {
     enable = true;

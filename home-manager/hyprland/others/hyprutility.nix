@@ -1,5 +1,7 @@
-{ pkgs,
-theme, ... }:
+{ pkgs
+, theme
+, ...
+}:
 
 {
   xdg.configFile."wlogout/icons".source = ./wlogout/icons;
@@ -8,8 +10,8 @@ theme, ... }:
   programs.waybar = {
     enable = true;
   };
-  
-  services.dunst = { 
+
+  services.dunst = {
     enable = true;
     configFile = builtins.readFile ./dunst/dunstrc;
   };
@@ -17,7 +19,7 @@ theme, ... }:
   programs.wlogout = {
     enable = true;
     layout = builtins.fromJSON ''${builtins.readFile ./wlogout/layout}'';
-    style =  builtins.readFile ./wlogout/style.css;
+    style = builtins.readFile ./wlogout/style.css;
   };
 
   programs.swaylock = {
@@ -28,9 +30,9 @@ theme, ... }:
   programs.wofi = {
     enable = true;
     settings = builtins.readFile ./wofi/config;
-  };  
+  };
 
-    home.file = {
+  home.file = {
     ".config/hypr" = {
       source = ./hyprpaper;
       recursive = true;
