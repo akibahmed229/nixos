@@ -1,15 +1,18 @@
 {
-    "layer": "top", 
+    "layer": "top", // Waybar at top layer
     "margin-top": 5,
     "margin-bottom": 0,
     "margin-left": 10,
     "margin-right": 10,
-    "position": "top", 
-    "height": 35, 
-    "spacing": 4, 
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 35, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
     "modules-left": ["custom/logo", "hyprland/workspaces", "custom/playerctl", "custom/playerlabel" ],
     "modules-center": [ "hyprland/window" ],
     "modules-right": [ "network", "pulseaudio", "memory", "temperature", "cpu", "clock", "tray", "custom/exit" ],
+    // Modules configuration
     "hyprland/workspaces": {
   	"format": "{name}",
   	"format-icons": {
@@ -20,7 +23,7 @@
   		"5": "",
      	},
          "persistent-workspaces": {
-               "*": 5, 
+               "*": 5, // 5 workspaces by default on every monitor
          }
     },
     "hyprland/window": {
@@ -123,6 +126,7 @@
         }
     },
     "tray": {
+        // "icon-size": 21,
         "spacing": 10
     },
     "clock": {
@@ -151,13 +155,13 @@
         "format-icons": ["", "", ""]
     },
     "backlight": {
-        "device": "acpi_video1",
+        // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
         "states": {
-             "good": 95,
+            // "good": 95,
             "warning": 30,
             "critical": 15
         },
@@ -165,14 +169,15 @@
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-         "format-good": "", 
-         "format-full": "",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
         "bat": "BAT2"
     },
     "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%)  ",
         "format-ethernet": "{ipaddr}/{cidr}  ",
         "tooltip-format": "{ifname} via {gwaddr}  ",
@@ -182,6 +187,7 @@
         "on-click": "nm-connection-editor",
     },
     "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
         "format": "{volume}%  {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
@@ -213,7 +219,8 @@
             "default": "🎜"
         },
         "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" 
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }
 
