@@ -47,6 +47,7 @@
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
     };
+
     systemPackages = with pkgs; [
       waybar
       dunst
