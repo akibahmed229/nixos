@@ -165,7 +165,7 @@
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-         "format-good": "", // An empty format will hide the module
+         "format-good": "", 
          "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
@@ -213,7 +213,7 @@
             "default": "🎜"
         },
         "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" 
     }
 }
 
