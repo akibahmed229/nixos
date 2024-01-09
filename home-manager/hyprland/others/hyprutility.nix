@@ -7,8 +7,6 @@ theme, ... }:
 
   programs.waybar = {
     enable = true;
-    settings = builtins.fromJSON ''${builtins.readFile ./waybar/config}'' ;
-    style = builtins.readFile ./waybar/style.css;
   };
   
   services.dunst = { 
@@ -34,23 +32,27 @@ theme, ... }:
 
     home.file = {
     ".config/hypr" = {
-      source = ./others/hyprpaper;
+      source = ./hyprpaper;
+      recursive = true;
+    };
+    ".config/waybar" = {
+      source = ./waybar;
       recursive = true;
     };
     ".config//libinput" = {
-      source = ./others/libinput;
+      source = ./libinput;
       recursive = true;
     };
     ".config/swappy" = {
-      source = ./others/swappy;
+      source = ./swappy;
       recursive = true;
     };
     ".config/gtk-4.0" = {
-      source = ../../themes/gtk/${theme};
+      source = ../../../themes/gtk/${theme};
       recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = ../../themes/gtk/${theme};
+      source = ../../../themes/gtk/${theme};
       recursive = true;
     };
   };
