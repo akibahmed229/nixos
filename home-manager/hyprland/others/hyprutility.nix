@@ -7,7 +7,7 @@ theme, ... }:
 
   programs.waybar = {
     enable = true;
-    settings = builtins.readFile "${builtins.fromJSON ./waybar/config}";
+    settings = builtins.fromJSON (builtins.readFile "/home/akib/flake/home-manager/hyprland/others/waybar/config") ;
     style = builtins.readFile ./waybar/style.css;
   };
   
@@ -18,7 +18,7 @@ theme, ... }:
 
   programs.wlogout = {
     enable = true;
-    layout = builtins.readFile "${builtins.fromJSON ./wlogout/layout}";
+    layout = builtins.fromJSON (builtins.readFile "/home/akib/flake/home-manager/hyprland/others/wlogout/layout");
     style =  builtins.readFile ./wlogout/style.css;
   };
 
