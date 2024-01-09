@@ -147,7 +147,7 @@
       ];
     };
 
-    extraConfig = builtins.readFile ./others/hyprland/hyprland.conf;
+    extraConfig = builtins.readFile ./others/hypr/hyprland.conf;
   };
 
   home.file = {
