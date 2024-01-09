@@ -11,7 +11,16 @@
 #               └─ default.nix *
 #
 
-{ inputs, config, lib, pkgs, unstable, hyprland, system, ... }:
+{ inputs
+, config
+, lib
+, pkgs
+, unstable
+, hyprland
+, system
+, ...
+}:
+
 {
   services = {
     xserver = {

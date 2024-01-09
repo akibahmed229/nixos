@@ -1,4 +1,13 @@
-{ config, pkgs, user, unstable, nixpkgs, lib, ... }:
+# common configuration for all machines.
+
+{ config
+, pkgs
+, user
+, unstable
+, nixpkgs
+, lib
+, ...
+}:
 
 {
   # Dual Booting using grub

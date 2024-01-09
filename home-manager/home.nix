@@ -1,4 +1,12 @@
-{ config, pkgs, user, state-version, lib, ... }:
+# common home-manager config accross all machines
+
+{ config
+, pkgs
+, user
+, state-version
+, lib
+, ...
+}:
 
 {
 

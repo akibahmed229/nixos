@@ -1,6 +1,19 @@
 # NixOS configuration with home-manager as a module in flakes
 
-{ lib, inputs, unstable, nixos, system, theme, state-version, nix-index-database, home-manager, hyprland, plasma-manager, user, ... }:
+{ lib
+, inputs
+, unstable
+, nixos
+, system
+, theme
+, state-version
+, nix-index-database
+, home-manager
+, hyprland
+, plasma-manager
+, user
+, ...
+}:
 
 {
   # Host desktop configuration ( main system)

@@ -1,6 +1,5 @@
-#
 #  Hyprland Home-manager configuration
-#
+
 #  flake.nix
 #   ├─ ./hosts
 #   │   └─ ./<host>
@@ -11,7 +10,13 @@
 #               └─ home.nix *
 #
 
-{ config, lib, pkgs, hyprland, theme, ... }:
+{ config
+, lib
+, pkgs
+, hyprland
+, theme
+, ...
+}:
 
 {
   imports =

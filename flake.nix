@@ -78,7 +78,17 @@
   };
 
   # outputs for the flake
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos, nix-index-database, home-manager, hyprland, plasma-manager, ... } @ inputs:
+  outputs =
+    { self
+    , nixpkgs
+    , nixpkgs-unstable
+    , nixos
+    , nix-index-database
+    , home-manager
+    , hyprland
+    , plasma-manager
+    , ...
+    } @ inputs:
     let
       inherit (self) outputs;
 

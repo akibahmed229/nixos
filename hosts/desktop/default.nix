@@ -1,4 +1,14 @@
-{ config, pkgs, user, unstable, inputs, lib, state-version, ... }:
+# default config files for desktop systems 
+
+{ config
+, pkgs
+, user
+, unstable
+, inputs
+, lib
+, state-version
+, ...
+}:
 
 {
   imports =
