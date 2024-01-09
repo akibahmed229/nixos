@@ -111,6 +111,7 @@
   xdg.portal = {
     # Required for flatpak with window managers and for file browsing
     enable = true;
+    wlr.enable = true;
     xdgOpenUsePortal = true;
     config = {
       common.default = [ "gtk" ];

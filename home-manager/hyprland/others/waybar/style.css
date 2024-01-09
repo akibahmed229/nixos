@@ -173,7 +173,7 @@ button {
 }
 
 #clock {
-  background-color: @success_color;
+  background-color: @accent_fg_color;
   color: #000000;
 }
 
@@ -210,7 +210,7 @@ label:focus {
 }
 
 #cpu {
-  background-color: @warning_bg_color;
+  background-color: @warning_color;
   color: @dark_5;
 }
 
@@ -286,7 +286,7 @@ label:focus {
 }
 
 #temperature {
-  background-color: @warning_bg_color;
+  background-color: @warning_color;
   color: @dark_5;
 }
 
