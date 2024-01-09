@@ -7,7 +7,7 @@ theme, ... }:
 
   programs.waybar = {
     enable = true;
-    settings = builtins.fromJSON ./waybar/config;
+    settings = builtins.readFile "${builtins.fromJSON ./waybar/config}";
     style = builtins.readFile ./waybar/style.css;
   };
   
@@ -18,7 +18,7 @@ theme, ... }:
 
   programs.wlogout = {
     enable = true;
-    layout = builtins.fromJSON ./wlogout/layout;
+    layout = builtins.readFile "${builtins.fromJSON ./wlogout/layout}";
     style =  builtins.readFile ./wlogout/style.css;
   };
 
