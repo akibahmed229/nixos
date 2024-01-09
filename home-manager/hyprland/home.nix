@@ -19,16 +19,16 @@
 }:
 
 {
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
+    "spotify"
+  ];
+
   imports =
     [ (import ../../programs/firefox/firefox.nix) ] ++
     [ (import ../../programs/spotify/spicetify.nix) ] ++
     [ (import ../../programs/discord/discord.nix) ] ++
     [ (import ../../programs/lf/lf.nix) ];
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "discord"
-    "spotify"
-  ];
 
   #imports = [(import ./others/hyprutility.nix)];
   wayland.windowManager.hyprland = {
