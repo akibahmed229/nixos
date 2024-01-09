@@ -151,8 +151,8 @@
   };
 
   home.file = {
-    ".config/hypr" = {
-      source = ./others/hyprpaper;
+    ".config/hypr/hyprpaper.conf" = {
+      source = ./others/hypr/hyprpaper.conf;
       recursive = true;
     };
     ".config/waybar" = {
