@@ -62,11 +62,11 @@
         "$mod, E, exec, thunar"
         "$mod, T, togglefloating,"
         "$mod, F, fullscreen"
-        "$mod, R, exec, wofi --show drun"
+        "$mod, R, exec, wofi -n --show drun"
         "$mod, P, pseudo," # dwindle
         "$mod, J, togglesplit," # dwindle
         "$mod, B, exec, firefox"
-        "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+        "$mod, V, exec, cliphist list | wofi -n --dmenu | cliphist decode | wl-copy"
         ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
         "$mod, L, exec, swaylock"
         "$mod SHIFT, DELETE, exec, wlogout"

@@ -53,7 +53,7 @@
     vscode
     android-tools
     android-udev-rules
-    espanso-wayland
+    #espanso-wayland
     zip
     unzip
     p7zip
