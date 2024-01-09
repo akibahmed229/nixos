@@ -7,7 +7,7 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # use the latest Linux kernel
-  #   boot.kernelPackages = pkgs.linuxPackages_latest;
+  #  boot.kernelPackages = pkgs.linuxPackages_latest;
   #  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelPackages = unstable.linuxPackages_zen;
 
@@ -32,7 +32,7 @@
       systemd.enable = true;
     };
     plymouth = {
-      enable = true;
+      enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
       theme = "breeze";
     };
   };
@@ -68,26 +68,23 @@
 
   boot.supportedFilesystems = [ "ntfs" "ntfs-3g" "btrfs" "exFAT" ];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "btrfs";
+    options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
+  };
 
-  fileSystems."/home" =
-    {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "btrfs";
+    options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
+  };
 
-  fileSystems."/nix" =
-    {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "btrfs";
+    options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
+  };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/boot";
@@ -97,13 +94,13 @@
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
     fsType = "ntfs"; # Specify the file system type
-   # options = [ "defaults" ]; # Mount options 
+    # options = [ "defaults" ]; # Mount options 
   };
 
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
     fsType = "ntfs"; # Specify the file system type
-   # options = [ "defaults" ]; # Mount options 
+    # options = [ "defaults" ]; # Mount options 
   };
 
   # Enabling samba file sharing over local network 
