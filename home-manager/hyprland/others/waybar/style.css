@@ -118,7 +118,7 @@ button {
 *    transition: all 0.3s ease-in-out;
 *      min-width: 40px;
 */
-  color: @success_color;
+  color: @accent_color;
   font-weight: bold;
   opacity: 1;
 }
@@ -150,6 +150,7 @@ button {
   margin: 4px 0px;
   color: #ffffff;
   border-radius: 15px;
+  opacity: 0.7;
   font-family:
     jetbrainsmono nerd font,
     sans-sherif;
@@ -277,7 +278,7 @@ label:focus {
 }
 
 #custom-exit {
-  color: #ffffff;
+  color: @accent_fg_color;
   font-size: 20px;
   font-weight: bold;
   margin: 0px 10px;
