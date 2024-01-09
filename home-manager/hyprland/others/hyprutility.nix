@@ -7,7 +7,7 @@ theme, ... }:
 
   programs.waybar = {
     enable = true;
-    settings = [ builtins.readFile ./waybar/config ] ;
+    settings =  builtins.readFile ./waybar/config ;
     style = builtins.readFile ./waybar/style.css;
   };
   
@@ -18,7 +18,7 @@ theme, ... }:
 
   programs.wlogout = {
     enable = true;
-    layout = [builtins.readFile ./wlogout/layout];
+    layout = builtins.readFile ./wlogout/layout;
     style =  builtins.readFile ./wlogout/style.css;
   };
 
