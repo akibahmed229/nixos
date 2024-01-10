@@ -9,8 +9,8 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": [ "custom/logo", "hyprland/workspaces", "custom/playerctl" , "custom/playerlabel" ],
-    "modules-center": [ "clock" ],
+    "modules-left": [ "clock", "hyprland/workspaces", "custom/playerctl" , "custom/playerlabel" ],
+    "modules-center": [ "hyprland/window" ],
     "modules-right": [ "pulseaudio", "memory", "temperature", "cpu",  "tray", "custom/exit" ],
     // Modules configuration
     "hyprland/workspaces": {
@@ -131,7 +131,7 @@
     },
     "clock": {
         "timezone": "Asia/Dhaka",
-        "format": "  {:%A, %B %d, %Y    %I:%M %p}",
+        "format": "  {:%B %d,   %I:%M %p}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         //"format-alt": "{:%Y-%m-%d}",
         "calendar": {
@@ -156,8 +156,8 @@
     "cpu": {
         "interval": 10,
         "format": "󰍛  {usage}%",
-        //"format-alt": "{icon0}{icon1}{icon2}{icon3}",
-        //"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "format-alt": "{icon0}{icon1}{icon2}{icon3}",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
         "on-click": "alacritty -e htop"
     },
     "memory": {
