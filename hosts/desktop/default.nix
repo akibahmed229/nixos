@@ -41,6 +41,11 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  # Default Shell zsh
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = [ pkgs.zsh ];
+  environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
@@ -199,44 +204,6 @@
   programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
   programs.command-not-found.enable = false;
 
-  # Zsh and Oh-My-Zsh setup
-  programs = {
-    zsh = {
-      enable = true;
-      shellAliases = {
-        la = "eza --icons -la  --group-directories-first";
-        ls = "eza --icons --grid --group-directories-first";
-      };
-      autosuggestions.enable = true;
-      enableBashCompletion = true;
-      syntaxHighlighting.enable = true;
-      shellInit = ''
-        source /home/${user}/flake/programs/zsh/.zshrc
-      '';
-      syntaxHighlighting.highlighters = [
-        "main"
-        "brackets"
-        "pattern"
-        "cursor"
-        "regexp"
-        "root"
-        "line"
-      ];
-      syntaxHighlighting.styles = { "alias" = "fg=magenta,bold"; };
-      autosuggestions.highlightStyle = "fg=cyan";
-      ohMyZsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "sudo"
-          "terraform"
-          "systemadmin"
-          "vi-mode"
-        ];
-        theme = "agnoster";
-      };
-    };
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

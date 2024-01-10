@@ -28,6 +28,7 @@
     [ (import ../../programs/firefox/firefox.nix) ] ++
     [ (import ../../programs/spotify/spicetify.nix) ] ++
     [ (import ../../programs/discord/discord.nix) ] ++
+    [ (import ../../programs/zsh/zsh.nix) ] ++
     [ (import ../../programs/lf/lf.nix) ];
 
   #imports = [(import ./others/hyprutility.nix)];

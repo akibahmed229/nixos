@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, 
+user
+,... }:
+
 {
   # Zsh and Oh-My-Zsh setup
   programs = {
@@ -8,7 +11,7 @@
         la = "eza --icons -la  --group-directories-first";
         ls = "eza --icons --grid --group-directories-first";
       };
-      autosuggestions.enable = true;
+      enableAutosuggestions = true;
       enableBashCompletion = true;
       syntaxHighlighting.enable = true;
       shellInit = ''
