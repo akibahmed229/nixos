@@ -7,7 +7,10 @@
 , lib
 , ...
 }:
+let
+  resurrectDirPath = "~/.config/tmux/resurrect";
 
+in
 {
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -140,7 +143,7 @@
   programs.home-manager.enable = true;
 
   # Tmux Config
-  #programs.tmux = {
+  programs.tmux = {
     enable = true;
     secureSocket = false;
     shell = "${pkgs.zsh}/bin/zsh"; # or zsh
