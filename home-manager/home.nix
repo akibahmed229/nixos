@@ -68,8 +68,8 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    ".config/alacritty" = {
-      source = ../programs/alacritty;
+    ".config/alacritty/alacritty.toml" = {
+      source = ../programs/alacritty/alacritty.toml;
       recursive = true;
     };
     ".config/OpenRGB" = {

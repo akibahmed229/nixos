@@ -60,7 +60,7 @@
     systemPackages = with pkgs; [
       waybar
       dunst
-      #kitty
+      kitty
       wofi
       alacritty
       hyprpaper
