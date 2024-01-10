@@ -9,7 +9,7 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["custom/logo", "hyprland/workspaces", "custom/playerctl", "custom/playerlabel" ],
+    "modules-left": ["custom/logo", "hyprland/workspaces", "custom/spotify" ],
     "modules-center": [ "hyprland/window" ],
     "modules-right": [ "network", "pulseaudio", "memory", "temperature", "cpu", "clock", "tray", "custom/exit" ],
     // Modules configuration
@@ -221,6 +221,19 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+    },
+    "custom/spotify": {
+        "exec": "python $HOME/.config/waybar/modules/mediaplayer.py --player spotify",
+        "format": " {}",
+        "return-type": "json",
+        "on-click": "playerctl play-pause --player spotify",
+      	"on-click-right": "playerctl next --player spotify",
+      	"on-click-middle": "playerctl previous --player spotify",
+      	"on-scroll-up": "~/.config/hypr/scripts/spotifyvolumecontrol.sh up",
+      	"on-scroll-down": "~/.config/hypr/scripts/spotifyvolumecontrol.sh down",
+      	"max-length": 25,
+        "escape": true,
+        "tooltip": true
+    },
 }
 
