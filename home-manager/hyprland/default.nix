@@ -22,6 +22,8 @@
 }:
 
 {
+  import = [(import ../../programs/tmux/tmux-service.nix)];
+
   services = {
     xserver = {
       enable = true;

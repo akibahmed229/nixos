@@ -68,8 +68,8 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    ".config/alacritty/alacritty.toml" = {
-      source = ../programs/alacritty/alacritty.toml;
+    ".config/alacritty/alacritty.yml" = {
+      source = ../programs/alacritty/alacritty.yml;
       recursive = true;
     };
     ".config/OpenRGB" = {
@@ -140,33 +140,33 @@
   programs.home-manager.enable = true;
 
   # Tmux Config
-  programs.tmux = {
-    enable = true;
-    secureSocket = false;
-    shell = "${pkgs.zsh}/bin/zsh"; # or zsh
-    plugins = with pkgs; [
-      tmuxPlugins.sensible
-      tmuxPlugins.catppuccin
-      tmuxPlugins.gruvbox
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.yank
-      tmuxPlugins.tmux-fzf
-      {
-        plugin = tmuxPlugins.resurrect;
-        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-      }
-      {
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '60' # minutes
-        '';
-      }
-    ];
-    extraConfig = ''	
-      source /home/${user}/flake/programs/tmux/tmux.conf
-      '';
-  };
+  #programs.tmux = {
+  #  enable = true;
+  #  secureSocket = false;
+  #  shell = "${pkgs.zsh}/bin/zsh"; # or zsh
+  #  plugins = with pkgs; [
+  #    tmuxPlugins.sensible
+  #    tmuxPlugins.catppuccin
+  #    tmuxPlugins.gruvbox
+  #    tmuxPlugins.vim-tmux-navigator
+  #    tmuxPlugins.yank
+  #    tmuxPlugins.tmux-fzf
+  #    {
+  #      plugin = tmuxPlugins.resurrect;
+  #      extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+  #    }
+  #    {
+  #      plugin = tmuxPlugins.continuum;
+  #      extraConfig = ''
+  #        set -g @continuum-restore 'on'
+  #        set -g @continuum-save-interval '60' # minutes
+  #      '';
+  #    }
+  #  ];
+  #  extraConfig = ''	
+  #    source /home/${user}/flake/programs/tmux/tmux.conf
+  #    '';
+  #};
 
   # NeoVim configuration
   # programs.neovim = {
