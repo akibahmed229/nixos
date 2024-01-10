@@ -14,6 +14,7 @@
         ls = "eza --icons --grid --group-directories-first";
       };
       syntaxHighlighting.enable = true;
+      enableCompletion = true;
       # shellInit = ''
       #   source /home/${user}/flake/programs/zsh/.zshrc
       # '';
@@ -45,7 +46,7 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      useTheme = "powerlevel10k_rainbow";
+      useTheme = "gruvbox";
     };
   };
 
