@@ -147,9 +147,9 @@ button {
 #scratchpad,
 #mpd {
   padding: 0px 10px;
-  margin: 4px 0px;
+  margin: 5px 0px;
   color: #ffffff;
-  border-radius: 15px;
+  border-radius: 6px;
   opacity: 0.7;
   font-family:
     jetbrainsmono nerd font,
@@ -173,8 +173,9 @@ button {
 }
 
 #clock {
-  background-color: @accent_fg_color;
-  color: #000000;
+  background-color: transparent;
+  color: @theme_text_color;
+  font-weight: bold;
 }
 
 #battery {
@@ -215,7 +216,7 @@ label:focus {
 }
 
 #memory {
-  background-color: @error_color;
+  background-color: @warning_color;
   color: @dark_5;
 }
 
@@ -238,8 +239,8 @@ label:focus {
 }
 
 #pulseaudio {
-  background-color: @accent_bg_color;
-  color: #000000;
+  background-color: @accent_fg_color;
+  color: @dark_5;
 }
 
 #pulseaudio.muted {
@@ -292,10 +293,12 @@ label:focus {
 
 #temperature.critical {
   background-color: @error_color;
+  color: @error_color;
 }
 
 #tray {
   background-color: @accent_bg_color;
+  color: @dark_5;
 }
 
 #tray > .passive {
