@@ -42,6 +42,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # Default Shell zsh
+  programs.zsh.enable = true;
+  programs.zsh.shellInit = ''
+    source /home/${user}/flake/programs/zsh/.zshrc
+  '';
+
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
   environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];

@@ -1,6 +1,7 @@
-{ pkgs, 
-user
-,... }:
+{ pkgs
+, user
+, ...
+}:
 
 {
   # Zsh and Oh-My-Zsh setup
@@ -12,11 +13,10 @@ user
         la = "eza --icons -la  --group-directories-first";
         ls = "eza --icons --grid --group-directories-first";
       };
-      enableBashCompletion = true;
       syntaxHighlighting.enable = true;
-      shellInit = ''
-        source /home/${user}/flake/programs/zsh/.zshrc
-      '';
+      # shellInit = ''
+      #   source /home/${user}/flake/programs/zsh/.zshrc
+      # '';
       syntaxHighlighting.highlighters = [
         "main"
         "brackets"
@@ -27,18 +27,25 @@ user
         "line"
       ];
       syntaxHighlighting.styles = { "alias" = "fg=magenta,bold"; };
-      autosuggestions.highlightStyle = "fg=cyan";
-      ohMyZsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "sudo"
-          "terraform"
-          "systemadmin"
-          "vi-mode"
-        ];
-        theme = "agnoster";
-      };
+      #autosuggestions.highlightStyle = "fg=cyan";
+      #oh-my-zsh = {
+      #  #enableBashCompletion = true;
+      #  enable = true;
+      #  plugins = [
+      #    "git"
+      #    "sudo"
+      #    "terraform"
+      #    "systemadmin"
+      #    "vi-mode"
+      #  ]; 
+      #  theme = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      #};
+    };
+    oh-my-posh = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      useTheme = "powerlevel10k_rainbow";
     };
   };
 
