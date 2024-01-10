@@ -138,6 +138,12 @@
     openFirewall = true;
   };
 
+  #services.plex = {
+  #  enable = true;
+  #  openFirewall = true;
+  #};
+
+
   swapDevices = [ ];
   zramSwap = {
     enable = true;

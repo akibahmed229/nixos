@@ -107,7 +107,7 @@
       # for music
       playerctl
       # color grab 
-      pywal
+      #pywal
     ];
   };
 
