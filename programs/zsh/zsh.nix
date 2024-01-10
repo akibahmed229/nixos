@@ -7,11 +7,11 @@ user
   programs = {
     zsh = {
       enable = true;
+      enableAutosuggestions = true;
       shellAliases = {
         la = "eza --icons -la  --group-directories-first";
         ls = "eza --icons --grid --group-directories-first";
       };
-      enableAutosuggestions = true;
       enableBashCompletion = true;
       syntaxHighlighting.enable = true;
       shellInit = ''
