@@ -22,7 +22,7 @@
 }:
 
 {
-  import = [(import ../../programs/tmux/tmux-service.nix)];
+  imports = [(import ../../programs/tmux/tmux-service.nix)];
 
   services = {
     xserver = {
