@@ -144,4 +144,7 @@
       "${XDG_BIN_HOME}"
     ];
   };
+
+    # Adding Nix Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }

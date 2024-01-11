@@ -287,9 +287,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "${state-version}"; # Did you read the comment?
-
-  # Adding Nix Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
 }
 
