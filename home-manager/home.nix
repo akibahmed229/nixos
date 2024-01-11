@@ -148,9 +148,9 @@ in
     secureSocket = false;
     shell = "${pkgs.zsh}/bin/zsh"; # or zsh
     plugins = with pkgs; [
-      tmuxPlugins.sensible
       tmuxPlugins.catppuccin
-      tmuxPlugins.gruvbox
+      tmuxPlugins.sensible
+     # tmuxPlugins.gruvbox
       tmuxPlugins.vim-tmux-navigator
       tmuxPlugins.yank
       tmuxPlugins.tmux-fzf
