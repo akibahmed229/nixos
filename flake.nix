@@ -30,12 +30,6 @@
     # live image builder for nixos
     nixos.url = "github:nixos/nixpkgs/23.11-beta";
 
-    # flake-programs-sqlite makes use of a mapping from git commit hashes to channel names.
-    programsdb = {
-      url = "github:wamserma/flake-programs-sqlite";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
