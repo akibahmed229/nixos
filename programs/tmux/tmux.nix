@@ -37,6 +37,7 @@ in
           # I know of with set -g @resurrect-strategy-* I decided to keep it enabled for the time being.
           set -g @resurrect-strategy-nvim 'session'
           set -g @resurrect-strategy-vim 'session'
+          set -g @resurrect-strategy-tmux 'session'
 
           set -g @resurrect-capture-pane-contents 'on'
 
