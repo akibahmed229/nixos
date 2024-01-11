@@ -145,6 +145,6 @@
     ];
   };
 
-    # Adding Nix Flakes
+  # Adding Nix Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
