@@ -44,6 +44,13 @@
       unstable.gnome.gnome-tweaks
       unstable.gnome.adwaita-icon-theme
       gnome-menus
+      xorg.xkill
+      xorg.libX11
+      xorg.libX11.dev
+      xorg.libxcb
+      xorg.libXft
+      xorg.libXinerama
+      xorg.xinit
     ];
     gnome.excludePackages = (with pkgs; [
       # Gnome ignored packages

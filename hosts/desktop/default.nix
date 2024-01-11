@@ -165,13 +165,6 @@
     libadwaita
     polkit
     #python310Packages.pygobject3
-    xorg.xkill
-    xorg.libX11
-    xorg.libX11.dev
-    xorg.libxcb
-    xorg.libXft
-    xorg.libXinerama
-    xorg.xinit
   ]) ++ (with unstable; [
     # List unstable packages here
     jetbrains.pycharm-community
