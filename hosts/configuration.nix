@@ -141,7 +141,4 @@
       "${XDG_BIN_HOME}"
     ];
   };
-  
-  
-  programs.nix-index.enable = true;
 }
