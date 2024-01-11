@@ -97,6 +97,9 @@
   # Enable ADB for Android
   programs.adb.enable = true;
 
+  programs.command-not-found.enable = false;
+  programs.nix-index.enable = true;
+
   # environment variables Setting
   environment = {
     variables = {

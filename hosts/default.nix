@@ -26,7 +26,7 @@
       ./desktop
       nix-index-database.nixosModules.nix-index
       # optional to also wrap and install comma
-      # { programs.nix-index-database.comma.enable = true; }
+      { programs.nix-index-database.comma.enable = true; }
 
       home-manager.nixosModules.home-manager
       {
@@ -37,7 +37,7 @@
           imports = [
             nix-index-database.hmModules.nix-index
             # optional to also wrap and install comma
-            # { programs.nix-index-database.comma.enable = true; }
+            { programs.nix-index-database.comma.enable = true; }
 
             # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
 
