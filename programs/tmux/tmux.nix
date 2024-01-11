@@ -1,54 +1,25 @@
-{ pkgs, ... }:
+{ pkgs
+, user
+, ...
+}:
 let
   resurrectDirPath = "~/.config/tmux/resurrect";
-  tmux-nerd-font-window-name = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-nerd-font-window-name.tmux";
-    version = "unstable-2023-08-22";
-    rtpFilePath = "tmux-nerd-font-window-name.tmux";
-    src = pkgs.fetchFromGitHub {
-      owner = "joshmedeski";
-      repo = "tmux-nerd-font-window-name";
-      rev = "c2e62d394a290a32e1394a694581791b0e344f9a";
-      sha256 = "stkhp95iLNxPy74Lo2SNes5j1AA4q/rgl+eLiZS81uA=";
-    };
-  };
 in
 {
-
+  # Tmux Config
   programs.tmux = {
     enable = true;
     secureSocket = false;
-    terminal = "screen-256color";
-    disableConfirmationPrompt = true;
-    prefix = "C-a";
-    keyMode = "vi";
-    baseIndex = 1;
-    clock24 = true;
-    sensibleOnTop = true;
-
-    # Important notice about tmux plugins and the tmux.conf that generated from
-    # this tmux.nix
-    #
-    # in general plugins may and will conflict with each other, so the order in
-    # which tmux loads them matters.  This is true when editing directly tmux.conf
-    # and same applies when putting them in the plugins list in NixOS.
-    #
-    # Specifically in my current list. The theme plugin(nord) must be included before
-    # continuum and same is true for everything that might set tmux status-right
-    # as the auto save command(set -g @continuum-save-interval '1')
-    # gets written into status-right. So everything that sets status-right would have to be loaded
-    # beforehand.
-    # Furthermore the continuum plugin must be loaded after the resurrect plugin.
-    plugins = with pkgs.tmuxPlugins; [
-      # The nord plugin or any other theme should on the top of the list
-      # of the plugins. As it writes into the status-right which breaks the
-      # set -g @continuum-save-interval for the continuum plugin.
-      nord
-
-      # This plugin needs to be loaded before continuum or else continuum, will
-      # not work.
+    shell = "${pkgs.zsh}/bin/zsh"; # or zsh
+    plugins = with pkgs; [
+      tmuxPlugins.catppuccin
+      tmuxPlugins.sensible
+      # tmuxPlugins.gruvbox
+      tmuxPlugins.vim-tmux-navigator
+      tmuxPlugins.yank
+      tmuxPlugins.tmux-fzf
       {
-        plugin = resurrect;
+        plugin = tmuxPlugins.resurrect;
         extraConfig = ''
 
           # I have tested this strategy to work with neovim but it is not enough to have
@@ -79,49 +50,6 @@ in
           # the tmux-resurrect plugin and successfully restored.
           set -g @resurrect-dir ${resurrectDirPath}
           set -g @resurrect-hook-post-save-all 'target=$(readlink -f ${resurrectDirPath}/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g" $target | sponge $target'
-        '';
-      }
-
-      # vim-tmux-navigator plugin has a dual function(although name implies only
-      # vim integration )
-      #
-      # This plugin adds smart movements between tmux panes and vim windows. By using
-      # Ctrl+h/j/k/l you will be able to move across tmux pane into pane with
-      # vim inside it and then move inside the vim windows and back seamlessly
-      # For this integration to work counterpart plugin needs to be added to vim.
-      #
-      # If the counterpart isn't installed the only functionality that will be added
-      # is the ability to move between panes using Ctr+h/j/k/l in tmux.
-      {
-        plugin = vim-tmux-navigator;
-      }
-      # The copy buffer for tmux is separate from the system one, in the past in
-      # order to sync the two there was a need to install tmux-yank but it looks like
-      # Tmux now sends the OSC52 escape code that tells the terminal(one that support this)
-      # to not display the following characters, but to copy them into the clipboard
-      # instead.
-      #
-      # The reason that this plugin is still included because it provides a quick way to copy what
-      # what is on the command line and once in copy mode to copy the PWD. I might just replace the
-      # plugin with keybindings(based on send-keys).
-      {
-        plugin = yank;
-      }
-      # For some reason this plugin by default only copy into the Tmux copy buffer
-      # and so I had to explicitly state the command to make it copy into the system
-      # clipboard as swell.
-      {
-        plugin = tmux-thumbs;
-        extraConfig = ''
-          set -g @thumbs-command 'tmux set-buffer -- {} && tmux display-message "Copied {}" && printf %s {} | xclip -i -selection clipboard'
-          set -g @thumbs-key C-y
-        '';
-      }
-      {
-        plugin = extrakto;
-        extraConfig = ''
-          set -g @extrakto_key M-y
-          set -g @extrakto_split_direction v
         '';
       }
       # a few words about @continuum-boot and @continuum-systemd-start-cmd that
@@ -156,143 +84,46 @@ in
       # If autosave option interval is not set there is a default of 15 minutes
       # and it worked for me when tested.
       {
-        plugin = continuum;
+        plugin = tmuxPlugins.continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
           set -g @continuum-save-interval '10'
         '';
       }
       {
-        plugin = tmux-nerd-font-window-name;
-        extraConfig = ''
-          set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
+        plugin = tmuxPlugins.catppuccin;
+        extraConfig = '' 
+        # capatuine theme
+        set -g @catppuccin_flavour "mocha"
+        set -g @catppuccin_window_left_separator "█"
+        set -g @catppuccin_window_right_separator "█ "
+        set -g @catppuccin_window_number_position "right"
+        set -g @catppuccin_window_middle_separator "  █"
+        
+        set -g @catppuccin_window_default_fill "number"
+        
+        set -g @catppuccin_window_current_fill "number"
+        set -g @catppuccin_window_current_text "#{pane_current_path}"
+        
+        set -g @catppuccin_status_modules_right "application session date_time"
+        set -g @catppuccin_status_left_separator  ""
+        set -g @catppuccin_status_right_separator " "
+        set -g @catppuccin_status_right_separator_inverse "yes"
+        set -g @catppuccin_status_fill "all"
+        set -g @catppuccin_status_connect_separator "no"
         '';
       }
-
-
     ];
-
-    extraConfig = ''
-      # This command is executed to address an edge case where after a fresh install of the OS no resurrect
-      # directory exist which means that the continuum plugin will not work. And so without user
-      # manually saving the first session(prfix + Ctrl+s) no resurrect-continuum will occur.
-      #
-      # And in case user does not remember to save his work for the first time and tmux daemon gets
-      # restarted next time user will try to attach, there will be no state to attach to and user will
-      # be scratching his head as to why.
-      #
-      # Saving right after fresh install on first boot of the tmux daemon with no sessions will create an
-      # empty "last" session file which might cause all kind of issues if tmux gets restarted before
-      # the user had the chance to work in it and let continuum plugin to take over and create
-      # at least one valid "snapshot" from which tmux will be able to resurrect. This is why an initial
-      # session named init-resurrect is created for resurrect plugin to create a valid "last" file for
-      # continuum plugin to work off of.
+    extraConfig = ''	
+    # Saving right after fresh install on first boot of the tmux daemon with no sessions will create an
+    # empty "last" session file which might cause all kind of issues if tmux gets restarted before
+    # the user had the chance to work in it and let continuum plugin to take over and create
+    # at least one valid "snapshot" from which tmux will be able to resurrect. This is why an initial
+    # session named init-resurrect is created for resurrect plugin to create a valid "last" file for
+    # continuum plugin to work off of.
       run-shell "if [ ! -d ~/.config/tmux/resurrect ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
 
-      # kill a session
-      bind-key X kill-session
-      # sets the length of session name
-      set -g status-left-length 30
-
-      # don't detach from tmux once last window of session is closed and instead
-      # attach to another existing session if one exist.
-      set-option -g detach-on-destroy off
-
-      # don't rename windows automatically
-      set-option -g allow-rename off
-
-      # Ensure window index numbers get reordered on delete
-      set-option -g renumber-windows on
-
-      # Set easier window split keys
-      bind-key v split-window -h
-      bind-key h split-window -v
-
-      # Enable mouse mode(tmux 2.1++)
-      setw -g mouse on
-
-      set-option -g status-position top
-
-      bind-key -r s run-shell 'tmux popup -E -w 80% -h 80% "bash tmux-sessionizer"'
-      bind-key g new-window 'lazygit; tmux kill-pane'
-
-      bind-key -r i run-shell 'tmux neww cheat-sh'
-      # Easier move of windows
-      bind-key -r Home swap-window -t - \; select-window -t -
-      bind-key -r End swap-window -t + \; select-window -t +
-
-
-      # Orders the session list by time of last access
-      # The default being to order by the index that is assigned when
-      # session was created.
-      bind S choose-tree -sZ -O time
-
-      # switch to last session
-      bind-key L switch-client -l
-
-      # Pane to window
-      unbind !
-      bind-key w break-pane
-
-      # Windows
-      set -g set-titles 'on'
-
-      set -g set-titles-string '#{pane_title}'
-
-      bind -n S-Left previous-window
-      bind -n S-Right next-window
-
-      # A more consistent(with i3wm) and ergonomic(qwerty) to focus on a pane
-      unbind z
-      bind-key f resize-pane -Z
-
-      # quick yank of the text in the current line without going into selection
-
-      # vim idiomatic selection and yanking
-      # ==================================
-      # This section is done in addition to the yanking plugins I already installed
-      # as those plugins are "one shot yank" intended to achieve something
-      # very specific while the following keybindings are intended to select and yank
-      # text the same way you will do in vim.
-      #
-      # Comparing to vim, tmux starts in INSERT mode and by executing prefix+[
-      # tmux goes into NORMAL mode and the following keybindings mimic
-      # selecting text in vim NORMAL mode.
-
-      # Go into selection and once done press Enter or y to yank
-      # -----------------
-      # Go into selection mode(vim VISUAL mode)
-      # to yank selected.
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      #
-      # Go into selection mode of line(vim VISUAL LINE mode)
-      bind-key -T copy-mode-vi V send-keys -X select-line
-      #
-      # Go into rectangle selection mode(vim VISUAL BLOCK mode)
-      bind-key -T copy-mode-vi C-v run-shell 'tmux send-keys -X rectangle-toggle; tmux send-keys -X begin-selection'
-
-      # Yanking
-      # -------
-      # This is the action that tapping the Enter key will do by default for tmux
-      # The only reason this is here is because this is how yanking is done
-      # vim.
-      # I created costume keybinding that removes \n when coping a line.
-      # not sure if it might break some flow and it requires perl and xclip.
-      # so I left the version that adds \n and has no dependencies in comment.
-      #bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-      bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "perl -pe 'chomp if eof' | tmux load-buffer - ; tmux save-buffer - | xclip -i -selection clipboard"
-      # ==================================
-
-      # Creating new windows and sessions
-      # ==================================
-      bind Enter new-window
-      bind-key -r o command-prompt -p "Name of new session:" "new-session -s '%%'"
-      # ==================================
-
-      # reload config
-      bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "~/.tmux.conf reloaded."
-
-    '';
+      source /home/${user}/flake/programs/tmux/tmux.conf
+      '';
   };
-
 }

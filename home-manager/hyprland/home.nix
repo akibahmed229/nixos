@@ -29,7 +29,7 @@
     [ (import ../../programs/spotify/spicetify.nix) ] ++
     [ (import ../../programs/discord/discord.nix) ] ++
     [ (import ../../programs/zsh/zsh.nix) ] ++
-    #    [ (import ../../programs/tmux/tmux.nix) ] ++
+    [ (import ../../programs/tmux/tmux.nix) ] ++
     [ (import ../../programs/lf/lf.nix) ];
 
   #imports = [(import ./others/hyprutility.nix)];
