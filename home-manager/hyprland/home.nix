@@ -60,7 +60,7 @@
         ## Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
         "$mod, RETURN, exec, alacritty"
         "$mod, Q, killactive,"
-        "$mod, M, exit,"
+        "$mod, DELETE, exit,"
         "$mod, E, exec, thunar"
         "$mod, T, togglefloating,"
         "$mod, F, fullscreen"
