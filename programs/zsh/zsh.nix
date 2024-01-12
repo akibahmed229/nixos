@@ -46,7 +46,7 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      useTheme = "amro";
+      useTheme = "catppuccin_mocha";
     };
   };
 
