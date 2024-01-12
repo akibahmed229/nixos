@@ -72,11 +72,12 @@
       xfce.thunar
       # for  qt and gtk
       libsForQt5.polkit-kde-agent
-      qt6Packages.qt6ct
+      #qt6Packages.qt6ct
       libsForQt5.qt5ct
       libsForQt5.qt5.qtwayland
-      qt6.qtwayland
-      lxappearance
+      libsForQt5.qtstyleplugin-kvantum
+      #qt6.qtwayland
+      #lxappearance
       nwg-look
       # for clipboard
       cliphist
