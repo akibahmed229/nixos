@@ -68,10 +68,10 @@
       hyprpaper
       preload
       networkmanagerapplet
+      # libsForQt5.polkit-kde-agent
       # mpd
       xfce.thunar
       # for  qt and gtk
-      libsForQt5.polkit-kde-agent
       #qt6Packages.qt6ct
       libsForQt5.qt5ct
       libsForQt5.qt5.qtwayland
@@ -112,6 +112,7 @@
       playerctl
       # color grab 
       #pywal
+      mission-center
     ];
   };
 
@@ -133,7 +134,7 @@
     };
     extraPortals = with pkgs;[
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
+      #xdg-desktop-portal-wlr
       xdg-desktop-portal-kde
       #xdg-desktop-portal-hyprland
     ];
@@ -162,8 +163,25 @@
     mountOnMedia = true;
   };
 
+  # polkit for authentication
   security.polkit = {
     enable = true;
   };
 
+  # A dbus session bus service that is used to bring up authentication dialogs used by polkit and gnome-keyring 
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
 }
