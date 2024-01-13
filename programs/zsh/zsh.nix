@@ -18,6 +18,15 @@
       # shellInit = ''
       #   source /home/${user}/flake/programs/zsh/.zshrc
       # '';
+      initExtra = ''
+        export LANG="en_US.UTF-8";
+        function tmux-sesssion {
+        BUFFER='tmux-sessionizer'
+            zle accept-line
+        }
+        zle -N tmux-sesssion
+        bindkey '^f' tmux-sesssion
+      '';
       syntaxHighlighting.highlighters = [
         "main"
         "brackets"
