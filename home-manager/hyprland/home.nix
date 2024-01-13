@@ -45,6 +45,8 @@
         "udiskie &" # USB Mass storage devices mounting
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
+        "kdeconnect-cli --refresh &" # KDE Connect daemon 
+        "kdeconnect-indicator &"
 
         ## app that i want to start after login
         "discord"
