@@ -96,11 +96,12 @@
       rhythmbox
       gnome.gnome-calculator
       gnome.gnome-clocks
-      # screen shot
+      # screen shot & other screen tools
       grim
       slurp
       swappy
       imagemagick
+      xwaylandvideobridge
       # Screen  lock 
       wlogout
       swaylock-effects
