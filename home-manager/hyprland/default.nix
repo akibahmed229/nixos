@@ -68,6 +68,7 @@
       hyprpaper
       preload
       networkmanagerapplet
+      ark
       # libsForQt5.polkit-kde-agent
       # mpd
       xfce.thunar
@@ -88,12 +89,12 @@
       ntfs3g
       # sound
       pavucontrol
-      # software of gnome of daily usage
-      #gnome.gnome-software
+      # software of gnome for daily usage
       gnome.eog
       evince
       gnome.gnome-weather
       rhythmbox
+      mission-center
       gnome.gnome-calculator
       gnome.gnome-clocks
       # screen shot & other screen tools
@@ -113,7 +114,6 @@
       playerctl
       # color grab 
       #pywal
-      mission-center
     ];
   };
 
