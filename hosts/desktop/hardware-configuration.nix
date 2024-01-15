@@ -75,7 +75,7 @@
     config.boot.kernelPackages.openrazer
   ];
 
-  boot.supportedFilesystems = [ "ntfs" "ntfs-3g"];
+  boot.supportedFilesystems = [ "ntfs" "ntfs-3g" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
