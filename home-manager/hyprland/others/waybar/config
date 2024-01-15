@@ -218,8 +218,8 @@
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         //"format-wifi": "󰤨  {essid}",
         //"format-ethernet": "󱘖  Wired",
-        "format-ethernet": "󱘖   {bandwidthUpBytes}   {bandwidthDownBytes}",
-        "format-wifi": "󰤨   {bandwidthUpBytes}   {bandwidthDownBytes}",
+        "format-ethernet": " {bandwidthUpBytes}   {bandwidthDownBytes}",
+        "format-wifi": " {bandwidthUpBytes}   {bandwidthDownBytes}",
         //"tooltip-format": "󱘖  {ipaddr}   {bandwidthUpBytes}   {bandwidthDownBytes}",
         //"format-linked": "󱘖  {ifname} (No IP)",
         //"format-disconnected": "  Disconnected",
