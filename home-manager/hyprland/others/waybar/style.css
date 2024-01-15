@@ -1,7 +1,7 @@
 * {
   /* `otf-font-awesome` is required to be installed for icons */
   font-family:
-    jetbrainsmono nerd font,
+    JetBrainsMono Nerd Font,
     FontAwesome,
     Roboto,
     Arial,
@@ -15,10 +15,21 @@
   padding-right: 10px;
 }
 
+/* tooltip box */
 tooltip {
-  background-color: rgba(@accent_fg_color, 0.5);
-  color: @dark_5;
+  background: @accent_fg_color;
   border-radius: 10px;
+  opacity: 0.9;
+}
+
+/* tooltip content */
+tooltip label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family:
+    JetBrainsMono Nerd Font,
+    sans-sherif;
+  color: @dark_5;
 }
 
 window#waybar {
@@ -157,7 +168,7 @@ button {
   border-radius: 16px;
   opacity: 0.9;
   font-family:
-    jetbrainsmono nerd font,
+    JetBrainsMono Nerd Font,
     sans-sherif;
 }
 
