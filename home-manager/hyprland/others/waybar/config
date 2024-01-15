@@ -11,7 +11,7 @@
     // Choose the order of the modules
     "modules-left": [ "clock", "hyprland/workspaces", "custom/playerctl" , "custom/playerlabel" ],
     "modules-center": [ "hyprland/window" ],
-    "modules-right": [ "pulseaudio", "memory", "temperature", "cpu",  "tray", "custom/exit" ],
+    "modules-right": [ "network", "pulseaudio", "memory", "temperature", "cpu",  "tray", "custom/exit" ],
     // Modules configuration
     "hyprland/workspaces": {
   	"format": "{name}",
@@ -216,12 +216,14 @@
         //"format-alt": "{ifname}: {ipaddr}/{cidr}",
 
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "󰤨  {essid}",
-        "format-ethernet": "󱘖  Wired",
-        "tooltip-format": "󱘖  {ipaddr}   {bandwidthUpBytes}   {bandwidthDownBytes}",
-        "format-linked": "󱘖  {ifname} (No IP)",
-        "format-disconnected": "  Disconnected",
-        "format-alt": "󰤨  {signalStrength}%",
+        //"format-wifi": "󰤨  {essid}",
+        //"format-ethernet": "󱘖  Wired",
+        "format-ethernet": "󱘖   {bandwidthUpBytes}   {bandwidthDownBytes}",
+        "format-wifi": "󰤨   {bandwidthUpBytes}   {bandwidthDownBytes}",
+        //"tooltip-format": "󱘖  {ipaddr}   {bandwidthUpBytes}   {bandwidthDownBytes}",
+        //"format-linked": "󱘖  {ifname} (No IP)",
+        //"format-disconnected": "  Disconnected",
+        //"format-alt": "󰤨  {signalStrength}%",
         "interval": 5,
         "on-click": "nm-connection-editor",
     },

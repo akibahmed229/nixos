@@ -229,12 +229,12 @@ label:focus {
 }
 
 #network {
-  background-color: @accent_bg_color;
-  color: #000000;
+  background-color: transparent;
+  color: @theme_text_color;
 }
 
 #network.disconnected {
-  background-color: #f53c3c;
+  color: @error_color;
 }
 
 #pulseaudio {
@@ -243,8 +243,8 @@ label:focus {
 }
 
 #pulseaudio.muted {
-  background-color: #90b1b1;
-  color: #2a5c45;
+  background-color: @warning_color;
+  color: @theme_text_color;
 }
 
 #wireplumber {
@@ -253,7 +253,7 @@ label:focus {
 }
 
 #wireplumber.muted {
-  background-color: #f53c3c;
+  background-color: @error_color;
 }
 
 #custom-media {
