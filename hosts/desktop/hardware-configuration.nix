@@ -22,7 +22,7 @@
 
   boot.kernelParams = [
     "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
-    "nohibernate" # Disable hibernation
+    "hibernate=no" # Disable hibernation
     "intel_iommu=on" # Enable IOMMU 
     "acpi_backlight=vendor" # Fix backlight control 
     "acpi_osi=Linux" # Fix backlight control 
@@ -75,7 +75,7 @@
     config.boot.kernelPackages.openrazer
   ];
 
-  boot.supportedFilesystems = [ "ntfs" "ntfs-3g" "btrfs" "exFAT" ];
+  boot.supportedFilesystems = [ "ntfs" "ntfs-3g"];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
@@ -103,13 +103,13 @@
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
     fsType = "ntfs"; # Specify the file system type
-    options = [ "defaults,rw" ]; # Mount options 
+    options = [ "rw" ]; # Mount options 
   };
 
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
     fsType = "ntfs"; # Specify the file system type
-    options = [ "defaults,rw" ]; # Mount options 
+    options = [ "rw" ]; # Mount options 
   };
 
   # Enabling samba file sharing over local network 
