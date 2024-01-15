@@ -1,24 +1,5 @@
-#  Can be run with "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-#  Can be run on fresh install "$ nixos-install --flake github:akibahmed229/nixos/#<host>
-
-# Structure of the flake
-#├── flake.nix
-#├── home-manager
-#│   ├── hyprland
-#│      ├── default.nix 
-#│      ├── home.nix 
-#│      ├── /others 
-#├── hosts
-#│   ├── configuration.nix
-#│   ├── default.nix
-#│   ├── desktop
-#│   │   ├── default.nix
-#│   │   └── hardware-configuration.nix
-#│   └── virt
-#├── programs
-#└── themes
 {
-  description = "My NixOS configuration";
+  description = "Akib | NixOS Configuration";
 
   # inputs for the flake
   inputs = {
@@ -29,7 +10,6 @@
 
     # live image builder for nixos
     nixos.url = "github:nixos/nixpkgs/23.11-beta";
-
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -52,7 +32,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
     # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports list in ./hosts/default.nix
     plasma-manager = {
       url = "github:pjones/plasma-manager";
@@ -60,13 +39,11 @@
       inputs.home-manager.follows = "nixpkgs";
     };
 
-
     # firefox-addons is a collection of Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
@@ -85,11 +62,11 @@
     } @ inputs:
     let
       inherit (self) outputs;
-
       # The system to build.
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       state-version = "23.11";
+
       # Supported systems for your flake packages, shell, etc.
       systems = [
         "aarch64-linux"
@@ -126,7 +103,9 @@
       # Other options beside 'user' include 'nixpkgs-fmt'
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
-      # NixOS configuration
+      # NixOS configuration with flake and home-manager as module
+      #  Accessible through "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
+      #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
       nixosConfigurations = (
         import ./hosts {
           # Imports ./hosts/default.nix

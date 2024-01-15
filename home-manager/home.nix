@@ -69,19 +69,19 @@
     # '';
 
     ".config/alacritty/alacritty.yml" = {
-      source = ../programs/alacritty/alacritty.yml;
+      source = ../modules/predefiend/home-manager/alacritty/alacritty.yml;
       recursive = true;
     };
     ".config/OpenRGB" = {
-      source = ../programs/OpenRGB;
+      source = ../modules/predefiend/home-manager/OpenRGB;
       recursive = true;
     };
     ".config/neofetch" = {
-      source = ../programs/neofetch;
+      source = ../modules/predefiend/home-manager/neofetch;
       recursive = true;
     };
     ".ssh" = {
-      source = ../programs/ssh;
+      source = ../modules/predefiend/home-manager/ssh;
       recursive = true;
     };
   };

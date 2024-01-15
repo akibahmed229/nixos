@@ -14,10 +14,11 @@
   imports =
     # Include the results of the hardware scan.
     [ (import ./hardware-configuration.nix) ] ++
-    #    [(import ../../programs/flatpak/flatpak.nix)]++
+    [ (import ../../home-manager/hyprland/default.nix) ]++ # uncomment to use Hyprland
     # [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
-    [ (import ../../home-manager/hyprland/default.nix) ]; # uncomment to use Hyprland
-  #    [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
+    # [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
+    # [(import ../../modules/predefiend/nixos/flatpak/flatpak.nix)]++
+    [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
 
 
   # Setting For OpenRGB
@@ -43,9 +44,9 @@
   nixpkgs.config.allowUnfree = true;
   # Default Shell zsh
   programs.zsh.enable = true;
-  programs.zsh.shellInit = ''
-    source /home/${user}/flake/programs/zsh/.zshrc
-  '';
+  #programs.zsh.shellInit = ''
+  #  source /home/${user}/flake/modules/predefiend/home-manager/zsh/zshrc
+  #'';
 
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
@@ -61,6 +62,7 @@
     cava
     neofetch
     vscode
+    ripgrep
     android-tools
     android-udev-rules
     #espanso-wayland
