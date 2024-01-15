@@ -4,7 +4,7 @@
 
 <h2 align="center">Akib | NixOS Config</h2>
 
-# Current System Preview
+## Current System Preview
 
 ![my current setup](public/preview/hyprland.png)
 
