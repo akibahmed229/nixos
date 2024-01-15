@@ -18,7 +18,7 @@
       # shellInit = ''
       # '';
       initExtra = ''
-        source /home/${user}/flake/modules/prefefiend/home-manager/zsh/.zshrc
+        source /home/${user}/flake/modules/predefiend/home-manager/zsh/.zshrc
         export LANG="en_US.UTF-8";
         function tmux-sesssion {
         BUFFER='tmux-sessionizer'
