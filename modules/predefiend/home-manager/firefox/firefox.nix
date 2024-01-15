@@ -2,6 +2,19 @@
 { pkgs, inputs, lib, ... }:
 
 {
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = "brave-browser.desktop";
+    "x-scheme-handler/http" = "firefox.desktop";
+    "x-scheme-handler/https" = "firefox.desktop";
+    "x-scheme-handler/about" = "firefox.desktop";
+    "x-scheme-handler/unknown" = "firefox.desktop";
+  };
+
+  home.sessionVariables = {
+    DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+  };
+
+
   programs.firefox = {
     enable = true;
     profiles.akib = {
