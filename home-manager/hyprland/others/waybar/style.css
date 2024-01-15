@@ -292,7 +292,7 @@ label:focus {
 
 #temperature.critical {
   background-color: @error_color;
-  color: @error_color;
+  color: @dark_5;
 }
 
 #tray {
