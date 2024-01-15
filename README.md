@@ -4,12 +4,16 @@
 
 <h2 align="center">Akib | NixOS Config</h2>
 
+# Current System Preview
+
+[./public/preview/hyprland.png]
 
 ## Table of Contents
 
 1. [NixOS Btrfs Installation Guide](#1-btrfs-installation-my-version-of-nixos)
-    1. [Prerequisites](#installation-prerequisites)
-    2. [Installation Steps](#installation-steps)
+
+   1. [Prerequisites](#installation-prerequisites)
+   2. [Installation Steps](#installation-steps)
 
 2. [FAQ](#2-faq)
 3. [File Structure](#3-file-structure)
@@ -34,6 +38,7 @@ Open a terminal and execute the following command to partition the disk:
 ```bash
 fdisk /dev/sdx
 ```
+
 create gpt label with two partion first one for root,home,nix & second one for efi boot pertion
 
 2. **Format Partitions and Create Subvolumes**
@@ -78,11 +83,10 @@ Congratulations! You have successfully installed NixOS with a Btrfs filesystem. 
 
 Remember to replace `/dev/sdX` with the appropriate disk identifier for your system.
 
-
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
 
-
 # 2. FAQ
+
 - Where can I learn about everything Nix?
   - Nix and NixOS
     - [Website](https://nixos.org/)
@@ -112,13 +116,14 @@ For more information about NixOS and its configuration options, refer to the off
     - [Mini-Wiki](https://github.com/LnL7/nix-darwin/wiki)
 
 # 3. File Structure
+
 - Flake.nix : Main flake file for defining the system configuration
-    - home-manager : Home manager configuration files && desktop environment configuration files
-    - hosts : Host specific configuration files
-    - programs : Program specific configuration files
-    - public : Basicly my wallpaper folder
-    - themes : GTK and QT themes
-- flake.lock : Lock file for the flake 
+  - home-manager : Home manager configuration files && desktop environment configuration files
+  - hosts : Host specific configuration files
+  - programs : Program specific configuration files
+  - public : Basicly my wallpaper folder
+  - themes : GTK and QT themes
+- flake.lock : Lock file for the flake
 - devShell/flake.nix : Flake file where I define my dev shell
 - pkgs/flake.nix : Flake file where I define my nix derivation / custom packages
 - nix-update-input/flake.nix : Flake to update the nixpkgs input
