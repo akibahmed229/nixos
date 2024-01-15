@@ -6,7 +6,7 @@
 
 # Current System Preview
 
-[[./public/preview/hyprland.png]]
+![my current setup](public/preview/hyprland.png)
 
 ## Table of Contents
 
