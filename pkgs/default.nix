@@ -5,6 +5,6 @@ pkgs: {
 
   custom_sddm = pkgs.callPackage ./sddm/sddm.nix { };
 
-  nix-update-input = pkgs.callPackage ./nix-update-input/updateInput.nix { };
+  nix-update-input = pkgs.callPackage ./nix-update-input/nix-update-input.nix { };
 
 }
