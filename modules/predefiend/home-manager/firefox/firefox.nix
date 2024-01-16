@@ -1,9 +1,9 @@
 # nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
-{ pkgs, inputs, lib, ... }:
+{ pkgs, user, inputs, lib, ... }:
 
 {
   xdg.mimeApps.defaultApplications = {
-    "text/html" = "brave-browser.desktop";
+    "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
     "x-scheme-handler/https" = "firefox.desktop";
     "x-scheme-handler/about" = "firefox.desktop";
@@ -15,7 +15,7 @@
 
   programs.firefox = {
     enable = true;
-    profiles.akib = {
+    profiles.${user} = {
 
       search.engines = {
         "Nix Packages" = {
