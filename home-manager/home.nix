@@ -35,6 +35,7 @@
     gruvbox-dark-gtk
     gruvbox-dark-icons-gtk
     alacritty
+    hwinfo
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
