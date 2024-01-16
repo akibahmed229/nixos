@@ -45,6 +45,7 @@
         "udiskie &" # USB Mass storage devices mounting
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
+        "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp " # Loads my RGB light
         "kdeconnect-cli --refresh &" # KDE Connect daemon 
         "kdeconnect-indicator &"
 
@@ -53,7 +54,6 @@
         "firefox"
         "spotify"
         "alacritty"
-        "openrgb"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
