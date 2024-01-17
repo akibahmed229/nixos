@@ -16,7 +16,7 @@
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
     };
-    grub = lib.mkDefault {
+    grub = {
       enable = true;
       theme = (pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "Yo, sleek operator!"; });
       # splashImage = ../public/wallpaper/nixos.png;
@@ -26,7 +26,7 @@
       configurationLimit = 5; # Store number of config 
     };
 
-    timeout = lib.mkDefault 3; # Boot Timeout
+    timeout = 3; # Boot Timeout
   };
 
   # networking options
