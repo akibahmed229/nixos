@@ -21,7 +21,7 @@
     inherit system;
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
-      "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
+      # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
 
       # configuration of nixos 
       ./configuration.nix

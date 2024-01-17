@@ -26,7 +26,7 @@
       configurationLimit = 5; # Store number of config 
     };
 
-    timeout = 3; # Boot Timeout
+    timeout = lib.mkDefault 3; # Boot Timeout
   };
 
   # networking options
