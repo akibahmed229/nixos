@@ -16,7 +16,7 @@
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
     };
-    grub = {
+    grub = lib.mkDefault {
       enable = true;
       theme = (pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "Yo, sleek operator!"; });
       # splashImage = ../public/wallpaper/nixos.png;
