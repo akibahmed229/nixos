@@ -72,7 +72,7 @@
         "$mod, B, exec, firefox"
         "$mod, V, exec, cliphist list | wofi -n --dmenu | cliphist decode | wl-copy"
         ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
-        "$mod, L, exec, swaylock"
+        "$mod SHIFT, L, exec, swaylock"
         "$mod SHIFT, DELETE, exec, wlogout"
 
         # Move focus with mainMod + arrow keys
