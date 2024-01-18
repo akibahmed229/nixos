@@ -209,8 +209,14 @@
   };
 
   # List services that you want to enable:
-  # Enabling docker
-  virtualisation.docker.enable = true;
+  # Enabling docker  
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
   # Enable WayDroid
   virtualisation.waydroid.enable = true;
   # Enable Flatpack
