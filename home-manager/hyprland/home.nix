@@ -14,6 +14,7 @@
 , lib
 , pkgs
 , hyprland
+, inputs ? {}
 , theme
 , ...
 }:
@@ -35,6 +36,9 @@
   #imports = [(import ./others/hyprutility.nix)];
   wayland.windowManager.hyprland = {
     enable = true;
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+    ];
     xwayland = { enable = true; };
     settings = {
       # Execute your favorite apps at launch
