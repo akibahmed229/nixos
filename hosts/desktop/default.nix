@@ -212,10 +212,10 @@
   # Enabling docker  
   virtualisation.docker = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
+    #rootless = {
+    #  enable = true;
+    #  setSocketVariable = true;
+    #};
   };
   # Enable WayDroid
   virtualisation.waydroid.enable = true;
