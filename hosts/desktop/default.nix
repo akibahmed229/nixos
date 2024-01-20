@@ -114,6 +114,7 @@
     spice-protocol
     win-virtio
     win-spice
+    virtiofsd
     whatsapp-for-linux
     telegram-desktop
     btop
@@ -232,6 +233,7 @@
   };
 
   # Enable virtualisation
+  # <binary path="/run/current-system/sw/bin/virtiofsd"/> # virtiofsd binary path for virt-manager add this in virt-manager FileSystem Share
   virtualisation = {
     libvirtd = {
       enable = true;
