@@ -14,7 +14,7 @@
 , lib
 , pkgs
 , hyprland
-, inputs ? {}
+, inputs ? { }
 , theme
 , ...
 }:
