@@ -24,6 +24,7 @@
     "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
     "hibernate=no" # Disable hibernation
     "intel_iommu=on" # Enable IOMMU 
+    "iommu=pt"
     "acpi_backlight=vendor" # Fix backlight control 
     "acpi_osi=Linux" # Fix backlight control 
     "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power 
