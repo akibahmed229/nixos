@@ -87,6 +87,7 @@
     python311Full
     nodejs_20
     yarn
+    docker-compose
     flatpak
     appimage-run
     bleachbit
