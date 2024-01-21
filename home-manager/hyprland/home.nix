@@ -141,10 +141,10 @@
         "workspace 5,virt-manager"
 
         # Window opacity rule
-        "opacity 1.0 override 0.9 override,^(firefox)$"
-        "opacity 1.0 override 0.9 override,^(virt-manager)$"
+        #"opacity 1.0 override 0.9 override,^(firefox)$"
+        #"opacity 1.0 override 0.9 override,^(virt-manager)$"
         "opacity 1.0 override 0.9 override,^(vlc)$"
-        "opacity 1.0 override 0.9 override,^(steam)$"
+        #"opacity 1.0 override 0.9 override,^(steam)$"
 
         # Floating window rule
         "float,^(pavucontrol)$"
