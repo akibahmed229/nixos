@@ -116,6 +116,7 @@
     win-virtio
     win-spice
     virtiofsd
+    virglrenderer
     whatsapp-for-linux
     telegram-desktop
     btop
