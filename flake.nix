@@ -99,11 +99,11 @@
     in
     {
       # Accessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
 
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'user' include 'nixpkgs-fmt'
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
+      formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.nixpkgs-fmt);
 
       # NixOS configuration with flake and home-manager as module
       #  Accessible through "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
