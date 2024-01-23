@@ -29,7 +29,7 @@
       xkbOptions = "eorsign:e";
       displayManager = {
         sddm.enable = true;
-        sddm.theme = "${import ../../pkgs/sddm/sddm.nix {inherit pkgs; }}";
+        sddm.theme = "${pkgs.callPackage ../../pkgs/sddm/sddm.nix { }}";
       };
     };
   };
