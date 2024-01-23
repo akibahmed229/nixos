@@ -102,7 +102,7 @@
       packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
 
       # Formatter for your nix files, available through 'nix fmt'
-      # Other options beside 'user' include 'nixpkgs-fmt'
+      # Other options beside 'alejandra' include 'nixpkgs-fmt'
       formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.nixpkgs-fmt);
 
       # NixOS configuration with flake and home-manager as module
