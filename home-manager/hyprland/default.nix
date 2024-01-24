@@ -156,6 +156,7 @@
   # To auto mount usb and other useb devices pluged in 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
+  services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2 = {
     enable = true;
