@@ -7,4 +7,6 @@ pkgs: {
 
   nix-update-input = pkgs.callPackage ./nix-update-input { };
 
+  obs-zoom-to-mouse = pkgs.callPackage ./obs-studio-plugins/obs-zoom-to-mouse.nix { };
+
 }
