@@ -1,42 +1,22 @@
 { lib, pkgs ? import <nixpkgs> { }, ... }:
 
-stdenv.mkDerivation rec {
-  pname = " obs-zoom-to-mouse";
-  version = "1.0.1";
+pkgs.stdenv.mkDerivation rec {
+  pname = "obs-zoom-to-mouse";
+  version = "v1.0.1";
 
-  src = fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "BlankSourceCode";
     repo = "obs-zoom-to-mouse";
     rev = version;
-    hash = "sha256-rpZ/vR9QbWgr8n6LDv6iTRsKXSIDGy0IpPu1Uatb0zw=";
+    sha256 = "sha256-CBuN2GrEqyEoH7kQ+kIFGW9H86zjUlZLhvrHSIh957M=";
   };
 
-  nativeBuildInputs = [ cmake ];
+  buildInputs = with pkgs; [ obs-studio ];
 
-  buildInputs = [
-    alsa-lib
-    asio
-    curl
-    libremidi
-    obs-studio
-    opencv
-    procps
-    qtbase
-    websocketpp
-    xorg.libXScrnSaver
-  ];
-
-  dontWrapQtApps = true;
-
-  postUnpack = ''
-    cp -r ${libremidi.src}/* $sourceRoot/deps/libremidi
-    chmod -R +w $sourceRoot/deps/libremidi
-  '';
-
-  postInstall = ''
-    mkdir $out/lib $out/share
-    mv $out/obs-plugins/64bit $out/lib/obs-plugins
-    mv $out/data $out/share/obs
+  installPhase = ''
+    mkdir $out
+    cp -r obs-zoom-to-mouse.lua "$out/"
+    cp -r $out ${pkgs.obs-studio}/share/obs/obs-plugins/frontend-tools/scripts
   '';
 
   meta = {
