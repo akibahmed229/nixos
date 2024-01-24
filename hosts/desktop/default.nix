@@ -91,7 +91,14 @@
     flatpak
     appimage-run
     bleachbit
-    obs-studio
+    #obs-studio
+    (pkgs.wrapOBS {
+      plugins = (with pkgs.obs-studio-plugins; [
+        obs-teleport
+        advanced-scene-switcher
+        #(callPackage ../../pkgs/obs-studio-plugins/obs-zoom-to-mouse.nix { })
+      ]);
+    })
     gimp
     libsForQt5.kdenlive
     inkscape
