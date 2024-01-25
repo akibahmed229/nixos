@@ -6,7 +6,7 @@
     Roboto,
     Arial,
     sans-serif;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 #window {
@@ -24,7 +24,7 @@ tooltip {
 
 /* tooltip content */
 tooltip label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
   font-family:
     JetBrainsMono Nerd Font,
@@ -33,10 +33,10 @@ tooltip label {
 }
 
 window#waybar {
-  background: shade(@theme_bg_color, 0.8);
+  background: shade(@theme_bg_color, 0.7);
   border-bottom: 2px solid @unfocused_borders;
   color: @theme_text_color;
-  transition-property: background-color;
+  transition-property: background-color, border-bottom-color, opacity;
   transition-duration: 0.5s;
   transition-timing-function: ease-in-out;
   border-radius: 20px;
@@ -107,7 +107,7 @@ button {
     JetBrainsMono Nerd Font,
     sans-sherif;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 12px;
   padding: 0px 5px;
   margin: 4px 0px;
   opacity: 0.8;
@@ -163,7 +163,7 @@ button {
 #scratchpad,
 #mpd {
   padding: 0px 10px;
-  margin: 5px 0px;
+  margin: 8px 0px;
   color: #ffffff;
   border-radius: 16px;
   opacity: 0.9;
@@ -289,14 +289,14 @@ label:focus {
 
 #custom-logo {
   color: #458588;
-  font-size: 22px;
+  font-size: 18px;
   margin: 0px 10px;
   font-weight: bold;
 }
 
 #custom-exit {
   color: @accent_fg_color;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin: 0px 10px;
   margin-right: 15px;
@@ -344,8 +344,6 @@ label:focus {
   border-radius: 16px;
   /*border-left: solid 1px #282738;*/
   /*border-right: solid 1px #282738;*/
-  margin-top: 5px;
-  margin-bottom: 5px;
   margin-left: 0px;
   margin-left: 5px;
   font-weight: bold;
@@ -361,8 +359,6 @@ label:focus {
   border-radius: 16px;
   /*border-left: solid 1px #282738;*/
   /*border-right: solid 1px #282738;*/
-  margin-top: 5px;
-  margin-bottom: 5px;
   font-weight: normal;
   font-style: normal;
 }
