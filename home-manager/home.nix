@@ -137,6 +137,14 @@
     EDITOR = "nvim";
   };
 
+  # Create XDG Dirs
+  xdg = {
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
