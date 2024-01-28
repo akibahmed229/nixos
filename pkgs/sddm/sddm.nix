@@ -1,11 +1,11 @@
 { pkgs }:
 
 let
-  imgLink = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nixos.png";
+  imgLink = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/Photo-of-Valley.jpg";
 
   image = pkgs.fetchurl {
     url = imgLink;
-    sha256 = "sha256-QcY0x7pE8pKQy3At81/OFl+3CUAbx0K99ZHk85QLSo0=";
+    sha256 = "sha256-86ja7yfSdMAaFFdfDqQS8Yq5yjZjXPMLTIgExcnzbXc=";
   };
 in
 pkgs.stdenv.mkDerivation {
