@@ -69,7 +69,10 @@
       ark
       # libsForQt5.polkit-kde-agent
       # mpd
+      # For file manager
       xfce.thunar
+      xfce.tumbler
+      xfce.tumbler-thumbnailers
       # for  qt and gtk
       #qt6Packages.qt6ct
       libsForQt5.qt5ct
