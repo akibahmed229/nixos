@@ -48,6 +48,11 @@
     };
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+    # secret management for nixos
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # outputs for the flake
