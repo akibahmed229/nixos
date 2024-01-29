@@ -29,7 +29,7 @@
       enable = true;
       shellInit = ''
         	#xcompmgr &
-        	picom &
+        	#picom &
       '';
       ohMyZsh = {
         enable = true;
