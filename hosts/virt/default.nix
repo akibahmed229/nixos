@@ -17,6 +17,10 @@
     #  wget
   ];
 
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = [ pkgs.zsh ];
+  environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
+
   programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
   programs.command-not-found.enable = false;
 
