@@ -44,7 +44,7 @@
       # See https://wiki.hyprland.org/Configuring/Monitors/
       #monitor=,preferred,auto,auto 
       monitor = [
-      ",1920x1080@75,auto,1"
+        ",1920x1080@75,auto,1"
       ];
 
       # Execute your favorite apps at launch
