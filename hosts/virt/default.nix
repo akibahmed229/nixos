@@ -27,6 +27,10 @@
   programs = {
     zsh = {
       enable = true;
+      shellInit = ''
+        	xcompmgr &
+        	picom &
+      '';
       ohMyZsh = {
         enable = true;
         plugins = [
