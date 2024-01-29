@@ -22,8 +22,8 @@
 	xwallpaper --zoom $wall
 	wal -c
 	wal -i $wall
-	xcompmgr &
-	picom &
+	#xcompmgr &
+	#picom &
 	slstatus &
   '';
 

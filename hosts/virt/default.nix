@@ -28,7 +28,7 @@
     zsh = {
       enable = true;
       shellInit = ''
-        	xcompmgr &
+        	#xcompmgr &
         	picom &
       '';
       ohMyZsh = {
