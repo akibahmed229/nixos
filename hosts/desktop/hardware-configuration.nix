@@ -78,6 +78,11 @@
 
   boot.supportedFilesystems = [ "ntfs" "ntfs-3g" ];
 
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+  };
+
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
     fsType = "btrfs";
