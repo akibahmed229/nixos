@@ -78,27 +78,27 @@
         "$mod, F, fullscreen"
         "$mod, R, exec, wofi -n --show drun"
         "$mod, P, pseudo," # dwindle
-        "$mod SHIFT, J, togglesplit," # dwindle
+        "$mod ALT, J, togglesplit," # dwindle
         "$mod, B, exec, firefox"
         "$mod, V, exec, cliphist list | wofi -n --dmenu | cliphist decode | wl-copy"
         ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
-        "$mod SHIFT, L, exec, swaylock"
+        "$mod ALT, L, exec, swaylock"
         "$mod SHIFT, DELETE, exec, wlogout"
 
-        # Move focus with mainMod + arrow keys
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
+        # Move focus with mainMod + ctrl + (h,j,k,l) keys
+        "$mod CTRL, h, movefocus, l"
+        "$mod CTRL, l, movefocus, r"
+        "$mod CTRL, k, movefocus, u"
+        "$mod CTRL, j, movefocus, d"
         # Scroll through existing workspaces with mainMod + scroll
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
 
         # window 
-        "$mod SHIFT, right, resizeactive, 100 0"
-        "$mod SHIFT, left, resizeactive, -100 0"
-        "$mod SHIFT, up, resizeactive, 0 -100"
-        "$mod SHIFT, down, resizeactive, 0 100"
+        "$mod SHIFT, l, resizeactive, 100 0"
+        "$mod SHIFT, h, resizeactive, -100 0"
+        "$mod SHIFT, k, resizeactive, 0 -100"
+        "$mod SHIFT, j, resizeactive, 0 100"
         "$mod, l, movewindow, r"
         "$mod, h, movewindow, l"
         "$mod, k, movewindow, u"
