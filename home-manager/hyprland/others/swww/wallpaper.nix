@@ -2,7 +2,7 @@
 
 pkgs.writeShellScriptBin "wallpaper" ''
   # Get the selected image path using wofi
-  image_path=$(ls ~/flake/public/wallpaper | ${pkgs.wofi}/bin/wofi -n --dmenu -w 1 -i -p "Select Wallpaper" | awk '{print "public/wallpaper/"$1}')
+  image_path=$(ls ~/flake/public/wallpaper | ${pkgs.wofi}/bin/wofi -n --dmenu -w 2 -i -p "Select Wallpaper" | awk '{print "public/wallpaper/"$1}')
 
   # Check if the user selected a valid image path
   if [ -z "$image_path" ]; then
