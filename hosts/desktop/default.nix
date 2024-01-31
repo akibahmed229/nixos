@@ -102,6 +102,7 @@
     })
     gimp
     libsForQt5.kdenlive
+    glaxnimate
     inkscape
     handbrake
     audacity
