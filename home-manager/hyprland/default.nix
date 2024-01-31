@@ -15,6 +15,7 @@
 , config
 , lib
 , pkgs
+, user
 , unstable
 , hyprland
 , system
@@ -29,6 +30,11 @@
       xkbOptions = "eorsign:e";
       displayManager = {
         sddm.enable = true;
+        sddm.settings = {
+          General = {
+            background = "/home/${user}/.cache/swww/Wallpaper";
+          };
+        };
         sddm.theme = "${pkgs.callPackage ../../pkgs/sddm/sddm.nix { }}";
       };
     };

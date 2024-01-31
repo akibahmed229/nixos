@@ -9,7 +9,7 @@ datestr=%a, %e of %B
 #screenshots
 
 # Add an image as a background 
-image=~/flake/public/wallpaper/Photo-of-Valley.jpg
+image=~/.cache/swww/Wallpaper
 
 # Fade in time
 fade-in=1

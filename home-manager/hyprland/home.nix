@@ -81,13 +81,13 @@
         "$mod, E, exec, thunar"
         "$mod, T, togglefloating,"
         "$mod, F, fullscreen"
-        "$mod, R, exec, wofi -n --show drun"
+        ''$mod, R, exec, wofi -n --show drun -p "Run App"''
         "$mod, P, pseudo," # dwindle
         "$mod ALT, J, togglesplit," # dwindle
         "$mod, B, exec, firefox"
-        "$mod, V, exec, cliphist list | wofi -n --dmenu | cliphist decode | wl-copy"
+        ''$mod, V, exec, cliphist list | wofi -n --dmenu -p "Copy Text" | cliphist decode | wl-copy''
         ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
-        "$mod, S, exec, wallpaper"
+        "$mod, W, exec, wallpaper"
         "$mod ALT, L, exec, swaylock"
         "$mod SHIFT, DELETE, exec, wlogout"
 

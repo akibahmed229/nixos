@@ -10,6 +10,9 @@ pkgs.writeShellScriptBin "wallpaper" ''
       exit 1
   fi
 
+  # copy the image to cache folder and save the img as Wallpaper
+  cp ~/flake/$image_path ~/.cache/swww/Wallpaper
+
   # Use the selected image path with swww command
   ${pkgs.swww}/bin/swww img ~/flake/$image_path  --transition-step 2 --transition-fps 60 --transition-type right
 ''
