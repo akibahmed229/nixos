@@ -1,4 +1,4 @@
-{ pkgs
+{ pkgs ? import <nixpkgs> {}
 , imgLink ? { url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/Photo-of-Valley.jpg"; sha256 = "sha256-86ja7yfSdMAaFFdfDqQS8Yq5yjZjXPMLTIgExcnzbXc="; }
 , ...
 }:
