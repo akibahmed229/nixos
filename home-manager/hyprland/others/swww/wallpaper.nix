@@ -14,6 +14,6 @@ pkgs.writeShellScriptBin "wallpaper" ''
   cp ~/flake/$image_path ~/.cache/swww/Wallpaper
 
   # Use the selected image path with swww command
-  ${pkgs.swww}/bin/swww img ~/flake/$image_path  --transition-step 2 --transition-fps 60 --transition-type right
+  ${pkgs.swww}/bin/swww img ~/flake/$image_path  --transition-step 2 --transition-fps 75 --transition-type right
 ''
 
