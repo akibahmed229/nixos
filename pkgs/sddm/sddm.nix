@@ -32,8 +32,7 @@ pkgs.stdenv.mkDerivation {
     cp -R ./* $out/
     cd $out/
     rm Background.jpg
-    cp -r ${image} new.jpg
-    cp -r new.jpg $out/Background.jpg
+    cp -r ${image} $out/Background.jpg
   '';
 
   meta = with pkgs.lib; {
