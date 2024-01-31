@@ -22,7 +22,7 @@ pkgs.stdenv.mkDerivation rec {
   meta = {
     description = "An OBS lua script to zoom a display-capture source to focus on the mouse";
     homepage = "https://github.com/BlankSourceCode/obs-zoom-to-mouse";
-    maintainers = with lib.maintainers; [ BlankSourceCode ];
+    maintainers = with lib.maintainers; [ akibahmed229 ];
     platforms = lib.platforms.linux;
   };
 }
