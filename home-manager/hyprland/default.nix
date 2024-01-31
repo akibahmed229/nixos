@@ -63,7 +63,7 @@
       kitty
       wofi
       alacritty
-      hyprpaper
+      #hyprpaper
       preload
       networkmanagerapplet
       ark
@@ -98,6 +98,7 @@
       gnome.gnome-calculator
       gnome.gnome-clocks
       # screen shot & other screen tools
+      swww
       grim
       slurp
       swappy

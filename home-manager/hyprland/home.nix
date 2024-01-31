@@ -33,6 +33,10 @@
     [ (import ../../modules/predefiend/home-manager/tmux/tmux.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/lf/lf.nix) ];
 
+  home.packages = with pkgs; [
+    (callPackage ./others/swww/walpapper.nix { })
+  ];
+
   #imports = [(import ./others/hyprutility.nix)];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -50,7 +54,8 @@
       # Execute your favorite apps at launch
       exec-once = [
         "waybar"
-        "hyprpaper"
+        #"hyprpaper"
+        "swww init"
         "nm-applet --indicator" # simple network manager indicator
         "udiskie &" # USB Mass storage devices mounting
         "wl-paste --type text --watch cliphist store" #Stores only text data
@@ -82,6 +87,7 @@
         "$mod, B, exec, firefox"
         "$mod, V, exec, cliphist list | wofi -n --dmenu | cliphist decode | wl-copy"
         ''$mod, Print, exec, grim -g "$(slurp)" - | swappy -f -''
+        "$mod, S, exec, wallpaper"
         "$mod ALT, L, exec, swaylock"
         "$mod SHIFT, DELETE, exec, wlogout"
 
@@ -165,10 +171,10 @@
   };
 
   home.file = {
-    ".config/hypr/hyprpaper.conf" = {
-      source = ./others/hypr/hyprpaper.conf;
-      recursive = true;
-    };
+    #".config/hypr/hyprpaper.conf" = {
+    #  source = ./others/hypr/hyprpaper.conf;
+    #  recursive = true;
+    #};
     ".config/waybar" = {
       source = ./others/waybar;
       recursive = true;
