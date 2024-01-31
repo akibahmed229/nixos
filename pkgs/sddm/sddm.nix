@@ -1,22 +1,21 @@
-{ pkgs ? import <nixpkgs> {}
+{ pkgs ? import <nixpkgs> { }
 , imgLink ? { url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/Photo-of-Valley.jpg"; sha256 = "sha256-86ja7yfSdMAaFFdfDqQS8Yq5yjZjXPMLTIgExcnzbXc="; }
 , ...
 }:
 
 let
+  isValidUrl = url: builtins.match ''(https?|ftp)://[^\s/$.?#].*'' url != null;
+
   image =
-    if imgLink.url == "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/Photo-of-Valley.jpg" then
+    if isValidUrl imgLink.url then
       pkgs.fetchurl
         {
           url = imgLink.url;
           sha256 = imgLink.sha256;
         }
     else
-      pkgs.fetchurl
-        {
-          url = imgLink.url;
-          sha256 = imgLink.sha256;
-        };
+    # what should be assigned to a
+      throw "Invalid URL. Please provide a valid URL.";
 in
 pkgs.stdenv.mkDerivation {
   name = "sddm-theme";
@@ -32,6 +31,7 @@ pkgs.stdenv.mkDerivation {
     cp -R ./* $out/
     cd $out/
     rm Background.jpg
+    cp -r ${image} new.jpg
     cp -r ${image} $out/Background.jpg
   '';
 
