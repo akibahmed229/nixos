@@ -26,7 +26,7 @@ pkgs.stdenv.mkDerivation {
     description = "NvChad";
     homepage = "https://github.com/NvChad/NvChad";
     platforms = platforms.all;
-    maintainers = [ maintainers.rayandrew ];
+    maintainers = [ maintainers.akibahmed229 ];
     license = licenses.gpl3;
   };
 }
