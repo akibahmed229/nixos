@@ -31,7 +31,6 @@ pkgs.stdenv.mkDerivation {
     cp -R ./* $out/
     cd $out/
     rm Background.jpg
-    cp -r ${image} new.jpg
     cp -r ${image} $out/Background.jpg
   '';
 

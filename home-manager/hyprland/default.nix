@@ -38,8 +38,8 @@
         sddm.theme = ''${pkgs.callPackage ../../pkgs/sddm/sddm.nix { imgLink = {
           url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nixos.png"; 
           sha256 = "sha256-QcY0x7pE8pKQy3At81/OFl+3CUAbx0K99ZHk85QLSo0=";
-         };
-        }}'';
+        };
+      }}'';
       };
     };
   };
@@ -68,6 +68,7 @@
     };
 
     systemPackages = with pkgs; [
+      cron
       waybar
       dunst
       kitty
@@ -165,6 +166,16 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
   };
+
+  # Enable cron service
+  # Note: *     *    *     *     *          command to run
+  #      min  hour  day  month  year        user command
+  #services.cron = {
+  #  enable = true;
+  #  systemCronJobs = [
+  #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
+  #  ];
+  #};
 
   # To auto mount usb and other useb devices pluged in 
   services.gnome.gnome-keyring.enable = true;
