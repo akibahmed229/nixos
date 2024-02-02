@@ -208,11 +208,11 @@
       recursive = true;
     };
     ".config/gtk-4.0" = {
-      source = ../../themes/gtk/${theme};
+      source = ../../public/themes/gtk/${theme};
       recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = ../../themes/gtk/${theme};
+      source = ../../public/themes/gtk/${theme};
       recursive = true;
     };
   };
