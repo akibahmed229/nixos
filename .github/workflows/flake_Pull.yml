@@ -1,15 +1,20 @@
 name: Nix Flake Check
 
+# which events should trigger this workflow
 on: [pull_request]
 
+# jobs to run
 jobs:
+  # job name
   check:
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
+    # steps to run
     steps:
+      # bring source code into repository into the container to run tests on it
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -22,17 +27,21 @@ jobs:
       - name: Install Nix Linting and Formatting Tools
         run: nix-env -i statix nixpkgs-fmt -f '<nixpkgs>'
 
+      # Statix Lint is a tool to lint nix files
       - name: Run Statix Lint
         run: statix fix
 
       - name: Run Nix Format
         run: nix fmt
 
+      # Health checks for your Nix flakes
       - name: Nix Flake Checker
         uses: DeterminateSystems/flake-checker-action@v5
 
+      # Commit changes made by linting and formatting
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Auto lint/format
+          # trigger workflow on pull request to main branch
           branch: dev
