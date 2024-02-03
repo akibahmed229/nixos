@@ -68,7 +68,7 @@
     };
 
     systemPackages = with pkgs; [
-      cron
+      #cron
       waybar
       dunst
       kitty
