@@ -91,13 +91,13 @@
 
       pkgs = forAllSystems (system:
         import nixpkgs {
-          inherit system;
+          inherit (if system == "x86_64-linux" then "x86_64-linux" else system);
           config = { allowUnfree = true; };
         }
       );
       unstable = forAllSystems (system:
         import nixpkgs-unstable {
-          inherit system;
+          inherit (if system == "x86_64-linux" then "x86_64-linux" else system);
           config = { allowUnfree = true; };
         }
       );
@@ -117,7 +117,8 @@
       nixosConfigurations = forAllSystems (system:
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs unstable nixos user system theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+          inherit (if system == "x86_64-linux" then "x86_64-linux" else system);
+          inherit inputs unstable nixos user theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
         }
       );
     };
