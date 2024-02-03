@@ -68,9 +68,10 @@
     , ...
     } @ inputs:
     let
+      # The system to build.
       inherit (self) outputs;
       inherit (nixpkgs) lib;
-      # The system to build.
+      system = "x86_64-linux";
       state-version = "23.11";
 
       # Supported systems for your flake packages, shell, etc.
@@ -89,37 +90,32 @@
       user = "akib";
       theme = "gruvbox-dark-soft";
 
-      pkgs = forAllSystems (system:
-        import nixpkgs {
-          inherit (if system == "x86_64-linux" then "x86_64-linux" else system);
-          config = { allowUnfree = true; };
-        }
-      );
-      unstable = forAllSystems (system:
-        import nixpkgs-unstable {
-          inherit (if system == "x86_64-linux" then "x86_64-linux" else system);
-          config = { allowUnfree = true; };
-        }
-      );
+      pkgs = import nixpkgs {
+        inherit system;
+        config = { allowUnfree = true; };
+      };
+
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config = { allowUnfree = true; };
+      };
+
       # using the above variables to define the system configuration
     in
     {
       # Accessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
 
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
+      formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.nixpkgs-fmt);
 
       # NixOS configuration with flake and home-manager as module
       #  Accessible through "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
       #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
-      nixosConfigurations = forAllSystems (system:
-        import ./hosts {
-          inherit (nixpkgs) lib;
-          inherit (if system == "x86_64-linux" then "x86_64-linux" else system);
-          inherit inputs unstable nixos user theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
-        }
-      );
+      nixosConfigurations = import ./hosts {
+        inherit (nixpkgs) lib;
+        inherit inputs unstable nixos user system theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+      };
     };
 }
