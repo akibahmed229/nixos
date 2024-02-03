@@ -71,7 +71,7 @@
       inherit (self) outputs;
       # The system to build.
       system = "x86_64-linux";
-      lib = nixpkgs.lib;
+      inherit (nixpkgs) lib;
       state-version = "23.11";
 
       # Supported systems for your flake packages, shell, etc.
@@ -113,11 +113,9 @@
       # NixOS configuration with flake and home-manager as module
       #  Accessible through "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
       #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
-      nixosConfigurations = (
-        import ./hosts {
-          inherit (nixpkgs) lib;
-          inherit inputs unstable nixos user system theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
-        }
-      );
+      nixosConfigurations = import ./hosts {
+        inherit (nixpkgs) lib;
+        inherit inputs unstable nixos user system theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+      };
     };
 }

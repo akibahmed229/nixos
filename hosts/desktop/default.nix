@@ -33,9 +33,9 @@
     "python-2.7.18.6"
   ];
 
-  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
     "steam"
-  ]);
+  ];
 
 
   # remove bloat
@@ -94,11 +94,11 @@
     bleachbit
     #obs-studio
     (pkgs.wrapOBS {
-      plugins = (with pkgs.obs-studio-plugins; [
+      plugins = with pkgs.obs-studio-plugins; [
         obs-teleport
         advanced-scene-switcher
         #(callPackage ../../pkgs/obs-studio-plugins/obs-zoom-to-mouse.nix { })
-      ]);
+      ];
     })
     gimp
     libsForQt5.kdenlive

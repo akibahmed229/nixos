@@ -19,7 +19,7 @@
     # variables
     let
       system = "x86_64-linux";
-      lib = nixpkgs.lib;
+      inherit (nixpkgs) lib;
 
       pkgs = import nixpkgs {
         inherit system;
@@ -35,11 +35,9 @@
     in
     {
       # DevShell configuration
-      devShells.${system} = (
-        import ./shell {
-          inherit system pkgs inputs;
-        }
-      );
+      devShells.${system} = import ./shell {
+        inherit system pkgs inputs;
+      };
     };
 }
 

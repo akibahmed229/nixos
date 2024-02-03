@@ -1,6 +1,6 @@
 { pkgs, unstable, inputs, ... }:
 let
-  spicetify-nix = inputs.spicetify-nix;
+  inherit (inputs) spicetify-nix;
   spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
 in
 {

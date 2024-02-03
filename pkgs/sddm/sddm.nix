@@ -10,8 +10,8 @@ let
     if isValidUrl imgLink.url then
       pkgs.fetchurl
         {
-          url = imgLink.url;
-          sha256 = imgLink.sha256;
+          inherit (imgLink) url;
+          inherit (imgLink) sha256;
         }
     else
     # what should be assigned to a
