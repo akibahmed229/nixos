@@ -76,7 +76,7 @@
     config.boot.kernelPackages.openrazer
   ];
 
-  boot.supportedFilesystems = [ "ntfs" "ntfs-3g" ];
+  boot.supportedFilesystems = [ "ntfs" "ntfs3" ];
 
   services.btrfs.autoScrub = {
     enable = true;
@@ -108,14 +108,14 @@
 
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
-    fsType = "ntfs"; # Specify the file system type
-    options = [ "rw,exec" ]; # Mount options 
+    #fsType = "ntfs3"; # Specify the file system type
+    options = [ "defaults" ]; # Mount options (rw,exec,auto,user,async)
   };
 
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
-    fsType = "ntfs"; # Specify the file system type
-    options = [ "rw,exec" ]; # Mount options 
+    #fsType = "ntfs3"; # Specify the file system type
+    options = [ "defaults" ]; # Mount options 
   };
 
   # Enabling samba file sharing over local network 
