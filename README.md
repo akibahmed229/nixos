@@ -74,7 +74,17 @@ mount /dev/disk/by-label/boot /mnt/boot
 To install NixOS on the mounted partitions, follow these steps:
 
 ```bash
-nixos-install --flake github:akibahmed229/nixos/#desktop
+nix-env -iA nixos.git
+nixos-generate-config --root /mnt
+git clone https://www.github.com/akibahmed229/nixos.git /mnt
+```
+
+Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to the /mnt/nixos directory. and install the system using the following command:
+
+```bash
+cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/nixos/hosts/desktop/hardware-configuration.nix
+cd /mnt/nixos
+nixos-install --flake .#desktop
 ```
 
 Note: During the configuration step, you can manually edit the `/mnt/etc/nixos/configuration.nix` file to set mount options and customize your NixOS installation.
@@ -121,9 +131,7 @@ For more information about NixOS and its configuration options, refer to the off
   - home-manager : Home manager configuration files && desktop environment configuration files
   - hosts : Host specific configuration files
   - programs : Program specific configuration files
-  - public : Basicly my wallpaper folder
-  - themes : GTK and QT themes
-- flake.lock : Lock file for the flake
+  - public : Basicly my wallpaper folder / GTK and QT themes
+- flake.lock : Lock file for the flake inputs
 - devShell/flake.nix : Flake file where I define my dev shell
-- pkgs/flake.nix : Flake file where I define my nix derivation / custom packages
-- nix-update-input/flake.nix : Flake to update the nixpkgs input
+- pkgs : Flake file where I define my nix derivation / custom packages / shell scripts
