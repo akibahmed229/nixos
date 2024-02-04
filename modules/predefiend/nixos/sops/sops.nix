@@ -21,12 +21,13 @@
 
   environment.systemPackages = with pkgs; [
     sops
+    age
   ];
 
-  #sops.secrets.example-key = { };
-  #sops.secrets."myservice/my_subdir/my_secret" = {
-  #  owner = "${user}";
-  #};
+  sops.secrets.example-key = { };
+  sops.secrets."myservice/my_subdir/my_secret" = {
+    owner = "${user}";
+  };
 
   #systemd.services."sometestservice" = {
   #  script = ''
