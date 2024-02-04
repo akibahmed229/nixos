@@ -84,9 +84,9 @@
     onionshare
     git
     gcc
-    jdk
-    python311Full
-    nodejs_20
+    jdk21
+    python312Full
+    nodejs_21
     yarn
     docker-compose
     flatpak
