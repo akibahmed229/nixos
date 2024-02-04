@@ -19,6 +19,10 @@
 
   sops.age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
 
+  environment.systemPackages = with pkgs; [
+    sops
+  ];
+
   #sops.secrets.example-key = { };
   #sops.secrets."myservice/my_subdir/my_secret" = {
   #  owner = "${user}";
