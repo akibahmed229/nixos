@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # devShells for different systems 
+    my-devShells = {
+      url = "./devshell";
+    };
+
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
     # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
     hyprland.url = "github:hyprwm/Hyprland";
@@ -52,9 +57,6 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    my-devShells = {
-      url = "./devshell";
     };
   };
 
