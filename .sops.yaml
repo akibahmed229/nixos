@@ -1,9 +1,0 @@
-# .sops.yaml
-
-keys:
-  - &primary age15v3fgq0kh7u8f7v24s6pthkg3wrq3lyvstarqg89lhfcatn9jv2qrfrdmx
-creation_rules:
-  - path_regex: modules/predefiend/nixos/sops/secrets/secrets.yaml$
-    key_groups:
-      - age:
-          - *primary
