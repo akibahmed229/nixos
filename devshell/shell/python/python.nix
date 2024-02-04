@@ -18,6 +18,7 @@ pkgs.mkShell {
 
   # Workaround: make vscode's python extension read the .venv
   shellHook = ''
+    echo "Activating virtual environment"
     venv="$(cd $(dirname $(which python)); cd ..; pwd)"
     ln -Tsf "$venv" .venv
   '';

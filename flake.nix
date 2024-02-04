@@ -53,6 +53,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    my-devShells = {
+      url = "./devshell";
+    };
   };
 
   # outputs for the flake
@@ -65,6 +68,7 @@
     , home-manager
     , hyprland
     , plasma-manager
+    , my-devShells
     , ...
     } @ inputs:
     let
@@ -105,6 +109,9 @@
     {
       # Accessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
+
+      # Accessible through 'nix develop" etc
+      devShells = forAllSystems (getSystem: my-devShells.devShells.${getSystem});
 
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
