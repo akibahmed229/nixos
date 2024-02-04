@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # devShells for different systems 
+    my-devShells = {
+      url = "./devshell";
+    };
+
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
     # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
     hyprland.url = "github:hyprwm/Hyprland";
@@ -65,6 +70,7 @@
     , home-manager
     , hyprland
     , plasma-manager
+    , my-devShells
     , ...
     } @ inputs:
     let
@@ -105,6 +111,9 @@
     {
       # Accessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
+
+      # Accessible through 'nix develop" etc
+      devShells = forAllSystems (getSystem: my-devShells.devShells.${getSystem});
 
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
