@@ -196,11 +196,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-6IZSFAFXpR1gbFz8ufM7fJCNnea6SeDFy0DnwTBQqa4=",
-        "path": "/nix/store/59pzmi9p7m0zfxkc6n4a4hfdckr0r8p7-source/devshell",
+        "path": "/nix/store/mk8izd42s4gyc1v87q4a3bv08713b7p9-source/devshell",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/59pzmi9p7m0zfxkc6n4a4hfdckr0r8p7-source/devshell",
+        "path": "/nix/store/mk8izd42s4gyc1v87q4a3bv08713b7p9-source/devshell",
         "type": "path"
       }
     },
