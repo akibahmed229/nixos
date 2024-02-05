@@ -34,7 +34,7 @@
     [ (import ../../modules/predefiend/home-manager/lf/lf.nix) ];
 
   home.packages = with pkgs; [
-    (callPackage ./others/swww/wallpaper.nix { })
+    (import ./others/swww/wallpaper.nix {inherit pkgs; })
   ];
 
   #imports = [(import ./others/hyprutility.nix)];

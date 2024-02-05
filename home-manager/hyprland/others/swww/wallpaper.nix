@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs ? import <nixpkgs> {}}:
 
 pkgs.writeShellScriptBin "wallpaper" ''
   # Get the selected image path using wofi
