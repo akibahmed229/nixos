@@ -196,10 +196,9 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-6IZSFAFXpR1gbFz8ufM7fJCNnea6SeDFy0DnwTBQqa4=",
-      "original": {
-        "path": "/nix/store/ryyp4j7isgw92b9dvdq8kiygq1wdb2iq-source/devshell",
+        "path": "/nix/store/mk8izd42s4gyc1v87q4a3bv08713b7p9-source/devshell",
         "type": "path"
-      }
+      },
     },
     "nix-index-database": {
       "inputs": {
