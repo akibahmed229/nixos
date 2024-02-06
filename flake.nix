@@ -51,12 +51,11 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # Handle persistent state on systems with ephemeral root storage
     impermanence = {
-    url = "github:nix-community/impermanence";
+      url = "github:nix-community/impermanence";
     };
-
 
     # Firefox-addons is a collection of Firefox extensions
     firefox-addons = {
