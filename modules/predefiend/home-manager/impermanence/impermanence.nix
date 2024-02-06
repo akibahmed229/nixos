@@ -27,6 +27,9 @@
     ];
     files = [
       ".screenrc"
+      ".zshrc"
+      ".zshenv"
+      ".zsh_history"
     ];
     allowOther = true;
   };
