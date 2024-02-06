@@ -13,6 +13,7 @@
       "Documents"
       "Videos"
       "VirtualBox VMs"
+      "flake"
       ".gnupg"
       ".ssh"
       ".nixops"
