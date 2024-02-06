@@ -77,10 +77,10 @@
         home-manager.users.${user} = {
           imports = [
             # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
+            inputs.impermanence.nixosModules.impermanence
             ../home-manager/home.nix
             ../modules/predefiend/home-manager/impermanence/impermanence.nix
             nix-index-database.hmModules.nix-index
-            inputs.impermanence.nixosModules.impermanence
             #../home-manager/hyprland/home.nix
             #hyprland.homeManagerModules.default # uncommnet to use hyprland
           ];
