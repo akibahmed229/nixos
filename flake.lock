@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1707095972,
+        "narHash": "sha256-iQ2jpCCwYWpk4UcPEgQqRSOVsY2p8GkPmz/lJw47Cvo=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "2e9b88f02ec166b1c3f0a638688f8e4ef444de32",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -187,6 +207,21 @@
         "type": "github"
       }
     },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1706639736,
+        "narHash": "sha256-CaG4j9+UwBDfinxxvJMo6yOonSmSo0ZgnbD7aj2Put0=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "cd13c2917eaa68e4c49fea0ff9cada45440d7045",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
     "my-devShells": {
       "inputs": {
         "nixpkgs": "nixpkgs_2",
@@ -196,11 +231,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-6IZSFAFXpR1gbFz8ufM7fJCNnea6SeDFy0DnwTBQqa4=",
-        "path": "/nix/store/lfgpwg8f87as02r210hr3bri8c1mb4nv-source/devshell",
+        "path": "/nix/store/1kcpld48006kqd5p6mpivc3qd1b697md-source/devshell",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/lfgpwg8f87as02r210hr3bri8c1mb4nv-source/devshell",
+        "path": "/nix/store/1kcpld48006kqd5p6mpivc3qd1b697md-source/devshell",
         "type": "path"
       }
     },
@@ -393,11 +428,13 @@
     },
     "root": {
       "inputs": {
+        "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
+        "impermanence": "impermanence",
         "my-devShells": "my-devShells",
         "nix-index-database": "nix-index-database",
         "nixos": "nixos",
