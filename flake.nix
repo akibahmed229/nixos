@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # devShells for different systems 
+    # My devShells for different systems 
     my-devShells = {
       url = "./devshell";
     };
@@ -46,14 +46,26 @@
       inputs.home-manager.follows = "nixpkgs";
     };
 
-    # firefox-addons is a collection of Firefox extensions
+    # Declarative disk partitioning and formatting using nix 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    # Handle persistent state on systems with ephemeral root storage
+    impermanence = {
+    url = "github:nix-community/impermanence";
+    };
+
+
+    # Firefox-addons is a collection of Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix.url = "github:the-argus/spicetify-nix";
-    # secret management for nixos
+    # Secret management for nixos
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
