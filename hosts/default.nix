@@ -64,6 +64,7 @@
     modules = [
       # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
       inputs.disko.nixosModules.default
+      inputs.impermanence.nixosModules.impermanence
       ./configuration.nix
       ./virt
       nix-index-database.nixosModules.nix-index
