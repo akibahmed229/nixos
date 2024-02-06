@@ -127,11 +127,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707099401,
-        "narHash": "sha256-9Le8MyRMlrIA6Te+woK9OG27fF0h5fgt7T3I3SKQLSs=",
+        "lastModified": 1707235940,
+        "narHash": "sha256-oUFgOgZqbWjvU+cHoOVs/oZA5oNMPdhM0rjfHH58vwQ=",
         "owner": "hyprwm",
         "repo": "hyprland-plugins",
-        "rev": "ff8526c766fbe87500fc7d94cda733e29a111fb2",
+        "rev": "d7ee47381bdfd345cf46c8918d86ed49b12c9df0",
         "type": "github"
       },
       "original": {
@@ -196,11 +196,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-6IZSFAFXpR1gbFz8ufM7fJCNnea6SeDFy0DnwTBQqa4=",
-        "path": "/nix/store/a9qqlbyh2safs2kj232nwj3gj8diavx7-source/devshell",
+        "path": "/nix/store/lfgpwg8f87as02r210hr3bri8c1mb4nv-source/devshell",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/a9qqlbyh2safs2kj232nwj3gj8diavx7-source/devshell",
+        "path": "/nix/store/lfgpwg8f87as02r210hr3bri8c1mb4nv-source/devshell",
         "type": "path"
       }
     },
