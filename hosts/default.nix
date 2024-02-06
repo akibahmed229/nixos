@@ -64,10 +64,10 @@
     modules = [
       # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
       inputs.disko.nixosModules.default
-      inputs.impermanence.nixosModules.impermanence
       ./configuration.nix
       ./virt
       nix-index-database.nixosModules.nix-index
+      inputs.impermanence.nixosModules.impermanence
 
       home-manager.nixosModules.home-manager
       {
@@ -78,7 +78,9 @@
           imports = [
             # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
             ../home-manager/home.nix
+            ../modules/predefiend/home-manager/impermanence/impermanence.nix
             nix-index-database.hmModules.nix-index
+            inputs.impermanence.nixosModules.impermanence
             #../home-manager/hyprland/home.nix
             #hyprland.homeManagerModules.default # uncommnet to use hyprland
           ];
