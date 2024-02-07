@@ -42,11 +42,6 @@
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
-    users.${user} = {
-      directories = [
-        { directory = "/persist/home/${user}"; mode = "700"; }
-      ];
-    };
   };
 
   programs.fuse.userAllowOther = true;
