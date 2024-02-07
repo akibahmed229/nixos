@@ -5,7 +5,7 @@
     inputs.impermanence.nixosModules.home-manager.impermanence
   ];
 
-  home.persistence."/persist/home/${user}" = {
+  home.persistence."/persist/home/${user}/" = {
     directories = [
       "Downloads"
       "Music"
