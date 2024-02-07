@@ -72,7 +72,7 @@
       clean old contents in home cache dir
       (it's persisted to avoid problems with large files being loaded into the tmpfs)
     */
-    "e %h/.cache 755 ${config.home.username} ${config.home.groupname} 30d"
+    "e %h/.cache 755 ${user}  ${user} - - - 7d"
 
     # exceptions
     "x %h/.cache/rbw"
