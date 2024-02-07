@@ -44,7 +44,7 @@
     ];
     users.${user} = {
       directories = [
-        { directory = "/persist/home/${user}"; parentDirectory = { mode = "700"; }; }
+        { directory = "/persist/home/${user}"; mode = "700"; }
       ];
     };
   };
