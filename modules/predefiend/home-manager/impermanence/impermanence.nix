@@ -14,6 +14,7 @@
       "Videos"
       "VirtualBox VMs"
       "Android"
+      "flake"
       ".docker"
       ".mozilla"
       ".tmux"
@@ -34,10 +35,6 @@
       ".local/share/nwg-look"
       {
         directory = ".local/share/Steam";
-        method = "symlink";
-      }
-      {
-        directory = "flake";
         method = "symlink";
       }
       ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
