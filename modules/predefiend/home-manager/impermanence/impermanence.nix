@@ -20,23 +20,27 @@
       ".gnupg"
       ".ssh"
       ".nixops"
-      ".config/tmux"
-      ".config/Thunar"
-      ".config/Kvantum"
-      ".config/nvim"
-      ".config/sops"
-      ".config/systemd"
-      ".config/github-copilot"
-      ".local/share/keyrings"
-      ".local/share/direnv"
-      ".local/share/nvim"
-      ".local/share/Notepadqq"
-      ".local/share/nwg-look"
+      #".config/tmux"
+      #".config/Thunar"
+      #".config/Kvantum"
+      #".config/nvim"
+      #".config/sops"
+      #".config/systemd"
+      #".config/github-copilot"
+      #".local/share/keyrings"
+      #".local/share/direnv"
+      #".local/share/nvim"
+      #".local/share/Notepadqq"
+      #".local/share/nwg-look"
       {
         directory = ".local/share/Steam";
         method = "symlink";
       }
-      ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
+      {
+        directory = "flake";
+        method = "symlink";
+      }
+      #".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
     ];
     files = [
       ".screenrc"
