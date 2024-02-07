@@ -18,7 +18,7 @@
       ".gnupg"
       ".ssh"
       ".nixops"
-      ".config"
+      #".config"
       ".local/share/keyrings"
       ".local/share/direnv"
       {
