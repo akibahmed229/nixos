@@ -75,14 +75,9 @@
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user inputs theme hyprland state-version; };
         home-manager.users.${user} = {
-          imports = [
-            # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
-            ../home-manager/home.nix
-            nix-index-database.hmModules.nix-index
-            #../home-manager/hyprland/home.nix
-            #hyprland.homeManagerModules.default # uncommnet to use hyprland
-          ] ++
-          [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ];
+          imports = [ (import ../home-manager/home.nix) ] ++
+            [ nix-index-database.hmModules.nix-index ] ++
+            [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ];
         };
       }
     ];
