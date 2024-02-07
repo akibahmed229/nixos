@@ -45,4 +45,9 @@
   };
 
   programs.fuse.userAllowOther = true;
+
+
+  # To install it globally
+  environment.systemPackages =
+    [ inputs.home-manager.packages.${pkgs.system}.default ];
 }
