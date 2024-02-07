@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, user, inputs, ... }:
 
 {
   boot.initrd.postDeviceCommands = lib.mkAfter ''
@@ -42,10 +42,14 @@
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
+    users.${user} = {
+      directories = [
+        { directory = "/persist/home/${user}"; parentDirectory = { mode = "700"; }; }
+      ];
+    };
   };
 
   programs.fuse.userAllowOther = true;
-
 
   # To install it globally
   environment.systemPackages =
