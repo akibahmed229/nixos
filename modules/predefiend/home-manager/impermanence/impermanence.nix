@@ -26,7 +26,7 @@
       ".config/Kvantum"
       ".config/nvim"
       ".config/sops"
-      #".config/systemd"
+      ".config/systemd"
       ".config/github-copilot"
       ".local/share/keyrings"
       ".local/share/direnv"
