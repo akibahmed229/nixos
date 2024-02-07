@@ -7,11 +7,6 @@
 {
   imports =
     [ (import ./hardware-configuration.nix) ] ++
-    [
-      (import ../../modules/predefiend/nixos/disko/disko.nix {
-        device = "/dev/vda";
-      })
-    ] ++
     [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
     [ (import ../../home-manager/dwm/default.nix) ];
 
