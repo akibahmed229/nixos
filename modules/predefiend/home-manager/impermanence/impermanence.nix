@@ -14,7 +14,6 @@
       "Videos"
       "VirtualBox VMs"
       "Android"
-      "flake"
       ".docker"
       ".mozilla"
       ".tmux"
