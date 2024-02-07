@@ -13,7 +13,6 @@
       "Documents"
       "Videos"
       "VirtualBox VMs"
-      ".nix-profile"
       "flake"
       ".gnupg"
       ".ssh"
