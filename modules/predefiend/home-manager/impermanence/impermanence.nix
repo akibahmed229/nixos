@@ -7,7 +7,7 @@
 
   home.persistence."/persist/home/${user}" = {
     directories = [
-      "Downloads"
+      "Downloads/*"
       "Music"
       "Pictures"
       "Documents"
