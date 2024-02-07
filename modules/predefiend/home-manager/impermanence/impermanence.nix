@@ -42,6 +42,7 @@
       ".screenrc"
       ".zshrc"
       ".zshenv"
+      ".zsh_history"
       ".gitconfig"
     ];
     allowOther = true;
