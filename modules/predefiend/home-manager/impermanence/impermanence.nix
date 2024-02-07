@@ -44,8 +44,6 @@
       ".zshenv"
       ".zsh_history"
       ".gitconfig"
-      ".config/user-dirs.dirs"
-      ".config/user-dirs.conf"
     ];
     allowOther = true;
   };
