@@ -13,24 +13,69 @@
       "Documents"
       "Videos"
       "VirtualBox VMs"
+      "Android"
       "flake"
+      ".docker"
+      ".mozilla"
+      ".tmux"
       ".gnupg"
       ".ssh"
       ".nixops"
-      #".config"
+      ".config/tmux"
+      ".config/Thunar"
+      ".config/OpenRGB"
+      ".config/gtk-3.0"
+      ".config/gtk-4.0"
+      ".config/Kvantum"
+      ".config/nvim"
+      ".config/libinput"
+      ".config/neofetch"
+      ".config/hypr"
+      ".config/waybar"
+      ".config/wlogout"
+      ".config/wofi"
+      ".config/sops"
+      ".config/swappy"
+      ".config/alacritty"
+      ".config/systemd"
+      ".config/Vencord"
+      ".config/spotify"
+      ".config/github-copilot"
       ".local/share/keyrings"
       ".local/share/direnv"
+      ".local/share/nvim"
+      ".local/share/Notepadqq"
+      ".local/share/nwg-look"
       {
         directory = ".local/share/Steam";
         method = "symlink";
       }
+      ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
     ];
     files = [
       ".screenrc"
       ".zshrc"
       ".zshenv"
-      #".zsh_history"
+      ".zsh_history"
+      ".gitconfig"
+      ".gtkrc-2.0"
+      ".steampath"
+      ".steampid"
+      ".config/user-dirs.dirs"
+      ".config/user-dirs.conf"
     ];
     allowOther = true;
   };
+
+  systemd.user.tmpfiles.rules = [
+    /*
+      clean old contents in home cache dir
+      (it's persisted to avoid problems with large files being loaded into the tmpfs)
+    */
+    "e %h/.cache 755 ${config.home.username} ${config.home.groupname} 30d"
+
+    # exceptions
+    "x %h/.cache/rbw"
+    "x %h/.cache/borg" # caches checksums of file chunks for deduplication
+  ];
 }
