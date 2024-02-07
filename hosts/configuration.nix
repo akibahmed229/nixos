@@ -83,6 +83,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
     isNormalUser = true;
+    initialPassword = "123456";
     description = "Akib Ahmed";
     extraGroups = [ "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
     packages = with pkgs; [
