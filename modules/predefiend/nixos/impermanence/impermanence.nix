@@ -41,7 +41,9 @@
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
-    users.${user} = lib.mkDefault {};
+    users.${user} = {
+      directory = "/home/${user}";
+    };
     #{
     #  directories = [
     #    "Desktop"
