@@ -33,7 +33,6 @@
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
-      "/home/${user}"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
       { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
@@ -42,37 +41,36 @@
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
-    #users.${user} = 
-    #{
-    #  directories = [
-    #    "Desktop"
-    #    "Downloads"
-    #    "Music"
-    #    "Pictures"
-    #    "Public"
-    #    "Documents"
-    #    "Videos"
-    #    "VirtualBox VMs"
-    #    "flake"
-    #    "Android"
-    #    ".docker"
-    #    ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
-    #    { directory = ".gnupg"; mode = "0700"; }
-    #    { directory = ".ssh"; mode = "0700"; }
-    #    { directory = ".config"; mode = "0700"; }
-    #    { directory = ".mozilla"; mode = "0700"; }
-    #    { directory = ".nixops"; mode = "0700"; }
-    #    { directory = ".tmux"; mode = "0700"; }
-    #    { directory = ".local/share/keyrings"; mode = "0700"; }
-    #    ".local/share/direnv"
-    #  ];
-    #  files = [
-    #    ".screenrc"
-    #    ".zshrc"
-    #    ".zsh_history"
-    #    ".gitconfig"
-    #  ];
-    #};
+    users.${user} = {
+      directories = [
+        "Desktop"
+        "Downloads"
+        "Music"
+        "Pictures"
+        "Public"
+        "Documents"
+        "Videos"
+        "VirtualBox VMs"
+        "flake"
+        "Android"
+        ".docker"
+        ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
+        { directory = ".gnupg"; mode = "0700"; }
+        { directory = ".ssh"; mode = "0700"; }
+        { directory = ".config"; mode = "0700"; }
+        { directory = ".mozilla"; mode = "0700"; }
+        { directory = ".nixops"; mode = "0700"; }
+        { directory = ".tmux"; mode = "0700"; }
+        { directory = ".local/share/keyrings"; mode = "0700"; }
+        ".local/share/direnv"
+      ];
+      files = [
+        ".screenrc"
+        ".zshrc"
+        ".zsh_history"
+        ".gitconfig"
+      ];
+    };
   };
 
   programs.fuse.userAllowOther = true;
