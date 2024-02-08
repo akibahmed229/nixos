@@ -74,4 +74,8 @@
   };
 
   programs.fuse.userAllowOther = true;
+  #  home-manager = {
+  #   extraSpecialArgs = {inherit inputs;};
+  #   users.${user} = import ./../../home-manager/impermanence/impermanence.nix;
+  # }; 
 }
