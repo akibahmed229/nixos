@@ -1,7 +1,7 @@
 { pkgs, lib, user, inputs, ... }:
 
 {
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
+  boot.initrd.systemd.extraConfig = lib.mkAfter ''
     mkdir /btrfs_tmp
     mount /dev/root_vg/root /btrfs_tmp
     if [[ -e /btrfs_tmp/root ]]; then
