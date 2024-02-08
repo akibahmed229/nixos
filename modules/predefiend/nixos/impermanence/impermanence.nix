@@ -27,7 +27,6 @@
   '';
 
   fileSystems."/persist".neededForBoot = true;
-  fileSystems."/persist/system".neededForBoot = true;
   fileSystems."/persist/home".neededForBoot = true;
   environment.persistence = {
     "/persist/system" = {
