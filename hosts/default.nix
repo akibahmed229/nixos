@@ -30,6 +30,7 @@
       # optional to also wrap and install comma
       { programs.nix-index-database.comma.enable = true; }
       inputs.impermanence.nixosModules.impermanence
+      inputs.disko.nixosModules.default
 
       # Home manager configuration as a module
       home-manager.nixosModules.home-manager
