@@ -22,22 +22,14 @@
       ".ssh"
       ".nixops"
       ".config"
-      ".local/share/keyrings"
-      ".local/share/direnv"
-      ".local/share/nvim"
-      ".local/share/Notepadqq"
-      ".local/share/nwg-look"
-      {
-        directory = ".local/share/Steam";
-        method = "symlink";
-      }
+      ".local"
       ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
     ];
     files = [
       ".screenrc"
       ".zshrc"
       ".zshenv"
-      #".zsh_history"
+      ".zsh_history"
       ".gitconfig"
     ];
     allowOther = true;
