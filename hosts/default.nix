@@ -19,14 +19,13 @@
   # Host desktop configuration ( main system)
   desktop = lib.nixosSystem {
     inherit system;
+
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
       # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
-
       # configuration of nixos 
       ./configuration.nix
       ./desktop
-
       nix-index-database.nixosModules.nix-index
       # optional to also wrap and install comma
       { programs.nix-index-database.comma.enable = true; }
@@ -42,13 +41,17 @@
             nix-index-database.hmModules.nix-index
             # optional to also wrap and install comma
             { programs.nix-index-database.comma.enable = true; }
-
+          ] ++
+          [
             # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
             hyprland.homeManagerModules.default # uncommnet to use hyprland
             { wayland.windowManager.hyprland.systemd.enable = true; }
-
+          ] ++
+          [
             # config of home-manager 
             ../home-manager/home.nix
+          ] ++
+          [
             #../home-manager/gnome/home.nix # uncommnet to use gnome
             ../home-manager/hyprland/home.nix
           ];
@@ -60,6 +63,7 @@
   # Host virt-managet configuration ( virtualization system)
   virt = lib.nixosSystem {
     inherit system;
+
     specialArgs = { inherit user inputs unstable state-version; };
     modules = [
       # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
