@@ -14,7 +14,7 @@
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ] ++
-    [ (import ../../modules/predefiend/nixos/disko/disko.nix { device = "/dev/nvme0n1"; } ) ];
+    [ (import ../../modules/predefiend/nixos/disko/disko.nix { device = "/dev/nvme0n1"; }) ];
 
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -29,24 +29,24 @@
     "acpi_backlight=vendor" # Fix backlight control 
     "acpi_osi=Linux" # Fix backlight control 
     "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power 
-   # "rd.udev.log_level=3" # Increase kernel log verbosity
+    # "rd.udev.log_level=3" # Increase kernel log verbosity
     "systemd.show_status=false"
     "no_console_suspend" # Prevent consoles from being suspended
     "splash"
     "logo.nologo"
   ];
 
-#  boot = {
-#    consoleLogLevel = 3;
- #   initrd = {
- #     verbose = false;
-#      systemd.enable = true;
-#    };
-#    plymouth = {
-   #   enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
-#      theme = "breeze";
-#    };
-#  };
+  #  boot = {
+  #    consoleLogLevel = 3;
+  #   initrd = {
+  #     verbose = false;
+  #      systemd.enable = true;
+  #    };
+  #    plymouth = {
+  #   enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
+  #      theme = "breeze";
+  #    };
+  #  };
 
   boot.initrd.availableKernelModules = [
     "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)

@@ -7,9 +7,9 @@ pkgs.writeShellScriptBin "disko-formate" ''
   read device
   curl https://raw.githubusercontent.com/akibahmed229/nixos/main/modules/predefiend/nixos/disko/disko.nix -o /tmp/disko.nix
   sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device "\"$device\""
-  mkdir -p /persist/home
-  chown 1000:100 /persist/home
-  chmod 700 /persist/home
+  mkdir -p /mnt/persist/home/akib
+  chown 1000:100 /mnt/persist/home/akib
+  chmod 700 /mnt/persist/home/akib
   echo "--------------------"
   echo "Disko Formate Done!"
 ''

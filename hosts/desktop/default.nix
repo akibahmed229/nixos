@@ -18,7 +18,7 @@
     # [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
     # [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
     # [(import ../../modules/predefiend/nixos/flatpak/flatpak.nix)]++
-#    [ (import ../../modules/predefiend/nixos/sops/sops.nix) ] ++
+    #    [ (import ../../modules/predefiend/nixos/sops/sops.nix) ] ++
     [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
 
