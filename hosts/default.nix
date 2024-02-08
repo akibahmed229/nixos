@@ -82,8 +82,8 @@
         home-manager.extraSpecialArgs = { inherit user inputs theme hyprland state-version; };
         home-manager.users.${user} = {
           imports = [ (import ../home-manager/home.nix) ] ++
-            [ nix-index-database.hmModules.nix-index ] ++
-            [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ];
+            [ nix-index-database.hmModules.nix-index ] ;
+            #[ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ];
         };
       }
     ];
