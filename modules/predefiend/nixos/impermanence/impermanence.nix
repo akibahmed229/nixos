@@ -33,6 +33,7 @@
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
+      "/home/${user}"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
       { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
@@ -41,9 +42,7 @@
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
-    users.${user} = {
-      directory = "/";
-    };
+    #users.${user} = 
     #{
     #  directories = [
     #    "Desktop"
