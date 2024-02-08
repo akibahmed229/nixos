@@ -22,7 +22,7 @@
       ".ssh"
       ".nixops"
       ".config"
-      ".local"
+      #".local"
       ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
       {
         directory = ".local/share/Steam";
@@ -33,8 +33,8 @@
       ".screenrc"
       ".zshrc"
       ".zshenv"
-      ".zsh_history"
-      ".gitconfig"
+      #".zsh_history"
+      #".gitconfig"
     ];
     allowOther = true;
   };
