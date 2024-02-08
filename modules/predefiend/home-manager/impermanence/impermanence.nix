@@ -22,7 +22,7 @@
       ".ssh"
       ".nixops"
       ".config"
-      ".local"
+    #  ".local"
       ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
     ];
     files = [
