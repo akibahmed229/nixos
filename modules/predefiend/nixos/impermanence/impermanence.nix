@@ -44,6 +44,12 @@
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
   };
+  environment.persistence."/persist/home" = {
+    hideMounts = true;
+    directories = [
+      "/home"
+    ];
+  };
 
   programs.fuse.userAllowOther = true;
 
