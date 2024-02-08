@@ -27,6 +27,7 @@
   '';
 
   fileSystems."/persist".neededForBoot = true;
+  fileSystems."/persist/system".neededForBoot = true;
   environment.persistence."/persist/system" = {
     hideMounts = true;
     directories = [
@@ -44,6 +45,7 @@
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
   };
+  fileSystems."/persist/home".neededForBoot = true;
   environment.persistence."/persist/home" = {
     hideMounts = true;
     directories = [
