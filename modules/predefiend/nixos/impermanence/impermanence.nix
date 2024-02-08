@@ -27,7 +27,6 @@
   '';
 
   fileSystems."/persist".neededForBoot = true;
-  programs.fuse.userAllowOther = true;
   environment.persistence."/persistent" = {
     hideMounts = true;
     directories = [
