@@ -29,7 +29,7 @@
     "acpi_backlight=vendor" # Fix backlight control 
     "acpi_osi=Linux" # Fix backlight control 
     "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power 
-    "rd.udev.log_level=3" # Increase kernel log verbosity
+   # "rd.udev.log_level=3" # Increase kernel log verbosity
     "systemd.show_status=false"
     "no_console_suspend" # Prevent consoles from being suspended
     "splash"
