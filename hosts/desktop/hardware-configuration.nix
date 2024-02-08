@@ -13,7 +13,8 @@
 }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ] ++
+    [ (import ../../modules/predefiend/nixos/disko/disko.nix) ];
 
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -81,29 +82,6 @@
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
-  };
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "btrfs";
-    options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "btrfs";
-    options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "btrfs";
-    options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
   };
 
   fileSystems."/mnt/sda1" = {

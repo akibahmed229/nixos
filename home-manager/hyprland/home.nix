@@ -26,6 +26,7 @@
   ];
 
   imports =
+    [ (import ../../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/firefox/firefox.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/spotify/spicetify.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/discord/discord.nix) ] ++

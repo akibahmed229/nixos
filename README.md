@@ -31,45 +31,25 @@ Before you begin, ensure you have the following:
 
 ## Installation Steps
 
-1. **Partition the Disk**
-
-Open a terminal and execute the following command to partition the disk:
-
-```bash
-fdisk /dev/sdx
-```
-
-create gpt label with two partion first one for root,home,nix & second one for efi boot pertion
-
-2. **Format Partitions and Create Subvolumes**
-
-In the same terminal, format the partitions and create subvolumes:
-
-```bash
-mkfs.fat -F 32 -n boot /dev/sdX1
-mkfs.btrfs -L nixos /dev/sdX2
-mkdir -p /mnt
-mount /dev/sdX2 /mnt
-btrfs subvolume create /mnt/root
-btrfs subvolume create /mnt/home
-btrfs subvolume create /mnt/nix
-umount /mnt
-```
-
-3. **Mount the Partitions and Subvolumes**
+1. **Formate, Mount the Partitions and Subvolumes**
 
 Mount the partitions and subvolumes using the following commands:
 
 ```bash
-mount -o compress=zstd,subvol=root /dev/disk/by-label/nixos /mnt
-mkdir /mnt/{home,nix}
-mount -o compress=zstd,subvol=home /dev/disk/by-label/nixos /mnt/home
-mount -o compress=zstd,noatime,subvol=nix /dev/disk/by-label/nixos /mnt/nix
-mkdir /mnt/boot
-mount /dev/disk/by-label/boot /mnt/boot
+nix su
+nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos#disko-formate --no-write-lock-file # This will format the disk and mount the partitions make sure to give the device name e.g /dev/sda
 ```
 
-4. **Install NixOS**
+Create home dir in /persist
+For devices with home dir persistence, we'll need to create that manually. That's because it's managed by impermanence in home-manager, which doesn't have the permissions to create a directory in the root-owned persist dir.
+
+- mkdir -p /persist/home/eisfunke
+
+- chown 1000:100 /persist/home/eisfunke
+
+- chmod 700 /persist/home/eisfunke
+
+2. **Install NixOS**
 
 To install NixOS on the mounted partitions, follow these steps:
 
@@ -84,7 +64,7 @@ Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to th
 ```bash
 cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/nixos/hosts/desktop/hardware-configuration.nix
 cd /mnt/nixos
-nixos-install --flake .#desktop
+nixos-install --root /mnt --flake .#desktop --no-write-lock-file
 ```
 
 Note: During the configuration step, you can manually edit the `/mnt/etc/nixos/configuration.nix` file to set mount options and customize your NixOS installation.
