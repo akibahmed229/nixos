@@ -29,7 +29,7 @@
     [ (import ../../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/firefox/firefox.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/spotify/spicetify.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/discord/discord.nix) ] ++
+    #[ (import ../../modules/predefiend/home-manager/discord/discord.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/zsh/zsh.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/tmux/tmux.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/lf/lf.nix) ];

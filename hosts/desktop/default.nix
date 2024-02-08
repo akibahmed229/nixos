@@ -115,7 +115,7 @@
     mangohud
     goverlay
     anydesk
-    geekbench
+    #geekbench
     qemu
     bridge-utils
     virt-manager
@@ -184,7 +184,7 @@
     # List unstable packages here
     jetbrains.pycharm-community
     jetbrains.idea-community
-    android-studio
+    #android-studio
     alacritty
     dwt1-shell-color-scripts
   ]);
