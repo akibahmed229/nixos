@@ -1,11 +1,11 @@
-{ inputs, ... }:
+{ pkgs, inputs, user, ... }:
 
 {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
   ];
 
-  home.persistence."/persist/home/${inputs.user}" = {
+  home.persistence."/persist/home/${user}" = {
     directories = [
       "Downloads"
       "Music"
