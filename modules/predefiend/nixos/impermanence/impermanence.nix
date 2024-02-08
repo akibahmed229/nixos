@@ -27,10 +27,10 @@
   '';
 
   fileSystems."/persist".neededForBoot = true;
+  programs.fuse.userAllowOther = true;
   environment.persistence."/persistent" = {
     hideMounts = true;
     directories = [
-      "/etc/nixos"
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
@@ -51,22 +51,18 @@
         "Videos"
         "VirtualBox VMs"
         "flake"
-        ".config"
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
+        { directory = ".config"; mode = "0700"; }
         { directory = ".nixops"; mode = "0700"; }
         { directory = ".local/share/keyrings"; mode = "0700"; }
         ".local/share/direnv"
       ];
       files = [
-        ".screenrc"
+        #".screenrc"
       ];
     };
   };
 
   programs.fuse.userAllowOther = true;
-
-  # To install it globally
-  environment.systemPackages =
-    [ inputs.home-manager.packages.${pkgs.system}.default ];
 }
