@@ -53,7 +53,6 @@
         "VirtualBox VMs"
         "flake"
         "Android"
-        "flake"
         ".docker"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
         { directory = ".gnupg"; mode = "0700"; }
