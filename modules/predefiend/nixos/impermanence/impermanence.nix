@@ -58,7 +58,10 @@
         ".local/share/direnv"
       ];
       files = [
-        #".screenrc"
+        ".screenrc"
+        ".zshrc"
+        ".zsh_history"
+        ".gitconfig"
       ];
     };
   };
