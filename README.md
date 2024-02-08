@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
 
-<h2 align="center">Akib | NixOS Config</h2>
+<h2 align="center">Akib | NixOS Config go Wilde with dev branch</h2>
 
 ## Current System Preview
 
