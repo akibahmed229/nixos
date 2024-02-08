@@ -7,27 +7,31 @@
 
   home.persistence."/persist/home/${user}" = {
     directories = [
+      "Desktop"
       "Downloads"
       "Music"
       "Pictures"
+      "Public"
       "Documents"
       "Videos"
       "VirtualBox VMs"
-      "Android"
       "flake"
+      "Android"
       ".docker"
-      ".mozilla"
-      ".tmux"
-      ".gnupg"
-      ".ssh"
-      ".nixops"
-      ".config"
-      #".local"
       ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
+      { directory = ".gnupg"; mode = "0700"; }
+      { directory = ".ssh"; mode = "0700"; }
+      { directory = ".config"; mode = "0700"; }
+      { directory = ".mozilla"; mode = "0700"; }
+      { directory = ".nixops"; mode = "0700"; }
+      { directory = ".tmux"; mode = "0700"; }
+      { directory = ".local/share/keyrings"; mode = "0700"; }
       {
         directory = ".local/share/Steam";
         method = "symlink";
       }
+      ".local/share/direnv"
+
     ];
     files = [
       ".screenrc"
