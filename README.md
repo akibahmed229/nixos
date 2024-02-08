@@ -37,7 +37,7 @@ Mount the partitions and subvolumes using the following commands:
 
 ```bash
 nix su
-nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos#disko-formate --no-write-lock-file # This will format the disk and mount the partitions make sure to give the device name e.g /dev/sda
+nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos/dev#disko-formate --no-write-lock-file # This will format the disk and mount the partitions make sure to give the device name e.g /dev/sda
 ```
 
 Create home dir in /persist
@@ -56,7 +56,7 @@ To install NixOS on the mounted partitions, follow these steps:
 ```bash
 nix-env -iA nixos.git
 nixos-generate-config --root /mnt
-git clone https://www.github.com/akibahmed229/nixos.git /mnt
+git clone https://www.github.com/akibahmed229/nixos/dev /mnt
 ```
 
 Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to the /mnt/nixos directory. and install the system using the following command:
