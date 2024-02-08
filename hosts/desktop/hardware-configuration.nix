@@ -36,17 +36,17 @@
     "logo.nologo"
   ];
 
-  boot = {
-    consoleLogLevel = 3;
-    initrd = {
-      verbose = false;
-      systemd.enable = true;
-    };
-    plymouth = {
-      enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
-      theme = "breeze";
-    };
-  };
+#  boot = {
+#    consoleLogLevel = 3;
+ #   initrd = {
+ #     verbose = false;
+#      systemd.enable = true;
+#    };
+#    plymouth = {
+   #   enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
+#      theme = "breeze";
+#    };
+#  };
 
   boot.initrd.availableKernelModules = [
     "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)
