@@ -30,12 +30,27 @@
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
+        "/etc/NetworkManager/system-connections"
+        "/var/log"  # system logs
+        "/var/lib/systemd"  # various state for systemd such as persistent timers
+        "/var/lib/nixos"
+        "/var/lib/docker"  # TODO: remove once I got rid of Docker on sapphire
+        /*
+        /var/tmp is expected to be on disk and have enough free space
+        e.g. by podman when copying images, which will easily fill up the tmpfs
+
+        so we persist this and add a systemd-tmpfiles rule below to clean it up
+        on a schedule
+        */
+        "/var/tmp"
+        "/etc/mullvad-vpn" "/var/cache/mullvad-vpn"  # mullvad vpn cli client settings and relay list cache
+        "/var/lib/bluetooth"  # bluetooth connection state stuff
+        "/var/lib/microvms"  # MicroVMs
+
+        # store the password store in /persist 
+        "/etc/shadow"
+        "/etc/passwd"
+        "/run/current-system/sw/bin"
     ];
     files = [
       "/etc/machine-id"
