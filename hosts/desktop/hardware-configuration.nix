@@ -29,24 +29,24 @@
     "acpi_backlight=vendor" # Fix backlight control 
     "acpi_osi=Linux" # Fix backlight control 
     "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power 
-    # "rd.udev.log_level=3" # Increase kernel log verbosity
+    "rd.udev.log_level=3" # Increase kernel log verbosity
     "systemd.show_status=false"
     "no_console_suspend" # Prevent consoles from being suspended
     "splash"
     "logo.nologo"
   ];
 
-  #  boot = {
-  #    consoleLogLevel = 3;
-  #   initrd = {
-  #     verbose = false;
-  #      systemd.enable = true;
-  #    };
-  #    plymouth = {
-  #   enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
-  #      theme = "breeze";
-  #    };
-  #  };
+  boot = {
+    consoleLogLevel = 3;
+    initrd = {
+      verbose = false;
+      #systemd.enable = true;
+    };
+    plymouth = {
+      enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
+      theme = "breeze";
+    };
+  };
 
   boot.initrd.availableKernelModules = [
     "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)
@@ -86,14 +86,14 @@
 
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
-    #fsType = "ntfs3"; # Specify the file system type
-    options = [ "defaults" ]; # Mount options (rw,exec,auto,user,async)
+    #fsType = "ntfs"; # Specify the file system type
+    options = [ "rw,exec" ]; # Mount options (rw,exec,auto,user,async)
   };
 
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
-    #fsType = "ntfs3"; # Specify the file system type
-    options = [ "defaults" ]; # Mount options 
+    #fsType = "ntfs"; # Specify the file system type
+    options = [ "rw,exec" ]; # Mount options 
   };
 
   # Enabling samba file sharing over local network 
