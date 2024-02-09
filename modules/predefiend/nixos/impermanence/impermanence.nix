@@ -30,22 +30,23 @@
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
-        "/etc/NetworkManager/system-connections"
-        "/var/log"  # system logs
-        "/var/lib/systemd"  # various state for systemd such as persistent timers
-        "/var/lib/nixos"
-        "/var/lib/docker"  # TODO: remove once I got rid of Docker on sapphire
-        /*
+      "/etc/NetworkManager/system-connections"
+      "/var/log" # system logs
+      "/var/lib/systemd" # various state for systemd such as persistent timers
+      "/var/lib/nixos"
+      "/var/lib/docker" # TODO: remove once I got rid of Docker on sapphire
+      /*
         /var/tmp is expected to be on disk and have enough free space
         e.g. by podman when copying images, which will easily fill up the tmpfs
 
         so we persist this and add a systemd-tmpfiles rule below to clean it up
         on a schedule
         */
-        "/var/tmp"
-        "/etc/mullvad-vpn" "/var/cache/mullvad-vpn"  # mullvad vpn cli client settings and relay list cache
-        "/var/lib/bluetooth"  # bluetooth connection state stuff
-        "/var/lib/microvms"  # MicroVMs
+      "/var/tmp"
+      "/etc/mullvad-vpn"
+      "/var/cache/mullvad-vpn" # mullvad vpn cli client settings and relay list cache
+      "/var/lib/bluetooth" # bluetooth connection state stuff
+      "/var/lib/microvms" # MicroVMs
     ];
     files = [
       "/etc/machine-id"
@@ -83,6 +84,9 @@
     };
   };
 
+  # /var/tmp is persisted for reasons explained above, clean it with systemd-tmpfiles
+  systemd.tmpfiles.rules = [ "e /var/tmp 1777 root root 30d" ];
+  # allows other users to access FUSE mounts
   programs.fuse.userAllowOther = true;
   #  home-manager = {
   #   extraSpecialArgs = {inherit inputs;};
