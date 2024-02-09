@@ -47,6 +47,7 @@
     alacritty
     dmenu
     gcc
+    nvim
     xcompmgr
     rPackages.pkgmaker
     xorg.xrandr
