@@ -46,14 +46,6 @@
         "/etc/mullvad-vpn" "/var/cache/mullvad-vpn"  # mullvad vpn cli client settings and relay list cache
         "/var/lib/bluetooth"  # bluetooth connection state stuff
         "/var/lib/microvms"  # MicroVMs
-
-        # store the password store in /persist 
-        "/etc/shadow"
-        "/etc/passwd"
-        "/run/current-system/sw/bin"
-        "/bin"
-        "/usr/bin"
-        "/nix/var/nix/profiles/system"
     ];
     files = [
       "/etc/machine-id"
