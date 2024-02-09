@@ -51,6 +51,9 @@
         "/etc/shadow"
         "/etc/passwd"
         "/run/current-system/sw/bin"
+        "/bin"
+        "/usr/bin"
+        "/nix/var/nix/profiles/system"
     ];
     files = [
       "/etc/machine-id"
