@@ -12,7 +12,7 @@
 , hyprland
 , plasma-manager
 , user
-, hostname 
+, hostname
 , ...
 }:
 
