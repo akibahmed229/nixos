@@ -22,8 +22,6 @@
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
   environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
-  # password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s
-  users.users.root.hashedPassword = "$6$ovUc9mdzJGnx/iwy$E2th/NMRrGEzDHs6vK39i2VSb1nbFGqtzxKzJjkC5pmCzh6xfQI23ZaNqU11.ECO/0VbwnH2lLjUdx6QweT7f.";
 
   programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
   programs.command-not-found.enable = false;

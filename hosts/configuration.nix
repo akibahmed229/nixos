@@ -3,6 +3,7 @@
 { config
 , pkgs
 , user
+, hostname
 , unstable
 , nixpkgs
 , lib
@@ -30,7 +31,7 @@
   };
 
   # networking options
-  networking.hostName = "Ahmed"; # Define your hostname.
+  networking.hostName = "${hostname}"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -80,10 +81,13 @@
   };
 
 
+  # password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s
+  users.users.root.hashedPassword = "$6$V9VUyHMch1ZsocfS$zk5UFtOBFmIw/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
     isNormalUser = true;
-    initialPassword = "123456";
+    hashedPassword  = "$6$y5qxEUAdhGfuMjTA$7zd9DbLF3hw8BCi.pOGI0BYg2hUTcNnP8FkzJtXfOgBOD9fv8cmBlmbMbiaOTsfeqeLyRgY/XMxkADpBsBa4Z0";
     description = "Akib Ahmed";
     extraGroups = [ "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
     packages = with pkgs; [

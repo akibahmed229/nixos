@@ -12,6 +12,7 @@
 , hyprland
 , plasma-manager
 , user
+, hostname 
 , ...
 }:
 
@@ -37,7 +38,7 @@
       {
         home-manager.useGlobalPkgs = false;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user inputs unstable theme state-version; }; # pass inputs && variables to home-manager
+        home-manager.extraSpecialArgs = { inherit user hostname inputs unstable theme state-version; }; # pass inputs && variables to home-manager
         home-manager.users.${user} = {
           imports = [
             nix-index-database.hmModules.nix-index

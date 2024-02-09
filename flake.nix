@@ -90,6 +90,7 @@
       inherit (nixpkgs) lib;
       system = "x86_64-linux";
       state-version = "23.11";
+      hostname = "desktop";
 
       # Supported systems for your flake packages, shell, etc.
       systems = [
@@ -135,7 +136,7 @@
       #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
       nixosConfigurations = import ./hosts {
         inherit (nixpkgs) lib;
-        inherit inputs unstable nixos user system theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs unstable nixos user hostname system theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
       };
     };
 }
