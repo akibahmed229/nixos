@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
 
-<h2 align="center">Akib | NixOS Config go Wilde with dev branch</h2>
+<h2 align="center">Akib | NixOS Config GO Wilde</h2>
 
 ## Current System Preview
 
@@ -40,29 +40,22 @@ nix su
 nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos/dev#disko-formate --no-write-lock-file # This will format the disk and mount the partitions make sure to give the device name e.g /dev/sda
 ```
 
-Create home dir in /persist
-For devices with home dir persistence, we'll need to create that manually. That's because it's managed by impermanence in home-manager, which doesn't have the permissions to create a directory in the root-owned persist dir.
-
-- mkdir -p /persist/home/eisfunke
-
-- chown 1000:100 /persist/home/eisfunke
-
-- chmod 700 /persist/home/eisfunke
-
 2. **Install NixOS**
 
 To install NixOS on the mounted partitions, follow these steps:
+make sure change your username and hostname in the flake.nix file
 
 ```bash
 nix-env -iA nixos.git
 nixos-generate-config --root /mnt
-git clone https://www.github.com/akibahmed229/nixos/dev /mnt
+mkdir -p /mnt/persist/home/flake
+git clone https://www.github.com/akibahmed229/nixos/dev /mnt/persist/home/flake
 ```
 
 Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to the /mnt/nixos directory. and install the system using the following command:
 
 ```bash
-cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/nixos/hosts/desktop/hardware-configuration.nix
+cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/persist/home/flake/hosts/desktop/hardware-configuration.nix
 cd /mnt/nixos
 nixos-install --root /mnt --flake .#desktop --no-write-lock-file
 ```
@@ -74,6 +67,8 @@ Congratulations! You have successfully installed NixOS with a Btrfs filesystem. 
 Remember to replace `/dev/sdX` with the appropriate disk identifier for your system.
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
+
+Post Installation Steps
 
 # 2. FAQ
 
