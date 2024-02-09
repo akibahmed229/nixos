@@ -74,10 +74,11 @@
         { directory = ".tmux"; mode = "0700"; }
         { directory = ".local/share/keyrings"; mode = "0700"; }
         ".local/share/direnv"
+        ".local/share/nvim"
       ];
       files = [
         ".screenrc"
-        ".zshrc"
+        #".zshrc"
         ".zsh_history"
         ".gitconfig"
       ];
