@@ -83,6 +83,8 @@
         ".local/share/Notepadqq"
         ".local/share/qBittorrent"
         ".local/share/flatpak"
+        ".local/state/nvim"
+        ".local/state/wireplumber"
       ];
       files = [
         ".screenrc"
