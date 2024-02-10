@@ -21,7 +21,7 @@
                   "com.leinardi.gst"
                   "org.gnome.Snapshot"
                   "org.nickvision.tubeconverter"
-                  #"com.getpostman.Postman"
+                  "com.getpostman.Postman"
                   #"com.google.Chrome"
                   #"com.microsoft.Edge"
                   #"io.github.amit9838.weather"

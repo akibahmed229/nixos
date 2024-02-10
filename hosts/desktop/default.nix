@@ -114,7 +114,7 @@
     qbittorrent
     obsidian
     figma-linux
-    postman
+    #postman
     protonvpn-gui
     notepadqq
     gradience
