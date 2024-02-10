@@ -60,14 +60,11 @@
   environment.systemPackages = (with pkgs; [
     # List programs you want in your system Stable packages
     neovim-unwrapped
+    ripgrep
     htop
     trash-cli
     cava
     neofetch
-    vscode
-    ripgrep
-    android-tools
-    android-udev-rules
     #espanso-wayland
     zip
     unzip
@@ -83,13 +80,7 @@
     devbox
     simplehttp2server
     speedtest-cli
-    onionshare
-    git
-    gcc
-    jdk21
-    python312Full
-    nodejs_21
-    yarn
+    #onionshare
     docker-compose
     flatpak
     appimage-run
@@ -114,7 +105,6 @@
     qbittorrent
     obsidian
     figma-linux
-    #postman
     protonvpn-gui
     notepadqq
     gradience
@@ -192,9 +182,20 @@
     # List unstable packages here
     jetbrains.pycharm-community
     jetbrains.idea-community
+    #postman
+    vscode
+    android-tools
+    android-udev-rules
+    github-desktop
     android-studio
     alacritty
     dwt1-shell-color-scripts
+    git
+    gcc
+    jdk21
+    python312Full
+    nodejs_21
+    yarn
   ]);
 
   # Gaming
