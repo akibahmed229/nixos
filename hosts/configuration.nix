@@ -105,7 +105,7 @@
       TERMINAL = "alacritty";
       EDITOR = "nvim";
       VISUAL = "nvim";
-      BROWSER = "firefox";
+      #BROWSER = "firefox";
     };
   };
 

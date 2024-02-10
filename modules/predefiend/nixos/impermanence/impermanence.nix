@@ -64,6 +64,7 @@
         "VirtualBox VMs"
         "flake"
         "Android"
+        ".vscode"
         ".docker"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
         { directory = ".gnupg"; mode = "0700"; }
@@ -78,6 +79,8 @@
         ".local/share/TelegramDesktop"
         ".local/share/whatsapp-for-linux"
         ".local/share/Notepadqq"
+        ".local/share/qBittorrent"
+        ".local/share/flatpak"
       ];
       files = [
         ".screenrc"
