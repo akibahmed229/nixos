@@ -13,7 +13,7 @@
       ''
         flatpaks=(
                   "sh.ppy.osu"
-                  "io.github.shiftey.Desktop"
+                  #"io.github.shiftey.Desktop"
                   "com.jgraph.drawio.desktop"
                   "com.jgraph.drawio.desktop"
                   "com.github.flxzt.rnote"

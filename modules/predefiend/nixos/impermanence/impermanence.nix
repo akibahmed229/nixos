@@ -66,6 +66,7 @@
         "VirtualBox VMs"
         "flake"
         "Android"
+        "Postman"
         ".vscode"
         ".docker"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
