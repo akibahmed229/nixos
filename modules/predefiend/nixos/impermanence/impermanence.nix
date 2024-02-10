@@ -43,10 +43,12 @@
         on a schedule
         */
       "/var/tmp"
+      "/root/.local/share" # various application state
       "/etc/mullvad-vpn"
       "/var/cache/mullvad-vpn" # mullvad vpn cli client settings and relay list cache
       "/var/lib/bluetooth" # bluetooth connection state stuff
       "/var/lib/microvms" # MicroVMs
+      "/var/lib/flatpak" # flatpak user data
     ];
     files = [
       "/etc/machine-id"
