@@ -86,14 +86,14 @@
 
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
-    #fsType = "ntfs"; # Specify the file system type
-    options = [ "rw,exec" ]; # Mount options (rw,exec,auto,user,async)
+    fsType = "ntfs"; # Specify the file system type
+    options = [ "defaults" ]; # Mount options (rw,exec,auto,user,async)
   };
 
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
-    #fsType = "ntfs"; # Specify the file system type
-    options = [ "rw,exec" ]; # Mount options 
+    fsType = "ntfs"; # Specify the file system type
+    options = [ "defaults" ]; # Mount options 
   };
 
   # Enabling samba file sharing over local network 
