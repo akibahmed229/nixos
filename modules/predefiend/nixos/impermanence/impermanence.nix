@@ -75,6 +75,9 @@
         { directory = ".local/share/keyrings"; mode = "0700"; }
         ".local/share/direnv"
         ".local/share/nvim"
+        ".local/share/TelegramDesktop"
+        ".local/share/whatsapp-for-linux"
+        ".local/share/Notepadqq"
       ];
       files = [
         ".screenrc"
