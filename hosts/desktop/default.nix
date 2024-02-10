@@ -17,7 +17,7 @@
     [ (import ../../home-manager/hyprland/default.nix) ] ++ # uncomment to use Hyprland
     # [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
     # [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
-    # [(import ../../modules/predefiend/nixos/flatpak/flatpak.nix)]++
+    [(import ../../modules/predefiend/nixos/flatpak/flatpak.nix)]++
     [ (import ../../modules/predefiend/nixos/sops/sops.nix) ] ++
     [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
@@ -109,13 +109,20 @@
     audacity
     bottles
     gparted
-    #libreoffice
+    libreoffice
+    qbittorrent
+    obsidian
+    figma-linux
+    postman
+    protonvpn-gui
     notepadqq
     gradience
     mangohud
     goverlay
     anydesk
-    #geekbench
+    geekbench
+    kdiskmark
+    chromium
     qemu
     bridge-utils
     virt-manager
@@ -184,7 +191,7 @@
     # List unstable packages here
     jetbrains.pycharm-community
     jetbrains.idea-community
-    #android-studio
+    android-studio
     alacritty
     dwt1-shell-color-scripts
   ]);
