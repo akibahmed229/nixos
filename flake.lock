@@ -231,11 +231,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-6IZSFAFXpR1gbFz8ufM7fJCNnea6SeDFy0DnwTBQqa4=",
-        "path": "/nix/store/cwy271kyb2bwl0w9nmg5z0vi6qbwr5nb-source/devshell",
+        "path": "/nix/store/x39c6f0fmh2x47yy5z023mr8z6rmmk2d-source/devshell",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/cwy271kyb2bwl0w9nmg5z0vi6qbwr5nb-source/devshell",
+        "path": "/nix/store/x39c6f0fmh2x47yy5z023mr8z6rmmk2d-source/devshell",
         "type": "path"
       }
     },
