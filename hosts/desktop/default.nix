@@ -32,6 +32,7 @@
   # Insecure permite
   nixpkgs.config.permittedInsecurePackages = [
     "python-2.7.18.6"
+    "electron-25.9.0"
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
