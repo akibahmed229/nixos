@@ -14,6 +14,13 @@
     };
   };
 
+    i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with unstable; [
+      (ibus-engines.typing-booster.override { langs = [ "en_US" ]; })
+    ];
+  };
+
   services = {
     xserver = {
       enable = true;
