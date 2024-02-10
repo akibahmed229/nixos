@@ -141,7 +141,7 @@
     # Required for flatpak with window managers and for file browsing
     enable = true;
     wlr.enable = true;
-    xdgOpenUsePortal = true;
+    #xdgOpenUsePortal = true; # disable to work default browser 
     config = {
       common.default = [ "gtk" ];
       hyprland.default = [ "gtk" "hyprland" ];
