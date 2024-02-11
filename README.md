@@ -31,19 +31,20 @@ Before you begin, ensure you have the following:
 
 ## Installation Steps
 
+Make sure change your username and hostname in the flake.nix file
+
 1. **Formate, Mount the Partitions and Subvolumes**
 
-Mount the partitions and subvolumes using the following commands:
+This will format the disk and mount the partitions make sure to give the device name e.g /dev/nvme0n1
 
 ```bash
 nix su
-nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos/dev#disko-formate --no-write-lock-file # This will format the disk and mount the partitions make sure to give the device name e.g /dev/sda
+nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos/dev#disko-formate
 ```
 
 2. **Install NixOS**
 
 To install NixOS on the mounted partitions, follow these steps:
-make sure change your username and hostname in the flake.nix file
 
 ```bash
 nix-env -iA nixos.git
@@ -57,7 +58,7 @@ Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to th
 ```bash
 cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/persist/home/flake/hosts/desktop/hardware-configuration.nix
 cd /mnt/nixos
-nixos-install --root /mnt --flake .#desktop --no-write-lock-file
+nixos-install --root /mnt --flake .#desktop
 ```
 
 Note: During the configuration step, you can manually edit the `/mnt/etc/nixos/configuration.nix` file to set mount options and customize your NixOS installation.
