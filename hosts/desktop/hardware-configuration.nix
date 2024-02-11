@@ -9,12 +9,13 @@
 , unstable
 , self
 , modulesPath
+, devicename
 , ...
 }:
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ] ++
-    [ (import ../../modules/predefiend/nixos/disko/disko.nix { device = "/dev/nvme0n1"; }) ];
+    [ (import ../../modules/predefiend/nixos/disko/disko.nix { device = "${devicename}"; }) ];
 
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;

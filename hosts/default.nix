@@ -13,6 +13,7 @@
 , plasma-manager
 , user
 , hostname
+, devicename
 , ...
 }:
 
@@ -21,7 +22,7 @@
   desktop = lib.nixosSystem {
     inherit system;
 
-    specialArgs = { inherit user hostname inputs unstable state-version; };
+    specialArgs = { inherit inputs  user hostname devicename unstable state-version; };
     modules = [
       # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
       # configuration of nixos 
@@ -38,7 +39,7 @@
       {
         home-manager.useGlobalPkgs = false;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user hostname inputs unstable theme state-version; }; # pass inputs && variables to home-manager
+        home-manager.extraSpecialArgs = { inherit inputs user unstable theme state-version; }; # pass inputs && variables to home-manager
         home-manager.users.${user} = {
           imports = [
             nix-index-database.hmModules.nix-index
@@ -67,7 +68,7 @@
   virt = lib.nixosSystem {
     inherit system;
 
-    specialArgs = { inherit user inputs unstable state-version; };
+    specialArgs = { inherit  inputs user hostname devicename unstable state-version; };
     modules = [
       # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
       inputs.disko.nixosModules.default
@@ -80,7 +81,7 @@
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user inputs theme hyprland state-version; };
+        home-manager.extraSpecialArgs = { inherit inputs user hostname devicename theme hyprland state-version; };
         home-manager.users.${user} = {
           imports = [ (import ../home-manager/home.nix) ] ++
             # [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
