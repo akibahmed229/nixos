@@ -91,7 +91,7 @@
       system = "x86_64-linux";
       state-version = "23.11";
       hostname = "desktop";
-      devicename = "/dev/nvme0n1"; 
+      devicename = "/dev/nvme0n1";
 
       # Supported systems for your flake packages, shell, etc.
       systems = [
