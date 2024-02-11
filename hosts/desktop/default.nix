@@ -138,6 +138,7 @@
     libverto
     fail2ban
     fzf
+    tlrc
     gamemode
     # bottles
     bottles
