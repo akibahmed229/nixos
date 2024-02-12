@@ -86,6 +86,7 @@
         ".local/share/flatpak"
         ".local/state/nvim"
         ".local/state/wireplumber"
+        "~/.var/app/sh.ppy.osu"
       ];
       files = [
         ".screenrc"
