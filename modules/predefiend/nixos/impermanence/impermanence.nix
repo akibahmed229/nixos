@@ -30,6 +30,8 @@
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
+      "/root/.local/share" # various application state
+      "/etc/mullvad-vpn"
       "/etc/NetworkManager/system-connections"
       "/var/log" # system logs
       "/var/lib/systemd" # various state for systemd such as persistent timers
@@ -43,12 +45,11 @@
         on a schedule
         */
       "/var/tmp"
-      "/root/.local/share" # various application state
-      "/etc/mullvad-vpn"
       "/var/cache/mullvad-vpn" # mullvad vpn cli client settings and relay list cache
       "/var/lib/bluetooth" # bluetooth connection state stuff
       "/var/lib/microvms" # MicroVMs
       "/var/lib/flatpak" # flatpak user data
+      "/var/lib/samba/private" # storing samba user password
     ];
     files = [
       "/etc/machine-id"
@@ -86,7 +87,7 @@
         ".local/share/flatpak"
         ".local/state/nvim"
         ".local/state/wireplumber"
-        "~/.var/app/sh.ppy.osu"
+        ".var/app/sh.ppy.osu"
       ];
       files = [
         ".screenrc"
