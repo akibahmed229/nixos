@@ -29,8 +29,7 @@
       ./configuration.nix
       ./desktop
       nix-index-database.nixosModules.nix-index
-      # optional to also wrap and install comma
-      { programs.nix-index-database.comma.enable = true; }
+      { programs.nix-index-database.comma.enable = true; } # optional to also wrap and install comma
       inputs.impermanence.nixosModules.impermanence
       inputs.disko.nixosModules.default
 
@@ -41,24 +40,13 @@
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit inputs user unstable theme state-version; }; # pass inputs && variables to home-manager
         home-manager.users.${user} = {
-          imports = [
-            nix-index-database.hmModules.nix-index
-            # optional to also wrap and install comma
-            { programs.nix-index-database.comma.enable = true; }
-          ] ++
-          [
-            # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
-            hyprland.homeManagerModules.default # uncommnet to use hyprland
-            { wayland.windowManager.hyprland.systemd.enable = true; }
-          ] ++
-          [
-            # config of home-manager 
-            ../home-manager/home.nix
-          ] ++
-          [
-            #../home-manager/gnome/home.nix # uncommnet to use gnome
-            ../home-manager/hyprland/home.nix
-          ];
+          imports =
+            [ nix-index-database.hmModules.nix-index { programs.nix-index-database.comma.enable = true; } ] ++ # optional to also wrap and install comma
+            [ hyprland.homeManagerModules.default { wayland.windowManager.hyprland.systemd.enable = true; } ] ++
+            # [ inputs.plasma-manager.homeManagerModules.plasma-manager ] ++ # uncommnet to use KDE Plasma 
+            [ (import ../home-manager/home.nix) ] ++ # config of home-manager 
+            [ (import ../home-manager/hyprland/home.nix) ];
+          # [(import  ../home-manager/gnome/home.nix ) ; ## uncommnet to use gnome
         };
       }
     ];
@@ -83,7 +71,8 @@
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit inputs user hostname devicename theme hyprland state-version; };
         home-manager.users.${user} = {
-          imports = [ (import ../home-manager/home.nix) ] ++
+          imports =
+            [ (import ../home-manager/home.nix) ] ++
             # [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
             [ nix-index-database.hmModules.nix-index ];
         };
