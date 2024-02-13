@@ -50,6 +50,7 @@
       "/var/lib/microvms" # MicroVMs
       "/var/lib/flatpak" # flatpak user data
       "/var/lib/samba/private" # storing samba user password
+      "/var/lib/waydroid" # waydroid state
     ];
     files = [
       "/etc/machine-id"
