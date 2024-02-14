@@ -60,26 +60,27 @@
       inherit system;
 
       specialArgs = { inherit inputs user hostname devicename unstable state-version; };
-      modules = [
-        # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
-        inputs.disko.nixosModules.default
-        ./configuration.nix
-        ./virt
-        nix-index-database.nixosModules.nix-index
-        inputs.impermanence.nixosModules.impermanence
-
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs user hostname devicename theme hyprland state-version; };
-          home-manager.users.${user} = {
-            imports =
-              [ (import ../home-manager/home.nix) ] ++
-              # [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
-              [ nix-index-database.hmModules.nix-index ];
-          };
-        }
-      ];
+      modules =
+        # [ "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
+        [ (import ./configuration.nix) ] ++
+        [ (import ./virt) ] ++
+        [ outputs.nixosModules.default ] ++ # Custom nixos modules
+        [ nix-index-database.nixosModules.nix-index ] ++
+        [ inputs.impermanence.nixosModules.impermanence ] ++
+        [ inputs.disko.nixosModules.default ] ++
+        [
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs user hostname devicename theme hyprland state-version; };
+            home-manager.users.${user} = {
+              imports =
+                [ (import ../home-manager/home.nix) ] ++
+                # [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
+                [ nix-index-database.hmModules.nix-index ];
+            };
+          }
+        ];
     };
 }
