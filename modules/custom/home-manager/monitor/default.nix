@@ -1,5 +1,3 @@
-# ./modules/monitors.nix
-
 { lib, config, ... }:
 
 let
