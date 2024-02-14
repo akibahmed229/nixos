@@ -44,7 +44,7 @@
   # Enable sound.
   audio.enable = true;
 
-  # password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s
+  # user configuration
   user.enable = true;
   user.userName = "${user}";
 

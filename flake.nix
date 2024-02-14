@@ -135,6 +135,9 @@
       # Reusable nixos modules you might want to export
       # These are usually stuff you would upstream into nixpkgs
       nixosModules = import ./modules/custom/nixos;
+      # Reusable home-manager modules you might want to export
+      # These are usually stuff you would upstream into home-manager
+      homeManagerModules = import ./modules/custom/home-manager;
 
       # NixOS configuration with flake and home-manager as module
       #  Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"

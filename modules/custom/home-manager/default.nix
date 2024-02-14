@@ -1,3 +1,3 @@
 {
-  default.imports = [ ];
+  default.imports = [ (import ./monitor) ];
 }

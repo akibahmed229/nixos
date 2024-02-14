@@ -15,6 +15,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s
     users.users.root.hashedPassword = "$6$V9VUyHMch1ZsocfS$zk5UFtOBFmIw/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
     users.users.${cfg.userName} = {
       isNormalUser = true;

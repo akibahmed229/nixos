@@ -47,9 +47,15 @@
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
       #monitor=,preferred,auto,auto 
-      monitor = [
-        ",1920x1080@75,auto,1"
-      ];
+      monitor = map
+        (monitor:
+          let
+            resolution = "${toString monitor.width}x${toString monitor.height}@${toString monitor.refreshRate}";
+            position = "${toString monitor.x}x${toString monitor.y}";
+          in
+          "${monitor.name},${if monitor.enabled then "${resolution},${position},1" else "disable"}"
+        )
+        (config.monitors);
 
       # Execute your favorite apps at launch
       exec-once = [

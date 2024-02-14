@@ -44,6 +44,7 @@
             imports =
               [ nix-index-database.hmModules.nix-index { programs.nix-index-database.comma.enable = true; } ] ++ # optional to also wrap and install comma
               [ hyprland.homeManagerModules.default { wayland.windowManager.hyprland.systemd.enable = true; } ] ++
+              [ outputs.homeManagerModules.default ] ++ # Custom home-manager modules
               # [ inputs.plasma-manager.homeManagerModules.plasma-manager ] ++ # uncommnet to use KDE Plasma 
               [ (import ../home-manager/home.nix) ] ++ # config of home-manager 
               [ (import ../home-manager/hyprland/home.nix) ];
