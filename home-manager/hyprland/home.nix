@@ -31,6 +31,7 @@
     [ (import ../../modules/predefiend/home-manager/discord/discord.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/zsh/zsh.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/tmux/tmux.nix) ] ++
+    [ (import ../../modules/predefiend/home-manager/nvchad/nvim.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/lf/lf.nix) ];
 
   home.packages = with pkgs; [

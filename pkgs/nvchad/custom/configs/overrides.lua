@@ -24,6 +24,12 @@ M.treesitter = {
     --   "python"
     -- },
   },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = true,
+    disable = {
+    },
+  },
 }
 
 M.mason = {

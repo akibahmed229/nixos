@@ -144,7 +144,7 @@
       #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
       nixosConfigurations = import ./hosts {
         inherit (nixpkgs) lib;
-        inherit inputs outputs unstable nixos user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs self unstable nixos user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
       };
     };
 }

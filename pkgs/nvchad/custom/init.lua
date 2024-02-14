@@ -1,3 +1,5 @@
+local opt = vim.opt
+
 -- local autocmd = vim.api.nvim_create_autocmd
 
 -- Auto resize panes when resizing nvim window
@@ -5,6 +7,8 @@
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
+
+opt.relativenumber = true
 
 for i = 1, 9, 1 do
   vim.keymap.set("n", string.format("<A-%s>", i), function()

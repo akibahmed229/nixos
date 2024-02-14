@@ -1,6 +1,7 @@
 # NixOS configuration with home-manager as a module in flakes
 
-{ lib
+{ self
+, lib
 , inputs
 , unstable
 , nixos
@@ -14,7 +15,6 @@
 , user
 , hostname
 , devicename
-, outputs
 , ...
 }:
 
@@ -23,13 +23,13 @@
   desktop = lib.nixosSystem {
     inherit system;
 
-    specialArgs = { inherit inputs user hostname devicename unstable state-version; };
+    specialArgs = { inherit inputs self user hostname devicename unstable state-version; };
     modules =
       # configuration of nixos 
       # [ "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
       [ (import ./configuration.nix) ] ++
       [ (import ./desktop) ] ++
-      [ outputs.nixosModules.default ] ++ # Custom nixos modules
+      [ self.nixosModules.default ] ++ # Custom nixos modules
       [ nix-index-database.nixosModules.nix-index { programs.nix-index-database.comma.enable = true; } ] ++ # optional to also wrap and install comma
       [ inputs.impermanence.nixosModules.impermanence ] ++
       [ inputs.disko.nixosModules.default ] ++
@@ -39,12 +39,12 @@
         {
           home-manager.useGlobalPkgs = false;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs user unstable theme state-version; }; # pass inputs && variables to home-manager
+          home-manager.extraSpecialArgs = { inherit inputs self user unstable theme state-version; }; # pass inputs && variables to home-manager
           home-manager.users.${user} = {
             imports =
               [ nix-index-database.hmModules.nix-index { programs.nix-index-database.comma.enable = true; } ] ++ # optional to also wrap and install comma
               [ hyprland.homeManagerModules.default { wayland.windowManager.hyprland.systemd.enable = true; } ] ++
-              [ outputs.homeManagerModules.default ] ++ # Custom home-manager modules
+              [ self.homeManagerModules.default ] ++ # Custom home-manager modules
               # [ inputs.plasma-manager.homeManagerModules.plasma-manager ] ++ # uncommnet to use KDE Plasma 
               [ (import ../home-manager/home.nix) ] ++ # config of home-manager 
               [ (import ../home-manager/hyprland/home.nix) ];
@@ -64,7 +64,7 @@
         # [ "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
         [ (import ./configuration.nix) ] ++
         [ (import ./virt) ] ++
-        [ outputs.nixosModules.default ] ++ # Custom nixos modules
+        [ self.nixosModules.default ] ++ # Custom nixos modules
         [ nix-index-database.nixosModules.nix-index ] ++
         [ inputs.impermanence.nixosModules.impermanence ] ++
         [ inputs.disko.nixosModules.default ] ++
