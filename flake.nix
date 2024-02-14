@@ -132,12 +132,16 @@
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
       formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.nixpkgs-fmt);
 
+      # Reusable nixos modules you might want to export
+      # These are usually stuff you would upstream into nixpkgs
+      nixosModules = import ./modules/custom/nixos;
+
       # NixOS configuration with flake and home-manager as module
-      #  Accessible through "$ nixos-rebuild switch --flake .#<host> " or "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
+      #  Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
       #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
       nixosConfigurations = import ./hosts {
         inherit (nixpkgs) lib;
-        inherit inputs unstable nixos user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+        inherit inputs outputs unstable nixos user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
       };
     };
 }

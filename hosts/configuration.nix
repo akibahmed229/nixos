@@ -12,23 +12,7 @@
 
 {
   # Dual Booting using grub
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    grub = {
-      enable = true;
-      theme = pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "Yo, sleek operator!"; };
-      # splashImage = ../public/wallpaper/nixos.png;
-      devices = [ "nodev" ]; # install grub on efi
-      efiSupport = true;
-      useOSProber = true; # To find Other boot manager like windows 
-      configurationLimit = 5; # Store number of config 
-    };
-
-    timeout = 3; # Boot Timeout
-  };
+  grub.enable = true;
 
   # networking options
   networking.hostName = "${hostname}"; # Define your hostname.
@@ -58,40 +42,11 @@
   services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    # alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    # wireplumber.enable = true;
-  };
-
+  audio.enable = true;
 
   # password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s
-  users.users.root.hashedPassword = "$6$V9VUyHMch1ZsocfS$zk5UFtOBFmIw/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
-    isNormalUser = true;
-    hashedPassword = "$6$y5qxEUAdhGfuMjTA$7zd9DbLF3hw8BCi.pOGI0BYg2hUTcNnP8FkzJtXfOgBOD9fv8cmBlmbMbiaOTsfeqeLyRgY/XMxkADpBsBa4Z0";
-    description = "Akib Ahmed";
-    extraGroups = [ "networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
-    packages = with pkgs; [
-      wget
-      thunderbird
-      vlc
-    ];
-  };
-  security.sudo.wheelNeedsPassword = true; # User does not need to give password when using sudo.
-
+  user.enable = true;
+  user.userName = "${user}";
 
   # Enable ADB for Android
   programs.adb.enable = true;
@@ -105,7 +60,7 @@
       TERMINAL = "alacritty";
       EDITOR = "nvim";
       VISUAL = "nvim";
-      #BROWSER = "firefox";
+      BROWSER = "firefox";
     };
   };
 
