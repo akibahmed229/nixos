@@ -55,7 +55,7 @@
           in
           "${monitor.name},${if monitor.enabled then "${resolution},${position},1" else "disable"}"
         )
-        (config.monitors);
+        config.monitors;
 
       # Execute your favorite apps at launch
       exec-once = [
