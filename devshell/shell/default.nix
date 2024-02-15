@@ -1,9 +1,9 @@
 # where all the possible development environments are defined 
 
-{ system, pkgs, inputs, ... }:
+{ system, pkgs, inputs, unstable, ... }:
 
 {
-  python = import ./python/python.nix { inherit system pkgs inputs; };
+  python = import ./python/python.nix { inherit system pkgs unstable inputs; };
 
   nodejs = import ./nodejs/nodejs.nix { inherit pkgs; };
 

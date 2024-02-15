@@ -1,4 +1,4 @@
-{ system, pkgs ? import <nixpkgs> { }, inputs }:
+{ system, pkgs ? import <nixpkgs> { }, unstable, inputs }:
 
 pkgs.mkShell {
   name = "python-dev-environment";
@@ -11,7 +11,7 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     python311Packages.pygame
     python311Packages.pip
-    python311Packages.virtualenv
+    unstable.python311Packages.virtualenv
 
     #inputs.python27-pkgs.legacyPackages.${system}.python27Packages.pygame_sdl2
   ];
