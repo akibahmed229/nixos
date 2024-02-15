@@ -31,22 +31,17 @@
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
+      system = "x86_64-linux";
 
-      pkgs = forAllSystems (system:
-        import nixpkgs {
-          inherit system;
-          config = { allowUnfree = true; };
-        }
-      );
+      pkgs = import nixpkgs {
+        inherit system;
+        config = { allowUnfree = true; };
+      };
 
-      unstable = forAllSystems (system:
-        import nixpkgs-unstable
-          {
-            inherit system;
-            config = { allowUnfree = true; };
-          }
-          nixpkgs-unstable.legacyPackages.${system}
-      );
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config = { allowUnfree = true; };
+      };
 
       # using the above variables to define the development configuration
     in

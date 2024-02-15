@@ -11,7 +11,7 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     python311Packages.pygame
     python311Packages.pip
-    unstable.python311Packages.virtualenv
+    python311Packages.virtualenv
 
     #inputs.python27-pkgs.legacyPackages.${system}.python27Packages.pygame_sdl2
   ];
