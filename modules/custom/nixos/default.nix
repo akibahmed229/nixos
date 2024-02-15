@@ -6,11 +6,13 @@
   enableBoot = import ./grub;
   enableAudio = import ./audio;
   enableKvm = import ./kvm;
+  enablePolkit = import ./polkit-agent;
 
   # by default, import all the modules
   default.imports =
     [ (import ./user) ] ++
     [ (import ./grub) ] ++
     [ (import ./audio) ] ++
+    [ (import ./polkit-agent) ] ++
     [ (import ./kvm) ];
 }
