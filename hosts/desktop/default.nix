@@ -168,7 +168,7 @@
     libadwaita
     polkit
     #python310Packages.pygobject3
-  ]) ++ (with unstable; [
+  ]) ++ (with unstable.${pkgs.system}; [
     # List unstable packages here
     jetbrains.pycharm-community
     jetbrains.idea-community

@@ -88,7 +88,6 @@
       # The system to build.
       inherit (self) outputs;
       inherit (nixpkgs) lib;
-      system = "x86_64-linux";
       state-version = "23.11";
       hostname = "desktop";
       devicename = "/dev/nvme0n1";
@@ -109,15 +108,16 @@
       user = "akib";
       theme = "gruvbox-dark-soft";
 
-      pkgs = import nixpkgs {
+      pkgs = forAllSystems (system: import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
-      };
+      });
 
-      unstable = import nixpkgs-unstable {
+      # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]
+      unstable = forAllSystems (system: import nixpkgs-unstable {
         inherit system;
         config = { allowUnfree = true; };
-      };
+      });
 
       # using the above variables to define the system configuration
     in
@@ -142,9 +142,13 @@
       # NixOS configuration with flake and home-manager as module
       #  Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
       #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
-      nixosConfigurations = import ./hosts {
-        inherit (nixpkgs) lib;
-        inherit inputs self unstable nixos user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
-      };
+      nixosConfigurations =
+        let
+          system = forAllSystems (getSystem: getSystem);
+        in
+        import ./hosts {
+          inherit (nixpkgs) lib;
+          inherit inputs self unstable nixos user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+        };
     };
 }

@@ -1,7 +1,10 @@
 # where all the possible development environments are defined 
 
-{ system, pkgs, inputs, unstable, ... }:
-
+{ system, pkg, inputs, pkg-unstable, ... }:
+let
+  pkgs = pkg.${system};
+  unstable = pkg-unstable.${system};
+in
 {
   python = import ./python/python.nix { inherit system pkgs unstable inputs; };
 
