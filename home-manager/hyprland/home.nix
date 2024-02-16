@@ -16,6 +16,7 @@
 , hyprland
 , inputs ? { }
 , theme
+, user
 , ...
 }:
 
@@ -67,16 +68,19 @@
         "udiskie &" # USB Mass storage devices mounting
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
-        "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp " # Loads my RGB light
         "kdeconnect-cli --refresh &" # KDE Connect daemon 
         "kdeconnect-indicator &"
-
-        ## app that i want to start after login
-        "discord"
-        "firefox"
-        "spotify"
-        "alacritty"
-      ];
+      ] ++
+      (if user == "akib" then
+        [
+          "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp " # Loads my RGB light
+          # app that i want to start after login
+          "discord"
+          "firefox"
+          "spotify"
+          "alacritty"
+        ]
+      else [ ]);
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mod" = "SUPER";
@@ -152,13 +156,6 @@
         # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
         # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 
-        # Window open rule
-        "workspace 1,Alacritty"
-        "workspace 2,firefox"
-        "workspace 3,discord"
-        "workspace 4,Spotify"
-        "workspace 5,virt-manager"
-
         # Window opacity rule
         #"opacity 1.0 override 0.9 override,^(firefox)$"
         #"opacity 1.0 override 0.9 override,^(virt-manager)$"
@@ -170,8 +167,17 @@
         "float,^(blueman-manager)$"
         "float,^(nm-connection-editor)$"
         "float,^(openrgb)$"
-
-      ];
+      ] ++
+      (if user == "akib" then
+        [
+          # Window open rule
+          "workspace 1,Alacritty"
+          "workspace 2,firefox"
+          "workspace 3,discord"
+          "workspace 4,Spotify"
+          "workspace 5,virt-manager"
+        ]
+      else [ ]);
     };
 
     extraConfig = builtins.readFile ./others/hypr/hyprland.conf;
