@@ -19,21 +19,22 @@
 , user
 , ...
 }:
-
 {
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "discord"
     "spotify"
   ];
 
-  imports =
-    [ (import ../../modules/predefiend/home-manager/firefox/firefox.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/spotify/spicetify.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/discord/discord.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/zsh/zsh.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/tmux/tmux.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/nvchad/nvim.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/lf/lf.nix) ];
+  # imports from the predefiend modules folder
+  imports = map
+    (app:
+      let
+        path = name: (import ../../modules/predefiend/home-manager/${name}); # path to the module
+      in
+      path app # loop through the apps and import the module
+    )
+    # list of apps
+    [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" ];
 
   home.packages = with pkgs; [
     (import ./others/swww/wallpaper.nix { inherit pkgs; })
@@ -52,11 +53,14 @@
       monitor = map
         (monitor:
           let
+            # set the rmonitor resolution & position from the custom Home-manager module
             resolution = "${toString monitor.width}x${toString monitor.height}@${toString monitor.refreshRate}";
             position = "${toString monitor.x}x${toString monitor.y}";
           in
+          # loop through the monitors and set the resolution, position and enable the monitor
           "${monitor.name},${if monitor.enabled then "${resolution},${position},1" else "disable"}"
         )
+        # set of monitors setting from custom monitor module 
         config.monitors;
 
       # Execute your favorite apps at launch

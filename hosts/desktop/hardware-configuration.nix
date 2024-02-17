@@ -15,7 +15,7 @@
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ] ++
-    [ (import ../../modules/predefiend/nixos/disko/disko.nix { device = "${devicename}"; }) ];
+    [ (import ../../modules/predefiend/nixos/disko { device = "${devicename}"; }) ];
 
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;

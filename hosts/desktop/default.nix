@@ -17,10 +17,20 @@
     [ (import ../../home-manager/hyprland/default.nix) ] ++ # uncomment to use Hyprland
     # [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
     # [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
-    [ (import ../../modules/predefiend/nixos/flatpak/flatpak.nix) ] ++
-    [ (import ../../modules/predefiend/nixos/sops/sops.nix) ] ++
-    [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
+    map
+      (myprograms:
+        let
+          path = name: (import ../../modules/predefiend/nixos/${name}); # path to the module
+        in
+        path myprograms # loop through the myprograms and import the module
+      )
+      # list of apps
+      [ "flatpak" "sops" "impermanence" "tmux" ];
+
+  # [ (import ../../modules/predefiend/nixos/flatpak/flatpak.nix) ] ++
+  # [ (import ../../modules/predefiend/nixos/sops/sops.nix) ] ++
+  # [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
+  # [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = {
