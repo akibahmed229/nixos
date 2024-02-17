@@ -24,13 +24,8 @@
         in
         path myprograms # loop through the myprograms and import the module
       )
-      # list of apps
+      # list of programs
       [ "flatpak" "sops" "impermanence" "tmux" ];
-
-  # [ (import ../../modules/predefiend/nixos/flatpak/flatpak.nix) ] ++
-  # [ (import ../../modules/predefiend/nixos/sops/sops.nix) ] ++
-  # [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
-  # [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = {

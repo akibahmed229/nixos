@@ -2,7 +2,7 @@
 let
   cfg = config.user;
   shell = pkgs.zsh;
-  link = [ "/share/zsh" "/tmp" "/home/akib" ];
+  link = [ "/share/zsh" "/tmp" "/home/${cfg.userName}" ];
   checkUserFun = user: if user == "akib" then shell else pkgs.bash;
 in
 {

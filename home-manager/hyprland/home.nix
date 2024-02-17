@@ -1,15 +1,5 @@
 #  Hyprland Home-manager configuration
 
-#  flake.nix
-#   ├─ ./hosts
-#   │   └─ ./<host>
-#   │       └─ home.nix
-#   └─ ./modules
-#       └─ ./desktop
-#           └─ ./hyprland
-#               └─ home.nix *
-#
-
 { config
 , lib
 , pkgs
