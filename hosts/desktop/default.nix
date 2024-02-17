@@ -22,7 +22,6 @@
     [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
     [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
 
-
   # Setting For OpenRGB
   services.hardware.openrgb = {
     enable = true;
@@ -38,23 +37,11 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
     "steam"
   ];
-
-
-  # remove bloat
-  #  documentation.nixos.enable = false;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  # Default Shell zsh
-  programs.zsh.enable = true;
-  #programs.zsh.shellInit = ''
-  #  source /home/${user}/flake/modules/predefiend/home-manager/zsh/zshrc
-  #'';
 
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
-  environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
-
+  # remove bloat
+  # documentation.nixos.enable = false;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
