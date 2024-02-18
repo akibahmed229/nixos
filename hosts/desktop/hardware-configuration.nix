@@ -9,11 +9,13 @@
 , unstable
 , self
 , modulesPath
+, devicename
 , ...
 }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ] ++
+    [ (import ../../modules/predefiend/nixos/disko { device = "${devicename}"; }) ];
 
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -39,7 +41,7 @@
     consoleLogLevel = 3;
     initrd = {
       verbose = false;
-      systemd.enable = true;
+      #systemd.enable = true; # uncomment to use initrd postDeviceCommands (e.g. to mount encrypted partitions)
     };
     plymouth = {
       enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
@@ -83,38 +85,15 @@
     interval = "weekly";
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "btrfs";
-    options = [ "subvol=root" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "btrfs";
-    options = [ "subvol=home" "ssd" "noatime" "compress=zstd" "space_cache=v2" "discard=async" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "btrfs";
-    options = [ "subvol=nix" "ssd" "compress=zstd" "noatime" "space_cache=v2" "discard=async" ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-  };
-
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
-    #fsType = "ntfs3"; # Specify the file system type
+    fsType = "ntfs"; # Specify the file system type
     options = [ "defaults" ]; # Mount options (rw,exec,auto,user,async)
   };
 
   fileSystems."/mnt/sda2" = {
     device = "/dev/sda2";
-    #fsType = "ntfs3"; # Specify the file system type
+    fsType = "ntfs"; # Specify the file system type
     options = [ "defaults" ]; # Mount options 
   };
 

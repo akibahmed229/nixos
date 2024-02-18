@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
 
-<h2 align="center">Akib | NixOS Config</h2>
+<h2 align="center">Akib | NixOS Config GO Wilde</h2>
 
 ## Current System Preview
 
@@ -31,60 +31,34 @@ Before you begin, ensure you have the following:
 
 ## Installation Steps
 
-1. **Partition the Disk**
+Make sure change your username and hostname in the flake.nix file
 
-Open a terminal and execute the following command to partition the disk:
+1. **Formate, Mount the Partitions and Subvolumes**
 
-```bash
-fdisk /dev/sdx
-```
-
-create gpt label with two partion first one for root,home,nix & second one for efi boot pertion
-
-2. **Format Partitions and Create Subvolumes**
-
-In the same terminal, format the partitions and create subvolumes:
+This will format the disk and mount the partitions make sure to give the device name e.g /dev/nvme0n1
 
 ```bash
-mkfs.fat -F 32 -n boot /dev/sdX1
-mkfs.btrfs -L nixos /dev/sdX2
-mkdir -p /mnt
-mount /dev/sdX2 /mnt
-btrfs subvolume create /mnt/root
-btrfs subvolume create /mnt/home
-btrfs subvolume create /mnt/nix
-umount /mnt
+nix su
+nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos/dev#disko-formate
 ```
 
-3. **Mount the Partitions and Subvolumes**
-
-Mount the partitions and subvolumes using the following commands:
-
-```bash
-mount -o compress=zstd,subvol=root /dev/disk/by-label/nixos /mnt
-mkdir /mnt/{home,nix}
-mount -o compress=zstd,subvol=home /dev/disk/by-label/nixos /mnt/home
-mount -o compress=zstd,noatime,subvol=nix /dev/disk/by-label/nixos /mnt/nix
-mkdir /mnt/boot
-mount /dev/disk/by-label/boot /mnt/boot
-```
-
-4. **Install NixOS**
+2. **Install NixOS**
 
 To install NixOS on the mounted partitions, follow these steps:
 
 ```bash
 nix-env -iA nixos.git
 nixos-generate-config --root /mnt
-git clone https://www.github.com/akibahmed229/nixos.git /mnt
+mkdir -p /mnt/persist/home/flake
+git clone https://www.github.com/akibahmed229/nixos/dev /mnt/persist/home/flake
 ```
 
 Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to the /mnt/nixos directory. and install the system using the following command:
 
 ```bash
-cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/nixos/hosts/desktop/hardware-configuration.nix
+cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/persist/home/flake/hosts/desktop/hardware-configuration.nix
 cd /mnt/nixos
-nixos-install --flake .#desktop
+nixos-install --root /mnt --flake .#desktop
 ```
 
 Note: During the configuration step, you can manually edit the `/mnt/etc/nixos/configuration.nix` file to set mount options and customize your NixOS installation.
@@ -94,6 +68,8 @@ Congratulations! You have successfully installed NixOS with a Btrfs filesystem. 
 Remember to replace `/dev/sdX` with the appropriate disk identifier for your system.
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
+
+Post Installation Steps
 
 # 2. FAQ
 

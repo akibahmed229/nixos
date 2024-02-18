@@ -1,6 +1,7 @@
 # NixOS configuration with home-manager as a module in flakes
 
-{ lib
+{ self
+, lib
 , inputs
 , unstable
 , nixos
@@ -12,6 +13,8 @@
 , hyprland
 , plasma-manager
 , user
+, hostname
+, devicename
 , ...
 }:
 
@@ -20,71 +23,64 @@
   desktop = lib.nixosSystem {
     inherit system;
 
-    specialArgs = { inherit user inputs unstable state-version; };
-    modules = [
-      # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
+    specialArgs = { inherit inputs self user hostname devicename unstable state-version; };
+    modules =
       # configuration of nixos 
-      ./configuration.nix
-      ./desktop
-      nix-index-database.nixosModules.nix-index
-      # optional to also wrap and install comma
-      { programs.nix-index-database.comma.enable = true; }
-
-      # Home manager configuration as a module
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = false;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user inputs unstable theme state-version; }; # pass inputs && variables to home-manager
-        home-manager.users.${user} = {
-          imports = [
-            nix-index-database.hmModules.nix-index
-            # optional to also wrap and install comma
-            { programs.nix-index-database.comma.enable = true; }
-          ] ++
-          [
-            # inputs.plasma-manager.homeManagerModules.plasma-manager  # uncommnet to use KDE Plasma 
-            hyprland.homeManagerModules.default # uncommnet to use hyprland
-            { wayland.windowManager.hyprland.systemd.enable = true; }
-          ] ++
-          [
-            # config of home-manager 
-            ../home-manager/home.nix
-          ] ++
-          [
-            #../home-manager/gnome/home.nix # uncommnet to use gnome
-            ../home-manager/hyprland/home.nix
-          ];
-        };
-      }
-    ];
+      # [ "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
+      [ (import ./configuration.nix) ] ++
+      [ (import ./desktop) ] ++
+      [ self.nixosModules.default ] ++ # Custom nixos modules
+      [ nix-index-database.nixosModules.nix-index { programs.nix-index-database.comma.enable = true; } ] ++ # optional to also wrap and install comma
+      [ inputs.impermanence.nixosModules.impermanence ] ++
+      [ inputs.disko.nixosModules.default ] ++
+      [
+        # Home manager configuration as a module
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = false;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = { inherit inputs self user unstable theme state-version; }; # pass inputs && variables to home-manager
+          home-manager.users.${user} = {
+            imports =
+              [ nix-index-database.hmModules.nix-index { programs.nix-index-database.comma.enable = true; } ] ++ # optional to also wrap and install comma
+              [ hyprland.homeManagerModules.default { wayland.windowManager.hyprland.systemd.enable = true; } ] ++
+              [ self.homeManagerModules.default ] ++ # Custom home-manager modules
+              # [ inputs.plasma-manager.homeManagerModules.plasma-manager ] ++ # uncommnet to use KDE Plasma 
+              [ (import ../home-manager/home.nix) ] ++ # config of home-manager 
+              [ (import ../home-manager/hyprland/home.nix) ];
+            # [ (import  ../home-manager/gnome/home.nix ) ; ## uncommnet to use gnome
+          };
+        }
+      ];
   };
 
   # Host virt-managet configuration ( virtualization system)
-  virt = lib.nixosSystem {
-    inherit system;
+  virt = lib.nixosSystem
+    {
+      inherit system;
 
-    specialArgs = { inherit user inputs unstable state-version; };
-    modules = [
-      # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
-      inputs.disko.nixosModules.default
-      ./configuration.nix
-      ./virt
-      nix-index-database.nixosModules.nix-index
-      inputs.impermanence.nixosModules.impermanence
-
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user inputs theme hyprland state-version; };
-        home-manager.users.${user} = {
-          imports = [ (import ../home-manager/home.nix) ] ++
-            [ nix-index-database.hmModules.nix-index ] ++
-            [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ];
-        };
-      }
-    ];
-  };
+      specialArgs = { inherit inputs user hostname devicename unstable state-version; };
+      modules =
+        # [ "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
+        [ (import ./configuration.nix) ] ++
+        [ (import ./virt) ] ++
+        [ self.nixosModules.default ] ++ # Custom nixos modules
+        [ nix-index-database.nixosModules.nix-index ] ++
+        [ inputs.impermanence.nixosModules.impermanence ] ++
+        [ inputs.disko.nixosModules.default ] ++
+        [
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs user hostname devicename theme hyprland state-version; };
+            home-manager.users.${user} = {
+              imports =
+                [ (import ../home-manager/home.nix) ] ++
+                # [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
+                [ nix-index-database.hmModules.nix-index ];
+            };
+          }
+        ];
+    };
 }
-

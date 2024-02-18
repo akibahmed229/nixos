@@ -3,12 +3,11 @@
 pkgs: {
   nvchad = pkgs.callPackage ./nvchad { };
 
+  obs-zoom-to-mouse = pkgs.callPackage ./obs-studio-plugins { };
+
   custom_sddm = pkgs.callPackage ./sddm/sddm.nix { };
 
-  nix-update-input = pkgs.callPackage ./nix-update-input { };
+  nix-update-input = import ./shellscript/nix-update-input.nix { inherit pkgs; };
 
-  obs-zoom-to-mouse = pkgs.callPackage ./obs-studio-plugins/obs-zoom-to-mouse.nix { };
-
-  disko-formate = pkgs.callPackage ./formate-disk { };
-
+  disko-formate = import ./shellscript/disko-formate.nix { inherit pkgs; };
 }

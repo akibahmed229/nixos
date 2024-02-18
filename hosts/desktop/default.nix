@@ -17,10 +17,15 @@
     [ (import ../../home-manager/hyprland/default.nix) ] ++ # uncomment to use Hyprland
     # [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
     # [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
-    # [(import ../../modules/predefiend/nixos/flatpak/flatpak.nix)]++
-    [ (import ../../modules/predefiend/nixos/sops/sops.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/tmux/tmux-service.nix) ];
-
+    map
+      (myprograms:
+        let
+          path = name: (import ../../modules/predefiend/nixos/${name}); # path to the module
+        in
+        path myprograms # loop through the myprograms and import the module
+      )
+      # list of programs
+      [ "flatpak" "sops" "impermanence" "tmux" ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = {
@@ -31,41 +36,27 @@
   # Insecure permite
   nixpkgs.config.permittedInsecurePackages = [
     "python-2.7.18.6"
+    "electron-25.9.0"
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
     "steam"
   ];
-
-
-  # remove bloat
-  #  documentation.nixos.enable = false;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  # Default Shell zsh
-  programs.zsh.enable = true;
-  #programs.zsh.shellInit = ''
-  #  source /home/${user}/flake/modules/predefiend/home-manager/zsh/zshrc
-  #'';
 
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
-  environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
-
+  # remove bloat
+  # documentation.nixos.enable = false;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
     # List programs you want in your system Stable packages
     neovim-unwrapped
+    ripgrep
     htop
     trash-cli
     cava
     neofetch
-    vscode
-    ripgrep
-    android-tools
-    android-udev-rules
     #espanso-wayland
     zip
     unzip
@@ -81,13 +72,7 @@
     devbox
     simplehttp2server
     speedtest-cli
-    onionshare
-    git
-    gcc
-    jdk21
-    python312Full
-    nodejs_21
-    yarn
+    #onionshare
     docker-compose
     flatpak
     appimage-run
@@ -108,24 +93,19 @@
     audacity
     bottles
     gparted
-    #libreoffice
+    libreoffice
+    qbittorrent
+    obsidian
+    figma-linux
+    protonvpn-gui
     notepadqq
     gradience
     mangohud
     goverlay
     anydesk
     geekbench
-    qemu
-    bridge-utils
-    virt-manager
-    virt-viewer
-    spice
-    spice-gtk
-    spice-protocol
-    win-virtio
-    win-spice
-    virtiofsd
-    virglrenderer
+    kdiskmark
+    chromium
     whatsapp-for-linux
     telegram-desktop
     btop
@@ -139,6 +119,7 @@
     libverto
     fail2ban
     fzf
+    tlrc
     gamemode
     # bottles
     bottles
@@ -179,13 +160,24 @@
     libadwaita
     polkit
     #python310Packages.pygobject3
-  ]) ++ (with unstable; [
+  ]) ++ (with unstable.${pkgs.system}; [
     # List unstable packages here
     jetbrains.pycharm-community
     jetbrains.idea-community
+    #postman
+    vscode
+    android-tools
+    android-udev-rules
+    github-desktop
     android-studio
     alacritty
     dwt1-shell-color-scripts
+    git
+    gcc
+    jdk21
+    python312Full
+    nodejs_21
+    yarn
   ]);
 
   # Gaming
@@ -245,21 +237,8 @@
   };
 
   # Enable virtualisation
-  # <binary path="/run/current-system/sw/bin/virtiofsd"/> # virtiofsd binary path for virt-manager add this in virt-manager FileSystem Share
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
-      };
-      onBoot = "ignore";
-      onShutdown = "shutdown";
-    };
-    spiceUSBRedirection.enable = true;
-  };
-  services.spice-vdagentd.enable = true;
+  kvm.enable = true;
+
   # Enable dbus 
   services.dbus.enable = true;
 
@@ -274,16 +253,6 @@
     ];
   };
   networking.enableIPv6 = true;
-
-  # Delete Garbage Collection previous generation collection
-  nix = {
-    settings.auto-optimise-store = true;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

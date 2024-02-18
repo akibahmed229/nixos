@@ -3,34 +3,20 @@
 { config
 , pkgs
 , user
+, hostname
 , unstable
 , nixpkgs
 , lib
+, inputs
 , ...
 }:
 
 {
   # Dual Booting using grub
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    grub = {
-      enable = true;
-      theme = pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "Yo, sleek operator!"; };
-      # splashImage = ../public/wallpaper/nixos.png;
-      devices = [ "nodev" ]; # install grub on efi
-      efiSupport = true;
-      useOSProber = true; # To find Other boot manager like windows 
-      configurationLimit = 5; # Store number of config 
-    };
-
-    timeout = 3; # Boot Timeout
-  };
+  grub.enable = true;
 
   # networking options
-  networking.hostName = "Ahmed"; # Define your hostname.
+  networking.hostName = "${hostname}"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -52,48 +38,16 @@
     keyMap = "us";
     #   useXkbConfig = true; # use xkbOptions in tty.
   };
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with unstable; [
-      (ibus-engines.typing-booster.override { langs = [ "en_US" ]; })
-    ];
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    # alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    jack.enable = true;
+  audio.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    # wireplumber.enable = true;
-  };
-
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
-    isNormalUser = true;
-    initialPassword = "123456";
-    description = "Akib Ahmed";
-    extraGroups = [ "networkmanager" "network" "wheel" "systemd-journal" "docker" "video" "audio" "lb" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
-    packages = with pkgs; [
-      wget
-      thunderbird
-      vlc
-    ];
-  };
-  security.sudo.wheelNeedsPassword = true; # User does not need to give password when using sudo.
-
+  # user configuration
+  user.enable = true;
+  user.userName = "${user}";
 
   # Enable ADB for Android
   programs.adb.enable = true;
@@ -132,6 +86,21 @@
     };
   };
 
+  # This will add each flake input as a registry
+  # To make nix3 commands consistent with your flake
+  nix.registry = (lib.mapAttrs (_: flake: { inherit flake; })) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+
+  # This will additionally add your inputs to the system's legacy channels
+  # Making legacy nix commands consistent as well, awesome!
+  nix.nixPath = [ "/etc/nix/path" ];
+  environment.etc =
+    lib.mapAttrs'
+      (name: value: {
+        name = "nix/path/${name}";
+        value.source = value.flake;
+      })
+      config.nix.registry;
+
   # XDG  paths
   environment.sessionVariables = rec {
     XDG_CACHE_HOME = "$HOME/.cache";
@@ -146,6 +115,16 @@
     ];
   };
 
-  # Adding Nix Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Delete Garbage Collection previous generation collection & enable flake 
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 }

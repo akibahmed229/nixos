@@ -1,37 +1,30 @@
 #  Hyprland Home-manager configuration
 
-#  flake.nix
-#   ├─ ./hosts
-#   │   └─ ./<host>
-#   │       └─ home.nix
-#   └─ ./modules
-#       └─ ./desktop
-#           └─ ./hyprland
-#               └─ home.nix *
-#
-
 { config
 , lib
 , pkgs
 , hyprland
 , inputs ? { }
 , theme
+, user
 , ...
 }:
-
 {
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "discord"
     "spotify"
   ];
 
-  imports =
-    [ (import ../../modules/predefiend/home-manager/firefox/firefox.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/spotify/spicetify.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/discord/discord.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/zsh/zsh.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/tmux/tmux.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/lf/lf.nix) ];
+  # imports from the predefiend modules folder
+  imports = map
+    (app:
+      let
+        path = name: (import ../../modules/predefiend/home-manager/${name}); # path to the module
+      in
+      path app # loop through the apps and import the module
+    )
+    # list of apps
+    [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" ];
 
   home.packages = with pkgs; [
     (import ./others/swww/wallpaper.nix { inherit pkgs; })
@@ -47,9 +40,18 @@
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
       #monitor=,preferred,auto,auto 
-      monitor = [
-        ",1920x1080@75,auto,1"
-      ];
+      monitor = map
+        (monitor:
+          let
+            # set the rmonitor resolution & position from the custom Home-manager module
+            resolution = "${toString monitor.width}x${toString monitor.height}@${toString monitor.refreshRate}";
+            position = "${toString monitor.x}x${toString monitor.y}";
+          in
+          # loop through the monitors and set the resolution, position and enable the monitor
+          "${monitor.name},${if monitor.enabled then "${resolution},${position},1" else "disable"}"
+        )
+        # set of monitors setting from custom monitor module 
+        config.monitors;
 
       # Execute your favorite apps at launch
       exec-once = [
@@ -60,16 +62,19 @@
         "udiskie &" # USB Mass storage devices mounting
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
-        "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp " # Loads my RGB light
         "kdeconnect-cli --refresh &" # KDE Connect daemon 
         "kdeconnect-indicator &"
-
-        ## app that i want to start after login
-        "discord"
-        "firefox"
-        "spotify"
-        "alacritty"
-      ];
+      ] ++
+      (if user == "akib" then
+        [
+          "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp " # Loads my RGB light
+          # app that i want to start after login
+          "discord"
+          "firefox"
+          "spotify"
+          "alacritty"
+        ]
+      else [ ]);
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mod" = "SUPER";
@@ -145,13 +150,6 @@
         # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
         # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 
-        # Window open rule
-        "workspace 1,Alacritty"
-        "workspace 2,firefox"
-        "workspace 3,discord"
-        "workspace 4,Spotify"
-        "workspace 5,virt-manager"
-
         # Window opacity rule
         #"opacity 1.0 override 0.9 override,^(firefox)$"
         #"opacity 1.0 override 0.9 override,^(virt-manager)$"
@@ -163,8 +161,17 @@
         "float,^(blueman-manager)$"
         "float,^(nm-connection-editor)$"
         "float,^(openrgb)$"
-
-      ];
+      ] ++
+      (if user == "akib" then
+        [
+          # Window open rule
+          "workspace 1,Alacritty"
+          "workspace 2,firefox"
+          "workspace 3,discord"
+          "workspace 4,Spotify"
+          "workspace 5,virt-manager"
+        ]
+      else [ ]);
     };
 
     extraConfig = builtins.readFile ./others/hypr/hyprland.conf;

@@ -11,7 +11,8 @@
 #               └─ default.nix *
 #
 
-{ inputs
+{ self
+, inputs
 , config
 , lib
 , pkgs
@@ -35,7 +36,7 @@
             background = "/home/${user}/.cache/swww/Wallpaper";
           };
         };
-        sddm.theme = ''${pkgs.callPackage ../../pkgs/sddm/sddm.nix { imgLink = {
+        sddm.theme = ''${self.packages.${pkgs.system}.custom_sddm.override  { imgLink = {
           url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nix-wallpaper-nineish-dark-gray.png"; 
           sha256 = "sha256-nhIUtCy/Hb8UbuxXeL3l3FMausjQrnjTVi1B3GkL9B8=";
         };
@@ -101,6 +102,7 @@
       # sound
       pavucontrol
       # software of gnome for daily usage
+      gnome.gnome-software
       gnome.eog
       evince
       gnome.gnome-weather
@@ -140,7 +142,7 @@
     # Required for flatpak with window managers and for file browsing
     enable = true;
     wlr.enable = true;
-    xdgOpenUsePortal = true;
+    #xdgOpenUsePortal = true; # disable to work default browser 
     config = {
       common.default = [ "gtk" ];
       hyprland.default = [ "gtk" "hyprland" ];
@@ -187,25 +189,6 @@
     mountOnMedia = true;
   };
 
-  # polkit for authentication
-  security.polkit = {
-    enable = true;
-  };
-
-  # A dbus session bus service that is used to bring up authentication dialogs used by polkit and gnome-keyring 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
+  # polkit for authentication ( from custom nixos module )
+  polkit-gnome.enable = true;
 }
