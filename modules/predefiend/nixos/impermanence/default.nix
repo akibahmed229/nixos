@@ -100,11 +100,19 @@
   };
 
   # /var/tmp is persisted for reasons explained above, clean it with systemd-tmpfiles
-  systemd.tmpfiles.rules = [ "e /var/tmp 1777 root root 30d" ];
+  systemd.tmpfiles.rules = [
+    "e /var/tmp 1777 root root 30d"
+    #  /*
+    #    clean old contents in home cache dir
+    #    (it's persisted to avoid problems with large files being loaded into the tmpfs)
+    #  */
+    "e /home/${user}/.cache 755 ${user} users 30d"
+
+    # exceptions
+    "x /home/${user}/.cache/rbw"
+    "x %h/.cache/borg" # caches checksums of file chunks for deduplication
+  ];
+
   # allows other users to access FUSE mounts
   programs.fuse.userAllowOther = true;
-  #  home-manager = {
-  #   extraSpecialArgs = {inherit inputs;};
-  #   users.${user} = import ./../../home-manager/impermanence/impermanence.nix;
-  # }; 
 }

@@ -1,15 +1,4 @@
-#
-#  Hyprland configuration
-#
-#  flake.nix
-#   ├─ ./hosts
-#   │   └─ ./<host>
-#   │       └─ default.nix
-#   └─ ./modules
-#       └─ ./desktop
-#           └─ ./hyprland
-#               └─ default.nix *
-#
+# Hyprland system configuration
 
 { self
 , inputs
