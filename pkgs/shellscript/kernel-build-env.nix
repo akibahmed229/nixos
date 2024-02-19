@@ -1,6 +1,5 @@
-let
-  pkgs = import <nixpkgs> { };
-in
+{ pkgs = import <nixpkgs> { }; }:
+
 (pkgs.buildFHSUserEnv {
   name = "kernel-build-env";
   targetPkgs = pkgs: (with pkgs;
