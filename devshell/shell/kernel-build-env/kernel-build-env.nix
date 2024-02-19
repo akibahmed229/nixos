@@ -1,10 +1,10 @@
-{ pkgs = import <nixpkgs> { }; }:
+{ pkgs ? import <nixpkgs> { } }:
 
-(pkgs.buildFHSUserEnv {
+(pkgs.buildFHSEnv {
   name = "kernel-build-env";
   targetPkgs = pkgs: (with pkgs;
     [
-      pkgconfig
+      pkg-config
       ncurses
       qt5.qtbase
       # new gcc usually causes issues with building kernel so use an old one
