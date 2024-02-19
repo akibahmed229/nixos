@@ -7,7 +7,7 @@
 {
   imports =
     [ (import ./hardware-configuration.nix) ] ++
-    [ (import ../../modules/predefiend/nixos/impermanence/impermanence.nix) ] ++
+    [ (import ../../modules/predefiend/nixos/impermanence) ] ++
     [ (import ../../home-manager/dwm/default.nix) ];
 
 
