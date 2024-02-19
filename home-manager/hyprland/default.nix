@@ -68,13 +68,15 @@
       preload
       networkmanagerapplet
       ark
+      lxmenu-data
       # libsForQt5.polkit-kde-agent
       # mpd
       # For file manager
       xfce.thunar
       xfce.tumbler
       # for  qt and gtk
-      #qt6Packages.qt6ct
+      qt6.qtwayland
+      qt6Packages.qt6ct
       libsForQt5.qt5ct
       libsForQt5.qt5.qtwayland
       libsForQt5.qtstyleplugin-kvantum
@@ -117,6 +119,8 @@
       playerctl
       # color grab 
       #pywal
+      # hypr echoshystem
+      hyprpicker
     ];
   };
 
