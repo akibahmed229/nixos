@@ -10,4 +10,6 @@ pkgs: {
   nix-update-input = import ./shellscript/nix-update-input.nix { inherit pkgs; };
 
   disko-formate = import ./shellscript/disko-formate.nix { inherit pkgs; };
+
+  kernel-build-env = import ./shellscript/kernel-build-env.nix { inherit pkgs; };
 }
