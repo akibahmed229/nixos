@@ -8,7 +8,7 @@
       ncurses
       qt5.qtbase
       # new gcc usually causes issues with building kernel so use an old one
-      pkgsCross.aarch64-multiplatform.gcc8Stdenv.cc
+      pkgsCross.aarch64-multiplatform.gcc11Stdenv.cc
       (hiPrio gcc8)
     ]
     ++ pkgs.linux.nativeBuildInputs);
