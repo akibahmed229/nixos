@@ -9,7 +9,7 @@
       qt5.qtbase
       # new gcc usually causes issues with building kernel so use an old one
       pkgsCross.aarch64-multiplatform.gcc11Stdenv.cc
-      (hiPrio gcc8)
+      (hiPrio gcc12)
     ]
     ++ pkgs.linux.nativeBuildInputs);
   runScript = pkgs.writeScript "init.sh" ''
