@@ -7,11 +7,27 @@
       pkg-config
       ncurses
       linuxHeaders
-      libelf
-      flex
-      bison
-      gdb
+      util-linux
+      e2fsprogs
+      jfsutils
+      reiserfsprogs
       binutils
+      xfsprogs
+      squashfs-tools-ng
+      btrfs-progs
+      pcmciautils
+      linuxquota
+      PPP
+      nfs-utils
+      procps
+      oprofile
+      udev
+      grub
+      mcelog
+      iptables
+      openssl
+      bc
+      Sphinx
       qt5.qtbase
       # new gcc usually causes issues with building kernel so use an old one
       pkgsCross.aarch64-multiplatform.gcc13Stdenv.cc
