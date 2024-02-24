@@ -234,7 +234,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-QZZAnX6QeF+uaWRH+ohYZFvmKmDMmtnomQX2BL3QPPc=",
+        "narHash": "sha256-V4CUCFVXmwqVCNNO2H8bQzWsbHi9NtF2SlPl8y+4+v0=",
         "path": "./devshell",
         "type": "path"
       },
