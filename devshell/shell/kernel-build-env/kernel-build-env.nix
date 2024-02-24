@@ -26,6 +26,6 @@
     export PKG_CONFIG_PATH="${pkgs.ncurses.dev}/lib/pkgconfig:${pkgs.qt5.qtbase.dev}/lib/pkgconfig"
     export QT_QPA_PLATFORM_PLUGIN_PATH="${pkgs.qt5.qtbase.bin}/lib/qt-${pkgs.qt5.qtbase.version}/plugins"
     export QT_QPA_PLATFORMTHEME=qt5ct
-    exec "${pkgs.zsh}/bin/zsh" 
+    exec "${pkgs.zsh}/bin/zsh"
   '';
 }).env
