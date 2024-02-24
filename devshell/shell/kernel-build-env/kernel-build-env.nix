@@ -14,8 +14,8 @@
       binutils
       qt5.qtbase
       # new gcc usually causes issues with building kernel so use an old one
-      pkgsCross.aarch64-multiplatform.gcc12Stdenv.cc
-      (hiPrio gcc12)
+      pkgsCross.aarch64-multiplatform.gcc13Stdenv.cc
+      (hiPrio gcc13)
     ]
     ++ pkgs.linux.nativeBuildInputs);
   runScript = pkgs.writeScript "init.sh" ''
