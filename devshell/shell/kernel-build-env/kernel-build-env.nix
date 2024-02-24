@@ -6,29 +6,14 @@
     [
       pkg-config
       ncurses
-      linuxHeaders
-      util-linux
-      e2fsprogs
-      jfsutils
-      reiserfsprogs
-      binutils
-      xfsprogs
-      squashfs-tools-ng
-      btrfs-progs
-      pcmciaUtils
-      linuxquota
-      PPP
-      nfs-utils
-      procps
-      oprofile
-      udev
-      grub
-      mcelog
-      iptables
-      openssl
-      bc
-      Sphinx
       qt5.qtbase
+      binutils
+      linuxHeaders
+      libelf
+      flex
+      bison
+      gdb
+      strace
       # new gcc usually causes issues with building kernel so use an old one
       pkgsCross.aarch64-multiplatform.gcc12Stdenv.cc
       (hiPrio gcc12)
