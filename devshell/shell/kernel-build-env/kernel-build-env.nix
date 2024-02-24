@@ -15,7 +15,7 @@
       xfsprogs
       squashfs-tools-ng
       btrfs-progs
-      pcmciautils
+      pcmciaUtils
       linuxquota
       PPP
       nfs-utils
