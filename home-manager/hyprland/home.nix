@@ -28,6 +28,7 @@
 
   home.packages = with pkgs; [
     (import ./others/swww/wallpaper.nix { inherit pkgs; })
+    xfce.exo
   ];
 
   #imports = [(import ./others/hyprutility.nix)];
@@ -210,8 +211,8 @@
       source = ./others/libinput;
       recursive = true;
     };
-    ".config/Thunar/thunarrc" = {
-      source = ./others/Thunar/thunarrc;
+    ".config/Thunar" = {
+      source = ./others/Thunar;
       recursive = true;
     };
     ".config/gtk-4.0" = {

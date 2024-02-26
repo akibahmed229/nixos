@@ -34,7 +34,6 @@
     adw-gtk3
     gruvbox-dark-gtk
     gruvbox-dark-icons-gtk
-    alacritty
     hwinfo
 
     # # Adds the 'hello' command to your environment. It prints a friendly
@@ -69,8 +68,8 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    ".config/alacritty/alacritty.yml" = {
-      source = ../modules/predefiend/home-manager/alacritty/alacritty.yml;
+    ".config/alacritty" = {
+      source = ../modules/predefiend/home-manager/alacritty;
       recursive = true;
     };
     ".config/OpenRGB" = {

@@ -52,7 +52,6 @@
   environment.systemPackages = (with pkgs; [
     # List programs you want in your system Stable packages
     neovim-unwrapped
-    ripgrep
     htop
     trash-cli
     cava
@@ -64,7 +63,6 @@
     ranger
     eza
     bat
-    rtx
     nvme-cli
     distrobox
     cargo

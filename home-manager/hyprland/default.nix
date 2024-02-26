@@ -63,8 +63,6 @@
       dunst
       kitty
       wofi
-      alacritty
-      #hyprpaper
       preload
       networkmanagerapplet
       ark

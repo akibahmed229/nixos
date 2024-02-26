@@ -44,7 +44,6 @@
     neofetch
     pywal
     xwallpaper
-    alacritty
     dmenu
     gcc
     neovim
