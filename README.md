@@ -47,25 +47,23 @@ nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos/d
 To install NixOS on the mounted partitions, follow these steps:
 
 ```bash
-nix-env -iA nixos.git
+nix-shell -p git
 nixos-generate-config --root /mnt
-mkdir -p /mnt/persist/home/flake
-git clone https://www.github.com/akibahmed229/nixos/dev /mnt/persist/home/flake
+mkdir -p /mnt/persist/home/yourUserName/flake
+git clone https://www.github.com/akibahmed229/nixos /mnt/persist/home/yourUserName/flake
 ```
 
 Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to the /mnt/nixos directory. and install the system using the following command:
 
 ```bash
-cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/persist/home/flake/hosts/desktop/hardware-configuration.nix
-cd /mnt/nixos
+cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/persist/home/yourUserName/flake/hosts/desktop/hardware-configuration.nix
+cd /home/yourUserName/flake
 nixos-install --root /mnt --flake .#desktop
 ```
 
 Note: During the configuration step, you can manually edit the `/mnt/etc/nixos/configuration.nix` file to set mount options and customize your NixOS installation.
 
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
-
-Remember to replace `/dev/sdX` with the appropriate disk identifier for your system.
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
 
