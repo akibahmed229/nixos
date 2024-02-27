@@ -7,7 +7,7 @@
   imports =
     [ (modulesPath + "/profiles/qemu-guest.nix") ] ++
     [
-      (import ../../modules/predefiend/nixos/disko {
+      (import ../../modules/predefiend/nixos/disko/default.nix {
         device = "/dev/vda";
       })
     ];
