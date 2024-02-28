@@ -4,7 +4,7 @@ pkgs.writeShellScriptBin "akibOS" ''
   echo "---------------------"
   echo "### Disko Formate ###"
   echo 
-  read -p "Enter device (e.g., /dev/nvme0n1): " device
+  read -p "Enter device name (e.g., /dev/nvme0n1): " device
   curl https://raw.githubusercontent.com/akibahmed229/nixos/main/modules/predefiend/nixos/disko/default.nix -o /tmp/disko.nix
   sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device "\"$device\""
   echo "--------------------"
@@ -19,7 +19,7 @@ pkgs.writeShellScriptBin "akibOS" ''
   git clone https://www.github.com/akibahmed229/nixos /mnt/persist/home/"$username"/flake
   cd /mnt/persist/home/$username/flake
   rm -rf flake.lock
-  read -p "Enter your hostname (e.g., desktop)" hostname
+  read -p "Enter your hostname (e.g., desktop): " hostname
   nixos-install --no-root-passwd --flake .#$hostname
 ''
 
