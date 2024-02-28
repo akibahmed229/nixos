@@ -19,11 +19,10 @@ pkgs.writeShellScriptBin "akibOS" ''
   echo
   mkdir -p /mnt/persist/home/$username/flake
   git clone https://www.github.com/akibahmed229/nixos /mnt/persist/home/"$username"/flake
-  cd /mnt/persist/home/$username/flake
-  rm -rf flake.lock
+  rm -rf /mnt/persist/home/$username/flake/flake.lock
   read -p "Enter your hostname (e.g., desktop): " hostname
   echo
-  nixos-install --root /mnt --flake .#$hostname
+  nixos-install --root /mnt --flake /mnt/persist/home/$username/flake#$hostname
 ''
 
 
