@@ -76,6 +76,7 @@
             extraSpecialArgs = { inherit inputs user hostname devicename theme hyprland state-version; };
             users.${user} = {
               imports =
+                [ self.homeManagerModules.default ] ++ # Custom home-manager modules
                 [ (import ../home-manager/home.nix) ] ++
                 # [ (import ../modules/predefiend/home-manager/impermanence/impermanence.nix) ] ++
                 [ nix-index-database.hmModules.nix-index ];
