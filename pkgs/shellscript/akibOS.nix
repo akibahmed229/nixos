@@ -13,14 +13,12 @@ pkgs.writeShellScriptBin "akibOS" ''
   echo "---------------------"
   echo "### Install System ###"
 
-  echo "Enter your username (e.g., akib): "
-  nix-shell -p git
-  read username
+  nix-env -iA nixos.git
+  read -p "Enter your username: " username
   mkdir -p /mnt/persist/home/$username/flake
   git clone https://www.github.com/akibahmed229/nixos /mnt/persist/home/"$username"/flake
   cd /mnt/persist/home/$username/flake
-  echo "Enter your hostname (e.g., deskto): "
-  read hostname
+  read -p "Enter your hostname: " hostname
   nixos-install --no-root-passwd --flake .#$hostname
 ''
 
