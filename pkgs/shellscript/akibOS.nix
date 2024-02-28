@@ -23,7 +23,7 @@ pkgs.writeShellScriptBin "akibOS" ''
   rm -rf flake.lock
   read -p "Enter your hostname (e.g., desktop): " hostname
   echo
-  nixos-install -root /mnt --flake .#$hostname
+  nixos-install --root /mnt --flake .#$hostname
 ''
 
 
