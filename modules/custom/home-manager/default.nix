@@ -3,7 +3,11 @@
 {
   # Import the modules from the files in this directory
   monitors = import ./monitor;
+  theme = import ./theme;
 
   # by default, import all the modules
-  default.imports = [ (import ./monitor) ];
+  default.imports =
+    [ (import ./monitor) ] ++
+    [ (import ./theme) ];
+
 }

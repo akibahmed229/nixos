@@ -28,12 +28,6 @@
                         alias gd='git diff'
                         alias ..='cd ..'
         		            #alias vim='nvim'
-                        # history search
-                        bindkey "^[[A" history-beginning-search-backward
-                        bindkey "^[[B" history-beginning-search-forward
-                        bindkey 'Ctrl-g' kill-line
-                        bindkey 'Ctrl-A' beginning-of-line
-                        bindkey 'Ctrl-E' end-of-line
       '';
       shellAliases = {
         la = "eza --icons -la  --group-directories-first";
@@ -42,13 +36,24 @@
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       initExtra = ''
+        eval "$(atuin init zsh)"
+
         export LANG="en_US.UTF-8";
+
         function tmux-sesssion {
         BUFFER='tmux-sessionizer'
             zle accept-line
         }
+
         zle -N tmux-sesssion
         bindkey '^f' tmux-sesssion
+
+        # history search
+        bindkey "^[[A" history-beginning-search-backward
+        bindkey "^[[B" history-beginning-search-forward
+        bindkey 'Ctrl-g' kill-line
+        bindkey 'Ctrl-A' beginning-of-line
+        bindkey 'Ctrl-E' end-of-line
       '';
       syntaxHighlighting.highlighters = [
         "main"

@@ -176,6 +176,7 @@
     python312Full
     nodejs_21
     yarn
+    atuin
   ]);
 
   # Gaming
@@ -234,11 +235,16 @@
     };
   };
 
-  # Enable virtualisation
+  # Enable virtualisation ( custom module )
   kvm.enable = true;
 
   # Enable dbus 
   services.dbus.enable = true;
+
+  services.atuin = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # Open ports in the firewall.
   networking.firewall = {
