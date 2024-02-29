@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> { } }:
 
-(pkgs.buildFHSUserEnv {
+(pkgs.buildFHSEnv {
   name = "kernel-build-env";
   targetPkgs = pkgs: (with pkgs;
     [
