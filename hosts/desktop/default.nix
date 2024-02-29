@@ -65,13 +65,9 @@
     bat
     nvme-cli
     distrobox
-    cargo
-    direnv
-    devbox
     simplehttp2server
     speedtest-cli
     #onionshare
-    docker-compose
     flatpak
     appimage-run
     bleachbit
@@ -93,7 +89,6 @@
     gparted
     libreoffice
     qbittorrent
-    obsidian
     figma-linux
     protonvpn-gui
     notepadqq
@@ -162,6 +157,7 @@
     # List unstable packages here
     jetbrains.pycharm-community
     jetbrains.idea-community
+    obsidian
     postman
     vscode
     android-tools
@@ -175,6 +171,12 @@
     jdk21
     python312Full
     nodejs_21
+    rustc
+    cargo
+    direnv
+    devbox
+    docker
+    docker-compose
     yarn
     atuin
   ]);
