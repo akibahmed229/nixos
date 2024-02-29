@@ -22,7 +22,7 @@ pkgs.writeShellScriptBin "akibOS" ''
   echo
   read -p "Enter your hostname (e.g., desktop): " hostname
   echo
-  nixos-install --no-root-passwd --flake /mnt/home/flake#$hostname
+  nixos-install --no-root-passwd --flake /mnt/home/$username/flake#$hostname
 ''
 
 
