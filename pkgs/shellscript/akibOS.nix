@@ -17,12 +17,12 @@ pkgs.writeShellScriptBin "akibOS" ''
   nix-env -iA nixos.git
   read -p "Enter your username (e.g., akib): " username
   echo
-  mkdir -p /mnt/persist/home/$username/flake
-  git clone https://www.github.com/akibahmed229/nixos /mnt/persist/home/"$username"/flake
-  rm -rf /mnt/persist/home/$username/flake/flake.lock
+  mkdir -p /home/$username/flake
+  git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
+  rm -rf /home/$username/flake/flake.lock
   read -p "Enter your hostname (e.g., desktop): " hostname
   echo
-  nixos-install --root /mnt --flake /mnt/persist/home/$username/flake#$hostname
+  nixos-install --no-root-passwd --flake /home/$username/flake#$hostname
 ''
 
 
