@@ -19,9 +19,10 @@ pkgs.writeShellScriptBin "akibOS" ''
   mkdir -p /mnt/home/$username/flake
   git clone https://www.github.com/akibahmed229/nixos /mnt/home/$username/flake
   rm -rf /mnt/home/$username/flake/flake.lock
+  echo
   read -p "Enter your hostname (e.g., desktop): " hostname
   echo
-  nixos-install --no-root-passwd --flake /mnt/home/nixos#$hostname
+  nixos-install --no-root-passwd --flake /mnt/home/flake#$hostname
 ''
 
 
