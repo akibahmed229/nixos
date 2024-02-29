@@ -47,16 +47,16 @@ pkgs.writeShellScriptBin "akibOS" ''
   # install flake function
   function install_flake() {
     # create persist dir and clone flake
-    mkdir -p /mnt/persist/home/$username/flake
-    git clone https://www.github.com/akibahmed229/nixos /mnt/persist/home/$username/flake
-    rm -rf /mnt/persist/home/$username/flake/flake.lock
+    mkdir -p /mnt/home/$username/flake
+    git clone https://www.github.com/akibahmed229/nixos /mnt/home/$username/flake
+    rm -rf /mnt/home/$username/flake/flake.lock
     echo
-    nixos-install --no-root-passwd --flake /mnt/persist/home/$username/flake#$hostname
+    nixos-install --no-root-passwd --flake /mnt/home/$username/flake#$hostname
   }
 
   # if dir already exists, remove it 
-  if [ -d "/mnt/persist" ]; then
-    sudo rm -rf /mnt/persist
+  if [ -d "/mnt/home" ]; then
+    sudo rm -rf /mnt/home
     my_format "### Installing NixOS ###"
     install_flake
   else
