@@ -162,7 +162,7 @@
     # List unstable packages here
     jetbrains.pycharm-community
     jetbrains.idea-community
-    #postman
+    postman
     vscode
     android-tools
     android-udev-rules
