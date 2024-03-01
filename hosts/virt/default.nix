@@ -7,9 +7,20 @@
 {
   imports =
     [ (import ./hardware-configuration.nix) ] ++
-    [ (import ../../modules/predefiend/nixos/impermanence) ] ++
-    [ (import ../../home-manager/dwm/default.nix) ];
-
+    [ (import ../../home-manager/dwm/default.nix) ] ++
+    map
+      (myprograms:
+        let
+          path = name:
+            if name == "disko" then
+              (import ../../modules/predefiend/nixos/${name} { device = "/dev/vda"; }) # diskos module with device name (e.g., /dev/sda1)
+            else
+              (import ../../modules/predefiend/nixos/${name}); # path to the module
+        in
+        path myprograms # loop through the myprograms and import the module
+      )
+      # list of programs
+      [ "impermanence" "disko" ];
 
 
   # List packages installed in system profile. To search, run:

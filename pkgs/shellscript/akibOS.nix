@@ -46,6 +46,7 @@ pkgs.writeShellScriptBin "akibOS" ''
     git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
     rm -rf /home/$username/flake/flake.lock
     nixos-install --no-root-passwd --flake /home/$username/flake#$hostname
+    mv /home/$username/flake /mnt/persist/home/$username/flake
   }
 
   # if dir already exists, remove it 
