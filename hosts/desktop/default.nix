@@ -34,7 +34,7 @@
       [ "flatpak" "sops" "impermanence" "tmux" "disko" ];
 
   # Setting For OpenRGB
-  services.hardware.openrgb = {
+  services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
     enable = true;
     motherboard = "intel";
   };
@@ -76,14 +76,6 @@
     flatpak
     appimage-run
     bleachbit
-    #obs-studio
-    (pkgs.wrapOBS {
-      plugins = with pkgs.obs-studio-plugins; [
-        obs-teleport
-        advanced-scene-switcher
-        #(callPackage ../../pkgs/obs-studio-plugins/obs-zoom-to-mouse.nix { })
-      ];
-    })
     gimp
     libsForQt5.kdenlive
     glaxnimate
@@ -171,9 +163,7 @@
       android-udev-rules
       github-desktop
       android-studio
-      alacritty
       dwt1-shell-color-scripts
-      git
       gcc
       jdk21
       python312Full
@@ -186,8 +176,24 @@
       docker
       docker-compose
       yarn
-      atuin
-    ] else [ ]);
+    ] else [ ]) ++ (
+    if (hostname == "desktop" || hostname == "laptop") then
+      with unstable.${pkgs.system};
+      [
+        git
+        alacritty
+        atuin
+        #obs-studio
+        (pkgs.wrapOBS {
+          plugins = with pkgs.obs-studio-plugins; [
+            obs-teleport
+            advanced-scene-switcher
+            #(callPackage ../../pkgs/obs-studio-plugins/obs-zoom-to-mouse.nix { })
+          ];
+        })
+      ]
+    else [ ]
+  );
 
   # Gaming
   programs.steam = {
@@ -197,7 +203,7 @@
   };
 
   # Eableing OpenGl support
-  hardware.opengl = lib.mkIf (hostname == "desktop") {
+  hardware.opengl = lib.mkIf (hostname == "desktop" || hostname == "laptop") {
     enable = true;
     driSupport32Bit = true;
     extraPackages = with pkgs; [

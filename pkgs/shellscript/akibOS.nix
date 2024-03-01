@@ -5,6 +5,8 @@
 pkgs.writeShellScriptBin "akibOS" ''
   #!/usr/bin/env bash
 
+  # enter as root 
+  sudo su 
   # check if internet is working
   if ! ping -c 1 google.com &> /dev/null; then # $> /dev/null is used to hide the output
     echo "No internet connection!"
