@@ -3,6 +3,8 @@
 { config
 , pkgs
 , user
+, hostname
+, devicename
 , unstable
 , inputs
 , lib
@@ -20,12 +22,16 @@
     map
       (myprograms:
         let
-          path = name: (import ../../modules/predefiend/nixos/${name}); # path to the module
+          path = name:
+            if name == "disko" then
+              (import ../../modules/predefiend/nixos/${name} { device = "${devicename}"; }) # diskos module with device name (e.g., /dev/sda1)
+            else
+              (import ../../modules/predefiend/nixos/${name}); # path to the module
         in
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "flatpak" "sops" "impermanence" "tmux" ];
+      [ "flatpak" "sops" "impermanence" "tmux" "disko" ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = {
@@ -64,7 +70,6 @@
     eza
     bat
     nvme-cli
-    distrobox
     simplehttp2server
     speedtest-cli
     #onionshare
@@ -153,33 +158,36 @@
     libadwaita
     polkit
     #python310Packages.pygobject3
-  ]) ++ (with unstable.${pkgs.system}; [
-    # List unstable packages here
-    jetbrains.pycharm-community
-    jetbrains.idea-community
-    obsidian
-    postman
-    vscode
-    android-tools
-    android-udev-rules
-    github-desktop
-    android-studio
-    alacritty
-    dwt1-shell-color-scripts
-    git
-    gcc
-    jdk21
-    python312Full
-    nodejs_21
-    rustc
-    cargo
-    direnv
-    devbox
-    docker
-    docker-compose
-    yarn
-    atuin
-  ]);
+  ]) ++ (if user == "akib" && hostname == "desktop" then
+    with unstable.${pkgs.system};
+    [
+      # List unstable packages here
+      jetbrains.pycharm-community
+      jetbrains.idea-community
+      obsidian
+      postman
+      vscode
+      android-tools
+      android-udev-rules
+      github-desktop
+      android-studio
+      alacritty
+      dwt1-shell-color-scripts
+      git
+      gcc
+      jdk21
+      python312Full
+      nodejs_21
+      rustc
+      cargo
+      direnv
+      devbox
+      distrobox
+      docker
+      docker-compose
+      yarn
+      atuin
+    ] else [ ]);
 
   # Gaming
   programs.steam = {
@@ -189,20 +197,16 @@
   };
 
   # Eableing OpenGl support
-  hardware.opengl = {
+  hardware.opengl = lib.mkIf (hostname == "desktop") {
     enable = true;
+    driSupport32Bit = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      (vaapiIntel.override { enableHybridCodec = true; }) # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       vaapiVdpau
       libvdpau-va-gl
     ];
-  };
-  hardware.opengl.driSupport32Bit = true;
-  # Getting accelerated video playback
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -11,9 +11,12 @@ pkgs.writeShellScriptBin "akibOS" ''
     exit 1
   fi
 
-  echo "---------------------"
-  echo "### Disko Formate ###"
-  echo 
+  # format output
+  function my_format() {
+    echo
+    echo "--------------------"
+    echo "$1"
+  }
 
   # store user input in function 
   function user_input() {
@@ -29,20 +32,12 @@ pkgs.writeShellScriptBin "akibOS" ''
     echo "Username, hostname, and device are required!"
     exit 1
   fi
-  
-  # format output
-  function my_format() {
-    echo
-    echo "--------------------"
-    echo "$1"
-  }
 
   my_format "### Mounting Disk ###"
   # download disko.nix and run disko
   curl https://raw.githubusercontent.com/akibahmed229/nixos/main/modules/predefiend/nixos/disko/default.nix -o /tmp/disko.nix
   sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device "\"$device\""
   my_format "### Disko Formate Done ###" 
-  
  
   # install flake function
   function install_flake() {
