@@ -31,7 +31,7 @@
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "flatpak" "sops" "impermanence" "tmux" "disko" ];
+      [ "sops" "impermanence" "tmux" "disko" ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
@@ -162,7 +162,7 @@
       android-tools
       android-udev-rules
       github-desktop
-      android-studio
+      #android-studio
       dwt1-shell-color-scripts
       gcc
       jdk21
