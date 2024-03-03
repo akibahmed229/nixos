@@ -93,7 +93,7 @@
     mangohud
     goverlay
     anydesk
-    geekbench
+    #geekbench
     kdiskmark
     chromium
     whatsapp-for-linux
