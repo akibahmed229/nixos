@@ -24,7 +24,7 @@
       path app # loop through the apps and import the module
     )
     # list of apps
-    [ "firefox" "zsh" "tmux" "nvchad" "lf" ];
+    [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" ];
 
   home.packages = with pkgs; [
     (import ./others/swww/wallpaper.nix { inherit pkgs; })

@@ -67,7 +67,6 @@
         "Documents"
         "Videos"
         "VirtualBox VMs"
-        "flake"
         "Android"
         "Postman"
         ".vscode"
