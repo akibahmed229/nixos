@@ -42,7 +42,7 @@
       #systemd.enable = true; # uncomment to use initrd postDeviceCommands (e.g. to mount encrypted partitions)
     };
 #    plymouth = {
-      enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
+ #     enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
  #     theme = "breeze";
 #    };
 #  };
