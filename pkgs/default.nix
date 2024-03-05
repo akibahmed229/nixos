@@ -7,6 +7,8 @@ pkgs: {
 
   custom_sddm = pkgs.callPackage ./sddm/sddm.nix { };
 
+  wallpaper = import ./shellscript/wallpaper.nix { inherit pkgs; };
+
   nix-update-input = import ./shellscript/nix-update-input.nix { inherit pkgs; };
 
   disko-formate = import ./shellscript/disko-formate.nix { inherit pkgs; };
