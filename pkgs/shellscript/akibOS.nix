@@ -41,10 +41,11 @@ pkgs.writeShellScriptBin "akibOS" ''
 
   # Change in file accroding to input 
   function writeUserData() {
-    user_input "Do you want write $username , $hostname, & $device in flake.nix (y/n): " ans
+    # ask user if they want to change the default values
+    read -p "Do you want to change the default(like:- username,hostname & device name) values? (y/n): " ans
 
     # if user input is not empty and is y 
-    if [ -z "$ans"] && [ "$ans" == "y" ] || [ "$ans" == "Y" ]; then
+    if [ "$ans" == "y" ] || [ "$ans" == "Y" ]; then
       # change in flake.nix file according to user input
       sed -i "s/akib/$username/g" /home/$username/flake/flake.nix
       sed -i "s/nixos/$hostname/g" /home/$username/flake/flake.nix
@@ -66,11 +67,12 @@ pkgs.writeShellScriptBin "akibOS" ''
  
   # install flake function
   function install_flake() {
+    clear
     # create persist dir and clone flake
     mkdir -p /home/$username/flake
     git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
     rm -rf /home/$username/flake/flake.lock
-    nix flake update /home/$username/flake
+    nix flake update /home/$username/flake --experimental-features "nix-command flakes"
     # call the above functions to write user data and generate hardware config
     writeUserData
     generateHardwareConfig
