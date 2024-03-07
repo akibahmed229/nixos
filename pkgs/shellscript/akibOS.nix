@@ -47,7 +47,7 @@ pkgs.writeShellScriptBin "akibOS" ''
       if [[ "$ans" =~ ^[Yy]$ ]]; then
           # Change values in the flake.nix file according to user input
           sed -i "s/akib/$username/g" "$file"
-          sed -i "s/nixos/$hostname/g" "$file"
+          sed -i "s/desktop/$hostname/g" "$file"
           sed -i "s,/dev/nvme0n1,$device,g" "$file"
       else
           print_message "You can change it later in flake.nix"
