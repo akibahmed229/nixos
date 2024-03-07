@@ -75,6 +75,7 @@ pkgs.writeShellScriptBin "akibOS" ''
     # nix flake update /home/$username/flake --experimental-features "nix-command flakes"
     # call the above functions to write user data and generate hardware config
     writeUserData
+    sleep 1
     generateHardwareConfig
     # install nixos
     nixos-install --no-root-passwd --flake /home/$username/flake#$hostname
@@ -85,9 +86,11 @@ pkgs.writeShellScriptBin "akibOS" ''
   # if dir already exists, remove it 
   if [ -d "/mnt/home" ]; then
     sudo rm -rf /home/$username
+    sleep 1
     my_format "### Installing NixOS ###"
     install_flake
   else
+    sleep 1
     my_format "### Installing NixOS ###"
     install_flake
   fi
