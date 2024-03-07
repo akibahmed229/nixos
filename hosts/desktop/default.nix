@@ -31,7 +31,7 @@
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "flatpak" "sops" "impermanence" "tmux" "disko" ];
+      [ "sops" "impermanence" "tmux" "disko" ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {

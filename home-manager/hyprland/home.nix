@@ -28,7 +28,7 @@
     [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" ];
 
   home.packages = with pkgs; [
-  (self.packages.${pkgs.system}.wallpaper)
+    self.packages.${pkgs.system}.wallpaper
     xfce.exo
   ];
 
