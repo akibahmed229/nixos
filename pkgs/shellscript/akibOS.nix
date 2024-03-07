@@ -68,7 +68,7 @@ pkgs.writeShellScriptBin "akibOS" ''
   function install_flake() {
     # create persist dir and clone flake
     mkdir -p /home/$username/flake
-    git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
+    ${pkgs.git}/bin/git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
     rm -rf /home/$username/flake/flake.lock
     nix flake update /home/$username/flake/
     
