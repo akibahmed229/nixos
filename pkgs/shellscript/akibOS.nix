@@ -76,7 +76,7 @@ pkgs.writeShellScriptBin "akibOS" ''
     # call the above functions to write user data and generate hardware config
     writeUserData
     sleep 1
-    generateHardwareConfig
+    # generateHardwareConfig
     # install nixos
     nixos-install --no-root-passwd --flake /home/$username/flake#$hostname
     mkdir -p /mnt/persist/home/$username/.config/flake
