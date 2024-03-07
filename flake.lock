@@ -263,22 +263,6 @@
         "type": "github"
       }
     },
-    "nixos": {
-      "locked": {
-        "lastModified": 1700593489,
-        "narHash": "sha256-YDgpSVIFV2zP8VWEzzMgx6ZRhLBlYCsbUF/2KmY9nZQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "dc7b3febf8d862328d8704de5c8437d2df442c76",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "23.11-beta",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1709703039,
@@ -441,7 +425,6 @@
         "impermanence": "impermanence",
         "my-devShells": "my-devShells",
         "nix-index-database": "nix-index-database",
-        "nixos": "nixos",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
         "plasma-manager": "plasma-manager",
