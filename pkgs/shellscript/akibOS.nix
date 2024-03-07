@@ -56,6 +56,7 @@ pkgs.writeShellScriptBin "akibOS" ''
 
   function generateHardwareConfig() {
     if [ "$username" == "akib" && "$hostname" == "desktop" ]; then
+      echo "You can change it later in hardware-configuration.nix"
     else
     # generate hardware-configuration.nix
     nixos-generate-config --root /mnt
