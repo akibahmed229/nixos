@@ -55,7 +55,7 @@ pkgs.writeShellScriptBin "akibOS" ''
   }
 
   function generateHardwareConfig() {
-    if [ "$username" == "akib" ]; then
+    if [ "$username" == "akib" && "$hostname" == "desktop" ]; then
       return
     else
     # generate hardware-configuration.nix
@@ -71,7 +71,7 @@ pkgs.writeShellScriptBin "akibOS" ''
     git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
     rm -rf /home/$username/flake/flake.lock
     nix flake update /home/$username/flake/ --experimental-features "nix-command flakes"
-    
+    # call the above functions to write user data and generate hardware config
     writeUserData
     generateHardwareConfig
     # install nixos
@@ -80,9 +80,8 @@ pkgs.writeShellScriptBin "akibOS" ''
   }
 
   # if dir already exists, remove it 
-  if [ -d "/mnt/home" ] && [ -d /mnt/persist/home; then
+  if [ -d "/mnt/home" ]; then
     sudo rm -rf /home/$username
-    sudo rm -rf /mnt/persist/home/$username/.config/flake
     my_format "### Installing NixOS ###"
     install_flake
   else
