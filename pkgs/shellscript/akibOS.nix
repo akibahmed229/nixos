@@ -72,14 +72,14 @@ pkgs.writeShellScriptBin "akibOS" ''
     mkdir -p /home/$username/flake
     git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
     rm -rf /home/$username/flake/flake.lock
-    nix flake update /home/$username/flake --experimental-features "nix-command flakes"
+    # nix flake update /home/$username/flake --experimental-features "nix-command flakes"
     # call the above functions to write user data and generate hardware config
     writeUserData
     generateHardwareConfig
     # install nixos
     nixos-install --no-root-passwd --flake /home/$username/flake#$hostname
     mkdir -p /mnt/persist/home/$username/.config/flake
-    mv /home/$username/flake /mnt/persist/home/$username/.config/flake
+    mv /home/$username/flake /mnt/persist/home/$username/.config
   }
 
   # if dir already exists, remove it 
