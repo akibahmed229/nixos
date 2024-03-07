@@ -38,23 +38,59 @@ pkgs.writeShellScriptBin "akibOS" ''
   curl https://raw.githubusercontent.com/akibahmed229/nixos/main/modules/predefiend/nixos/disko/default.nix -o /tmp/disko.nix
   sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device "\"$device\""
   my_format "### Disko Formate Done ###" 
+
+  # Change in file accroding to input 
+  function writeUserData() {
+    # ask user if they want to change the default values
+    read -p "Do you want to change the default(like:- username,hostname & device name) values? (y/n): " ans
+
+    # if user input is not empty and is y 
+    if [ "$ans" == "y" ] || [ "$ans" == "Y" ]; then
+      # change in flake.nix file according to user input
+      sed -i "s/akib/$username/g" /home/$username/flake/flake.nix
+      sed -i "s/nixos/$hostname/g" /home/$username/flake/flake.nix
+      sed -i "s/\/dev\/nvme0n1/$device/g" /home/$username/flake/flake.nix
+    else
+      echo "You can change it later in flake.nix"
+    fi
+  }
+
+  function generateHardwareConfig() {
+    if [ "$username" == "akib" ] && [ "$hostname" == "desktop" ]; then
+      echo "You can change it later in hardware-configuration.nix"
+    else
+    # generate hardware-configuration.nix
+    nixos-generate-config --root /mnt
+    cp -r /mnt/etc/nixos/hardware-configuration.nix /home/$username/flake/hosts/desktop/hardware-configuration.nix
+    fi
+  }
  
   # install flake function
   function install_flake() {
+    clear
     # create persist dir and clone flake
     mkdir -p /home/$username/flake
     git clone https://www.github.com/akibahmed229/nixos /home/$username/flake
     rm -rf /home/$username/flake/flake.lock
+    # nix flake update /home/$username/flake --experimental-features "nix-command flakes"
+    # call the above functions to write user data and generate hardware config
+    writeUserData
+    sleep 1
+    generateHardwareConfig
+    # install nixos
     nixos-install --no-root-passwd --flake /home/$username/flake#$hostname
-    mv /home/$username/flake /mnt/persist/home/$username/.config/
+    mkdir -p /mnt/persist/home/$username/.config/flake
+    mv /home/$username/flake /mnt/persist/home/$username/.config
   }
 
   # if dir already exists, remove it 
   if [ -d "/mnt/home" ]; then
-    sudo rm -rf /home
+    sudo rm -rf /home/$username
+    sleep 1
     my_format "### Installing NixOS ###"
     install_flake
   else
+    sleep 1
     my_format "### Installing NixOS ###"
     install_flake
   fi
