@@ -9,7 +9,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # live image builder for nixos
-    nixos.url = "github:nixos/nixpkgs/23.11-beta";
+    # nixos.url = "github:nixos/nixpkgs/23.11-beta";
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -76,7 +76,6 @@
     { self
     , nixpkgs
     , nixpkgs-unstable
-    , nixos
     , nix-index-database
     , home-manager
     , hyprland
@@ -148,7 +147,7 @@
         in
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs self unstable nixos user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+          inherit inputs self unstable user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
         };
     };
 }

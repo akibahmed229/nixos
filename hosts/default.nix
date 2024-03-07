@@ -4,7 +4,6 @@
 , lib
 , inputs
 , unstable
-, nixos
 , system
 , theme
 , state-version
@@ -25,7 +24,7 @@
     specialArgs = { inherit inputs self user hostname devicename unstable state-version; };
     modules =
       # configuration of nixos 
-      # [ "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
+      # [ "${inputs.nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
       [ (import ./configuration.nix) ] ++
       [ (import ./desktop) ] ++
       [ self.nixosModules.default ] ++ # Custom nixos modules
