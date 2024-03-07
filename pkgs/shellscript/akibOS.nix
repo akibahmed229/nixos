@@ -44,7 +44,7 @@ pkgs.writeShellScriptBin "akibOS" ''
     user_input "Do you want write $username , $hostname, & $device in flake.nix (y/n): " ans
 
     # if user input is not empty and is y 
-    if [ -z "$ans"] && [ "$ans" == "y" || "$ans" == "Y" ]; then
+    if [ -z "$ans"] && [ "$ans" == "y" ] || [ "$ans" == "Y" ]; then
       # change in flake.nix file according to user input
       sed -i "s/akib/$username/g" /home/$username/flake/flake.nix
       sed -i "s/nixos/$hostname/g" /home/$username/flake/flake.nix
@@ -55,7 +55,7 @@ pkgs.writeShellScriptBin "akibOS" ''
   }
 
   function generateHardwareConfig() {
-    if [ "$username" == "akib" && "$hostname" == "desktop" ]; then
+    if [ "$username" == "akib" ] && [ "$hostname" == "desktop" ]; then
       echo "You can change it later in hardware-configuration.nix"
     else
     # generate hardware-configuration.nix
