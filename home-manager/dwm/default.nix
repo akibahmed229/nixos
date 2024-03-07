@@ -5,20 +5,9 @@
 { config, pkgs, unstable, user, state-version, ... }:
 
 {
-  #environment.shellInit = '' 
-  #xrandr -s 1920x1080
-  #wall=$(find /home/${user}/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
-  #xwallpaper --zoom $wall
-  ##wal -c
-  ##wal -i $wall
-  ##xcompmgr &
-  ##picom &
-  #slstatus &
-  #'';
-
   services.xserver.displayManager.sessionCommands = '' 
 	xrandr -s 1920x1080
-	wall=$(find /home/${user}/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+	wall=$(find /home/${user}/.config/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
 	xwallpaper --zoom $wall
 	wal -c
 	wal -i $wall
