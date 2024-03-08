@@ -75,8 +75,8 @@ pkgs.writeShellScriptBin "akibOS" ''
       
       mkdir -p "$persist_dir"
       mv "$flake_dir" "$persist_dir"
-      chown -R "$username:users" "$persist_dir/flake/*"
-      chown -R "$username:users" "$persist_dir/flake/.*"
+      chown -R $username:users $persist_dir/flake/*
+      chown -R $username:users $persist_dir/flake/.*
   }
 
   # Function to install the flake and NixOS
