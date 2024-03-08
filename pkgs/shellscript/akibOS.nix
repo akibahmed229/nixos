@@ -68,6 +68,17 @@ pkgs.writeShellScriptBin "akibOS" ''
       fi
   }
 
+  # Function to move the flake directory to the persist directory 
+  function move_flake() {
+      local flake_dir="$1"
+      local persist_dir="$2"
+      
+      mkdir -p "$persist_dir"
+      mv "$flake_dir" "$persist_dir"
+      chown -R "$username:users" "$persist_dir/flake/*"
+      chown -R "$username:users" "$persist_dir/flake/.*"
+  }
+
   # Function to install the flake and NixOS
   function install_flake() {
       local flake_dir="/home/$username/flake"
@@ -84,8 +95,7 @@ pkgs.writeShellScriptBin "akibOS" ''
 
       # Install NixOS
       nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
-      mkdir -p "$persist_dir"
-      mv "$flake_dir" "$persist_dir"
+      move_flake "$flake_dir" "$persist_dir"
   }
 
   # Main script logic
