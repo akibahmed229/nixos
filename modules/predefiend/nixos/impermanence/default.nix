@@ -71,6 +71,7 @@
         "Postman"
         ".vscode"
         ".docker"
+        ".mysql"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
@@ -96,6 +97,7 @@
         #".zshrc"
         ".zsh_history"
         ".gitconfig"
+        ".mysql_history"
       ];
     };
   };

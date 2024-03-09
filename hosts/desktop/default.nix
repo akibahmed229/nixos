@@ -149,6 +149,8 @@
     #rubyPackages.glib2
     libadwaita
     polkit
+    mysql-workbench
+    mysql80
     #python310Packages.pygobject3
   ]) ++ (if user == "akib" && hostname == "desktop" then
     with unstable.${pkgs.system};
@@ -181,6 +183,7 @@
       with unstable.${pkgs.system};
       [
         git
+        lazygit
         alacritty
         atuin
         #obs-studio
@@ -256,6 +259,11 @@
   services.atuin = {
     enable = true;
     openFirewall = true;
+  };
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb; 
   };
 
   # Open ports in the firewall.
