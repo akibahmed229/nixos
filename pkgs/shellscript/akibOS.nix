@@ -40,10 +40,10 @@ pkgs.writeShellScriptBin "akibOS" ''
   # Function to update user data in the flake.nix file
   function update_flake_data() {
       local file="/home/$username/flake/flake.nix"
-
       # Ask the user if they want to change default values
       read -rp "Do you want to change the default values (e.g., username, hostname, and device name)? (y/n): " ans
 
+      # using regex to match the user input
       if [[ "$ans" =~ ^[Yy]$ ]]; then
           # Change values in the flake.nix file according to user input
           sed -i "s/akib/$username/g" "$file"
@@ -75,6 +75,7 @@ pkgs.writeShellScriptBin "akibOS" ''
       
       mkdir -p "$persist_dir"
       mv "$flake_dir" "$persist_dir"
+      useradd -m -G users -s /bin/bash $username
       chown -R $username:users $persist_dir/flake/*
       chown -R $username:users $persist_dir/flake/.*
   }
