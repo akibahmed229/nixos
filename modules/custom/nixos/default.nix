@@ -7,6 +7,7 @@
   enableAudio = import ./audio;
   enableKvm = import ./kvm;
   enablePolkit = import ./polkit-agent;
+  enableSDM = import ./sddm;
 
   # by default, import all the modules
   default.imports =
@@ -14,5 +15,6 @@
     [ (import ./grub) ] ++
     [ (import ./audio) ] ++
     [ (import ./polkit-agent) ] ++
+    [ (import ./sddm) ] ++
     [ (import ./kvm) ];
 }

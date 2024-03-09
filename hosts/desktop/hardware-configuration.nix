@@ -9,13 +9,11 @@
 , unstable
 , self
 , modulesPath
-, devicename
 , ...
 }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ] ++
-    [ (import ../../modules/predefiend/nixos/disko { device = "${devicename}"; }) ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -37,17 +35,17 @@
     "logo.nologo"
   ];
 
-  boot = {
-    consoleLogLevel = 3;
-    initrd = {
-      verbose = false;
-      #systemd.enable = true; # uncomment to use initrd postDeviceCommands (e.g. to mount encrypted partitions)
-    };
-    plymouth = {
-      enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
-      theme = "breeze";
-    };
-  };
+  #  boot = {
+  #   consoleLogLevel = 3;
+  #  initrd = {
+  #     verbose = false;
+  #systemd.enable = true; # uncomment to use initrd postDeviceCommands (e.g. to mount encrypted partitions)
+  #    };
+  #    plymouth = {
+  #     enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
+  #     theme = "breeze";
+  #    };
+  #  };
 
   boot.initrd.availableKernelModules = [
     "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)

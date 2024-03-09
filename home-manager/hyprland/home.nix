@@ -5,6 +5,7 @@
 , pkgs
 , hyprland
 , inputs ? { }
+, self
 , theme
 , user
 , ...
@@ -27,7 +28,8 @@
     [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" ];
 
   home.packages = with pkgs; [
-    (import ./others/swww/wallpaper.nix { inherit pkgs; })
+    self.packages.${pkgs.system}.wallpaper
+    xfce.exo
   ];
 
   #imports = [(import ./others/hyprutility.nix)];
@@ -210,8 +212,8 @@
       source = ./others/libinput;
       recursive = true;
     };
-    ".config/Thunar/thunarrc" = {
-      source = ./others/Thunar/thunarrc;
+    ".config/Thunar" = {
+      source = ./others/Thunar;
       recursive = true;
     };
     ".config/gtk-4.0" = {

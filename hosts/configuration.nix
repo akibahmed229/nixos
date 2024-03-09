@@ -54,6 +54,7 @@
 
   programs.command-not-found.enable = false;
   programs.nix-index.enable = true;
+  programs.dconf.enable = true; # Enable dconf to manage settings.
 
   # environment variables Setting
   environment = {

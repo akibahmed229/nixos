@@ -1,10 +1,8 @@
-<p align="center"><img src="https://i.imgur.com/X5zKxvp.png" width=300px></p>
-
 <p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
 
 <h2 align="center">Akib | NixOS Config GO Wilde</h2>
 
-## Current System Preview
+<h2 align="center"> Current System Preview </h2>
 
 ![my current setup](public/preview/hyprland.png)
 
@@ -33,39 +31,18 @@ Before you begin, ensure you have the following:
 
 Make sure change your username and hostname in the flake.nix file
 
-1. **Formate, Mount the Partitions and Subvolumes**
-
-This will format the disk and mount the partitions make sure to give the device name e.g /dev/nvme0n1
-
-```bash
-nix su
-nix --experimental-features 'nix-command flakes' run github:akibahmed229/nixos/dev#disko-formate
-```
-
 2. **Install NixOS**
 
 To install NixOS on the mounted partitions, follow these steps:
 
 ```bash
-nix-env -iA nixos.git
-nixos-generate-config --root /mnt
-mkdir -p /mnt/persist/home/flake
-git clone https://www.github.com/akibahmed229/nixos/dev /mnt/persist/home/flake
+sudo su
+nix-shell -p git --command 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
 ```
 
-Copy the hardware-configuration.nix file from the /mnt/etc/nixos directory to the /mnt/nixos directory. and install the system using the following command:
-
-```bash
-cp -r /mnt/etc/nixos/hardware-configuration.nix /mnt/persist/home/flake/hosts/desktop/hardware-configuration.nix
-cd /mnt/nixos
-nixos-install --root /mnt --flake .#desktop
-```
-
-Note: During the configuration step, you can manually edit the `/mnt/etc/nixos/configuration.nix` file to set mount options and customize your NixOS installation.
+Note: During the installation process, akibOS will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
 
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
-
-Remember to replace `/dev/sdX` with the appropriate disk identifier for your system.
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
 

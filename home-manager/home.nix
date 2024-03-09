@@ -34,7 +34,6 @@
     adw-gtk3
     gruvbox-dark-gtk
     gruvbox-dark-icons-gtk
-    alacritty
     hwinfo
 
     # # Adds the 'hello' command to your environment. It prints a friendly
@@ -69,8 +68,8 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    ".config/alacritty/alacritty.yml" = {
-      source = ../modules/predefiend/home-manager/alacritty/alacritty.yml;
+    ".config/alacritty" = {
+      source = ../modules/predefiend/home-manager/alacritty;
       recursive = true;
     };
     ".config/OpenRGB" = {
@@ -87,41 +86,8 @@
     };
   };
 
-  gtk = {
-    enable = true;
-    cursorTheme.name = "Bibata-Modern-Classic";
-    cursorTheme.package = pkgs.bibata-cursors;
-    theme.package = pkgs.adw-gtk3;
-    theme.name = "adw-gtk3-dark";
-    iconTheme.package = pkgs.gruvbox-dark-icons-gtk;
-    iconTheme.name = "oomox-gruvbox-dark";
-  };
-
-  home = {
-    pointerCursor = {
-      gtk.enable = true;
-      x11.enable = true;
-      size = 38;
-      name = "Bibata-Modern-Classic";
-      package = pkgs.bibata-cursors;
-    };
-  };
-
-  qt = {
-    enable = true;
-    # platform theme "gtk" or "gnome"
-    platformTheme = "gtk3";
-    # name of the qt theme
-    style.name = "adwaita-dark";
-
-    # detected automatically:
-    # adwaita, adwaita-dark, adwaita-highcontrast,
-    # adwaita-highcontrastinverse, breeze,
-    # bb10bright, bb10dark, cde, cleanlooks,
-    # gtk2, motif, plastique
-    # package to use
-    style.package = pkgs.adwaita-qt;
-  };
+  # GTK and QT themes ( custom home-manager module )
+  theme.enable = true;
 
   # You can also manage environment variables but you will have to manually
   # source

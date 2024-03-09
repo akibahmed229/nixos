@@ -51,6 +51,7 @@
       "/var/lib/flatpak" # flatpak user data
       "/var/lib/samba/private" # storing samba user password
       "/var/lib/waydroid" # waydroid state
+      "/var/lib/libvirt" # libvirt state for VMs
     ];
     files = [
       "/etc/machine-id"
@@ -66,7 +67,6 @@
         "Documents"
         "Videos"
         "VirtualBox VMs"
-        "flake"
         "Android"
         "Postman"
         ".vscode"
@@ -88,6 +88,7 @@
         ".local/share/flatpak"
         ".local/state/nvim"
         ".local/state/wireplumber"
+        ".local/share/atuin"
         ".var/app/sh.ppy.osu"
       ];
       files = [

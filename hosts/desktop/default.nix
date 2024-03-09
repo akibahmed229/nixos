@@ -3,6 +3,8 @@
 { config
 , pkgs
 , user
+, hostname
+, devicename
 , unstable
 , inputs
 , lib
@@ -20,15 +22,19 @@
     map
       (myprograms:
         let
-          path = name: (import ../../modules/predefiend/nixos/${name}); # path to the module
+          path = name:
+            if name == "disko" then
+              (import ../../modules/predefiend/nixos/${name} { device = "${devicename}"; }) # diskos module with device name (e.g., /dev/sda1)
+            else
+              (import ../../modules/predefiend/nixos/${name}); # path to the module
         in
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "flatpak" "sops" "impermanence" "tmux" ];
+      [ "sops" "impermanence" "tmux" "disko" ];
 
   # Setting For OpenRGB
-  services.hardware.openrgb = {
+  services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
     enable = true;
     motherboard = "intel";
   };
@@ -52,7 +58,6 @@
   environment.systemPackages = (with pkgs; [
     # List programs you want in your system Stable packages
     neovim-unwrapped
-    ripgrep
     htop
     trash-cli
     cava
@@ -64,27 +69,13 @@
     ranger
     eza
     bat
-    rtx
     nvme-cli
-    distrobox
-    cargo
-    direnv
-    devbox
     simplehttp2server
     speedtest-cli
     #onionshare
-    docker-compose
     flatpak
     appimage-run
     bleachbit
-    #obs-studio
-    (pkgs.wrapOBS {
-      plugins = with pkgs.obs-studio-plugins; [
-        obs-teleport
-        advanced-scene-switcher
-        #(callPackage ../../pkgs/obs-studio-plugins/obs-zoom-to-mouse.nix { })
-      ];
-    })
     gimp
     libsForQt5.kdenlive
     glaxnimate
@@ -95,7 +86,6 @@
     gparted
     libreoffice
     qbittorrent
-    obsidian
     figma-linux
     protonvpn-gui
     notepadqq
@@ -160,25 +150,50 @@
     libadwaita
     polkit
     #python310Packages.pygobject3
-  ]) ++ (with unstable.${pkgs.system}; [
-    # List unstable packages here
-    jetbrains.pycharm-community
-    jetbrains.idea-community
-    #postman
-    vscode
-    android-tools
-    android-udev-rules
-    github-desktop
-    android-studio
-    alacritty
-    dwt1-shell-color-scripts
-    git
-    gcc
-    jdk21
-    python312Full
-    nodejs_21
-    yarn
-  ]);
+  ]) ++ (if user == "akib" && hostname == "desktop" then
+    with unstable.${pkgs.system};
+    [
+      # List unstable packages here
+      jetbrains.pycharm-community
+      jetbrains.idea-community
+      obsidian
+      postman
+      vscode
+      android-tools
+      android-udev-rules
+      github-desktop
+      android-studio
+      dwt1-shell-color-scripts
+      gcc
+      jdk21
+      python312Full
+      nodejs_21
+      rustc
+      cargo
+      direnv
+      devbox
+      distrobox
+      docker
+      docker-compose
+      yarn
+    ] else [ ]) ++ (
+    if (hostname == "desktop" || hostname == "laptop") then
+      with unstable.${pkgs.system};
+      [
+        git
+        alacritty
+        atuin
+        #obs-studio
+        (pkgs.wrapOBS {
+          plugins = with pkgs.obs-studio-plugins; [
+            obs-teleport
+            advanced-scene-switcher
+            #(callPackage ../../pkgs/obs-studio-plugins/obs-zoom-to-mouse.nix { })
+          ];
+        })
+      ]
+    else [ ]
+  );
 
   # Gaming
   programs.steam = {
@@ -188,20 +203,16 @@
   };
 
   # Eableing OpenGl support
-  hardware.opengl = {
+  hardware.opengl = lib.mkIf (hostname == "desktop" || hostname == "laptop") {
     enable = true;
+    driSupport32Bit = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      (vaapiIntel.override { enableHybridCodec = true; }) # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       vaapiVdpau
       libvdpau-va-gl
     ];
-  };
-  hardware.opengl.driSupport32Bit = true;
-  # Getting accelerated video playback
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -236,11 +247,16 @@
     };
   };
 
-  # Enable virtualisation
+  # Enable virtualisation ( custom module )
   kvm.enable = true;
 
   # Enable dbus 
   services.dbus.enable = true;
+
+  services.atuin = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # Open ports in the firewall.
   networking.firewall = {

@@ -41,6 +41,7 @@ local plugins = {
         "html-lsp",
         "stylua",
         "nil",
+        "rust-analyzer",
         "tailwindcss-language-server"
       },
     },
