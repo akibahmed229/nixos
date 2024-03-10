@@ -1,6 +1,6 @@
 <p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
 
-<h2 align="center">Akib | NixOS Config GO Wilde</h2>
+<h2 align="center">Akib | NixOS Config Go Wilde</h2>
 
 <h2 align="center"> Current System Preview </h2>
 
@@ -16,7 +16,7 @@
 2. [FAQ](#2-faq)
 3. [File Structure](#3-file-structure)
 
-# 1. Btrfs Installation My version of NixOS
+# 1. Installation My version of NixOS
 
 NixOS setup using falke and home-manager as module. Hyperland as default Window Manager.
 
@@ -29,18 +29,15 @@ Before you begin, ensure you have the following:
 
 ## Installation Steps
 
-Make sure change your username and hostname in the flake.nix file
-
-2. **Install NixOS**
-
-To install NixOS on the mounted partitions, follow these steps:
+1. **Install NixOS**
 
 ```bash
 sudo su
 nix-shell -p git --command 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
 ```
 
-Note: During the installation process, akibOS will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
+Note: During the installation process, [akibOS](./pkgs/shellscript/akibOS.nix) will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
+also replace `hostname` with your desired hostname and `username` with your desired username.
 
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
 
@@ -83,7 +80,7 @@ Post Installation Steps
 - Flake.nix : Main flake file for defining the system configuration
   - home-manager : Home manager configuration files && desktop environment configuration files
   - hosts : Host specific configuration files
-  - programs : Program specific configuration files
+  - modules : Program specific configuration files. Custom modules & predefined modules for nixos & home-manager
   - public : Basicly my wallpaper folder / GTK and QT themes
 - flake.lock : Lock file for the flake inputs
 - devShell/flake.nix : Flake file where I define my dev shell
