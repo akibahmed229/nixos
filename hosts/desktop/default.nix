@@ -263,7 +263,7 @@
 
   services.mysql = {
     enable = true;
-    package = pkgs.mariadb; 
+    package = pkgs.mariadb;
   };
 
   # Open ports in the firewall.
@@ -296,4 +296,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "${state-version}"; # Did you read the comment?
 }
-
