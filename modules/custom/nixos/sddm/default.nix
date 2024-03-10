@@ -23,8 +23,8 @@ in
             };
           };
           sddm.theme = ''${self.packages.${pkgs.system}.custom_sddm.override  { imgLink = {
-          url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nix-wallpaper-nineish-dark-gray.png"; 
-          sha256 = "sha256-nhIUtCy/Hb8UbuxXeL3l3FMausjQrnjTVi1B3GkL9B8=";
+          url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nixos.png"; 
+          sha256 = "sha256-QcY0x7pE8pKQy3At81/OFl+3CUAbx0K99ZHk85QLSo0=";
         };
       }}'';
         };
