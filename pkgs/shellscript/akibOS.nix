@@ -75,7 +75,7 @@ pkgs.writeShellScriptBin "akibOS" ''
       
       mkdir -p "$persist_dir"
       mv "$flake_dir" "$persist_dir"
-      useradd -m -G users -s /bin/bash $username
+      useradd -m -G users $username
       chown -R $username:users $persist_dir/flake/*
       chown -R $username:users $persist_dir/flake/.*
   }
