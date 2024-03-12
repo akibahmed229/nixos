@@ -19,5 +19,5 @@ jobs:
 
       - name: Install Nix
         uses: cachix/install-nix-action@v25
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - run: nix build .#desktop
+        with:
+          extra_nix_config: "system-features = nixos-test benchmark big-parallel kvm"
