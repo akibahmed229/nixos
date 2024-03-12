@@ -1,0 +1,25 @@
+name: Nix build
+
+# which events should trigger this workflow
+on:
+  push:
+    # trigger workflow on push request to main & dev branch
+    branches:
+      - main
+      - dev
+
+# jobs to run
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: cachix/cachix-action@v12
+
+      - run: nixos-rebuild dry-build --flake .#desktop
