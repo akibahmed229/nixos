@@ -23,4 +23,4 @@ jobs:
           extra_nix_config: "system-features = nixos-test benchmark big-parallel kvm"
 
       - name: build system test for desktop
-        run: nix-build flake.nix -A system.desktop
+        run: nix-build flake.nix
