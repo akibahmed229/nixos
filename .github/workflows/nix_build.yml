@@ -24,4 +24,4 @@ jobs:
 
       - name: build system test for desktop
 
-        run: nixos-test -I nixpkgs=channel:nixos-23.11 -I nixos-config=tests/desktop.nix
+        run: nix build -f .#system.desktop
