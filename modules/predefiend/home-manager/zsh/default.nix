@@ -37,6 +37,7 @@
       enableCompletion = true;
       initExtra = ''
         eval "$(atuin init zsh)"
+        eval "$(direnv hook zsh)"
 
         export LANG="en_US.UTF-8";
 

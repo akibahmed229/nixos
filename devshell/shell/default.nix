@@ -1,5 +1,10 @@
 # where all the possible development environments are defined 
 
+# Direnv is a tool that allows you to define environment variables in a .envrc file in a directory and have them automatically loaded when you cd into that directory.
+# Go to your desired dir and run the following commands
+# echo 'use flake github:akibahmed229/nixos"devShell_name"' > .envrc
+# direnv allow 
+
 { system, pkg, inputs, pkg-unstable, ... }:
 let
   pkgs = pkg.${system};

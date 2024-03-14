@@ -31,7 +31,7 @@
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "sops" "impermanence" "tmux" "disko" "flatpak" ];
+      [ "sops" "impermanence" "tmux" "disko" "flatpak" "mysql" ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
@@ -259,11 +259,6 @@
   services.atuin = {
     enable = true;
     openFirewall = true;
-  };
-
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
   };
 
   # Open ports in the firewall.
