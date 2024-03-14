@@ -39,6 +39,8 @@
         eval "$(atuin init zsh)"
         eval "$(direnv hook zsh)"
 
+        export DIRENV_LOG_FORMAT=""
+
         export LANG="en_US.UTF-8";
 
         function tmux-sesssion {
