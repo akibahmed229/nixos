@@ -149,8 +149,6 @@
     #rubyPackages.glib2
     libadwaita
     polkit
-    mysql-workbench
-    mysql80
     #python310Packages.pygobject3
   ]) ++ (if user == "akib" && hostname == "desktop" then
     with unstable.${pkgs.system};
@@ -178,6 +176,8 @@
       docker
       docker-compose
       yarn
+      mysql-workbench
+      mysql80
     ] else [ ]) ++ (
     if (hostname == "desktop" || hostname == "laptop") then
       with unstable.${pkgs.system};
