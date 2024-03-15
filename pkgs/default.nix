@@ -8,4 +8,5 @@ pkgs: {
   nix-update-input = import ./shellscript/nix-update-input.nix { inherit pkgs; };
   disko-formate = import ./shellscript/disko-formate.nix { inherit pkgs; };
   akibOS = import ./shellscript/akibOS.nix { inherit pkgs; };
+  fileviewer = import ./shellscript/fileviewer.nix { inherit pkgs; };
 }
