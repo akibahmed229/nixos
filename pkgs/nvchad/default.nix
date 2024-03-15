@@ -1,6 +1,6 @@
 { lib, pkgs ? import <nixpkgs> { }, ... }:
 let
-  custom = ./custom;
+  custom = builtins.path { path = ./custom; name = "custom"; };
 in
 pkgs.stdenv.mkDerivation {
   pname = "nvchad";
