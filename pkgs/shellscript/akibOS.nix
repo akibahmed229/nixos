@@ -25,8 +25,9 @@ pkgs.writeShellScriptBin "akibOS" ''
       print_message "No internet connection!"
       exit 1
   fi
-
+  
   # Prompt user for required information
+  clear
   prompt_user "Enter your username (e.g., akib)" username
   prompt_user "Enter your hostname (e.g., nixos)" hostname
   prompt_user "Enter your device (e.g., /dev/sda)" device
@@ -84,8 +85,16 @@ pkgs.writeShellScriptBin "akibOS" ''
   function install_flake() {
       local flake_dir="/home/$username/flake"
       local persist_dir="/mnt/persist/home/$username/.config"
-
+      
+      # check if git is installed
+      if ! command -v git &> /dev/null; then
+          print_message "Installing ...Git!"
+          nix-env -iA nixos.git
+      else
+          print_message "Git is already installed!"
+      fi
       # Clone flake repository
+      print_message "Cloning flake repository..."
       git clone https://www.github.com/akibahmed229/nixos "$flake_dir"
       rm -rf "$flake_dir/flake.lock"
 
