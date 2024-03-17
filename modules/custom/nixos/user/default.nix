@@ -30,7 +30,12 @@ in
 
     users.users.${cfg.userName} = {
       isNormalUser = true;
-      hashedPassword = "$6$y5qxEUAdhGfuMjTA$7zd9DbLF3hw8BCi.pOGI0BYg2hUTcNnP8FkzJtXfOgBOD9fv8cmBlmbMbiaOTsfeqeLyRgY/XMxkADpBsBa4Z0";
+      hashedPassword =
+        if (cfg.userName == "akib") then
+          "$6$y5qxEUAdhGfuMjTA$7zd9DbLF3hw8BCi.pOGI0BYg2hUTcNnP8FkzJtXfOgBOD9fv8cmBlmbMbiaOTsfeqeLyRgY/XMxkADpBsBa4Z0"
+        else # Default password is "123456"
+          "$6$F24on0ukWanIJWvW$P7Ks7lUFBUUJj/ej54pSDcHt/6UgSMPcRQ57oxU2W4Ot9FpBA5guLp1D1.4WTWpQcB0Oo6AmkS64p0/f/65AY/";
+
       extraGroups = [ "networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
       packages = with pkgs; [
         wget
