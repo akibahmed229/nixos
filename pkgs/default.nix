@@ -7,7 +7,7 @@ pkgs: {
   wallpaper = import ./shellscript/wallpaper.nix { inherit pkgs; };
   nix-update-input = import ./shellscript/nix-update-input.nix { inherit pkgs; };
   disko-formate = import ./shellscript/disko-formate.nix { inherit pkgs; };
-  akibOS = pkgs.callPackage ./akibOS { };
+  akibOS = import ./akibOS { inherit pkgs; };
   fileviewer = import ./shellscript/fileviewer.nix { inherit pkgs; };
   docker-desktop = pkgs.callPackage ./docker-desktop { };
 }
