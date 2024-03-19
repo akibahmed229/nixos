@@ -7,7 +7,7 @@ pkgs.stdenv.mkDerivation rec {
   # disable unpackPhase etc
   phases = "buildPhase";
   builder = ./builder.sh;
-  nativeBuildInputs = [ git ];
+  nativeBuildInputs = with pkgs; [ git ];
   PATH = lib.makeBinPath nativeBuildInputs;
   # only strings can be passed to builder
   # someString = "hello";
