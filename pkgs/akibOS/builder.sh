@@ -16,10 +16,10 @@ function prompt_user() {
 }
 
 # Check internet connectivity
-if ! ping -c 1 google.com &> /dev/null; then
-    print_message "No internet connection!"
-    exit 1
-fi
+# if ! ping -c 1 google.com &> /dev/null; then
+#     print_message "No internet connection!"
+#     exit 1
+# fi
 
 # Prompt user for required information
 clear
