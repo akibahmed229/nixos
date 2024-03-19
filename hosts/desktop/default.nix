@@ -9,6 +9,7 @@
 , inputs
 , lib
 , state-version
+, self
 , ...
 }:
 
@@ -174,6 +175,7 @@
       devbox
       distrobox
       docker
+      self.packages.${pkgs.system}.docker-desktop
       docker-compose
       yarn
       mysql-workbench
