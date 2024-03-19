@@ -11,4 +11,4 @@ pkgs.stdenv.mkDerivation rec {
   PATH = lib.makeBinPath nativeBuildInputs;
   # only strings can be passed to builder
   # someString = "hello";
-};
+}
