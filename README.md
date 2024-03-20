@@ -8,15 +8,13 @@
 
 ## Table of Contents
 
-<details>
-  <summary>Table of Contents</summary>
+1. [NixOS Btrfs Installation Guide](#1-btrfs-installation-my-version-of-nixos)
 
-- [NixOS Btrfs Installation Guide](#1-btrfs-installation-my-version-of-nixos)
-  - [Prerequisites](#installation-prerequisites)
-  - [Installation Steps](#installation-steps)
-- [FAQ](#2-faq)
-- [File Structure](#3-file-structure)
-</details>
+   - [Prerequisites](#installation-prerequisites)
+   - [Installation Steps](#installation-steps)
+
+2. [FAQ](#2-faq)
+3. [File Structure](#3-file-structure)
 
 # 1. Installation My version of NixOS
 
