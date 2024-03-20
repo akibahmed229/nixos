@@ -57,9 +57,9 @@ For more information about NixOS and its configuration options, refer to the off
   - **home-manager** : Configuration files for Home Manager and desktop environment
   - **hosts** : Host-specific configuration files
   - **modules** : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
+  - **pkgs** : Nix derivations, custom packages, and shell scripts
   - **public** : Wallpaper folder, GTK, and QT themes
   - **flake.lock** : Lock file for the flake inputs
-  - **pkgs** : Nix derivations, custom packages, and shell scripts
 
 - **_devShell/flake.nix_** : Flake file defining the development shell
 </details>
