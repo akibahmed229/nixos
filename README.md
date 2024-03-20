@@ -30,7 +30,7 @@ Before you begin, ensure you have the following:
 
 ## Installation Steps
 
-1. **Install NixOS**
+**Install NixOS**
 
 ```bash
 sudo su
@@ -52,16 +52,14 @@ For more information about NixOS and its configuration options, refer to the off
 <details>
   <summary>File Structure</summary>
 
-- Flake.nix : Main flake file for defining the system configuration
+- **Flake.nix** : Main flake file for defining the system configuration
 
-  - home-manager : Configuration files for Home Manager and desktop environment
-  - hosts : Host-specific configuration files
-  - modules : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
-  - public : Wallpaper folder, GTK, and QT themes
+  - **home-manager** : Configuration files for Home Manager and desktop environment
+  - **hosts** : Host-specific configuration files
+  - **modules** : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
+  - **public** : Wallpaper folder, GTK, and QT themes
+  - **flake.lock** : Lock file for the flake inputs
 
-- flake.lock : Lock file for the flake inputs
-
-- devShell/flake.nix : Flake file defining the development shell
-
-- pkgs : Flake file defining Nix derivations, custom packages, and shell scripts
+- **_devShell/flake.nix_** : Flake file defining the development shell
+- **pkgs** : Flake file defining Nix derivations, custom packages, and shell scripts
 </details>
