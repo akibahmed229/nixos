@@ -48,39 +48,6 @@ For more information about NixOS and its configuration options, refer to the off
 
 </details>
 
-# 2. FAQ
-
-<details>
-  <summary>Where can I learn about everything Nix?</summary>
-
-- Nix and NixOS
-  - [Website](https://nixos.org/)
-  - [Manuals](https://nixos.org/learn.html)
-  - [Manual](https://nixos.org/manual/nix/stable/introduction.html)
-  - [Packages](https://search.nixos.org/packages) and [Options](https://search.nixos.org/options?)
-  - [Unofficial Wiki](https://nixos.wiki/)
-  - [Wiki Resources](https://nixos.wiki/wiki/Resources)
-  - [Nix Pills](https://nixos.org/guides/nix-pills/)
-  - [Some Blogs](https://www.ianthehenry.com/posts/how-to-learn-nix/), [More Blogs](https://christine.website/blog)
-  - [Config Collection](https://nixos.wiki/wiki/Configuration_Collection)
-- Home-manager
-  - [Official Repo](https://github.com/nix-community/home-manager)
-  - [Manual](https://nix-community.github.io/home-manager/)
-  - [Appendix A](https://nix-community.github.io/home-manager/options.html)
-  - [Appendix B](https://nix-community.github.io/home-manager/nixos-options.html)
-  - [Appendix D](https://nix-community.github.io/home-manager/tools.html)
-  - [NixOS wiki](https://nixos.wiki/wiki/Home_Manager)
-- Flakes
-  - [NixOS wiki](https://nixos.wiki/wiki/Flakes)
-  - [Manual](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html)
-  - [Some Blogs](https://www.tweag.io/blog/2020-05-25-flakes/), [More Blogs](https://christine.website/blog/nix-flakes-3-2022-04-07)
-- Nix-Darwin
-  - [Official Repo](https://github.com/LnL7/nix-darwin/)
-  - [Manual](https://daiderd.com/nix-darwin/manual/index.html)
-  - [Mini-Wiki](https://github.com/LnL7/nix-darwin/wiki)
-
-</details>
-
 # 3. File Structure
 
 <details>
