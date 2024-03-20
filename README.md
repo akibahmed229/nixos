@@ -96,8 +96,7 @@ For more information about NixOS and its configuration options, refer to the off
       - hosts : Host-specific configuration files
       - modules : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
       - public : Wallpaper folder, GTK, and QT themes
-
-    </details>
+      </details>
 
 - flake.lock : Lock file for the flake inputs
 
