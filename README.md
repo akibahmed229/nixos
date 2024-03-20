@@ -88,16 +88,16 @@ For more information about NixOS and its configuration options, refer to the off
 <details>
   <summary>File Structure</summary>
 
-    - Flake.nix : Main flake file for defining the system configuration
-          - home-manager : Configuration files for Home Manager and desktop environment
-          - hosts : Host-specific configuration files
-          - modules : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
-          - public : Wallpaper folder, GTK, and QT themes
+- Flake.nix : Main flake file for defining the system configuration
 
-    - flake.lock : Lock file for the flake inputs
+  - home-manager : Configuration files for Home Manager and desktop environment
+  - hosts : Host-specific configuration files
+  - modules : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
+  - public : Wallpaper folder, GTK, and QT themes
 
-    - devShell/flake.nix : Flake file defining the development shell
+- flake.lock : Lock file for the flake inputs
 
-    - pkgs : Flake file defining Nix derivations, custom packages, and shell scripts
+- devShell/flake.nix : Flake file defining the development shell
 
+- pkgs : Flake file defining Nix derivations, custom packages, and shell scripts
 </details>
