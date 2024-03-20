@@ -4,22 +4,25 @@
 
 <h2 align="center"> Current System Preview </h2>
 
-![my current setup](./public/preview/preview1.png)
-![my current setup](./public/preview/preview2.png)
+![my current setup](./public/preview/hyprland.png)
 
 ## Table of Contents
 
-1. [NixOS Btrfs Installation Guide](#1-btrfs-installation-my-version-of-nixos)
+<details>
+  <summary>Table of Contents</summary>
 
-   1. [Prerequisites](#installation-prerequisites)
-   2. [Installation Steps](#installation-steps)
-
-2. [FAQ](#2-faq)
-3. [File Structure](#3-file-structure)
+- [NixOS Btrfs Installation Guide](#1-btrfs-installation-my-version-of-nixos)
+  - [Prerequisites](#installation-prerequisites)
+  - [Installation Steps](#installation-steps)
+- [FAQ](#2-faq)
+- [File Structure](#3-file-structure)
+</details>
 
 # 1. Installation My version of NixOS
 
-NixOS setup using falke and home-manager as module. Hyperland as default Window Manager.
+<details>
+
+<summary>NixOS setup using falke and home-manager as module. Hyperland as default Window Manager.</summary>
 
 ## Installation Prerequisites
 
@@ -44,6 +47,8 @@ the default password for the user is `123456` you can change it later.
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
+
+</details>
 
 # 2. FAQ
 
@@ -80,11 +85,23 @@ For more information about NixOS and its configuration options, refer to the off
 
 # 3. File Structure
 
+<details>
+  <summary>File Structure</summary>
+
 - Flake.nix : Main flake file for defining the system configuration
-  - home-manager : Home manager configuration files && desktop environment configuration files
-  - hosts : Host specific configuration files
-  - modules : Program specific configuration files. Custom modules & predefined modules for nixos & home-manager
-  - public : Basicly my wallpaper folder / GTK and QT themes
+    <details>
+      <summary>Flake Inputs</summary>
+
+      - home-manager : Configuration files for Home Manager and desktop environment
+      - hosts : Host-specific configuration files
+      - modules : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
+      - public : Wallpaper folder, GTK, and QT themes
+
+    </details>
+
 - flake.lock : Lock file for the flake inputs
-- devShell/flake.nix : Flake file where I define my dev shell
-- pkgs : Flake file where I define my nix derivation / custom packages / shell scripts
+
+- devShell/flake.nix : Flake file defining the development shell
+
+- pkgs : Flake file defining Nix derivations, custom packages, and shell scripts
+</details>
