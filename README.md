@@ -4,7 +4,8 @@
 
 <h2 align="center"> Current System Preview </h2>
 
-![my current setup](public/preview/hyprland.png)
+![my current setup](./public/preview/preview1.png)
+![my current setup](./public/preview/preview2.png)
 
 ## Table of Contents
 
@@ -38,42 +39,44 @@ nix-shell -p git --command 'nix run github:akibahmed229/nixos#akibOS --experimen
 
 Note: During the installation process, [akibOS](./pkgs/shellscript/akibOS.nix) will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
 also replace `hostname` with your desired hostname and `username` with your desired username.
+the default password for the user is `123456` you can change it later.
 
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
 
-Post Installation Steps
-
 # 2. FAQ
 
-- Where can I learn about everything Nix?
-  - Nix and NixOS
-    - [Website](https://nixos.org/)
-    - [Manuals](https://nixos.org/learn.html)
-    - [Manual](https://nixos.org/manual/nix/stable/introduction.html)
-    - [Packages](https://search.nixos.org/packages) and [Options](https://search.nixos.org/options?)
-    - [Unofficial Wiki](https://nixos.wiki/)
-    - [Wiki Resources](https://nixos.wiki/wiki/Resources)
-    - [Nix Pills](https://nixos.org/guides/nix-pills/)
-    - [Some](https://www.ianthehenry.com/posts/how-to-learn-nix/) [Blogs](https://christine.website/blog)
-    - [Config Collection](https://nixos.wiki/wiki/Configuration_Collection)
-    - [Config Collection](https://nixos.wiki/wiki/Configuration_Collection)
-  - Home-manager
-    - [Official Repo](https://github.com/nix-community/home-manager)
-    - [Manual](https://nix-community.github.io/home-manager/)
-    - [Appendix A](https://nix-community.github.io/home-manager/options.html)
-    - [Appendix B](https://nix-community.github.io/home-manager/nixos-options.html)
-    - [Appendix D](https://nix-community.github.io/home-manager/tools.html)
-    - [NixOS wiki](https://nixos.wiki/wiki/Home_Manager)
-  - Flakes
-    - [NixOS wiki](https://nixos.wiki/wiki/Flakes)
-    - [Manual](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html)
-    - [Some](https://www.tweag.io/blog/2020-05-25-flakes/) [Blogs](https://christine.website/blog/nix-flakes-3-2022-04-07)
-  - Nix-Darwin
-    - [Official Repo](https://github.com/LnL7/nix-darwin/)
-    - [Manual](https://daiderd.com/nix-darwin/manual/index.html)
-    - [Mini-Wiki](https://github.com/LnL7/nix-darwin/wiki)
+<details>
+  <summary>Where can I learn about everything Nix?</summary>
+
+- Nix and NixOS
+  - [Website](https://nixos.org/)
+  - [Manuals](https://nixos.org/learn.html)
+  - [Manual](https://nixos.org/manual/nix/stable/introduction.html)
+  - [Packages](https://search.nixos.org/packages) and [Options](https://search.nixos.org/options?)
+  - [Unofficial Wiki](https://nixos.wiki/)
+  - [Wiki Resources](https://nixos.wiki/wiki/Resources)
+  - [Nix Pills](https://nixos.org/guides/nix-pills/)
+  - [Some Blogs](https://www.ianthehenry.com/posts/how-to-learn-nix/), [More Blogs](https://christine.website/blog)
+  - [Config Collection](https://nixos.wiki/wiki/Configuration_Collection)
+- Home-manager
+  - [Official Repo](https://github.com/nix-community/home-manager)
+  - [Manual](https://nix-community.github.io/home-manager/)
+  - [Appendix A](https://nix-community.github.io/home-manager/options.html)
+  - [Appendix B](https://nix-community.github.io/home-manager/nixos-options.html)
+  - [Appendix D](https://nix-community.github.io/home-manager/tools.html)
+  - [NixOS wiki](https://nixos.wiki/wiki/Home_Manager)
+- Flakes
+  - [NixOS wiki](https://nixos.wiki/wiki/Flakes)
+  - [Manual](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html)
+  - [Some Blogs](https://www.tweag.io/blog/2020-05-25-flakes/), [More Blogs](https://christine.website/blog/nix-flakes-3-2022-04-07)
+- Nix-Darwin
+  - [Official Repo](https://github.com/LnL7/nix-darwin/)
+  - [Manual](https://daiderd.com/nix-darwin/manual/index.html)
+  - [Mini-Wiki](https://github.com/LnL7/nix-darwin/wiki)
+
+</details>
 
 # 3. File Structure
 
