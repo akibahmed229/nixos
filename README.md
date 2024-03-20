@@ -13,8 +13,7 @@
    - [Prerequisites](#installation-prerequisites)
    - [Installation Steps](#installation-steps)
 
-2. [FAQ](#2-faq)
-3. [File Structure](#3-file-structure)
+2. [File Structure](#3-file-structure)
 
 # 1. Installation My version of NixOS
 
@@ -48,7 +47,7 @@ For more information about NixOS and its configuration options, refer to the off
 
 </details>
 
-# 3. File Structure
+# 2. File Structure
 
 <details>
   <summary>File Structure</summary>
