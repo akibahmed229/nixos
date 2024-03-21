@@ -169,6 +169,7 @@
       jdk21
       python312Full
       nodejs_21
+      jq
       rustc
       cargo
       direnv
