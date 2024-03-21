@@ -24,7 +24,6 @@
     specialArgs = { inherit inputs self user hostname devicename unstable state-version; };
     modules =
       # configuration of nixos 
-      # [ "${inputs.nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
       [ (import ./configuration.nix) ] ++
       [ (import ./desktop) ] ++
       [ self.nixosModules.default ] ++ # Custom nixos modules
@@ -85,4 +84,38 @@
       ];
   };
 
+  # Host virt-managet configuration ( virtualization system)
+  # Can Access through  "nix build .#nixosConfigurations.currentSystemISO.config.system.build.isoImage"
+  currentSystemISO = lib.nixosSystem {
+    inherit system;
+    specialArgs = { inherit inputs self user hostname devicename unstable state-version; };
+    modules =
+      [ "${inputs.nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
+      [
+        (import ./configuration.nix)
+        {
+          nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+          grub.enable = lib.mkForce false;
+          networking.networkmanager.enable = lib.mkForce false;
+        }
+      ] ++
+      [ (import ../home-manager/hyprland/default.nix) ] ++
+      [ self.nixosModules.default ] ++ # Custom nixos modules
+      [
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = false;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs self user hostname theme hyprland state-version; };
+            users.${user} = {
+              imports =
+                [ self.homeManagerModules.default ] ++ # Custom home-manager modules
+                [ (import ../home-manager/home.nix) ] ++
+                [ (import ../home-manager/hyprland/home.nix) ];
+            };
+          };
+        }
+      ];
+  };
 }
