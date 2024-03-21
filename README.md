@@ -42,6 +42,7 @@ also replace `hostname` with your desired hostname and `username` with your desi
 the default password for the user is `123456` you can change it later.
 
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
+Note: The Configuration will clone from this repository and will be placed in `/home/username/.config/flake` respectively.
 
 For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
 
