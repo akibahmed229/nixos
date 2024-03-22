@@ -288,18 +288,14 @@
         "python27-pkgs": "python27-pkgs"
       },
       "locked": {
-        "dir": "devshell",
-        "dirtyRev": "efe3bcb8cca7322bab320b9f3652dcb1d977e4ca-dirty",
-        "dirtyShortRev": "efe3bcb-dirty",
-        "lastModified": 1711151419,
-        "narHash": "sha256-ngceq4LvWnHGyJknyObvV6+iROgKCwgfYQg4cKQCtiE=",
-        "type": "git",
-        "url": "file:.?dir=devshell"
+        "lastModified": 1,
+        "narHash": "sha256-CU5STSQaE/uNtTDiUm3iOmXtWCxxU9ommY2cDeX2d1Y=",
+        "path": "devshell",
+        "type": "path"
       },
       "original": {
-        "dir": "devshell",
-        "type": "git",
-        "url": "file:.?dir=devshell"
+        "path": "devshell",
+        "type": "path"
       }
     },
     "nix-index-database": {
