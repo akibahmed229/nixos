@@ -87,7 +87,6 @@
       slurp
       swappy
       imagemagick
-      xwaylandvideobridge
       # Screen  lock 
       wlogout
       swaylock-effects

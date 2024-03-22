@@ -1,3 +1,4 @@
+# overlay pull the latest version of discord
 { inputs, ... }: (self: super: {
   discord = super.discord.overrideAttrs (
     _: {

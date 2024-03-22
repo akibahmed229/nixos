@@ -35,7 +35,7 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = false;
+            useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs self user unstable theme state-version; }; # pass inputs && variables to home-manager
             users.${user} = {
