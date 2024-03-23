@@ -290,11 +290,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-CU5STSQaE/uNtTDiUm3iOmXtWCxxU9ommY2cDeX2d1Y=",
-        "path": "devshell",
+        "path": "./devshell",
         "type": "path"
       },
       "original": {
-        "path": "devshell",
+        "path": "./devshell",
         "type": "path"
       }
     },
