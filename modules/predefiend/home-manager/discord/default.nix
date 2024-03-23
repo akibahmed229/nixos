@@ -13,6 +13,6 @@
         };
       };
     })
-    unstable.${pkgs.system}.vesktop # for screen sharing on wayland
+    # unstable.${pkgs.system}.vesktop # for screen sharing on wayland
   ];
 }

@@ -11,10 +11,19 @@
 , ...
 }:
 {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "discord"
-    "spotify"
-  ];
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      self.overlays.discord-overlay
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
+  };
 
   # imports from the predefiend modules folder
   imports = map
