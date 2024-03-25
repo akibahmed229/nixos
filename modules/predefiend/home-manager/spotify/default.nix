@@ -8,17 +8,18 @@ in
   imports = [ spicetify-nix.homeManagerModule ];
 
   # configure spicetify :)
-  programs.spicetify =
-    {
-      enable = true;
-      theme = spicePkgs.themes.Onepunch;
-      colorScheme = "gruvbox";
+  programs.spicetify = {
+    # use spotify from the nixpkgs master branch
+    spotifyPackage = unstable.${pkgs.system}.spotify;
+    enable = true;
+    theme = spicePkgs.themes.Onepunch;
+    colorScheme = "gruvbox";
 
-      enabledExtensions = with spicePkgs.extensions; [
-        fullAppDisplay
-        shuffle # shuffle+ (special characters are sanitized out of ext names)
-        hidePodcasts
-        autoSkipExplicit
-      ];
-    };
+    enabledExtensions = with spicePkgs.extensions; [
+      fullAppDisplay
+      shuffle # shuffle+ (special characters are sanitized out of ext names)
+      hidePodcasts
+      autoSkipExplicit
+    ];
+  };
 }
