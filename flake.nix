@@ -123,13 +123,13 @@
     {
       # Accessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
+      # Your custom packages and modifications, exported as overlays
+      overlays = import ./overlays { inherit inputs; };
       # Accessible through 'nix develop" etc
-      devShells = forAllSystems (getSystem: my-devShells.devShells.${getSystem});
+      devShells = my-devShells.devShells;
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
       formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.nixpkgs-fmt);
-      # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays { inherit inputs; };
 
       # Reusable nixos modules you might want to export
       # These are usually stuff you would upstream into nixpkgs
