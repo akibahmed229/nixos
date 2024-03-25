@@ -39,6 +39,7 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+    # KDE Plasma User Settings Generator
     # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports list in ./hosts/default.nix
     plasma-manager = {
       url = "github:pjones/plasma-manager";
@@ -51,12 +52,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     # Handle persistent state on systems with ephemeral root storage
     impermanence = {
       url = "github:nix-community/impermanence";
     };
-
     # Firefox-addons is a collection of Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -101,17 +100,17 @@
       ];
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
-      forAllSystems = nixpkgs.lib.genAttrs systems;
+      forAllSystems = lib.genAttrs systems;
 
       # The user to build for.
       user = "akib";
       theme = "gruvbox-dark-soft";
 
+      # Dynamically get the current system and pass it to the nixpkgs
       pkgs = forAllSystems (system: import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
       });
-
       # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]
       unstable = forAllSystems (system: import nixpkgs-unstable {
         inherit system;
@@ -139,15 +138,14 @@
       homeManagerModules = import ./modules/custom/home-manager;
 
       # NixOS configuration with flake and home-manager as module
-      #  Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-      #  Accessible through github "$ nixos-install --flake github:akibahmed229/nixos/#<host>
+      # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
       nixosConfigurations =
         let
           system = forAllSystems (getSystem: getSystem);
         in
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs self unstable user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager; # Also inherit home-manager so it does not need to be defined here.
+          inherit inputs self unstable user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager;
         };
     };
 }
