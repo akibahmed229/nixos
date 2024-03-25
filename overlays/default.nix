@@ -22,4 +22,5 @@
   # };
 
   discord-overlay = import ./discord { inherit inputs; };
+  flatpak-overlay = import ./flatpak { inherit inputs; };
 }
