@@ -10,7 +10,7 @@ in
   # configure spicetify :)
   programs.spicetify = {
     # use spotify from the nixpkgs master branch
-    spotifyPackage = unstable.${pkgs.system}.spotify;
+    # spotifyPackage = unstable.${pkgs.system}.spotify;
     enable = true;
     theme = spicePkgs.themes.Onepunch;
     colorScheme = "gruvbox";
