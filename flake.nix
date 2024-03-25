@@ -29,7 +29,7 @@
 
     # My devShells for different systems 
     my-devShells = {
-      url = "path:./devshell";
+      url = "path:./devshells";
     };
 
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
