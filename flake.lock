@@ -1,17 +1,5 @@
 {
   "nodes": {
-    "discord-nix": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-GS6EFwIwEhfL+F46i+bDo0Ue4/PjbEqtpjQGWG8W9DU=",
-        "type": "file",
-        "url": "https://discord.com/api/download?format=tar.gz&platform=linux"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://discord.com/api/download?format=tar.gz&platform=linux"
-      }
-    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -167,11 +155,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1711460334,
-        "narHash": "sha256-YUnZ+qy4ScRIWpb4/ejSv0fHewIGNHnVSLp0FN6elyY=",
+        "lastModified": 1711466169,
+        "narHash": "sha256-8LyPRWHz6YFWS5IIgjb94K6eDH5Riwe65BBkreC6v1c=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "9b7ae25ae83b5b0d6f61fe542391301a57d31270",
+        "rev": "ae52b7f4680716976d05b638aaa90e169d199117",
         "type": "github"
       },
       "original": {
@@ -499,7 +487,6 @@
     },
     "root": {
       "inputs": {
-        "discord-nix": "discord-nix",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
