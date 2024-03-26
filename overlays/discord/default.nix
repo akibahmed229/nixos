@@ -1,6 +1,6 @@
 # overlay pull the latest version of discord
-{ inputs, ... }: (self: super: {
-  discord = super.discord.overrideAttrs (
+{ inputs, ... }: (final: prev: {
+  discord = prev.discord.overrideAttrs (
     _: {
       src = builtins.fetchTarball {
         url = "https://discord.com/api/download?platform=linux&format=tar.gz";
