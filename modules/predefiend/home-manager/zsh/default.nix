@@ -1,5 +1,6 @@
 { pkgs
 , user
+, unstable
 , ...
 }:
 
@@ -84,6 +85,7 @@
     };
     oh-my-posh = {
       enable = true;
+      package = unstable.${pkgs.system}.oh-my-posh;
       enableBashIntegration = true;
       enableZshIntegration = true;
       useTheme = "catppuccin_mocha";
