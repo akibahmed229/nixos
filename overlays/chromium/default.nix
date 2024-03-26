@@ -3,7 +3,7 @@
   chromium = prev.chromium.overrideAttrs {
     chromeSrc = builtins.fetchurl {
       url = "https://download-chromium.appspot.com/dl/Linux_x64?type=snapshots";
-      sha256 = "sha256:1q6pk5bwbij6b8y1p7y806rxrak0chds5r3mxhyx4lcpk7hfiwkr";
+      sha256 = "sha256:1h7qgqinmrl4w2a1871x2qgdpibzbcss59z2ar4d10pqfkcgl9kv";
     };
   };
 })
