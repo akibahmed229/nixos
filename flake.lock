@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "discord-nix": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-GS6EFwIwEhfL+F46i+bDo0Ue4/PjbEqtpjQGWG8W9DU=",
+        "type": "file",
+        "url": "https://discord.com/api/download?format=tar.gz&platform=linux"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://discord.com/api/download?format=tar.gz&platform=linux"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -487,6 +499,7 @@
     },
     "root": {
       "inputs": {
+        "discord-nix": "discord-nix",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
