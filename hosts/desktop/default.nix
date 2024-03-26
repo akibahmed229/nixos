@@ -45,6 +45,7 @@
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       #self.overlays.discord-overlay
+      self.overlays.chromium-overlay
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default

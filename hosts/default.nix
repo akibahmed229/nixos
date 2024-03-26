@@ -107,7 +107,7 @@
           home-manager = {
             useGlobalPkgs = false;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs self user hostname theme hyprland state-version; };
+            extraSpecialArgs = { inherit inputs self user unstable hostname theme hyprland state-version; };
             users.${user} = {
               imports =
                 [ self.homeManagerModules.default ] ++ # Custom home-manager modules
