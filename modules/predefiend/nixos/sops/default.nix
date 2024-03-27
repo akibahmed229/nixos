@@ -17,16 +17,17 @@
   sops.defaultSopsFile = ./secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
-  sops.age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/var/lib/sops-nix/secret_file";
+  sops.age.generateKey = true;
 
   environment.systemPackages = with pkgs; [
     sops
     age
   ];
 
-  sops.secrets.example-key = { };
   sops.secrets."myservice/my_subdir/my_secret" = {
     owner = "${user}";
+    path = "/home/${user}/.config/sops/secrets/myservice/my_subdir/my_secret";
   };
 
   #systemd.services."sometestservice" = {

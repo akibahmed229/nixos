@@ -52,10 +52,12 @@
       "/var/lib/samba/private" # storing samba user password
       "/var/lib/waydroid" # waydroid state
       "/var/lib/libvirt" # libvirt state for VMs
+      "/var/lib/sops-nix/"
+      "/run/secrets.d/"
     ];
     files = [
       "/etc/machine-id"
-      { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+      # { file = "/var/lib/sops-nix/secret_file"; parentDirectory = { mode = "u=rwx,g=rwx,o=rwx"; }; }
     ];
     users.${user} = {
       directories = [

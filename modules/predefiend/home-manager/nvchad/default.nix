@@ -25,7 +25,7 @@
   home.file = {
     ".config/nvim" = {
       recursive = true;
-      source = ''${self.packages.${pkgs.system}.nvchad}'';
+      source = builtins.unsafeDiscardOutputDependency ''${self.packages.${pkgs.system}.nvchad}'';
     };
   };
 }
