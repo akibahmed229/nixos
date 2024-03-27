@@ -149,3 +149,4 @@ read if you used those and something break with a version upgrade you're on your
 @define-color thumbnail_fg_color #dcd7ba;
 @define-color shade_color rgba(0, 0, 0, 0.36);
 @define-color scrollbar_outline_color rgba(0, 0, 0, 0.5);
+@define-color dark_5 rgba(224, 222, 244, 0.8);
