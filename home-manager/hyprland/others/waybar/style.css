@@ -40,6 +40,7 @@ window#waybar {
   transition-duration: 0.5s;
   transition-timing-function: ease-in-out;
   border-radius: 20px;
+  opacity: 0.9;
 }
 
 window#waybar.hidden {
@@ -106,7 +107,7 @@ button {
   font-family:
     JetBrainsMono Nerd Font,
     sans-sherif;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 12px;
   padding: 0px 5px;
   margin: 4px 0px;
@@ -166,7 +167,7 @@ button {
   margin: 8px 0px;
   color: #ffffff;
   border-radius: 16px;
-  opacity: 0.9;
+  opacity: 1;
   font-family:
     JetBrainsMono Nerd Font,
     sans-sherif;
@@ -189,7 +190,7 @@ button {
 }
 
 #clock {
-  background-color: @accent_fg_color;
+  background-color: @theme_bg_color;
   color: @dark_5;
   margin-left: 10px;
 }
@@ -295,7 +296,7 @@ label:focus {
 }
 
 #custom-exit {
-  color: @accent_fg_color;
+  color: @accent_bg_color;
   font-size: 18px;
   font-weight: bold;
   margin: 0px 10px;
@@ -313,7 +314,7 @@ label:focus {
 }
 
 #tray {
-  background-color: @accent_color;
+  background-color: @theme_bg_color;
   color: @dark_5;
   font-weight: bold;
 }

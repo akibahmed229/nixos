@@ -32,8 +32,6 @@
     tree
     bibata-cursors
     adw-gtk3
-    gruvbox-dark-gtk
-    gruvbox-dark-icons-gtk
     hwinfo
 
     # # Adds the 'hello' command to your environment. It prints a friendly
