@@ -20,7 +20,7 @@
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "impermanence" "disko" ];
+      [ "impermanence" "disko" "sops" ];
 
 
   # List packages installed in system profile. To search, run:
