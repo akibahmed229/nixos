@@ -40,7 +40,7 @@ in
         isNormalUser = true;
         hashedPasswordFile = lib.mkIf (cfg.userName == "akib") config.sops.secrets."myservice/my_subdir/my_secret".path;
         hashedPassword = lib.mkIf (cfg.userName != "akib") "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
-        #initialPassword = "123456"
+        initialPassword = lib.mkIf (config.users.users.${cfg.userName}.hashedPasswordFile != { }) "123456";
         extraGroups = [ "networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
         packages = with pkgs; [
           wget
