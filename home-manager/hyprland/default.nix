@@ -127,40 +127,44 @@
     ];
   };
 
-  services.dbus = {
-    implementation = "broker";
-    # needed for GNOME services outside of GNOME Desktop
-    packages = [ pkgs.gcr ];
+  # services for Hyprland
+  services = {
+    dbus = {
+      implementation = "broker";
+      # needed for GNOME services outside of GNOME Desktop
+      packages = [ pkgs.gcr ];
+    };
+
+    udev = {
+      packages = with pkgs; [ gnome.gnome-settings-daemon ];
+      extraRules = ''
+        # add my android device to adbusers
+        SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
+      '';
+    };
+
+    # Enable cron service
+    # Note: *     *    *     *     *          command to run
+    #      min  hour  day  month  year        user command
+    # cron = {
+    #  enable = true;
+    #  systemCronJobs = [
+    #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
+    #  ];
+    # };
+
+    # To auto mount usb and other useb devices pluged in 
+    gnome.gnome-keyring.enable = true;
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2 = {
+      enable = true;
+      mountOnMedia = true;
+    };
   };
 
-  services.udev = {
-    packages = with pkgs; [ gnome.gnome-settings-daemon ];
-    extraRules = ''
-      # add my android device to adbusers
-      SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
-    '';
-  };
-
-  # Enable cron service
-  # Note: *     *    *     *     *          command to run
-  #      min  hour  day  month  year        user command
-  #services.cron = {
-  #  enable = true;
-  #  systemCronJobs = [
-  #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
-  #  ];
-  #};
-
-  # To auto mount usb and other useb devices pluged in 
-  services.gnome.gnome-keyring.enable = true;
+  # Enable GNOME keyring for PAM
   security.pam.services.greetd.enableGnomeKeyring = true;
-  services.devmon.enable = true;
-  services.gvfs.enable = true;
-  services.udisks2 = {
-    enable = true;
-    mountOnMedia = true;
-  };
-
   # polkit for authentication ( from custom nixos module )
   polkit-gnome.enable = true;
 }

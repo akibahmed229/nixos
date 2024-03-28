@@ -120,12 +120,12 @@
       # using the above variables to define the system configuration
     in
     {
+      # Accessible through 'nix develop" etc
+      inherit (my-devShells) devShells;
       # Accessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
-      # Accessible through 'nix develop" etc
-      devShells = my-devShells.devShells;
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
       formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.nixpkgs-fmt);

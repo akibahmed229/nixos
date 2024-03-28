@@ -5,24 +5,28 @@
 { config, pkgs, unstable, user, state-version, ... }:
 
 {
-  services.xserver.displayManager.sessionCommands = '' 
-	xrandr -s 1920x1080
-	wall=$(find /home/${user}/.config/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
-	xwallpaper --zoom $wall
-	wal -c
-	wal -i $wall
-	#xcompmgr &
-	#picom &
-	slstatus &
-  '';
+  services = {
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  # DWM setup
-  services.xserver.windowManager.dwm.enable = true;
-  # DWM overlay
-  services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
-    src = ./dwm;
+    # Enable the X11 windowing system.
+    xserver.enable = true;
+    # DWM setup
+    xserver = {
+      displayManager.sessionCommands = '' 
+          	xrandr -s 1920x1080
+          	wall=$(find /home/${user}/.config/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+          	xwallpaper --zoom $wall
+          	wal -c
+          	wal -i $wall
+          	#xcompmgr &
+          	#picom &
+          	slstatus &
+      '';
+      windowManager.dwm.enable = true;
+      # DWM overlay
+      windowManager.dwm.package = pkgs.dwm.overrideAttrs {
+        src = ./dwm;
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -62,18 +66,22 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.mtr.enable = true;
-  programs.dconf.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+  programs = {
+    mtr.enable = true;
+    dconf.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 
   # List services that you want to enable:
 
-  services.picom.enable = true;
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services = {
+    picom.enable = true;
+    # Enable the OpenSSH daemon.
+    openssh.enable = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

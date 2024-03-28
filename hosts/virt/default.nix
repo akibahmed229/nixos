@@ -22,20 +22,17 @@
       # list of programs
       [ "impermanence" "disko" "sops" ];
 
-
+  users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-  ];
-
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
-  environment.pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
-
-  programs.command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
-  programs.command-not-found.enable = false;
+  environment = {
+    systemPackages = with pkgs; [
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+    ];
+    shells = [ pkgs.zsh ];
+    pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
+  };
 
   programs = {
     zsh = {
@@ -55,9 +52,12 @@
         ];
         theme = "agnoster";
       };
-
     };
+
+    command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
+    command-not-found.enable = false;
   };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -84,5 +84,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "${state-version}"; # Did you read the comment?
-
 }

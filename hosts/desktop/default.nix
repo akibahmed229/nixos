@@ -217,10 +217,19 @@
   );
 
   # Gaming
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  programs = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 
   # Eableing OpenGl support
@@ -236,60 +245,60 @@
     ];
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   # List services that you want to enable:
   # Enabling docker  
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "btrfs";
-    #rootless = {
-    #  enable = true;
-    #  setSocketVariable = true;
-    #};
+  virtualisation = {
+    docker = {
+      enable = true;
+      storageDriver = "btrfs";
+      #rootless = {
+      #  enable = true;
+      #  setSocketVariable = true;
+      #};
+    };
+    # Enable WayDroid
+    waydroid.enable = true;
   };
-  # Enable WayDroid
-  virtualisation.waydroid.enable = true;
-  # Enable Flatpack
-  services.flatpak.enable = true;
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    ports = [ 8080 ];
-    settings = lib.mkDefault {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
+
+  services = {
+    # Enable Flatpack
+    flatpak.enable = true;
+    # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+      ports = [ 8080 ];
+      settings = lib.mkDefault {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
+    };
+
+    # Enable dbus 
+    dbus.enable = true;
+    atuin = {
+      enable = true;
+      openFirewall = true;
     };
   };
 
   # Enable virtualisation ( custom module )
   kvm.enable = true;
 
-  # Enable dbus 
-  services.dbus.enable = true;
-
-  services.atuin = {
-    enable = true;
-    openFirewall = true;
-  };
 
   # Open ports in the firewall.
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 80 443 22 ];
-    allowedUDPPortRanges = [
-      { from = 4000; to = 4007; }
-      { from = 8000; to = 8010; }
-      { from = 9000; to = 9010; } # Adding UDP port range 9000-9010 for illustration
-    ];
+  networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 443 22 ];
+      allowedUDPPortRanges = [
+        { from = 4000; to = 4007; }
+        { from = 8000; to = 8010; }
+        { from = 9000; to = 9010; } # Adding UDP port range 9000-9010 for illustration
+      ];
+    };
+    enableIPv6 = true;
   };
-  networking.enableIPv6 = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -298,14 +307,16 @@
 
   # Enable Auto Update
   # system.copySystemConfiguration = true;
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-${state-version}";
+  system = {
+    autoUpgrade.enable = true;
+    autoUpgrade.channel = "https://nixos.org/channels/nixos-${state-version}";
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It's perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "${state-version}"; # Did you read the comment?
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It's perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    stateVersion = "${state-version}"; # Did you read the comment?
+  };
 }

@@ -17,11 +17,6 @@ in
         xkbOptions = "eorsign:e";
         displayManager = {
           sddm.enable = true;
-          sddm.settings = {
-            General = {
-              background = "/home/${user}/.cache/swww/Wallpaper";
-            };
-          };
           sddm.theme = ''${self.packages.${pkgs.system}.custom_sddm.override  { 
             imgLink = { 
               url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/evening-sky.png"; 

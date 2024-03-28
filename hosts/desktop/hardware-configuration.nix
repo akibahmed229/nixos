@@ -16,67 +16,71 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # use the latest Linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  #  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  #  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    #  kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    #  kernelPackages = pkgs.linuxPackages_zen;
 
-  boot.kernelParams = [
-    "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
-    "hibernate=no" # Disable hibernation
-    "intel_iommu=on" # Enable IOMMU 
-    "iommu=pt"
-    "acpi_backlight=vendor" # Fix backlight control 
-    "acpi_osi=Linux" # Fix backlight control 
-    "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power 
-    "rd.udev.log_level=3" # Increase kernel log verbosity
-    "systemd.show_status=false"
-    "no_console_suspend" # Prevent consoles from being suspended
-    "splash"
-    "logo.nologo"
-  ];
+    kernelParams = [
+      "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
+      "hibernate=no" # Disable hibernation
+      "intel_iommu=on" # Enable IOMMU 
+      "iommu=pt"
+      "acpi_backlight=vendor" # Fix backlight control 
+      "acpi_osi=Linux" # Fix backlight control 
+      "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power 
+      "rd.udev.log_level=3" # Increase kernel log verbosity
+      "systemd.show_status=false"
+      "no_console_suspend" # Prevent consoles from being suspended
+      "splash"
+      "logo.nologo"
+    ];
 
-  #  boot = {
-  #   consoleLogLevel = 3;
-  #  initrd = {
-  #     verbose = false;
-  #systemd.enable = true; # uncomment to use initrd postDeviceCommands (e.g. to mount encrypted partitions)
-  #    };
-  #    plymouth = {
-  #     enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
-  #     theme = "breeze";
-  #    };
-  #  };
+    initrd.availableKernelModules = [
+      "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)
+      "ehci_pci" # USB 2.0 (Enhanced Host Controller Interface)
+      "rtsx_pci_sdmmc" # Realtek PCI-E SD/MMC Card Host Driver
+      "ahci" # SATA devices on modern AHCI controllers
+      "nvme" # NVMe drives (really fast SSDs)
+      "usbhid" # USB Human Interface Devices
+      "usb_storage" # Utilize USB Mass Storage (USB flash drives)
+      "sd_mod" # SCSI, SATA, and PATA (IDE) devices
+      "sdhci_pci" # Secure Digital Host Controller Interface (SD cards)
+      "uas" # USB attached SCSI drives
+      "virtio_blk" # Another Virtio module, enabling high-performance communication between the host and virtualized block devices (e.g., hard drives) in a virtualized environment.
+      "virtio_pci" # Part of Virtio virtualization standard, it supports efficient communication between the host and virtual machines with PCI bus devices.
+    ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci" # USB 3.0 (eXtensible Host Controller Interface)
-    "ehci_pci" # USB 2.0 (Enhanced Host Controller Interface)
-    "rtsx_pci_sdmmc" # Realtek PCI-E SD/MMC Card Host Driver
-    "ahci" # SATA devices on modern AHCI controllers
-    "nvme" # NVMe drives (really fast SSDs)
-    "usbhid" # USB Human Interface Devices
-    "usb_storage" # Utilize USB Mass Storage (USB flash drives)
-    "sd_mod" # SCSI, SATA, and PATA (IDE) devices
-    "sdhci_pci" # Secure Digital Host Controller Interface (SD cards)
-    "uas" # USB attached SCSI drives
-    "virtio_blk" # Another Virtio module, enabling high-performance communication between the host and virtualized block devices (e.g., hard drives) in a virtualized environment.
-    "virtio_pci" # Part of Virtio virtualization standard, it supports efficient communication between the host and virtual machines with PCI bus devices.
-  ];
-  boot.initrd.kernelModules = [
-    "cifs" #  implementation of the Server Message Block (SMB) protocol, is used to share file systems, printers, or serial ports over a network. 
-    "dm-snapshot" #  a read-only copy of the entire file system and all the files contained in the file system. 
-  ];
-  boot.kernelModules = [
-    "kvm-intel" # KVM on Intel CPUs
-    "coretemp" # Temperature monitoring on Intel CPUs
-    "fuse" # userspace filesystem framework.
-    "i2c-dev" # An acronym for the “Inter-IC” bus, a simple bus protocol which is widely used where low data rate communications suffice.
-    "i2c-piix4"
-  ];
-  boot.extraModulePackages = [
-    config.boot.kernelPackages.openrazer
-  ];
+    initrd.kernelModules = [
+      "cifs" #  implementation of the Server Message Block (SMB) protocol, is used to share file systems, printers, or serial ports over a network. 
+      "dm-snapshot" #  a read-only copy of the entire file system and all the files contained in the file system. 
+    ];
 
-  boot.supportedFilesystems = [ "ntfs" "ntfs3" ];
+    kernelModules = [
+      "kvm-intel" # KVM on Intel CPUs
+      "coretemp" # Temperature monitoring on Intel CPUs
+      "fuse" # userspace filesystem framework.
+      "i2c-dev" # An acronym for the “Inter-IC” bus, a simple bus protocol which is widely used where low data rate communications suffice.
+      "i2c-piix4"
+    ];
+    extraModulePackages = [
+      config.boot.kernelPackages.openrazer
+    ];
+
+    supportedFilesystems = [ "ntfs" "ntfs3" ];
+
+    # consoleLogLevel = 3;
+    # initrd = {
+    #     verbose = false;
+    #     systemd.enable = true; # uncomment to use initrd postDeviceCommands (e.g. to mount encrypted partitions)
+    # };
+    # plymouth = {
+    #   enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
+    #   theme = "breeze";
+    # };
+  };
+
+
 
   services.btrfs.autoScrub = {
     enable = true;

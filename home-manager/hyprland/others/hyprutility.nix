@@ -7,29 +7,28 @@
   xdg.configFile."wlogout/icons".source = ./wlogout/icons;
   xdg.configFile."wlogout".source = ./wlogout/noise.png;
 
-  programs.waybar = {
-    enable = true;
+  programs = {
+    waybar = {
+      enable = true;
+    };
+    wlogout = {
+      enable = true;
+      layout = builtins.fromJSON ''${builtins.readFile ./wlogout/layout}'';
+      style = builtins.readFile ./wlogout/style.css;
+    };
+    swaylock = {
+      enable = true;
+      settings = builtins.readFile ./swaylock/config;
+    };
+    wofi = {
+      enable = true;
+      settings = builtins.readFile ./wofi/config;
+    };
   };
 
   services.dunst = {
     enable = true;
     configFile = builtins.readFile ./dunst/dunstrc;
-  };
-
-  programs.wlogout = {
-    enable = true;
-    layout = builtins.fromJSON ''${builtins.readFile ./wlogout/layout}'';
-    style = builtins.readFile ./wlogout/style.css;
-  };
-
-  programs.swaylock = {
-    enable = true;
-    settings = builtins.readFile ./swaylock/config;
-  };
-
-  programs.wofi = {
-    enable = true;
-    settings = builtins.readFile ./wofi/config;
   };
 
   home.file = {

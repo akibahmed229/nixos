@@ -12,7 +12,7 @@
 }:
 
 {
-  # Dual Booting using grub
+  # Dual Booting using grub (Custom nixos modules)
   grub.enable = true;
 
   # networking options
@@ -42,19 +42,23 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Custom nixos modules
   # Enable sound.
   audio.enable = true;
-
   # user configuration
-  user.enable = true;
-  user.userName = "${user}";
+  user = {
+    enable = true;
+    userName = "${user}";
+  };
 
-  # Enable ADB for Android
-  programs.adb.enable = true;
+  programs = {
+    # Enable ADB for Android
+    adb.enable = true;
 
-  programs.command-not-found.enable = false;
-  programs.nix-index.enable = true;
-  programs.dconf.enable = true; # Enable dconf to manage settings.
+    command-not-found.enable = false;
+    nix-index.enable = true;
+    dconf.enable = true; # Enable dconf to manage settings.
+  };
 
   # environment variables Setting
   environment = {
@@ -87,6 +91,19 @@
     };
   };
 
+  # Delete Garbage Collection previous generation collection & enable flake 
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
+
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
   nix.registry = (lib.mapAttrs (_: flake: { inherit flake; })) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
@@ -114,18 +131,5 @@
     PATH = [
       "${XDG_BIN_HOME}"
     ];
-  };
-
-  # Delete Garbage Collection previous generation collection & enable flake 
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
   };
 }

@@ -34,7 +34,6 @@
         la = "eza --icons -la  --group-directories-first";
         ls = "eza --icons --grid --group-directories-first";
       };
-      syntaxHighlighting.enable = true;
       enableCompletion = true;
       initExtra = ''
         eval "$(atuin init zsh)"
@@ -59,16 +58,19 @@
         bindkey 'Ctrl-A' beginning-of-line
         bindkey 'Ctrl-E' end-of-line
       '';
-      syntaxHighlighting.highlighters = [
-        "main"
-        "brackets"
-        "pattern"
-        "cursor"
-        "regexp"
-        "root"
-        "line"
-      ];
-      syntaxHighlighting.styles = { "alias" = "fg=magenta,bold"; };
+      syntaxHighlighting = {
+        enable = true;
+        highlighters = [
+          "main"
+          "brackets"
+          "pattern"
+          "cursor"
+          "regexp"
+          "root"
+          "line"
+        ];
+        styles = { "alias" = "fg=magenta,bold"; };
+      };
       #autosuggestions.highlightStyle = "fg=cyan";
       #oh-my-zsh = {
       #  #enableBashCompletion = true;

@@ -14,11 +14,12 @@
       inputs.sops-nix.nixosModules.sops
     ];
 
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-
-  sops.age.keyFile = "/var/lib/sops-nix/secret_file";
-  sops.age.generateKey = true;
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/var/lib/sops-nix/secret_file";
+    age.generateKey = true;
+  };
 
   environment.systemPackages = with pkgs; [
     sops

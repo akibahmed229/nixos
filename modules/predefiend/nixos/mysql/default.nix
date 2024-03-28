@@ -18,10 +18,12 @@ in
     ensureDatabases = [
       statsConfig.db
     ];
-    replication.role = "master";
-    replication.slaveHost = "127.0.0.1";
-    replication.masterUser = "${statsConfig.user}";
-    replication.masterPassword = "${statsConfig.password}";
+    replication = {
+      role = "master";
+      slaveHost = "127.0.0.1";
+      masterUser = "${statsConfig.user}";
+      masterPassword = "${statsConfig.password}";
+    };
     initialDatabases = [
       {
         name = "${statsConfig.db}";
