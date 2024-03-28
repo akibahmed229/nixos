@@ -19,13 +19,15 @@ in
 
   config = lib.mkIf cfg.enable {
     # password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s
-    users.users.root.hashedPassword = "$6$V9VUyHMch1ZsocfS$zk5UFtOBFmIw/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
+    sops.secrets."myservice/my_subdir/root_secret".neededForUsers = lib.mkIf (cfg.userName == "akib") true; # decrypt the secret to /run/secrets-for-users
+    users.users.root.hashedPasswordFile = lib.mkIf (cfg.userName == "akib") config.sops.secrets."myservice/my_subdir/root_secret".path;
 
     programs.zsh.enable = true;
     users.defaultUserShell = checkUserFun cfg.userName;
     environment.shells = [ (checkUserFun cfg.userName) ];
     environment.pathsToLink = if cfg.userName == "akib" then link else [ "/share/bash" "/tmp" ];
     sops.secrets."myservice/my_subdir/my_secret".neededForUsers = lib.mkIf (cfg.userName == "akib") true;
+    users.mutableUsers = lib.mkIf (config.users.users.${cfg.userName}.hashedPasswordFile != { }) true;
     users.users.${cfg.userName} = {
       isNormalUser = true;
       hashedPasswordFile = lib.mkIf (cfg.userName == "akib") config.sops.secrets."myservice/my_subdir/my_secret".path;
