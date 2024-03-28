@@ -21,21 +21,16 @@ in
     # password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s
     users.users.root.hashedPassword = "$6$V9VUyHMch1ZsocfS$zk5UFtOBFmIw/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
 
-    # shell settings 
-    # Default Shell zsh
     programs.zsh.enable = true;
     users.defaultUserShell = checkUserFun cfg.userName;
     environment.shells = [ (checkUserFun cfg.userName) ];
     environment.pathsToLink = if cfg.userName == "akib" then link else [ "/share/bash" "/tmp" ];
-
+    sops.secrets."myservice/my_subdir/my_secret".neededForUsers = lib.mkIf (cfg.userName == "akib") true;
     users.users.${cfg.userName} = {
       isNormalUser = true;
-      hashedPassword =
-        if (cfg.userName == "akib") then
-          "$6$y5qxEUAdhGfuMjTA$7zd9DbLF3hw8BCi.pOGI0BYg2hUTcNnP8FkzJtXfOgBOD9fv8cmBlmbMbiaOTsfeqeLyRgY/XMxkADpBsBa4Z0"
-        else # Default password is "123456"
-          "$6$F24on0ukWanIJWvW$P7Ks7lUFBUUJj/ej54pSDcHt/6UgSMPcRQ57oxU2W4Ot9FpBA5guLp1D1.4WTWpQcB0Oo6AmkS64p0/f/65AY/";
-
+      hashedPasswordFile = lib.mkIf (cfg.userName == "akib") config.sops.secrets."myservice/my_subdir/my_secret".path;
+      hashedPassword = lib.mkIf (cfg.userName != "akib") "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
+      #initialPassword = "123456"
       extraGroups = [ "networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
       packages = with pkgs; [
         wget
