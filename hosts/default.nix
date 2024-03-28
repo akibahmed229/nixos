@@ -100,7 +100,7 @@
         }
       ] ++
       [ (import ../home-manager/hyprland/default.nix) ] ++
-      [ (import ../modules/predefiend/nixos/sops ) ] ++
+      [ (import ../modules/predefiend/nixos/sops) ] ++
       [ self.nixosModules.default ] ++ # Custom nixos modules
       [
         home-manager.nixosModules.home-manager
