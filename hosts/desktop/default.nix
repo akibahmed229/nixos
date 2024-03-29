@@ -54,18 +54,17 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+
+      # Insecure permite
+      permittedInsecurePackages = [
+        "python-2.7.18.6"
+        "electron-25.9.0"
+      ];
+      allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
+        "steam"
+      ];
     };
   };
-
-  # Insecure permite
-  nixpkgs.config.permittedInsecurePackages = [
-    "python-2.7.18.6"
-    "electron-25.9.0"
-  ];
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
-    "steam"
-  ];
 
   # remove bloat
   # documentation.nixos.enable = false;
@@ -245,10 +244,9 @@
     ];
   };
 
-
   # List services that you want to enable:
-  # Enabling docker  
   virtualisation = {
+    # Enabling docker  
     docker = {
       enable = true;
       storageDriver = "btrfs";
@@ -260,7 +258,6 @@
     # Enable WayDroid
     waydroid.enable = true;
   };
-
   services = {
     # Enable Flatpack
     flatpak.enable = true;
@@ -284,7 +281,6 @@
 
   # Enable virtualisation ( custom module )
   kvm.enable = true;
-
 
   # Open ports in the firewall.
   networking = {

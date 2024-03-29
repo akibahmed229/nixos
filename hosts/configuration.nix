@@ -94,6 +94,10 @@
   # Delete Garbage Collection previous generation collection & enable flake 
   nix = {
     settings = {
+      # given the users in this list the right to specify additional substituters via:
+      #    1. `nixConfig.substituters` in `flake.nix`
+      trusted-users = [ "${user}" ];
+
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
     };
