@@ -102,7 +102,6 @@
     libreoffice
     qbittorrent
     figma-linux
-    protonvpn-gui
     notepadqq
     gradience
     mangohud
