@@ -12,6 +12,7 @@
   # by default, import all the modules
   default.imports =
     [ (import ./user) ] ++
+    [ (import ./user/user.nix) ] ++
     [ (import ./grub) ] ++
     [ (import ./audio) ] ++
     [ (import ./polkit-agent) ] ++

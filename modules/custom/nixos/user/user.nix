@@ -1,7 +1,6 @@
 { lib, config, pkgs, ... }:
 let
   inherit (lib) mkOption types;
-  cfg = config.user;
   shell = pkgs.zsh;
   checkUserFun = user: if user == "akib" then shell else pkgs.bash;
 in
@@ -21,6 +20,11 @@ in
           hashedPassword = mkOption {
             type = types.str;
             example = "$/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
+            description = "password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s";
+          };
+          hashedPasswordFile = mkOption {
+            type = types.str;
+            example = "/etc/nixos/secrets/my_secret.nix";
             description = "password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s";
           };
           extraGroups = mkOption {
@@ -43,11 +47,13 @@ in
   };
 
   config = {
+    # List of users
     myusers = [
       {
         name = "akib";
         isNormalUser = true;
-        hashedPassword = "$6$y5qxEUAdhGfuMjTA$7zd9DbLF3hw8BCi.pOGI0BYg2hUTcNnP8FkzJtXfOgBOD9fv8cmBlmbMbiaOTsfeqeLyRgY/XMxkADpBsBa4Z0";
+        hashedPasswordFile = config.sops.secrets."myservice/my_subdir/my_secret".path;
+        hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         extraGroups = [ "networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
         packages = with pkgs; [
           wget
@@ -55,6 +61,16 @@ in
           vlc
         ];
         shell = checkUserFun "akib";
+        enabled = true;
+      }
+      {
+        name = "root";
+        isNormalUser = false;
+        hashedPasswordFile = config.sops.secrets."myservice/my_subdir/root_secret".path;
+        hashedPassword = "";
+        packages = with pkgs; [ ];
+        extraGroups = [ ];
+        shell = checkUserFun "root";
         enabled = true;
       }
     ];
