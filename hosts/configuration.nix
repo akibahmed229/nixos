@@ -46,15 +46,33 @@
   # Enable sound.
   audio.enable = true;
   # user configuration
-  user = {
-    enable = true;
-    userName = "${user}";
-  };
+  #user = {
+  #  enable = true;
+  #  userName = "${user}";
+  #};
+
+  # Custom nixos modules map through list of users and create users with their configurations
+  users.users = builtins.listToAttrs
+    (map
+      (user: {
+        name = user.name;
+        value = lib.mkIf (user.enabled != false) {
+          hashedPasswordFile = user.hashedPasswordFile;
+          hashedPassword = lib.mkIf (user.hashedPassword != { }) user.hashedPassword;
+          extraGroups = user.extraGroups;
+          packages = user.packages;
+          shell = user.shell;
+          isNormalUser = user.isNormalUser;
+        };
+      })
+      config.myusers);
+  users.mutableUsers = lib.mkIf (config.users.users.${user}.hashedPasswordFile != { }) true;
 
   programs = {
     # Enable ADB for Android
     adb.enable = true;
 
+    zsh.enable = true;
     command-not-found.enable = false;
     nix-index.enable = true;
     dconf.enable = true; # Enable dconf to manage settings.
