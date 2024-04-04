@@ -45,13 +45,8 @@
   # Custom nixos modules
   # Enable sound.
   audio.enable = true;
-  # user configuration
-  #user = {
-  #  enable = true;
-  #  userName = "${user}";
-  #};
-
   # Custom nixos modules map through list of users and create users with their configurations
+  setUserName = "${user}"; # for main user
   users.users = builtins.listToAttrs
     (map
       (user: {
