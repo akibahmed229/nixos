@@ -111,7 +111,6 @@
     kdiskmark
     chromium
     whatsapp-for-linux
-    telegram-desktop
     btop
     #davinci-resolve
     ffmpeg_6
@@ -202,6 +201,7 @@
         lazygit
         alacritty
         atuin
+        telegram-desktop
         #obs-studio
         (pkgs.wrapOBS {
           plugins = with pkgs.obs-studio-plugins; [

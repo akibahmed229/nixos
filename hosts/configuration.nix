@@ -49,17 +49,18 @@
   setUserName = "${user}"; # for main user
   users.users = builtins.listToAttrs
     (map
-      (user: {
-        name = user.name;
-        value = lib.mkIf (user.enabled != false) {
-          hashedPasswordFile = user.hashedPasswordFile;
-          hashedPassword = lib.mkIf (user.hashedPassword != { }) user.hashedPassword;
-          extraGroups = user.extraGroups;
-          packages = user.packages;
-          shell = user.shell;
-          isNormalUser = user.isNormalUser;
-        };
-      })
+      (user:
+        if (user.enabled == true) then {
+          name = user.name;
+          value = {
+            hashedPasswordFile = user.hashedPasswordFile;
+            hashedPassword = lib.mkIf (user.hashedPassword != { }) user.hashedPassword;
+            extraGroups = user.extraGroups;
+            packages = user.packages;
+            shell = user.shell;
+            isNormalUser = user.isNormalUser;
+          };
+        } else { })
       config.myusers);
   users.mutableUsers = lib.mkIf (config.users.users.${user}.hashedPasswordFile != { }) true;
 
