@@ -1,10 +1,22 @@
+/*
+  Custom module to create users with hashed passwords from secrets
+  This module will help to manage multiple users with different configurations and packages
+*/
 { lib, config, pkgs, ... }:
+
 let
   inherit (lib) mkOption types;
   shell = pkgs.zsh;
   checkUserFun = user: if user == "akib" then shell else pkgs.bash;
+
 in
 {
+  options.setUserName = lib.mkOption {
+    description = "The user to be created";
+    default = "user";
+    type = lib.types.str;
+  };
+
   options.myusers = mkOption {
     type = types.listOf
       (types.submodule {
@@ -50,9 +62,9 @@ in
     # List of users
     myusers = [
       {
-        name = "akib";
+        name = config.setUserName;
         isNormalUser = true;
-        hashedPasswordFile = config.sops.secrets."myservice/my_subdir/my_secret".path;
+        hashedPasswordFile = if (config.setUserName == "akib") then config.sops.secrets."myservice/my_subdir/my_secret".path else null;
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         extraGroups = [ "networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex" ];
         packages = with pkgs; [
@@ -60,14 +72,14 @@ in
           thunderbird
           vlc
         ];
-        shell = checkUserFun "akib";
+        shell = checkUserFun "${config.setUserName}";
         enabled = true;
       }
       {
         name = "root";
         isNormalUser = false;
-        hashedPasswordFile = config.sops.secrets."myservice/my_subdir/root_secret".path;
-        hashedPassword = "";
+        hashedPasswordFile = if (config.setUserName == "akib") then config.sops.secrets."myservice/my_subdir/root_secret".path else null;
+        hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         packages = with pkgs; [ ];
         extraGroups = [ ];
         shell = checkUserFun "root";
