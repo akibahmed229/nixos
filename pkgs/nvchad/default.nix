@@ -4,14 +4,16 @@ let
 in
 pkgs.stdenv.mkDerivation {
   pname = "nvchad";
-  version = "2.0.0";
+  version = "2.5";
 
   src = pkgs.fetchFromGitHub {
     owner = "NvChad";
     repo = "NvChad";
-    rev = "refs/heads/v2.0";
+    rev = "refs/heads/v2.5";
     sha256 = "sha256-u5zF9UuNt+ndeWMCpKbebYYW8TR+nLeBvcMy3blZiQw=";
   };
+
+  dontFixup = true; # tell derivations to not fixup the output
 
   installPhase = ''
     mkdir $out
