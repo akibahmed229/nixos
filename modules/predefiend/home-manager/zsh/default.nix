@@ -1,6 +1,7 @@
 { pkgs
 , user
 , unstable
+, config
 , ...
 }:
 
@@ -10,6 +11,13 @@
     zsh = {
       enable = true;
       enableAutosuggestions = true;
+      history = {
+        size = 10000;
+        save = 10000;
+        ignoreDups = true;
+        ignoreSpace = true;
+        path = "${config.xdg.dataHome}/zsh/zsh_history";
+      };
       envExtra = ''
                         colorscript random
                         setopt hist_ignore_all_dups     # Ignore duplicate commands in history

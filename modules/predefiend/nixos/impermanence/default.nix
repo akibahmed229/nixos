@@ -94,6 +94,7 @@
         ".local/share/whatsapp-for-linux"
         ".local/share/Notepadqq"
         ".local/share/qBittorrent"
+        ".local/share/zsh"
         ".local/share/flatpak"
         ".local/state/nvim"
         ".local/state/wireplumber"
@@ -103,7 +104,6 @@
       files = [
         ".screenrc"
         #".zshrc"
-        #".zsh_history"
         ".gitconfig"
         ".mysql_history"
       ];
