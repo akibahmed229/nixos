@@ -57,6 +57,7 @@
       "/var/lib/samba/private" # storing samba user password
       "/var/lib/waydroid" # waydroid state
       "/var/lib/libvirt" # libvirt state for VMs
+      "/var/lib/mysql"
       "/var/lib/sops-nix/"
       "/run/secrets.d/"
     ];
