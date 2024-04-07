@@ -103,7 +103,7 @@
       files = [
         ".screenrc"
         #".zshrc"
-        ".zsh_history"
+        #".zsh_history"
         ".gitconfig"
         ".mysql_history"
       ];
