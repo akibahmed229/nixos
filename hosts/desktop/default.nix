@@ -188,7 +188,7 @@
       devbox
       distrobox
       docker
-      self.packages.${pkgs.system}.docker-desktop
+      # self.packages.${pkgs.system}.docker-desktop
       docker-compose
       yarn
       mysql-workbench
