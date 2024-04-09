@@ -13,7 +13,7 @@
     serviceConfig = {
       Type = "forking";
       Restart = "always";
-      ExecStart = "${pkgs.zsh}/bin/zsh -c 'source ${config.system.build.setEnvironment} ; exec ${pkgs.tmux}/bin/tmux start-server'";
+      ExecStart = "${pkgs.zsh}/bin/zsh -cl 'source ${config.system.build.setEnvironment} ; exec ${pkgs.tmux}/bin/tmux start-server'";
       ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
     };
 
