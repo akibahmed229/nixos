@@ -106,7 +106,7 @@
     gradience
     mangohud
     goverlay
-    anydesk
+    #anydesk
     geekbench
     kdiskmark
     chromium
@@ -126,6 +126,7 @@
     gamemode
     # bottles
     bottles
+    obsidian
     # Heoric game luncher
     heroic-unwrapped
     # Steam
@@ -169,7 +170,6 @@
       # List unstable packages here
       jetbrains.pycharm-community
       jetbrains.idea-community
-      obsidian
       postman
       vscode
       android-tools
