@@ -80,6 +80,7 @@
         ".vscode"
         ".docker"
         ".mysql"
+        ".steam"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
@@ -99,6 +100,7 @@
         ".local/state/nvim"
         ".local/state/wireplumber"
         ".local/share/atuin"
+        ".local/share/Steam"
         ".var/app/sh.ppy.osu"
       ];
       files = [

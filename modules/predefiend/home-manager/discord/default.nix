@@ -4,14 +4,14 @@
     (pkgs.discord.override {
       withOpenASAR = true;
       withVencord = true;
-      vencord = pkgs.vencord.overrideAttrs {
-        src = fetchFromGitHub {
-          owner = "Vendicated";
-          repo = "Vencord";
-          rev = "main";
-          hash = "sha256-i/n7qPQ/dloLUYR6sj2fPJnvvL80/OQC3s6sOqhu2dQ=";
-        };
-      };
+      # vencord = pkgs.vencord.overrideAttrs {
+      #   src = fetchFromGitHub {
+      #     owner = "Vendicated";
+      #     repo = "Vencord";
+      #     rev = "main";
+      #     hash = "sha256-jkbXLTjKPPxOxVQiPvchP9/EhVxzeomDDRUaP0QDvfE=";
+      #   };
+      # };
     })
     # unstable.${pkgs.system}.vesktop # for screen sharing on wayland
   ];

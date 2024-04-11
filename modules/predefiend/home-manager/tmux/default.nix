@@ -11,6 +11,7 @@ in
     enable = true;
     secureSocket = false;
     shell = "${pkgs.zsh}/bin/zsh"; # or zsh
+    newSession = true;
     plugins = with pkgs; [
       tmuxPlugins.catppuccin
       tmuxPlugins.sensible
