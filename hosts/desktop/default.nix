@@ -128,7 +128,7 @@
     bottles
     obsidian
     # Heoric game luncher
-    heroic-unwrapped
+    heroic
     # Steam
     steam
     steam-run
