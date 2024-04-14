@@ -77,6 +77,7 @@
         "VirtualBox VMs"
         "Android"
         "Postman"
+        "Games"
         ".vscode"
         ".docker"
         ".mysql"
