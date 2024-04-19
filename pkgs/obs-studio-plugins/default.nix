@@ -15,8 +15,9 @@ pkgs.stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir $out
-    cp -r obs-zoom-to-mouse.lua "$out/"
-    cp -r $out ${pkgs.obs-studio}/share/obs/obs-plugins/frontend-tools/scripts
+    mkdir -p $out/share/obs/obs-plugins/frontend-tools/scripts
+    cp -r obs-zoom-to-mouse.lua "$out/share/obs/obs-plugins/frontend-tools/scripts"
+    # cp -r $out ${pkgs.obs-studio}/share/obs/obs-plugins/frontend-tools/scripts
   '';
 
   meta = {
