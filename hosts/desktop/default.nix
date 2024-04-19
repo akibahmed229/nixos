@@ -207,7 +207,7 @@
           plugins = with pkgs.obs-studio-plugins; [
             obs-teleport
             advanced-scene-switcher
-            #(callPackage ../../pkgs/obs-studio-plugins/obs-zoom-to-mouse.nix { })
+            self.packages.${pkgs.system}.obs-zoom-to-mouse
           ];
         })
       ]
