@@ -4,7 +4,7 @@
     _: {
       src = builtins.fetchTarball {
         url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-        sha256 = "sha256:151iklw4gb2y3drnp7k8rzrx3c329cpmzd9jhhdxvnwgj0w7j5pv";
+        sha256 = "sha256:0hvgzn8zfg6wqhsjcg9icd9y7vcd5h4ffckmc0ga51iv6ic35nyz";
       };
     }
   );
