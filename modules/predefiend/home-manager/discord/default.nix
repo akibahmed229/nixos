@@ -8,8 +8,8 @@
       #   src = fetchFromGitHub {
       #     owner = "Vendicated";
       #     repo = "Vencord";
-      #     rev = "main";
-      #     hash = "sha256-jkbXLTjKPPxOxVQiPvchP9/EhVxzeomDDRUaP0QDvfE=";
+      #     rev = "v1.7.8";
+      #     hash = "sha256-5kMBUdFupVxmlQ7NVJ7qzFoyQieDGHrFNkrzhlhEzJ0=";
       #   };
       # };
     })
