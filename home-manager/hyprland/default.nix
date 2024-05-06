@@ -11,7 +11,9 @@
 , system
 , ...
 }:
-
+let
+  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   # SDDM (custom module)
   sddm.enable = true;
@@ -29,6 +31,13 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
   };
+  #hardware.opengl = {
+  #  package = pkgs-unstable.mesa.drivers;
+
+  #  # if you also want 32-bit support (e.g for Steam)
+  #  driSupport32Bit = true;
+  #  package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+  #};
 
   environment = {
     variables = {
@@ -41,8 +50,8 @@
 
     systemPackages = with pkgs; [
       #cron
-      waybar
       dunst
+      unstable.${pkgs.system}.waybar
       kitty
       wofi
       preload

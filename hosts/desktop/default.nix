@@ -180,7 +180,7 @@
       gcc
       jdk21
       python312Full
-      nodejs_21
+      nodejs_20
       jq
       rustc
       cargo
@@ -234,7 +234,7 @@
   hardware.opengl = lib.mkIf (hostname == "desktop" || hostname == "laptop") {
     enable = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [
+    extraPackages = with unstable.${pkgs.system}; [
       intel-compute-runtime
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       (vaapiIntel.override { enableHybridCodec = true; }) # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)

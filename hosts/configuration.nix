@@ -113,16 +113,16 @@
       trusted-users = [ "${user}" ];
 
       # the system-level substituters & trusted-public-keys
-      #extra-substituters = [
-      #  "https://hyprland.cachix.org"
-      #  "https://nix-gaming.cachix.org"
-      #  # "https://nixpkgs-wayland.cachix.org"
-      #];
-      #extra-trusted-public-keys = [
-      #  "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      #  "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      #  # "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-      #];
+      extra-substituters = [
+        #"https://hyprland.cachix.org"
+        "https://nix-gaming.cachix.org"
+        "https://nixpkgs-wayland.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        #"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+      ];
 
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
