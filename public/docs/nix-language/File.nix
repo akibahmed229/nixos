@@ -1,0 +1,3 @@
+{
+  greet = name: "Hello, ${name}";
+}
