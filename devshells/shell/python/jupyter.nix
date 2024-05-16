@@ -3,7 +3,7 @@
 pkgs.mkShell rec {
   name = "impurePythonEnv";
   venvDir = "./.venv";
-  buildInputs =  with pkgs; [
+  nativeBuildInputs =  with pkgs; [
 
     pkgs.stdenv.cc.cc.lib
 
