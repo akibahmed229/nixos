@@ -6,7 +6,7 @@ in
 pkgs.mkShell rec {
   name = "impurePythonEnv";
   venvDir = "./.venv";
-  buildInputs = [
+  buildInputs = with pkgs; [
 
     pkgs.stdenv.cc.cc.lib
 
