@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs  }:
 
 pkgs.mkShell rec {
   name = "impurePythonEnv";
@@ -7,8 +7,8 @@ pkgs.mkShell rec {
 
     pkgs.stdenv.cc.cc.lib
 
-    # git-crypt
-    # stdenv.cc.cc # jupyter lab needs
+    git-crypt
+    stdenv.cc.cc # jupyter lab needs
 
     python3
 
