@@ -1,8 +1,9 @@
-with import <nixpkgs> { };
+{ pkgs ? import <nixpkgs> { } }:
 
 let
   pythonPackages = python311Packages; # Change to Python 3.11
-in pkgs.mkShell rec {
+in
+pkgs.mkShell rec {
   name = "impurePythonEnv";
   venvDir = "./.venv";
   buildInputs = [

@@ -24,7 +24,7 @@
       allowUnfreePredicate = _: true;
     };
   };
-  wayland.windowManager.hyprland.systemd.variables = ["--all"];
+  wayland.windowManager.hyprland.systemd.variables = [ "--all" ];
 
   # imports from the predefiend modules folder
   imports = map
