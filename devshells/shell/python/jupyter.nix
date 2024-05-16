@@ -11,7 +11,6 @@ pkgs.mkShell {
 
     python3
 
-    pythonPackages.python
     pythonPackages.ipykernel
     pythonPackages.jupyterlab
     pythonPackages.pyzmq
@@ -33,6 +32,10 @@ pkgs.mkShell {
   (with unstable; [
     python311Packages.virtualenv
   ]);
+
+  permittedInsecurePackages = [
+    "python-2.7.18.7"
+  ];
 
   # Workaround: make vscode's python extension read the .venv
   shellHook = ''
