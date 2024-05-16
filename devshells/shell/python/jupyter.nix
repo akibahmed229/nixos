@@ -7,18 +7,18 @@ pkgs.mkShell {
     pkgs.stdenv.cc.cc.lib
 
     git-crypt
-    # stdenv.cc.cc # jupyter lab needs
+    stdenv.cc.cc # jupyter lab needs
 
     python3
 
-    pythonPackages.ipykernel
-    pythonPackages.jupyterlab
-    pythonPackages.pyzmq
-    pythonPackages.venvShellHook
-    pythonPackages.pip
-    pythonPackages.numpy
-    pythonPackages.pandas
-    pythonPackages.requests
+    python311Packages.ipykernel
+    python311Packages..jupyterlab
+    python311Packages..pyzmq
+    python311Packages..venvShellHook
+    python311Packages..pip
+    python311Packages..numpy
+    python311Packages..pandas
+    python311Packages..requests
 
     # sometimes you might need something additional like the following - you will get some useful error if it is looking for a binary in the environment.
     taglib
@@ -33,9 +33,6 @@ pkgs.mkShell {
     python311Packages.virtualenv
   ]);
 
-  permittedInsecurePackages = [
-    "python-2.7.18.7"
-  ];
 
   # Workaround: make vscode's python extension read the .venv
   shellHook = ''
