@@ -1,4 +1,4 @@
-{mkShell, hello, ...}:
+{ mkShell, hello, ... }:
 mkShell {
   buildInputs = [ hello ];
   shellHook = ''

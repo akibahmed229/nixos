@@ -1,9 +1,9 @@
 let
   getFile = import ./File.nix;
 
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
 
-        # Supported systems for your flake packages, shell, etc.
+  # Supported systems for your flake packages, shell, etc.
   systems = [
     "aarch64-linux"
     "i686-linux"
@@ -15,7 +15,7 @@ let
   # pass to it, with each system as an argument
   forAllSystems = pkgs.lib.genAttrs systems;
 
-in 
+in
 {
   example1 = getFile.greet "World";
 
