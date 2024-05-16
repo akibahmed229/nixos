@@ -10,7 +10,7 @@ pkgs.mkShell rec {
 
     pkgs.stdenv.cc.cc.lib
 
-    git-crypt
+    # git-crypt
     # stdenv.cc.cc # jupyter lab needs
 
     python3
