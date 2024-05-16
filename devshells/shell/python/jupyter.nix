@@ -12,13 +12,13 @@ pkgs.mkShell {
     python3
 
     python311Packages.ipykernel
-    python311Packages..jupyterlab
-    python311Packages..pyzmq
-    python311Packages..venvShellHook
-    python311Packages..pip
-    python311Packages..numpy
-    python311Packages..pandas
-    python311Packages..requests
+    python311Packages.jupyterlab
+    python311Packages.pyzmq
+    python311Packages.venvShellHook
+    python311Packages.pip
+    python311Packages.numpy
+    python311Packages.pandas
+    python311Packages.requests
 
     # sometimes you might need something additional like the following - you will get some useful error if it is looking for a binary in the environment.
     taglib
