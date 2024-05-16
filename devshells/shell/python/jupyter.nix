@@ -1,8 +1,5 @@
 { pkgs ? import <nixpkgs> { } }:
 
-let
-  pythonPackages = pkgs.python311Packages; # Change to Python 3.11
-in
 pkgs.mkShell rec {
   name = "impurePythonEnv";
   venvDir = "./.venv";
@@ -15,15 +12,15 @@ pkgs.mkShell rec {
 
     python3
 
-    pythonPackages.python
-    pythonPackages.ipykernel
-    pythonPackages.jupyterlab
-    pythonPackages.pyzmq
-    pythonPackages.venvShellHook
-    pythonPackages.pip
-    pythonPackages.numpy
-    pythonPackages.pandas
-    pythonPackages.requests
+    python311Packages.python
+    python311Packages.ipykernel
+    python311Packages.jupyterlab
+    python311Packages.pyzmq
+    python311Packages.venvShellHook
+    python311Packages.pip
+    python311Packages.numpy
+    python311Packages.pandas
+    python311Packages.requests
 
     # sometimes you might need something additional like the following - you will get some useful error if it is looking for a binary in the environment.
     taglib
