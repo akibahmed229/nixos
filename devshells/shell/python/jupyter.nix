@@ -18,6 +18,8 @@ pkgs.mkShell {
     python311Packages.pip
     python311Packages.numpy
     python311Packages.pandas
+    python311Packages.pandas-datareader
+    python311Packages.matplotlib
     python311Packages.requests
 
     # sometimes you might need something additional like the following - you will get some useful error if it is looking for a binary in the environment.
