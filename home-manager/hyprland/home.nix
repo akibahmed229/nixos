@@ -179,8 +179,8 @@
           # Window open rule
           "workspace 1,Alacritty"
           "workspace 2,firefox"
-          "workspace 3,discord"
-          "workspace 4,Spotify"
+          "workspace 3,Discord"
+          "workspace 4,spotify"
           "workspace 5,virt-manager"
         ]
       else [ ]);
