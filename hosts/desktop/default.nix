@@ -180,9 +180,10 @@
       gcc
       jdk21
       python312Full
-      nodejs_20
+      nodejs_22
       jq
       rustc
+      rustup
       cargo
       direnv
       devbox
