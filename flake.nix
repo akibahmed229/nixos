@@ -87,6 +87,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Stylix is a NixOS module which applies the same colour scheme, font and wallpaper to a range of applications and desktop environments.
+    stylix.url = "github:danth/stylix";
   };
 
   # outputs for the flake
