@@ -1,8 +1,6 @@
-# Secrets management with SOPS and Nix
-
 { pkgs
 , inputs
-, user
+, lib
 , config
 , ...
 }:
