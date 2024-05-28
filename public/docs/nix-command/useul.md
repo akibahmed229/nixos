@@ -5,3 +5,9 @@
 3. `sudo nix-collect-garbage -d` - Remove all the unused packages from the Nix store.
 
 4. `nix-prefetch-url "https://discord.com/api/download?platform=linux&format=tar.gz"` - Fetch the hash of a remote file. This is useful when you want to add a new package to your Nix configuration.
+
+5. `nix flake update --commit-lock-file --accept-flake-config` - Update the flake.lock file and accept the changes in the flake configuration. This command is useful when you want to update the dependencies of a flake project.
+
+6. `nix-eval --file default.nix` - Evaluate a Nix expression in a file. This command is useful when you want to test a Nix expression before using it in your configuration.
+
+7. `nix flake metadata --json | nix run nixpkgs\#jq` - Get the metadata of a flake and use jq to parse the JSON output. This command is useful when you want to inspect the metadata of a flake.
