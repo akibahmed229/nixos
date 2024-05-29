@@ -103,7 +103,7 @@
       # hypr echoshystem
       hyprpicker
     ] ++
-    with unstable.${pkgs.system} [
+    (with unstable.${pkgs.system}; [
       waybar
       networkmanagerapplet
       # Screen  lock 
@@ -113,7 +113,7 @@
       # fot sddm theme 
       libsForQt5.qt5.qtquickcontrols2
       libsForQt5.qt5.qtgraphicaleffects
-    ];
+    ]);
   };
 
   # swaylock config
