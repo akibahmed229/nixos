@@ -11,9 +11,7 @@
 , system
 , ...
 }:
-let
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
+
 {
   # SDDM (custom module)
   sddm.enable = true;
@@ -31,13 +29,18 @@ in
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
   };
-  #hardware.opengl = {
-  #  package = pkgs-unstable.mesa.drivers;
 
-  #  # if you also want 32-bit support (e.g for Steam)
-  #  driSupport32Bit = true;
-  #  package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
-  #};
+  # hardware.opengl =
+  #   let
+  #     pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  #   in
+  #   {
+  #     package = pkgs-unstable.mesa.drivers;
+
+  #     # if you also want 32-bit support (e.g for Steam)
+  #     driSupport32Bit = true;
+  #     package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+  #   };
 
   environment = {
     variables = {
@@ -49,13 +52,10 @@ in
     };
 
     systemPackages = with pkgs; [
-      #cron
       dunst
-      unstable.${pkgs.system}.waybar
       kitty
       wofi
       preload
-      networkmanagerapplet
       ark
       lxmenu-data
       # libsForQt5.polkit-kde-agent
@@ -96,6 +96,16 @@ in
       slurp
       swappy
       imagemagick
+      # for music
+      playerctl
+      # color grab 
+      #pywal
+      # hypr echoshystem
+      hyprpicker
+    ] ++
+    with unstable.${pkgs.system} [
+      waybar
+      networkmanagerapplet
       # Screen  lock 
       wlogout
       swaylock-effects
@@ -103,12 +113,6 @@ in
       # fot sddm theme 
       libsForQt5.qt5.qtquickcontrols2
       libsForQt5.qt5.qtgraphicaleffects
-      # for music
-      playerctl
-      # color grab 
-      #pywal
-      # hypr echoshystem
-      hyprpicker
     ];
   };
 
@@ -151,16 +155,6 @@ in
         SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
       '';
     };
-
-    # Enable cron service
-    # Note: *     *    *     *     *          command to run
-    #      min  hour  day  month  year        user command
-    # cron = {
-    #  enable = true;
-    #  systemCronJobs = [
-    #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
-    #  ];
-    # };
 
     # To auto mount usb and other useb devices pluged in 
     gnome.gnome-keyring.enable = true;

@@ -72,6 +72,7 @@
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
     # List programs you want in your system Stable packages
+    #cron
     neovim-unwrapped
     htop
     trash-cli
@@ -298,6 +299,16 @@
     };
     enableIPv6 = true;
   };
+
+  # Enable cron service
+  # Note: *     *    *     *     *          command to run
+  #      min  hour  day  month  year        user command
+  # cron = {
+  #  enable = true;
+  #  systemCronJobs = [
+  #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
+  #  ];
+  # };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
