@@ -10,7 +10,7 @@
   programs = {
     zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       history = {
         size = 10000;
         save = 10000;

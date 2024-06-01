@@ -23,12 +23,12 @@
   # inputs for the flake
   inputs = {
     # stable packages
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     # unstable packages 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # live image builder for nixos
-    nixos.url = "github:nixos/nixpkgs/23.11";
+    nixos.url = "github:nixos/nixpkgs/24.05";
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -37,7 +37,7 @@
 
     # stable home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # unstable home-manager
@@ -107,7 +107,7 @@
       # The system to build.
       inherit (self) outputs;
       inherit (nixpkgs) lib;
-      state-version = "23.11";
+      state-version = "24.05";
       hostname = "desktop";
       devicename = "/dev/nvme0n1";
 

@@ -33,7 +33,7 @@ in
     qt = {
       enable = true;
       # platform theme "gtk" or "gnome"
-      platformTheme = "gtk3";
+      platformTheme.name = "gtk3";
       # name of the qt theme
       style.name = "adwaita-dark";
 

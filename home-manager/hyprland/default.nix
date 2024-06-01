@@ -102,12 +102,12 @@
       #pywal
       # hypr echoshystem
       hyprpicker
+      # Screen  lock 
+      wlogout
     ] ++
     (with unstable.${pkgs.system}; [
       waybar
       networkmanagerapplet
-      # Screen  lock 
-      wlogout
       swaylock-effects
       swaylock
       # fot sddm theme 

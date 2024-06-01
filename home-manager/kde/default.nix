@@ -18,8 +18,8 @@
     xserver = {
       enable = true;
 
-      layout = "us"; # Keyboard layout & €-sign
-      xkbOptions = "eurosign:e";
+      xkb.layout = "us"; # Keyboard layout & €-sign
+      xkb.options = "eurosign:e";
       libinput.enable = true;
 
       displayManager = {
