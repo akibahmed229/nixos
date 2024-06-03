@@ -55,6 +55,7 @@
       dunst
       kitty
       wofi
+      networkmanagerapplet
       preload
       ark
       lxmenu-data
@@ -107,7 +108,6 @@
     ] ++
     (with unstable.${pkgs.system}; [
       waybar
-      networkmanagerapplet
       swaylock-effects
       swaylock
       # fot sddm theme 

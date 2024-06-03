@@ -5,7 +5,7 @@
 
   # inputs for the flake
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11"; # stable packages
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05"; # stable packages
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable"; # unstable packages 
 
