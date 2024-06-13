@@ -342,11 +342,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1718273282,
-        "narHash": "sha256-Drdpjgw9ZHbS2SC5V41PmuFqVpxXqKJyi8Wl7gUneYI=",
+        "lastModified": 1718292752,
+        "narHash": "sha256-NFioPAqyQIOuQMPcDezGCpngCP5ShrudUHfFCfN0d7o=",
         "ref": "refs/heads/main",
-        "rev": "e6d10539af1fdca33b10bc3c1dfac16f1cdfe1c8",
-        "revCount": 4819,
+        "rev": "5de273a14427cb4a4cad9ac57a22b418bcd4248d",
+        "revCount": 4821,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -699,11 +699,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1718268835,
-        "narHash": "sha256-+RcwrOnwSwWeXGpXNpNJxDqOnRp2vj5qylP/m3z3pfE=",
+        "lastModified": 1718299582,
+        "narHash": "sha256-XHncuv56N++i4la5n3lH2P8dz8kOCvOdbNFT2p8SnHI=",
         "owner": "pjones",
         "repo": "plasma-manager",
-        "rev": "b12a9715f8fb9303a6fa1b65a8a7488592f0e46b",
+        "rev": "4d5b25e9281e466bf7e190f9107a28189300d9bb",
         "type": "github"
       },
       "original": {
@@ -803,11 +803,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1718122552,
-        "narHash": "sha256-A+dBkSwp8ssHKV/WyXb9uqIYrHBqHvtSedU24Lq9lqw=",
+        "lastModified": 1718292734,
+        "narHash": "sha256-XAwxzCDfExqIj0PIjEpjt3eOzsosxOCLx6sQWHPSrSg=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "e59d2c1725b237c362e4a62f5722f5b268d566c7",
+        "rev": "73c6955b4572346cc10f43a459949fe646efbde0",
         "type": "github"
       },
       "original": {
