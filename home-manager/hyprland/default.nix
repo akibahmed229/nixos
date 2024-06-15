@@ -105,14 +105,14 @@
       hyprpicker
       # Screen  lock 
       wlogout
+      # fot sddm theme 
+      libsForQt5.qt5.qtquickcontrols2
+      libsForQt5.qt5.qtgraphicaleffects
     ] ++
     (with unstable.${pkgs.system}; [
       waybar
       swaylock-effects
       swaylock
-      # fot sddm theme 
-      libsForQt5.qt5.qtquickcontrols2
-      libsForQt5.qt5.qtgraphicaleffects
     ]);
   };
 

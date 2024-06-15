@@ -12,8 +12,8 @@ in
     # use spotify from the nixpkgs master branch
     # spotifyPackage = unstable.${pkgs.system}.spotify;
     enable = true;
-    theme = spicePkgs.themes.Dribbblish;
-    colorScheme = "rosepine";
+    theme = spicePkgs.themes.Onepunch;
+    colorScheme = "gruvbox";
 
     enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplay

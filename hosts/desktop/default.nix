@@ -32,7 +32,7 @@
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "sops" "impermanence" "tmux" "disko" "mysql" ];
+      [ "sops" "stylix" "impermanence" "tmux" "disko" "mysql" ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
@@ -204,14 +204,14 @@
         alacritty
         atuin
         telegram-desktop
-        #obs-studio
-        (pkgs.wrapOBS {
-          plugins = with pkgs.obs-studio-plugins; [
-            obs-teleport
-            advanced-scene-switcher
-            self.packages.${pkgs.system}.obs-zoom-to-mouse
-          ];
-        })
+        obs-studio
+        #(pkgs.wrapOBS {
+        #  plugins = with pkgs.obs-studio-plugins; [
+        #    obs-teleport
+        #    advanced-scene-switcher
+        #    #self.packages.${pkgs.system}.obs-zoom-to-mouse
+        #  ];
+        #})
       ]
     else [ ]
   );

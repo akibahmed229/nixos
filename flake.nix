@@ -125,7 +125,7 @@
 
       # The user to build for.
       user = "akib";
-      theme = "capa-mocha";
+      theme = "gruvbox-dark-soft";
 
       # Dynamically get the current system and pass it to the nixpkgs
       pkgs = forAllSystems (system: import nixpkgs {

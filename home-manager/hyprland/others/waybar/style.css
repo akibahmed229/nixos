@@ -190,7 +190,7 @@ button {
 }
 
 #clock {
-  background-color: @theme_bg_color;
+  background-color: @accent_fg_color;
   color: @dark_5;
   margin-left: 10px;
 }
@@ -296,7 +296,7 @@ label:focus {
 }
 
 #custom-exit {
-  color: @accent_bg_color;
+  color: @accent_fg_color;
   font-size: 18px;
   font-weight: bold;
   margin: 0px 10px;

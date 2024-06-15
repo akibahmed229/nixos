@@ -20,8 +20,8 @@ in
         sddm.enable = true;
         sddm.theme = ''${self.packages.${pkgs.system}.custom_sddm.override  { 
             imgLink = { 
-              url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/evening-sky.png"; 
-              sha256 = "sha256-fYMzoY3un4qGOSR4DMqVUAFmGGil+wUze31rLLrjcAc=";
+              url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nixos.png"; 
+              sha256 = "sha256-QcY0x7pE8pKQy3At81/OFl+3CUAbx0K99ZHk85QLSo0=";
             };
           }}'';
       };

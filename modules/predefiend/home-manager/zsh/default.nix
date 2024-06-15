@@ -99,7 +99,7 @@
       package = unstable.${pkgs.system}.oh-my-posh;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      useTheme = "catppuccin_mocha";
+      useTheme = "gruvbox";
     };
   };
 
