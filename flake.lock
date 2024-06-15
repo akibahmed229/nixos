@@ -803,11 +803,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1718400985,
-        "narHash": "sha256-+geG68ZukjXif9nnckOrABfQVfzw1CXaYNIZRudZ1XM=",
+        "lastModified": 1718445778,
+        "narHash": "sha256-C4IhoX026Q5tEhbzmmlWZrLDK2rOqPtwZ7zoT9haDw8=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "76d6ca2224adef72f482e46fd61d66d2ef57fb66",
+        "rev": "7941795d444c590f053ba64a84a9c5339e672a3e",
         "type": "github"
       },
       "original": {
