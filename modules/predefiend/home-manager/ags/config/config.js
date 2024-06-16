@@ -30,17 +30,21 @@ const date = Variable("", {
 function Workspaces() {
   const activeId = hyprland.active.workspace.bind("id");
   const workspaces = hyprland.bind("workspaces").as((ws) =>
-    ws.map(({ id }) =>
-      Widget.Button({
-        on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
-        child: Widget.Label(`${id}`),
-        class_name: activeId.as((i) => `${i === id ? "focused" : ""}`),
-      }),
-    ),
+    ws
+      .sort((a, b) => parseInt(a.id, 10) - parseInt(b.id, 10))
+      .map(({ id }) =>
+        Widget.Button({
+          on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
+          child: Widget.Label(`${id}`),
+          class_name: activeId.as((i) => `${i === id ? "focused" : ""}`),
+        }),
+      ),
   );
 
   return Widget.Box({
     class_name: "workspaces",
+    homogeneous: false,
+    spacing: 1,
     children: workspaces,
   });
 }
@@ -131,7 +135,7 @@ function Volume() {
 
   return Widget.Box({
     class_name: "volume",
-    css: "min-width: 180px",
+    css: "min-width: 160px",
     children: [icon, slider],
   });
 }
@@ -170,6 +174,7 @@ function SysTray() {
 
   return Widget.Box({
     children: items,
+    spacing: 1,
   });
 }
 
