@@ -89,6 +89,8 @@
     };
     # Stylix is a NixOS module which applies the same colour scheme, font and wallpaper to a range of applications and desktop environments.
     stylix.url = "github:danth/stylix";
+    #  A customizable and extensible shell 
+    ags.url = "github:Aylur/ags";
   };
 
   # outputs for the flake

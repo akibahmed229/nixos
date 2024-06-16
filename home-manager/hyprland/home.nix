@@ -35,7 +35,7 @@
       path app # loop through the apps and import the module
     )
     # list of apps
-    [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" ];
+    [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" "ags" ];
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
@@ -67,8 +67,9 @@
 
       # Execute your favorite apps at launch
       exec-once = [
-        "waybar"
-        #"hyprpaper"
+        # "waybar"
+        # "hyprpaper"
+        "ags"
         "swww init"
         "nm-applet --indicator" # simple network manager indicator
         "udiskie &" # USB Mass storage devices mounting
@@ -198,10 +199,10 @@
       source = ./others/waybar;
       recursive = true;
     };
-    ".config/dunst" = {
-      source = ./others/dunst;
-      recursive = true;
-    };
+    #".config/dunst" = {
+    #  source = ./others/dunst;
+    #  recursive = true;
+    #};
     ".config/wofi" = {
       source = ./others/wofi;
       recursive = true;

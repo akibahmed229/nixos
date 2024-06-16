@@ -52,7 +52,7 @@
     };
 
     systemPackages = with pkgs; [
-      dunst
+      # dunst
       kitty
       wofi
       networkmanagerapplet
