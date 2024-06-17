@@ -31,7 +31,7 @@ function Workspaces() {
   const activeId = hyprland.active.workspace.bind("id");
   const workspaces = hyprland.bind("workspaces").as((ws) =>
     ws
-      .sort((a, b) => parseInt(a.id, 10) - parseInt(b.id, 10))
+      .sort((a, b) => parseInt(a.id) - parseInt(b.id))
       .map(({ id }) =>
         Widget.Button({
           on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
