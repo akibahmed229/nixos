@@ -207,9 +207,11 @@ function SysTray() {
 function SystemMonitor() {
   const cpuLabel = Widget.Label({
     label: "󰍛 : N/A%",
+    css: "color: @error_color; opacity: 0.8",
   });
   const memoryLabel = Widget.Label({
     label: " : N/A MB",
+    css: "color: @warning_color; opacity: 0.8",
   });
   const diskLabel = Widget.Label({
     label: " : N/A%",
