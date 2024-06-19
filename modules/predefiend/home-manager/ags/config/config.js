@@ -65,6 +65,7 @@ const date = Variable("", {
 function Clock() {
   return Widget.Label({
     class_name: "clock",
+    justification: "left",
     label: date.bind(),
   });
 }
@@ -275,6 +276,13 @@ function SystemMonitor() {
   return widget;
 }
 
+function PowerMenu() {
+  return Widget.Button({
+    child: Widget.Icon({ icon: "system-shutdown-symbolic" }),
+    on_primary_click: () => Utils.exec(`bash -c "wlogout"`),
+  });
+}
+
 // layout of the bar
 function Left() {
   return Widget.Box({
@@ -295,8 +303,15 @@ function Center() {
 function Right() {
   return Widget.Box({
     hpack: "end",
-    spacing: 8,
-    children: [Volume(), BatteryLabel(), Clock(), SystemMonitor(), SysTray()],
+    spacing: 6,
+    children: [
+      Volume(),
+      BatteryLabel(),
+      Clock(),
+      SystemMonitor(),
+      SysTray(),
+      PowerMenu(),
+    ],
   });
 }
 function Bar(monitor = 0) {
@@ -305,6 +320,7 @@ function Bar(monitor = 0) {
     class_name: "bar",
     monitor,
     anchor: ["top", "left", "right"],
+    margins: [1, 8],
     exclusivity: "exclusive",
     child: Widget.CenterBox({
       start_widget: Left(),
