@@ -211,6 +211,18 @@ function SystemMonitor() {
   const memoryLabel = Widget.Label({
     label: " : N/A MB",
   });
+  const diskLabel = Widget.Label({
+    label: " : N/A%",
+  });
+  const networkLabel = Widget.Label({
+    label: "  N/A    N/A",
+  });
+  const temperatureLabel = Widget.Label({
+    label: " : N/A°C",
+  });
+  const uptimeLabel = Widget.Label({
+    label: " : N/A",
+  });
 
   const widget = Widget.Box({
     spacing: 8,
@@ -220,8 +232,14 @@ function SystemMonitor() {
   Utils.interval(1000, () => {
     const cpu = Utils.exec(`bash -c "top -bn1 | awk '/Cpu/ { print $2}'"`);
     const memory = Utils.exec(`bash -c "free -m | awk '/Mem/{print $3}'"`);
-
-    console.log(cpu, memory);
+    const disk = Utils.exec(`bash -c "df -h | awk '/nvme1n1p2/ {print $5}'"`);
+    const network = Utils.exec(
+      `bash -c "cat /proc/net/dev | grep enp4s0 | awk '{print $2, $10}'"`,
+    );
+    const temperature = Utils.exec(
+      `bash -c "sensors | grep Package | awk '{print $4}'"`,
+    );
+    const uptime = Utils.exec(`bash -c "uptime -p"`);
 
     // Update the labels with the new values
     cpuLabel.label = `󰍛 : ${parseInt(cpu)}%`;
