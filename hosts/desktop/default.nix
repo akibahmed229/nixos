@@ -169,8 +169,8 @@
     with unstable.${pkgs.system};
     [
       # List unstable packages here
-      jetbrains.pycharm-community
-      jetbrains.idea-community
+      # jetbrains.pycharm-community
+      # jetbrains.idea-community
       postman
       vscode
       android-tools
@@ -195,6 +195,7 @@
       yarn
       mysql-workbench
       mysql80
+      postgresql
     ] else [ ]) ++ (
     if (hostname == "desktop" || hostname == "laptop") then
       with unstable.${pkgs.system};

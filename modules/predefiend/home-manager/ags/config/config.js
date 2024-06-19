@@ -5,6 +5,13 @@ const audio = await Service.import("audio");
 const battery = await Service.import("battery");
 const systemtray = await Service.import("systemtray");
 import { NotificationPopups } from "./notificationPopups.js";
+import { Media } from "./media.js";
+
+const win = Widget.Window({
+  name: "mpris",
+  anchor: ["top", "center"],
+  child: Media(),
+});
 
 // Utils.timeout(100, () =>
 //   Utils.notify({
@@ -81,24 +88,42 @@ function Clock() {
 //   });
 // }
 
-function Media() {
-  const label = Utils.watch("", mpris, "player-changed", () => {
-    if (mpris.players[0]) {
-      const { track_artists, track_title } = mpris.players[0];
-      return `${track_artists.join(", ")} - ${track_title}`;
-    } else {
-      return "Nothing is playing";
-    }
+// function Media() {
+//   const label = Utils.watch("", mpris, "player-changed", () => {
+//     if (mpris.players[0]) {
+//       const { track_artists, track_title } = mpris.players[0];
+//       return `${track_artists.join(", ")} - ${track_title}`;
+//     } else {
+//       return "Nothing is playing";
+//     }
+//   });
+//
+//   return Widget.Button({
+//     class_name: "media",
+//     on_primary_click: () => mpris.getPlayer("")?.playPause(),
+//     on_scroll_up: () => mpris.getPlayer("")?.next(),
+//     on_scroll_down: () => mpris.getPlayer("")?.previous(),
+//     child: Widget.Label({ label }),
+//   });
+// }
+
+const Player = (player) =>
+  Widget.Button({
+    onClicked: () => {
+      if (win.visible) return win.hide();
+      else return win.show();
+    },
+    on_secondary_click: () => player.playPause(),
+    css: "min-width: 300px",
+    child: Widget.Label().hook(player, (label) => {
+      const { track_artists, track_title } = player;
+      label.label = `${track_artists.join(", ")} - ${track_title}`;
+    }),
   });
 
-  return Widget.Button({
-    class_name: "media",
-    on_primary_click: () => mpris.getPlayer("")?.playPause(),
-    on_scroll_up: () => mpris.getPlayer("")?.next(),
-    on_scroll_down: () => mpris.getPlayer("")?.previous(),
-    child: Widget.Label({ label }),
-  });
-}
+const players = Widget.Box({
+  children: mpris.bind("players").as((p) => p.map(Player)),
+});
 
 function Volume() {
   const icons = {
@@ -190,7 +215,8 @@ function Center() {
   return Widget.Box({
     spacing: 8,
     children: [
-      Media(),
+      Player(mpris.players[0]),
+      // Media(),
       // Notification()
     ],
   });
