@@ -7,12 +7,6 @@ const systemtray = await Service.import("systemtray");
 import { NotificationPopups } from "./notificationPopups.js";
 import { Media } from "./media.js";
 
-const win = Widget.Window({
-  name: "mpris",
-  anchor: ["top", "center"],
-  child: Media(),
-});
-
 // Utils.timeout(100, () =>
 //   Utils.notify({
 //     summary: "Notification Popup Example",
@@ -106,6 +100,12 @@ function Clock() {
 //     child: Widget.Label({ label }),
 //   });
 // }
+
+const win = Widget.Window({
+  name: "mpris",
+  anchor: ["top", "center"],
+  child: Media(),
+});
 
 const Player = (player) =>
   Widget.Button({
@@ -203,6 +203,34 @@ function SysTray() {
   });
 }
 
+// System Monitor Widget (CPU, Memory, Disk, Network) etc
+function SystemMonitor() {
+  const cpuLabel = Widget.Label({
+    label: "󰍛 : N/A%",
+  });
+  const memoryLabel = Widget.Label({
+    label: " : N/A MB",
+  });
+
+  const widget = Widget.Box({
+    spacing: 8,
+    children: [cpuLabel, memoryLabel],
+  });
+
+  Utils.interval(1000, () => {
+    const cpu = Utils.exec(`bash -c "top -bn1 | awk '/Cpu/ { print $2}'"`);
+    const memory = Utils.exec(`bash -c "free -m | awk '/Mem/{print $3}'"`);
+
+    console.log(cpu, memory);
+
+    // Update the labels with the new values
+    cpuLabel.label = `󰍛 : ${parseInt(cpu)}%`;
+    memoryLabel.label = ` : ${parseInt(memory)} MB`;
+  });
+
+  return widget;
+}
+
 // layout of the bar
 function Left() {
   return Widget.Box({
@@ -226,7 +254,7 @@ function Right() {
   return Widget.Box({
     hpack: "end",
     spacing: 8,
-    children: [Volume(), BatteryLabel(), Clock(), SysTray()],
+    children: [Volume(), BatteryLabel(), Clock(), SystemMonitor(), SysTray()],
   });
 }
 
