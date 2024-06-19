@@ -20,10 +20,6 @@ import { Media } from "./media.js";
 //   }),
 // );
 
-const date = Variable("", {
-  poll: [1000, 'date "+%I:%M:%S %b %e."'],
-});
-
 // widgets can be only assigned as a child in one container
 // so to make a reuseable widget, make it a function
 // then you can simply instantiate one by calling it
@@ -56,6 +52,10 @@ function ClientTitle() {
     label: hyprland.active.client.bind("title"),
   });
 }
+
+const date = Variable("", {
+  poll: [1000, 'date "+%I:%M:%S %b %e."'],
+});
 
 function Clock() {
   return Widget.Label({
@@ -184,7 +184,8 @@ function BatteryLabel() {
     ],
   });
 }
-
+// System section
+// System Tray
 function SysTray() {
   const items = systemtray.bind("items").as((items) =>
     items.map((item) =>
@@ -202,7 +203,6 @@ function SysTray() {
     spacing: 1,
   });
 }
-
 // System Monitor Widget (CPU, Memory, Disk, Network) etc
 function SystemMonitor() {
   const cpuLabel = Widget.Label({
@@ -238,7 +238,6 @@ function Left() {
     children: [Workspaces(), ClientTitle()],
   });
 }
-
 function Center() {
   return Widget.Box({
     spacing: 8,
@@ -249,7 +248,6 @@ function Center() {
     ],
   });
 }
-
 function Right() {
   return Widget.Box({
     hpack: "end",
@@ -257,7 +255,6 @@ function Right() {
     children: [Volume(), BatteryLabel(), Clock(), SystemMonitor(), SysTray()],
   });
 }
-
 function Bar(monitor = 0) {
   return Widget.Window({
     name: `bar-${monitor}`, // name has to be unique
@@ -273,6 +270,7 @@ function Bar(monitor = 0) {
   });
 }
 
+// finally, we configure the app
 App.config({
   style: "./style.css",
   windows: [
