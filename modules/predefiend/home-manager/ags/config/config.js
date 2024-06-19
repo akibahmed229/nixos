@@ -50,11 +50,16 @@ function ClientTitle() {
   return Widget.Label({
     class_name: "client-title",
     label: hyprland.active.client.bind("title"),
+    justification: "left",
+    truncate: "end",
+    xalign: 0,
+    wrap: true,
+    maxWidthChars: 36,
   });
 }
 
 const date = Variable("", {
-  poll: [1000, 'date "+%I:%M:%S %b %e."'],
+  poll: [1000, 'date "+%I:%M %b %e."'],
 });
 
 function Clock() {
@@ -63,6 +68,19 @@ function Clock() {
     label: date.bind(),
   });
 }
+
+const calendar = Widget.Calendar({
+  showDayNames: true,
+  showDetails: true,
+  showHeading: true,
+  showWeekNumbers: true,
+  detail: (self, y, m, d) => {
+    return `<span color="white">${y}. ${m}. ${d}.</span>`;
+  },
+  onDaySelected: ({ date: [y, m, d] }) => {
+    print(`${y}. ${m}. ${d}.`);
+  },
+});
 
 // we don't need dunst or any other notification daemon
 // because the Notifications module is a notification daemon itself
@@ -115,7 +133,13 @@ const Player = (player) =>
     },
     on_secondary_click: () => player.playPause(),
     css: "min-width: 300px",
-    child: Widget.Label().hook(player, (label) => {
+    child: Widget.Label({
+      justification: "left",
+      truncate: "end",
+      xalign: 0,
+      wrap: true,
+      maxWidthChars: 46,
+    }).hook(player, (label) => {
       const { track_artists, track_title } = player;
       label.label = `${track_artists.join(", ")} - ${track_title}`;
     }),
