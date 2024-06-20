@@ -99,7 +99,8 @@
         "$mod, E, exec, thunar"
         "$mod, T, togglefloating,"
         "$mod, F, fullscreen"
-        ''$mod, R, exec, wofi -n --show drun -p "Run App"''
+        # ''$mod, R, exec, wofi -n --show drun -p "Run App"''
+        "$mod, R, exec, ags -t applauncher"
         "$mod, P, pseudo," # dwindle
         "$mod ALT, J, togglesplit," # dwindle
         "$mod, B, exec, firefox"

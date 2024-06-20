@@ -6,6 +6,7 @@ const battery = await Service.import("battery");
 const systemtray = await Service.import("systemtray");
 import { NotificationPopups } from "./notificationPopups.js";
 import { Media } from "./media.js";
+import { applauncher } from "./applauncher.js";
 
 // Utils.timeout(100, () =>
 //   Utils.notify({
@@ -336,6 +337,7 @@ App.config({
   windows: [
     Bar(),
     NotificationPopups(),
+    applauncher,
 
     // you can call it, for each monitor
     // Bar(0),
