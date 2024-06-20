@@ -68,7 +68,6 @@ const IconPicker = () => {
 
 const win = new Gtk.Window({
   name: "icon-browser",
-  anchor: ["center", "center"],
   child: IconPicker(),
 });
 
