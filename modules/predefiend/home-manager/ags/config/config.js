@@ -136,9 +136,8 @@ const Player = (player) =>
     on_secondary_click: () => player.playPause(),
     css: "min-width: 300px",
     child: Widget.Label({
-      justification: "left",
+      justification: "center",
       truncate: "end",
-      xalign: 0,
       wrap: true,
       maxWidthChars: 46,
     }).hook(player, (label) => {
