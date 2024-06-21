@@ -111,6 +111,7 @@ window.notification-popups box.notifications {
 /* */
 .player {
   padding: 10px;
+  margin-top: 10px;
   min-width: 350px;
 }
 

@@ -123,6 +123,7 @@ const calendar = Widget.Calendar({
 
 const win = Widget.Window({
   name: "mpris",
+  css: `padding: 10px; border-radius: 12px; margin-top: 50px; border: 1px solid shade(@theme_fg_color, 0.7);`,
   anchor: ["top", "center"],
   child: Media(),
 });
@@ -134,7 +135,6 @@ const Player = (player) =>
       else return win.show();
     },
     on_secondary_click: () => player.playPause(),
-    css: "min-width: 300px",
     child: Widget.Label({
       justification: "center",
       truncate: "end",
