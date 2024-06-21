@@ -32,7 +32,7 @@
         path myprograms # loop through the myprograms and import the module
       )
       # list of programs
-      [ "sops" "stylix" "impermanence" "tmux" "disko" "mysql" ];
+      [ "sops" "stylix" "impermanence" "tmux" "disko" "mysql" "postgresql" ];
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
@@ -281,14 +281,6 @@
     atuin = {
       enable = true;
       openFirewall = true;
-    };
-    postgresql = {
-      enable = true;
-      settings.port = 5432;
-      authentication = pkgs.lib.mkOverride 10 ''
-        #type database  DBuser  auth-method
-                local all       all     trust
-      '';
     };
   };
 
