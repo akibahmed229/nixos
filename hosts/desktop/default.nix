@@ -124,8 +124,6 @@
     fzf
     tlrc
     obsidian
-    # bottles
-    bottles
     # pppoe connection
     ppp
     rpPPPoE
