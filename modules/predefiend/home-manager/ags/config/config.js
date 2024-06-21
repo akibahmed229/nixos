@@ -123,7 +123,7 @@ const calendar = Widget.Calendar({
 
 const win = Widget.Window({
   name: "mpris",
-  css: `padding: 10px; border-radius: 12px; margin-top: 50px; border: 1px solid shade(@theme_fg_color, 0.7);`,
+  css: `padding: 10px; border-radius: 10px; margin-top: 50px; border: 1px solid shade(@theme_fg_color, 0.7);`,
   anchor: ["top", "center"],
   child: Media(),
 });
