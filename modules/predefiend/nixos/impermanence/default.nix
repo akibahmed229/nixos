@@ -58,6 +58,7 @@
       "/var/lib/waydroid" # waydroid state
       "/var/lib/libvirt" # libvirt state for VMs
       "/var/lib/mysql"
+      "/var/lib/postgresql"
       "/var/lib/sops-nix/"
       "/run/secrets.d/"
     ];
@@ -81,6 +82,7 @@
         ".vscode"
         ".docker"
         ".mysql"
+        ".rustup"
         ".steam"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
         { directory = ".gnupg"; mode = "0700"; }
