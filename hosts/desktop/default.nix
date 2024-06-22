@@ -54,20 +54,11 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-
-      # Insecure permite
-      permittedInsecurePackages = [
-        "python-2.7.18.6"
-        "electron-25.9.0"
-      ];
-      allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
-        "steam"
-      ];
     };
   };
 
   # remove bloat
-  # documentation.nixos.enable = false;
+  documentation.nixos.enable = false;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
@@ -217,16 +208,6 @@
   services = {
     # Enable Flatpack
     flatpak.enable = true;
-    # Enable the OpenSSH daemon.
-    openssh = {
-      enable = true;
-      ports = [ 8080 ];
-      settings = lib.mkDefault {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
-      };
-    };
-
     # Enable dbus 
     dbus.enable = true;
     atuin = {
@@ -261,24 +242,4 @@
   #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
   #  ];
   # };
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # Enable Auto Update
-  # system.copySystemConfiguration = true;
-  system = {
-    autoUpgrade.enable = true;
-    autoUpgrade.channel = "https://nixos.org/channels/nixos-${state-version}";
-
-    # This value determines the NixOS release from which the default
-    # settings for stateful data, like file locations and database versions
-    # on your system were taken. It's perfectly fine and recommended to leave
-    # this value at the release version of the first install of this system.
-    # Before changing this value read the documentation for this option
-    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    stateVersion = "${state-version}"; # Did you read the comment?
-  };
 }
