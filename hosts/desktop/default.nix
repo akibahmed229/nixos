@@ -8,7 +8,6 @@
 , unstable
 , inputs
 , lib
-, state-version
 , self
 , ...
 }:
