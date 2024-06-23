@@ -55,7 +55,7 @@
           name = user.name;
           value = {
             hashedPasswordFile = user.hashedPasswordFile;
-            hashedPassword = lib.mkIf (user.hashedPasswordFile == null) user.hashedPassword;
+            hashedPassword = lib.mkIf (user.hashedPasswordFile != { }) user.hashedPassword;
             extraGroups = user.extraGroups;
             packages = user.packages;
             shell = user.shell;
