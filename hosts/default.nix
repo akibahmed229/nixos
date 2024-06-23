@@ -97,6 +97,11 @@
           nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
           grub.enable = lib.mkForce false;
           networking.networkmanager.enable = lib.mkForce false;
+
+          # Enables copy / paste when running in a KVM with spice.
+          services.spice-vdagentd.enable = true;
+          # Use faster squashfs compression
+          isoImage.squashfsCompression = "gzip -Xcompression-level 1";
         }
       ] ++
       [ (import ../home-manager/hyprland/default.nix) ] ++
