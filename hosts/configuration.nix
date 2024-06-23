@@ -128,6 +128,7 @@
           "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
         ];
 
+        auto-optimise-store = true;
         # Enable flakes and new 'nix' command
         experimental-features = "nix-command flakes";
         # Opinionated: disable global registry
