@@ -52,7 +52,7 @@
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
       #monitor=,preferred,auto,auto 
-      monitor = map
+      monitor = (map
         (monitor:
           let
             # set the rmonitor resolution & position from the custom Home-manager module
@@ -63,7 +63,7 @@
           "${monitor.name},${if monitor.enabled then "${resolution},${position},1" else "disable"}"
         )
         # set of monitors setting from custom monitor module 
-        config.monitors;
+        config.monitors);
 
       # Execute your favorite apps at launch
       exec-once = [
