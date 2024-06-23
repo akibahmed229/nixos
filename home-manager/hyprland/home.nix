@@ -22,6 +22,8 @@
       allowUnfree = true;
     };
   };
+
+  # Fix: systemd not importing the environment by default.
   wayland.windowManager.hyprland.systemd.variables = [ "--all" ];
 
   # imports from the predefiend modules folder
@@ -80,9 +82,10 @@
         [
           "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp " # Loads my RGB light
           # app that i want to start after login
-          "discord"
+          # "discord"
           "firefox"
           "spotify"
+          "vesktop"
           "alacritty"
         ]
       else [ ]);
@@ -179,7 +182,8 @@
           # Window open rule
           "workspace 1,Alacritty"
           "workspace 2,firefox"
-          "workspace 3,discord"
+          # "workspace 3,discord"
+          "workspace 3,vesktop"
           "workspace 4,Spotify"
           "workspace 5,virt-manager"
         ]
