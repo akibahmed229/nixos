@@ -5,10 +5,7 @@
 , config
 , lib
 , pkgs
-, user
 , unstable
-, hyprland
-, system
 , ...
 }:
 

@@ -5,7 +5,6 @@
 , user
 , hostname
 , unstable
-, nixpkgs
 , lib
 , inputs
 , state-version

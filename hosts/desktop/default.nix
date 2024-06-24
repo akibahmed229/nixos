@@ -1,4 +1,4 @@
-# default config files for desktop systems 
+
 
 { config
 , pkgs
@@ -45,6 +45,7 @@
       # Add overlays your own flake exports (from overlays and pkgs dir):
       # self.overlays.discord-overlay
       # self.overlays.chromium-overlay
+      # self.overlays.nvim-overlay
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -63,7 +64,6 @@
   environment.systemPackages = (with pkgs; [
     # List programs you want in your system Stable packages
     #cron
-    neovim-unwrapped
     htop
     trash-cli
     cava

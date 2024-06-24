@@ -3,7 +3,6 @@
 { config
 , lib
 , pkgs
-, hyprland
 , inputs ? { }
 , self
 , theme
@@ -15,6 +14,7 @@
     # You can add overlays here
     overlays = [
       self.overlays.discord-overlay
+      self.overlays.nvim-overlay
     ];
     # Configure your nixpkgs instance
     config = {
@@ -35,11 +35,12 @@
       path app # loop through the apps and import the module
     )
     # list of apps
-    [ "firefox" "spotify" "discord" "zsh" "tmux" "nvchad" "lf" "ags" ];
+    [ "firefox" "spotify" "discord" "zsh" "tmux" "lf" "ags" ];
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
     xfce.exo
+    neovim
   ];
 
   #imports = [(import ./others/hyprutility.nix)];
