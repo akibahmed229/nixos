@@ -983,15 +983,15 @@
       "locked": {
         "lastModified": 1719263456,
         "narHash": "sha256-K71KkpvEg3TBH1iPpM8hHUbuIRiiF1o2fbkzOu3Woj0=",
-        "ref": "refs/heads/main",
+        "owner": "akibahmed229",
+        "repo": "nxivim",
         "rev": "ed782cc11a19689cb93903a214c78238205af9c6",
-        "revCount": 7,
-        "type": "git",
-        "url": "file:pkgs/nixvim"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:pkgs/nixvim"
+        "owner": "akibahmed229",
+        "repo": "nxivim",
+        "type": "github"
       }
     },
     "nixvim_2": {
