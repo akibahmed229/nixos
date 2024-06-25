@@ -1,3 +1,0 @@
-{
-  imports = [ ./bufferline.nix ];
-}
