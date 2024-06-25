@@ -981,17 +981,14 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1719263456,
-        "narHash": "sha256-K71KkpvEg3TBH1iPpM8hHUbuIRiiF1o2fbkzOu3Woj0=",
-        "owner": "akibahmed229",
-        "repo": "nxivim",
-        "rev": "ed782cc11a19689cb93903a214c78238205af9c6",
-        "type": "github"
+        "lastModified": 1,
+        "narHash": "sha256-yQtyH0JTs1NX3oXHDZ0eqDlhl1QpLK61zbDiDaJoAoc=",
+        "path": "./pkgs/nixvim",
+        "type": "path"
       },
       "original": {
-        "owner": "akibahmed229",
-        "repo": "nxivim",
-        "type": "github"
+        "path": "./pkgs/nixvim",
+        "type": "path"
       }
     },
     "nixvim_2": {

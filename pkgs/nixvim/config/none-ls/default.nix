@@ -1,0 +1,3 @@
+{
+  imports = [ ./none-ls.nix ];
+}

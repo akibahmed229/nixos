@@ -1,0 +1,3 @@
+{
+  imports = [ ./neo-tree.nix ];
+}
