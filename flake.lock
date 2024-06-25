@@ -981,18 +981,17 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "dir": "pkgs/nixvim",
-        "dirtyRev": "f9f0e996b6fc3b8279ffe33154da9bd0560f61e6-dirty",
-        "dirtyShortRev": "f9f0e99-dirty",
-        "lastModified": 1719317743,
-        "narHash": "sha256-SctF0WXP5OyQzpISuV8j+8ZgATkVEKGqn40HVU8DrUg=",
+        "lastModified": 1719263456,
+        "narHash": "sha256-K71KkpvEg3TBH1iPpM8hHUbuIRiiF1o2fbkzOu3Woj0=",
+        "ref": "refs/heads/main",
+        "rev": "ed782cc11a19689cb93903a214c78238205af9c6",
+        "revCount": 7,
         "type": "git",
-        "url": "file:.?dir=pkgs/nixvim"
+        "url": "file:./pkgs/nixvim"
       },
       "original": {
-        "dir": "pkgs/nixvim",
         "type": "git",
-        "url": "file:.?dir=pkgs/nixvim"
+        "url": "file:./pkgs/nixvim"
       }
     },
     "nixvim_2": {
