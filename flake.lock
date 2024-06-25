@@ -577,11 +577,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719173945,
-        "narHash": "sha256-VPXoV9osFbbjCmOnwN+8/7P1508SCp7CO7Y06AayQqs=",
+        "lastModified": 1719318037,
+        "narHash": "sha256-TnlAcO5K2gkab0mpKurP5Co6eWRycP/KbFqWNS2rsMA=",
         "owner": "hyprwm",
         "repo": "hyprland-plugins",
-        "rev": "135de7b88649dbe5fea8c997447bdc9d6f15ad86",
+        "rev": "3ae670253a5a3ae1e3a3104fb732a8c990a31487",
         "type": "github"
       },
       "original": {
@@ -981,14 +981,18 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-yQtyH0JTs1NX3oXHDZ0eqDlhl1QpLK61zbDiDaJoAoc=",
-        "path": "./pkgs/nixvim",
-        "type": "path"
+        "dir": "pkgs/nixvim",
+        "dirtyRev": "f9f0e996b6fc3b8279ffe33154da9bd0560f61e6-dirty",
+        "dirtyShortRev": "f9f0e99-dirty",
+        "lastModified": 1719317743,
+        "narHash": "sha256-SctF0WXP5OyQzpISuV8j+8ZgATkVEKGqn40HVU8DrUg=",
+        "type": "git",
+        "url": "file:.?dir=pkgs/nixvim"
       },
       "original": {
-        "path": "./pkgs/nixvim",
-        "type": "path"
+        "dir": "pkgs/nixvim",
+        "type": "git",
+        "url": "file:.?dir=pkgs/nixvim"
       }
     },
     "nixvim_2": {
