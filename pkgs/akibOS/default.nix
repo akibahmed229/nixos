@@ -5,7 +5,7 @@
 pkgs.writeShellApplication {
   name = "akibOS";
 
-  runtimeInuts = with pkgs; [
+  runtimeInputs = with pkgs; [
     git
   ];
 
