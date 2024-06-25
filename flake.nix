@@ -94,7 +94,7 @@
     # My custom nixvim 
     nixvim = {
       url = "path:./pkgs/nixvim";
-      inputs.nixpkgs-unstable.follows = "nixvim/nixpkgs-unstable";
+      inputs.nixpkgs-unstable.follows = "nixvim/nixpkgs";
     };
   };
 
