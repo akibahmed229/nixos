@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 
 # you can use this file to install nixos on your system
-# nix-shell -p git --command 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
+# nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"
 pkgs.writeShellApplication {
   name = "akibOS";
 
@@ -92,14 +92,7 @@ pkgs.writeShellApplication {
     function install_flake() {
         local flake_dir="/home/$username/flake"
         local persist_dir="/mnt/persist/home/$username/.config"
-    
-        # check if git is installed
-        if ! command -v git &> /dev/null; then
-            print_message "Installing ...Git!"
-            nix-env -iA nixos.git
-        else
-            print_message "Git is already installed!"
-        fi
+
         # Clone flake repository
         print_message "Cloning flake repository..."
         git clone https://www.github.com/akibahmed229/nixos "$flake_dir"
