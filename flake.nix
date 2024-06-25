@@ -93,7 +93,7 @@
     ags.url = "github:Aylur/ags";
     # My custom nixvim 
     nixvim = {
-      url = "path:./pkgs/nixvim";
+      url = "git+file:.?dir=pkgs/nixvim";
       inputs.nixpkgs-unstable.follows = "nixvim/nixpkgs";
     };
   };
