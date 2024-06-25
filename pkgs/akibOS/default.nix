@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 
 # you can use this file to install nixos on your system
-# nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"
+# nix-shell -p git 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
 pkgs.writeShellApplication {
   name = "akibOS";
 
