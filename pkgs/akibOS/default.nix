@@ -83,7 +83,7 @@ pkgs.writeShellApplication {
     
         mkdir -p "$persist_dir"
         mv "$flake_dir" "$persist_dir"
-        useradd -m $username
+        useradd -m "$username"
         chown -R "$username":users "$persist_dir"/flake/*
         chown -R "$username":users "$persist_dir"/flake/.*
     }
