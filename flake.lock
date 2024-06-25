@@ -987,11 +987,11 @@
         "rev": "ed782cc11a19689cb93903a214c78238205af9c6",
         "revCount": 7,
         "type": "git",
-        "url": "file:./pkgs/nixvim"
+        "url": "file:pkgs/nixvim"
       },
       "original": {
         "type": "git",
-        "url": "file:./pkgs/nixvim"
+        "url": "file:pkgs/nixvim"
       }
     },
     "nixvim_2": {
