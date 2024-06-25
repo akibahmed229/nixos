@@ -92,10 +92,7 @@
     #  A customizable and extensible shell 
     ags.url = "github:Aylur/ags";
     # My custom nixvim 
-    nixvim = {
-      url = "git+file:.?dir=pkgs/nixvim";
-      inputs.nixpkgs-unstable.follows = "nixvim/nixpkgs";
-    };
+    nixvim.url = "github:akibahmed229/nixvim";
   };
 
   # outputs for the flake
