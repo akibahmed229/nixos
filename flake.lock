@@ -981,11 +981,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1719366982,
-        "narHash": "sha256-HbhvwKAtDTlpcniBJoYNTd1eK/mVaNEzlV31Y9+A6pk=",
+        "lastModified": 1719384142,
+        "narHash": "sha256-VWcQNI/B2oj2jIfieJBdNl/dDMt3Mid6S1kreGrP4Gg=",
         "owner": "akibahmed229",
         "repo": "nxivim",
-        "rev": "11fa8e0ccd5ed87c477424462367cecc45d0edbe",
+        "rev": "e8b71c5b56294f4d02198b43448f74c56c4a6304",
         "type": "github"
       },
       "original": {
