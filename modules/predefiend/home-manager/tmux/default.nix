@@ -118,7 +118,7 @@ in
       #   '';
       # }
       {
-        plugin =  unstable.${pkgs.system}.tmuxPlugins.tmux-nova;
+        plugin = unstable.${pkgs.system}.tmuxPlugins.tmux-nova;
         extraConfig = ''
           set -g @plugin 'o0th/tmux-nova'
 

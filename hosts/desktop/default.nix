@@ -142,6 +142,7 @@
       jdk21
       python312Full
       nodejs_22
+      nil
       jq
       rustc
       rustup
