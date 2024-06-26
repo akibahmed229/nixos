@@ -5,9 +5,9 @@
 pkgs.writeShellApplication {
   name = "akibOS";
 
-  runtimeInputs = with pkgs; [
-    git
-  ];
+  # runtimeInputs = with pkgs; [
+  #   git
+  # ];
 
   text = ''
     #!/usr/bin/env bash
@@ -36,7 +36,7 @@ pkgs.writeShellApplication {
     # Prompt user for required information
     clear
     prompt_user "Enter your username (e.g., akib)" username
-    prompt_user "Enter your hostname (e.g., nixos)" hostname
+    prompt_user "Enter your hostname (available options: desktop, virt)" hostname
     prompt_user "Enter your device (e.g., /dev/sda)" device
 
     # Check if user input is not empty
