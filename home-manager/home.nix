@@ -35,6 +35,7 @@
     bibata-cursors
     adw-gtk3
     hwinfo
+    ripgrep
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
