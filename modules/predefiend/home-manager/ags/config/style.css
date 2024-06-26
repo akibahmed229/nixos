@@ -2,160 +2,160 @@
 /* Bar Config style*/
 /* */
 window.bar {
-  background-color: shade(@theme_bg_color, 0.7);
-  color: @theme_fg_color;
-  border-radius: 10px;
-  border: 1px solid shade(@theme_fg_color, 0.7);
+    background-color: shade(@theme_bg_color, 0.7);
+    color: @theme_fg_color;
+    border-radius: 10px;
+    border: 1px solid shade(@theme_fg_color, 0.7);
 }
 
 button {
-  min-width: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  background-color: transparent;
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent;
 }
 
 button:active {
-  background-color: @theme_selected_bg_color;
-  border-radius: 10px;
+    background-color: @theme_selected_bg_color;
+    border-radius: 10px;
 }
 
 button:hover {
-  border-bottom: 3px solid @theme_fg_color;
+    border-bottom: 3px solid @theme_fg_color;
 }
 
 label {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .workspaces button.focused {
-  border-bottom: 3px solid @theme_selected_bg_color;
+    border-bottom: 3px solid @theme_selected_bg_color;
 }
 
 .client-title {
-  color: @theme_selected_bg_color;
+    color: @theme_selected_bg_color;
 }
 
 .notification {
-  color: yellow;
+    color: yellow;
 }
 
 levelbar block,
 highlight {
-  min-height: 10px;
+    min-height: 10px;
 }
 
 /* */
 /* Notification Popups style */
 /* */
 window.notification-popups box.notifications {
-  padding: 0.5em;
+    padding: 0.5em;
 }
 
 .icon {
-  min-width: 68px;
-  min-height: 68px;
-  margin-right: 1em;
+    min-width: 68px;
+    min-height: 68px;
+    margin-right: 1em;
 }
 
 .icon image {
-  font-size: 58px;
-  /* to center the icon */
-  margin: 5px;
-  color: @theme_fg_color;
+    font-size: 58px;
+    /* to center the icon */
+    margin: 5px;
+    color: @theme_fg_color;
 }
 
 .icon box {
-  min-width: 68px;
-  min-height: 68px;
-  border-radius: 7px;
+    min-width: 68px;
+    min-height: 68px;
+    border-radius: 7px;
 }
 
 .notification {
-  min-width: 350px;
-  border-radius: 11px;
-  padding: 1em;
-  margin: 0.5em;
-  border: 1px solid @wm_borders_edge;
-  background-color: @theme_bg_color;
+    min-width: 350px;
+    border-radius: 11px;
+    padding: 1em;
+    margin: 0.5em;
+    border: 1px solid @wm_borders_edge;
+    background-color: @theme_bg_color;
 }
 
 .notification.critical {
-  border: 1px solid lightcoral;
+    border: 1px solid lightcoral;
 }
 
 .title {
-  color: @theme_fg_color;
-  font-size: 1.4em;
+    color: @theme_fg_color;
+    font-size: 1.4em;
 }
 
 .body {
-  color: @theme_unfocused_fg_color;
+    color: @theme_unfocused_fg_color;
 }
 
 .actions .action-button {
-  margin: 0 0.4em;
-  margin-top: 0.8em;
+    margin: 0 0.4em;
+    margin-top: 0.8em;
 }
 
 .actions .action-button:first-child {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .actions .action-button:last-child {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 /* */
 /* Media Player style */
 /* */
 .player {
-  padding: 10px;
-  margin-top: 10px;
-  min-width: 350px;
+    padding: 10px;
+    margin-top: 10px;
+    min-width: 350px;
 }
 
 .player .img {
-  min-width: 100px;
-  min-height: 100px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 13px;
-  margin-right: 1em;
+    min-width: 100px;
+    min-height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 13px;
+    margin-right: 1em;
 }
 
 .player .title {
-  font-size: 1.2em;
+    font-size: 1.2em;
 }
 
 .player .artist {
-  font-size: 1.1em;
-  color: @insensitive_fg_color;
+    font-size: 1.1em;
+    color: @insensitive_fg_color;
 }
 
 .player scale.position {
-  padding: 0;
-  margin-bottom: 0.3em;
+    padding: 0;
+    margin-bottom: 0.3em;
 }
 
 .player scale.position trough {
-  min-height: 8px;
+    min-height: 8px;
 }
 
 .player scale.position highlight {
-  background-color: @theme_fg_color;
+    background-color: @theme_fg_color;
 }
 
 .player scale.position slider {
-  all: unset;
+    all: unset;
 }
 
 .player button {
-  min-height: 1em;
-  min-width: 1em;
-  padding: 0.3em;
+    min-height: 1em;
+    min-width: 1em;
+    padding: 0.3em;
 }
 
 .player button.play-pause {
-  margin: 0 0.3em;
+    margin: 0 0.3em;
 }

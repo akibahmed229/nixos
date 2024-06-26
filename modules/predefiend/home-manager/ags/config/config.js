@@ -123,7 +123,7 @@ const calendar = Widget.Calendar({
 const win = Widget.Window({
     name: "mpris",
     css: `padding: 10px; border-radius: 10px; margin-top: 50px; border: 1px solid shade(@theme_fg_color, 0.7);`,
-    anchor: ["top", "center"],
+    anchor: ["top", "right"],
     child: Media(),
 });
 
@@ -135,10 +135,10 @@ const Player = (player) =>
         },
         on_secondary_click: () => player.playPause(),
         child: Widget.Label({
-            justification: "center",
+            justification: "left",
             truncate: "end",
             wrap: true,
-            maxWidthChars: 46,
+            maxWidthChars: 16,
         }).hook(player, (label) => {
             const { track_artists, track_title } = player;
             label.label = `${track_artists.join(", ")} - ${track_title}`;
@@ -293,9 +293,7 @@ function Center() {
     return Widget.Box({
         spacing: 8,
         children: [
-            Player(mpris.players[0]),
-            // Media(),
-            // Notification()
+            Clock(),
         ],
     });
 }
@@ -304,9 +302,11 @@ function Right() {
         hpack: "end",
         spacing: 6,
         children: [
+            Player(mpris.players[0]),
+            // Media(),
+            // Notification()
             Volume(),
             BatteryLabel(),
-            Clock(),
             SystemMonitor(),
             SysTray(),
             PowerMenu(),
@@ -319,7 +319,7 @@ function Bar(monitor = 0) {
         class_name: "bar",
         monitor,
         anchor: ["top", "left", "right"],
-        margins: [1, 8],
+        margins: [6, 8],
         exclusivity: "exclusive",
         child: Widget.CenterBox({
             start_widget: Left(),
