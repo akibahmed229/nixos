@@ -1,5 +1,6 @@
 { pkgs
 , user
+, unstable
 , ...
 }:
 let
@@ -13,7 +14,8 @@ in
     shell = "${pkgs.zsh}/bin/zsh"; # or zsh
     newSession = true;
     plugins = with pkgs; [
-      tmuxPlugins.catppuccin
+      # tmuxPlugins.catppuccin
+      unstable.${pkgs.system}.tmuxPlugins.tmux-nova
       tmuxPlugins.sensible
       # tmuxPlugins.gruvbox
       tmuxPlugins.vim-tmux-navigator
@@ -50,8 +52,8 @@ in
           # tmux_resurrect_* files can't be parsed and restored. This addition
           # makes sure to fix the tmux_resurrect_* files so they can be parsed by
           # the tmux-resurrect plugin and successfully restored.
-          set -g @resurrect-dir ${resurrectDirPath}
-          set -g @resurrect-hook-post-save-all 'target=$(readlink -f ${resurrectDirPath}/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g" $target | sponge $target'
+          #  set -g @resurrect-dir ${resurrectDirPath}
+          #  set -g @resurrect-hook-post-save-all 'target=$(readlink -f ${resurrectDirPath}/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g" $target | sponge $target'
         '';
       }
       # a few words about @continuum-boot and @continuum-systemd-start-cmd that
@@ -89,30 +91,60 @@ in
         plugin = tmuxPlugins.continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '10'
+          set -g @continuum-save-interval '5'
         '';
       }
+      # {
+      #   plugin = tmuxPlugins.catppuccin;
+      #   extraConfig = '' 
+      #   # capatuine theme
+      #   set -g @catppuccin_flavour "mocha"
+
+      #   set -g @catppuccin_window_left_separator "█"
+      #   set -g @catppuccin_window_right_separator "█ "
+      #   set -g @catppuccin_window_number_position "right"
+      #   set -g @catppuccin_window_middle_separator "  █"
+      #   
+      #   set -g @catppuccin_window_default_fill "number"
+      #   
+      #   set -g @catppuccin_window_current_fill "number"
+      #   set -g @catppuccin_window_current_text "#{pane_current_path}"
+      #   
+      #   # set -g @catppuccin_status_modules_right "application session date_time"
+      #   set -g @catppuccin_status_left_separator  ""
+      #   set -g @catppuccin_status_right_separator " "
+      #   set -g @catppuccin_status_fill "all"
+      #   set -g @catppuccin_status_connect_separator "yes"
+      #   '';
+      # }
       {
-        plugin = tmuxPlugins.catppuccin;
-        extraConfig = '' 
-        # capatuine theme
-        set -g @catppuccin_flavour "mocha"
-        set -g @catppuccin_window_left_separator "█"
-        set -g @catppuccin_window_right_separator "█ "
-        set -g @catppuccin_window_number_position "right"
-        set -g @catppuccin_window_middle_separator "  █"
-        
-        set -g @catppuccin_window_default_fill "number"
-        
-        set -g @catppuccin_window_current_fill "number"
-        set -g @catppuccin_window_current_text "#{pane_current_path}"
-        
-        # set -g @catppuccin_status_modules_right "application session date_time"
-        set -g @catppuccin_status_left_separator  ""
-        set -g @catppuccin_status_right_separator " "
-        set -g @catppuccin_status_right_separator_inverse "yes"
-        set -g @catppuccin_status_fill "all"
-        set -g @catppuccin_status_connect_separator "no"
+        plugin =  unstable.${pkgs.system}.tmuxPlugins.tmux-nova;
+        extraConfig = ''
+          set -g @plugin 'o0th/tmux-nova'
+
+          set -g @nova-nerdfonts true
+          set -g @nova-nerdfonts-left 
+          set -g @nova-nerdfonts-right 
+          
+          set -g @nova-pane-active-border-style "#44475a"
+          set -g @nova-pane-border-style "#282a36"
+          set -g @nova-status-style-bg "#4c566a"
+          set -g @nova-status-style-fg "#d8dee9"
+          set -g @nova-status-style-active-bg "#89c0d0"
+          set -g @nova-status-style-active-fg "#2e3540"
+          set -g @nova-status-style-double-bg "#2d3540"
+          
+          set -g @nova-pane "#I#{?pane_in_mode,  #{pane_mode},}  #W"
+          
+          set -g @nova-segment-mode "#{?client_prefix,Ω,ω}"
+          set -g @nova-segment-mode-colors "#78a2c1 #2e3440"
+          
+          set -g @nova-segment-whoami "#{pane_current_path}"
+          set -g @nova-segment-whoami-colors "#78a2c1 #2e3440"
+          
+          set -g @nova-rows 0
+          set -g @nova-segments-0-left "mode"
+          set -g @nova-segments-0-right "whoami"
         '';
       }
     ];
@@ -123,7 +155,7 @@ in
     # at least one valid "snapshot" from which tmux will be able to resurrect. This is why an initial
     # session named init-resurrect is created for resurrect plugin to create a valid "last" file for
     # continuum plugin to work off of.
-      run-shell "if [ ! -d ~/.config/tmux/resurrect ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
+    #  run-shell "if [ ! -d ~/.config/tmux/resurrect ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
 
       set-option -sa terminal-overrides ",xterm*:Tc"
       set -g mouse on
