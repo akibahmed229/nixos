@@ -59,7 +59,7 @@ function ClientTitle() {
 }
 
 const date = Variable("", {
-    poll: [1000, 'date "+%I:%M %b %e."'],
+    poll: [1000, 'date "+%A %I:%M %p,  %B %d."'],
 });
 
 function Clock() {
