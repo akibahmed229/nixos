@@ -192,7 +192,8 @@ in
       
       # set vi-mode
       set-window-option -g mode-keys vi
-      # keybindings
+
+      # keybindings Press C-space. Press [. Navigate to the start of the text you want to copy using h, j, k, l.
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
