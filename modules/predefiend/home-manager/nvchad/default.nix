@@ -1,9 +1,9 @@
-{ self
-, inputs
-, pkgs
-, ...
-}:
 {
+  self,
+  inputs,
+  pkgs,
+  ...
+}: {
   home = {
     packages = with pkgs; [
       neovide

@@ -1,8 +1,7 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{pkgs ? import <nixpkgs> {}}:
 pkgs.writeShellScriptBin "fileviewer" ''
   #!/usr/bin/env bash
-  # This script is used to find files in the current directory and its subdirectories 
+  # This script is used to find files in the current directory and its subdirectories
 
   # Function to find files using fzf and preview them
   akibFind() {
@@ -22,12 +21,12 @@ pkgs.writeShellScriptBin "fileviewer" ''
                  file_type="$(${pkgs.file}/bin/file --mime-type -b {})";
                  if [[ "$file_type" == "text/plain" ]]; then
                    ${pkgs.bat}/bin/bat --style=numbers --theme=ansi --color=always {} 2>/dev/null
-                 else 
+                 else
                    ${pkgs.chafa}/bin/chafa -c full --color-space rgb --dither none -p on -w 9 2>/dev/null {}
                  fi
                else
                  echo "Not a regular file"
-               fi')" 
+               fi')"
       # If the selection is a directory, change directory to it
       if [[ -d $selection ]]; then
         >/dev/null cd "$selection"

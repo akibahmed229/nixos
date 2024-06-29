@@ -1,5 +1,8 @@
-{ lib, pkgs ? import <nixpkgs> { }, ... }:
-
+{
+  lib,
+  pkgs ? import <nixpkgs> {},
+  ...
+}:
 pkgs.stdenv.mkDerivation rec {
   pname = "obs-zoom-to-mouse";
   version = "v1.0.1";
@@ -11,7 +14,7 @@ pkgs.stdenv.mkDerivation rec {
     sha256 = "sha256-CBuN2GrEqyEoH7kQ+kIFGW9H86zjUlZLhvrHSIh957M=";
   };
 
-  buildInputs = with pkgs; [ obs-studio ];
+  buildInputs = with pkgs; [obs-studio];
 
   installPhase = ''
     mkdir $out
@@ -23,7 +26,7 @@ pkgs.stdenv.mkDerivation rec {
   meta = {
     description = "An OBS lua script to zoom a display-capture source to focus on the mouse";
     homepage = "https://github.com/BlankSourceCode/obs-zoom-to-mouse";
-    maintainers = with lib.maintainers; [ akibahmed229 ];
+    maintainers = with lib.maintainers; [akibahmed229];
     platforms = lib.platforms.linux;
   };
 }

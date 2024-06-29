@@ -1,5 +1,5 @@
 # overlay pull the latest version of discord
-{ inputs, ... }: (final: prev: {
+{inputs, ...}: (final: prev: {
   discord = prev.discord.overrideAttrs (
     _: {
       src = builtins.fetchTarball {
@@ -9,4 +9,3 @@
     }
   );
 })
-

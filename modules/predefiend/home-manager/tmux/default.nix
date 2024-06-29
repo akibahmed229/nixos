@@ -1,12 +1,11 @@
-{ pkgs
-, user
-, unstable
-, ...
-}:
-let
-  resurrectDirPath = "~/.config/tmux/resurrect";
-in
 {
+  pkgs,
+  user,
+  unstable,
+  ...
+}: let
+  resurrectDirPath = "~/.config/tmux/resurrect";
+in {
   # Tmux Config
   programs.tmux = {
     enable = true;
@@ -96,7 +95,7 @@ in
       }
       # {
       #   plugin = tmuxPlugins.catppuccin;
-      #   extraConfig = '' 
+      #   extraConfig = ''
       #   # capatuine theme
       #   set -g @catppuccin_flavour "mocha"
 
@@ -104,12 +103,12 @@ in
       #   set -g @catppuccin_window_right_separator "█ "
       #   set -g @catppuccin_window_number_position "right"
       #   set -g @catppuccin_window_middle_separator "  █"
-      #   
+      #
       #   set -g @catppuccin_window_default_fill "number"
-      #   
+      #
       #   set -g @catppuccin_window_current_fill "number"
       #   set -g @catppuccin_window_current_text "#{pane_current_path}"
-      #   
+      #
       #   # set -g @catppuccin_status_modules_right "application session date_time"
       #   set -g @catppuccin_status_left_separator  ""
       #   set -g @catppuccin_status_right_separator " "
@@ -125,7 +124,7 @@ in
           set -g @nova-nerdfonts true
           set -g @nova-nerdfonts-left 
           set -g @nova-nerdfonts-right 
-          
+
           set -g @nova-pane-active-border-style "#44475a"
           set -g @nova-pane-border-style "#282a36"
           set -g @nova-status-style-bg "#4c566a"
@@ -133,73 +132,73 @@ in
           set -g @nova-status-style-active-bg "#89c0d0"
           set -g @nova-status-style-active-fg "#2e3540"
           set -g @nova-status-style-double-bg "#2d3540"
-          
+
           set -g @nova-pane "#I#{?pane_in_mode,  #{pane_mode},}  #W"
-          
+
           set -g @nova-segment-mode "#{?client_prefix,Ω,ω}"
           set -g @nova-segment-mode-colors "#78a2c1 #2e3440"
-          
+
           set -g @nova-segment-whoami "#{pane_current_path}"
           set -g @nova-segment-whoami-colors "#78a2c1 #2e3440"
-          
+
           set -g @nova-rows 0
           set -g @nova-segments-0-left "mode"
           set -g @nova-segments-0-right "whoami"
         '';
       }
     ];
-    extraConfig = ''	
-    # Saving right after fresh install on first boot of the tmux daemon with no sessions will create an
-    # empty "last" session file which might cause all kind of issues if tmux gets restarted before
-    # the user had the chance to work in it and let continuum plugin to take over and create
-    # at least one valid "snapshot" from which tmux will be able to resurrect. This is why an initial
-    # session named init-resurrect is created for resurrect plugin to create a valid "last" file for
-    # continuum plugin to work off of.
-    #  run-shell "if [ ! -d ~/.config/tmux/resurrect ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
+    extraConfig = ''
+      # Saving right after fresh install on first boot of the tmux daemon with no sessions will create an
+      # empty "last" session file which might cause all kind of issues if tmux gets restarted before
+      # the user had the chance to work in it and let continuum plugin to take over and create
+      # at least one valid "snapshot" from which tmux will be able to resurrect. This is why an initial
+      # session named init-resurrect is created for resurrect plugin to create a valid "last" file for
+      # continuum plugin to work off of.
+      #  run-shell "if [ ! -d ~/.config/tmux/resurrect ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
 
-      set-option -sa terminal-overrides ",xterm*:Tc"
-      set -g mouse on
-      
-      unbind C-b
-      set -g prefix C-Space
-      bind C-Space send-prefix
-      
-      # Vim style pane selection
-      bind h select-pane -L
-      bind j select-pane -D 
-      bind k select-pane -U
-      bind l select-pane -R
-      
-      # Start windows and panes at 1, not 0
-      set -g base-index 2
-      set -g pane-base-index 1
-      set-window-option -g pane-base-index 1
-      set-option -g renumber-windows on
-      
-      # Use Alt-arrow keys without prefix key to switch panes
-      bind -n M-Left select-pane -L
-      bind -n M-Right select-pane -R
-      bind -n M-Up select-pane -U
-      bind -n M-Down select-pane -D
-      
-      # Shift arrow to switch windows
-      bind -n S-Left  previous-window
-      bind -n S-Right next-window
-      
-      # Shift Alt vim keys to switch windows
-      bind -n M-H previous-window
-      bind -n M-L next-window
-      
-      # set vi-mode
-      set-window-option -g mode-keys vi
+        set-option -sa terminal-overrides ",xterm*:Tc"
+        set -g mouse on
 
-      # keybindings Press C-space. Press [. Navigate to the start of the text you want to copy using h, j, k, l.
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-      
-      bind '"' split-window -v -c "#{pane_current_path}"
-      bind % split-window -h -c "#{pane_current_path}"
-      '';
+        unbind C-b
+        set -g prefix C-Space
+        bind C-Space send-prefix
+
+        # Vim style pane selection
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
+
+        # Start windows and panes at 1, not 0
+        set -g base-index 2
+        set -g pane-base-index 1
+        set-window-option -g pane-base-index 1
+        set-option -g renumber-windows on
+
+        # Use Alt-arrow keys without prefix key to switch panes
+        bind -n M-Left select-pane -L
+        bind -n M-Right select-pane -R
+        bind -n M-Up select-pane -U
+        bind -n M-Down select-pane -D
+
+        # Shift arrow to switch windows
+        bind -n S-Left  previous-window
+        bind -n S-Right next-window
+
+        # Shift Alt vim keys to switch windows
+        bind -n M-H previous-window
+        bind -n M-L next-window
+
+        # set vi-mode
+        set-window-option -g mode-keys vi
+
+        # keybindings Press C-space. Press [. Navigate to the start of the text you want to copy using h, j, k, l.
+        bind-key -T copy-mode-vi v send-keys -X begin-selection
+        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+        bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+        bind '"' split-window -v -c "#{pane_current_path}"
+        bind % split-window -h -c "#{pane_current_path}"
+    '';
   };
 }

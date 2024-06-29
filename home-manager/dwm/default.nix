@@ -1,25 +1,28 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
-
-{ config, pkgs, unstable, user, state-version, ... }:
-
 {
+  config,
+  pkgs,
+  unstable,
+  user,
+  state-version,
+  ...
+}: {
   services = {
-
     # Enable the X11 windowing system.
     xserver.enable = true;
     # DWM setup
     xserver = {
-      displayManager.sessionCommands = '' 
-          	xrandr -s 1920x1080
-          	wall=$(find /home/${user}/.config/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
-          	xwallpaper --zoom $wall
-          	wal -c
-          	wal -i $wall
-          	#xcompmgr &
-          	#picom &
-          	slstatus &
+      displayManager.sessionCommands = ''
+        xrandr -s 1920x1080
+        wall=$(find /home/${user}/.config/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+        xwallpaper --zoom $wall
+        wal -c
+        wal -i $wall
+        #xcompmgr &
+        #picom &
+        slstatus &
       '';
       windowManager.dwm.enable = true;
       # DWM overlay
@@ -89,4 +92,3 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 }
-

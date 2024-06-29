@@ -1,8 +1,13 @@
-{ lib, config, pkgs, self, user, ... }:
-let
-  cfg = config.theme;
-in
 {
+  lib,
+  config,
+  pkgs,
+  self,
+  user,
+  ...
+}: let
+  cfg = config.theme;
+in {
   options = {
     theme = {
       enable = lib.mkEnableOption "Enable GTK and QT theme";

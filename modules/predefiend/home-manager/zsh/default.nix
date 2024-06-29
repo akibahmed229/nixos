@@ -1,11 +1,10 @@
-{ pkgs
-, user
-, unstable
-, config
-, ...
-}:
-
 {
+  pkgs,
+  user,
+  unstable,
+  config,
+  ...
+}: {
   # Zsh and Oh-My-Zsh setup
   programs = {
     zsh = {
@@ -19,24 +18,24 @@
         path = "${config.xdg.dataHome}/zsh/zsh_history";
       };
       envExtra = ''
-                        colorscript random
-                        setopt hist_ignore_all_dups     # Ignore duplicate commands in history
-                        setopt hist_ignore_space        # Ignore commands starting with a space in h>
-                        setopt hist_reduce_blanks       # Remove redundant blanks from history
-                        setopt hist_verify              # Verify history expansions before execution
-                        # setopt
-                        setopt extended_glob            #  control over file matching
-                        setopt autocd                   # enable auto cd
-                        setopt correct                  # Enable auto-correction
-                        # alias
-                        alias ll='ls -l'
-                        alias cat='bat'
-                        alias ga='git add'
-                        alias gc='git commit'
-                        alias gs='git status'
-                        alias gd='git diff'
-                        alias ..='cd ..'
-        		            #alias vim='nvim'
+          colorscript random
+          setopt hist_ignore_all_dups     # Ignore duplicate commands in history
+          setopt hist_ignore_space        # Ignore commands starting with a space in h>
+          setopt hist_reduce_blanks       # Remove redundant blanks from history
+          setopt hist_verify              # Verify history expansions before execution
+          # setopt
+          setopt extended_glob            #  control over file matching
+          setopt autocd                   # enable auto cd
+          setopt correct                  # Enable auto-correction
+          # alias
+          alias ll='ls -l'
+          alias cat='bat'
+          alias ga='git add'
+          alias gc='git commit'
+          alias gs='git status'
+          alias gd='git diff'
+          alias ..='cd ..'
+        #alias vim='nvim'
       '';
       shellAliases = {
         la = "eza --icons -la  --group-directories-first";
@@ -78,7 +77,7 @@
           "root"
           "line"
         ];
-        styles = { "alias" = "fg=magenta,bold"; };
+        styles = {"alias" = "fg=magenta,bold";};
       };
       #autosuggestions.highlightStyle = "fg=cyan";
       #oh-my-zsh = {
@@ -90,7 +89,7 @@
       #    "terraform"
       #    "systemadmin"
       #    "vi-mode"
-      #  ]; 
+      #  ];
       #  theme = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       #};
     };
@@ -102,5 +101,4 @@
       useTheme = "gruvbox";
     };
   };
-
 }

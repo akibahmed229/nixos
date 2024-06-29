@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{pkgs ? import <nixpkgs> {}}:
 # you can use this file to install nixos on your system
 # nix-shell -p git 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
 pkgs.writeShellApplication {
@@ -76,11 +75,11 @@ pkgs.writeShellApplication {
         fi
     }
 
-    # Function to move the flake directory to the persist directory 
+    # Function to move the flake directory to the persist directory
     function move_flake() {
         local flake_dir="$1"
         local persist_dir="$2"
-    
+
         mkdir -p "$persist_dir"
         mv "$flake_dir" "$persist_dir"
         useradd -m "$username"

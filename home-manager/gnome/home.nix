@@ -3,23 +3,27 @@
 #
 # Dconf settings can be found by running "$ dconf watch /"
 #
-
-{ config, lib, pkgs, unstable, theme, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  unstable,
+  theme,
+  ...
+}: {
   imports =
-    [ (import ../../modules/predefiend/home-manager/firefox/firefox.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/spotify/spicetify.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/discord/discord.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/zsh/zsh.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/tmux/tmux.nix) ] ++
-    [ (import ../../modules/predefiend/home-manager/lf/lf.nix) ];
+    [(import ../../modules/predefiend/home-manager/firefox/firefox.nix)]
+    ++ [(import ../../modules/predefiend/home-manager/spotify/spicetify.nix)]
+    ++ [(import ../../modules/predefiend/home-manager/discord/discord.nix)]
+    ++ [(import ../../modules/predefiend/home-manager/zsh/zsh.nix)]
+    ++ [(import ../../modules/predefiend/home-manager/tmux/tmux.nix)]
+    ++ [(import ../../modules/predefiend/home-manager/lf/lf.nix)];
 
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "discord"
-    "spotify"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "discord"
+      "spotify"
+    ];
 
   dconf.settings = {
     "org/gnome/shell" = {
@@ -88,36 +92,36 @@
       button-layout = ":minimize,close";
     };
     "org/gnome/desktop/wm/keybindings" = {
-      maximize = [ "<Ctrl><Super>Up" ]; # For floating
-      unmaximize = [ "<Ctrl><Super>Down" ];
+      maximize = ["<Ctrl><Super>Up"]; # For floating
+      unmaximize = ["<Ctrl><Super>Down"];
       # maximize = ["@as []"];                          # For tilers
       # unmaximize = ["@as []"];
-      switch-to-workspace-left = [ "<Alt>Left" ];
-      switch-to-workspace-right = [ "<Alt>Right" ];
-      switch-to-workspace-1 = [ "<Alt>1" ];
-      switch-to-workspace-2 = [ "<Alt>2" ];
-      switch-to-workspace-3 = [ "<Alt>3" ];
-      switch-to-workspace-4 = [ "<Alt>4" ];
-      switch-to-workspace-5 = [ "<Alt>5" ];
-      switch-to-workspace-6 = [ "<Alt>6" ];
-      switch-to-workspace-7 = [ "<Alt>7" ];
-      switch-to-workspace-8 = [ "<Alt>8" ];
-      switch-to-workspace-9 = [ "<Alt>9" ];
-      move-to-workspace-left = [ "<Shift><Alt>Left" ];
-      move-to-workspace-right = [ "<Shift><Alt>Right" ];
-      move-to-workspace-1 = [ "<Shift><Alt>1" ];
-      move-to-workspace-2 = [ "<Shift><Alt>2" ];
-      move-to-workspace-3 = [ "<Shift><Alt>3" ];
-      move-to-workspace-4 = [ "<Shift><Alt>4" ];
-      move-to-workspace-5 = [ "<Shift><Alt>5" ];
-      move-to-workspace-6 = [ "<Shift><Alt>6" ];
-      move-to-workspace-7 = [ "<Shift><Alt>7" ];
-      move-to-workspace-8 = [ "<Shift><Alt>8" ];
-      move-to-workspace-9 = [ "<Shift><Alt>9" ];
-      move-to-monitor-left = [ "<Super><Alt>Left" ];
-      move-to-monitor-right = [ "<Super><Alt>Right" ];
-      close = [ "<Super>q" "<Alt>F4" ];
-      toggle-fullscreen = [ "<Super>f" ];
+      switch-to-workspace-left = ["<Alt>Left"];
+      switch-to-workspace-right = ["<Alt>Right"];
+      switch-to-workspace-1 = ["<Alt>1"];
+      switch-to-workspace-2 = ["<Alt>2"];
+      switch-to-workspace-3 = ["<Alt>3"];
+      switch-to-workspace-4 = ["<Alt>4"];
+      switch-to-workspace-5 = ["<Alt>5"];
+      switch-to-workspace-6 = ["<Alt>6"];
+      switch-to-workspace-7 = ["<Alt>7"];
+      switch-to-workspace-8 = ["<Alt>8"];
+      switch-to-workspace-9 = ["<Alt>9"];
+      move-to-workspace-left = ["<Shift><Alt>Left"];
+      move-to-workspace-right = ["<Shift><Alt>Right"];
+      move-to-workspace-1 = ["<Shift><Alt>1"];
+      move-to-workspace-2 = ["<Shift><Alt>2"];
+      move-to-workspace-3 = ["<Shift><Alt>3"];
+      move-to-workspace-4 = ["<Shift><Alt>4"];
+      move-to-workspace-5 = ["<Shift><Alt>5"];
+      move-to-workspace-6 = ["<Shift><Alt>6"];
+      move-to-workspace-7 = ["<Shift><Alt>7"];
+      move-to-workspace-8 = ["<Shift><Alt>8"];
+      move-to-workspace-9 = ["<Shift><Alt>9"];
+      move-to-monitor-left = ["<Super><Alt>Left"];
+      move-to-monitor-right = ["<Super><Alt>Right"];
+      close = ["<Super>q" "<Alt>F4"];
+      toggle-fullscreen = ["<Super>f"];
     };
 
     "org/gnome/mutter" = {
@@ -126,8 +130,8 @@
       edge-tiling = false; # Disabled when tiling
     };
     "org/gnome/mutter/keybindings" = {
-      toggle-tiled-left = [ "<Ctrl><Super>Left" ]; # For floating
-      toggle-tiled-right = [ "<Ctrl><Super>Right" ];
+      toggle-tiled-left = ["<Ctrl><Super>Left"]; # For floating
+      toggle-tiled-right = ["<Ctrl><Super>Right"];
       #toggle-tiled-left = ["@as []"];                 # For tilers
       #toggle-tiled-right = ["@as []"];
     };
@@ -226,7 +230,7 @@
     #  trans-use-custom-opacity = true;
     #  trans-use-dynamic-opacity = true;
     #  tray-padding = -1;
-    #  tray-size = 0; 
+    #  tray-size = 0;
     #  window-preview-title-position = "TOP";
     #};
     "org/gnome/shell/extensions/caffeine" = {
@@ -261,23 +265,23 @@
       # Set active colors manually
       focus-border-toggle = true;
       float-always-on-top-enabled = true;
-      window-focus-up = [ "<Super>Up" ];
-      window-focus-down = [ "<Super>Down" ];
-      window-focus-left = [ "<Super>Left" ];
-      window-focus-right = [ "<Super>Right" ];
+      window-focus-up = ["<Super>Up"];
+      window-focus-down = ["<Super>Down"];
+      window-focus-left = ["<Super>Left"];
+      window-focus-right = ["<Super>Right"];
       # window-swap-up = ["<Shift><Super>Up"];
       # window-swap-down = ["<Shift><Super>Down"];
       # window-swap-left = ["<Shift><Super>Left"];
       # window-swap-right = ["<Shift><Super>Right"];
-      window-move-up = [ "<Shift><Super>Up" ];
-      window-move-down = [ "<Shift><Super>Down" ];
-      window-move-left = [ "<Shift><Super>Left" ];
-      window-move-right = [ "<Shift><Super>Right" ];
-      window-swap-last-active = [ "@as []" ];
-      window-toggle-float = [ "<Shift><Super>f" ];
+      window-move-up = ["<Shift><Super>Up"];
+      window-move-down = ["<Shift><Super>Down"];
+      window-move-left = ["<Shift><Super>Left"];
+      window-move-right = ["<Shift><Super>Right"];
+      window-swap-last-active = ["@as []"];
+      window-toggle-float = ["<Shift><Super>f"];
     };
 
-    # Dash-to-Dock config 
+    # Dash-to-Dock config
     # "org/gnome/shell/extensions/dash-to-dock" = {   # If dock if preferred
     #   multi-monitor = true;
     #   intelligent-autohide = true;
@@ -297,7 +301,7 @@
     # };
     # Vitals config for system monitor
     "org/gnome/shell/extensions/vitals" = {
-      hot-sensors = [ "_processor_usage_" "_memory_usage_" "_processor_frequency_" "__temperature_avg__" ];
+      hot-sensors = ["_processor_usage_" "_memory_usage_" "_processor_frequency_" "__temperature_avg__"];
     };
 
     # Space-Bar config for showing which workspace in
@@ -313,10 +317,10 @@
       smart-workspace-names = false;
     };
     "org/gnome/shell/extensions/space-bar/shortcuts" = {
-      open-menu = [ "<Shift><Control><Alt>w" ];
+      open-menu = ["<Shift><Control><Alt>w"];
     };
     "org/gnome/shell/extensions/auto-move-windows" = {
-      application-list = [ "firefox.desktop:1" "Alacritty.desktop:2" "discord.desktop:3" "com.github.eneshecan.WhatsAppForLinux.desktop:3" "org.telegram.desktop.desktop:3" "spotify.desktop:4" ];
+      application-list = ["firefox.desktop:1" "Alacritty.desktop:2" "discord.desktop:3" "com.github.eneshecan.WhatsAppForLinux.desktop:3" "org.telegram.desktop.desktop:3" "spotify.desktop:4"];
     };
   };
 

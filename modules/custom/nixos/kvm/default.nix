@@ -1,8 +1,11 @@
-{ lib, config, pkgs, ... }:
-let
-  cfg = config.kvm;
-in
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  cfg = config.kvm;
+in {
   options = {
     kvm = {
       enable = lib.mkEnableOption "Enable KVM";
@@ -30,7 +33,7 @@ in
         qemu = {
           swtpm.enable = true;
           ovmf.enable = true;
-          ovmf.packages = [ pkgs.OVMFFull.fd ];
+          ovmf.packages = [pkgs.OVMFFull.fd];
         };
         onBoot = "ignore";
         onShutdown = "shutdown";
@@ -40,4 +43,3 @@ in
     services.spice-vdagentd.enable = true;
   };
 }
-

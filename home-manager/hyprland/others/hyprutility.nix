@@ -1,9 +1,8 @@
-{ pkgs
-, theme
-, ...
-}:
-
 {
+  pkgs,
+  theme,
+  ...
+}: {
   xdg.configFile."wlogout/icons".source = ./wlogout/icons;
   xdg.configFile."wlogout".source = ./wlogout/noise.png;
 

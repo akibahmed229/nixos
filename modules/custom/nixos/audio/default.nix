@@ -1,8 +1,11 @@
-{ lib, config, pkgs, ... }:
-let
-  cfg = config.audio;
-in
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  cfg = config.audio;
+in {
   options = {
     audio = {
       enable = lib.mkEnableOption "Enable audio support";
@@ -27,4 +30,3 @@ in
     };
   };
 }
-

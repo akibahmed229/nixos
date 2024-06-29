@@ -1,9 +1,8 @@
-{ lib
-, pkgs
-, ...
-}:
-
 {
+  lib,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     gamemode
     bottles
@@ -26,7 +25,7 @@
     # support 32-bit only
     wine
     # support 64-bit only
-    (wine.override { wineBuild = "wine64"; })
+    (wine.override {wineBuild = "wine64";})
     # wine-staging (version with experimental features)
     wineWowPackages.staging
     # winetricks (all versions)
@@ -41,7 +40,7 @@
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      gamescopeSession.enable = true; # optimize micro compositor for games 
+      gamescopeSession.enable = true; # optimize micro compositor for games
     };
     gamemode.enable = true; # set of tools to optimize system performance for games
 

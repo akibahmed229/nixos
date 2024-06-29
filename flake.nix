@@ -24,7 +24,7 @@
   inputs = {
     # stable packages
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
-    # unstable packages 
+    # unstable packages
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # live image builder for nixos
@@ -46,7 +46,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # My devShells for different systems 
+    # My devShells for different systems
     my-devShells = {
       url = "path:./devshells";
     };
@@ -66,7 +66,7 @@
       inputs.home-manager.follows = "nixpkgs";
     };
 
-    # Declarative disk partitioning and formatting using nix 
+    # Declarative disk partitioning and formatting using nix
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,88 +89,86 @@
     };
     # Stylix is a NixOS module which applies the same colour scheme, font and wallpaper to a range of applications and desktop environments.
     stylix.url = "github:danth/stylix";
-    #  A customizable and extensible shell 
+    #  A customizable and extensible shell
     ags.url = "github:Aylur/ags";
-    # My custom nixvim 
+    # My custom nixvim
     nixvim.url = "github:akibahmed229/nixvim";
   };
 
   # outputs for the flake
-  outputs =
-    { self
-    , nixpkgs
-    , nixpkgs-unstable
-    , nix-index-database
-    , home-manager
-    , hyprland
-    , plasma-manager
-    , my-devShells
-    , ...
-    } @ inputs:
-    let
-      # The system to build.
-      inherit (self) outputs;
-      inherit (nixpkgs) lib;
-      state-version = "24.05";
-      hostname = "desktop";
-      devicename = "/dev/nvme0n1";
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    nix-index-database,
+    home-manager,
+    hyprland,
+    plasma-manager,
+    my-devShells,
+    ...
+  } @ inputs: let
+    # The system to build.
+    inherit (self) outputs;
+    inherit (nixpkgs) lib;
+    state-version = "24.05";
+    hostname = "desktop";
+    devicename = "/dev/nvme0n1";
 
-      # Supported systems for your flake packages, shell, etc.
-      systems = [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
-      # This is a function that generates an attribute by calling a function you
-      # pass to it, with each system as an argument
-      forAllSystems = lib.genAttrs systems;
+    # Supported systems for your flake packages, shell, etc.
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = lib.genAttrs systems;
 
-      # The user to build for.
-      user = "akib";
-      theme = "gruvbox-dark-soft";
+    # The user to build for.
+    user = "akib";
+    theme = "gruvbox-dark-soft";
 
-      # Dynamically get the current system and pass it to the nixpkgs
-      pkgs = forAllSystems (system: import nixpkgs {
+    # Dynamically get the current system and pass it to the nixpkgs
+    pkgs = forAllSystems (system:
+      import nixpkgs {
         inherit system;
-        config = { allowUnfree = true; };
+        config = {allowUnfree = true;};
       });
-      # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]
-      unstable = forAllSystems (system: import nixpkgs-unstable {
+    # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]
+    unstable = forAllSystems (system:
+      import nixpkgs-unstable {
         inherit system;
-        config = { allowUnfree = true; };
+        config = {allowUnfree = true;};
       });
+    # using the above variables to define the system configuration
+  in {
+    # Accessible through 'nix develop" etc
+    inherit (my-devShells) devShells;
+    # Accessible through 'nix build', 'nix shell', etc
+    packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays {inherit inputs;};
+    # Formatter for your nix files, available through 'nix fmt'
+    # Other options beside 'alejandra' include 'nixpkgs-fmt'
+    formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.alejandra);
 
-      # using the above variables to define the system configuration
+    # Reusable nixos modules you might want to export
+    # These are usually stuff you would upstream into nixpkgs
+    nixosModules = import ./modules/custom/nixos;
+    # Reusable home-manager modules you might want to export
+    # These are usually stuff you would upstream into home-manager
+    homeManagerModules = import ./modules/custom/home-manager;
+
+    # NixOS configuration with flake and home-manager as module
+    # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
+    nixosConfigurations = let
+      system = forAllSystems (getSystem: getSystem);
     in
-    {
-      # Accessible through 'nix develop" etc
-      inherit (my-devShells) devShells;
-      # Accessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
-      # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays { inherit inputs; };
-      # Formatter for your nix files, available through 'nix fmt'
-      # Other options beside 'alejandra' include 'nixpkgs-fmt'
-      formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.nixpkgs-fmt);
-
-      # Reusable nixos modules you might want to export
-      # These are usually stuff you would upstream into nixpkgs
-      nixosModules = import ./modules/custom/nixos;
-      # Reusable home-manager modules you might want to export
-      # These are usually stuff you would upstream into home-manager
-      homeManagerModules = import ./modules/custom/home-manager;
-
-      # NixOS configuration with flake and home-manager as module
-      # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-      nixosConfigurations =
-        let
-          system = forAllSystems (getSystem: getSystem);
-        in
-        import ./hosts {
-          inherit (nixpkgs) lib;
-          inherit inputs self unstable user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager;
-        };
-    };
+      import ./hosts {
+        inherit (nixpkgs) lib;
+        inherit inputs self unstable user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager;
+      };
+  };
 }

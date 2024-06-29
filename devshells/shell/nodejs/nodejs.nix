@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
   name = "nodejs-dev-environment";
   nativeBuildInputs = with pkgs; [
@@ -10,5 +9,3 @@ pkgs.mkShell {
     export NODE_ENV=development
   '';
 }
-
-

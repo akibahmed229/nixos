@@ -1,10 +1,12 @@
 #
 # KDE Plasma 5 configuration
 #
-
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs = {
     dconf.enable = true;
     kdeconnect = {
@@ -53,5 +55,3 @@
     xdg-desktop-portal-kde
   ];
 }
-
-

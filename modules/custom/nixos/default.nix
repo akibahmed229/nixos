@@ -11,10 +11,10 @@
 
   # by default, import all the modules
   default.imports =
-    [ (import ./user) ] ++
-    [ (import ./grub) ] ++
-    [ (import ./audio) ] ++
-    [ (import ./polkit-agent) ] ++
-    [ (import ./sddm) ] ++
-    [ (import ./kvm) ];
+    [(import ./user)]
+    ++ [(import ./grub)]
+    ++ [(import ./audio)]
+    ++ [(import ./polkit-agent)]
+    ++ [(import ./sddm)]
+    ++ [(import ./kvm)];
 }

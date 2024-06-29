@@ -1,6 +1,10 @@
-{ mkShell, hello, ... }:
+{
+  mkShell,
+  hello,
+  ...
+}:
 mkShell {
-  buildInputs = [ hello ];
+  buildInputs = [hello];
   shellHook = ''
     echo "Hello, world!"
   '';

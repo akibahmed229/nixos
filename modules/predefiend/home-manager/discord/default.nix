@@ -1,5 +1,8 @@
-{ pkgs, unstable, ... }:
 {
+  pkgs,
+  unstable,
+  ...
+}: {
   home.packages = with pkgs; [
     # (pkgs.discord.override {
     #   withOpenASAR = true;

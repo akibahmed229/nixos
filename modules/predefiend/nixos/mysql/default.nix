@@ -1,17 +1,15 @@
-{ lib
-, stdenv
-, pkgs
-, ...
-}:
-
-let
+{
+  lib,
+  stdenv,
+  pkgs,
+  ...
+}: let
   statsConfig = {
     db = "test1";
     user = "akib";
     password = "123";
   };
-in
-{
+in {
   services.mysql = {
     package = pkgs.mariadb;
     enable = true;
@@ -27,7 +25,7 @@ in
     initialDatabases = [
       {
         name = "${statsConfig.db}";
-        # schema = ./main.sql;  
+        # schema = ./main.sql;
       }
     ];
     # initialScript = ./main.sql;
@@ -39,13 +37,12 @@ in
         };
       }
     ];
-
   };
 
   systemd.services.setdbpass = {
     description = "MySQL database password setup";
-    wants = [ "mariadb.service" ];
-    wantedBy = [ "multi-user.target" ];
+    wants = ["mariadb.service"];
+    wantedBy = ["multi-user.target"];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.mariadb}/bin/mysql -e "grant all privileges on ${statsConfig.db}.* to ${statsConfig.user}@localhost identified by '${statsConfig.password}';" ${statsConfig.db}

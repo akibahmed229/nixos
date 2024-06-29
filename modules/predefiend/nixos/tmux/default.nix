@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
-
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   systemd.user.services.tmux = {
     enable = true;
     description = "tmux server";
@@ -17,6 +18,6 @@
       ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
     };
 
-    wantedBy = [ "default.target" ];
+    wantedBy = ["default.target"];
   };
 }

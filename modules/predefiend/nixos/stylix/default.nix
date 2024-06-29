@@ -1,12 +1,11 @@
-{ pkgs
-, inputs
-, lib
-, config
-, ...
-}:
-
 {
-  imports = [ inputs.stylix.nixosModules.stylix ];
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}: {
+  imports = [inputs.stylix.nixosModules.stylix];
 
   stylix.base16Scheme = ../../../../public/themes/base16Scheme/gruvbox-dark-soft.yaml;
   # Don't forget to apply wallpaper
@@ -14,12 +13,12 @@
 
   # example get cursor/scheme names
   /*
-    $ nix build nixpkgs#bibata-cursors
-    $ nix build nixpkgs#base16-schemes
-    
-    $ cd result
-    
-    $ nix run nixpkgs#eza -- --tree --level 3
+  $ nix build nixpkgs#bibata-cursors
+  $ nix build nixpkgs#base16-schemes
+
+  $ cd result
+
+  $ nix run nixpkgs#eza -- --tree --level 3
   */
 
   # fonts and cursors
@@ -28,7 +27,7 @@
 
   stylix.fonts = {
     monospace = {
-      package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+      package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
       name = "JetBrainsMono Nerd Font Mono";
     };
     sansSerif = {

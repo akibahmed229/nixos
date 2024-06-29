@@ -1,26 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, unstable, inputs, state-version, ... }:
-
 {
+  config,
+  pkgs,
+  unstable,
+  inputs,
+  state-version,
+  ...
+}: {
   imports =
-    [ (import ./hardware-configuration.nix) ] ++
-    [ (import ../../home-manager/dwm/default.nix) ] ++
-    map
-      (myprograms:
-        let
-          path = name:
-            if name == "disko" then
-              (import ../../modules/predefiend/nixos/${name} { device = "/dev/vda"; }) # diskos module with device name (e.g., /dev/sda1)
-            else
-              (import ../../modules/predefiend/nixos/${name}); # path to the module
-        in
+    [(import ./hardware-configuration.nix)]
+    ++ [(import ../../home-manager/dwm/default.nix)]
+    ++ map
+    (
+      myprograms: let
+        path = name:
+          if name == "disko"
+          then (import ../../modules/predefiend/nixos/${name} {device = "/dev/vda";}) # diskos module with device name (e.g., /dev/sda1)
+          else (import ../../modules/predefiend/nixos/${name}); # path to the module
+      in
         path myprograms # loop through the myprograms and import the module
-      )
-      # list of programs
-      [ "impermanence" "disko" "sops" ];
+    )
+    # list of programs
+    ["impermanence" "disko" "sops"];
 
   users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
@@ -30,16 +33,16 @@
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       #  wget
     ];
-    shells = [ pkgs.zsh ];
-    pathsToLink = [ "/share/zsh" "/tmp" "/home/akib" ];
+    shells = [pkgs.zsh];
+    pathsToLink = ["/share/zsh" "/tmp" "/home/akib"];
   };
 
   programs = {
     zsh = {
       enable = true;
       shellInit = ''
-        	#xcompmgr &
-        	#picom &
+        #xcompmgr &
+        #picom &
       '';
       ohMyZsh = {
         enable = true;

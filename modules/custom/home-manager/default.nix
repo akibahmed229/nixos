@@ -7,7 +7,6 @@
 
   # by default, import all the modules
   default.imports =
-    [ (import ./monitor) ] ++
-    [ (import ./theme) ];
-
+    [(import ./monitor)]
+    ++ [(import ./theme)];
 }

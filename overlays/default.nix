@@ -1,5 +1,5 @@
 # This file defines overlays
-{ inputs, ... }: {
+{inputs, ...}: {
   # This one brings our custom packages from the 'pkgs' directory
   # additions = final: _prev: import ../pkgs final.pkgs;
 
@@ -21,8 +21,8 @@
   #   };
   # };
 
-  discord-overlay = import ./discord { inherit inputs; };
-  flatpak-overlay = import ./flatpak { inherit inputs; };
-  chromium-overlay = import ./chromium { inherit inputs; };
-  nvim-overlay = import ./nvim { inherit inputs; };
+  discord-overlay = import ./discord {inherit inputs;};
+  flatpak-overlay = import ./flatpak {inherit inputs;};
+  chromium-overlay = import ./chromium {inherit inputs;};
+  nvim-overlay = import ./nvim {inherit inputs;};
 }

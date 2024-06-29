@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{pkgs ? import <nixpkgs> {}}:
 pkgs.writeShellScriptBin "disko-formate" ''
   echo "---------------------"
   echo "### Disko Formate ###"
@@ -13,4 +12,3 @@ pkgs.writeShellScriptBin "disko-formate" ''
   echo "--------------------"
   echo "Disko Formate Done!"
 ''
-

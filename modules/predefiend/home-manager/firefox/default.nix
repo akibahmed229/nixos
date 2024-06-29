@@ -1,7 +1,11 @@
 # nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
-{ pkgs, user, inputs, lib, ... }:
-
 {
+  pkgs,
+  user,
+  inputs,
+  lib,
+  ...
+}: {
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
@@ -16,19 +20,26 @@
   programs.firefox = {
     enable = true;
     profiles.${user} = {
-
       search.engines = {
         "Nix Packages" = {
-          urls = [{
-            template = "https://search.nixos.org/packages";
-            params = [
-              { name = "type"; value = "packages"; }
-              { name = "query"; value = "{searchTerms}"; }
-            ];
-          }];
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
 
           icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = [ "@np" ];
+          definedAliases = ["@np"];
         };
       };
       search.force = true;
@@ -36,67 +47,67 @@
       bookmarks = [
         {
           name = "youtube";
-          tags = [ "video" ];
+          tags = ["video"];
           keyword = "yt";
           url = "https://www.youtube.com/";
         }
         {
           name = "github";
-          tags = [ "git" ];
+          tags = ["git"];
           keyword = "gh";
           url = "github.com/akibahmed229";
         }
         {
           name = "reddit";
-          tags = [ "social" ];
+          tags = ["social"];
           keyword = "r";
           url = "https://www.reddit.com/";
         }
         {
           name = "DIU Blender";
-          tags = [ "education" ];
+          tags = ["education"];
           keyword = "varsity";
           url = "https://elearn.daffodilvarsity.edu.bd/";
         }
         {
           name = "DIU Strudent Portal";
-          tags = [ "education" ];
+          tags = ["education"];
           keyword = "portal";
           url = "http://studentportal.diu.edu.bd";
         }
         {
           name = "Gmail";
-          tags = [ "email" ];
+          tags = ["email"];
           keyword = "mail";
           url = "https://mail.google.com/mail/u/0/#inbox";
         }
         {
           name = "Nix Packages";
-          tags = [ "nix" ];
+          tags = ["nix"];
           keyword = "nixpkgs";
           url = "https://search.nixos.org/packages";
         }
         {
           name = "Nix Home-Manager options";
-          tags = [ "nix" ];
+          tags = ["nix"];
           keyword = "nix home-manager options";
           url = "https://mipmip.github.io/home-manager-option-search/";
         }
         {
           name = "Chat Gpt";
-          tags = [ "chat" "gpt" "ai" ];
+          tags = ["chat" "gpt" "ai"];
           keyword = "chat";
           url = "https://chat.openai.com/";
         }
         {
           name = "Google Bird";
-          tags = [ "ai" "google" "bird" ];
+          tags = ["ai" "google" "bird"];
           keyword = "chat";
           url = "https://bard.google.com/chat";
         }
         {
           name = "Binge Ai";
-          tags = [ "ai" "binge" ];
+          tags = ["ai" "binge"];
           keyword = "binge";
           url = "https://www.bing.com/search?q=Bing+AI&showconv=1";
         }
@@ -110,8 +121,8 @@
         "signon.rememberSignons" = false;
       };
 
-      userChrome = ''                         
-        /* some css */                        
+      userChrome = ''
+        /* some css */
       '';
 
       extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
@@ -125,8 +136,6 @@
         #gnome-shell-integration
         gruvbox-dark-theme
       ];
-
     };
   };
 }
-

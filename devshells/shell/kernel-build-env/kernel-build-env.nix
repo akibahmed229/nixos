@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{pkgs ? import <nixpkgs> {}}:
 (pkgs.buildFHSEnv {
   name = "kernel-build-env";
   targetPkgs = pkgs: (with pkgs;
@@ -28,4 +27,5 @@
     export QT_QPA_PLATFORMTHEME=qt5ct
     exec "${pkgs.zsh}/bin/zsh"
   '';
-}).env
+})
+.env

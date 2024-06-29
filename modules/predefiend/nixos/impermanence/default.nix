@@ -1,10 +1,13 @@
 /*
-  Modules to help you handle persistent state on systems with ephemeral root storage 
+Modules to help you handle persistent state on systems with ephemeral root storage
 */
-
-{ pkgs, lib, user, inputs, ... }:
-
 {
+  pkgs,
+  lib,
+  user,
+  inputs,
+  ...
+}: {
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
     mount /dev/root_vg/root /btrfs_tmp
@@ -43,12 +46,12 @@
       "/var/lib/nixos"
       "/var/lib/docker" # TODO: remove once I got rid of Docker on sapphire
       /*
-        /var/tmp is expected to be on disk and have enough free space
-        e.g. by podman when copying images, which will easily fill up the tmpfs
+      /var/tmp is expected to be on disk and have enough free space
+      e.g. by podman when copying images, which will easily fill up the tmpfs
 
-        so we persist this and add a systemd-tmpfiles rule below to clean it up
-        on a schedule
-        */
+      so we persist this and add a systemd-tmpfiles rule below to clean it up
+      on a schedule
+      */
       "/var/tmp"
       "/var/cache/mullvad-vpn" # mullvad vpn cli client settings and relay list cache
       "/var/lib/bluetooth" # bluetooth connection state stuff
@@ -85,13 +88,34 @@
         ".rustup"
         ".steam"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
-        { directory = ".gnupg"; mode = "0700"; }
-        { directory = ".ssh"; mode = "0700"; }
-        { directory = ".config"; mode = "0700"; }
-        { directory = ".mozilla"; mode = "0700"; }
-        { directory = ".nixops"; mode = "0700"; }
-        { directory = ".tmux"; mode = "0700"; }
-        { directory = ".local/share/keyrings"; mode = "0700"; }
+        {
+          directory = ".gnupg";
+          mode = "0700";
+        }
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
+        {
+          directory = ".config";
+          mode = "0700";
+        }
+        {
+          directory = ".mozilla";
+          mode = "0700";
+        }
+        {
+          directory = ".nixops";
+          mode = "0700";
+        }
+        {
+          directory = ".tmux";
+          mode = "0700";
+        }
+        {
+          directory = ".local/share/keyrings";
+          mode = "0700";
+        }
         ".local/share/direnv"
         ".local/share/nvim"
         ".local/share/TelegramDesktop"

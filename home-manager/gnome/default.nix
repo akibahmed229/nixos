@@ -1,10 +1,13 @@
 #
 # Gnome configuration
 #
-
-{ config, lib, pkgs, unstable, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  unstable,
+  ...
+}: {
   programs = {
     dconf.enable = true;
     kdeconnect = {
@@ -17,7 +20,7 @@
   i18n.inputMethod = {
     enabled = "ibus";
     ibus.engines = with unstable; [
-      (ibus-engines.typing-booster.override { langs = [ "en_US" ]; })
+      (ibus-engines.typing-booster.override {langs = ["en_US"];})
     ];
   };
 
@@ -29,7 +32,7 @@
       xkb.options = "eurosign:e";
       libinput.enable = true;
 
-      displayManager.gdm.enable = true; # Display Manager 
+      displayManager.gdm.enable = true; # Display Manager
       desktopManager.gnome.enable = true; # Window Manager
     };
 
@@ -60,22 +63,24 @@
       xorg.libXinerama
       xorg.xinit
     ];
-    gnome.excludePackages = (with pkgs; [
-      # Gnome ignored packages
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      gedit
-      epiphany
-      geary
-      gnome-characters
-      tali
-      iagno
-      hitori
-      atomix
-      yelp
-      gnome-contacts
-      gnome-initial-setup
-    ]);
+    gnome.excludePackages =
+      (with pkgs; [
+        # Gnome ignored packages
+        gnome-tour
+      ])
+      ++ (with pkgs.gnome; [
+        gedit
+        epiphany
+        geary
+        gnome-characters
+        tali
+        iagno
+        hitori
+        atomix
+        yelp
+        gnome-contacts
+        gnome-initial-setup
+      ]);
   };
 
   xdg.portal.enable = true;

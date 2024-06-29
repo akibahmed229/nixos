@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
   name = "C/C++ GTK 3 development environment";
   packages = [
@@ -16,7 +15,4 @@ pkgs.mkShell {
     echo "Welcome to the C/C++ GTK 3 development environment."
     export LD_LIBRARY_PATH=${pkgs.gtk3}/lib:$LD_LIBRARY_PATH
   '';
-
 }
-
-

@@ -1,6 +1,9 @@
-{ pkgs, inputs, user, ... }:
-
 {
+  pkgs,
+  inputs,
+  user,
+  ...
+}: {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
   ];

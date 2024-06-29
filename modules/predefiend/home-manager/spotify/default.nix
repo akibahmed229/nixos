@@ -1,11 +1,14 @@
-{ pkgs, unstable, inputs, ... }:
-let
+{
+  pkgs,
+  unstable,
+  inputs,
+  ...
+}: let
   inherit (inputs) spicetify-nix;
   spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
-in
-{
+in {
   # import the flake's module for your system
-  imports = [ spicetify-nix.homeManagerModule ];
+  imports = [spicetify-nix.homeManagerModule];
 
   # configure spicetify :)
   programs.spicetify = {
