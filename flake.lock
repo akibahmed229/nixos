@@ -719,7 +719,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-pPNmcVcRP0qMP6GE8k+9oPvm68vH+xCWyPLSfFUvsvs=",
+        "narHash": "sha256-8veX9eXMt/vS8PA9vBaGtpWLrFntXw6bbSM5yFs0TEA=",
         "path": "./devshells",
         "type": "path"
       },
@@ -981,11 +981,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1719624873,
-        "narHash": "sha256-Vh+RTUfkBruTDu94Y3iLRZXn893d28d1gE9QQb5Nnyk=",
+        "lastModified": 1719626573,
+        "narHash": "sha256-nHUnZKeKnqiYj+1lJxWYTQYvEsxbnbTJQQ76gO+hmKI=",
         "owner": "akibahmed229",
         "repo": "nixvim",
-        "rev": "edac70889eec72a1e5a34765cbea52e0c2393222",
+        "rev": "1b6e78e76106d9ddb0b3c7fb272c7e225e7c0a4e",
         "type": "github"
       },
       "original": {
