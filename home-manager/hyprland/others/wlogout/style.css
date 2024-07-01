@@ -10,7 +10,7 @@
 }
 
 window {
-  background-color: rgba(12, 12, 12, 0.1);
+  background-color: rgba(12, 12, 12, 0.2);
 }
 
 button {
@@ -22,7 +22,7 @@ button {
   background-size: 25%;
 
   border-style: solid;
-  background-color: rgba(12, 12, 12, 0.3);
+  background-color: rgba(12, 12, 12, 0.4);
   border: 3px solid @accent_fg_color;
 
   box-shadow:
@@ -34,7 +34,7 @@ button {
 button:active,
 button:hover {
   color: @error_color;
-  background-color: rgba(12, 12, 12, 0.5);
+  background-color: rgba(12, 12, 12, 0.6);
   border: 3px solid @accent_color;
 }
 
