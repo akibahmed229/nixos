@@ -21,4 +21,6 @@ in {
   nodejs = import ./nodejs/nodejs.nix {inherit pkgs;};
 
   gtk3_env = import ./c_c++/gtk3_env.nix {inherit pkgs;};
+
+  prisma = import ./prisma {inherit pkgs;};
 }
