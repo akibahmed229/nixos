@@ -1,6 +1,6 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
-  name = "python-dev-environment";
+  name = "prisma-shell";
   nativeBuildInputs = [pkgs.bashInteractive];
   buildInputs = with pkgs; [
     nodePackages.prisma
