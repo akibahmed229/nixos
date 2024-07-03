@@ -159,6 +159,7 @@
           mysql-workbench
           mysql80
           postgresql
+          pgadmin4
         ]
       else []
     )
