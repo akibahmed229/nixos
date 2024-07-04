@@ -4,16 +4,7 @@
 
 <h2 align="center"> Current System Preview </h2>
 
-![my current setup](./public/preview/hyprland.png)
-
-## Table of Contents
-
-1. [NixOS Btrfs Installation Guide](#1-btrfs-installation-my-version-of-nixos)
-
-   - [Prerequisites](#installation-prerequisites)
-   - [Installation Steps](#installation-steps)
-
-2. [File Structure](#3-file-structure)
+![my current setup](./public/preview/Current.png)
 
 # 1. Installation My version of NixOS
 
@@ -38,7 +29,7 @@ nix-shell -p git --command 'nix run github:akibahmed229/nixos#akibOS --experimen
 ```
 
 **Note:** During the installation process, [akibOS](./pkgs/akibOS/default.nix) will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
-also replace `hostname` with your desired hostname and `username` with your desired username.
+also replace `hostname` with (available options: desktop, virt) and `username` with your desired username.
 the default password for the user is `123456` you can change it later.
 
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
@@ -59,7 +50,7 @@ For more information about NixOS and its configuration options, refer to the off
   - **hosts** : Host-specific configuration files
   - **modules** : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
   - **pkgs** : Nix derivations, custom packages, and shell scripts
-  - **public** : Wallpaper folder, GTK, and QT themes
+  - **public** : Wallpaper folder, GTK, and QT themes and doc
   - **flake.lock** : Lock file for the flake inputs
 
 - **_devShell/flake.nix_** : Flake file defining the development shell
