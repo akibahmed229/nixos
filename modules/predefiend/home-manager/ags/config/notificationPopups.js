@@ -106,7 +106,7 @@ export function NotificationPopups(monitor = 0) {
     monitor,
     name: `notifications${monitor}`,
     class_name: "notification-popups",
-    anchor: ["top", "right"],
+    anchor: ["top", "left"],
     child: Widget.Box({
       css: "min-width: 2px; min-height: 2px;",
       class_name: "notifications",
@@ -114,9 +114,9 @@ export function NotificationPopups(monitor = 0) {
       child: list,
 
       /** this is a simple one liner that could be used instead of
-                hooking into the 'notified' and 'dismissed' signals.
-                but its not very optimized becuase it will recreate
-                the whole list everytime a notification is added or dismissed */
+                      hooking into the 'notified' and 'dismissed' signals.
+                      but its not very optimized becuase it will recreate
+                      the whole list everytime a notification is added or dismissed */
       // children: notifications.bind('popups')
       //     .as(popups => popups.map(Notification))
     }),
