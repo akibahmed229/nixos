@@ -49,6 +49,7 @@
         la = "eza --icons -la  --group-directories-first";
         ls = "eza --icons --grid --group-directories-first";
         find-dir = "cd $(find -type d | fzf)";
+        find-file = "nvim $(fzf --preview 'bat --color=always {}')";
       };
       enableCompletion = true;
       initExtra = ''
