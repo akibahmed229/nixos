@@ -69,10 +69,7 @@ in {
       {
         name = config.setUserName;
         isNormalUser = true;
-        hashedPasswordFile =
-          if (config.setUserName == "akib")
-          then config.sops.secrets."myservice/my_subdir/my_secret".path
-          else "";
+        hashedPasswordFile = lib.mkIf (config.sops.secrets."myservice/my_subdir/my_secret".path != {}) config.sops.secrets."myservice/my_subdir/my_secret".path;
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         extraGroups = ["networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex"];
         packages = with pkgs; [
@@ -86,10 +83,7 @@ in {
       {
         name = "root";
         isNormalUser = false;
-        hashedPasswordFile =
-          if (config.setUserName == "akib")
-          then config.sops.secrets."myservice/my_subdir/root_secret".path
-          else "";
+        hashedPasswordFile = lib.mkIf (config.setUserName == "akib") config.sops.secrets."myservice/my_subdir/root_secret".path;
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         packages = with pkgs; [];
         extraGroups = [];
