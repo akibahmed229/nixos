@@ -184,11 +184,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1720290646,
-        "narHash": "sha256-3qOtNUQN8IX553JnnVirK4nwpi0EDnhFXHZS80+F8y4=",
+        "lastModified": 1720325030,
+        "narHash": "sha256-LvZKOs2UePDVLfyzRHoHMPwMHDtSyYZ/y7YrQuOO1os=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "e6d4bbd22a5a582b166c8a5f120d2bb21454f194",
+        "rev": "53b0af89f96980f2f51c324b392eafcc66f57503",
         "type": "gitlab"
       },
       "original": {
@@ -448,11 +448,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720289319,
-        "narHash": "sha256-E3CjSsXNDWYqoNjrKQLPdEZDLR+mVI9HMa+jY//FjBY=",
+        "lastModified": 1720327769,
+        "narHash": "sha256-kAsg3Lg4YKKpGw+f1W2s5hzjP8B0y/juowvjK8utIag=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "10486e6b311b3c5ae1c3477fee058704cea7cb4a",
+        "rev": "6b7ce96f34b324e4e104abc30d06955d216bac71",
         "type": "github"
       },
       "original": {
@@ -981,11 +981,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1720321947,
-        "narHash": "sha256-csdSl5LfZHcH1hLDOKKJQrY23oLwpTu3dZLMn3sLvjI=",
+        "lastModified": 1720322113,
+        "narHash": "sha256-ACAqgEjPZy1mjgCVWPHGE0oqLsYKrw2ducGN1D4k1mU=",
         "owner": "akibahmed229",
         "repo": "nixvim",
-        "rev": "3f04d8555557705726e3abe55c6b0ea4c9090c18",
+        "rev": "191384e60dab587c986af7a852e193386c889e58",
         "type": "github"
       },
       "original": {
