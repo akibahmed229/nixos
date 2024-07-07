@@ -59,47 +59,47 @@ For more information about NixOS and its configuration options, refer to the off
 
 # 3. This Flake Provide
 
-<details>
-<summary>Overlays for custom packages and Nixpkgs</summary>
-</br>
+- <details>
+  <summary>Overlays for custom packages and Nixpkgs</summary>
+  </br>
 
-You can also plug this into a flake to include it into a system configuration.
+  You can also plug this into a flake to include it into a system configuration.
 
-```nix
-{
-    inputs = {
-     akibOS.url = "github:akibahmed229/nixos";
-    };
-}
-```
+  ```nix
+  {
+      inputs = {
+       akibOS.url = "github:akibahmed229/nixos";
+      };
+  }
+  ```
 
-This input can then be used as an overlay to replace the default Nixpkgs with the custom one. (nixos , home-manager)
+  This input can then be used as an overlay to replace the default Nixpkgs with the custom one. (nixos , home-manager)
 
-```nix
-{inputs, ... }:
-{
-    nixpkgs.overlays = [
-       inputs.akibOS.overlays.discord-overlay # pull the latest version of discord
-       inputs.akibOS.overlays.chromium-overlay # pull the latest version of chromium
-       inputs.akibOS.overlays.nvim-overlay # my custom nvim with nixvim
-       inputs.akibOS.overlays.flatpak-overlay # patch flatpak font
-    ];
-}
-```
+  ```nix
+  {inputs, ... }:
+  {
+      nixpkgs.overlays = [
+         inputs.akibOS.overlays.discord-overlay # pull the latest version of discord
+         inputs.akibOS.overlays.chromium-overlay # pull the latest version of chromium
+         inputs.akibOS.overlays.nvim-overlay # my custom nvim with nixvim
+         inputs.akibOS.overlays.flatpak-overlay # patch flatpak font
+      ];
+  }
+  ```
 
-</details>
+  </details>
 
-<details>
-<summary>DevShell for development environments</summary>
-</br>
+- <details>
+   <summary>DevShell for development environments</summary>
+   </br>
+   
+   you can access the development shell by running the following command:
+   
+   ```bash
+   nix develop github:akibahmed229/nixos#kernel_build_env # kernel development environment
+   nix develop github:akibahmed229/nixos#jupyter # jupyter development environment
+   nix develop github:akibahmed229/nixos#gtk3_env # gtk3 development environment
+   nix develop github:akibahmed229/nixos#prisma # prisma query engine
+   ```
 
-you can access the development shell by running the following command:
-
-```bash
-nix develop github:akibahmed229/nixos#kernel_build_env # kernel development environment
-nix develop github:akibahmed229/nixos#jupyter # jupyter development environment
-nix develop github:akibahmed229/nixos#gtk3_env # gtk3 development environment
-nix develop github:akibahmed229/nixos#prisma # prisma query engine
-```
-
-</details>
+  </details>
