@@ -35,7 +35,7 @@
         path app # loop through the apps and import the module
     )
     # list of apps
-    ["firefox" "spotify" "discord" "zsh" "tmux" "lf" "ags"];
+    ["firefox" "spotify" "discord" "zsh" "tmux" "lf" "ags" "git"];
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
