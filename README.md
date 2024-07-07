@@ -54,4 +54,36 @@ For more information about NixOS and its configuration options, refer to the off
   - **flake.lock** : Lock file for the flake inputs
 
 - **_devShell/flake.nix_** : Flake file defining the development shell
+
+</details>
+
+# 3. This Flake Provide
+
+<details>
+<summary>Overlays for custom packages and Nixpkgs</summary>
+
+You can also plug this into a flake to include it into a system configuration.
+
+```nix
+{
+    inputs = {
+     akibOS.url = "github:akibahmed229/nixos";
+    };
+}
+```
+
+This input can then be used as an overlay to replace the default Nixpkgs with the custom one. (nixos , home-manager)
+
+```nix
+{inputs, ... }:
+{
+    nixpkgs.overlays = [
+       inputs.akibOS.overlays.discord-overlay # pull the latest version of discord
+       inputs.akibOS.overlays.chromium-overlay # pull the latest version of chromium
+       inputs.akibOS.overlays.nvim-overlay # my custom nvim with nixvim
+       inputs.akibOS.overlays.flatpak-overlay # patch flatpak font
+    ];
+}
+```
+
 </details>
