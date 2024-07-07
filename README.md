@@ -62,14 +62,16 @@ For more information about NixOS and its configuration options, refer to the off
 <details>
 <summary>Overlays for custom packages and Nixpkgs</summary>
 </br>
+
 You can also plug this into a flake to include it into a system configuration.
 
-````nix
+```nix
 {
     inputs = {
      akibOS.url = "github:akibahmed229/nixos";
     };
-} ```
+}
+```
 
 This input can then be used as an overlay to replace the default Nixpkgs with the custom one. (nixos , home-manager)
 
@@ -83,13 +85,14 @@ This input can then be used as an overlay to replace the default Nixpkgs with th
        inputs.akibOS.overlays.flatpak-overlay # patch flatpak font
     ];
 }
-````
+```
 
 </details>
 
 <details>
 <summary>DevShell for development environments</summary>
 </br>
+
 you can access the development shell by running the following command:
 
 ```bash
