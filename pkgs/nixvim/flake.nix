@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixvim.url = "github:nix-community/nixvim";
+    nixvim.url = "github:nix-community/nixvim/6674dea8403747827431d4d8497c34023f93d047"; # pinning to a specific commit cause latest commit is treesitter broken
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
