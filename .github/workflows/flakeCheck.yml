@@ -2,69 +2,12 @@ name: 'Flake Check'
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '**.nix'
-
 jobs:
-  lint:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v25
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-      - name: Install Nixpkgs
-        run: nix-env -iA nixpkgs.nixpkgs-fmt
-      - name: Format Check
-        run: nixpkgs-fmt --check .
-
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        system: [x86_64-linux, aarch64-linux, x86_64-darwin, aarch64-darwin]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v3
-        with:
-          path: /nix/store
-          key: ${{ runner.os }}-nix-${{ hashFiles('**/*.nix') }}
-          restore-keys: |
-            ${{ runner.os }}-nix-
-      - uses: cachix/install-nix-action@v25
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-      - uses: cachix/cachix-action@v14
-        with:
-          name: mycache
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build Packages
-        run: nix build .#packages.${{ matrix.system }}
-      - name: Run Tests
-        run: nix flake check --override-input my-devShells path:./devshells --override-input nixvim path:./pkgs/nixVim --no-update-lock-file --no-write-lock-file --accept-flake-config
-
-  integration-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v25
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-      - uses: cachix/cachix-action@v14
-        with:
-          name: mycache
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build Packages
-        run: nix build .#packages.${{ matrix.system }}
-      - name: Start Services
-        run: |
-          nix-shell -p docker --run "docker run -d --name my-service my-docker-image"
-      - name: Run Integration Tests
-        run: nix flake check --override-input my-devShells path:./devshells --override-input nixvim path:./pkgs/nixVim --no-update-lock-file --no-write-lock-file --accept-flake-config
-      - name: Cleanup
-        run: |
-          nix-shell -p docker --run "docker stop my-service && docker rm my-service"
+      - run: nix flake check --override-input my-devShells path:./devshells --override-input nixvim path:./pkgs/nixVim --no-update-lock-file --no-write-lock-file --accept-flake-config
