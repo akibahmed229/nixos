@@ -18,8 +18,8 @@
   };
   # Secrets
   sops.secrets = {
-    "myservice/my_subdir/root_secret".neededForUsers = true; # decrypt the secret to /run/secrets-for-users
-    "myservice/my_subdir/my_secret".neededForUsers = true;
+    "password/root_secret".neededForUsers = true; # decrypt the secret to /run/secrets-for-users
+    "password/my_secret".neededForUsers = true;
   };
 
   environment.systemPackages = with pkgs; [
