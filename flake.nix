@@ -92,9 +92,7 @@
     #  A customizable and extensible shell
     ags.url = "github:Aylur/ags";
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
-    nixvim = {
-      url = "path:./pkgs/nixVim";
-    };
+    nixvim.url = "github:akibahmed229/nixvim";
   };
 
   # outputs for the flake
