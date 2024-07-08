@@ -27,8 +27,6 @@
       ++ [self.nixosModules.default]
       ++ # Custom nixos modules
       [nix-index-database.nixosModules.nix-index {programs.nix-index-database.comma.enable = true;}]
-      ++ # optional to also wrap and install comma
-      [inputs.impermanence.nixosModules.impermanence]
       ++ [inputs.disko.nixosModules.default]
       ++ [
         # Home manager configuration as a module

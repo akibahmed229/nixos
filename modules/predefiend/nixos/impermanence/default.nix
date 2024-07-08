@@ -8,6 +8,8 @@ Modules to help you handle persistent state on systems with ephemeral root stora
   inputs,
   ...
 }: {
+  imports = [inputs.impermanence.nixosModules.impermanence];
+
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
     mount /dev/root_vg/root /btrfs_tmp
