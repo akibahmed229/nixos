@@ -91,8 +91,10 @@
     stylix.url = "github:danth/stylix";
     #  A customizable and extensible shell
     ags.url = "github:Aylur/ags";
-    # My custom nixvim
-    nixvim.url = "github:akibahmed229/nixvim";
+    # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
+    nixvim = {
+      url = "path:./pkgs/nixVim";
+    };
   };
 
   # outputs for the flake
@@ -147,7 +149,15 @@
     # Accessible through 'nix develop" etc
     inherit (my-devShells) devShells;
     # Accessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (getSystem: import ./pkgs nixpkgs.legacyPackages.${getSystem});
+    packages = forAllSystems (
+      getSystem:
+      # Import your custom packages
+        import ./pkgs nixpkgs.legacyPackages.${getSystem}
+        # import custom nixvim flake as a package
+        // {
+          nixvim = inputs.nixvim.packages.${getSystem}.default;
+        }
+    );
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     # Formatter for your nix files, available through 'nix fmt'

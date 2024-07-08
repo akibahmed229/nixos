@@ -1,3 +1,3 @@
 {inputs, ...}: (final: prev: {
-  neovim = inputs.nixvim.packages.${prev.system}.default;
+  neovim = inputs.self.packages.${prev.system}.nixvim;
 })

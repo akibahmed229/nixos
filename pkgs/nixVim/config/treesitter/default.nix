@@ -1,0 +1,3 @@
+{
+  imports = [./treesitter.nix];
+}
