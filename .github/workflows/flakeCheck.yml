@@ -21,4 +21,4 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: run flake checks for all configured flake inputs
-        run: nix flake check --override-input my-devShells path:./devshells --override-input nixvim path:./pkgs/nixVim --no-update-lock-file --no-write-lock-file --accept-flake-config
+        run: nix flake check --override-input my-devShells path:./devshells --override-input nixvim path:./pkgs/nixvim --no-update-lock-file --no-write-lock-file --accept-flake-config
