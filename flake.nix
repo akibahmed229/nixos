@@ -1,5 +1,5 @@
 {
-  description = "Akib | NixOS Configuration";
+  description = "Akib | NixOS Configuration Go Wild";
 
   # the nixConfig here only affects the flake itself, not the system configuration!
   # for more information, see:
@@ -148,7 +148,7 @@
   in {
     # Accessible through 'nix develop" etc
     inherit (my-devShells) devShells;
-    # Accessible through 'nix build', 'nix shell', etc
+    # Accessible through 'nix build', 'nix shell', "nix run", etc
     packages = forAllSystems (
       getSystem:
       # Import your custom packages
@@ -173,8 +173,18 @@
 
     # NixOS configuration with flake and home-manager as module
     # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
+    # system is dynamically generated for supported systems only (aarch64-linux, x86_64-linux)
     nixosConfigurations = let
-      system = forAllSystems (getSystem: getSystem);
+      system = forAllSystems (
+        system:
+          if
+            builtins.elem system [
+              "aarch64-linux" # ARM (Raspberry Pi)
+              "x86_64-linux" # x86_64 (Intel/AMD)
+            ]
+          then system
+          else throw "Unsupported system: ${system}"
+      );
     in
       import ./hosts {
         inherit (nixpkgs) lib;
