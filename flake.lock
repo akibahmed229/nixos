@@ -971,11 +971,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-bumbX1dD/HY9ojUH6JDiIDv4Sij2/kyvjF1ZB7omkMY=",
-        "path": "./pkgs/nixvim-copy",
+        "path": "./pkgs/nixVim",
         "type": "path"
       },
       "original": {
-        "path": "./pkgs/nixvim-copy",
+        "path": "./pkgs/nixVim",
         "type": "path"
       }
     },
