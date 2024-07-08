@@ -1,4 +1,3 @@
-# test
 {
   description = "Akib | NixOS Configuration";
 
