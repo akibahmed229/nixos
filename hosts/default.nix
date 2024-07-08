@@ -66,7 +66,6 @@
       ++ [self.nixosModules.default]
       ++ # Custom nixos modules
       [nix-index-database.nixosModules.nix-index]
-      ++ [inputs.impermanence.nixosModules.impermanence]
       ++ [inputs.disko.nixosModules.default]
       ++ [
         home-manager.nixosModules.home-manager
