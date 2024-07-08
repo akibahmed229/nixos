@@ -1,3 +1,0 @@
-[submodule "pkgs/nixvim"]
-	path = pkgs/nixvim
-	url = git@github.com:akibahmed229/nxivim.git
