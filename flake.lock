@@ -969,15 +969,14 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1720399336,
-        "narHash": "sha256-JuaYEoclJ5aqCYcVrnZu6MXRM3EXsMiA0lwVTqkhfU0=",
-        "path": "/nix/store/rwyhpkzygnmrqclhbdc80ifnqzhl0sql-source",
-        "rev": "3e164c983fff14e22bd04a1ff3d18b85b558f528",
+        "lastModified": 1,
+        "narHash": "sha256-bumbX1dD/HY9ojUH6JDiIDv4Sij2/kyvjF1ZB7omkMY=",
+        "path": "./pkgs/nixvim-copy",
         "type": "path"
       },
       "original": {
-        "id": "nixvim",
-        "type": "indirect"
+        "path": "./pkgs/nixvim-copy",
+        "type": "path"
       }
     },
     "nixvim_2": {
