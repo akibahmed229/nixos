@@ -971,15 +971,13 @@
       "locked": {
         "lastModified": 1720399336,
         "narHash": "sha256-JuaYEoclJ5aqCYcVrnZu6MXRM3EXsMiA0lwVTqkhfU0=",
-        "owner": "akibahmed229",
-        "repo": "nixvim",
+        "path": "/nix/store/rwyhpkzygnmrqclhbdc80ifnqzhl0sql-source",
         "rev": "3e164c983fff14e22bd04a1ff3d18b85b558f528",
-        "type": "github"
+        "type": "path"
       },
       "original": {
-        "owner": "akibahmed229",
-        "repo": "nixvim",
-        "type": "github"
+        "id": "nixvim",
+        "type": "indirect"
       }
     },
     "nixvim_2": {
