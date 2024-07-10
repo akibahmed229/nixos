@@ -11,3 +11,18 @@
 6. `nix-eval --file default.nix` - Evaluate a Nix expression in a file. This command is useful when you want to test a Nix expression before using it in your configuration.
 
 7. `nix flake metadata --json | nix run nixpkgs\#jq` - Get the metadata of a flake and use jq to parse the JSON output. This command is useful when you want to inspect the metadata of a flake.
+
+8. Switching Generations without reboot
+
+   ```bash
+   nix-env --list-generations -p /nix/var/nix/profiles/system
+   nix-env --switch-generation <number> -p /nix/var/nix/profiles/system
+   # sets selected generation to be activated
+   /nix/var/nix/profiles/system/bin/switch-to-configuration { switch or boot }
+   ```
+
+   Set current config to default boot
+
+   use this when you boot a previous generation via the boot manager menu and want it to be set to default on next boot
+
+   `/run/current-system/bin/switch-to-configuration { switch or boot }`

@@ -7,6 +7,7 @@
   unstable,
   lib,
   inputs,
+  self,
   state-version,
   ...
 }: {
@@ -149,6 +150,10 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
+    optimise = {
+      automatic = true;
+      dates = ["weekly"];
+    };
 
     # Opinionated: enable channels
     channel.enable = true;
@@ -202,6 +207,18 @@
   };
 
   system = {
+    # Auto upgrade system for flake inputs and nixpkgs weekly
+    autoUpgrade = {
+      enable = true;
+      dates = "weekly";
+      flake = self.outPath;
+      flags = [
+        "--update-input"
+        "nixpkgs"
+        "-L"
+      ];
+      randomizedDelaySec = "45min";
+    };
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It's perfectly fine and recommended to leave
