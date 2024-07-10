@@ -186,11 +186,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1720497793,
-        "narHash": "sha256-LOj3+G748XmgFk9J7ETMJ/vExfI0bSPfGah/mlXEzbo=",
+        "lastModified": 1720584194,
+        "narHash": "sha256-ZH4OxzC5RdSzz/8Sqjs7R8a8UqoIu9DBtXKBn8qtbvI=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "7c2c324bdcf69ddb691129736b6272f6c28cfad3",
+        "rev": "03e1e39528eb9fb88ec8f590d0a32d44dc2a4184",
         "type": "gitlab"
       },
       "original": {
@@ -843,7 +843,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-8vPYkuhIIJ034TJjqs6EuvQldVRvg5NlTwZ7ciYEXSE=",
+        "narHash": "sha256-rnyA+tkVbPEn/HskFpRlsgTKfRSfW1teg3Kuf812a9w=",
         "path": "./pkgs/nixvim",
         "type": "path"
       },
@@ -888,11 +888,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720369165,
-        "narHash": "sha256-MLRzgdEEmckPVwwllD8+4zkqnnxfMgFw5zk6O3JUiks=",
+        "lastModified": 1720603727,
+        "narHash": "sha256-A5qYbCT3rHvVi95u8Zy12cRmW5OPT7yFl1LrTDSejyE=",
         "owner": "pjones",
         "repo": "plasma-manager",
-        "rev": "995d818078778b366e6302ea32d83c2ba586e015",
+        "rev": "f0691e1a9fff4684ce399c345c3a941d2ef0fe78",
         "type": "github"
       },
       "original": {
