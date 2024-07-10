@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   user ? "example.com",
   ...
@@ -50,16 +51,39 @@
       ];
     };
 
-    # Configuration for the VLAN interface
+    # Configuration for VLAN interfaces.
     vlans = {
-      # Configuration for the VLAN interface
+      # Configuration for VLAN with ID 2.
       vlan2 = {
         id = 2; # VLAN ID.
         interface = "enp4s0"; # Parent interface for the VLAN.
       };
+
+      # Configuration for VLAN with ID 3.
       vlan3 = {
         id = 3; # VLAN ID.
         interface = "enp4s0"; # Parent interface for the VLAN.
+      };
+    };
+
+    # Configuration for WireGuard interface using wg-quick. and protonvpn wireguard config file for the peer.
+    wg-quick.interfaces = {
+      # Define the WireGuard interface wg0.
+      wg0 = {
+        address = ["10.2.0.2/32"]; # IP address for the wg0 interface.
+        dns = ["10.2.0.1"]; # DNS server for the wg0 interface.
+
+        # Path to the private key file, managed by sops for secret management.
+        privateKeyFile = config.sops.secrets."akib/wireguard/PrivateKey".path;
+
+        # Configuration for the WireGuard peers.
+        peers = [
+          {
+            publicKey = "rnrZQSK5IeTCzh60Ghv/TEaUIbD7IprzdoCJjE5E9Sc="; # Public key of the peer.
+            allowedIPs = ["0.0.0.0/0"]; # IPs that are allowed to communicate through the peer.
+            endpoint = "37.19.205.202:51820"; # Endpoint of the peer (IP address and port).
+          }
+        ];
       };
     };
   };

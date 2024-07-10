@@ -18,8 +18,9 @@
   };
   # Secrets
   sops.secrets = {
-    "password/root_secret".neededForUsers = true; # decrypt the secret to /run/secrets-for-users
-    "password/my_secret".neededForUsers = true;
+    "akib/password/root_secret".neededForUsers = true; # decrypt the secret to /run/secrets-for-users
+    "akib/password/my_secret".neededForUsers = true;
+    "akib/wireguard/PrivateKey".neededForUsers = true; # decrypt the secret to /run/secrets-for-users
   };
 
   environment.systemPackages = with pkgs; [
