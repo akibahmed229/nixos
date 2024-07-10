@@ -135,6 +135,15 @@
       nix-path = config.nix.nixPath;
     };
 
+    extraOptions = ''
+      keep-outputs = true # Keep build outputs for debugging purposes
+      keep-derivations = true
+
+      #  free up to 5GiB whenever there is less than 10GiB left:
+      min-free = ${toString (10240 * 1024 * 1024)}
+      max-free = ${toString (5120 * 1024 * 1024)}
+    '';
+
     gc = {
       automatic = true;
       dates = "weekly";
