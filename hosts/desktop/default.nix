@@ -144,7 +144,6 @@
           jdk21
           python312Full
           nodejs_22
-          nil
           jq
           rustc
           rustup
@@ -169,6 +168,7 @@
         with unstable.${pkgs.system}; [
           git
           lazygit
+          gh
           alacritty
           atuin
           telegram-desktop
