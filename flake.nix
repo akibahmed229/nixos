@@ -48,7 +48,10 @@
 
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
     # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -76,20 +79,38 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
-    spicetify-nix.url = "github:the-argus/spicetify-nix";
+    spicetify-nix = {
+      url = "github:the-argus/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Secret management for nixos
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     # Stylix is a NixOS module which applies the same colour scheme, font and wallpaper to a range of applications and desktop environments.
-    stylix.url = "github:danth/stylix";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "nixpkgs";
+    };
     #  A customizable and extensible shell
-    ags.url = "github:Aylur/ags";
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
-    nixvim.url = "path:./pkgs/nixvim";
+    nixvim = {
+      url = "path:./pkgs/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     # My devShells for different systems
-    my-devShells.url = "path:./devshells";
+    my-devShells = {
+      url = "path:./devshells";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
+    };
   };
 
   # outputs for the flake
