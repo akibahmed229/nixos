@@ -25,7 +25,7 @@
     # stable packages
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     # unstable packages
-    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/9f4128e00b0ae8ec65918efeba59db998750ead6"; # latest commit broken so pinned a specific version
 
     # live image builder for nixos
     nixos.url = "github:nixos/nixpkgs/24.05";
@@ -44,11 +44,6 @@
     home-manager-unstable = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    # My devShells for different systems
-    my-devShells = {
-      url = "path:./devshells";
     };
 
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
@@ -92,9 +87,9 @@
     #  A customizable and extensible shell
     ags.url = "github:Aylur/ags";
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
-    nixvim = {
-      url = "path:./pkgs/nixvim";
-    };
+    nixvim.url = "path:./pkgs/nixvim";
+    # My devShells for different systems
+    my-devShells.url = "path:./devshells";
   };
 
   # outputs for the flake
@@ -170,7 +165,6 @@
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/custom/home-manager;
-
     # NixOS configuration with flake and home-manager as module
     # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
     # system is dynamically generated for supported systems only (aarch64-linux, x86_64-linux)
