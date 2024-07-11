@@ -61,7 +61,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = {inherit inputs user hostname devicename theme state-version;};
+            extraSpecialArgs = {inherit inputs self user hostname devicename theme state-version;};
             users.${user} = {
               imports = [(import ../home-manager/home.nix)];
             };
