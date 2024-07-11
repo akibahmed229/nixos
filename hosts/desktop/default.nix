@@ -30,7 +30,7 @@
         path myprograms # loop through the myprograms and import the module
     )
     # list of programs
-    ["sops" "stylix" "impermanence" "disko" "mysql" "postgresql" "gaming" "networking"];
+    ["sops" "stylix" "impermanence" "disko" "mysql" "postgresql" "gaming" "networking" "bbr"];
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
