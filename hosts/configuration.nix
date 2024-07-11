@@ -11,6 +11,12 @@
   state-version,
   ...
 }: {
+  imports = [
+    self.nixosModules.default # Custom nixos modules
+    inputs.nix-index-database.nixosModules.nix-index
+    {programs.nix-index-database.comma.enable = true;}
+  ];
+
   # Dual Booting using grub (Custom nixos modules)
   grub.enable = true;
 

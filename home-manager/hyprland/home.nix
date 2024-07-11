@@ -27,7 +27,11 @@
 
   # imports from the predefiend modules folder
   imports =
-    map
+    [
+      inputs.hyprland.homeManagerModules.default
+      {wayland.windowManager.hyprland.systemd.enable = true;}
+    ]
+    ++ map
     (
       app: let
         path = name: (import ../../modules/predefiend/home-manager/${name}); # path to the module

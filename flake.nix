@@ -25,7 +25,7 @@
     # stable packages
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     # unstable packages
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/9f4128e00b0ae8ec65918efeba59db998750ead6"; # latest commit broken so pinned a specific version
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixpkgs-unstable"; # latest commit broken so pinned a specific version
 
     # live image builder for nixos
     nixos.url = "github:nixos/nixpkgs/24.05";
@@ -118,10 +118,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    nix-index-database,
     home-manager,
-    hyprland,
-    plasma-manager,
     my-devShells,
     ...
   } @ inputs: let
@@ -204,7 +201,7 @@
     in
       import ./hosts {
         inherit (nixpkgs) lib;
-        inherit inputs self unstable user hostname system devicename desktopEnvironment theme state-version nix-index-database home-manager hyprland plasma-manager;
+        inherit inputs self unstable user hostname system devicename desktopEnvironment theme state-version home-manager;
       };
   };
 }

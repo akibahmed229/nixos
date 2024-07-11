@@ -5,8 +5,16 @@
   user,
   state-version,
   lib,
+  inputs,
+  self,
   ...
 }: {
+  imports = [
+    inputs.nix-index-database.hmModules.nix-index
+    {programs.nix-index-database.comma.enable = true;} # optional to also wrap and install comma
+    self.homeManagerModules.default # Custom home-manager modules
+  ];
+
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.

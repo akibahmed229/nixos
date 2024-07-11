@@ -8,10 +8,7 @@
   desktopEnvironment,
   theme,
   state-version,
-  nix-index-database,
   home-manager,
-  hyprland,
-  plasma-manager,
   user,
   hostname,
   devicename,
@@ -26,11 +23,6 @@
       [
         (import ./configuration.nix)
         (import ./desktop)
-      ]
-      ++ [
-        self.nixosModules.default # Custom nixos modules
-        nix-index-database.nixosModules.nix-index
-        {programs.nix-index-database.comma.enable = true;}
         inputs.disko.nixosModules.default
       ]
       ++ [
@@ -42,29 +34,10 @@
             useUserPackages = true;
             extraSpecialArgs = {inherit inputs self user unstable desktopEnvironment theme state-version;}; # pass inputs && variables to home-manager
             users.${user} = {
-              imports =
-                [
-                  nix-index-database.hmModules.nix-index
-                  {programs.nix-index-database.comma.enable = true;} # optional to also wrap and install comma
-                  self.homeManagerModules.default # Custom home-manager modules
-                ]
-                ++ [(import ../home-manager/home.nix)] # config of home-manager
-                ++ (
-                  if (desktopEnvironment == "hyprland")
-                  then [
-                    hyprland.homeManagerModules.default
-                    {wayland.windowManager.hyprland.systemd.enable = true;}
-                    (import ../home-manager/hyprland/home.nix)
-                  ]
-                  else if (desktopEnvironment == "kde")
-                  then [
-                    plasma-manager.homeManagerModules.plasma-manager
-                    (import ../home-manager/kde/home.nix)
-                  ]
-                  else if (desktopEnvironment == "gnome")
-                  then [(import ../home-manager/gnome/home.nix)]
-                  else []
-                );
+              imports = [
+                (import ../home-manager/home.nix) # config of home-manager
+                (import ../home-manager/${desktopEnvironment}/home.nix)
+              ];
             };
           };
         }
@@ -77,23 +50,20 @@
     specialArgs = {inherit inputs self user hostname devicename unstable state-version;};
     modules =
       # [ "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] ++ # uncomment to  have  live cd, which can be used to configure the current system  into bootable iso
-      [(import ./configuration.nix)]
-      ++ [(import ./virt)]
-      ++ [self.nixosModules.default] # Custom nixos modules
-      ++ [nix-index-database.nixosModules.nix-index]
-      ++ [inputs.disko.nixosModules.default]
+      [
+        (import ./configuration.nix)
+        (import ./virt)
+        inputs.disko.nixosModules.default
+      ]
       ++ [
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = {inherit inputs user hostname devicename theme hyprland state-version;};
+            extraSpecialArgs = {inherit inputs user hostname devicename theme state-version;};
             users.${user} = {
-              imports =
-                [self.homeManagerModules.default] # Custom home-manager modules
-                ++ [(import ../home-manager/home.nix)]
-                ++ [nix-index-database.hmModules.nix-index];
+              imports = [(import ../home-manager/home.nix)];
             };
           };
         }
@@ -120,21 +90,22 @@
           isoImage.squashfsCompression = "gzip -Xcompression-level 1";
         }
       ]
-      ++ [(import ../home-manager/hyprland/default.nix)]
-      ++ [(import ../modules/predefiend/nixos/sops)]
-      ++ [self.nixosModules.default] # Custom nixos modules
+      ++ [
+        (import ../home-manager/hyprland/default.nix)
+        (import ../modules/predefiend/nixos/sops)
+      ]
       ++ [
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = false;
             useUserPackages = true;
-            extraSpecialArgs = {inherit inputs self user unstable hostname theme hyprland state-version;};
+            extraSpecialArgs = {inherit inputs self user unstable hostname theme state-version;};
             users.${user} = {
-              imports =
-                [self.homeManagerModules.default] # Custom home-manager modules
-                ++ [(import ../home-manager/home.nix)]
-                ++ [(import ../home-manager/hyprland/home.nix)];
+              imports = [
+                (import ../home-manager/home.nix)
+                (import ../home-manager/hyprland/home.nix)
+              ];
             };
           };
         }

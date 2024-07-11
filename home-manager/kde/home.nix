@@ -7,10 +7,10 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
-  home.packages = with pkgs; [
-  ];
+  imports = [inputs.plasma-manager.homeManagerModules.plasma-manager];
 
   programs.plasma = {
     enable = true;
