@@ -1,10 +1,10 @@
 # default config files for desktop systems
 {
-  config,
   pkgs,
   user,
   hostname,
   devicename,
+  desktopEnvironment,
   unstable,
   inputs,
   lib,
@@ -14,17 +14,14 @@
   imports =
     # Include the results of the hardware scan.
     [(import ./hardware-configuration.nix)]
-    ++ [(import ../../home-manager/hyprland/default.nix)]
+    ++ [(import ../../home-manager/${desktopEnvironment})]
     ++ # uncomment to use Hyprland
-    
-    # [(import ../../home-manager/kde/default.nix)]; # uncomment to use KDE Plasma
-    # [(import ../../home-manager/gnome/default.nix)]; # uncomment to Use GNOME
     map
     (
       myprograms: let
         path = name:
           if name == "disko"
-          then (import ../../modules/predefiend/nixos/${name} {device = "${devicename}";}) # diskos module with device name (e.g., /dev/sda1)
+          then (import ../../modules/predefiend/nixos/${name} {device = devicename;}) # diskos module with device name (e.g., /dev/sda1)
           else (import ../../modules/predefiend/nixos/${name}); # path to the module
       in
         path myprograms # loop through the myprograms and import the module

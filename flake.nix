@@ -147,6 +147,7 @@
     # The user to build for.
     user = "akib";
     theme = "gruvbox-dark-soft";
+    desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
     # Dynamically get the current system and pass it to the nixpkgs
     pkgs = forAllSystems (system:
@@ -203,7 +204,7 @@
     in
       import ./hosts {
         inherit (nixpkgs) lib;
-        inherit inputs self unstable user hostname system devicename theme state-version nix-index-database home-manager hyprland plasma-manager;
+        inherit inputs self unstable user hostname system devicename desktopEnvironment theme state-version nix-index-database home-manager hyprland plasma-manager;
       };
   };
 }
