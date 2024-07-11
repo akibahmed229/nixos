@@ -25,7 +25,7 @@
     # stable packages
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     # unstable packages
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixpkgs-unstable"; # latest commit broken so pinned a specific version
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixpkgs-unstable";
 
     # live image builder for nixos
     nixos.url = "github:nixos/nixpkgs/24.05";
