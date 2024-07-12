@@ -79,9 +79,9 @@
         # Configuration for the WireGuard peers.
         peers = [
           {
-            publicKey = "rnrZQSK5IeTCzh60Ghv/TEaUIbD7IprzdoCJjE5E9Sc="; # Public key of the peer.
+            publicKey = "URpeZxtyUXAUUA0MWcFdCSa7F+MvchJ4eNSJUetKEGk="; # Public key of the peer.
             allowedIPs = ["0.0.0.0/0"]; # IPs that are allowed to communicate through the peer.
-            endpoint = "37.19.205.202:51820"; # Endpoint of the peer (IP address and port).
+            endpoint = "212.8.253.137:51820"; # Endpoint of the peer (IP address and port).
           }
         ];
       };
