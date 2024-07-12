@@ -843,7 +843,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-cTltYtuHHMSy1bdMOUmPA4bzFyvsgmx1k0SklrCR94Y=",
+        "narHash": "sha256-/It6bCx2xAa7taEpHE6hKFxxejbzRoGsce2g8Hj2gjM=",
         "path": "./pkgs/nixvim",
         "type": "path"
       },
@@ -888,11 +888,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720603727,
-        "narHash": "sha256-A5qYbCT3rHvVi95u8Zy12cRmW5OPT7yFl1LrTDSejyE=",
+        "lastModified": 1720794602,
+        "narHash": "sha256-RZDFN/Jv1tfXvO80reTfrr53NHFLHUDKO5a4qU1GKd8=",
         "owner": "pjones",
         "repo": "plasma-manager",
-        "rev": "f0691e1a9fff4684ce399c345c3a941d2ef0fe78",
+        "rev": "8c84e04023525a8afb1827ba309979ef19ed06cd",
         "type": "github"
       },
       "original": {
