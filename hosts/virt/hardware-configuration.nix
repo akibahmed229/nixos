@@ -16,7 +16,7 @@
     kernelModules = ["kvm-intel"];
     extraModulePackages = [];
     tmp = {
-      useTmpfs = true;
+      useTmpfs = false;
       cleanOnBoot = true;
     };
   };
