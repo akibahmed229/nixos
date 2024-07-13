@@ -528,11 +528,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1720880492,
-        "narHash": "sha256-qBs9MuD2FXV9HmrdN7pg8D8w8tXvIgX0Cblz0U4BUTQ=",
+        "lastModified": 1720896272,
+        "narHash": "sha256-zo1lDMsxjEyko/P+KfCLNYZrCAWQOrX90/J31nqzpy4=",
         "ref": "refs/heads/main",
-        "rev": "45c48984236d7a682a1941b147f8ae489ac9a1e6",
-        "revCount": 4923,
+        "rev": "bc6b0880dda2607a80f000c134f573c970452a0f",
+        "revCount": 4925,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -888,11 +888,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720863765,
-        "narHash": "sha256-Q+LSZm9w1htVrRDY1d+0T8rBdifA/6JnAWuBMneGCCE=",
+        "lastModified": 1720896694,
+        "narHash": "sha256-lKInIpVIrI4YOTwbaN6wwQ+EvhL/iVqKhpxcTj4kBhE=",
         "owner": "pjones",
         "repo": "plasma-manager",
-        "rev": "40fa15eceeda6f3fb539367ccee462fa06a4d760",
+        "rev": "809d86d6a8a48b6d71b6ece05eeb5e55f554b396",
         "type": "github"
       },
       "original": {
