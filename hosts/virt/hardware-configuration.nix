@@ -15,6 +15,10 @@
     initrd.kernelModules = [];
     kernelModules = ["kvm-intel"];
     extraModulePackages = [];
+    tmp = {
+      useTmpfs = true;
+      cleanOnBoot = true;
+    };
   };
 
   #fileSystems."/" =
