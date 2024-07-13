@@ -121,7 +121,6 @@
       #rubyPackages.glib2
       libadwaita
       polkit
-      mysql-workbench
       #python310Packages.pygobject3
     ])
     ++ (
@@ -154,6 +153,7 @@
           docker-compose
           yarn
           mysql80
+          mysql-workbench
           postgresql
           pgadmin4
         ]
