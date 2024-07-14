@@ -2,8 +2,11 @@
   plugins = {
     treesitter = {
       enable = true;
-      indent = true;
-      ensureInstalled = ["c" "lua" "vim" "vimdoc" "query" "elixir" "heex" "javascript" "html" "nix" "python" "rust" "css" "sql" "java" "json" "typescript" "yaml" "toml" "bash"];
+      settings = {
+        highlight.enable = true;
+        indent.enable = true;
+        ensure_installed = ["c" "lua" "vim" "vimdoc" "query" "elixir" "heex" "javascript" "html" "nix" "python" "rust" "css" "sql" "java" "json" "typescript" "yaml" "toml" "bash"];
+      };
       nixvimInjections = true;
 
       languageRegister.nu = "nu";
