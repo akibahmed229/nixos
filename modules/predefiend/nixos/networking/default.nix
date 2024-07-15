@@ -2,6 +2,7 @@
   config,
   pkgs,
   user ? "example.com",
+  lib,
   ...
 }: {
   networking = {
@@ -64,7 +65,7 @@
     };
 
     # Configuration for WireGuard interface using wg-quick. and protonvpn wireguard config file for the peer.
-    wg-quick.interfaces = {
+    wg-quick.interfaces = lib.mkIf (config.sops.secrets."akib/wireguard/PrivateKey".path != {}) {
       # Define the WireGuard interface wg0.
       wg0 = {
         address = ["10.2.0.2/32"]; #
