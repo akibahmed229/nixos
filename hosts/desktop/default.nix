@@ -148,6 +148,7 @@
           direnv
           devbox
           distrobox
+          busybox
           docker
           # self.packages.${pkgs.system}.docker-desktop
           docker-compose
