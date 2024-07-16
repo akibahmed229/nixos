@@ -227,7 +227,8 @@
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443 22];
+      allowedTCPPorts = [80 443 22 465];
+      allowedUDPPorts = [67 68];
       allowedUDPPortRanges = [
         {
           from = 4000;
@@ -237,13 +238,10 @@
           from = 8000;
           to = 8010;
         }
-        {
-          from = 9000;
-          to = 9010;
-        } # Adding UDP port range 9000-9010 for illustration
       ];
     };
     enableIPv6 = true;
+    enableB43Firmware = true;
   };
 
   # Enable cron service

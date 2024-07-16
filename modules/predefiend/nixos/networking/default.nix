@@ -11,9 +11,27 @@
       address = "192.168.0.1"; # IP address of the default gateway.
       interface = "enp4s0"; # Network interface used to reach the default gateway.
     };
+    networkmanager = {
+      wifi.macAddress = "random"; # Randomize the MAC address for WiFi interfaces.
+      ethernet.macAddress = "random"; # Randomize the MAC address for Ethernet interfaces.
+    };
 
     # Define the DNS nameservers.
-    nameservers = ["192.168.0.1"]; # List of DNS nameservers to use.
+    nameservers = [
+      # Public DNS Servers
+      "1.1.1.1" # Cloudflare Primary
+      "1.0.0.1" # Cloudflare Secondary
+      "9.9.9.9" # Quad9 Primary
+      "149.112.112.112" # Quad9 Secondary
+      "76.76.19.19" # Alternate DNS Primary
+      "76.223.122.150" # Alternate DNS Secondary
+      "8.8.8.8" # Google Primary
+      "8.8.4.4" # Google Secondary
+      "95.85.95.85" # Gcore Primary
+      "2.56.220.2" # Gcore Secondary
+      "94.140.14.14" # AdGuard Primary
+      "94.140.15.15" # AdGuard Secondary
+    ]; # List of DNS nameservers to use.
 
     # Set the domain name and search domain for the system.
     domain = "${user}";
