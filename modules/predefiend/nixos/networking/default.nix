@@ -12,6 +12,7 @@
       interface = "enp4s0"; # Network interface used to reach the default gateway.
     };
     networkmanager = {
+      enable = true; # Enable the NetworkManager service.
       wifi.macAddress = "random"; # Randomize the MAC address for WiFi interfaces.
       ethernet.macAddress = "random"; # Randomize the MAC address for Ethernet interfaces.
     };

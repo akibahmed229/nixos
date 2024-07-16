@@ -15,8 +15,7 @@
     # Include the results of the hardware scan.
     [(import ./hardware-configuration.nix)]
     ++ [(import ../../home-manager/${desktopEnvironment})]
-    ++ # uncomment to use Hyprland
-    map
+    ++ map
     (
       myprograms: let
         path = name:
