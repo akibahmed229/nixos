@@ -193,7 +193,8 @@
           if
             builtins.elem system [
               "aarch64-linux" # ARM (Raspberry Pi)
-              "x86_64-linux" # x86_64 (Intel/AMD)
+              "x86_64-linux" # x86_64 (Intel/AMD) 64-bit
+              "i686-linux" # x86 (Intel/AMD) 32-bit
             ]
           then system
           else throw "Unsupported system: ${system}"
