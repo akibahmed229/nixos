@@ -39,7 +39,7 @@
         prettier = {
           enable = true;
           disableTsServerFormatter = false;
-          withArgs = ''
+          settings = ''
             {
               extra_args = { "--no-semi", "--single-quote" },
             }
@@ -53,7 +53,7 @@
         };
         black = {
           enable = true;
-          withArgs = ''
+          settings = ''
             {
               extra_args = { "--fast" },
             }
