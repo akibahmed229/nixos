@@ -115,6 +115,7 @@
           "$mod, T, togglefloating,"
           "$mod, F, fullscreen"
           # ''$mod, R, exec, wofi -n --show drun -p "Run App"''
+          ''$mod, D, exec, emacsclient -c -a "emacs"''
           "$mod, R, exec, ags -t applauncher"
           "$mod, P, pseudo," # dwindle
           "$mod ALT, J, togglesplit," # dwindle

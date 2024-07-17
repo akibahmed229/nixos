@@ -213,9 +213,15 @@
     flatpak.enable = true;
     # Enable dbus
     dbus.enable = true;
+
     atuin = {
       enable = true;
       openFirewall = true;
+    };
+
+    emacs = {
+      enable = true;
+      package = pkgs.emacs-gtk; # replace with emacs-gtk, or a version provided by the community overlay if desired.
     };
   };
 
