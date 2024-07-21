@@ -212,14 +212,14 @@
     #  source = ./others/hypr/hyprpaper.conf;
     #  recursive = true;
     #};
-    ".config/waybar" = {
-      source = ./others/waybar;
-      recursive = true;
-    };
     #".config/dunst" = {
     #  source = ./others/dunst;
     #  recursive = true;
     #};
+    ".config/waybar" = {
+      source = ./others/waybar;
+      recursive = true;
+    };
     ".config/wofi" = {
       source = ./others/wofi;
       recursive = true;
@@ -242,14 +242,6 @@
     };
     ".config/Thunar" = {
       source = ./others/Thunar;
-      recursive = true;
-    };
-    ".config/gtk-4.0" = {
-      source = ../../public/themes/gtk/${theme};
-      recursive = true;
-    };
-    ".config/gtk-3.0" = {
-      source = ../../public/themes/gtk/${theme};
       recursive = true;
     };
   };

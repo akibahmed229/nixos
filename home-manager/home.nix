@@ -1,11 +1,11 @@
 # common home-manager config accross all machines
 {
-  config,
   pkgs,
   user,
   state-version,
-  lib,
+  theme,
   inputs,
+  lib,
   self,
   ...
 }: {
@@ -78,15 +78,27 @@
       source = ../modules/predefiend/home-manager/alacritty;
       recursive = true;
     };
-    ".config/OpenRGB" = {
-      source = ../modules/predefiend/home-manager/OpenRGB;
-      recursive = true;
-    };
     ".config/neofetch" = {
       source = ../modules/predefiend/home-manager/neofetch;
       recursive = true;
     };
-    ".ssh" = {
+    ".config/gtk-4.0" = {
+      source = ../../public/themes/gtk/${theme};
+      recursive = true;
+    };
+    ".config/gtk-3.0" = {
+      source = ../../public/themes/gtk/${theme};
+      recursive = true;
+    };
+    ".config/gtk-2.0" = {
+      source = ../../public/themes/gtk/${theme};
+      recursive = true;
+    };
+    ".config/OpenRGB" = lib.mkIf (user == "akib") {
+      source = ../modules/predefiend/home-manager/OpenRGB;
+      recursive = true;
+    };
+    ".ssh" = lib.mkIf (user == "akib") {
       source = ../modules/predefiend/home-manager/ssh;
       recursive = true;
     };
