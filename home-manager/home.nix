@@ -83,15 +83,15 @@
       recursive = true;
     };
     ".config/gtk-4.0" = {
-      source = ../../public/themes/gtk/${theme};
+      source = ../public/themes/gtk/${theme};
       recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = ../../public/themes/gtk/${theme};
+      source = ../public/themes/gtk/${theme};
       recursive = true;
     };
     ".config/gtk-2.0" = {
-      source = ../../public/themes/gtk/${theme};
+      source = ../public/themes/gtk/${theme};
       recursive = true;
     };
     ".config/OpenRGB" = lib.mkIf (user == "akib") {
