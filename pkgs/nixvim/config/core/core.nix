@@ -22,6 +22,36 @@
       }
       {
         mode = "n";
+        key = "<leader>wv";
+        action = "<cmd>vertical split<CR>";
+        options.desc = "Vertical window split";
+      }
+      {
+        mode = "n";
+        key = "<leader>wh";
+        action = "<cmd>horizontal split<CR>";
+        options.desc = "Horizontal window split";
+      }
+      {
+        mode = "n";
+        key = "<C-d>";
+        action = "<C-d>zz";
+        options.desc = "Page down";
+      }
+      {
+        mode = "n";
+        key = "<C-u>";
+        action = "<C-u>zz";
+        options.desc = "page up";
+      }
+      {
+        mode = "i";
+        key = "<C-c>";
+        action = "<Esc>";
+        options.desc = "Escep";
+      }
+      {
+        mode = "n";
         key = "<C-h>";
         action = "<C-w>h";
       }
@@ -47,16 +77,37 @@
     };
 
     opts = {
-      autoindent = true;
-      expandtab = true;
+      nu = true;
       number = true;
       relativenumber = true;
-      shiftwidth = 4;
-      smartcase = true;
-      softtabstop = 4;
-      spell = true;
+
       tabstop = 4;
+      softtabstop = 4;
+      shiftwidth = 4;
+      expandtab = true;
+
+      smartindent = true;
+      spell = true;
       wrap = true;
+
+      swapfile = false;
+      backup = false;
+      # undodir = os.getenv("HOME") .. "/.vim/undodir";
+      undofile = true;
+
+      hlsearch = false;
+      incsearch = true;
+
+      termguicolors = true;
+
+      scrolloff = 8;
+      signcolumn = "yes";
+
+      updatetime = 50;
+      colorcolumn = "80";
+
+      # autoindent = true;
+      # smartcase = true;
     };
 
     autoCmd = [
