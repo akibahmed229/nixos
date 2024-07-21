@@ -137,6 +137,9 @@
           android-studio
           dwt1-shell-color-scripts
           gcc
+          cmake
+          gnumake
+          libtool
           jdk21
           python312Full
           nodejs_22
@@ -223,6 +226,9 @@
       enable = true;
       package = pkgs.emacs-gtk; # replace with emacs-gtk, or a version provided by the community overlay if desired.
     };
+
+    # disable password auth for openssh
+    openssh.settings.PasswordAuthentication = false;
   };
 
   # Enable virtualisation ( custom module )
