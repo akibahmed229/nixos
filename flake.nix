@@ -123,7 +123,6 @@
     ...
   } @ inputs: let
     # The system to build.
-    inherit (self) outputs;
     inherit (nixpkgs) lib;
     state-version = "24.05";
     hostname = "desktop";
@@ -202,7 +201,7 @@
     in
       import ./hosts {
         inherit (nixpkgs) lib;
-        inherit inputs self unstable user hostname system devicename desktopEnvironment theme state-version home-manager;
+        inherit inputs self pkgs unstable user hostname system devicename desktopEnvironment theme state-version home-manager;
       };
   };
 }
