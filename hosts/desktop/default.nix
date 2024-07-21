@@ -6,9 +6,7 @@
   devicename,
   desktopEnvironment,
   unstable,
-  inputs,
   lib,
-  self,
   ...
 }: {
   imports =

@@ -1,11 +1,9 @@
 #  Hyprland Home-manager configuration
 {
   config,
-  lib,
   pkgs,
   inputs ? {},
   self,
-  theme,
   user,
   ...
 }: {

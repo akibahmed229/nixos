@@ -1,9 +1,6 @@
 # Hyprland system configuration
 {
-  self,
   inputs,
-  config,
-  lib,
   pkgs,
   unstable,
   ...

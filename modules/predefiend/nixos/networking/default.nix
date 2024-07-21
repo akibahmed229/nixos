@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   user ? "example.com",
   lib,
   ...

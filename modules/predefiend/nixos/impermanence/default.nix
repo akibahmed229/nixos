@@ -2,7 +2,6 @@
 Modules to help you handle persistent state on systems with ephemeral root storage
 */
 {
-  pkgs,
   lib,
   user,
   inputs,

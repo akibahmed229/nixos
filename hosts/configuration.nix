@@ -4,7 +4,6 @@
   pkgs,
   user,
   hostname,
-  unstable,
   lib,
   inputs,
   self,
