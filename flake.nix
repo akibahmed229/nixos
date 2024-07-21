@@ -163,19 +163,19 @@
     inherit (my-devShells) devShells;
     # Accessible through 'nix build', 'nix shell', "nix run", etc
     packages = forAllSystems (
-      getSystem:
+      system:
       # Import your custom packages
-        import ./pkgs nixpkgs.legacyPackages.${getSystem}
+        import ./pkgs nixpkgs.legacyPackages.${system}
         # import custom nixvim flake as a package
         // {
-          nixvim = inputs.nixvim.packages.${getSystem}.default;
+          nixvim = inputs.nixvim.packages.${system}.default;
         }
     );
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (getSystem: nixpkgs.legacyPackages.${getSystem}.alejandra);
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
