@@ -22,6 +22,12 @@
       }
       {
         mode = "n";
+        key = "<C-y>";
+        action = "ggVGy";
+        options.desc = "Yank Current Buffer";
+      }
+      {
+        mode = "n";
         key = "<leader>wv";
         action = "<cmd>vertical split<CR>";
         options.desc = "Vertical window split";
@@ -74,6 +80,7 @@
 
     clipboard = {
       register = "unnamedplus";
+      providers.wl-copy.enable = true;
     };
 
     opts = {
