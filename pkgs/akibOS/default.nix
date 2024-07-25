@@ -4,9 +4,8 @@
 pkgs.writeShellApplication {
   name = "akibOS";
 
-  # runtimeInputs = with pkgs; [
-  #   git
-  # ];
+  runtimeInputs = with pkgs; [git];
+  buildInputs = with pkgs; [git];
 
   text = ''
     #!/usr/bin/env bash
@@ -70,8 +69,10 @@ pkgs.writeShellApplication {
             sleep 1
         else
             # Generate hardware-configuration.nix
+            print_message "Generateing hardware-configuration.nix"
             nixos-generate-config --root /mnt
             cp -r "/mnt/etc/nixos/hardware-configuration.nix" "$config_dir"
+            print_message "Config generated successfully"
         fi
     }
 
@@ -96,6 +97,7 @@ pkgs.writeShellApplication {
         print_message "Cloning flake repository..."
         git clone https://www.github.com/akibahmed229/nixos "$flake_dir"
         rm -rf "$flake_dir/flake.lock"
+        print_message "Successfully cloned"
 
         # Update user data and generate hardware configuration
         update_flake_data
@@ -109,11 +111,9 @@ pkgs.writeShellApplication {
 
     # Main script logic
     print_message "### Mounting Disk ###"
-
     # Download disko.nix and run disko
     curl -sSfL https://raw.githubusercontent.com/akibahmed229/nixos/main/modules/predefiend/nixos/disko/default.nix -o /tmp/disko.nix
     sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/disko.nix --arg device "\"$device\""
-
     print_message "### Disko Format Done ###"
 
     # Check if /mnt/home directory exists
@@ -123,5 +123,6 @@ pkgs.writeShellApplication {
 
     print_message "### Installing NixOS ###"
     install_flake
+    print_message "### Installation Finished! ###"
   '';
 }
