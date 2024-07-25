@@ -1,9 +1,11 @@
 {
   description = "Akib | NixOS Configuration Go Wild";
 
-  # the nixConfig here only affects the flake itself, not the system configuration!
-  # for more information, see:
-  #     https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
+  /*
+  * the nixConfig here only affects the flake itself, not the system configuration!
+  * for more information, see:
+      - https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
+  */
   nixConfig = {
     # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
@@ -20,7 +22,11 @@
     ];
   };
 
-  # inputs for the flake
+  /*
+  * Inputs is an attribute set that defines all the dependencies of this flake.
+  * These dependencies will be passed as arguments to the outputs function after they are fetched
+  * Inputs can be :- another flake, a regular Git repository, or a local path
+  */
   inputs = {
     # stable packages
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
@@ -47,7 +53,7 @@
     };
 
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
-    # Add "hyprland.nixosModules.default" to the host moduls list in ./hosts/default.nix
+    # Add "inputs.hyprland.homeManagerModules.default" to home-config
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -57,7 +63,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     # KDE Plasma User Settings Generator
-    # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports list in ./hosts/default.nix
+    # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to home-config
     plasma-manager = {
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -113,14 +119,20 @@
     };
   };
 
-  # outputs for the flake
+  /*
+  * outputs is a function that takes the dependencies from inputs as its parameters,
+  * and its return value is an attribute set, which represents the build results of the flake.
+  * outputs section defines the different outputs that a flake can produce during its build process
+  * Following :- devshells, packages, formatter, overlays, nixosModules, homeManagerModules, nixosConfigurations, darwinConfigurations, homeConfigurations (Standalone setup) etc
+  */
   outputs = {
-    self,
+    self, # The special input named self refers to the outputs and source tree of this flake
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
     my-devShells,
     ...
+    # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
   } @ inputs: let
     # The system to build.
     inherit (nixpkgs) lib;
