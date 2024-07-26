@@ -3,10 +3,7 @@
 # nix-shell -p git 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
 pkgs.writeShellApplication {
   name = "akibOS";
-
-  runtimeInputs = with pkgs; [git];
-  buildInputs = with pkgs; [git];
-
+  # runtimeInputs = with pkgs; [git];
   text = ''
     #!/usr/bin/env bash
 
