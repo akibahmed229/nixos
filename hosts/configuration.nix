@@ -97,6 +97,7 @@
       noto-fonts-cjk
       noto-fonts-emoji
       font-awesome
+      lohit-fonts.bengali
       jetbrains-mono
       source-han-sans
       (nerdfonts.override {fonts = ["Meslo"];})
