@@ -1,5 +1,3 @@
-;;; warm-night-theme.el --- Theme
-
 ;; Copyright (C) 2024 , 
 
 ;; Author: Akib Ahmed
@@ -46,7 +44,7 @@
       (str     "#71a19f")
       (type    "#8b8fc6")
       (var     "#c27d7b")
-      (selection "#e81050")
+      (selection "#cc241d")
       (warning   "#e81050")
       (warning2  "#e86310")
       (unspec   (when (>= emacs-major-version 29) 'unspecified)))
