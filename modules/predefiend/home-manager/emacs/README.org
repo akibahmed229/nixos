@@ -2,6 +2,7 @@
 
 #+AUTHOR: Akib Ahmed
 #+DESCRIPTION: Akib's personal Emacs config.
+#+PROPERTY: header-args :tangle config.el
 #+STARTUP: showeverything
 #+OPTIONS: toc:2
 
