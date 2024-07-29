@@ -7,6 +7,7 @@
   desktopEnvironment,
   unstable,
   lib,
+  self,
   ...
 }: {
   imports =
@@ -168,16 +169,18 @@
           lazygit
           gh
           alacritty
+          sxiv
+          mpv
           atuin
           telegram-desktop
-          obs-studio
-          #(pkgs.wrapOBS {
-          #  plugins = with pkgs.obs-studio-plugins; [
-          #    obs-teleport
-          #    advanced-scene-switcher
-          #    #self.packages.${pkgs.system}.obs-zoom-to-mouse
-          #  ];
-          #})
+          # obs-studio
+          (pkgs.wrapOBS {
+            plugins = with pkgs.obs-studio-plugins; [
+              obs-teleport
+              advanced-scene-switcher
+              self.packages.${pkgs.system}.obs-zoom-to-mouse
+            ];
+          })
         ]
       else []
     );
