@@ -1,8 +1,8 @@
 #+TITLE: Akib's GNU Emacs Config
+#+PROPERTY: header-args :tangle config.el
 
 #+AUTHOR: Akib Ahmed
 #+DESCRIPTION: Akib's personal Emacs config.
-#+PROPERTY: header-args :tangle config.el
 #+STARTUP: showeverything
 #+OPTIONS: toc:2
 
