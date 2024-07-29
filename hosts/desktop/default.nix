@@ -222,7 +222,7 @@
 
     emacs = {
       enable = true;
-      package = pkgs.emacs-gtk; # replace with emacs-gtk, or a version provided by the community overlay if desired.
+      package = unstable.${pkgs.system}.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
     };
 
     # disable password auth for openssh
