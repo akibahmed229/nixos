@@ -219,11 +219,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1722204561,
-        "narHash": "sha256-OHFlj+84UBHW3otQW2K4y5g8TcDXYUDAu5OWqkl8hqM=",
+        "lastModified": 1722225797,
+        "narHash": "sha256-qkVwXLMn5miM3v+7xWcC9ab1jqdebnpnnU6iRcCSXmA=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "09d8a5a5590af73ba0996013943576ecdcca4a0a",
+        "rev": "4002dc8a2dec233b78af2ea108fa259a72159016",
         "type": "gitlab"
       },
       "original": {
@@ -550,11 +550,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1722203795,
-        "narHash": "sha256-Ml3cL8ayTGozjo8QW08J7jEPIRMWtQmdW1Y44pb2SYQ=",
+        "lastModified": 1722265010,
+        "narHash": "sha256-wip3i+9/iNeunW9lzV7IK2sbv0BrD8we6W2WPRkvHtw=",
         "ref": "refs/heads/main",
-        "rev": "a9d87bd6669568741704de08b6f0328a92e29396",
-        "revCount": 5009,
+        "rev": "3a1afb53fdc75d6bfb434fb5ff29ab43ce6b040a",
+        "revCount": 5015,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -887,11 +887,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1722203484,
-        "narHash": "sha256-9jjUoWG2e3X/T62nfc3F6QYFpvYPGOvBPCZZd/bvJOw=",
+        "lastModified": 1722232048,
+        "narHash": "sha256-TjBk/EECLYfPscxOW9yWEuoI4mzoYOok/qMiod/Xx8M=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "040bab5f55e8162b777c3c62a0404e6bbc6d8d07",
+        "rev": "2415edc0cb749bf81c9b142138c2bb705514f6cc",
         "type": "github"
       },
       "original": {
@@ -933,11 +933,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722200137,
-        "narHash": "sha256-xMJZUZywwAbgCkNd2YtB33spCkAlzDnlS/KO/QOrWl8=",
+        "lastModified": 1722240909,
+        "narHash": "sha256-Su6e3lihhErB8QP6qpZQsbQhxt21hSJEkBt8qZhCdic=",
         "owner": "pjones",
         "repo": "plasma-manager",
-        "rev": "81c1e2c3745ce366d3cd553448a1cd6ca5f712f0",
+        "rev": "90c187c0b363b48ba82adaae40b502a6b362dcdb",
         "type": "github"
       },
       "original": {
