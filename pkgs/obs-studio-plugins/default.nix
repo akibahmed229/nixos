@@ -14,13 +14,10 @@ pkgs.stdenv.mkDerivation rec {
     sha256 = "sha256-CBuN2GrEqyEoH7kQ+kIFGW9H86zjUlZLhvrHSIh957M=";
   };
 
-  buildInputs = with pkgs; [obs-studio];
-
-  installPhase = ''
-    mkdir $out
-    mkdir -p $out/share/obs/obs-plugins/frontend-tools/scripts
-    cp -r obs-zoom-to-mouse.lua "$out/share/obs/obs-plugins/frontend-tools/scripts"
-    # cp -r $out ${pkgs.obs-studio}/share/obs/obs-plugins/frontend-tools/scripts
+  # Fix output directory
+  postInstall = ''
+    mkdir -p $out/lib/obs-plugins
+    mv obs-zoom-to-mouse.lua $out/lib/obs-plugins/
   '';
 
   meta = {
