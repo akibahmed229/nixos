@@ -1,0 +1,401 @@
+# Created 2024-04-23 Tue 15:20
+#+title: Lets Learn Emacs Lisp
+#+author: Gavin Jaeger-Freeborn
+* Emacs terminology
+
+[[https://sachachua.com/blog/wp-content/uploads/2013/05/How-to-Learn-Emacs-v2-Large.png][How to Learn Emacs]]
+
+- buffer :: The area containing text kinda like a *tab in a browser*
+- point :: The *cursor*
+- window :: A section of the emacs window containing text
+  - seperated by splits
+- frame :: Dedicated Emacs Window (meaning your OS's window)
+- minibuffer :: Text area at the bottom of a frame
+
+- mark :: The point where highlighted text starts
+  - the mark is set with ~C-SPC~
+- region :: area between the point and the mark (often highlighted)
+  - ~kill-region~ (C-w) makes use of this
+
+
+- Major Mode :: current programming language
+- Minor Mode :: (enabled feature such as spellchecking)
+
+* Basic Syntax
+- Calling functions
+  #+begin_src emacs-lisp
+  (defun my-add-function (num)
+    (+ num 1))
+
+  (my-add-function 1)
+  #+end_src
+  2
+
+
+Alternatively we can use ~funcall~ 
+#+begin_src emacs-lisp
+(funcall 'my-add-function 1)
+#+end_src
+2
+
+** Symbols
+You can see that I put a quote before the ~my-add-function~
+
+This quote is basically a way to prevent evaluation of ~my-add-function~
+
+if we evaluated my-add-function it would look it up as if it was a
+variable.
+
+To give the symbol ~my-add-function~ it's self we need to quote it.
+
+Symbols are often used in place of where some languages would rely on
+a string.
+
+I go into this a little more in my video [[https://www.youtube.com/watch?v=NocDm4zzToo][LEARN EMACS LISP - Mostly The Strange Parts - YouTube]]
+
+* Basic Types
+Evaluate each of these with =C-x C-e=
+
+- numbers :: 1
+- strings :: "hello"
+- symbols :: 'hello
+- keywords :: :hello
+- chars :: ?h
+- true :: t
+- false :: nil
+- pairs (cons cell) :: (cons 1 2)
+- lists :: (list 1 2 3)
+
+** Quote
+Quote as in ' tells Emacs not to evaluate the following expression
+
+#+begin_src emacs-lisp
+'(+ 1 2)
+#+end_src
+(+ 1 2)
+
+
+We used quote to create the symbol above.
+
+#+begin_src emacs-lisp
+'i-am-a-symbol
+#+end_src
+i-am-a-symbol
+
+for example if we evaluate ~(list 1 2)~ we get ~(1 2)~
+
+Using quote we can prevent evaluation and skip the use of =list= all together
+
+#+begin_src emacs-lisp
+'(1 2)
+#+end_src
+(1 2)
+
+
+This is why you may hear people say that in lisp _code is data_
+
+This can also be done for something like a cons cell to skip the use of =cons=
+in =(cons 1 2)=
+
+#+begin_src emacs-lisp
+'(1 . 2)
+#+end_src
+
+Note that ~(1 . 2)~ is how a cons cell is represented
+
+** Quasiquote
+
+In addition to the regular quote emacs has a special version of it
+called quasiquote which allows us to unquote and experession.
+
+Here is a quick example
+
+#+begin_src emacs-lisp
+`(1 2 ,(+ 1 2))
+#+end_src
+
+Note that we use =`= as quasiquote rather than ='= and =,= to unquote
+
+* Some quick practical examples
+** Interactive functions
+All commands you can use (seen with ~M-x~) are functions
+
+They require the use of ~(interactive)~ inside the functon to tell emacs
+it can be used as a command.
+
+#+begin_src emacs-lisp
+(defun insert-numbers ()
+  "inserts an a sequence of numbers"
+  (interactive)
+  (insert "1 2 3"))
+#+end_src
+insert-numbers
+insert-numbers
+
+
+These interactive functions can be accessed via a keybinding
+
+The string at the top is simply for documentation purposes
+
+To learn more about a function you can use
+#+begin_src emacs-lisp
+(describe-function 'insert-numbers)
+#+end_src
+
+This is also available via ~M-x~
+** Key Binding
+The most general way to bind a new key is using ~global-set-key~
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-S-s") 'insert-numbers) ;; control shift s
+#+end_src
+insert-numbers
+
+~kbd~ here turns our string into something Emacs can convert into a key
+
+If you are using a more modern Emacs you can skip the ~kbd~ step by using
+
+#+begin_src emacs-lisp
+(keymap-global-set "C-S-s" 'insert-numbers)
+#+end_src
+insert-numbers
+
+I will stick to the functions prefixed with keymap for now as they 
+often you want keys to be set only for a specific mode
+
+for example lets say we want a key that will insert an if statement in C
+
+#+begin_src emacs-lisp
+(defun c--insert-if ()
+  (interactive)
+  (insert "if () {\n}"))
+(keymap-set c-mode-map "C-S-l" 'c--insert-if)
+#+end_src
+c--insert-if
+
+Now if I open a C file
+
+#+begin_src C
+if () {
+}
+#+end_src
+
+There is a corresponding *map* for basically every mode in Emacs simply
+by following the name of the mode with ~-map~
+
+If I would like to learn more about a key I can use
+
+#+begin_src emacs-lisp
+(describe-key (kbd "C-S-s"))
+#+end_src
+
+Alternatively ~C-h k~ then press the key it's self
+* Namespaceing
+
+Since all function names are shared in Emacs packages prefix their
+functions with the name of the package as to avoid confusion and
+conflicting names
+
+for example
+
+~org--newline~
+
+is a function used by org-mode to create a newline
+
+the ~--~ is to indicate it's only meant to be used by org-mode internally
+
+~org-babel-tangle-file~
+On the other hand is intended to be used by anyone which is why there is only a single ~-~
+
+* More Emacs lisp features
+** Conditionals
+*** if
+#+begin_src emacs-lisp
+(if t
+    'it-was-true
+  'it-was-false)
+#+end_src
+it-was-true
+
+#+begin_src emacs-lisp
+(if nil
+    'it-was-true
+  'it-was-false)
+#+end_src
+it-was-false
+
+As mentioned above we often use =t= to mean true but really anything
+other than =nil= is considered true
+
+#+begin_src emacs-lisp
+(if 'this-is-true
+    'it-was-true
+  'it-was-false)
+#+end_src
+*** when and unless
+Often =if= expressions can be difficult to read so when you only need to
+handle when something is true we use =when=
+#+begin_src emacs-lisp
+(when t
+  'this-is-true)
+#+end_src
+
+If we want to handle the case that something is nil we use unless
+#+begin_src emacs-lisp
+(unless nil
+  'this-is-false)
+#+end_src
+this-is-false
+
+*** and, or, not
+Like in many other languages we can use =and=, =or=, and =not=
+#+begin_src emacs-lisp
+(and t nil)
+#+end_src
+#+begin_src emacs-lisp
+(and t t)
+#+end_src
+#+begin_src emacs-lisp
+(or t nil)
+#+end_src
+
+#+begin_src emacs-lisp
+(not t)
+#+end_src
+*** progn
+In Elisp the last expression to be evaluated is returned.
+
+While nice in most cases it can be a pain when we want to perform a
+sequence of operations in an =if= expression.
+
+This is solved with =progn=
+#+begin_src emacs-lisp
+(if t
+    (progn
+      (message "print this in minibuffer")
+      'this-was-true)
+  'this-was-false)
+#+end_src
+this-was-true
+
+This is another reason people tend to use =when= and =unless=
+
+** Variables
+Configuration of Emacs is often done via variables.
+*** How do you find these variables? search
+~C-h v~
+~M-x describe-variable~
+*** Setting Variables
+
+- =setq=
+  - =setopt= (has extra features e.g. type checking)
+    - These types come from [[file:~/.emacs.d/elpa/markdown-mode-20240107.831/markdown-mode.el::(defcustom markdown-command-needs-filename nil][defcustom]]
+- =defvar= (For creating new variables)
+  - e.g. ~(defvar thing 1 "Just some thing")~
+
+*** Lists (the most important collection)
+- cons cells
+- cons, car, and cdr
+
+Recall the type *cons cell* ~(cons 1 2)~
+
+which is basically a pair in most other languages
+
+*Lists* _are_ actually constructed using *cons cells*
+
+Chaining these pairs together we can create a list like so
+
+#+begin_src emacs-lisp
+(cons 1 (cons 2 nil))
+#+end_src
+
+As you can see a list is simply a chain of cons cells ending with ~nil~
+* Iteration
+Each of these you can learn about using =C-h f= or =M-x describe-function=
+
+- cl-loop :: Probably the most familiar to those coming from other languages
+     #+begin_src emacs-lisp
+     (require 'cl-lib) ; Usually already required in your config anyways
+     (cl-loop for i from 0 to 10
+              collect (* i i))
+     #+end_src
+     (0 1 4 9 16 25 36 49 64 81 100)
+
+  - I have a video that goes much deeper into it's use
+
+- while
+  #+begin_src emacs-lisp
+  (setq my/val 1)
+  (setq my/truth t)
+  (while my/truth
+    (if (= my/val 10)
+        (setq my/truth nil))
+    (message "%s" (setq my/val (1+ my/val))))
+  #+end_src
+  nil
+
+  - dotimes
+    #+begin_src emacs-lisp
+    (setq total nil)
+    (dotimes (i 3)
+      (setq total (cons total i)))
+    total
+    #+end_src
+
+  - dolist
+    #+begin_src emacs-lisp
+    (setq total 0)
+    (dolist (i '(1 2 3))
+      (setq total (+ total i)))
+    total
+    #+end_src
+    6
+
+* Hooks
+One thing new comers often get confused by is hooks
+
+A *hook* is a list of functions to run in a particular situation
+
+#+begin_src emacs-lisp
+(defun my-fun ()
+  (interactive)
+  ;does something
+  (run-hooks 'my-fun-hook))
+
+(add-hook 'my-fun-hook (lambda () (insert "3")))
+#+end_src
+#+begin_src emacs-lisp
+(add-hook 'my-fun-hook (lambda () (insert "4")))
+#+end_src
+
+if you are coming from vim these are similar to *autocommands* but less finicky
+
+One example usecase would be to change settings for a particular programming language
+
+#+begin_src emacs-lisp
+(add-hook 'emacs-lisp-mode-hook (lambda ()
+                                  (indent-tabs-mode -1)))
+#+end_src
+
+This means that whenever I open an emacs lisp file it will use _spaces instead of tabs_ when I *hit the TAB key*
+
+* Temporary Variables
+When you want a function local variable people usually use =let=
+#+begin_src emacs-lisp
+(defun what-is-2+2-5 ()
+  (let (
+        (four (+ 2 2))
+        (five 5)
+        )
+    (- four five)))
+
+;; call this function
+(what-is-2+2-5)
+#+end_src
+* More Videos on elisp by me
+- [[https://www.youtube.com/watch?v=NocDm4zzToo][LEARN EMACS LISP - Mostly The Strange Parts - YouTube]]
+- [[https://www.youtube.com/watch?v=i4tmF_1nZng][LOOP Common Lisps Superior For - YouTube]]
+* Next Time
+** Lexical and Dynamic scoping
+** Macros
+** Buffer manipulation
