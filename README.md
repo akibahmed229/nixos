@@ -28,14 +28,27 @@ sudo su
 nix-shell -p git --command 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
 ```
 
-**Note:** During the installation process, [akibOS](./pkgs/akibOS/default.nix) will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
-also replace `hostname` with (available options: desktop, virt) and `username` with your desired username.
-the default password for the user is `123456` you can change it later.
+> **NOTE**:
+> During the installation process, [akibOS](./pkgs/akibOS/default.nix) will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
+> also replace `hostname` with (available options: desktop, virt) and `username` with your desired username.
+> the default password for the user is `123456` you can change it later.
 
 Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
-**Note:** The Configuration will clone from this repository and will be placed in `/home/username/.config/flake` respectively.
 
-For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
+> **NOTE**:
+> The Configuration will clone from this repository and will be placed in `/home/username/.config/flake` respectively.
+> For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
+
+**After installation:**
+
+- Open a terminal with "Super + Return".
+- Navigate to the `~/.config/flake` directory in the terminal.
+- Fix permission issues by running these commands:
+
+```bash
+chown -R yourUserName:users *
+chown -R yourUserName:users .*
+```
 
 </details>
 
@@ -101,5 +114,52 @@ For more information about NixOS and its configuration options, refer to the off
    nix develop github:akibahmed229/nixos#gtk3_env # gtk3 development environment
    nix develop github:akibahmed229/nixos#prisma # prisma query engine
    ```
+
+  </details>
+
+- <details>
+   <summary>Custom Pkgs & Shell scripts</summary>
+   </br>
+   
+   you can access the shell scripts by running the following command:
+   
+   ```bash
+   nix run github:akibahmed229/nixos#update-input-flake # this will update specific flake input of you flake.nix
+   nix rub github:akibahmed229/nixos#nixvim # you can try my custom nixvim
+   nix rub github:akibahmed229/nixos#wallpaper # you need to define your env variable $WALLPAPER
+   ```
+
+  You can also plug this into a flake to include it into a system configuration.
+
+  ```nix
+  {
+      inputs = {
+       akibOS.url = "github:akibahmed229/nixos";
+      };
+  }
+  ```
+
+  This input can then be used as Nixpkgs with the custom one. (nixos , home-manager)
+
+  ```nix
+  {inputs, ... }:
+  {
+      environment.systemPackages = with pkgs; [
+        inputs.akibOS.packages.${pkgs.system}.wallpaper # make sure you have set the env variable $WALLPAPER
+        inputs.akibOS.packages.${pkgs.system}.custom_nsxiv # my modify version of nsxiv
+      ];
+
+      # custom pkgs for sddm theme
+      services.displayManager.sddm = {
+        enable = true;
+        theme = ''${inputs.akibOS.packages.${pkgs.system}.custom_sddm.override {
+            imgLink = {
+              url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nix-wallpaper-nineish-dark-gray.png"; # you can change the image for sddm theme
+              sha256 = "07zl1dlxqh9dav9pibnhr2x1llywwnyphmzcdqaby7dz5js184ly"; # change the hash accordingly
+            };
+          }}'';
+      };
+  }
+  ```
 
   </details>
