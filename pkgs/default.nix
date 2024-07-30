@@ -10,4 +10,5 @@ pkgs: {
   akibOS = import ./akibOS {inherit pkgs;};
   fileviewer = import ./shellscript/fileviewer.nix {inherit pkgs;};
   docker-desktop = pkgs.callPackage ./docker-desktop {};
+  custom_nsxiv = pkgs.callPackage ./nsxiv {};
 }

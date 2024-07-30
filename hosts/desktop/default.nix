@@ -169,7 +169,7 @@
           lazygit
           gh
           alacritty
-          sxiv
+          self.packages.${pkgs.system}.custom_nsxiv
           mpv
           atuin
           telegram-desktop

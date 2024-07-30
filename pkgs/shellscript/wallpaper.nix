@@ -1,17 +1,25 @@
 {pkgs ? import <nixpkgs> {}}:
-pkgs.writeShellScriptBin "wallpaper" ''
-  # Get the selected image path using wofi
-  image_path=$(ls ~/.config/flake/public/wallpaper | ${pkgs.wofi}/bin/wofi -n --dmenu -w 2 -i -p "Select Wallpaper" | awk '{print "public/wallpaper/"$1}')
+pkgs.writeShellApplication {
+  name = "wallpaper";
+  text = ''
+    # Directory containing the images
+    IMAGE_DIR="$WALLPAPER"
 
-  # Check if the user selected a valid image path
-  if [ -z "$image_path" ]; then
-      echo "No image selected. Exiting."
-      exit 1
-  fi
+    # Launch sxiv to select an image and capture the selected image's filename
+    SELECTED_IMAGE=$(nsxiv -t -o "$IMAGE_DIR"/* | head -n 1)
 
-  # copy the image to cache folder and save the img as Wallpaper
-  cp ~/.config/flake/$image_path ~/.cache/swww/Wallpaper
+    # Check if an image was selected
+    if [ -n "$SELECTED_IMAGE" ]; then
+      # Print the relative path of the selected image
+      RELATIVE_PATH="$SELECTED_IMAGE"
+    else
+      echo "No image selected."
+    fi
 
-  # Use the selected image path with swww command
-  ${pkgs.swww}/bin/swww img ~/.config/flake/$image_path  --transition-step 2 --transition-fps 75 --transition-type right
-''
+     # copy the image to cache folder and save the img as Wallpaper
+     cp "$RELATIVE_PATH" ~/.cache/swww/Wallpaper
+
+     # Use the selected image path with swww command
+     swww img "$RELATIVE_PATH"  --transition-step 2 --transition-fps 75 --transition-type right
+  '';
+}

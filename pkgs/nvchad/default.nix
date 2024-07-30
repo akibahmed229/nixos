@@ -1,6 +1,7 @@
 {
   lib,
-  pkgs ? import <nixpkgs> {},
+  stdenv,
+  fetchFromGitHub,
   ...
 }: let
   custom = builtins.path {
@@ -8,11 +9,11 @@
     name = "custom";
   };
 in
-  pkgs.stdenv.mkDerivation {
+  stdenv.mkDerivation {
     pname = "nvchad";
     version = "2.5";
 
-    src = pkgs.fetchFromGitHub {
+    src = fetchFromGitHub {
       owner = "NvChad";
       repo = "NvChad";
       rev = "refs/heads/v2.5";
