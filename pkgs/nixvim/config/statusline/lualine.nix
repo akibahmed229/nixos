@@ -1,7 +1,7 @@
 {
   plugins.lualine = {
     enable = true;
-    theme = "nord";
+    theme = "gruvbox-material";
 
     componentSeparators = {
       left = "";

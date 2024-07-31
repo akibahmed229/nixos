@@ -4,6 +4,6 @@ pkgs.writeShellApplication {
   name = "update-input";
   text = ''
     input=$(${pkgs.jq}/bin/jq -r ".nodes.root.inputs | keys[]" < flake.lock | ${pkgs.fzf}/bin/fzf)
-    nix flake lock --update-input $input
+    nix flake lock --update-input "$input"
   '';
 }
