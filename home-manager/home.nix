@@ -81,8 +81,8 @@
       source = ../modules/predefiend/home-manager/alacritty;
       recursive = true;
     };
-    ".config/neofetch" = {
-      source = ../modules/predefiend/home-manager/neofetch;
+    ".config/fastfetch" = {
+      source = ../modules/predefiend/home-manager/fastfetch;
       recursive = true;
     };
     ".config/gtk-4.0" = {

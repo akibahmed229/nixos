@@ -62,7 +62,6 @@
       htop
       trash-cli
       cava
-      neofetch
       #espanso-wayland
       zip
       unzip
@@ -166,6 +165,7 @@
       then
         with unstable.${pkgs.system}; [
           git
+          fastfetch
           lazygit
           gh
           self.packages.${pkgs.system}.custom_nsxiv
