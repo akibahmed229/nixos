@@ -168,7 +168,6 @@
           git
           lazygit
           gh
-          alacritty
           self.packages.${pkgs.system}.custom_nsxiv
           mpv
           atuin

@@ -4,7 +4,7 @@
   unstable,
   ...
 }: let
-  resurrectDirPath = "~/.config/tmux/resurrect";
+  resurrectDirPath = "~/.tmux/resurrect";
 in {
   # Tmux Config
   programs.tmux = {
@@ -12,6 +12,9 @@ in {
     secureSocket = false;
     shell = "${pkgs.zsh}/bin/zsh"; # or zsh
     newSession = true;
+    keyMode = "vi";
+    mouse = true;
+    terminal = "screen-256color";
     plugins = with pkgs; [
       # tmuxPlugins.catppuccin
       unstable.${pkgs.system}.tmuxPlugins.tmux-nova
@@ -42,6 +45,10 @@ in {
           set -g @resurrect-strategy-tmux 'session'
 
           set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-dir ${resurrectDirPath}
+          set -g @resurrect-hook-post-save-all 'target=$(readlink -f ${resurrectDirPath}/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/home/$USER/.nix-profile/bin/||g" $target | sponge $target'
+
+
 
           # This three lines are specific to NixOS and they are intended
           # to edit the tmux_resurrect_* files that are created when tmux
@@ -125,21 +132,21 @@ in {
           set -g @nova-nerdfonts-left 
           set -g @nova-nerdfonts-right 
 
-          set -g @nova-pane-active-border-style "#44475a"
+          set -g @nova-pane-active-border-style "#3c3836"
           set -g @nova-pane-border-style "#282a36"
-          set -g @nova-status-style-bg "#4c566a"
+          set -g @nova-status-style-bg "#3c3837"
           set -g @nova-status-style-fg "#d8dee9"
-          set -g @nova-status-style-active-bg "#89c0d0"
-          set -g @nova-status-style-active-fg "#2e3540"
-          set -g @nova-status-style-double-bg "#2d3540"
+          set -g @nova-status-style-active-bg "#8ec07c"
+          set -g @nova-status-style-active-fg "#4f4b4a"
+          set -g @nova-status-style-double-bg "#4f4b4a"
 
           set -g @nova-pane "#I#{?pane_in_mode,  #{pane_mode},}  #W"
 
           set -g @nova-segment-mode "#{?client_prefix,Ω,ω}"
-          set -g @nova-segment-mode-colors "#78a2c1 #2e3440"
+          set -g @nova-segment-mode-colors "#458588 #3c3836"
 
           set -g @nova-segment-whoami "#{pane_current_path}"
-          set -g @nova-segment-whoami-colors "#78a2c1 #2e3440"
+          set -g @nova-segment-whoami-colors "#458588 #3c3836"
 
           set -g @nova-rows 0
           set -g @nova-segments-0-left "mode"
@@ -157,6 +164,8 @@ in {
       #  run-shell "if [ ! -d ~/.config/tmux/resurrect ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
 
         set-option -sa terminal-overrides ",xterm*:Tc"
+        set -q -g status-utf8 on                  # expect UTF-8 (tmux < 2.2)
+        setw -q -g utf8 on
         set -g mouse on
 
         unbind C-b

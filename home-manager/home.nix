@@ -1,6 +1,7 @@
 # common home-manager config accross all machines
 {
   pkgs,
+  unstable,
   user,
   state-version,
   theme,
@@ -33,7 +34,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
+  home.packages = with unstable.${pkgs.system}; [
     xdg-utils
     wl-clipboard
     tree
@@ -41,6 +42,8 @@
     adw-gtk3
     hwinfo
     ripgrep
+    alacritty
+    kitty
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -119,6 +122,14 @@
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  programs.kitty = {
+    enable = true;
+    package = unstable.${pkgs.system}.kitty;
+    shellIntegration.enableBashIntegration = true;
+    shellIntegration.enableZshIntegration = true;
+    extraConfig = builtins.readFile ../modules/predefiend/home-manager/kitty/kitty.conf;
   };
 
   # Create XDG Dirs

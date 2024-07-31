@@ -45,7 +45,6 @@
     systemPackages = with pkgs;
       [
         # dunst
-        kitty
         wofi
         networkmanagerapplet
         preload

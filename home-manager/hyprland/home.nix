@@ -97,7 +97,8 @@
             "firefox"
             "spotify"
             "vesktop"
-            "alacritty"
+            #"alacritty"
+            "kitty"
           ]
           else []
         );
@@ -107,7 +108,7 @@
       bind =
         [
           ## Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-          "$mod, RETURN, exec, alacritty"
+          "$mod, RETURN, exec, kitty"
           "$mod, Q, killactive,"
           "$mod, DELETE, exit,"
           "$mod, E, exec, thunar"
@@ -192,7 +193,8 @@
           if user == "akib"
           then [
             # Window open rule
-            "workspace 1,Alacritty"
+            #"workspace 1,Alacritty"
+            "workspace 1,kitty"
             "workspace 2,firefox"
             # "workspace 3,discord"
             "workspace 3,vesktop"
