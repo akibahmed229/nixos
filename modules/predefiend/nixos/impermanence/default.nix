@@ -88,6 +88,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
         ".mysql"
         ".rustup"
         ".steam"
+        ".elfeed"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
         {
           directory = ".gnupg";
@@ -129,6 +130,8 @@ Modules to help you handle persistent state on systems with ephemeral root stora
         ".local/state/wireplumber"
         ".local/share/atuin"
         ".local/share/Steam"
+        ".local/share/zed"
+        ".local/zed.app"
         ".var/app/sh.ppy.osu"
       ];
       files = [
