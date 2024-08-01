@@ -132,6 +132,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
         ".local/share/Steam"
         ".local/share/zed"
         ".local/zed.app"
+        ".local/share/org.localsend.localsend_app"
         ".var/app/sh.ppy.osu"
       ];
       files = [
