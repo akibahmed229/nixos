@@ -25,7 +25,7 @@
         path myprograms # loop through the myprograms and import the module
     )
     # list of programs
-    ["sops" "stylix" "impermanence" "disko" "mysql" "postgresql" "gaming" "networking" "bbr"];
+    ["sops" "stylix" "impermanence" "disko" "mysql" "postgresql" "gaming" "networking" "bbr" "sftp"];
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
@@ -129,6 +129,7 @@
           jetbrains.idea-community
           postman
           vscode
+          zed-editor
           android-tools
           android-udev-rules
           github-desktop
@@ -166,6 +167,8 @@
         with unstable.${pkgs.system}; [
           git
           fastfetch
+          # solaar # Logitech Unifying Receiver
+          localsend
           lazygit
           gh
           self.packages.${pkgs.system}.custom_nsxiv
