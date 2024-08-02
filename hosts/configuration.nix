@@ -59,12 +59,7 @@
         then {
           inherit (user) name;
           value = {
-            inherit (user) hashedPasswordFile;
-            hashedPassword = lib.mkIf (user.hashedPasswordFile != {}) user.hashedPassword;
-            inherit (user) extraGroups;
-            inherit (user) packages;
-            inherit (user) shell;
-            inherit (user) isNormalUser;
+            inherit (user) hashedPasswordFile hashedPassword extraGroups packages shell isNormalUser;
           };
         }
         else {})

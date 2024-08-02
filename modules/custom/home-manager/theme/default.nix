@@ -2,8 +2,6 @@
   lib,
   config,
   pkgs,
-  self,
-  user,
   ...
 }: let
   cfg = config.theme;
@@ -29,7 +27,7 @@ in {
       pointerCursor = {
         gtk.enable = true;
         x11.enable = true;
-        size = 38;
+        size = 24;
         name = "Bibata-Modern-Classic";
         package = pkgs.bibata-cursors;
       };
