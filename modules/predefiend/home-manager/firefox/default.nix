@@ -1,6 +1,7 @@
 # nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
 {
   pkgs,
+  unstable,
   user,
   inputs,
   lib,
@@ -19,6 +20,7 @@
 
   programs.firefox = {
     enable = true;
+    package = unstable.${pkgs.system}.firefox;
     profiles.${user} = {
       search.engines = {
         "Nix Packages" = {

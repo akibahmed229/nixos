@@ -35,15 +35,11 @@
         path = name: (import ../../modules/predefiend/home-manager/${name}); # path to the module
       in
         path app # loop through the apps and import the module
-    )
-    # list of apps
-    ["firefox" "discord" "zsh" "tmux" "lf" "ags" "git"];
+    ) ["firefox" "spotify" "discord" "zsh" "tmux" "lf" "ags" "git"]; # list of apps
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
     xfce.exo
-    neovim
-    spotify
   ];
 
   #imports = [(import ./others/hyprutility.nix)];

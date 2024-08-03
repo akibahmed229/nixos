@@ -51,6 +51,8 @@
   environment = {
     systemPackages = with pkgs; [
       # Packages installed
+      # Login manager customizetion for gdm
+      #gobject-introspection
       unstable.gnome.dconf-editor
       unstable.gnome.gnome-tweaks
       unstable.gnome.adwaita-icon-theme

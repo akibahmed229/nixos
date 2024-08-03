@@ -1,0 +1,3 @@
+[submodule "public/wallpapers"]
+	path = public/wallpapers
+	url = git@github.com:akibahmed229/wallpaper.git

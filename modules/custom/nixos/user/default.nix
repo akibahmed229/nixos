@@ -9,10 +9,10 @@ This module will help to manage multiple users with different configurations and
   ...
 }: let
   inherit (lib) mkOption types;
-  shell = pkgs.zsh;
+
   checkUserFun = user:
-    if user == "akib"
-    then shell
+    if user == config.setUserName
+    then pkgs.zsh
     else pkgs.bash;
 in {
   options.setUserName = lib.mkOption {
@@ -35,12 +35,12 @@ in {
             default = true;
           };
           hashedPassword = mkOption {
-            type = types.str;
+            type = types.str or null;
             example = "$/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
             description = "password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s";
           };
           hashedPasswordFile = mkOption {
-            type = types.str;
+            type = types.str or null;
             example = "/etc/nixos/secrets/my_secret.nix";
             description = "password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s";
           };
@@ -66,28 +66,24 @@ in {
   config = {
     # List of users
     myusers = [
-      {
+      rec {
         name = config.setUserName;
         isNormalUser = true;
         hashedPasswordFile = lib.mkIf (config.sops.secrets."akib/password/my_secret".path != {}) config.sops.secrets."akib/password/my_secret".path;
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
-        extraGroups = ["networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "plex"];
-        packages = with pkgs; [
-          wget
-          thunderbird
-          vlc
-        ];
-        shell = checkUserFun "${config.setUserName}";
+        extraGroups = ["networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak"];
+        packages = with pkgs; [wget thunderbird vlc];
+        shell = checkUserFun name;
         enabled = true;
       }
-      {
+      rec {
         name = "root";
         isNormalUser = false;
         hashedPasswordFile = lib.mkIf (config.setUserName == "akib") config.sops.secrets."akib/password/root_secret".path;
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
-        packages = with pkgs; [];
+        packages = with pkgs; [neovim wget];
         extraGroups = [];
-        shell = checkUserFun "root";
+        shell = checkUserFun name;
         enabled = true;
       }
     ];

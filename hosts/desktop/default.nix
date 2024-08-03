@@ -1,17 +1,19 @@
 # default config files for desktop systems
 {
+  inputs,
   pkgs,
   user,
   hostname,
   devicename,
   desktopEnvironment,
+  theme,
+  state-version,
   unstable,
   lib,
   self,
   ...
 }: {
   imports =
-    # Include the results of the hardware scan.
     [(import ./hardware-configuration.nix)]
     ++ [(import ../../home-manager/${desktopEnvironment})]
     ++ map
@@ -52,7 +54,7 @@
   };
 
   # remove bloat
-  documentation.nixos.enable = false;
+  documentation.nixos.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages =
@@ -111,14 +113,10 @@
       # pppoe connection
       ppp
       rpPPPoE
-      # Login manager customizetion for gdm
-      #gobject-introspection
       meson
       #gettext
       #rubyPackages.glib2
       libadwaita
-      polkit
-      #python310Packages.pygobject3
     ])
     ++ (
       if user == "akib" && hostname == "desktop"
@@ -175,6 +173,7 @@
           mpv
           atuin
           telegram-desktop
+          darktable
           # obs-studio
           (pkgs.wrapOBS {
             plugins = with pkgs.obs-studio-plugins; [
@@ -267,4 +266,17 @@
   #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
   #  ];
   # };
+
+  # Home manager configuration as a module
+  home-manager = {
+    useGlobalPkgs = false;
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs self user unstable desktopEnvironment theme state-version;}; # pass inputs && variables to home-manager
+    users.${user} = {
+      imports = [
+        (import ../../home-manager/home.nix) # config of home-manager
+        (import ../../home-manager/${desktopEnvironment}/home.nix)
+      ];
+    };
+  };
 }

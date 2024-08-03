@@ -169,7 +169,24 @@
         inherit system;
         config = {allowUnfree = true;};
       });
-    # using the above variables to define the system configuration
+
+    # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
+    mkNixosSystem = let
+      system = forAllSystems (system:
+        if
+          builtins.elem system [
+            "aarch64-linux" # ARM (Raspberry Pi)
+            "x86_64-linux" # x86_64 (Intel/AMD) 64-bit
+            "i686-linux" # x86 (Intel/AMD) 32-bit
+          ]
+        then system
+        else throw "Unsupported system: ${system}");
+    in
+      import ./lib/mkNixosSystem.nix {
+        inherit (nixpkgs) lib;
+        inherit inputs self pkgs unstable user hostname system devicename desktopEnvironment theme state-version home-manager;
+      };
+    # using the above variables,function, etc. to generate the system configuration
   in {
     # Accessible through 'nix develop" etc
     inherit (my-devShells) devShells;
@@ -197,23 +214,6 @@
     homeManagerModules = import ./modules/custom/home-manager;
     # NixOS configuration with flake and home-manager as module
     # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-    # system is dynamically generated for supported systems only (aarch64-linux, x86_64-linux)
-    nixosConfigurations = let
-      system = forAllSystems (
-        system:
-          if
-            builtins.elem system [
-              "aarch64-linux" # ARM (Raspberry Pi)
-              "x86_64-linux" # x86_64 (Intel/AMD) 64-bit
-              "i686-linux" # x86 (Intel/AMD) 32-bit
-            ]
-          then system
-          else throw "Unsupported system: ${system}"
-      );
-    in
-      import ./hosts {
-        inherit (nixpkgs) lib;
-        inherit inputs self pkgs unstable user hostname system devicename desktopEnvironment theme state-version home-manager;
-      };
+    nixosConfigurations = mkNixosSystem ./hosts;
   };
 }

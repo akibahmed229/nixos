@@ -2,10 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
+  self,
   pkgs,
   unstable,
   inputs,
+  user,
+  hostname,
+  devicename,
+  theme,
   state-version,
   ...
 }: {
@@ -74,4 +78,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # Home manager configuration as a module
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs self user hostname devicename theme unstable state-version;};
+    users.${user} = {
+      imports = [(import ../../home-manager/home.nix)];
+    };
+  };
 }

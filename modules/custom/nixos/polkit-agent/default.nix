@@ -13,9 +13,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    security.polkit = {
-      enable = true;
-    };
+    # Don't require sudo/root to `reboot` or `poweroff`.
+    security.polkit.enable = true;
     # A dbus session bus service that is used to bring up authentication dialogs used by polkit and gnome-keyring
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
