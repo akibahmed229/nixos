@@ -29,8 +29,8 @@
         modules =
           # configuration of nixos
           [
-            (import ../hosts/configuration.nix)
-            (import ../hosts/${name})
+            (import /${path}/configuration.nix)
+            (import /${path}/${name})
             inputs.disko.nixosModules.default
             home-manager.nixosModules.home-manager
           ];
