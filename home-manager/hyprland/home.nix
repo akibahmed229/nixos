@@ -40,6 +40,7 @@
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
     xfce.exo
+    neovim
   ];
 
   #imports = [(import ./others/hyprutility.nix)];

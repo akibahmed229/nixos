@@ -42,7 +42,6 @@
     adw-gtk3
     hwinfo
     ripgrep
-    neovim
     alacritty
     kitty
 
