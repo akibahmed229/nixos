@@ -29,13 +29,13 @@
       {
         mode = "n";
         key = "<leader>wv";
-        action = "<cmd>vertical split<CR>";
+        action = "<cmd>vsplit<CR>";
         options.desc = "Vertical window split";
       }
       {
         mode = "n";
         key = "<leader>wh";
-        action = "<cmd>horizontal split<CR>";
+        action = "<cmd>split<CR>";
         options.desc = "Horizontal window split";
       }
       {
@@ -48,13 +48,13 @@
         mode = "n";
         key = "<C-u>";
         action = "<C-u>zz";
-        options.desc = "page up";
+        options.desc = "Page up";
       }
       {
         mode = "i";
         key = "<C-c>";
         action = "<Esc>";
-        options.desc = "Escep";
+        options.desc = "Escape";
       }
       {
         mode = "n";

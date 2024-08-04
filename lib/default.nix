@@ -1,0 +1,3 @@
+{
+  mkNixOSSystem = import ./mkNixOSSystem;
+}

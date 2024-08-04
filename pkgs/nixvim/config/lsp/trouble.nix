@@ -9,7 +9,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<leader>x";
+      key = "<leader>xd";
       action = "+diagnostics/quickfix";
     }
     {
