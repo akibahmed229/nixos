@@ -171,7 +171,7 @@
       });
 
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
-    mkNixosSystem = let
+    mkNixOSSystem = let
       system = forAllSystems (system:
         if
           builtins.elem system [
@@ -184,7 +184,8 @@
     in
       self.lib.mkNixOSSystem {
         inherit (nixpkgs) lib;
-        inherit inputs self pkgs unstable user hostname system devicename desktopEnvironment theme state-version home-manager;
+        inherit pkgs system home-manager;
+        specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
       };
     # using the above variables,function, etc. to generate the system configuration
   in {
@@ -216,6 +217,6 @@
     homeManagerModules = import ./modules/custom/home-manager;
     # NixOS configuration with flake and home-manager as module
     # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-    nixosConfigurations = mkNixosSystem ./hosts;
+    nixosConfigurations = mkNixOSSystem ./hosts;
   };
 }

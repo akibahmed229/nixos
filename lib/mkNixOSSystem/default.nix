@@ -3,18 +3,11 @@
 * which will import ../hosts dir and create a list of nixos systems to be build
 */
 {
-  self,
   lib,
-  inputs,
-  unstable,
+  pkgs,
   system,
-  desktopEnvironment,
-  theme,
-  state-version,
   home-manager,
-  user,
-  hostname,
-  devicename,
+  specialArgs ? {},
   ...
 }: path: let
   getinfo = builtins.readDir path;
@@ -25,13 +18,14 @@
       inherit name;
       value = lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs self home-manager user hostname devicename desktopEnvironment theme unstable state-version;};
+        specialArgs =
+          {inherit system;}
+          // lib.mapAttrs' (name: value: {inherit name value;}) specialArgs;
         modules =
           # configuration of nixos
           [
             (import /${path}/configuration.nix)
             (import /${path}/${name})
-            inputs.disko.nixosModules.default
             home-manager.nixosModules.home-manager
           ];
       };
@@ -42,10 +36,10 @@
 
   # Map and filter out non-directories from the list of files
   processed = lib.mapAttrs' processDir getinfo;
-  validAttrs = lib.filterAttrs (_: value: value != "regular" && value != "symlink") processed;
+  validAttrs = lib.filterAttrs (_: value: value != "regular" && value != "symlink" && value != "unknown") processed;
 
   # Convert to list of attribute sets for listToAttrs (haha I'm so funny)
-  validList = builtins.map (name: {
+  validList = map (name: {
     inherit name;
     value = validAttrs.${name};
   }) (lib.attrNames validAttrs);

@@ -21,6 +21,11 @@
   grub.enable = lib.mkForce false;
   networking.networkmanager.enable = lib.mkForce false;
 
+  nixpkgs.overlays = [
+    self.overlays.nvim-overlay
+  ];
+  environment.systemPackages = with unstable.${pkgs.system}; [neovim];
+
   # Enables copy / paste when running in a KVM with spice.
   services.spice-vdagentd.enable = true;
   # Use faster squashfs compression
