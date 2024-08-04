@@ -177,3 +177,164 @@ chown -R yourUserName:users .*
   ```
 
   </details>
+
+- <details>
+  <summary>My Custom lib helper (flake lib) allow multiple hosts with easy-to-administer</summary>
+  </br>
+
+  You can plug this into a flake to make your nixosSystem configuration **_(flake and home-manager as modules)_**
+
+  ```nix
+  {
+    inputs = {
+       nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
+       home-manager = {
+        url = "github:nix-community/home-manager/release-24.05";
+        inputs.nixpkgs.follows = "nixpkgs";
+       };
+       akibOS.url = "github:akibahmed229/nixos";
+    };
+    outputs = {
+        self, # The special input named self refers to the outputs and source tree of this flake
+        nixpkgs,
+        home-manager,
+        akibOS,
+        ...
+    # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
+    } @ inputs: let
+      system = "x86_64-linux";
+      # FIXME: Replace with your username
+      user = "akib"
+
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {allowUnfree = true;};
+      };
+
+      mkNixOSSystem = akibOS.lib.mkNixOSSystem {
+        # need to be passed
+        inherit (nixpkgs) lib;
+        inherit pkgs system home-manager;
+
+        # Set all inputs parameters as special arguments for all submodules,
+        # so you can directly use all dependencies in inputs in submodules
+        specialArgs = {inherit inputs user;}; # pass args as your requirement (make sure to pass user)
+      };
+    in {
+        nixosConfigurations = mkNixOSSystem ./hosts;
+    };
+  }
+  ```
+
+  **_In the above example `./hosts` is the hosts specific file see [hosts](./hosts) where you need to define one common config file for nixos system `./hosts/configuration.nix` and `yourHostName` directory which will contain `./hosts/desktop/default.nix` and `./hosts/desktop/hardware-configuration.nix` which will import by default your `default.nix` file._**
+
+  > **_Note:_** You can have multiple hosts by adding directory for each host as mention above.
+
+  example `./hosts/desktop/default.nix` configuration
+
+  ```nix
+    # This is your system's configuration file.
+    # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+
+    {pkgs, user,...}:{
+
+      # your imports goes here,...
+      # make sure to import the hardware-configuration
+      imports = [(import ./hardware-configuration.nix)];
+
+      # Configure your nixpkgs instance
+      config = {
+        # Disable if you don't want unfree packages
+        allowUnfree = true;
+      };
+
+      # your configuration goes here,...
+      environment.systemPackages = with pkgs; [nvim];
+
+      users.users = {
+        ${user} = {
+          # TODO: You can set an initial password for your user.
+          # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
+          # Be sure to change it (using passwd) after rebooting!
+          initialPassword = "correcthorsebatterystaple";
+          isNormalUser = true;
+          # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
+          extraGroups = ["wheel"];
+        };
+      };
+
+      # home-manager configuration
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        extraSpecialArgs = {inherit inputs user;}; # pass args as your requirement
+        users.${user} = {
+          imports = [
+            # TODO: import your home.nix file and other home-manager stuff
+            # make sure to import home configuration
+            (import ./home.nix)
+          ];
+        };
+      };
+
+      # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+      system.stateVersion = "24.05";
+    }
+  ```
+
+  example `./hosts/desktop/hardware-configuration.nix` configuration
+
+  ```nix
+    # This is just an example, you should generate yours with nixos-generate-config and put it in here.
+
+    {
+      boot.loader.systemd-boot.enable = true;
+
+      fileSystems."/" = {
+        device = "/dev/sda1";
+        fsType = "ext4";
+      };
+
+      # Set your system kind (needed for flakes)
+      nixpkgs.hostPlatform = "x86_64-linux";
+    }
+  ```
+
+  example `./hosts/desktop/home.nix` configuration
+
+  ```nix
+    # This is your home-manager configuration file
+    # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+
+    {
+      imports = [
+          # your imports goes here,...
+      ];
+
+      # Configure your nixpkgs instance
+      config = {
+         # Disable if you don't want unfree packages
+         allowUnfree = true;
+         # Workaround for https://github.com/nix-community/home-manager/issues/2942
+         allowUnfreePredicate = _: true;
+      };
+
+      home = {
+        username = "${user}";
+        homeDirectory = "/home/${user}";
+      };
+
+      # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+      home.stateVersion = "24.05";
+    };
+
+  ```
+
+  **Accessible through :** `$ nixos-rebuild switch --flake .#<host-name>`
+
+  > **_Note_** : `host-name` will be your directory name that you create in `./hosts`
+  > In our case host name will be `desktop` as we created directory in `./hosts/desktop/`
+
+  > - `$ nixos-rebuild switch --flake .#desktop`
+
+  </details>
