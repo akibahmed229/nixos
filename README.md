@@ -93,9 +93,9 @@ chown -R yourUserName:users .*
   {
       nixpkgs.overlays = [
          inputs.akibOS.overlays.discord-overlay # pull the latest version of discord
-         inputs.akibOS.overlays.chromium-overlay # pull the latest version of chromium
          inputs.akibOS.overlays.nvim-overlay # my custom nvim with nixvim
          inputs.akibOS.overlays.flatpak-overlay # patch flatpak font
+         inputs.akibOS.overlays.unstable-packages # pull pkgs from unstable. be accissible through `pkgs.unstable`
       ];
   }
   ```
@@ -124,9 +124,9 @@ chown -R yourUserName:users .*
    you can access the shell scripts by running the following command:
    
    ```bash
-   nix run github:akibahmed229/nixos#update-input-flake # this will update specific flake input of you flake.nix
-   nix rub github:akibahmed229/nixos#nixvim # you can try my custom nixvim
-   nix rub github:akibahmed229/nixos#wallpaper # you need to define your env variable $WALLPAPER
+   nix run github:akibahmed229/nixos#nix-update-input # this will update specific flake input of you flake.nix
+   nix run github:akibahmed229/nixos#nixvim # you can try my custom nixvim
+   nix run github:akibahmed229/nixos#wallpaper # you need to define your env variable $WALLPAPER
    ```
 
   You can also plug this into a flake to include it into a system configuration.
@@ -141,15 +141,17 @@ chown -R yourUserName:users .*
 
   This input can then be used as Nixpkgs with the custom one. (nixos , home-manager)
 
+  From NixOS Configuration
+
   ```nix
-  {inputs, ... }:
+  {inputs, pkgs,... }:
   {
       environment.systemPackages = with pkgs; [
         inputs.akibOS.packages.${pkgs.system}.wallpaper # make sure you have set the env variable $WALLPAPER
         inputs.akibOS.packages.${pkgs.system}.custom_nsxiv # my modify version of nsxiv
       ];
 
-      # custom pkgs for sddm theme
+      # custom pkgs for sddm theme for
       services.displayManager.sddm = {
         enable = true;
         theme = ''${inputs.akibOS.packages.${pkgs.system}.custom_sddm.override {
@@ -159,6 +161,18 @@ chown -R yourUserName:users .*
             };
           }}'';
       };
+  }
+  ```
+
+  From Home Manager
+
+  ```nix
+  {inputs, pkgs,... }:
+  {
+     home.packages  = with pkgs; [
+        inputs.akibOS.packages.${pkgs.system}.wallpaper # make sure you have set the env variable $WALLPAPER
+        inputs.akibOS.packages.${pkgs.system}.custom_nsxiv # my modify version of nsxiv
+      ];
   }
   ```
 
