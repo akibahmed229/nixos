@@ -182,7 +182,7 @@
         then system
         else throw "Unsupported system: ${system}");
     in
-      import ./lib/mkNixosSystem.nix {
+      self.lib.mkNixOSSystem {
         inherit (nixpkgs) lib;
         inherit inputs self pkgs unstable user hostname system devicename desktopEnvironment theme state-version home-manager;
       };
@@ -190,6 +190,8 @@
   in {
     # Accessible through 'nix develop" etc
     inherit (my-devShells) devShells;
+    # lib is a custom library of helper functions
+    lib = import ./lib;
     # Accessible through 'nix build', 'nix shell', "nix run", etc
     packages = forAllSystems (
       system:

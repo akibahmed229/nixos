@@ -1,6 +1,6 @@
 /*
 * My lib helper functions
-* which will import ../hosts dir and create a list of nixos systems to be built
+* which will import ../hosts dir and create a list of nixos systems to be build
 */
 {
   self,
@@ -44,7 +44,7 @@
   processed = lib.mapAttrs' processDir getinfo;
   validAttrs = lib.filterAttrs (_: value: value != "regular" && value != "symlink") processed;
 
-  # Convert to list of attribute sets for listToAttrs
+  # Convert to list of attribute sets for listToAttrs (haha I'm so funny)
   validList = builtins.map (name: {
     inherit name;
     value = validAttrs.${name};
