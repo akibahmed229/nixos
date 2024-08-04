@@ -39,16 +39,10 @@ in {
           # sense I don't really need tmux resurrect to restore the session as this already
           # taken care of and this functionality becomes redundant. But as I am not sure if I keep
           # using vim-startify or its auto restore feature and it do not conflict in any way that
-          # I know of with set -g @resurrect-strategy-* I decided to keep it enabled for the time being.
-          set -g @resurrect-strategy-nvim 'session'
-          set -g @resurrect-strategy-vim 'session'
-          set -g @resurrect-strategy-tmux 'session'
-
-          set -g @resurrect-capture-pane-contents 'on'
-          set -g @resurrect-dir ${resurrectDirPath}
-          set -g @resurrect-hook-post-save-all 'target=$(readlink -f ${resurrectDirPath}/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/home/$USER/.nix-profile/bin/||g" $target | sponge $target'
-
-
+          set -g @resurrect-strategy-* 'session'
+          # set -g @resurrect-strategy-nvim 'session'
+          # set -g @resurrect-strategy-vim 'session'
+          # set -g @resurrect-strategy-tmux 'session'
 
           # This three lines are specific to NixOS and they are intended
           # to edit the tmux_resurrect_* files that are created when tmux
