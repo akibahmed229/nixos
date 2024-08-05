@@ -728,10 +728,10 @@
       },
       "locked": {
         "dir": "/devshells",
-        "dirtyRev": "1419710f9da768d4d8d4663c7abab3681da5b9e3-dirty",
-        "dirtyShortRev": "1419710-dirty",
-        "lastModified": 1722894787,
-        "narHash": "sha256-vGIk8Zpe4shQBNubPacrlh+edoaf/pGIQun3UGPPBSA=",
+        "dirtyRev": "fa5559703d0cc0db3733d6ebb2991f844912275a-dirty",
+        "dirtyShortRev": "fa55597-dirty",
+        "lastModified": 1722895090,
+        "narHash": "sha256-1oyeO2T7RHl419/G+QKzVscbfJbtSYttNhd5hCz6sa4=",
         "type": "git",
         "url": "file:.?dir=/devshells"
       },
@@ -868,14 +868,18 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-7wh+30G9HIIYCrGt9AEeiekVu8q2CWx63VcHPZg5ltQ=",
-        "path": "./pkgs/nixvim",
-        "type": "path"
+        "dir": "/pkgs/nixvim",
+        "dirtyRev": "fa5559703d0cc0db3733d6ebb2991f844912275a-dirty",
+        "dirtyShortRev": "fa55597-dirty",
+        "lastModified": 1722895090,
+        "narHash": "sha256-1oyeO2T7RHl419/G+QKzVscbfJbtSYttNhd5hCz6sa4=",
+        "type": "git",
+        "url": "file:.?dir=/pkgs/nixvim"
       },
       "original": {
-        "path": "./pkgs/nixvim",
-        "type": "path"
+        "dir": "/pkgs/nixvim",
+        "type": "git",
+        "url": "file:.?dir=/pkgs/nixvim"
       }
     },
     "nixvim_2": {
