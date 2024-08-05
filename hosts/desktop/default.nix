@@ -1,13 +1,10 @@
 # default config files for desktop systems
 {
-  inputs,
   pkgs,
   user,
   hostname,
   devicename,
   desktopEnvironment,
-  theme,
-  state-version,
   unstable,
   lib,
   self,
@@ -270,8 +267,6 @@
   # Home manager configuration as a module
   home-manager = {
     useGlobalPkgs = false;
-    useUserPackages = true;
-    extraSpecialArgs = {inherit inputs self user unstable desktopEnvironment theme state-version;}; # pass inputs && variables to home-manager
     users.${user} = {
       imports = [
         (import ../../home-manager/home.nix) # config of home-manager

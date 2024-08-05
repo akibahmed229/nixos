@@ -4,10 +4,6 @@
   unstable,
   inputs,
   user,
-  hostname,
-  devicename,
-  theme,
-  state-version,
   lib,
   ...
 }: {
@@ -33,8 +29,6 @@
 
   home-manager = {
     useGlobalPkgs = false;
-    useUserPackages = true;
-    extraSpecialArgs = {inherit inputs self user hostname devicename theme unstable state-version;};
     users.${user} = {
       imports = [
         (import ../../home-manager/home.nix)

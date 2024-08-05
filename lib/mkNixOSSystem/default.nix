@@ -20,13 +20,20 @@
         inherit system;
         specialArgs =
           {inherit system;}
-          // lib.mapAttrs' (name: value: {inherit name value;}) specialArgs;
+          // lib.mapAttrs' (n: v: lib.nameValuePair n v) specialArgs;
         modules =
           # configuration of nixos
           [
             (import /${path}/configuration.nix)
             (import /${path}/${name})
             home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = lib.mkDefault true;
+                useUserPackages = lib.mkDefault true;
+                extraSpecialArgs = lib.mapAttrs' (n: v: lib.nameValuePair n v) specialArgs;
+              };
+            }
           ];
       };
     }
@@ -36,7 +43,7 @@
 
   # Map and filter out non-directories from the list of files
   processed = lib.mapAttrs' processDir getinfo;
-  validAttrs = lib.filterAttrs (_: value: value != "regular" && value != "symlink" && value != "unknown") processed;
+  validAttrs = lib.filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
 
   # Convert to list of attribute sets for listToAttrs (haha I'm so funny)
   validList = map (name: {

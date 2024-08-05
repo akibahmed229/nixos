@@ -81,9 +81,6 @@
 
   # Home manager configuration as a module
   home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = {inherit inputs self user hostname devicename theme unstable state-version;};
     users.${user} = {
       imports = [(import ../../home-manager/home.nix)];
     };

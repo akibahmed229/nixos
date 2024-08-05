@@ -226,30 +226,23 @@ chown -R yourUserName:users .*
   }
   ```
 
-  **_In the above example `./hosts` is the hosts specific file see [hosts](./hosts) where you need to define one common config file for nixos system `./hosts/configuration.nix` and `yourHostName` directory which will contain `./hosts/desktop/default.nix` and `./hosts/desktop/hardware-configuration.nix` which will import by default your `default.nix` file._**
+  **In the above example `./hosts` is the hosts specific file see [hosts](./hosts) where you need to define one common config file for nixos system `./hosts/configuration.nix` and `yourHostName` directory which will contain `./hosts/desktop/default.nix` and `./hosts/desktop/hardware-configuration.nix` which will import by default your `default.nix` file.**
 
   > **_Note:_** You can have multiple hosts by adding directory for each host as mention above.
 
-  example `./hosts/desktop/default.nix` configuration
+  example `./hosts/configuration.nix` configuration
 
   ```nix
-    # This is your system's configuration file.
-    # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+    # This is your default configuration file.
 
     {pkgs, user,...}:{
-
-      # your imports goes here,...
-      # make sure to import the hardware-configuration
-      imports = [(import ./hardware-configuration.nix)];
+      # your default configuration for all system goes here,...
 
       # Configure your nixpkgs instance
       config = {
         # Disable if you don't want unfree packages
         allowUnfree = true;
       };
-
-      # your configuration goes here,...
-      environment.systemPackages = with pkgs; [nvim];
 
       users.users = {
         ${user} = {
@@ -263,11 +256,27 @@ chown -R yourUserName:users .*
         };
       };
 
+      # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+      system.stateVersion = "24.05";
+    }
+  ```
+
+  example `./hosts/desktop/default.nix` configuration
+
+  ```nix
+    # This is your system's configuration file.
+    # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+
+    {pkgs, user,...}:{
+      # your imports goes here,...
+      # make sure to import the hardware-configuration
+      imports = [(import ./hardware-configuration.nix)];
+
+      # your configuration goes here,...
+      environment.systemPackages = with pkgs; [nvim];
+
       # home-manager configuration
       home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        extraSpecialArgs = {inherit inputs user;}; # pass args as your requirement
         users.${user} = {
           imports = [
             # TODO: import your home.nix file and other home-manager stuff
@@ -276,9 +285,6 @@ chown -R yourUserName:users .*
           ];
         };
       };
-
-      # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-      system.stateVersion = "24.05";
     }
   ```
 
@@ -306,10 +312,10 @@ chown -R yourUserName:users .*
     # This is your home-manager configuration file
     # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-    {
-      imports = [
-          # your imports goes here,...
-      ];
+    {pkgs, user,...}:{
+
+      # your imports & home configuration goes here,...
+      imports = [ ];
 
       # Configure your nixpkgs instance
       config = {
@@ -327,7 +333,6 @@ chown -R yourUserName:users .*
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
       home.stateVersion = "24.05";
     };
-
   ```
 
   **Accessible through :** `$ nixos-rebuild switch --flake .#<host-name>`
@@ -335,6 +340,6 @@ chown -R yourUserName:users .*
   > **_Note_** : `host-name` will be your directory name that you create in `./hosts`
   > In our case host name will be `desktop` as we created directory in `./hosts/desktop/`
 
-  > - `$ nixos-rebuild switch --flake .#desktop`
+  > **`$ nixos-rebuild switch --flake .#desktop`**
 
   </details>
