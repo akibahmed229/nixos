@@ -6,13 +6,15 @@
   lib ? throw "lib is not defined",
   pkgs ? throw "pkgs is not defined",
   system ? throw "system is required",
+  homeConf ? false,
   home-manager ? throw "home-manager is required",
   specialArgs ? {},
   ...
 }: path: let
   getinfo = builtins.readDir path;
 
-  processDir = name: value:
+  # NixOS system
+  processDirNixOS = name: value:
     if value == "directory"
     then {
       inherit name;
@@ -41,8 +43,34 @@
       inherit name value;
     };
 
+  # Home manager system
+  processDirHome = name: value:
+    if value == "directory"
+    then {
+      inherit name;
+      value = lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = lib.mapAttrs' (n: v: lib.nameValuePair n v) specialArgs;
+        modules = [
+          # configuration of home-manager
+          (import /${path}/home.nix)
+          (import /${path}/${name})
+        ];
+      };
+    }
+    else {
+      inherit name value;
+    };
+
   # Map and filter out non-directories from the list of files
-  processed = lib.mapAttrs' processDir getinfo;
+  processed =
+    lib.mapAttrs' (
+      # Check if we are processing home-manager or nixos
+      if homeConf
+      then processDirHome
+      else processDirNixOS
+    )
+    getinfo;
   validAttrs = lib.filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
 
   # Convert to list of attribute sets for listToAttrs (haha I'm so funny)
@@ -50,5 +78,11 @@
     inherit name;
     value = validAttrs.${name};
   }) (lib.attrNames validAttrs);
+
+  # check if directly is empty
+  isEmpty = _:
+    if lib.lists.length validList == 0
+    then throw "No systems found in ${path}"
+    else _;
 in
-  builtins.listToAttrs validList
+  isEmpty builtins.listToAttrs validList

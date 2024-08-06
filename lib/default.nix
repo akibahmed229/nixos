@@ -1,4 +1,4 @@
-lib: {
-  mkNixOSSystem = import ./mkNixOSSystem;
+{lib, ...}: {
+  mkSystem = import ./mkSystem;
   mkImport = import ./mkImport {inherit lib;};
 }
