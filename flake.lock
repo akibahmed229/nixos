@@ -865,7 +865,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-sJt1SVbzQ45xuZUJ5lQMoxbbtRzf0lnxOqD7YCVDL3c=",
+        "narHash": "sha256-GEWmW3ng+aG4Vtpg5p2HJ24LzkLSHfa9LuJ+Xx0/7GI=",
         "path": "./pkgs/nixvim",
         "type": "path"
       },
@@ -1047,11 +1047,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722872544,
-        "narHash": "sha256-zxj4FLaqvBw7AR2ppEwn4qK//XpapKG33l8kcfY+QXs=",
+        "lastModified": 1722944539,
+        "narHash": "sha256-bQ9Tm5IVu3e8DEzAtmqjch8AkhYXGoDR0twRvhhoNCg=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "c0309fc3f4315cfb7e1e588a43ed19516c8b6022",
+        "rev": "94aa0fc0fbe9ed37a7bfa156cff0bfacc3b0a8cb",
         "type": "github"
       },
       "original": {
