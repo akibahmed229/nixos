@@ -108,12 +108,12 @@
     };
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
     nixvim = {
-      url = "path:./pkgs/nixvim";
+      url = "git+file:.?dir=/pkgs/nixvim";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     # My devShells for different systems
     my-devShells = {
-      url = "path:./devshells";
+      url = "git+file:.?dir=/devshells";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
     };
