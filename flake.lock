@@ -219,11 +219,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1722830603,
-        "narHash": "sha256-RKdQbzJwScg4MG5tLh4fF700kinfAeRPNh7mo9mvQh4=",
+        "lastModified": 1722917006,
+        "narHash": "sha256-29qBs5HlcegrLP8oQe8T9hHx7u94TEz9ivPwZlorAJU=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "8b215244d5fe6e922475e8348c1c417b192595fe",
+        "rev": "8552abe55a4f364d94efb84502a550c2c9c3101c",
         "type": "gitlab"
       },
       "original": {
@@ -728,10 +728,10 @@
       },
       "locked": {
         "dir": "/devshells",
-        "dirtyRev": "fa5559703d0cc0db3733d6ebb2991f844912275a-dirty",
-        "dirtyShortRev": "fa55597-dirty",
-        "lastModified": 1722895090,
-        "narHash": "sha256-1oyeO2T7RHl419/G+QKzVscbfJbtSYttNhd5hCz6sa4=",
+        "dirtyRev": "bfbecfadaae5ca71c2855e161be8265c0327c624-dirty",
+        "dirtyShortRev": "bfbecfa-dirty",
+        "lastModified": 1722895140,
+        "narHash": "sha256-40pRtE6lv0/2tsq4ouC1IZJ6NNNr0Ce//R24ARpmdhA=",
         "type": "git",
         "url": "file:.?dir=/devshells"
       },
@@ -869,10 +869,10 @@
       },
       "locked": {
         "dir": "/pkgs/nixvim",
-        "dirtyRev": "fa5559703d0cc0db3733d6ebb2991f844912275a-dirty",
-        "dirtyShortRev": "fa55597-dirty",
-        "lastModified": 1722895090,
-        "narHash": "sha256-1oyeO2T7RHl419/G+QKzVscbfJbtSYttNhd5hCz6sa4=",
+        "dirtyRev": "bfbecfadaae5ca71c2855e161be8265c0327c624-dirty",
+        "dirtyShortRev": "bfbecfa-dirty",
+        "lastModified": 1722895140,
+        "narHash": "sha256-40pRtE6lv0/2tsq4ouC1IZJ6NNNr0Ce//R24ARpmdhA=",
         "type": "git",
         "url": "file:.?dir=/pkgs/nixvim"
       },
@@ -1002,11 +1002,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722114803,
-        "narHash": "sha256-s6YhI8UHwQvO4cIFLwl1wZ1eS5Cuuw7ld2VzUchdFP0=",
+        "lastModified": 1722897572,
+        "narHash": "sha256-3m/iyyjCdRBF8xyehf59QlckIcmShyTesymSb+N4Ap4=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "eb34eb588132d653e4c4925d862f1e5a227cc2ab",
+        "rev": "8ae477955dfd9cbf5fa4eb82a8db8ddbb94e79d9",
         "type": "github"
       },
       "original": {
