@@ -171,7 +171,7 @@
       });
 
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
-    mkNixOSSystem = let
+    mkSystem = let
       system = forAllSystems (system:
         if
           builtins.elem system [
@@ -182,7 +182,7 @@
         then system
         else throw "Unsupported system: ${system}");
     in
-      self.lib.mkNixOSSystem {
+      self.lib.mkSystem {
         inherit lib pkgs system home-manager;
         specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
       };
@@ -196,7 +196,7 @@
     packages = forAllSystems (
       system:
       # Import your custom packages
-        import ./pkgs nixpkgs.legacyPackages.${system}
+        import ./pkgs nixpkgs.legacyPackages.${system} or {}
         # import custom nixvim flake as a package
         // {
           nixvim = inputs.nixvim.packages.${system}.default;
@@ -206,7 +206,7 @@
     overlays = import ./overlays {inherit inputs;};
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {});
 
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
@@ -214,8 +214,9 @@
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/custom/home-manager;
+
     # NixOS configuration with flake and home-manager as module
     # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-    nixosConfigurations = mkNixOSSystem ./hosts;
+    nixosConfigurations = mkSystem ./hosts;
   };
 }
