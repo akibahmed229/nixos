@@ -3,10 +3,10 @@
 * which will import ../hosts dir and create a list of nixos systems to be build
 */
 {
-  lib,
-  pkgs,
-  system,
-  home-manager,
+  lib ? throw "lib is not defined",
+  pkgs ? throw "pkgs is not defined",
+  system ? throw "system is required",
+  home-manager ? throw "home-manager is required",
   specialArgs ? {},
   ...
 }: path: let
