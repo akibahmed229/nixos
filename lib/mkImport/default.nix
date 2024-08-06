@@ -1,4 +1,4 @@
-{
+lib: {
   path ? throw "path is required",
   ListOfPrograms ? [],
   ...

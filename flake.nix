@@ -135,7 +135,7 @@
     # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
   } @ inputs: let
     # The system to build.
-    inherit (nixpkgs) lib;
+    lib = nixpkgs.lib // home-manager.lib;
     state-version = "24.05";
     hostname = "desktop";
     devicename = "/dev/nvme0n1";
@@ -183,8 +183,7 @@
         else throw "Unsupported system: ${system}");
     in
       self.lib.mkNixOSSystem {
-        inherit (nixpkgs) lib;
-        inherit pkgs system home-manager;
+        inherit lib pkgs system home-manager;
         specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
       };
     # using the above variables,function, etc. to generate the system configuration
@@ -192,7 +191,7 @@
     # Accessible through 'nix develop" etc
     inherit (my-devShells) devShells;
     # lib is a custom library of helper functions
-    lib = import ./lib;
+    lib = import ./lib {inherit lib;};
     # Accessible through 'nix build', 'nix shell', "nix run", etc
     packages = forAllSystems (
       system:
