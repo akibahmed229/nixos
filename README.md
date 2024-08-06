@@ -211,7 +211,7 @@ chown -R yourUserName:users .*
         config = {allowUnfree = true;};
       };
 
-      mkNixOSSystem = akibOS.lib.mkNixOSSystem {
+      mkSystem = akibOS.lib.mkSystem {
         # need to be passed
         inherit (nixpkgs) lib;
         inherit pkgs system home-manager;
@@ -221,7 +221,7 @@ chown -R yourUserName:users .*
         specialArgs = {inherit inputs user;}; # pass args as your requirement (make sure to pass user)
       };
     in {
-        nixosConfigurations = mkNixOSSystem ./hosts;
+        nixosConfigurations = mkSystem ./hosts;
     };
   }
   ```
