@@ -4,20 +4,17 @@
 # Dconf settings can be found by running "$ dconf watch /"
 #
 {
-  config,
   lib,
   pkgs,
   unstable,
   theme,
+  self,
   ...
 }: {
-  imports =
-    [(import ../../modules/predefiend/home-manager/firefox/firefox.nix)]
-    ++ [(import ../../modules/predefiend/home-manager/spotify/spicetify.nix)]
-    ++ [(import ../../modules/predefiend/home-manager/discord/discord.nix)]
-    ++ [(import ../../modules/predefiend/home-manager/zsh/zsh.nix)]
-    ++ [(import ../../modules/predefiend/home-manager/tmux/tmux.nix)]
-    ++ [(import ../../modules/predefiend/home-manager/lf/lf.nix)];
+  imports = self.lib.mkImport {
+    path = ../../modules/predefiend/home-manager;
+    ListOfPrograms = ["firefox" "spicetify" "discord" "zsh" "tmux" "lf"];
+  };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [

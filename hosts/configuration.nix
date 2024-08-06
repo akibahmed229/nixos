@@ -8,14 +8,17 @@
   inputs,
   self,
   state-version,
+  devicename,
   ...
 }: {
-  imports = [
-    self.nixosModules.default # Custom nixos modules
-    inputs.disko.nixosModules.default
-    inputs.nix-index-database.nixosModules.nix-index
-    {programs.nix-index-database.comma.enable = true;}
-  ];
+  imports =
+    [
+      self.nixosModules.default # Custom nixos modules
+      inputs.disko.nixosModules.default
+      inputs.nix-index-database.nixosModules.nix-index
+      {programs.nix-index-database.comma.enable = true;}
+    ]
+    ++ [(import ../modules/predefiend/nixos/disko {device = lib.mkDefault devicename;})];
 
   # Dual Booting using grub (Custom nixos modules)
   grub.enable = true;

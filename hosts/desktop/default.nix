@@ -11,20 +11,14 @@
   ...
 }: {
   imports =
-    [(import ./hardware-configuration.nix)]
-    ++ [(import ../../home-manager/${desktopEnvironment})]
-    ++ map
-    (
-      myprograms: let
-        path = name:
-          if name == "disko"
-          then (import ../../modules/predefiend/nixos/${name} {device = devicename;}) # diskos module with device name (e.g., /dev/sda1)
-          else (import ../../modules/predefiend/nixos/${name}); # path to the module
-      in
-        path myprograms # loop through the myprograms and import the module
-    )
-    # list of programs
-    ["sops" "stylix" "impermanence" "disko" "mysql" "postgresql" "gaming" "networking" "bbr" "sftp"];
+    [
+      (import ./hardware-configuration.nix)
+      (import ../../home-manager/${desktopEnvironment})
+    ]
+    ++ self.lib.mkImport {
+      path = ../../modules/predefiend/nixos;
+      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr" "sftp"];
+    };
 
   # Setting For OpenRGB
   services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {

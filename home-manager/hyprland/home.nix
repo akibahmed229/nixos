@@ -29,13 +29,10 @@
       inputs.hyprland.homeManagerModules.default
       {wayland.windowManager.hyprland.systemd.enable = true;}
     ]
-    ++ map
-    (
-      app: let
-        path = name: (import ../../modules/predefiend/home-manager/${name}); # path to the module
-      in
-        path app # loop through the apps and import the module
-    ) ["firefox" "discord" "zsh" "tmux" "lf" "ags" "git"]; # list of apps
+    ++ self.lib.mkImport {
+      path = ../../modules/predefiend/home-manager;
+      ListOfPrograms = ["firefox" "discord" "zsh" "tmux" "lf" "ags" "git"];
+    };
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper

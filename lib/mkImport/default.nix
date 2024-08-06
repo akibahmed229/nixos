@@ -1,15 +1,15 @@
 {
-  path,
+  path ? throw "path is required",
   ListOfPrograms ? [],
   ...
 }: let
   mkImport =
     map
     (
-      p: let
+      sProgram: let
         rPath = name: (import /${path}/${name}); # path to the module
       in
-        rPath p # loop through the apps and import the module
+        rPath sProgram # loop through the apps and import the module
     )
     ListOfPrograms;
 in

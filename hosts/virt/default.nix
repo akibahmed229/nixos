@@ -7,27 +7,18 @@
   unstable,
   inputs,
   user,
-  hostname,
-  devicename,
-  theme,
-  state-version,
   ...
 }: {
   imports =
-    [(import ./hardware-configuration.nix)]
-    ++ [(import ../../home-manager/dwm/default.nix)]
-    ++ map
-    (
-      myprograms: let
-        path = name:
-          if name == "disko"
-          then (import ../../modules/predefiend/nixos/${name} {device = "/dev/vda";}) # diskos module with device name (e.g., /dev/sda1)
-          else (import ../../modules/predefiend/nixos/${name}); # path to the module
-      in
-        path myprograms # loop through the myprograms and import the module
-    )
-    # list of programs
-    ["impermanence" "disko" "sops"];
+    [
+      (import ./hardware-configuration.nix)
+      (import ../../home-manager/dwm/default.nix)
+      (import ../../modules/predefiend/nixos/disko {device = "/dev/vda";})
+    ]
+    ++ self.lib.mkImport {
+      path = ../../modules/predefiend/nixos;
+      ListOfPrograms = ["impermanence" "sops"];
+    };
 
   users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
