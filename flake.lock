@@ -727,18 +727,14 @@
         "python27-pkgs": "python27-pkgs"
       },
       "locked": {
-        "dir": "/devshells",
-        "dirtyRev": "bfbecfadaae5ca71c2855e161be8265c0327c624-dirty",
-        "dirtyShortRev": "bfbecfa-dirty",
-        "lastModified": 1722895140,
-        "narHash": "sha256-40pRtE6lv0/2tsq4ouC1IZJ6NNNr0Ce//R24ARpmdhA=",
-        "type": "git",
-        "url": "file:.?dir=/devshells"
+        "lastModified": 1,
+        "narHash": "sha256-l7Zgknt/EUVCrUBVk07K5MvTkIRtha1ZdIMpvJ4Np3E=",
+        "path": "./devshells",
+        "type": "path"
       },
       "original": {
-        "dir": "/devshells",
-        "type": "git",
-        "url": "file:.?dir=/devshells"
+        "path": "./devshells",
+        "type": "path"
       }
     },
     "nix-darwin": {
@@ -868,18 +864,14 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "dir": "/pkgs/nixvim",
-        "dirtyRev": "bfbecfadaae5ca71c2855e161be8265c0327c624-dirty",
-        "dirtyShortRev": "bfbecfa-dirty",
-        "lastModified": 1722895140,
-        "narHash": "sha256-40pRtE6lv0/2tsq4ouC1IZJ6NNNr0Ce//R24ARpmdhA=",
-        "type": "git",
-        "url": "file:.?dir=/pkgs/nixvim"
+        "lastModified": 1,
+        "narHash": "sha256-CSezoTwrJBWS43uqCAPqKW/8RO9l5kP602CXD46nLiw=",
+        "path": "./pkgs/nixvim",
+        "type": "path"
       },
       "original": {
-        "dir": "/pkgs/nixvim",
-        "type": "git",
-        "url": "file:.?dir=/pkgs/nixvim"
+        "path": "./pkgs/nixvim",
+        "type": "path"
       }
     },
     "nixvim_2": {
