@@ -11,6 +11,9 @@
   specialArgs ? {},
   ...
 }: path: let
+  inherit (lib) nixosSystem mapAttrs' nameValuePair mkDefault filterAttrs attrNames lists;
+  inherit (home-manager.lib) homeManagerConfiguration;
+
   getinfo = builtins.readDir path;
 
   # NixOS system
@@ -18,11 +21,11 @@
     if value == "directory"
     then {
       inherit name;
-      value = lib.nixosSystem {
+      value = nixosSystem {
         inherit system;
         specialArgs =
           {inherit system;}
-          // lib.mapAttrs' (n: v: lib.nameValuePair n v) specialArgs;
+          // mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules =
           # configuration of nixos
           [
@@ -31,9 +34,9 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-                useGlobalPkgs = lib.mkDefault true;
-                useUserPackages = lib.mkDefault true;
-                extraSpecialArgs = lib.mapAttrs' (n: v: lib.nameValuePair n v) specialArgs;
+                useGlobalPkgs = mkDefault true;
+                useUserPackages = mkDefault true;
+                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
               };
             }
           ];
@@ -48,9 +51,9 @@
     if value == "directory"
     then {
       inherit name;
-      value = home-manager.lib.homeManagerConfiguration {
+      value = homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = lib.mapAttrs' (n: v: lib.nameValuePair n v) specialArgs;
+        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
           # configuration of home-manager
           (import /${path}/home.nix)
@@ -64,24 +67,24 @@
 
   # Map and filter out non-directories from the list of files
   processed =
-    lib.mapAttrs' (
+    mapAttrs' (
       # Check if we are processing home-manager or nixos
       if homeConf
       then processDirHome
       else processDirNixOS
     )
     getinfo;
-  validAttrs = lib.filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
+  validAttrs = filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
 
   # Convert to list of attribute sets for listToAttrs (haha I'm so funny)
   validList = map (name: {
     inherit name;
     value = validAttrs.${name};
-  }) (lib.attrNames validAttrs);
+  }) (attrNames validAttrs);
 
   # check if directly is empty
   isEmpty = _:
-    if lib.lists.length validList == 0
+    if lists.length validList == 0
     then throw "No systems found in ${path}"
     else _;
 in

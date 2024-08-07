@@ -3,8 +3,10 @@
   ListOfPrograms ? [],
   ...
 }: let
+  inherit (lib) optionals lists;
+
   mkImport =
-    lib.optionals ((lib.lists.length ListOfPrograms) > 0) lib.lists.map (
+    optionals ((lists.length ListOfPrograms) > 0) lists.map (
       sProgram: let
         rPath = name: (import /${path}/${name}); # path to the module
       in
