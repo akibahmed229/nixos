@@ -67,6 +67,9 @@
           prefixLength = 24;
         }
       ];
+
+      # Configuration for the WireGuard interface 'wg0'.
+      wg0.macAddress = "28:3A:4D:F2:0B:FE";
     };
 
     # Appending vlans to the network interfaces.
@@ -86,7 +89,7 @@
     wg-quick.interfaces = lib.mkIf (config.sops.secrets."akib/wireguard/PrivateKey".path != {}) {
       # Define the WireGuard interface wg0.
       wg0 = {
-        address = ["10.2.0.2/32"]; #
+        address = ["10.2.0.2/32"];
         dns = ["10.2.0.1"];
 
         # Path to the private key file, managed by sops for secret management.
