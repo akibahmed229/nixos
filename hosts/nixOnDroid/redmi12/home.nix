@@ -7,7 +7,7 @@
   programs.home-manager.enable = true;
 
   home = {
-    home.packages = with pkgs; [
+    packages = with pkgs; [
       # Core
       zsh
       git
