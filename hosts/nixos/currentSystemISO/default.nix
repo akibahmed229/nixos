@@ -10,8 +10,8 @@
   imports =
     ["${inputs.nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"]
     ++ [
-      (import ../../home-manager/hyprland)
-      (import ../../modules/predefiend/nixos/sops)
+      (import ../../../home-manager/hyprland)
+      (import ../../../modules/predefiend/nixos/sops)
     ];
 
   grub.enable = lib.mkForce false;
@@ -31,8 +31,8 @@
     useGlobalPkgs = false;
     users.${user} = {
       imports = [
-        (import ../../home-manager/home.nix)
-        (import ../../home-manager/hyprland/home.nix)
+        (import ../../../home-manager/home.nix)
+        (import ../../../home-manager/hyprland/home.nix)
       ];
     };
   };

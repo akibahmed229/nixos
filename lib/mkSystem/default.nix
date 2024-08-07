@@ -7,12 +7,16 @@
   pkgs ? import <nixpkgs> {},
   system ? "x86_64-linux",
   homeConf ? false,
-  home-manager ? import <home-manager> {},
+  droidConf ? false,
+  nixpkgs ? {},
   specialArgs ? {},
+  home-manager ? import <home-manager> {},
+  nix-on-droid ? import <nix-on-droid> {},
   ...
 }: path: let
   inherit (lib) nixosSystem mapAttrs' nameValuePair mkDefault filterAttrs attrNames lists;
   inherit (home-manager.lib) homeManagerConfiguration;
+  inherit (nix-on-droid.lib) nixOnDroidConfiguration;
 
   getinfo = builtins.readDir path;
 
@@ -65,12 +69,49 @@
       inherit name value;
     };
 
+  # Nix On Droid system
+  processDirNixOnDroid = name: value:
+    if value == "directory"
+    then {
+      inherit name;
+      value = nixOnDroidConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-linux";
+          overlays = [
+            nix-on-droid.overlays.default
+            # add other overlays
+          ];
+        };
+        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+        modules =
+          # configuration of nix-on-droid
+          [
+            (import /${path}/configuration.nix)
+            (import /${path}/${name})
+            {
+              home-manager = {
+                backupFileExtension = "hm-bak";
+                useGlobalPkgs = true;
+                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+              };
+            }
+          ];
+        # set path to home-manager flake
+        home-manager-path = home-manager.outPath;
+      };
+    }
+    else {
+      inherit name value;
+    };
+
   # Map and filter out non-directories from the list of files
   processed =
     mapAttrs' (
       # Check if we are processing home-manager or nixos
       if homeConf
-      then processDirHome
+      then processDirHome # homeConf is true
+      else if droidConf
+      then processDirNixOnDroid # droidConf is true
       else processDirNixOS
     )
     getinfo;

@@ -12,11 +12,11 @@
   imports =
     [
       (import ./hardware-configuration.nix)
-      (import ../../home-manager/dwm/default.nix)
-      (import ../../modules/predefiend/nixos/disko {device = "/dev/vda";})
+      (import ../../../home-manager/dwm/default.nix)
+      (import ../../../modules/predefiend/nixos/disko {device = "/dev/vda";})
     ]
     ++ self.lib.mkImport {
-      path = ../../modules/predefiend/nixos;
+      path = ../../../modules/predefiend/nixos;
       ListOfPrograms = ["impermanence" "sops"];
     };
 
@@ -73,7 +73,7 @@
   # Home manager configuration as a module
   home-manager = {
     users.${user} = {
-      imports = [(import ../../home-manager/home.nix)];
+      imports = [(import ../../../home-manager/home.nix)];
     };
   };
 }

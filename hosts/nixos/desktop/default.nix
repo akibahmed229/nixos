@@ -13,10 +13,10 @@
   imports =
     [
       (import ./hardware-configuration.nix)
-      (import ../../home-manager/${desktopEnvironment})
+      (import ../../../home-manager/${desktopEnvironment})
     ]
     ++ self.lib.mkImport {
-      path = ../../modules/predefiend/nixos;
+      path = ../../../modules/predefiend/nixos;
       ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr" "sftp"];
     };
 
@@ -263,8 +263,8 @@
     useGlobalPkgs = false;
     users.${user} = {
       imports = [
-        (import ../../home-manager/home.nix) # config of home-manager
-        (import ../../home-manager/${desktopEnvironment}/home.nix)
+        (import ../../../home-manager/home.nix) # config of home-manager
+        (import ../../../home-manager/${desktopEnvironment}/home.nix)
       ];
     };
   };

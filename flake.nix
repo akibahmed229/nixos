@@ -32,6 +32,12 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     # unstable packages
     nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixpkgs-unstable";
+    # nix-on-droid is a project to run Nix on Android
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     # live image builder for nixos
     nixos.url = "github:nixos/nixpkgs/24.05";
@@ -130,6 +136,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    nix-on-droid,
     my-devShells,
     ...
     # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
@@ -171,10 +178,16 @@
       });
 
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
-    mkSystem = self.lib.mkSystem {
+    mkNixOSSystem = self.lib.mkSystem {
       inherit lib pkgs home-manager;
       system = forAllSystems (s: s);
       specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
+    };
+
+    mkNixOnDroidSystem = self.lib.mkSystem {
+      inherit lib nixpkgs home-manager nix-on-droid;
+      droidConf = true;
+      specialArgs = {inherit inputs self unstable state-version;};
     };
     # using the above variables,function, etc. to generate the system configuration
   in {
@@ -207,6 +220,10 @@
 
     # NixOS configuration with flake and home-manager as module
     # Accessible through "$ nixos-rebuild switch --flake </path/to/flake.nix>#<host>"
-    nixosConfigurations = mkSystem ./hosts;
+    nixosConfigurations = mkNixOSSystem ./hosts/nixos;
+
+    # Nix-On-Droid configuration with flake and home-manager as module
+    # Accessible through "$ nix-on-droid switch --flake path/to/flake#device"
+    nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts/nixOnDroid;
   };
 }
