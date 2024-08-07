@@ -135,7 +135,7 @@
     # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
   } @ inputs: let
     # The system to build.
-    lib = nixpkgs.lib // home-manager.lib;
+    inherit (nixpkgs) lib;
     state-version = "24.05";
     hostname = "desktop";
     devicename = "/dev/nvme0n1";
@@ -171,21 +171,11 @@
       });
 
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
-    mkSystem = let
-      system = forAllSystems (system:
-        if
-          builtins.elem system [
-            "aarch64-linux" # ARM (Raspberry Pi)
-            "x86_64-linux" # x86_64 (Intel/AMD) 64-bit
-            "i686-linux" # x86 (Intel/AMD) 32-bit
-          ]
-        then system
-        else throw "Unsupported system: ${system}");
-    in
-      self.lib.mkSystem {
-        inherit lib pkgs system home-manager;
-        specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
-      };
+    mkSystem = self.lib.mkSystem {
+      inherit lib pkgs home-manager;
+      system = forAllSystems (s: s);
+      specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
+    };
     # using the above variables,function, etc. to generate the system configuration
   in {
     # Accessible through 'nix develop" etc

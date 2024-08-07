@@ -4,10 +4,10 @@
 */
 {
   lib ? throw "lib is not defined",
-  pkgs ? throw "pkgs is not defined",
-  system ? throw "system is required",
+  pkgs ? import <nixpkgs> {},
+  system ? "x86_64-linux",
   homeConf ? false,
-  home-manager ? throw "home-manager is required",
+  home-manager ? import <home-manager> {},
   specialArgs ? {},
   ...
 }: path: let
@@ -48,7 +48,7 @@
     if value == "directory"
     then {
       inherit name;
-      value = lib.homeManagerConfiguration {
+      value = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = lib.mapAttrs' (n: v: lib.nameValuePair n v) specialArgs;
         modules = [
