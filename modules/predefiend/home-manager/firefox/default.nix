@@ -15,7 +15,7 @@
     "x-scheme-handler/unknown" = "firefox.desktop";
   };
   home.sessionVariables = {
-    DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+    DEFAULT_BROWSER = "${pkgs.system}/bin/firefox";
   };
 
   programs.firefox = {
@@ -85,15 +85,21 @@
         }
         {
           name = "Nix Packages";
-          tags = ["nix"];
+          tags = ["nix" "pkgs"];
           keyword = "nixpkgs";
           url = "https://search.nixos.org/packages";
         }
         {
           name = "Nix Home-Manager options";
-          tags = ["nix"];
-          keyword = "nix home-manager options";
+          tags = ["nix" "home-manager"];
+          keyword = "home-manager";
           url = "https://mipmip.github.io/home-manager-option-search/";
+        }
+        {
+          name = "noogle";
+          tags = ["nix" "lib"];
+          keyword = "nix-lib";
+          url = "https://noogle.dev/";
         }
         {
           name = "Chat Gpt";
@@ -103,9 +109,9 @@
         }
         {
           name = "Google Bird";
-          tags = ["ai" "google" "bird"];
+          tags = ["ai" "google" "bird" "gemini"];
           keyword = "chat";
-          url = "https://bard.google.com/chat";
+          url = "https://gemini.google.com/";
         }
         {
           name = "Binge Ai";
