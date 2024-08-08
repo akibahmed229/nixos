@@ -190,6 +190,11 @@
       droidConf = true;
       specialArgs = {inherit inputs self unstable state-version;};
     };
+
+    mkTemplate = self.lib.mkSystem {
+      inherit lib;
+      template = true;
+    };
     # using the above variables,function, etc. to generate the system configuration
   in {
     # Accessible through 'nix develop" etc
@@ -227,5 +232,9 @@
     # Nix-On-Droid configuration entrypoint for Android (flake & home-manager as module)
     # Accessible through "$ nix-on-droid switch --flake path/to/flake#device"
     nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts/nixOnDroid;
+
+    # Template for different systems
+    # Accessible through "$ nix flake init -t ~/.config/flake#template"
+    templates = mkTemplate ./public/templates;
   };
 }

@@ -8,6 +8,7 @@
   system ? "x86_64-linux",
   homeConf ? false,
   droidConf ? false,
+  template ? false,
   nixpkgs ? {},
   specialArgs ? {},
   home-manager ? import <home-manager> {},
@@ -104,6 +105,19 @@
       inherit name value;
     };
 
+  processDirTemplate = name: value:
+    if value == "directory"
+    then {
+      inherit name;
+      value = {
+        description = "Template for ${name} system";
+        path = /${path}/${name};
+      };
+    }
+    else {
+      inherit name value;
+    };
+
   # Map and filter out non-directories from the list of files
   processed =
     mapAttrs' (
@@ -112,6 +126,8 @@
       then processDirHome # homeConf is true
       else if droidConf
       then processDirNixOnDroid # droidConf is true
+      else if template
+      then processDirTemplate # template is true
       else processDirNixOS
     )
     getinfo;
