@@ -13,10 +13,10 @@
   imports =
     [
       (import ./hardware-configuration.nix)
-      (import ../../../home-manager/${desktopEnvironment})
+      (self.lib.mkRelativeToRoot "home-manager/${desktopEnvironment}")
     ]
     ++ self.lib.mkImport {
-      path = ../../../modules/predefiend/nixos;
+      path = self.lib.mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr" "sftp"];
     };
 
@@ -89,6 +89,7 @@
       chromium
       whatsapp-for-linux
       btop
+      pipes
       #davinci-resolve
       ffmpeg_6
       gst_all_1.gstreamer
@@ -262,9 +263,9 @@
   home-manager = {
     useGlobalPkgs = false;
     users.${user} = {
-      imports = [
-        (import ../../../home-manager/home.nix) # config of home-manager
-        (import ../../../home-manager/${desktopEnvironment}/home.nix)
+      imports = map self.lib.mkRelativeToRoot [
+        "home-manager/home.nix" # config of home-manager
+        "home-manager/${desktopEnvironment}/home.nix"
       ];
     };
   };

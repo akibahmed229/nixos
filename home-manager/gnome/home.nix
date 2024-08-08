@@ -12,7 +12,7 @@
   ...
 }: {
   imports = self.lib.mkImport {
-    path = ../../modules/predefiend/home-manager;
+    path = self.lib.mkRelativeToRoot "modules/predefiend/home-manager";
     ListOfPrograms = ["firefox" "spicetify" "discord" "zsh" "tmux" "lf"];
   };
 

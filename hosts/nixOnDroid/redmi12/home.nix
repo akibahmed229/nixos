@@ -1,22 +1,43 @@
 {
   config,
   pkgs,
+  unstable,
   state-version,
   self,
   ...
 }: {
   imports = self.lib.mkImport {
-    path = ../../../modules/predefiend/home-manager;
+    path = self.lib.mkRelativeToRoot "modules/predefiend/home-manager";
     ListOfPrograms = ["zsh" "tmux" "lf" "git"];
   };
 
   home = {
-    packages = with pkgs; [
-      # Core
-      zsh
-      git
-    ];
+    packages = with pkgs;
+      [
+        # Core
+        zsh
+        git
+        eza
+        direnv
+        fzf
+      ]
+      ++ (with unstable.${pkgs.system}; [
+        dwt1-shell-color-scripts
+      ]);
     stateVersion = state-version; # Please read the comment before changing.
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    package = pkgs.atuin;
+    settings = {
+      auto_sync = true;
+      sync_frequency = "5m";
+      sync_address = "https://api.atuin.sh";
+      search_mode = "prefix";
+    };
   };
 
   xdg = {

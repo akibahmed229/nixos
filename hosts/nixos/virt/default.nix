@@ -12,8 +12,8 @@
   imports =
     [
       (import ./hardware-configuration.nix)
-      (import ../../../home-manager/dwm/default.nix)
       (import ../../../modules/predefiend/nixos/disko {device = "/dev/vda";})
+      (self.lib.mkRelativeToRoot "home-manager/dwm")
     ]
     ++ self.lib.mkImport {
       path = ../../../modules/predefiend/nixos;
@@ -73,7 +73,7 @@
   # Home manager configuration as a module
   home-manager = {
     users.${user} = {
-      imports = [(import ../../../home-manager/home.nix)];
+      imports = [(self.lib.mkRelativeToRoot "home-manager/home.nix")];
     };
   };
 }

@@ -9,10 +9,10 @@
 }: {
   imports =
     ["${inputs.nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"]
-    ++ [
-      (import ../../../home-manager/hyprland)
-      (import ../../../modules/predefiend/nixos/sops)
-    ];
+    ++ (map self.lib.mkRelativeToRoot [
+      "home-manager/hyprland"
+      "modules/predefiend/nixos/sops"
+    ]);
 
   grub.enable = lib.mkForce false;
   networking.networkmanager.enable = lib.mkForce false;
@@ -30,9 +30,9 @@
   home-manager = {
     useGlobalPkgs = false;
     users.${user} = {
-      imports = [
-        (import ../../../home-manager/home.nix)
-        (import ../../../home-manager/hyprland/home.nix)
+      imports = map self.lib.mkRelativeToRoot [
+        "home-manager/home.nix"
+        "home-manager/hyprland/home.nix"
       ];
     };
   };

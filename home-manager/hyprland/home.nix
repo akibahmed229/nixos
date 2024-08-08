@@ -30,7 +30,7 @@
       {wayland.windowManager.hyprland.systemd.enable = true;}
     ]
     ++ self.lib.mkImport {
-      path = ../../modules/predefiend/home-manager;
+      path = self.lib.mkRelativeToRoot "modules/predefiend/home-manager";
       ListOfPrograms = ["firefox" "discord" "zsh" "tmux" "lf" "ags" "git"];
     };
 
