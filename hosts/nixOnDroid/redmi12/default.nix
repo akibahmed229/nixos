@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  state-version,
-  ...
-}: {
+{pkgs, ...}: {
   # Simply install just the packages
   environment.packages = with pkgs; [
     # User-facing stuff that you really really want to have
@@ -13,6 +6,7 @@
 
     # Some common stuff that people expect to have
     procps
+    busybox
     killall
     diffutils
     findutils
@@ -31,6 +25,11 @@
     unzip
     git
   ];
+  programs = {
+    # Enable ADB for Android and other stuff.
+    adb.enable = true;
+    zsh.enable = true;
+  };
 
   # Configure home-manager
   home-manager = {

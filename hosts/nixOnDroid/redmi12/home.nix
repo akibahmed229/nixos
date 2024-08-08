@@ -2,9 +2,13 @@
   config,
   pkgs,
   state-version,
+  self,
   ...
 }: {
-  programs.home-manager.enable = true;
+  imports = self.lib.mkImport {
+    path = ../../../modules/predefiend/home-manager;
+    ListOfPrograms = ["zsh" "tmux" "lf" "git"];
+  };
 
   home = {
     packages = with pkgs; [
@@ -44,4 +48,5 @@
   };
 
   news.display = "silent";
+  programs.home-manager.enable = true;
 }
