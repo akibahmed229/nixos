@@ -1,8 +1,4 @@
-{
-  pkgs,
-  user,
-  ...
-}: {
+{pkgs, ...}: {
   # Simply install just the packages
   environment.packages = with pkgs; [
     # User-facing stuff that you really really want to have
@@ -33,9 +29,7 @@
   ];
 
   terminal.font = "${pkgs.jetbrains-mono}/share/fonts/TTF/JetBrainsMono-Regular.ttf";
-
   user.shell = "${pkgs.zsh}/bin/zsh";
-  user.userName = "${user}";
 
   # Configure home-manager
   home-manager = {

@@ -188,7 +188,7 @@
     mkNixOnDroidSystem = self.lib.mkSystem {
       inherit lib nixpkgs home-manager nix-on-droid;
       droidConf = true;
-      specialArgs = {inherit inputs self unstable user state-version;};
+      specialArgs = {inherit inputs self unstable state-version;};
     };
     # using the above variables,function, etc. to generate the system configuration
   in {
