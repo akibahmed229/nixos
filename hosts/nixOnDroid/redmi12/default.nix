@@ -25,11 +25,6 @@
     unzip
     git
   ];
-  programs = {
-    # Enable ADB for Android and other stuff.
-    adb.enable = true;
-    zsh.enable = true;
-  };
 
   # Configure home-manager
   home-manager = {
