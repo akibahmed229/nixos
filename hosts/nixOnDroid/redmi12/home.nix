@@ -21,7 +21,10 @@
   };
 
   programs = {
-    ssh.enable = true;
+    ssh = {
+      enable = true;
+      package = pkgs.openssh;
+    };
 
     atuin = {
       enable = true;
