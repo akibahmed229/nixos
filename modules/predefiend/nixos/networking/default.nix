@@ -86,24 +86,24 @@
     };
 
     # Configuration for WireGuard interface using wg-quick. and protonvpn wireguard config file for the peer.
-    wg-quick.interfaces = lib.mkIf (config.sops.secrets."akib/wireguard/PrivateKey".path != {}) {
-      # Define the WireGuard interface wg0.
-      wg0 = {
-        address = ["10.2.0.2/32"];
-        dns = ["10.2.0.1"];
+    # wg-quick.interfaces = lib.mkIf (config.sops.secrets."akib/wireguard/PrivateKey".path != {}) {
+    #   # Define the WireGuard interface wg0.
+    #   wg0 = {
+    #     address = ["10.2.0.2/32"];
+    #     dns = ["10.2.0.1"];
 
-        # Path to the private key file, managed by sops for secret management.
-        privateKeyFile = config.sops.secrets."akib/wireguard/PrivateKey".path;
+    #     # Path to the private key file, managed by sops for secret management.
+    #     privateKeyFile = config.sops.secrets."akib/wireguard/PrivateKey".path;
 
-        # Configuration for the WireGuard peers.
-        peers = [
-          {
-            publicKey = "URpeZxtyUXAUUA0MWcFdCSa7F+MvchJ4eNSJUetKEGk=";
-            allowedIPs = ["0.0.0.0/0"];
-            endpoint = "212.8.253.137:51820";
-          }
-        ];
-      };
-    };
+    #     # Configuration for the WireGuard peers.
+    #     peers = [
+    #       {
+    #         publicKey = "URpeZxtyUXAUUA0MWcFdCSa7F+MvchJ4eNSJUetKEGk=";
+    #         allowedIPs = ["0.0.0.0/0"];
+    #         endpoint = "212.8.253.137:51820";
+    #       }
+    #     ];
+    #   };
+    # };
   };
 }
