@@ -43,10 +43,10 @@
       config = {allowUnfree = true;};
     };
 
+    # The function to generate the Standalone home-manager configuration
     mkHomeManagerSystem = akibOS.lib.mkSystem {
       # must pass this args to mkSystem
-      inherit (nixpkgs) lib;
-      inherit pkgs home-manager;
+      inherit nixpkgs pkgs home-manager;
       homeConf = true;
 
       # Set all inputs parameters as special arguments for all submodules,

@@ -44,7 +44,6 @@
     # This function generates the nix-on-droid system configuration for Android devices
     mkNixOnDroidSystem = akibOS.lib.mkSystem {
       # must pass this args to mkSystem
-      inherit (nixpkgs) lib;
       inherit nixpkgs home-manager nix-on-droid;
       droidConf = true;
 

@@ -3,21 +3,21 @@
 * which will import ../hosts dir and create a list of nixos systems to be build
 */
 {
-  lib ? throw "lib is not defined",
   pkgs ? import <nixpkgs> {},
   system ? "x86_64-linux",
+  nixpkgs ? {},
+  template ? false,
   homeConf ? false,
   droidConf ? false,
-  template ? false,
-  nixpkgs ? {},
   specialArgs ? {},
   home-manager ? import <home-manager> {},
   nix-on-droid ? import <nix-on-droid> {},
   ...
 }: path: let
-  inherit (lib) nixosSystem mapAttrs' nameValuePair mkDefault filterAttrs attrNames lists;
-  inherit (home-manager.lib) homeManagerConfiguration;
+  inherit (nixpkgs) lib;
   inherit (nix-on-droid.lib) nixOnDroidConfiguration;
+  inherit (home-manager.lib) homeManagerConfiguration;
+  inherit (lib) nixosSystem mapAttrs' nameValuePair mkDefault filterAttrs attrNames lists;
 
   getinfo = builtins.readDir path;
 

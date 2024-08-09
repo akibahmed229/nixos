@@ -43,10 +43,10 @@
       config = {allowUnfree = true;};
     };
 
+    # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
     mkNixOSSystem = akibOS.lib.mkSystem {
       # must pass this args to mkSystem
-      inherit (nixpkgs) lib;
-      inherit pkgs system home-manager;
+      inherit nixpkgs pkgs system home-manager;
 
       # Set all inputs parameters as special arguments for all submodules,
       # so you can directly use all dependencies in inputs in submodules

@@ -179,20 +179,21 @@
 
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
     mkNixOSSystem = self.lib.mkSystem {
-      inherit lib pkgs home-manager;
+      inherit nixpkgs pkgs home-manager;
       system = forAllSystems (s: s);
       specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
     };
 
     # This function generates the nix-on-droid system configuration for Android devices
     mkNixOnDroidSystem = self.lib.mkSystem {
-      inherit lib nixpkgs home-manager nix-on-droid;
+      inherit nixpkgs home-manager nix-on-droid;
       droidConf = true;
       specialArgs = {inherit inputs self unstable state-version;};
     };
 
+    # This function generates the template for different systems
     mkTemplate = self.lib.mkSystem {
-      inherit lib;
+      inherit nixpkgs;
       template = true;
     };
     # using the above variables,function, etc. to generate the system configuration
