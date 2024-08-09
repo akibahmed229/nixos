@@ -30,7 +30,7 @@
     git
   ];
 
-  terminal.font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
+  terminal.font = "${pkgs.nerdfonts}/share/fonts/truetype/NerdFonts/MesloLGLNerdFontMono-Regular.ttf:";
   user.shell = "${pkgs.zsh}/bin/zsh";
 
   # Configure home-manager
