@@ -5,6 +5,7 @@
     neovim # or some other editor, e.g. nano or neovim
     fastfetch
     pipes
+    android-tools
 
     # Some common stuff that people expect to have
     procps
@@ -28,7 +29,7 @@
     git
   ];
 
-  terminal.font = "${pkgs.jetbrains-mono}/share/fonts/TTF/JetBrainsMono-Regular.ttf";
+  terminal.font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
   user.shell = "${pkgs.zsh}/bin/zsh";
 
   # Configure home-manager
