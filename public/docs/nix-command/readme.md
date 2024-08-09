@@ -1,5 +1,4 @@
 1. `sudo nix-store --repair --verify --check-contents` - Check the integrity of the Nix store and repair any inconsistencies. This command is useful if you suspect that the Nix store has been corrupted or if you are experiencing issues with your Nix installation
-
 2. `sudo nix-env --list-generations --profile /nix/var/nix/profiles/system` - List all the generations of the system profile.
 
 3. `sudo nix-collect-garbage -d` - Remove all the unused packages from the Nix store.
@@ -12,7 +11,9 @@
 
 7. `nix flake metadata --json | nix run nixpkgs\#jq` - Get the metadata of a flake and use jq to parse the JSON output. This command is useful when you want to inspect the metadata of a flake.
 
-8. Switching Generations without reboot
+8. `sudo nixos-rebuild switch --flake .#host --option tarball-ttl 0` Will not use cache to rebuild
+
+9. Switching Generations without reboot
 
    ```bash
    nix-env --list-generations -p /nix/var/nix/profiles/system
