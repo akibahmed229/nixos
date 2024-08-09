@@ -146,6 +146,10 @@ Modules to help you handle persistent state on systems with ephemeral root stora
 
   # /var/tmp is persisted for reasons explained above, clean it with systemd-tmpfiles
   systemd.tmpfiles.rules = [
+    # FIX: mkdir: cannot create directory "/persist/home": Permission denied
+    # "d /persist/home/ 0777 root root -" # create /persist/home owned by root
+    # ''d /persist/home/${user} 0700 "${user}" users -'' # /persist/home/<user> owned by that user
+
     "e /var/tmp 1777 root root 30d"
     #  /*
     #    clean old contents in home cache dir
