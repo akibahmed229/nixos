@@ -5,17 +5,27 @@
 {
   config,
   lib,
+  self,
   pkgs,
   modulesPath,
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
-  # use the latest Linux kernel
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    # use the latest Linux kernel
     #  kernelPackages = pkgs.linuxPackages_xanmod_latest;
     #  kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPatches = [
+      {
+        name = "Improves in memory performance & reducing the kernel boot time";
+        patch = self.lib.mkRelativeToRoot "public/patches/kernel/acpi-slab-hwcache-align.patch";
+        # extraConfig = ''
+        #   SLAB_HWCACHE_ALIGN y
+        # '';
+      }
+    ];
 
     kernelParams = [
       "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
@@ -28,8 +38,8 @@
       "rd.udev.log_level=3" # Increase kernel log verbosity
       "systemd.show_status=false"
       "no_console_suspend" # Prevent consoles from being suspended
-      "splash"
-      "logo.nologo"
+      "splash" # Show a splash screen during boot
+      "logo.nologo" # Disable the Linux logo at boot
     ];
 
     initrd.availableKernelModules = [
