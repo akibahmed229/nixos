@@ -5,6 +5,12 @@
   config,
   ...
 }: {
+  home.packages = with unstable.${pkgs.system}; [
+    eza
+    fzf
+    bat
+    dwt1-shell-color-scripts
+  ];
   # Zsh and Oh-My-Zsh setup
   programs = {
     zsh = {

@@ -60,8 +60,6 @@
       unzip
       p7zip
       ranger
-      eza
-      bat
       nvme-cli
       simplehttp2server
       speedtest-cli
@@ -124,7 +122,6 @@
           android-udev-rules
           github-desktop
           android-studio
-          dwt1-shell-color-scripts
           gcc
           cmake
           gnumake
