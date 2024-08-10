@@ -1,13 +1,21 @@
+# `nix build .#nixosConfigurations.minimalISO.config.system.build.isoImage` - from nix-config directory to generate the iso manually
+#
+# Generated images will be output to the ~/nix-config/results directory unless drive is specified
 {
   pkgs,
   lib,
   inputs,
+  self,
   ...
 }: {
   imports = [
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+    (self.lib.mkRelativeToRoot "modules/predefiend/nixos/sops")
   ];
+
+  # (Custom nixos modules)
+  grub.enable = lib.mkForce false;
 
   # The default compression-level is (6) and takes too long on some machines (>30m). 3 takes <2m
   isoImage.squashfsCompression = "zstd -Xcompression-level 3";
@@ -18,7 +26,7 @@
   };
 
   # FIXME: Reference generic nix file
-  nix = {
+  nix = lib.mkDefault {
     settings.experimental-features = [
       "nix-command"
       "flakes"
@@ -56,7 +64,8 @@
   };
 
   networking = {
-    hostName = "iso";
+    hostName = lib.mkDefault "iso";
+    wireless.enable = false;
   };
 
   systemd = {

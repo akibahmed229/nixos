@@ -1,3 +1,6 @@
+# `nix build .#nixosConfigurations.currentSystemISO.config.system.build.isoImage` - from nix-config directory to generate the iso manually
+#
+# Generated images will be output to the ~/nix-config/results directory unless drive is specified
 {
   self,
   pkgs,
@@ -8,12 +11,13 @@
   ...
 }: {
   imports =
-    ["${inputs.nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"]
+    ["${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"]
     ++ (map self.lib.mkRelativeToRoot [
       "home-manager/hyprland"
       "modules/predefiend/nixos/sops"
     ]);
 
+  # (Custom nixos modules)
   grub.enable = lib.mkForce false;
   networking.networkmanager.enable = lib.mkForce false;
 

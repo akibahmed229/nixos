@@ -39,8 +39,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # live image builder for nixos
-    nixos.url = "github:nixos/nixpkgs/24.05";
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
       url = "github:Mic92/nix-index-database";

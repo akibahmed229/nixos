@@ -69,7 +69,10 @@ in {
       rec {
         name = config.setUserName;
         isNormalUser = true;
-        hashedPasswordFile = lib.mkIf (config.sops.secrets."akib/password/my_secret".path != {}) config.sops.secrets."akib/password/my_secret".path;
+        hashedPasswordFile =
+          if (config.sops.secrets."akib/password/my_secret".path != {})
+          then config.sops.secrets."akib/password/my_secret".path
+          else null;
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         extraGroups = ["networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak"];
         packages = with pkgs; [wget thunderbird vlc];
@@ -79,7 +82,10 @@ in {
       rec {
         name = "root";
         isNormalUser = false;
-        hashedPasswordFile = lib.mkIf (config.setUserName == "akib") config.sops.secrets."akib/password/root_secret".path;
+        hashedPasswordFile =
+          if (config.setUserName == "akib")
+          then config.sops.secrets."akib/password/root_secret".path
+          else null;
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         packages = with pkgs; [neovim wget];
         extraGroups = [];
