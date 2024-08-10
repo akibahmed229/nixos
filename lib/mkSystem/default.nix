@@ -39,7 +39,7 @@
   ifFileExists = _path:
     if pathExists _path
     then import _path
-    else throw "File not found: ${_path}, configuration.nix is required";
+    else throw "File not found: ${_path}";
 
   # Function to process directories for NixOS systems
   processDirNixOS = name: value:
