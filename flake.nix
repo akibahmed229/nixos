@@ -184,7 +184,7 @@
 
     # This function generates the nix-on-droid system configuration for Android devices
     mkNixOnDroidSystem = self.lib.mkSystem {
-      inherit nixpkgs home-manager nix-on-droid;
+      inherit nixpkgs home-manager nix-on-droid user;
       droidConf = true;
       specialArgs = {inherit inputs self unstable state-version;};
     };
