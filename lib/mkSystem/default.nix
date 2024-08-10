@@ -1,148 +1,178 @@
 /*
-* My lib helper functions
-* which will import ../hosts dir and create a list of nixos systems to be build
+* Imports and Dependencies: The script imports various libraries and configurations such as nixpkgs, home-manager, and nix-on-droid.
+* These imports are used to define and manage NixOS, Home Manager, and Nix-on-Droid systems.
+
+* Processing Functions: The processDirNixOS, processDirHome, processDirNixOnDroid, and processDirTemplate functions are defined to handle different types of systems.
+* Each function checks if the input is a directory and then processes it accordingly.
+
+* Conditional Mapping: The processed attribute uses mapAttrs' to apply the correct processing function based on the flags (homeConf, droidConf, template).
+
+* Filtering: Non-directory entries are filtered out using filterAttrs, and the valid attributes are converted to a list of attribute sets.
+
+* Error Handling: The script checks if the processed list is empty and throws an error if no systems are found.
+
+* Final Output: The script returns the final list of valid systems using builtins.listToAttrs.
 */
 {
+  # Default arguments for the function
   pkgs ? import <nixpkgs> {},
-  system ? "x86_64-linux",
-  nixpkgs ? {},
-  template ? false,
-  homeConf ? false,
-  droidConf ? false,
-  specialArgs ? {},
-  home-manager ? import <home-manager> {},
-  nix-on-droid ? import <nix-on-droid> {},
+  system ? "x86_64-linux", # Default system architecture
+  nixpkgs ? {}, # Allows passing custom nixpkgs
+  template ? false, # Flag to indicate if it's a template system
+  homeConf ? false, # Flag to indicate if it's a Home Manager system
+  droidConf ? false, # Flag to indicate if it's a Nix-on-Droid system
+  specialArgs ? {}, # Additional special arguments to pass
+  home-manager ? import <home-manager> {}, # Home Manager import
+  nix-on-droid ? import <nix-on-droid> {}, # Nix-on-Droid import
   ...
 }: path: let
+  # Importing necessary functions and utilities from the provided imports
   inherit (nixpkgs) lib;
+  inherit (builtins) readDir trace;
   inherit (nix-on-droid.lib) nixOnDroidConfiguration;
   inherit (home-manager.lib) homeManagerConfiguration;
-  inherit (lib) nixosSystem mapAttrs' nameValuePair mkDefault filterAttrs attrNames lists;
+  inherit (lib) nixosSystem mapAttrs' nameValuePair pathExists mkDefault filterAttrs attrNames lists;
 
-  getinfo = builtins.readDir path;
+  # Read directory contents from the provided path
+  getinfo = readDir path;
+  # Function to check if a file exists at the specified path
+  ifFileExists = _path:
+    if pathExists _path
+    then import _path
+    else throw "File not found: ${_path}, configuration.nix is required";
 
-  # NixOS system
+  # Function to process directories for NixOS systems
   processDirNixOS = name: value:
     if value == "directory"
     then {
       inherit name;
-      value = nixosSystem {
+      # Import NixOS system configuration
+      value = trace "importing nixos host: ${name}" nixosSystem {
         inherit system;
         specialArgs =
-          {inherit system;}
-          // mapAttrs' (n: v: nameValuePair n v) specialArgs;
-        modules =
-          # configuration of nixos
-          [
-            (import /${path}/configuration.nix)
-            (import /${path}/${name})
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = mkDefault true;
-                useUserPackages = mkDefault true;
-                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-              };
-            }
-          ];
-      };
-    }
-    else {
-      inherit name value;
-    };
-
-  # Home manager system
-  processDirHome = name: value:
-    if value == "directory"
-    then {
-      inherit name;
-      value = homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+          {inherit system;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
-          # configuration of home-manager
-          (import /${path}/home.nix)
-          (import /${path}/${name})
+          (ifFileExists /${path}/configuration.nix) # Base configuration
+          (ifFileExists /${path}/${name}) # Host-specific configuration
+          home-manager.nixosModules.home-manager # Home Manager integration
+          {
+            home-manager = {
+              useGlobalPkgs = mkDefault true;
+              useUserPackages = mkDefault true;
+              extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+            };
+          }
         ];
       };
     }
     else {
+      # If not a directory, inherit name and value as-is
       inherit name value;
     };
 
-  # Nix On Droid system
+  # Function to process directories for Home Manager systems
+  processDirHome = name: value:
+    if value == "directory"
+    then {
+      inherit name;
+      # Import Home Manager configuration
+      value = trace "importing home-manager host: ${name}" homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+        modules = [
+          (ifFileExists /${path}/home.nix) # Base Home Manager configuration
+          (ifFileExists /${path}/${name}) # Host-specific configuration
+        ];
+      };
+    }
+    else {
+      # If not a directory, inherit name and value as-is
+      inherit name value;
+    };
+
+  # Function to process directories for Nix-on-Droid systems
   processDirNixOnDroid = name: value:
     if value == "directory"
     then {
       inherit name;
-      value = nixOnDroidConfiguration {
+      # Import Nix-on-Droid system configuration
+      value = trace "importing nix-on-droid host: ${name}" nixOnDroidConfiguration {
         pkgs = import nixpkgs {
-          system = "aarch64-linux";
+          system = "aarch64-linux"; # Set system architecture for Nix-on-Droid
           overlays = [
-            nix-on-droid.overlays.default
-            # add other overlays
+            nix-on-droid.overlays.default # Apply default overlays
+            # add other overlays if needed
           ];
         };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-        modules =
-          # configuration of nix-on-droid
-          [
-            (import /${path}/configuration.nix)
-            (import /${path}/${name})
-            {
-              home-manager = {
-                backupFileExtension = "hm-bak";
-                useGlobalPkgs = true;
-                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-              };
-            }
-          ];
-        # set path to home-manager flake
+        modules = [
+          (ifFileExists /${path}/configuration.nix) # Base configuration
+          (ifFileExists /${path}/${name}) # Host-specific configuration
+          {
+            home-manager = {
+              backupFileExtension = "hm-bak"; # Set backup file extension
+              useGlobalPkgs = true; # Use global packages
+              extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+            };
+          }
+        ];
+        # Set path to Home Manager flake
         home-manager-path = home-manager.outPath;
       };
     }
     else {
+      # If not a directory, inherit name and value as-is
       inherit name value;
     };
 
+  # Function to process template directories
   processDirTemplate = name: value:
     if value == "directory"
     then {
       inherit name;
-      value = {
+      # Import template configuration
+      value = trace "importing template name: ${name}" {
         description = "Template for ${name} system";
-        path = /${path}/${name};
+        # Set path to the template
+        path =
+          if pathExists /${path}/${name}
+          then /${path}/${name}
+          else throw "Template directory not found: ${path}/${name}";
       };
     }
     else {
+      # If not a directory, inherit name and value as-is
       inherit name value;
     };
 
-  # Map and filter out non-directories from the list of files
+  # Process directory contents based on the type of system being configured
   processed =
     mapAttrs' (
-      # Check if we are processing home-manager or nixos
+      # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems
       if homeConf
-      then processDirHome # homeConf is true
+      then trace "mapping through homeManagerConfiguration" processDirHome # homeConf is true
       else if droidConf
-      then processDirNixOnDroid # droidConf is true
+      then trace "mapping through nixOnDroidConfigurations" processDirNixOnDroid # droidConf is true
       else if template
-      then processDirTemplate # template is true
-      else processDirNixOS
+      then trace "mapping through templates" processDirTemplate # template is true
+      else trace "mapping through nixosSystem" processDirNixOS # Default to NixOS
     )
     getinfo;
+
+  # Filter out non-directory entries from the processed list
   validAttrs = filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
 
-  # Convert to list of attribute sets for listToAttrs (haha I'm so funny)
+  # Convert the filtered attributes to a list of attribute sets
   validList = map (name: {
     inherit name;
     value = validAttrs.${name};
   }) (attrNames validAttrs);
 
-  # check if directly is empty
-  isEmpty = _:
+  # Check if the directory is empty and throw an error if no systems are found
+  isHostsEmpty = _:
     if lists.length validList == 0
     then throw "No systems found in ${path}"
-    else _;
+    else trace "systems found in ${path}" _;
+  # Return the final list of valid systems
 in
-  isEmpty builtins.listToAttrs validList
+  isHostsEmpty builtins.listToAttrs validList

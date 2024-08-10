@@ -1,22 +1,28 @@
-# default config files for desktop systems
+/*
+* Host-specific configuration for NixOS systems.
+* This is your system's configuration file.
+* Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+*/
 {
   pkgs,
   user,
   hostname,
-  devicename,
   desktopEnvironment,
   unstable,
   lib,
   self,
   ...
-}: {
+}: let
+  # My custom lib helper functions
+  inherit (self.lib) mkImport mkRelativeToRoot;
+in {
   imports =
     [
       (import ./hardware-configuration.nix)
-      (self.lib.mkRelativeToRoot "home-manager/${desktopEnvironment}")
+      (mkRelativeToRoot "home-manager/${desktopEnvironment}")
     ]
-    ++ self.lib.mkImport {
-      path = self.lib.mkRelativeToRoot "modules/predefiend/nixos";
+    ++ mkImport {
+      path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr" "sftp"];
     };
 
@@ -260,7 +266,7 @@
   home-manager = {
     useGlobalPkgs = false;
     users.${user} = {
-      imports = map self.lib.mkRelativeToRoot [
+      imports = map mkRelativeToRoot [
         "home-manager/home.nix" # config of home-manager
         "home-manager/${desktopEnvironment}/home.nix"
       ];

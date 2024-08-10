@@ -1,9 +1,5 @@
-#
-# Gnome configuration
-#
+# Gnome system configuration
 {
-  config,
-  lib,
   pkgs,
   unstable,
   ...

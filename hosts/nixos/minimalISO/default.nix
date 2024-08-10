@@ -7,11 +7,14 @@
   inputs,
   self,
   ...
-}: {
+}: let
+  # My custom lib helper functions
+  inherit (self.lib) mkRelativeToRoot;
+in {
   imports = [
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-    (self.lib.mkRelativeToRoot "modules/predefiend/nixos/sops")
+    (mkRelativeToRoot "modules/predefiend/nixos/sops")
   ];
 
   # (Custom nixos modules)

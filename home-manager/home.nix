@@ -1,4 +1,4 @@
-# common home-manager config accross all machines
+# common home-manager configuration across all machines
 {
   pkgs,
   unstable,

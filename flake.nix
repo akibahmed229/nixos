@@ -182,14 +182,14 @@
       specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
     };
 
-    # This function generates the nix-on-droid system configuration for Android devices
+    # This function generates the nix-on-droid system configuration for Android devices (derived from my custom lib helper function)
     mkNixOnDroidSystem = self.lib.mkSystem {
       inherit nixpkgs home-manager nix-on-droid;
       droidConf = true;
       specialArgs = {inherit inputs self unstable user state-version;};
     };
 
-    # This function generates the template for different systems
+    # This function generates the template for different systems (derived from my custom lib helper function)
     mkTemplate = self.lib.mkSystem {
       inherit nixpkgs;
       template = true;

@@ -1,4 +1,4 @@
-# common configuration for all machines.
+# common configuration for across all systems
 {
   config,
   pkgs,

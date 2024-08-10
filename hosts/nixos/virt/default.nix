@@ -1,22 +1,26 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+/*
+* Host-specific configuration for NixOS systems.
+* This is your system's configuration file.
+* Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+*/
 {
   self,
   pkgs,
-  unstable,
   inputs,
   user,
   ...
-}: {
+}: let
+  # My custom lib helper functions
+  inherit (self.lib) mkImport mkRelativeToRoot;
+in {
   imports =
     [
       (import ./hardware-configuration.nix)
       (import ../../../modules/predefiend/nixos/disko {device = "/dev/vda";})
-      (self.lib.mkRelativeToRoot "home-manager/dwm")
+      (mkRelativeToRoot "home-manager/dwm")
     ]
-    ++ self.lib.mkImport {
-      path = ../../../modules/predefiend/nixos;
+    ++ mkImport {
+      path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["impermanence" "sops"];
     };
 
@@ -26,7 +30,7 @@
   environment = {
     systemPackages = with pkgs; [
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #  wget
+      wget
     ];
     shells = [pkgs.zsh];
     pathsToLink = ["/share/zsh" "/tmp" "/home/akib"];
@@ -73,7 +77,7 @@
   # Home manager configuration as a module
   home-manager = {
     users.${user} = {
-      imports = [(self.lib.mkRelativeToRoot "home-manager/home.nix")];
+      imports = [(mkRelativeToRoot "home-manager/home.nix")];
     };
   };
 }

@@ -9,10 +9,13 @@
   user,
   lib,
   ...
-}: {
+}: let
+  # My custom lib helper functions
+  inherit (self.lib) mkRelativeToRoot;
+in {
   imports =
     ["${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"]
-    ++ (map self.lib.mkRelativeToRoot [
+    ++ (map mkRelativeToRoot [
       "home-manager/hyprland"
       "modules/predefiend/nixos/sops"
     ]);
@@ -34,7 +37,7 @@
   home-manager = {
     useGlobalPkgs = false;
     users.${user} = {
-      imports = map self.lib.mkRelativeToRoot [
+      imports = map mkRelativeToRoot [
         "home-manager/home.nix"
         "home-manager/hyprland/home.nix"
       ];
