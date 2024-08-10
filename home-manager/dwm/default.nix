@@ -2,11 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 {
-  config,
+  self,
   pkgs,
-  unstable,
   user,
-  state-version,
   ...
 }: {
   services = {
@@ -16,7 +14,7 @@
     xserver = {
       displayManager.sessionCommands = ''
         xrandr -s 1920x1080
-        wall=$(find /home/${user}/.config/flake/public/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+        wall=$(find /home/${user}/.config/flake/public/wallpapers/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
         xwallpaper --zoom $wall
         wal -c
         wal -i $wall
@@ -33,14 +31,11 @@
   };
 
   environment.systemPackages = with pkgs; [
-    firefox
-    git
     htop
     gnumake
     neofetch
     pywal
     xwallpaper
-    dmenu
     gcc
     neovim
     xcompmgr
@@ -55,16 +50,6 @@
     xorg.xkill
     xorg.libXinerama
     xorg.xrdb
-    picom
-    (st.overrideAttrs {
-      src = ./st;
-    })
-    (slstatus.overrideAttrs {
-      src = ./slstatus;
-    })
-    (dmenu.overrideAttrs {
-      src = ./dmenu;
-    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -91,4 +76,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+
+  # Home manager configuration as a module
+  home-manager = {
+    users.${user} = {
+      imports = map self.lib.mkRelativeToRoot [
+        "home-manager/home.nix" # config of home-manager
+        "home-manager/dwm/home.nix"
+      ];
+    };
+  };
 }
