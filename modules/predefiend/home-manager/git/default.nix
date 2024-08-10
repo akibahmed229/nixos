@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  user,
+  lib,
+  ...
+}:
+lib.mkIf (user == "akib") {
   programs.git = {
     enable = true;
     package = pkgs.git;
