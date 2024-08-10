@@ -21,9 +21,6 @@
       {
         name = "Improves in memory performance & reducing the kernel boot time";
         patch = self.lib.mkRelativeToRoot "public/patches/kernel/acpi-slab-hwcache-align.patch";
-        # extraConfig = ''
-        #   SLAB_HWCACHE_ALIGN y
-        # '';
       }
     ];
 
@@ -32,6 +29,10 @@
       "hibernate=no" # Disable hibernation
       "intel_iommu=on" # Enable IOMMU
       "iommu=pt" # set IOMMU to passthrough mode
+      "intel_idel=on" # Enable Intel Idle driver
+      "intel_idle.max_cstate=0" # reduce the maximum C-state to C1  improve
+      "intel_pstate=enable" # Enable Intel P-State driver
+      "processor.max_cstate=0" # disable deep sleep states
       "acpi_backlight=vendor" # Fix backlight control
       "acpi_osi=Linux" # Fix backlight control
       "acpi_sleep=nonvs" # pecific kernel parameters to enable proper power
@@ -40,6 +41,7 @@
       "no_console_suspend" # Prevent consoles from being suspended
       "splash" # Show a splash screen during boot
       "logo.nologo" # Disable the Linux logo at boot
+      "timer_stats=1" # Enable timer stats
     ];
 
     initrd.availableKernelModules = [
@@ -67,7 +69,8 @@
       "coretemp" # Temperature monitoring on Intel CPUs
       "fuse" # userspace filesystem framework.
       "i2c-dev" # An acronym for the “Inter-IC” bus, a simple bus protocol which is widely used where low data rate communications suffice.
-      "i2c-piix4"
+      "i2c-piix4" # I2C bus adapter driver for Intel PIIX4 chipsets.
+      "intel-speed-select" # Intel Speed Select Technology
     ];
     extraModulePackages = [
       config.boot.kernelPackages.openrazer
