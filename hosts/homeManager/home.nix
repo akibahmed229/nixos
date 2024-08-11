@@ -6,7 +6,9 @@
   theme,
   self,
   ...
-}: {
+}: let
+  inherit (self.lib) mkRelativeToRoot;
+in {
   imports = [
     self.homeManagerModules.default # Custom home-manager modules
   ];
@@ -41,22 +43,22 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/gtk-4.0" = {
-      source = ../public/themes/gtk/${theme};
+      source = mkRelativeToRoot "public/themes/gtk/${theme}";
       recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = ../public/themes/gtk/${theme};
+      source = mkRelativeToRoot "/public/themes/gtk/${theme}";
       recursive = true;
     };
     ".config/gtk-2.0" = {
-      source = ../public/themes/gtk/${theme};
+      source = mkRelativeToRoot "public/themes/gtk/${theme}";
       recursive = true;
     };
 
     # The camera's /dev/video file is kept open (without streaming), sadly causing the camera to be powered on what looks to be most devices.
     # For some reason, this completely nullifies the soc power management on modern laptops and can result in increases from 3W to 8W at idle!
     ".config/wireplumber" = {
-      source = ../modules/predefiend/home-manager/wireplumber; # tells wireplumber to ignore cameras
+      source = mkRelativeToRoot "modules/predefiend/home-manager/wireplumber"; # tells wireplumber to ignore cameras
       recursive = true;
     };
   };
