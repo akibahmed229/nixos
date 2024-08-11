@@ -78,10 +78,10 @@
       # Import Home Manager configuration
       value = trace "importing home-manager host: ${name}" homeManagerConfiguration {
         inherit pkgs lib;
+        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
           (ifFileExists /${path}/home.nix) # Base Home Manager configuration
           (ifFileExists /${path}/${name}) # Host-specific configuration
-          {_module.args = mapAttrs' (n: v: nameValuePair n v) specialArgs;}
         ];
       };
     }
