@@ -47,7 +47,7 @@ in {
       recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = mkRelativeToRoot "/public/themes/gtk/${theme}";
+      source = mkRelativeToRoot "public/themes/gtk/${theme}";
       recursive = true;
     };
     ".config/gtk-2.0" = {
