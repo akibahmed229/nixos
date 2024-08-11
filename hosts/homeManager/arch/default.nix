@@ -28,6 +28,8 @@ in {
     adw-gtk3
     hwinfo
     ripgrep
+    atuin
+    direnv
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
