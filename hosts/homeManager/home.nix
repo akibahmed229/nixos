@@ -78,8 +78,6 @@
     EDITOR = "nvim";
   };
 
-  # Set backup file extension
-  home-manager.backupFileExtension = ".hm-bak";
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # Nicely reload system units when changing configs

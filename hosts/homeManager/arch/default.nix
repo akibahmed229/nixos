@@ -15,7 +15,7 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["firefox" "discord" "zsh" "tmux" "lf" "ags" "git"];
+    ListOfPrograms = ["zsh" "tmux" "lf" "git"];
   };
 
   # The home.packages option allows you to install Nix packages into your
