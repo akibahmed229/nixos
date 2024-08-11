@@ -77,7 +77,10 @@
       inherit name;
       # Import Home Manager configuration
       value = trace "importing home-manager host: ${name}" homeManagerConfiguration {
-        inherit pkgs lib;
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {allowUnfree = true;};
+        };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
           (ifFileExists /${path}/home.nix) # Base Home Manager configuration
