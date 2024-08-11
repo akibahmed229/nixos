@@ -52,7 +52,8 @@
     # home-manager options:- https://home-manager-options.extranix.com/
 
     # Nix-On-Droid configuration entrypoint for Android (flake & home-manager as module)
-    # Accessible through "$ nix-on-droid switch --flake path/to/flake#device"
+    # Accessible through "$ nix-on-droid switch --flake .#device"
+    # in our case .#device with directory located in the mentioned path ./hosts
     nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts;
   };
 }

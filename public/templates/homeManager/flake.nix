@@ -49,7 +49,8 @@
     # home-manager options:- https://home-manager-options.extranix.com/
 
     # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
+    # Available through 'home-manager switch --flake .#home-name'
+    # in our case .#home-name with directory located in the mentioned path ./home
     homeConfigurations = mkHomeManagerSystem ./home;
   };
 }

@@ -55,7 +55,8 @@
     # home-manager options:- https://home-manager-options.extranix.com/
 
     # NixOS configuration entrypoint ( flake & home-manager as module)
-    # Accessible through "$ nixos-rebuild switch --flake path/to/flake.nix#host"
+    # Accessible through "$ nixos-rebuild switch --flake .#host"
+    # in our case .#host with directory located in the mentioned path ./hosts
     nixosConfigurations = mkNixOSSystem ./hosts;
   };
 }
