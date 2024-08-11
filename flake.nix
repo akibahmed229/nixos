@@ -182,6 +182,13 @@
       specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
     };
 
+    # The function to generate the standalone home-manager configuration (derived from my custom lib helper function)
+    mkHomeManagerSystem = self.lib.mkSystem {
+      inherit nixpkgs pkgs home-manager;
+      homeConf = true;
+      specialArgs = {inherit inputs self unstable user theme state-version;};
+    };
+
     # This function generates the nix-on-droid system configuration for Android devices (derived from my custom lib helper function)
     mkNixOnDroidSystem = self.lib.mkSystem {
       inherit nixpkgs home-manager nix-on-droid;
@@ -227,6 +234,10 @@
     # NixOS configuration entrypoint ( flake & home-manager as module)
     # Accessible through "$ nixos-rebuild switch --flake path/to/flake.nix#host"
     nixosConfigurations = mkNixOSSystem ./hosts/nixos;
+
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-host'
+    homeConfigurations = mkHomeManagerSystem ./hosts/homeManager;
 
     # Nix-On-Droid configuration entrypoint for Android (flake & home-manager as module)
     # Accessible through "$ nix-on-droid switch --flake path/to/flake#device"
