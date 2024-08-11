@@ -10,14 +10,10 @@
     # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://nix-gaming.cachix.org"
-      "https://nixpkgs-wayland.cachix.org"
       "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
@@ -146,28 +142,15 @@
     devicename = "/dev/nvme0n1";
 
     # Supported systems for your flake packages, shell, etc.
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
-    forAllSystems = lib.genAttrs systems;
+    forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
     # The user to build for.
     user = "akib";
     theme = "gruvbox-dark-soft";
     desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
-    # Dynamically get the current system and pass it to the nixpkgs
-    pkgs = forAllSystems (system:
-      import nixpkgs {
-        inherit system;
-        config = {allowUnfree = true;};
-      });
     # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]
     unstable = forAllSystems (system:
       import nixpkgs-unstable {
@@ -177,14 +160,14 @@
 
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
     mkNixOSSystem = self.lib.mkSystem {
-      inherit nixpkgs pkgs home-manager;
+      inherit nixpkgs home-manager;
       system = forAllSystems (s: s);
       specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
     };
 
     # The function to generate the standalone home-manager configuration (derived from my custom lib helper function)
     mkHomeManagerSystem = self.lib.mkSystem {
-      inherit nixpkgs pkgs home-manager;
+      inherit nixpkgs home-manager;
       homeConf = true;
       specialArgs = {inherit inputs self unstable user theme state-version;};
     };
@@ -214,9 +197,7 @@
       # Import your custom packages
         import ./pkgs nixpkgs.legacyPackages.${system} or {}
         # import custom nixvim flake as a package
-        // {
-          nixvim = inputs.nixvim.packages.${system}.default;
-        }
+        // {nixvim = inputs.nixvim.packages.${system}.default;}
     );
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
