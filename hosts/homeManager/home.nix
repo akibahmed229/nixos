@@ -54,6 +54,9 @@ in {
       source = mkRelativeToRoot "public/themes/gtk/${theme}";
       recursive = true;
     };
+    ".config/nix".source = builtins.toFile "nix.conf" ''
+      experimental-features = nix-command flakes
+    '';
 
     # The camera's /dev/video file is kept open (without streaming), sadly causing the camera to be powered on what looks to be most devices.
     # For some reason, this completely nullifies the soc power management on modern laptops and can result in increases from 3W to 8W at idle!
