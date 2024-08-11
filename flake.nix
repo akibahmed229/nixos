@@ -213,19 +213,19 @@
     homeManagerModules = import ./modules/custom/home-manager;
 
     # NixOS configuration entrypoint ( flake & home-manager as module)
-    # Accessible through "$ nixos-rebuild switch --flake path/to/flake.nix#host"
+    # Accessible through "$ nixos-rebuild switch --flake .#host"
     nixosConfigurations = mkNixOSSystem ./hosts/nixos;
 
     # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-host'
+    # Available through 'home-manager switch --flake .#your-host'
     homeConfigurations = mkHomeManagerSystem ./hosts/homeManager;
 
     # Nix-On-Droid configuration entrypoint for Android (flake & home-manager as module)
-    # Accessible through "$ nix-on-droid switch --flake path/to/flake#device"
+    # Accessible through "$ nix-on-droid switch --flake .#device"
     nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts/nixOnDroid;
 
     # Template for different systems
-    # Accessible through "$ nix flake init -t ~/.config/flake#template"
+    # Accessible through "$ nix flake init -t .#template"
     templates = mkTemplate ./public/templates;
   };
 }
