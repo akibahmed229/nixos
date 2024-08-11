@@ -1,6 +1,5 @@
 {
   pkgs,
-  user,
   unstable,
   config,
   ...
@@ -10,6 +9,8 @@
     fzf
     bat
     dwt1-shell-color-scripts
+    autin
+    direnv
   ];
   # Zsh and Oh-My-Zsh setup
   programs = {
