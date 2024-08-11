@@ -15,7 +15,6 @@
 */
 {
   # Default arguments for the function
-  pkgs ? import <nixpkgs> {},
   system ? "x86_64-linux", # Default system architecture
   nixpkgs ? {}, # Allows passing custom nixpkgs
   template ? false, # Flag to indicate if it's a template system
