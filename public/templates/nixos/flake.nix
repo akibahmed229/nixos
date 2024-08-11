@@ -8,15 +8,17 @@
   */
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # You can also use the unstable version of home-manager
+    home-manager-unstable.url = "github:nix-community/home-manager/master";
 
     akibOS.url = "github:akibahmed229/nixos";
   };
@@ -38,15 +40,10 @@
     # FIXME: Replace with your username
     user = "akib";
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {allowUnfree = true;};
-    };
-
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
     mkNixOSSystem = akibOS.lib.mkSystem {
       # must pass this args to mkSystem
-      inherit nixpkgs pkgs system home-manager;
+      inherit nixpkgs system home-manager;
 
       # Set all inputs parameters as special arguments for all submodules,
       # so you can directly use all dependencies in inputs in submodules
