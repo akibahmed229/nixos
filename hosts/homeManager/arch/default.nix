@@ -57,6 +57,7 @@ in {
 
   # Create XDG Dirs
   xdg = {
+    enable = true;
     desktopEntries.image-roll = {
       name = "image-roll";
       exec = "${pkgs.image-roll}/bin/image-roll %F";
