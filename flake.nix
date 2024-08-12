@@ -148,7 +148,7 @@
 
     # The user to build for.
     user = "akib";
-    theme = "gruvbox-dark-soft";
+    theme = "gruvbox-dark-soft"; # available options located in ./public/themes/gtk, directory name is the theme name
     desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
     # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]
@@ -214,18 +214,22 @@
 
     # NixOS configuration entrypoint ( flake & home-manager as module)
     # Accessible through "$ nixos-rebuild switch --flake .#host"
+    # notes: located directory in ./hosts/nixos are the host name for the system, e.g., desktop, virt
     nixosConfigurations = mkNixOSSystem ./hosts/nixos;
 
     # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager switch --flake .#your-host'
+    # Available through 'home-manager switch --flake .#home'
+    # notes: located directory in ./hosts/homeManager are the home name for the system, e.g., arch
     homeConfigurations = mkHomeManagerSystem ./hosts/homeManager;
 
     # Nix-On-Droid configuration entrypoint for Android (flake & home-manager as module)
     # Accessible through "$ nix-on-droid switch --flake .#device"
+    # notes: located directory in ./hosts/nixOnDroid are the device name for the system, e.g., redmi12
     nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts/nixOnDroid;
 
     # Template for different systems
     # Accessible through "$ nix flake init -t .#template"
+    # notes: located directory in ./public/templates are the template name, e.g., nixos, homeManager, nixOnDroid
     templates = mkTemplate ./public/templates;
   };
 }
