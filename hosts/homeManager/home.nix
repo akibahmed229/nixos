@@ -41,10 +41,6 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".config/nix/nix.conf".source = builtins.toFile "nix.conf" ''
-      experimental-features = nix-command flakes
-      accept-flake-config = true # Enable substitution from flake.nix
-    '';
 
     # The camera's /dev/video file is kept open (without streaming), sadly causing the camera to be powered on what looks to be most devices.
     # For some reason, this completely nullifies the soc power management on modern laptops and can result in increases from 3W to 8W at idle!
@@ -67,6 +63,13 @@ in {
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+  # Set up nix for flakes
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+    accept-flake-config = true # Enable substitution from flake.nix
+    trusted-users = ${user}
+  '';
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
