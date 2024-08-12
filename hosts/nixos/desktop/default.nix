@@ -194,6 +194,13 @@ in {
     ];
   };
 
+  programs = {
+    wireshark = {
+      enable = true;
+      package = unstable.${pkgs.system}.wireshark;
+    };
+  };
+
   # List services that you want to enable:
   virtualisation = {
     # Enabling docker
