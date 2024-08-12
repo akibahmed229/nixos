@@ -41,7 +41,7 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".config/nix".source = builtins.toFile "nix.conf" ''
+    ".config/nix/nix.conf".source = builtins.toFile "nix.conf" ''
       experimental-features = nix-command flakes
     '';
 
