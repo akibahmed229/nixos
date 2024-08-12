@@ -12,10 +12,6 @@
   inherit (self.lib) mkImport mkRelativeToRoot;
 in {
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      self.overlays.nvim-overlay
-    ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
