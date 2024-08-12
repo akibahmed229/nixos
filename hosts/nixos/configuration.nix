@@ -142,6 +142,8 @@
     };
 
     extraOptions = ''
+      accept-flake-config = true # Enable substitution from flake.nix
+
       keep-outputs = true # Keep build outputs for debugging purposes
       keep-derivations = true
 

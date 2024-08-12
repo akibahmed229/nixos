@@ -43,6 +43,11 @@ in {
     # '';
     ".config/nix/nix.conf".source = builtins.toFile "nix.conf" ''
       experimental-features = nix-command flakes
+      accept-flake-config = true # Enable substitution from flake.nix
+      trusted-users = ${user}
+      substituters = https://cache.nixos.org/
+      trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+
     '';
 
     # The camera's /dev/video file is kept open (without streaming), sadly causing the camera to be powered on what looks to be most devices.
