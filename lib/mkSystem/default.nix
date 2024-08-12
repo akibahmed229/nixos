@@ -84,6 +84,7 @@
         modules = [
           (ifFileExists /${path}/home.nix) # Base Home Manager configuration
           (ifFileExists /${path}/${name}) # Host-specific configuration
+          {home-manager.backupFileExtension = "hm-bak";} # Set backup file extension
         ];
       };
     }
