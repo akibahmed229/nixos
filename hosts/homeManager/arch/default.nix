@@ -6,7 +6,6 @@
 */
 {
   pkgs,
-  unstable,
   self,
   ...
 }: let
@@ -32,12 +31,10 @@ in {
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with unstable.${pkgs.system}; [
+  home.packages = with pkgs; [
     xdg-utils
     wl-clipboard
     tree
-    bibata-cursors
-    adw-gtk3
     hwinfo
     ripgrep
     atuin
