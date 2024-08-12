@@ -5,6 +5,7 @@
   # Set up nix for flakes
   nix.extraOptions = ''
     experimental-features = nix-command flakes
+    accept-flake-config = true # Enable substitution from flake.nix
   '';
 
   # Set your time zone
