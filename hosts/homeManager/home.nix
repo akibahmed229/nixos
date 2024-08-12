@@ -3,7 +3,6 @@
 {
   user,
   state-version,
-  theme,
   self,
   ...
 }: let
@@ -42,18 +41,6 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".config/gtk-4.0" = {
-      source = mkRelativeToRoot "public/themes/gtk/${theme}";
-      recursive = true;
-    };
-    ".config/gtk-3.0" = {
-      source = mkRelativeToRoot "public/themes/gtk/${theme}";
-      recursive = true;
-    };
-    ".config/gtk-2.0" = {
-      source = mkRelativeToRoot "public/themes/gtk/${theme}";
-      recursive = true;
-    };
     ".config/nix".source = builtins.toFile "nix.conf" ''
       experimental-features = nix-command flakes
     '';
@@ -84,7 +71,7 @@ in {
   };
 
   # Set backup file extension
-  home-manager.backupFileExtension = ".hm-bak";
+  home-manager.backupFileExtension = "hm-bak";
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # Nicely reload system units when changing configs

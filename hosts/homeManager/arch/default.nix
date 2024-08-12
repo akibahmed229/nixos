@@ -12,6 +12,13 @@
 }: let
   inherit (self.lib) mkImport mkRelativeToRoot;
 in {
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      self.overlays.nvim-overlay
+    ];
+  };
+
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
@@ -30,6 +37,7 @@ in {
     ripgrep
     atuin
     direnv
+    neovim
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
