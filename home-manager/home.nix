@@ -9,7 +9,10 @@
   lib,
   self,
   ...
-}: {
+}: let
+  # My custom lib helper functions
+  inherit (self.lib) mkRelativeToRoot;
+in {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
     {programs.nix-index-database.comma.enable = true;} # optional to also wrap and install comma
@@ -78,27 +81,27 @@
     # '';
 
     ".config/alacritty" = {
-      source = ../modules/predefiend/home-manager/alacritty;
+      source = mkRelativeToRoot "modules/predefiend/home-manager/alacritty";
       recursive = true;
     };
     ".config/fastfetch" = {
-      source = ../modules/predefiend/home-manager/fastfetch;
+      source = mkRelativeToRoot "modules/predefiend/home-manager/fastfetch";
       recursive = true;
     };
     ".config/gtk-4.0" = {
-      source = ../public/themes/gtk/${theme};
+      source = mkRelativeToRoot "public/themes/gtk/${theme}";
       recursive = true;
     };
     ".config/gtk-3.0" = {
-      source = ../public/themes/gtk/${theme};
+      source = mkRelativeToRoot "public/themes/gtk/${theme}";
       recursive = true;
     };
     ".config/gtk-2.0" = {
-      source = ../public/themes/gtk/${theme};
+      source = mkRelativeToRoot "public/themes/gtk/${theme}";
       recursive = true;
     };
     ".config/OpenRGB" = lib.mkIf (user == "akib") {
-      source = ../modules/predefiend/home-manager/OpenRGB;
+      source = mkRelativeToRoot "modules/predefiend/home-manager/OpenRGB";
       recursive = true;
     };
 
