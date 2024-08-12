@@ -53,9 +53,6 @@ in {
     };
   };
 
-  # GTK and QT themes ( custom home-manager module )
-  theme.enable = true;
-
   # You can also manage environment variables but you will have to manually
   # source
   #
