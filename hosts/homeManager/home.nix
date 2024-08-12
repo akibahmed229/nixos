@@ -65,14 +65,25 @@ in {
   };
 
   # Set up nix for flakes
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-    accept-flake-config = true # Enable substitution from flake.nix
-    trusted-users = ${user}
-  '';
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      accept-flake-config = true # Enable substitution from flake.nix
+      trusted-users = ${user}
+    '';
+
+    # Garbage collection
+    gc = {
+      automatic = true;
+      frequency = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
+
+  services.home-manager.autoUpgrade.frequency = "weekly";
 }
