@@ -92,7 +92,8 @@ pkgs.writeShellApplication {
 
         # Clone flake repository
         print_message "Cloning flake repository..."
-        git clone https://www.github.com/akibahmed229/nixos "$flake_dir"
+        # clone the flake repository head only to save time
+        git clone https://www.github.com/akibahmed229/nixos "$flake_dir" --depth 1
         rm -rf "$flake_dir/flake.lock"
         print_message "Successfully cloned"
 
