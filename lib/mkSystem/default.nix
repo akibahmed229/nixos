@@ -56,6 +56,7 @@
           home-manager.nixosModules.home-manager # Home Manager integration
           {
             home-manager = {
+              backupFileExtension = "hm-bak"; # Set backup file extension
               useGlobalPkgs = mkDefault true;
               useUserPackages = mkDefault true;
               extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
