@@ -2,6 +2,7 @@
 # run `man home-configuration.nix` to view the documentation.
 {
   user,
+  pkgs,
   state-version,
   self,
   ...
@@ -71,6 +72,7 @@ in {
       accept-flake-config = true # Enable substitution from flake.nix
       trusted-users = ${user}
     '';
+    package = pkgs.nix;
 
     # Garbage collection
     gc = {
