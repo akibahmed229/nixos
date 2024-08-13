@@ -12,16 +12,21 @@
 }: let
   # Inherit utilities from the provided library (`lib`)
   inherit (lib) optionals lists;
+  inherit (builtins) trace pathExists;
 
-  # Define the `mkImport` function
+  # Function to check if a file exists at the specified path
+  ifFileExists = _path:
+    if pathExists _path
+    then import _path
+    else throw "File not found: ${_path}";
+
   mkImport =
-    # Use `optionals` to conditionally apply the import logic
     # If `ListOfPrograms` is not empty, proceed to map over the list and import each program
-    optionals ((lists.length ListOfPrograms) > 0) lists.map (
+    optionals ((lists.length ListOfPrograms) > 0) trace "importing module from: ${path}" lists.map (
       sProgram: let
-        rPath = name: (import /${path}/${name}); # Constructs the full path and imports the module
+        rPath = name: (ifFileExists /${path}/${name}); # Constructs the full path and imports the module
       in
-        rPath sProgram # Apply the `rPath` function to each program in `ListOfPrograms`
+        rPath sProgram
     )
     ListOfPrograms; # The list to map over
 in
