@@ -18,4 +18,5 @@
   chromium-overlay = import ./chromium {inherit inputs;};
   nvim-overlay = import ./nvim {inherit inputs;};
   unstable-packages = import ./unstable-packages {inherit inputs;};
+  intel-latestKernel-overlay = import ./intel-kernel {inherit inputs;};
 }

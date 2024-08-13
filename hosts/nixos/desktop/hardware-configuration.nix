@@ -14,17 +14,13 @@
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
+  nixpkgs.overlays = [self.overlays.intel-latestKernel-overlay]; # Add the latest kernel overlay for my intel processor
+
   boot = {
-    # use the latest Linux kernel
-    #  kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    #  kernelPackages = pkgs.linuxPackages_zen;
+    # Other options are:- linuxPackages_xanmod_latest, linuxPackages_zen
+
+    # Custom kernel packages
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = [
-      {
-        name = "Improves in memory performance & reducing the kernel boot time";
-        patch = self.lib.mkRelativeToRoot "public/patches/kernel/acpi-slab-hwcache-align.patch";
-      }
-    ];
 
     kernelParams = [
       "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
