@@ -11,7 +11,7 @@
   ...
 }: let
   # Inherit utilities from the provided library (`lib`)
-  inherit (lib) optionals lists;
+  inherit (lib) optionals lists concatStringsSep;
   inherit (builtins) trace pathExists;
 
   # Function to check if a file exists at the specified path
@@ -22,12 +22,15 @@
 
   mkImport =
     # If `ListOfPrograms` is not empty, proceed to map over the list and import each program
-    optionals ((lists.length ListOfPrograms) > 0) trace "importing module from: ${path}" lists.map (
+    optionals ((lists.length ListOfPrograms) > 0) lists.map (
       sProgram: let
         rPath = name: (ifFileExists /${path}/${name}); # Constructs the full path and imports the module
       in
         rPath sProgram
     )
     ListOfPrograms; # The list to map over
+
+  # Log the import information
+  logImportInfo = trace "module found in: ${path}\nimporting modules: ${concatStringsSep ", " ListOfPrograms}";
 in
-  mkImport
+  logImportInfo mkImport

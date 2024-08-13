@@ -30,7 +30,7 @@
   inherit (builtins) readDir trace;
   inherit (nix-on-droid.lib) nixOnDroidConfiguration;
   inherit (home-manager.lib) homeManagerConfiguration;
-  inherit (lib) nixosSystem mapAttrs' nameValuePair pathExists mkDefault filterAttrs attrNames lists;
+  inherit (lib) nixosSystem mapAttrs' nameValuePair pathExists mkDefault filterAttrs attrNames lists concatStringsSep;
 
   # Read directory contents from the provided path
   getinfo = readDir path;
@@ -46,7 +46,7 @@
     then {
       inherit name;
       # Import NixOS system configuration
-      value = trace "importing nixos host: ${name}" nixosSystem {
+      value = nixosSystem {
         inherit system;
         specialArgs =
           {inherit system;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
@@ -76,7 +76,7 @@
     then {
       inherit name;
       # Import Home Manager configuration
-      value = trace "importing home-manager host: ${name}" homeManagerConfiguration {
+      value = homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
           config = {allowUnfree = true;};
@@ -99,7 +99,7 @@
     then {
       inherit name;
       # Import Nix-on-Droid system configuration
-      value = trace "importing nix-on-droid host: ${name}" nixOnDroidConfiguration {
+      value = nixOnDroidConfiguration {
         pkgs = import nixpkgs {
           system = "aarch64-linux"; # Set system architecture for Nix-on-Droid
           overlays = [
@@ -134,7 +134,7 @@
     then {
       inherit name;
       # Import template configuration
-      value = trace "importing template name: ${name}" {
+      value = {
         description = "Template for ${name} system";
         # Set path to the template
         path =
@@ -153,12 +153,12 @@
     mapAttrs' (
       # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems
       if homeConf
-      then trace "mapping through homeManagerConfiguration" processDirHome # homeConf is true
+      then processDirHome
       else if droidConf
-      then trace "mapping through nixOnDroidConfigurations" processDirNixOnDroid # droidConf is true
+      then processDirNixOnDroid
       else if template
-      then trace "mapping through templates" processDirTemplate # template is true
-      else trace "mapping through nixosSystem" processDirNixOS # Default to NixOS
+      then processDirTemplate
+      else processDirNixOS # Default to NixOS
     )
     getinfo;
 
@@ -171,11 +171,14 @@
     value = validAttrs.${name};
   }) (attrNames validAttrs);
 
+  # Concatenate the names of the found hosts for logging purposes
+  foundHosts = concatStringsSep ", " (attrNames validAttrs);
+
   # Check if the directory is empty and throw an error if no systems are found
   isHostsEmpty = _:
     if lists.length validList == 0
     then throw "No systems found in ${path}"
-    else trace "systems found in ${path}" _;
+    else trace "systems found in: ${path}\navailable systems: ${foundHosts}" _;
   # Return the final list of valid systems
 in
   isHostsEmpty builtins.listToAttrs validList
