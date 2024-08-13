@@ -1,5 +1,4 @@
 {
-  config,
   user ? "example.com",
   lib,
   ...
@@ -10,10 +9,11 @@
       address = "192.168.0.1"; # IP address of the default gateway.
       interface = "enp4s0"; # Network interface used to reach the default gateway.
     };
+    # Enable the NetworkManager service.
     networkmanager = {
-      enable = true; # Enable the NetworkManager service.
-      wifi.macAddress = "random"; # Randomize the MAC address for WiFi interfaces.
-      ethernet.macAddress = "random"; # Randomize the MAC address for Ethernet interfaces.
+      enable = lib.mkDefault true;
+      wifi.macAddress = "54-CC-5E-B2-64-06"; # option: random, stable, or a specific MAC address.
+      ethernet.macAddress = "28:3A:4D:F2:0B:FE";
     };
 
     # Define the DNS nameservers.
@@ -69,7 +69,7 @@
       ];
 
       # Configuration for the WireGuard interface 'wg0'.
-      wg0.macAddress = "28:3A:4D:F2:0B:FE";
+      # wg0.macAddress = "28:3A:4D:F2:0B:FE";
     };
 
     # Appending vlans to the network interfaces.
