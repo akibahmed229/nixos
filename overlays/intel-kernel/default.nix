@@ -20,7 +20,7 @@
         kernelPatches = [
           {
             name = "Improves in memory performance & reducing the kernel boot time";
-            patch = inputs.self.lib.mkRelativeToRoot "public/patches/kernel/acpi-slab-hwcache-align.patch";
+            patch = ./patches/acpi-slab-hwcache-align.patch;
           }
         ];
         ignoreConfigErrors = true;
