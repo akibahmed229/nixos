@@ -13,12 +13,10 @@
   # My custom lib helper functions
   inherit (self.lib) mkRelativeToRoot;
 in {
-  imports =
-    ["${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"]
-    ++ (map mkRelativeToRoot [
-      "home-manager/hyprland"
-      "modules/predefiend/nixos/sops"
-    ]);
+  imports = map mkRelativeToRoot [
+    "home-manager/hyprland"
+    "modules/predefiend/nixos/sops"
+  ];
 
   # (Custom nixos modules)
   grub.enable = lib.mkForce false;
@@ -43,6 +41,4 @@ in {
       ];
     };
   };
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

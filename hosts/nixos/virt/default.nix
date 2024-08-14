@@ -15,7 +15,6 @@
 in {
   imports =
     [
-      (import ./hardware-configuration.nix)
       (import ../../../modules/predefiend/nixos/disko {device = "/dev/vda";})
       (mkRelativeToRoot "home-manager/dwm")
     ]

@@ -52,6 +52,7 @@
           {inherit system;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
           (ifFileExists /${path}/configuration.nix) # Base configuration
+          (ifFileExists /${path}/${name}/hardware-configuration.nix) # Host-specific hardware configuration
           (ifFileExists /${path}/${name}) # Host-specific configuration
           home-manager.nixosModules.home-manager # Home Manager integration
           {

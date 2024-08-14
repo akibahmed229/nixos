@@ -17,10 +17,7 @@
   inherit (self.lib) mkImport mkRelativeToRoot;
 in {
   imports =
-    [
-      (import ./hardware-configuration.nix)
-      (mkRelativeToRoot "home-manager/${desktopEnvironment}")
-    ]
+    [(mkRelativeToRoot "home-manager/${desktopEnvironment}")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr"];

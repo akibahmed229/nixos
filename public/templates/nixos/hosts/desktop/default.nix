@@ -6,8 +6,7 @@
   ...
 }: {
   # your imports goes here,...
-  # make sure to import the hardware-configuration
-  imports = [(import ./hardware-configuration.nix)];
+  imports = []; # your stuff
 
   # your configuration goes here,...
   environment.systemPackages = with pkgs; [nvim];
