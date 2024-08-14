@@ -270,10 +270,12 @@ in {
   home-manager = {
     useGlobalPkgs = false;
     users.${user} = {
-      imports = map mkRelativeToRoot [
-        "home-manager/home.nix" # config of home-manager
-        "home-manager/${desktopEnvironment}/home.nix"
-      ];
+      imports =
+        map mkRelativeToRoot [
+          "home-manager/home.nix" # config of home-manager
+          "home-manager/${desktopEnvironment}/home.nix"
+        ]
+        ++ [(import ./home.nix)];
     };
   };
 }

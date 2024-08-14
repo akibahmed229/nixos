@@ -6,16 +6,8 @@
   self,
   user,
   ...
-}: let
-  # My custom lib helper functions
-  inherit (self.lib) mkImport mkRelativeToRoot;
-in {
+}: {
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      self.overlays.discord-overlay
-      self.overlays.nvim-overlay
-    ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -23,28 +15,20 @@ in {
     };
   };
 
-  # Fix: systemd not importing the environment by default.
-  wayland.windowManager.hyprland.systemd.variables = ["--all"];
-
-  # imports from the predefiend modules folder
-  imports =
-    [
-      inputs.hyprland.homeManagerModules.default
-      {wayland.windowManager.hyprland.systemd.enable = true;}
-    ]
-    ++ mkImport {
-      path = mkRelativeToRoot "modules/predefiend/home-manager";
-      ListOfPrograms = ["firefox" "discord" "zsh" "tmux" "lf" "ags" "git"];
-    };
+  # imports = [(import ./others/hyprutility.nix)];
+  # imports hyprland home-manager modules
+  imports = [
+    inputs.hyprland.homeManagerModules.default
+    {wayland.windowManager.hyprland.systemd.enable = true;}
+  ];
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
     xfce.exo
-    neovim
-    spotify
   ];
 
-  #imports = [(import ./others/hyprutility.nix)];
+  # Fix: systemd not importing the environment by default.
+  wayland.windowManager.hyprland.systemd.variables = ["--all"];
   wayland.windowManager.hyprland = {
     enable = true;
     plugins = [
