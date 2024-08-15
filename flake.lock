@@ -746,13 +746,13 @@
         "rev": "9cbbf076595b2af9b661cdd484a02faf3752787f",
         "shallow": true,
         "type": "git",
-        "url": "ssh://git@gitlab.com/akibahmed229/sops-secrects.git"
+        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
       },
       "original": {
         "ref": "main",
         "shallow": true,
         "type": "git",
-        "url": "ssh://git@gitlab.com/akibahmed229/sops-secrects.git"
+        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
       }
     },
     "nix-darwin": {
