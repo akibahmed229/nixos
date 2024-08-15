@@ -2,21 +2,26 @@
   pkgs,
   user,
   lib,
+  inputs,
   ...
-}:
-lib.mkIf (user == "akib") {
-  programs.git = {
-    enable = true;
-    package = pkgs.git;
-    userName = "akibahmed229";
-    userEmail = "akib4418@gmail.com";
-    extraConfig = {
-      user = {
-        signingkey = "akib4418@gmail.com";
-      };
-      commit = {
-        gpgSign = true;
+}: let
+  secretsInput = builtins.toString inputs.mySsecrets;
+  email = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/github/email.txt");
+  username = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/github/username.txt");
+in
+  lib.mkIf (user == "akib") {
+    programs.git = {
+      enable = true;
+      package = pkgs.git;
+      userName = username;
+      extraConfig = {
+        user = {
+          userEmail = email;
+          signingkey = email;
+        };
+        commit = {
+          gpgSign = true;
+        };
       };
     };
-  };
-}
+  }

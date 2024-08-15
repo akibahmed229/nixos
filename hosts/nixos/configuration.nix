@@ -68,7 +68,10 @@
         }
         else {})
       config.myusers);
-  users.mutableUsers = lib.mkIf (config.users.users.${user}.hashedPasswordFile != {}) true;
+  users.mutableUsers =
+    if (config.users.users.${user}.hashedPasswordFile != null)
+    then false
+    else true; # required for password to be set via sops during system activation
 
   programs = {
     # Enable ADB for Android and other stuff.

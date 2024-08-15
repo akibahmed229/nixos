@@ -13,17 +13,19 @@
 
 8. `sudo nixos-rebuild switch --flake .#host --option tarball-ttl 0` Will not use cache to rebuild
 
-9. Switching Generations without reboot
+9. `nixos-rebuild --use-remote-sudo switch --flake .#host` will append for sudo while system activation script
 
-   ```bash
-   nix-env --list-generations -p /nix/var/nix/profiles/system
-   nix-env --switch-generation <number> -p /nix/var/nix/profiles/system
-   # sets selected generation to be activated
-   /nix/var/nix/profiles/system/bin/switch-to-configuration { switch or boot }
-   ```
+10. Switching Generations without reboot
 
-   Set current config to default boot
+```bash
+nix-env --list-generations -p /nix/var/nix/profiles/system
+nix-env --switch-generation <number> -p /nix/var/nix/profiles/system
+# sets selected generation to be activated
+/nix/var/nix/profiles/system/bin/switch-to-configuration { switch or boot }
+```
 
-   use this when you boot a previous generation via the boot manager menu and want it to be set to default on next boot
+Set current config to default boot
 
-   `/run/current-system/bin/switch-to-configuration { switch or boot }`
+use this when you boot a previous generation via the boot manager menu and want it to be set to default on next boot
+
+`/run/current-system/bin/switch-to-configuration { switch or boot }`
