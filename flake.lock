@@ -737,6 +737,24 @@
         "type": "path"
       }
     },
+    "mySsecrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723727591,
+        "narHash": "sha256-HXVND919hbLK+a9mrcQGXLdd1iweMgl4PPmehfSRxi0=",
+        "ref": "main",
+        "rev": "59d7d11fb2fc37480f1c3c50177f8e4c85402542",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
+      },
+      "original": {
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -954,11 +972,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1723670331,
-        "narHash": "sha256-bQaWqflbYdOn28NJHMTMMPgswlQRXhZh+a3WQAeyaFE=",
+        "lastModified": 1723726977,
+        "narHash": "sha256-8N1lnLbHFCn39y/nez7QofjzMeAGykJtu8tQPPJGOI8=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "a96aa9730af8c85dd7ed15e359ac23e9686f0a9a",
+        "rev": "fb4e6c2361ffd88e3a0a48ac8e90034076f25527",
         "type": "github"
       },
       "original": {
@@ -1094,6 +1112,7 @@
         "hyprland-plugins": "hyprland-plugins",
         "impermanence": "impermanence",
         "my-devShells": "my-devShells",
+        "mySsecrets": "mySsecrets",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs",
