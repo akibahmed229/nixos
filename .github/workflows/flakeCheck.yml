@@ -24,7 +24,7 @@ jobs:
 
       - name: Run flake checks for all configured flake inputs
         run: |
-          nix build .#checks.x86_64-linux \
+          nix flake check \
             --override-input mySsecrets "git+https://gitlab.com/myname/secrects.git?ref=main&shallow=1" \
             --override-input my-devShells path:./devshells \
             --override-input nixvim path:./pkgs/nixvim \
