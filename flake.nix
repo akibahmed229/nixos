@@ -106,6 +106,9 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    #################### Personal Repositories | local flake ####################
+
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
     nixvim = {
       url = "path:./pkgs/nixvim";
@@ -117,9 +120,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
     };
-
-    #################### Personal Repositories ####################
-
     # Private secrets repo.
     # Authenticate via ssh and use shallow clone
     mySsecrets = {
