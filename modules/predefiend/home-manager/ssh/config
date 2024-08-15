@@ -1,4 +1,18 @@
+# Phone
 Host phone
   HostName 192.168.0.103
   User akib
   Port 8022
+
+# GitHub
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_github
+
+# GitLab
+Host gitlab.com
+  HostName gitlab.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_gitlab
+
