@@ -5,6 +5,7 @@
 {
   inputs,
   user,
+  lib,
   ...
 }: let
   secretsInput = builtins.toString inputs.mySsecrets;
@@ -13,7 +14,7 @@ in {
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  sops = {
+  sops = lib.mkIf (user == "akib") {
     # This is the location of the host specific age-key for ta and will to have been extracted to this location via hosts/common/core/sops.nix on the host
     age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
 

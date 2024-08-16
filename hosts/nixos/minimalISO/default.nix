@@ -35,6 +35,10 @@ in {
     wget
     curl
     git
+    p7zip
+    zip
+    unzip
+    wl-clipboard
     # for ssh
     openssh
     # for nix
@@ -49,16 +53,8 @@ in {
     };
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = lib.mkForce [
-      "btrfs"
-      "vfat"
-    ];
-  };
-
   networking = {
-    hostName = lib.mkDefault "iso";
+    hostName = lib.mkDefault "MinimalISO";
     wireless.enable = false;
   };
 

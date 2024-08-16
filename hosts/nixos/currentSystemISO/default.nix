@@ -5,9 +5,9 @@
   self,
   pkgs,
   unstable,
-  inputs,
   user,
   lib,
+  desktopEnvironment,
   ...
 }: let
   # My custom lib helper functions
@@ -20,7 +20,10 @@ in {
 
   # (Custom nixos modules)
   grub.enable = lib.mkForce false;
-  networking.networkmanager.enable = lib.mkForce false;
+  networking = {
+    hostName = lib.mkDefault "CurrentISO";
+    wireless.enable = false;
+  };
 
   nixpkgs.overlays = [
     self.overlays.nvim-overlay
@@ -35,10 +38,12 @@ in {
   home-manager = {
     useGlobalPkgs = false;
     users.${user} = {
-      imports = map mkRelativeToRoot [
-        "home-manager/home.nix"
-        "home-manager/hyprland/home.nix"
-      ];
+      imports =
+        map mkRelativeToRoot [
+          "home-manager/home.nix"
+          "home-manager/${desktopEnvironment}/home.nix"
+        ]
+        ++ [(import ./home.nix)];
     };
   };
 }

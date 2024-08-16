@@ -15,6 +15,8 @@
 {
   pkgs,
   inputs,
+  lib,
+  user,
   ...
 }: let
   secretsInput = builtins.toString inputs.mySsecrets;
@@ -24,9 +26,9 @@ in {
   ];
 
   sops = {
-    defaultSopsFile = "${secretsInput}/secrets/secrets.yaml";
+    defaultSopsFile = lib.mkIf (user == "akib") "${secretsInput}/secrets/secrets.yaml";
     defaultSopsFormat = "yaml";
-    age = {
+    age = lib.mkIf (user == "akib") {
       # automatically import host SSH keys as age keys
       sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       # this will use an age key that is expected to already be in the file-system
@@ -44,7 +46,7 @@ in {
   */
 
   # Secrets
-  sops.secrets = {
+  sops.secrets = lib.mkIf (user == "akib") {
     "akib/password/root_secret".neededForUsers = true; # decrypt the secret to /run/secrets-for-users
     "akib/password/my_secret".neededForUsers = true;
     "akib/wireguard/PrivateKey".neededForUsers = true;

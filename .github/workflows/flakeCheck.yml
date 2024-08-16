@@ -20,5 +20,10 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: run flake checks for all configured flake inputs
-        run: nix flake check self
+      - name: Modify flake.nix and run flake checks
+        run: |
+          sed -i 's/akib/test/g' flake.nix
+          nix flake check \
+            --override-input my-devShells path:./devshells \
+            --override-input nixvim path:./pkgs/nixvim \
+            --no-update-lock-file --no-write-lock-file --accept-flake-config
