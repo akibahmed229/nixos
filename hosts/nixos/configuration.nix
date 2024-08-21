@@ -207,6 +207,8 @@
     };
   };
 
+  security.allowSimultaneousMultithreading = true; # simultaneous multithreading of CPU cores
+
   programs = {
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
