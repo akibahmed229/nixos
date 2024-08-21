@@ -740,10 +740,10 @@
     "mySsecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1723730492,
-        "narHash": "sha256-GfG1AzvguB+s1Thf0wbARtjqLuxxMjKjXLSpGWIqqIY=",
+        "lastModified": 1724225274,
+        "narHash": "sha256-O4kNVPZIrf9eQhJdWeVULI1U2dux//ezwWyITuq1OrQ=",
         "ref": "main",
-        "rev": "9cbbf076595b2af9b661cdd484a02faf3752787f",
+        "rev": "cce7839fc15bc36c949f92017b1b06fdbcc86eb9",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
