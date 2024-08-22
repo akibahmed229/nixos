@@ -39,7 +39,6 @@ in {
   # environment.
   home.packages = with unstable.${pkgs.system}; [
     xdg-utils
-    wl-clipboard
     tree
     bibata-cursors
     adw-gtk3

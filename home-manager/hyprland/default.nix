@@ -52,9 +52,6 @@
         lxmenu-data
         # libsForQt5.polkit-kde-agent
         # mpd
-        # For file manager
-        xfce.thunar
-        xfce.tumbler
         # for  qt and gtk
         qt6.qtwayland
         qt6Packages.qt6ct
@@ -64,10 +61,6 @@
         libsForQt5.ark.out
         #qt6.qtwayland
         #lxappearance
-        nwg-look
-        # for clipboard
-        cliphist
-        wl-clipboard
         # stroge mount
         #udiskie
         ntfs3g
@@ -82,20 +75,10 @@
         mission-center
         gnome.gnome-calculator
         gnome.gnome-clocks
-        # screen shot & other screen tools
-        swww
-        grim
-        slurp
-        swappy
-        imagemagick
-        # for music
-        playerctl
         # color grab
         #pywal
         # hypr echoshystem
         hyprpicker
-        # Screen  lock
-        wlogout
         # fot sddm theme
         libsForQt5.qt5.qtquickcontrols2
         libsForQt5.qt5.qtgraphicaleffects

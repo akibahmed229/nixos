@@ -110,6 +110,7 @@ in {
       #gettext
       #rubyPackages.glib2
       libadwaita
+      libinput
     ])
     ++ (
       if user == "akib" && hostname == "desktop"

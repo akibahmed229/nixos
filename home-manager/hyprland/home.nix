@@ -24,7 +24,24 @@
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
+    nwg-look
+    # For file manager
+    xfce.thunar
+    xfce.tumbler
     xfce.exo
+    # for music
+    playerctl
+    # screen shot & other screen tools
+    swww
+    grim
+    slurp
+    swappy
+    imagemagick
+    # for clipboard
+    cliphist
+    wl-clipboard
+    # Screen  lock
+    wlogout
   ];
 
   # Fix: systemd not importing the environment by default.
@@ -144,6 +161,19 @@
             )
             10)
         );
+
+      # These binds set the expected behavior for regular keyboard media volume keys, including when the screen is locked:
+      bindel = [
+        " , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        " , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        " , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ];
+      bindl = [
+        # Requires playerctl
+        " , XF86AudioPlay, exec, playerctl play-pause"
+        " , XF86AudioPrev, exec, playerctl previous"
+        " , XF86AudioNext, exec, playerctl next"
+      ];
 
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging

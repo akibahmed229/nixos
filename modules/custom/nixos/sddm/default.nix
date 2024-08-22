@@ -3,7 +3,6 @@
   config,
   pkgs,
   self,
-  user,
   ...
 }: let
   cfg = config.sddm;
@@ -18,6 +17,7 @@ in {
     services = {
       xserver = {
         enable = true;
+        libinput.enable = true;
         xkb.layout = "us";
         xkb.options = "eorsign:e";
       };
