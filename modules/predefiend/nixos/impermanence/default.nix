@@ -137,8 +137,6 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       ];
       files = [
         ".screenrc"
-        #".zshrc"
-        #".gitconfig"
         ".mysql_history"
       ];
     };
@@ -155,7 +153,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
     #    clean old contents in home cache dir
     #    (it's persisted to avoid problems with large files being loaded into the tmpfs)
     #  */
-    "e /home/${user}/.cache 755 ${user} users 30d"
+    "e /home/${user}/.cache 755 ${user} users 7d"
 
     # exceptions
     "x /home/${user}/.cache/rbw"
