@@ -154,6 +154,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
     #    (it's persisted to avoid problems with large files being loaded into the tmpfs)
     #  */
     "e /home/${user}/.cache 755 ${user} users 7d"
+    "r /home/${user}/.cache/tmp*" # remove temporary files in cache on every boot
 
     # exceptions
     "x /home/${user}/.cache/rbw"
