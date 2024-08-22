@@ -15,9 +15,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     services = {
+      libinput.enable = true;
       xserver = {
         enable = true;
-        libinput.enable = true;
         xkb.layout = "us";
         xkb.options = "eorsign:e";
       };
