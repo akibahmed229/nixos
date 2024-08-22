@@ -13,7 +13,6 @@
   ...
 }: let
   # Define the remote SFTP path and the local mount point
-  remoteUser = "${user}";
   remoteHost = "192.168.0.103";
   remotePort = "8022";
   remotePath = "/sdcard";

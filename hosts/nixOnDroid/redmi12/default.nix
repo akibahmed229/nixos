@@ -1,4 +1,14 @@
 {pkgs, ...}: {
+  nixpkgs.overlays = [
+    (self: super: {
+      openssh = super.openssh.override {
+        hpnSupport = true;
+        withKerberos = true;
+        kerberos = self.libkrb5;
+      };
+    })
+  ];
+
   # Simply install just the packages
   environment.packages = with pkgs; [
     # User-facing stuff that you really really want to have
@@ -7,6 +17,7 @@
     pipes
     android-tools
     btop
+    openssh
 
     # Some common stuff that people expect to have
     procps

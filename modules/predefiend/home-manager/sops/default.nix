@@ -6,8 +6,10 @@
   inputs,
   user,
   lib,
+  config,
   ...
 }: let
+  inherit (config.home) homeDirectory;
   secretsInput = builtins.toString inputs.mySsecrets;
 in {
   imports = [
@@ -15,18 +17,18 @@ in {
   ];
 
   sops = lib.mkIf (user == "akib") {
-    # This is the location of the host specific age-key for ta and will to have been extracted to this location via hosts/common/core/sops.nix on the host
-    age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
+    # This is the location of the host specific age-key for akib and will to have been extracted to this location via hosts/common/core/sops.nix on the host
+    age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
 
     defaultSopsFile = "${secretsInput}/secrets/secrets.yaml";
     validateSopsFiles = false;
 
     secrets = {
       "github/sshKey" = {
-        path = "/home/${user}/.ssh/id_ed25519_github";
+        path = "${homeDirectory}/.ssh/id_ed25519_github";
       };
       "gitlab/sshKey" = {
-        path = "/home/${user}/.ssh/id_ed25519_gitlab";
+        path = "${homeDirectory}/.ssh/id_ed25519_gitlab";
       };
     };
   };

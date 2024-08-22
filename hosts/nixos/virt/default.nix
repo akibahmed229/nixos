@@ -32,7 +32,7 @@ in {
       wget
     ];
     shells = [pkgs.zsh];
-    pathsToLink = ["/share/zsh" "/tmp" "/home/akib"];
+    pathsToLink = ["/share/zsh" "/tmp" "/home/${user}"];
   };
 
   programs = {

@@ -7,7 +7,7 @@
 }: {
   imports = self.lib.mkImport {
     path = self.lib.mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["zsh" "tmux" "lf" "git"];
+    ListOfPrograms = ["zsh" "tmux" "lf"];
   };
 
   home = {
