@@ -166,7 +166,7 @@
       });
 
     # The function to generate the system configurations (derived from my custom lib helper function)
-    inherit (self.lib) mkSystem;
+    inherit (self.lib) mkSystem mkDerivation;
     mkNixOSSystem = mkSystem {
       inherit nixpkgs home-manager;
       system = forAllSystems (s: s);
@@ -192,7 +192,10 @@
 
     packages = forAllSystems (
       system:
-        self.lib.mkPkgs {inherit nixpkgs system;} ./pkgs
+        mkDerivation {
+          inherit nixpkgs system;
+          path = ./pkgs;
+        }
         // {
           nixvim = inputs.nixvim.packages.${system}.default;
         }
