@@ -4,7 +4,6 @@
   unstable,
   user,
   inputs,
-  lib,
   ...
 }: {
   xdg.mimeApps.defaultApplications = {
@@ -125,13 +124,16 @@
         "media.mediasource.enabled" = true;
         "dom.security.https_only_mode" = true;
         "browser.download.panel.shown" = true;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "svg.context-properties.content.enabled" = true;
+        "layout.css.has-selector.enabled" = true;
         "identity.fxaccounts.enabled" = false;
         "signon.rememberSignons" = false;
       };
 
-      userChrome = ''
-        /* some css */
-      '';
+      # custom css for firefox ui and webpages
+      userChrome = builtins.readFile ./userChrome.css;
+      userContent = builtins.readFile ./userContent.css;
 
       extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
         bitwarden
