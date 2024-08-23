@@ -186,16 +186,15 @@
       inherit nixpkgs;
       template = true;
     };
-    # using the above variables,function, etc. to generate the system configuration
   in {
     inherit (my-devShells) devShells; # available through "$ nix develop .#devShells"
     lib = import ./lib {inherit lib;}; # Lib is a custom library of helper functions
 
     packages = forAllSystems (
       system:
-        import ./pkgs nixpkgs.legacyPackages.${system} or {} # Import your custom packages
+        self.lib.mkPkgs {inherit nixpkgs system;} ./pkgs
         // {
-          nixvim = inputs.nixvim.packages.${system}.default; # import custom nixvim flake as a package
+          nixvim = inputs.nixvim.packages.${system}.default;
         }
     ); # Accessible through 'nix build', 'nix shell', "nix run", etc
 

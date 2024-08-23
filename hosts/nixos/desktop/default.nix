@@ -146,7 +146,7 @@ in {
           docker-compose
           yarn
           mysql80
-          mysql-workbench
+          # mysql-workbench
           postgresql
           pgadmin4
         ]

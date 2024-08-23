@@ -2,13 +2,14 @@
 # You can build them using 'nix build .#example'
 pkgs: {
   nvchad = pkgs.callPackage ./nvchad {};
-  obs-zoom-to-mouse = pkgs.callPackage ./obs-studio-plugins {};
-  custom_sddm = pkgs.callPackage ./sddm/sddm.nix {};
+  obs-zoom-to-mouse = pkgs.callPackage ./obs-zoom-to-mouse {};
+  custom_sddm = pkgs.callPackage ./custom_sddm {};
+  docker-desktop = pkgs.callPackage ./docker-desktop {};
+  custom_nsxiv = pkgs.callPackage ./custom_nsxiv {};
+
   wallpaper = import ./shellscript/wallpaper.nix {inherit pkgs;};
   nix-update-input = import ./shellscript/nix-update-input.nix {inherit pkgs;};
   disko-formate = import ./shellscript/disko-formate.nix {inherit pkgs;};
-  akibOS = import ./akibOS {inherit pkgs;};
+  akibOS = import ./shellscript/akibOS.nix {inherit pkgs;};
   fileviewer = import ./shellscript/fileviewer.nix {inherit pkgs;};
-  docker-desktop = pkgs.callPackage ./docker-desktop {};
-  custom_nsxiv = pkgs.callPackage ./nsxiv {};
 }
