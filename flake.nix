@@ -1,6 +1,5 @@
 {
   description = "Akib | NixOS Configuration Go Wild";
-
   /*
   * the nixConfig here only affects the flake itself, not the system configuration!
   * for more information, see:
@@ -24,10 +23,20 @@
   * Inputs can be :- another flake, a regular Git repository, or a local path
   */
   inputs = {
-    # stable packages
+    ####################  Core Repositories ####################
+
+    # Nixpkgs is a collection of over 100,000 software packages that can be installed with the Nix package manager. It also implements NixOS, a purely-functional Linux distribution.
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
-    # unstable packages
     nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixpkgs-unstable";
+    # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     # nix-on-droid is a project to run Nix on Android
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
@@ -35,22 +44,7 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # stable home-manager
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # unstable home-manager
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    ####################  Desktop Environments & WindowManager | remote flake ####################
 
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
     # Add "inputs.hyprland.homeManagerModules.default" to home-config
@@ -70,6 +64,13 @@
       inputs.home-manager.follows = "nixpkgs";
     };
 
+    ####################  Community & Other Repositories | remote flake ####################
+
+    # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Declarative disk partitioning and formatting using nix
     disko = {
       url = "github:nix-community/disko";
@@ -96,7 +97,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
     };
-    #  A customizable and extensible shell
+    # A customizable and extensible shell
     ags = {
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -120,8 +121,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
     };
-    # Private secrets repo.
-    # Authenticate via ssh and use shallow clone
+    # Private secrets repo. Authenticate via ssh and use shallow clone
     mySsecrets = {
       url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git?ref=main&shallow=1";
       flake = false;
@@ -151,8 +151,6 @@
     devicename = "/dev/nvme0n1";
 
     # Supported systems for your flake packages, shell, etc.
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
     forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
     # The user to build for.
@@ -167,78 +165,51 @@
         config = {allowUnfree = true;};
       });
 
-    # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
-    mkNixOSSystem = self.lib.mkSystem {
+    # The function to generate the system configurations (derived from my custom lib helper function)
+    inherit (self.lib) mkSystem;
+    mkNixOSSystem = mkSystem {
       inherit nixpkgs home-manager;
       system = forAllSystems (s: s);
       specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
     };
-
-    # The function to generate the standalone home-manager configuration (derived from my custom lib helper function)
-    mkHomeManagerSystem = self.lib.mkSystem {
+    mkHomeManagerSystem = mkSystem {
       inherit nixpkgs home-manager;
       homeConf = true;
       specialArgs = {inherit inputs self unstable user theme state-version;};
     };
-
-    # This function generates the nix-on-droid system configuration for Android devices (derived from my custom lib helper function)
-    mkNixOnDroidSystem = self.lib.mkSystem {
+    mkNixOnDroidSystem = mkSystem {
       inherit nixpkgs home-manager nix-on-droid;
       droidConf = true;
       specialArgs = {inherit inputs self unstable user state-version;};
     };
-
-    # This function generates the template for different systems (derived from my custom lib helper function)
-    mkTemplate = self.lib.mkSystem {
+    mkTemplate = mkSystem {
       inherit nixpkgs;
       template = true;
     };
     # using the above variables,function, etc. to generate the system configuration
   in {
-    # Accessible through 'nix develop" etc
-    inherit (my-devShells) devShells;
-    # lib is a custom library of helper functions
-    lib = import ./lib {inherit lib;};
+    inherit (my-devShells) devShells; # available through "$ nix develop .#devShells"
+    lib = import ./lib {inherit lib;}; # Lib is a custom library of helper functions
 
-    # Accessible through 'nix build', 'nix shell', "nix run", etc
     packages = forAllSystems (
       system:
-      # Import your custom packages
-        import ./pkgs nixpkgs.legacyPackages.${system} or {}
-        # import custom nixvim flake as a package
-        // {nixvim = inputs.nixvim.packages.${system}.default;}
-    );
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {});
+        import ./pkgs nixpkgs.legacyPackages.${system} or {} # Import your custom packages
+        // {
+          nixvim = inputs.nixvim.packages.${system}.default; # import custom nixvim flake as a package
+        }
+    ); # Accessible through 'nix build', 'nix shell', "nix run", etc
 
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
+    overlays = import ./overlays {inherit inputs;}; # Your custom packages and modifications, exported as overlays
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {}); # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
+
+    # Reusable nixos & home-manager modules you might want to export
     nixosModules = import ./modules/custom/nixos;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/custom/home-manager;
 
-    # NixOS configuration entrypoint ( flake & home-manager as module)
-    # Accessible through "$ nixos-rebuild switch --flake .#host"
-    # notes: located directory in ./hosts/nixos are the host name for the system, e.g., desktop, virt
-    nixosConfigurations = mkNixOSSystem ./hosts/nixos;
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager switch --flake .#home'
-    # notes: located directory in ./hosts/homeManager are the home name for the system, e.g., arch
-    homeConfigurations = mkHomeManagerSystem ./hosts/homeManager;
-
-    # Nix-On-Droid configuration entrypoint for Android (flake & home-manager as module)
-    # Accessible through "$ nix-on-droid switch --flake .#device"
-    # notes: located directory in ./hosts/nixOnDroid are the device name for the system, e.g., redmi12
-    nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts/nixOnDroid;
-
-    # Template for different systems
-    # Accessible through "$ nix flake init -t .#template"
-    # notes: located directory in ./public/templates are the template name, e.g., nixos, homeManager, nixOnDroid
-    templates = mkTemplate ./public/templates;
+    # The nixos system configurations for the supported systems
+    nixosConfigurations = mkNixOSSystem ./hosts/nixos; # available through "$ nixos-rebuild switch --flake .#host"
+    homeConfigurations = mkHomeManagerSystem ./hosts/homeManager; # available through "$ home-manager switch --flake .#home"
+    nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts/nixOnDroid; # available through "$ nix-on-droid switch --flake .#device"
+    templates = mkTemplate ./public/templates; # available through "$ nix flake init -t .#template"
   };
 }
