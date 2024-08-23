@@ -972,11 +972,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-BP443Snc6UHjOuG85pkU6KQFiGSQHyy76L02cr5WygY=",
-        "path": "./pkgs/custom/nixvim",
+        "path": "./pkgs/nixvim",
         "type": "path"
       },
       "original": {
-        "path": "./pkgs/custom/nixvim",
+        "path": "./pkgs/nixvim",
         "type": "path"
       }
     },
