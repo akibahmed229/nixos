@@ -37,13 +37,13 @@
   # Read directory contents from the provided path
   getinfo = readDir path;
 
-  # Process the "shellscript" directory and import regular files as Nix packages
+  # Process the overlays by importing them with the provided inputs and path
   processOverlays = name: value: {
     inherit name;
     value = import /${path}/${name} {inherit inputs;};
   };
 
-  # Process only regular files and directories with a .nix extension
+  # Process only the directories containing Nix files and ignore the default.nix file and non-regular files
   processed = attrsets.filterAttrs (_path: _type:
     (_type != "regular" && _type != "symlink" && _type != "unknown")
     || (_path != "default.nix") # ignore the default.nix file
