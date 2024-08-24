@@ -166,7 +166,7 @@
       });
 
     # The function to generate the system configurations (derived from my custom lib helper function)
-    inherit (self.lib) mkSystem mkDerivation mkOverlay;
+    inherit (self.lib) mkSystem mkDerivation mkOverlay mkModule;
     mkNixOSSystem = mkSystem {
       inherit nixpkgs home-manager;
       system = forAllSystems (s: s);
@@ -208,8 +208,8 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {}); # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
 
     # Reusable nixos & home-manager modules you might want to export
-    nixosModules = import ./modules/custom/nixos;
-    homeManagerModules = import ./modules/custom/home-manager;
+    nixosModules = mkModule {path = ./modules/custom/nixos;};
+    homeManagerModules = mkModule {path = ./modules/custom/home-manager;};
 
     # The nixos system configurations for the supported systems
     nixosConfigurations = mkNixOSSystem ./hosts/nixos; # available through "$ nixos-rebuild switch --flake .#host"
