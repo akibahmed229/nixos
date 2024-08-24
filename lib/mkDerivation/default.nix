@@ -69,5 +69,8 @@
     || (_path != "default.nix") # ignore the default.nix file
     && (strings.hasSuffix ".nix" _path))
   (mapAttrs' processDirShellScript (readDir "${path}/shellscript"));
+
+  # Merge the processed packages
+  merged = recursiveUpdate processedPkgs processedShellScript;
 in
-  recursiveUpdate processedPkgs processedShellScript
+  merged

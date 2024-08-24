@@ -11,11 +11,7 @@
 *   - module2
 *     - default.nix
 */
-{lib, ...}: {
-  inputs ? {},
-  path ? throw "path required",
-  ...
-}: let
+{lib, ...}: path: let
   # Importing necessary functions and utilities from the provided imports
   inherit (builtins) readDir;
   inherit (lib) mapAttrs' attrsets strings;
@@ -32,8 +28,8 @@
   # Process only the directories containing Nix files and ignore the default.nix file and non-regular files
   processed = attrsets.filterAttrs (_path: _type:
     (_type != "regular" && _type != "symlink" && _type != "unknown")
-    || (_path != "default.nix") # ignore the default.nix file
-    && (strings.hasSuffix ".nix" _path))
+    || ((_path != "default.nix") # ignore the default.nix file
+      && (strings.hasSuffix ".nix" _path)))
   (mapAttrs' processesModule getinfo);
 in
   processed

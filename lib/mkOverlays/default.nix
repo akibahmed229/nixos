@@ -46,8 +46,8 @@
   # Process only the directories containing Nix files and ignore the default.nix file and non-regular files
   processed = attrsets.filterAttrs (_path: _type:
     (_type != "regular" && _type != "symlink" && _type != "unknown")
-    || (_path != "default.nix") # ignore the default.nix file
-    && (strings.hasSuffix ".nix" _path))
+    || ((_path != "default.nix") # ignore the default.nix file
+      && (strings.hasSuffix ".nix" _path)))
   (mapAttrs' processOverlays getinfo);
 in
   processed

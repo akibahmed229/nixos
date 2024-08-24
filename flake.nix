@@ -208,8 +208,8 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {}); # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
 
     # Reusable nixos & home-manager modules you might want to export
-    nixosModules = mkModule {path = ./modules/custom/nixos;};
-    homeManagerModules = mkModule {path = ./modules/custom/home-manager;};
+    nixosModules = mkModule ./modules/custom/nixos;
+    homeManagerModules = mkModule ./modules/custom/home-manager;
 
     # The nixos system configurations for the supported systems
     nixosConfigurations = mkNixOSSystem ./hosts/nixos; # available through "$ nixos-rebuild switch --flake .#host"
