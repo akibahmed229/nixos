@@ -166,7 +166,7 @@
       });
 
     # The function to generate the system configurations (derived from my custom lib helper function)
-    inherit (self.lib) mkSystem mkDerivation;
+    inherit (self.lib) mkSystem mkDerivation mkOverlay;
     mkNixOSSystem = mkSystem {
       inherit nixpkgs home-manager;
       system = forAllSystems (s: s);
@@ -201,7 +201,10 @@
         }
     ); # Accessible through 'nix build', 'nix shell', "nix run", etc
 
-    overlays = import ./overlays {inherit inputs;}; # Your custom packages and modifications, exported as overlays
+    overlays = mkOverlay {
+      inherit inputs;
+      path = ./overlays;
+    }; # Your custom packages and modifications, exported as overlays
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {}); # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
 
     # Reusable nixos & home-manager modules you might want to export

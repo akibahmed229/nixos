@@ -1,12 +1,10 @@
 {lib, ...}: {
-  # Import the custom `mkSystem` function from the `mkSystem.nix` file
+  # Core functions (system level)
   mkSystem = import ./mkSystem;
-  # Import the custom `mkDerivation` function from the `mkDerivation.nix` file
   mkDerivation = import ./mkDerivation;
+  mkOverlay = import ./mkOverlays {inherit lib;};
 
-  # Import the custom `mkImport` function from the `mkImport.nix` file
-  # Pass `lib` as an argument to the `mkImport` function
+  # Helper functions (user level)
   mkImport = import ./mkImport {inherit lib;};
-  # Define `mkRelativeToRoot`, a helper function that appends a relative path from the current directory to the root directory
-  mkRelativeToRoot = lib.path.append ../.;
+  mkRelativeToRoot = lib.path.append ../.; # appends a relative path from the current directory to the root directory
 }
