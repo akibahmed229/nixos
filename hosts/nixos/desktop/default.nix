@@ -111,6 +111,7 @@ in {
       #rubyPackages.glib2
       libadwaita
       libinput
+      veracrypt
     ])
     ++ (
       if user == "akib" && hostname == "desktop"
