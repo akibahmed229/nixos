@@ -111,6 +111,7 @@ in {
       #rubyPackages.glib2
       libadwaita
       libinput
+      cryptsetup
       veracrypt
     ])
     ++ (
