@@ -92,16 +92,23 @@
     interval = "weekly";
   };
 
-  fileSystems."/mnt/sda1" = {
-    device = "/dev/sda1";
-    fsType = "ntfs"; # Specify the file system type
-    options = ["defaults"]; # Mount options (rw,exec,auto,user,async)
-  };
-
-  fileSystems."/mnt/sda2" = {
-    device = "/dev/sda2";
-    fsType = "ntfs"; # Specify the file system type
-    options = ["defaults"]; # Mount options
+  fileSystems = {
+    # nvme samsung
+    "/mnt/samsung" = {
+      device = "/dev/disk/by-label/samsung";
+      fsType = "btrfs";
+      options = ["defaults,uid=1000,gid=100,umask=0022"];
+    };
+    "/mnt/sda1" = {
+      device = "/dev/sda1";
+      fsType = "ntfs";
+      options = ["defaults,uid=1000,gid=100,umask=0022"]; # Mount options (rw,exec,auto,user,async)
+    };
+    "/mnt/sda2" = {
+      device = "/dev/sda2";
+      fsType = "ntfs";
+      options = ["defaults,uid=1000,gid=100,umask=0022"];
+    };
   };
 
   # Enabling samba file sharing over local network
