@@ -25,7 +25,7 @@
   #     });
   # };
 */
-{lib, ...}: {
+{lib}: {
   inputs ? {},
   path ? throw "path required",
   ...

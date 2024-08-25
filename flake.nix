@@ -190,22 +190,23 @@
     inherit (my-devShells) devShells; # available through "$ nix develop .#devShells"
     lib = import ./lib {inherit lib;}; # Lib is a custom library of helper functions
 
+    # Accessible through 'nix build', 'nix shell', "nix run", etc
     packages = forAllSystems (
       system:
         mkDerivation {
           inherit nixpkgs system;
           path = ./pkgs;
         }
-        // {
-          nixvim = inputs.nixvim.packages.${system}.default;
-        }
-    ); # Accessible through 'nix build', 'nix shell', "nix run", etc
+        // {nixvim = inputs.nixvim.packages.${system}.default;}
+    );
 
+    # Your custom packages and modifications, exported as overlays
     overlays = mkOverlay {
       inherit inputs;
       path = ./overlays;
-    }; # Your custom packages and modifications, exported as overlays
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {}); # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
+    };
+    # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {});
 
     # Reusable nixos & home-manager modules you might want to export
     nixosModules = mkModule ./modules/custom/nixos;

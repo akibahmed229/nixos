@@ -11,7 +11,7 @@
 *   - module2
 *     - default.nix
 */
-{lib, ...}: path: let
+{lib}: path: let
   # Importing necessary functions and utilities from the provided imports
   inherit (builtins) readDir;
   inherit (lib) mapAttrs' attrsets strings;
