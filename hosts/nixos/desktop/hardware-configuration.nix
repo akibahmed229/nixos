@@ -97,17 +97,17 @@
     "/mnt/samsung" = {
       device = "/dev/disk/by-label/samsung";
       fsType = "btrfs";
-      options = ["defaults,uid=1000,gid=100,umask=0022"];
+      options = ["defaults"];
     };
     "/mnt/sda1" = {
       device = "/dev/sda1";
       fsType = "ntfs";
-      options = ["defaults,uid=1000,gid=100,umask=0022"]; # Mount options (rw,exec,auto,user,async)
+      options = ["defaults"]; # Mount options (rw,exec,auto,user,async)
     };
     "/mnt/sda2" = {
       device = "/dev/sda2";
       fsType = "ntfs";
-      options = ["defaults,uid=1000,gid=100,umask=0022"];
+      options = ["defaults"];
     };
   };
 
