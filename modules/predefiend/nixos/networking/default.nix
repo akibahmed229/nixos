@@ -21,14 +21,8 @@
       # Public DNS Servers
       "1.1.1.1" # Cloudflare Primary
       "1.0.0.1" # Cloudflare Secondary
-      "9.9.9.9" # Quad9 Primary
-      "149.112.112.112" # Quad9 Secondary
-      "76.76.19.19" # Alternate DNS Primary
-      "76.223.122.150" # Alternate DNS Secondary
       "8.8.8.8" # Google Primary
       "8.8.4.4" # Google Secondary
-      "95.85.95.85" # Gcore Primary
-      "2.56.220.2" # Gcore Secondary
       "94.140.14.14" # AdGuard Primary
       "94.140.15.15" # AdGuard Secondary
     ]; # List of DNS nameservers to use.
