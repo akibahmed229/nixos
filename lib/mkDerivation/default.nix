@@ -27,8 +27,6 @@
 
   # Import the Nix packages
   pkgs = import nixpkgs {inherit system;};
-  # Read directory contents from the provided path
-  getinfo = readDir path;
   # Function to check if a file exists and return the path or throw an error if not found
   ifFileExists = _path:
     if pathExists _path
@@ -40,7 +38,7 @@
     if (value == "directory" && name != "nixvim") # Only process directories, skipping "nixvim"
     then {
       inherit name;
-      value = pkgs.callPackage (ifFileExists /${path}/${name}) {};
+      value = pkgs.callPackage (ifFileExists (path + "/${name}")) {};
     }
     else {
       inherit name value;
@@ -51,24 +49,28 @@
     if value == "regular" # Only process regular files
     then {
       name = removeSuffix ".nix" name; # Remove the ".nix" suffix from the file name
-      value = import /${path}/shellscript/${name} {inherit pkgs;};
+      value = import (path + "/shellscript/${name}") {inherit pkgs;};
     }
     else {
       inherit name value;
     };
 
   # Process the main directory contents and filter out unwanted entries
-  processedPkgs = filterAttrs (_path: _type:
-    (_type != "regular" && _type != "symlink" && _type != "unknown")
-    && (_path != "shellscript" && _path != "nixvim"))
-  (mapAttrs' processDirPkgs getinfo);
+  processedPkgs =
+    filterAttrs (_path: _type:
+      (_type != "regular" && _type != "symlink" && _type != "unknown")
+      && (_path != "shellscript" && _path != "nixvim"))
+    (mapAttrs' processDirPkgs
+      (readDir path));
 
   # Process the shellscript directory separately and filter out unwanted entries
-  processedShellScript = attrsets.filterAttrs (_path: _type:
-    (_type != "directory" && _type != "symlink" && _type != "unknown")
-    || (_path != "default.nix") # ignore the default.nix file
-    && (strings.hasSuffix ".nix" _path))
-  (mapAttrs' processDirShellScript (readDir "${path}/shellscript"));
+  processedShellScript =
+    attrsets.filterAttrs (_path: _type:
+      (_type != "directory" && _type != "symlink" && _type != "unknown")
+      || (_path != "default.nix") # ignore the default.nix file
+      && (strings.hasSuffix ".nix" _path))
+    (mapAttrs' processDirShellScript
+      (readDir "${path}/shellscript"));
 
   # Merge the processed packages
   merged = recursiveUpdate processedPkgs processedShellScript;

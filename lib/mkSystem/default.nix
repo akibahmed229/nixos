@@ -30,19 +30,33 @@
   inherit (builtins) readDir trace;
   inherit (nix-on-droid.lib) nixOnDroidConfiguration;
   inherit (home-manager.lib) homeManagerConfiguration;
-  inherit (lib) nixosSystem mapAttrs' nameValuePair pathExists mkDefault filterAttrs attrNames lists concatStringsSep;
+  inherit (lib) nixosSystem strings attrsets mapAttrs' nameValuePair pathExists mkDefault filterAttrs attrNames lists concatStringsSep;
+
+  # Utility to check if a given path points to a directory
+  isDirectory = attr: attr == "directory";
+  # Utility to check if a given path is a Nix file
+  isNixFile = name: strings.hasSuffix ".nix" name;
 
   # Read directory contents from the provided path
-  getinfo = readDir path;
+  getHosts = path: let
+    contents = readDir path;
+  in
+    # Keep only directories with a default.nix file and nix files themselves
+    attrsets.filterAttrs (
+      name: attr:
+        isDirectory attr || (isNixFile name && name != "default.nix")
+    )
+    contents;
+
   # Function to check if a file exists at the specified path
   ifFileExists = _path:
     if pathExists _path
-    then import _path
+    then _path
     else throw "File not found: ${_path}";
 
   # Function to process directories for NixOS systems
   processDirNixOS = name: value:
-    if value == "directory"
+    if isDirectory value
     then {
       inherit name;
       # Import NixOS system configuration
@@ -51,9 +65,9 @@
         specialArgs =
           {inherit system;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
-          (ifFileExists /${path}/configuration.nix) # Base configuration
-          (ifFileExists /${path}/${name}/hardware-configuration.nix) # Host-specific hardware configuration
-          (ifFileExists /${path}/${name}) # Host-specific configuration
+          (ifFileExists (path + "/configuration.nix")) # Base configuration
+          (ifFileExists (path + "/${name}/hardware-configuration.nix")) # Host-specific hardware configuration
+          (ifFileExists (path + "/${name}")) # Host-specific configuration
           home-manager.nixosModules.home-manager # Home Manager integration
           {
             home-manager = {
@@ -67,13 +81,12 @@
       };
     }
     else {
-      # If not a directory, inherit name and value as-is
       inherit name value;
     };
 
   # Function to process directories for Home Manager systems
   processDirHome = name: value:
-    if value == "directory"
+    if isDirectory value
     then {
       inherit name;
       # Import Home Manager configuration
@@ -84,19 +97,18 @@
         };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
-          (ifFileExists /${path}/home.nix) # Base Home Manager configuration
-          (ifFileExists /${path}/${name}) # Host-specific configuration
+          (ifFileExists (path + "/home.nix")) # Base Home Manager configuration
+          (ifFileExists (path + "/${name}")) # Host-specific configuration
         ];
       };
     }
     else {
-      # If not a directory, inherit name and value as-is
       inherit name value;
     };
 
   # Function to process directories for Nix-on-Droid systems
   processDirNixOnDroid = name: value:
-    if value == "directory"
+    if isDirectory value
     then {
       inherit name;
       # Import Nix-on-Droid system configuration
@@ -110,8 +122,8 @@
         };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = [
-          (ifFileExists /${path}/configuration.nix) # Base configuration
-          (ifFileExists /${path}/${name}) # Host-specific configuration
+          (ifFileExists (path + "/configuration.nix")) # Base configuration
+          (ifFileExists (path + "/${name}")) # Host-specific configuration
           {
             home-manager = {
               backupFileExtension = "hm-bak"; # Set backup file extension
@@ -125,27 +137,22 @@
       };
     }
     else {
-      # If not a directory, inherit name and value as-is
       inherit name value;
     };
 
   # Function to process template directories
   processDirTemplate = name: value:
-    if value == "directory"
+    if isDirectory value
     then {
       inherit name;
       # Import template configuration
       value = {
         description = "Template for ${name} system";
         # Set path to the template
-        path =
-          if pathExists /${path}/${name}
-          then /${path}/${name}
-          else throw "Template directory not found: ${path}/${name}";
+        path = ifFileExists (path + "/${name}");
       };
     }
     else {
-      # If not a directory, inherit name and value as-is
       inherit name value;
     };
 
@@ -161,7 +168,7 @@
       then processDirTemplate
       else processDirNixOS # Default to NixOS
     )
-    getinfo;
+    (getHosts path);
 
   # Filter out non-directory entries from the processed list
   validAttrs = filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;

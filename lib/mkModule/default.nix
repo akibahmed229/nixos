@@ -33,18 +33,20 @@
     contents;
 
   # Function to import modules from valid directories or files
-  processModule = name: attr:
+  processModule = name: attr: let
+    fullpath = path + "/${name}";
+  in
     if isDirectory attr
     then {
       # Import the default.nix from directories
       inherit name;
-      value = import (path + "/${name}");
+      value = import fullpath;
     }
     else if isNixFile name
     then {
       # Import standalone .nix files
       name = removeSuffix ".nix" name; # Remove the ".nix" suffix from the file name
-      value = import (path + "/${name}");
+      value = import fullpath;
     }
     else
       # Return null for unsupported file types (acts as a no-op)

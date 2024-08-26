@@ -32,22 +32,47 @@
 }: let
   # Importing necessary functions and utilities from the provided imports
   inherit (builtins) readDir;
-  inherit (lib) mapAttrs' attrsets strings;
+  inherit (lib) mapAttrs' attrsets strings removeSuffix;
 
-  # Read directory contents from the provided path
-  getinfo = readDir path;
+  # Utility to check if a given path points to a directory
+  isDirectory = attr: attr == "directory";
+
+  # Utility to check if a given path is a Nix file
+  isNixFile = name: strings.hasSuffix ".nix" name;
+
+  # Reads the directory contents from the provided path and filters out unwanted entries
+  getOverlays = path: let
+    contents = readDir path;
+  in
+    # Keep only directories with a default.nix file and nix files themselves
+    attrsets.filterAttrs (
+      name: attr:
+        isDirectory attr || (isNixFile name && name != "default.nix")
+    )
+    contents;
 
   # Process the overlays by importing them with the provided inputs and path
-  processOverlays = name: value: {
-    inherit name;
-    value = import /${path}/${name} {inherit inputs;};
-  };
+  processOverlays = name: value: let
+    fullpath = path + "/${name}";
+  in
+    if isDirectory value
+    then {
+      # Import the default.nix from directories
+      inherit name;
+      value = import fullpath {inherit inputs;};
+    }
+    else if isNixFile name
+    then {
+      # Import standalone .nix files
+      name = removeSuffix ".nix" name; # Remove the ".nix" suffix from the file name
+      value = import fullpath {inherit inputs;};
+    }
+    else null;
 
-  # Process only the directories containing Nix files and ignore the default.nix file and non-regular files
-  processed = attrsets.filterAttrs (_path: _type:
-    (_type != "regular" && _type != "symlink" && _type != "unknown")
-    || ((_path != "default.nix") # ignore the default.nix file
-      && (strings.hasSuffix ".nix" _path)))
-  (mapAttrs' processOverlays getinfo);
+  # Apply the processing function to each valid module
+  processed =
+    mapAttrs' processOverlays
+    (getOverlays path);
 in
-  processed
+  # Filter out null values from the resulting attribute set (i.e., unsupported files)
+  attrsets.filterAttrs (_: m: m != null) processed
