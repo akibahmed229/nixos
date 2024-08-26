@@ -24,7 +24,7 @@
     # If `ListOfPrograms` is not empty, proceed to map over the list and import each program
     optionals ((lists.length ListOfPrograms) > 0) lists.map (
       sProgram: let
-        rPath = name: (ifFileExists /${path}/${name}); # Constructs the full path and imports the module
+        rPath = name: (ifFileExists (path + "/${name}")); # Constructs the full path and imports the module
       in
         rPath sProgram
     )
