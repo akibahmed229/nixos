@@ -12,24 +12,46 @@
 *     - default.nix
 */
 {lib}: path: let
-  # Importing necessary functions and utilities from the provided imports
   inherit (builtins) readDir;
-  inherit (lib) mapAttrs' attrsets strings;
+  inherit (lib) strings attrsets mapAttrs' removeSuffix;
 
-  # Read directory contents from the provided path
-  getinfo = readDir path;
+  # Utility to check if a given path points to a directory
+  isDirectory = attr: attr == "directory";
 
-  # Process the module by importing them with the provided path
-  processesModule = name: value: {
-    inherit name;
-    value = import /${path}/${name};
-  };
+  # Utility to check if a given path is a Nix file
+  isNixFile = name: strings.hasSuffix ".nix" name;
 
-  # Process only the directories containing Nix files and ignore the default.nix file and non-regular files
-  processed = attrsets.filterAttrs (_path: _type:
-    (_type != "regular" && _type != "symlink" && _type != "unknown")
-    || ((_path != "default.nix") # ignore the default.nix file
-      && (strings.hasSuffix ".nix" _path)))
-  (mapAttrs' processesModule getinfo);
+  # Reads the directory contents from the provided path and filters out unwanted entries
+  getModules = path: let
+    contents = readDir path;
+  in
+    # Keep only directories with a default.nix file and nix files themselves
+    attrsets.filterAttrs (
+      name: attr:
+        isDirectory attr || (isNixFile name && name != "default.nix")
+    )
+    contents;
+
+  # Function to import modules from valid directories or files
+  processModule = name: attr:
+    if isDirectory attr
+    then {
+      # Import the default.nix from directories
+      inherit name;
+      value = import (path + "/${name}");
+    }
+    else if isNixFile name
+    then {
+      # Import standalone .nix files
+      name = removeSuffix ".nix" name; # Remove the ".nix" suffix from the file name
+      value = import (path + "/${name}");
+    }
+    else
+      # Return null for unsupported file types (acts as a no-op)
+      null;
+
+  # Apply the processing function to each valid module
+  processedModules = mapAttrs' processModule (getModules path);
 in
-  processed
+  # Filter out null values from the resulting attribute set (i.e., unsupported files)
+  attrsets.filterAttrs (_: m: m != null) processedModules
