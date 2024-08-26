@@ -39,6 +39,8 @@ in {
     zip
     unzip
     wl-clipboard
+    cryptsetup
+    veracrypt
     # for ssh
     openssh
     # for nix
