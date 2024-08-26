@@ -157,15 +157,6 @@
   # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f0u11u2.useDHCP = lib.mkDefault true;
 
-  # PPPoE configuration for PPPoE connections.
-  # networking.interfaces.enp4s0 = {
-  #  useDHCP = false;
-  #  ipv4.addresses = ["192.168.100.2/24"];
-  #  ipv4.gateway = "192.168.100.1";
-  #  preUp = "pppoe-start";
-  #  postDown = "pppoe-stop";
-  # };
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkOverride 1 "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkForce config.hardware.enableRedistributableFirmware;
