@@ -761,19 +761,15 @@
     "mySsecrets": {
       "flake": false,
       "locked": {
-        "allRefs": false,
         "lastModified": 1724227278,
         "narHash": "sha256-8V+DSc1ZhiBhOLMqPoiwoljY16XxcInFb8HAtjlNm4M=",
-        "ref": "main",
+        "ref": "refs/heads/main",
         "rev": "b05cf7b3dcf1415402af4a3c39251c08f75c9e4a",
-        "shallow": true,
+        "revCount": 8,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
       },
       "original": {
-        "allRefs": false,
-        "ref": "main",
-        "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
       }
