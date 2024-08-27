@@ -155,9 +155,9 @@
 
     # The user to build for.
     user =
-      if (builtins.getEnv "ISITYOU" == "yes" || builtins.getEnv "ISITYOU")
-      then "akib"
-      else "test";
+      if (builtins.toString (builtins.getEnv "ISITYOU") == "yes")
+      then "test"
+      else "akib";
     theme = "gruvbox-dark-soft"; # available options located in ./public/themes/gtk, directory name is the theme name
     desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
