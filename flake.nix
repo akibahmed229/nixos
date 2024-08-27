@@ -123,7 +123,7 @@
     };
     # Private secrets repo. Authenticate via ssh and use shallow clone
     mySsecrets = {
-      url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git?ref=main&shallow=1&allRefs=true";
+      url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git";
       flake = false;
     };
   };
