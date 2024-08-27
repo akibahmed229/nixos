@@ -6,7 +6,11 @@ fhs
 # Try running a non-NixOS binary downloaded from the Internet.
   (fhs) $ ./bin/code
 */
-{pkgs, ...}: {
+{
+  pkgs,
+  self,
+  ...
+}: {
   # ......omit many configurations
 
   environment.systemPackages = with pkgs; [
