@@ -763,13 +763,15 @@
       "locked": {
         "lastModified": 1724227278,
         "narHash": "sha256-8V+DSc1ZhiBhOLMqPoiwoljY16XxcInFb8HAtjlNm4M=",
-        "ref": "refs/heads/main",
+        "ref": "main",
         "rev": "b05cf7b3dcf1415402af4a3c39251c08f75c9e4a",
-        "revCount": 8,
+        "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
       },
       "original": {
+        "ref": "main",
+        "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
       }
