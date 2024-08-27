@@ -29,7 +29,10 @@ in {
   environment = {
     systemPackages = with pkgs; [
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      spice-vdagent
+      guestfs-tools
       wget
+      git
     ];
     shells = [pkgs.zsh];
     pathsToLink = ["/share/zsh" "/tmp" "/home/${user}"];
