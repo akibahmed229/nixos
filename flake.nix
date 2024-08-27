@@ -154,7 +154,10 @@
     forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
     # The user to build for.
-    user = "akib";
+    user =
+      if (builtins.getEnv "ISITYOU" == "yes" || builtins.getEnv "ISITYOU")
+      then "akib"
+      else "test";
     theme = "gruvbox-dark-soft"; # available options located in ./public/themes/gtk, directory name is the theme name
     desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
