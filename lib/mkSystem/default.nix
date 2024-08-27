@@ -30,7 +30,7 @@
   inherit (builtins) readDir trace;
   inherit (nix-on-droid.lib) nixOnDroidConfiguration;
   inherit (home-manager.lib) homeManagerConfiguration;
-  inherit (lib) nixosSystem strings attrsets mapAttrs' nameValuePair pathExists mkDefault filterAttrs attrNames lists concatStringsSep;
+  inherit (lib) nixosSystem strings attrsets mapAttrs' nameValuePair pathExists mkDefault optionals filterAttrs attrNames lists concatStringsSep;
 
   # Utility to check if a given path points to a directory
   isDirectory = attr: attr == "directory";
@@ -64,20 +64,29 @@
         inherit system;
         specialArgs =
           {inherit system;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
-        modules = [
-          (ifFileExists (path + "/configuration.nix")) # Base configuration
-          (ifFileExists (path + "/${name}/hardware-configuration.nix")) # Host-specific hardware configuration
-          (ifFileExists (path + "/${name}")) # Host-specific configuration
-          home-manager.nixosModules.home-manager # Home Manager integration
-          {
-            home-manager = {
-              backupFileExtension = "hm-bak"; # Set backup file extension
-              useGlobalPkgs = mkDefault true;
-              useUserPackages = mkDefault true;
-              extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-            };
-          }
-        ];
+        modules =
+          [
+            (ifFileExists (path + "/configuration.nix")) # Base configuration
+            (ifFileExists (path + "/${name}/hardware-configuration.nix")) # Host-specific hardware configuration
+            (ifFileExists (path + "/${name}")) # Host-specific configuration
+          ]
+          ++
+          # Include Home Manager configuration if the system is integrated
+          optionals (attrsets.filterAttrs
+            (n: _: n == "home-manager")
+            != {})
+          [
+            home-manager.nixosModules.home-manager # Home Manager integration
+
+            {
+              home-manager = {
+                backupFileExtension = "hm-bak"; # Set backup file extension
+                useGlobalPkgs = mkDefault true;
+                useUserPackages = mkDefault true;
+                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+              };
+            }
+          ];
       };
     }
     else {
