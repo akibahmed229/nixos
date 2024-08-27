@@ -45,9 +45,14 @@ in {
     openssh
     # for nix
     nix
+    # for qemu
+    spice-vdagent
+    guestfs-tools
   ];
 
   services = {
+    # Enables copy / paste when running in a KVM with spice.
+    spice-vdagentd.enable = true;
     qemuGuest.enable = true;
     openssh = {
       ports = [8080];

@@ -28,10 +28,11 @@ in {
   nixpkgs.overlays = [
     self.overlays.nvim-overlay
   ];
-  environment.systemPackages = with unstable.${pkgs.system}; [neovim cryptsetup veracrypt];
+  environment.systemPackages = with unstable.${pkgs.system}; [neovim cryptsetup veracrypt spice-vdagent guestfs-tools];
 
   # Enables copy / paste when running in a KVM with spice.
   services.spice-vdagentd.enable = true;
+  services.qemuGuest.enable = true;
   # Use faster squashfs compression
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 

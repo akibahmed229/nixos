@@ -65,7 +65,10 @@ in {
   };
 
   # Enables copy / paste when running in a KVM with spice.
-  services.spice-vdagentd.enable = true;
+  services = {
+    spice-vdagentd.enable = true;
+    qemuGuest.enable = true;
+  };
 
   # List services that you want to enable:
 
