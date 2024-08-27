@@ -20,7 +20,7 @@ in {
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["impermanence"];
+      ListOfPrograms = ["impermanence" "sops"];
     };
 
   users.defaultUserShell = pkgs.zsh;

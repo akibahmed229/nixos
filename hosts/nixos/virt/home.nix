@@ -5,6 +5,6 @@
 in {
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["firefox" "zsh" "tmux" "lf"];
+    ListOfPrograms = ["firefox" "zsh" "tmux" "lf" "git"];
   };
 }
