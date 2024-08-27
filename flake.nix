@@ -123,7 +123,7 @@
     };
     # Private secrets repo. Authenticate via ssh and use shallow clone
     mySsecrets = {
-      url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git";
+      url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git?ref=main&shallow=1";
       flake = false;
     };
   };
@@ -154,10 +154,7 @@
     forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
     # The user to build for.
-    user =
-      if (builtins.toString (builtins.getEnv "ISITYOU") == "yes")
-      then "test"
-      else "akib";
+    user = "akib";
     theme = "gruvbox-dark-soft"; # available options located in ./public/themes/gtk, directory name is the theme name
     desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
