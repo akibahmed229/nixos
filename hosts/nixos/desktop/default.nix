@@ -20,7 +20,7 @@ in {
     [(mkRelativeToRoot "home-manager/${desktopEnvironment}")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr" "samba" "fhs"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "bbr" "samba" "fhs"];
     };
 
   # Setting For OpenRGB
