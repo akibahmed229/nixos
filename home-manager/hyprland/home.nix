@@ -25,10 +25,6 @@
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
     nwg-look
-    # For file manager
-    xfce.thunar
-    xfce.tumbler
-    xfce.exo
     # for music
     playerctl
     # screen shot & other screen tools
@@ -40,8 +36,6 @@
     # for clipboard
     cliphist
     wl-clipboard
-    # Screen  lock
-    wlogout
   ];
 
   # Fix: systemd not importing the environment by default.
@@ -221,40 +215,12 @@
   };
 
   home.file = {
-    #".config/hypr/hyprpaper.conf" = {
-    #  source = ./others/hypr/hyprpaper.conf;
-    #  recursive = true;
-    #};
-    #".config/dunst" = {
-    #  source = ./others/dunst;
-    #  recursive = true;
-    #};
-    ".config/waybar" = {
-      source = ./others/waybar;
-      recursive = true;
-    };
-    ".config/wofi" = {
-      source = ./others/wofi;
-      recursive = true;
-    };
-    ".config/wlogout" = {
-      source = ./others/wlogout;
-      recursive = true;
-    };
-    ".config/swaylock" = {
-      source = ./others/swaylock;
-      recursive = true;
-    };
     ".config/swappy" = {
       source = ./others/swappy;
       recursive = true;
     };
     ".config//libinput" = {
       source = ./others/libinput;
-      recursive = true;
-    };
-    ".config/Thunar" = {
-      source = ./others/Thunar;
       recursive = true;
     };
   };

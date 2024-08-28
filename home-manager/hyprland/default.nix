@@ -44,8 +44,6 @@
 
     systemPackages = with pkgs;
       [
-        # dunst
-        wofi
         networkmanagerapplet
         preload
         ark
@@ -84,7 +82,6 @@
         libsForQt5.qt5.qtgraphicaleffects
       ]
       ++ (with unstable.${pkgs.system}; [
-        waybar
         swaylock-effects
         swaylock
       ]);

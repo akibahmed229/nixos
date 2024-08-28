@@ -20,7 +20,7 @@ in {
     [(mkRelativeToRoot "home-manager/${desktopEnvironment}")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr" "fhs"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "networking" "bbr" "samba" "fhs"];
     };
 
   # Setting For OpenRGB
@@ -267,6 +267,11 @@ in {
   #  systemCronJobs = [
   #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
   #  ];
+  # };
+
+  # services.plex = {
+  #   enable = true;
+  #   openFirewall = true;
   # };
 
   # Home manager configuration as a module

@@ -74,6 +74,8 @@
       config.boot.kernelPackages.openrazer
     ];
 
+    extraModprobeConfig = "options kvm_intel nested=1"; # for intel cpu
+
     supportedFilesystems = ["ntfs" "ntfs3"];
 
     # consoleLogLevel = 3;
@@ -110,37 +112,6 @@
       options = ["defaults"];
     };
   };
-
-  # Enabling samba file sharing over local network
-  services.samba = {
-    enable = true; # Dont forget to set a password for the user with smbpasswd -a ${user}
-    shares = {
-      sda1 = {
-        "path" = "/mnt/sda1";
-        "comment" = "Window";
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-      };
-      sda2 = {
-        "path" = "/mnt/sda2";
-        "comment" = "Linux";
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-      };
-    };
-    openFirewall = true;
-  };
-
-  # services.plex = {
-  #   enable = true;
-  #   openFirewall = true;
-  # };
 
   swapDevices = [];
   zramSwap = {
