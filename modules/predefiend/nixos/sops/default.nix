@@ -1,4 +1,5 @@
 /*
+* useful resources: https://unmovedcentre.com/posts/secrets-management/#using-nix-secrets-with-nix-config
 * Secrets management with SOPS and Nix
 * System level secrets
 

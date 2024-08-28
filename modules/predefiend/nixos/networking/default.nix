@@ -1,6 +1,10 @@
+/*
+* using nixos as a router: https://francis.begyn.be/blog/nixos-home-router
+*/
 {
   user ? "example.com",
   lib,
+  config,
   ...
 }: {
   networking = {
@@ -19,12 +23,12 @@
     # Define the DNS nameservers.
     nameservers = [
       # Public DNS Servers
-      "1.1.1.1" # Cloudflare Primary
-      "1.0.0.1" # Cloudflare Secondary
+      # "1.1.1.1" # Cloudflare Primary
+      # "1.0.0.1" # Cloudflare Secondary
       "8.8.8.8" # Google Primary
       "8.8.4.4" # Google Secondary
-      "94.140.14.14" # AdGuard Primary
-      "94.140.15.15" # AdGuard Secondary
+      # "94.140.14.14" # AdGuard Primary
+      # "94.140.15.15" # AdGuard Secondary
     ]; # List of DNS nameservers to use.
 
     # Set the domain name and search domain for the system.
@@ -63,7 +67,7 @@
       ];
 
       # Configuration for the WireGuard interface 'wg0'.
-      # wg0.macAddress = "28:3A:4D:F2:0B:FE";
+      wg0.macAddress = "28:3A:4D:F2:0B:FE";
     };
 
     # Appending vlans to the network interfaces.
@@ -80,24 +84,24 @@
     };
 
     # Configuration for WireGuard interface using wg-quick. and protonvpn wireguard config file for the peer.
-    # wg-quick.interfaces = lib.mkIf (config.sops.secrets."akib/wireguard/PrivateKey".path != {}) {
-    #   # Define the WireGuard interface wg0.
-    #   wg0 = {
-    #     address = ["10.2.0.2/32"];
-    #     dns = ["10.2.0.1"];
+    wg-quick.interfaces = lib.mkIf (config.sops.secrets."akib/wireguard/PrivateKey".path != {}) {
+      # Define the WireGuard interface wg0.
+      wg0 = {
+        address = ["10.2.0.2/32"];
+        dns = ["10.2.0.1"];
 
-    #     # Path to the private key file, managed by sops for secret management.
-    #     privateKeyFile = config.sops.secrets."akib/wireguard/PrivateKey".path;
+        # Path to the private key file, managed by sops for secret management.
+        privateKeyFile = config.sops.secrets."akib/wireguard/PrivateKey".path;
 
-    #     # Configuration for the WireGuard peers.
-    #     peers = [
-    #       {
-    #         publicKey = "URpeZxtyUXAUUA0MWcFdCSa7F+MvchJ4eNSJUetKEGk=";
-    #         allowedIPs = ["0.0.0.0/0"];
-    #         endpoint = "212.8.253.137:51820";
-    #       }
-    #     ];
-    #   };
-    # };
+        # Configuration for the WireGuard peers.
+        peers = [
+          {
+            publicKey = "URpeZxtyUXAUUA0MWcFdCSa7F+MvchJ4eNSJUetKEGk=";
+            allowedIPs = ["0.0.0.0/0"];
+            endpoint = "212.8.253.137:51820";
+          }
+        ];
+      };
+    };
   };
 }
