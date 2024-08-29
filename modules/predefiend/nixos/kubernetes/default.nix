@@ -1,4 +1,9 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  user,
+  lib,
+  ...
+}: let
   #Master: The master node handles all the administrative tasks for the cluster.
   # Node: A machine (physical or virtual) that runs workloads. Each node has a Kubernetes agent (kubelet) that manages the pods running on it.
   kubeMasterIP = "192.168.0.111"; # Master IP address
@@ -29,14 +34,29 @@ in {
   };
 
   # Set up the kubelet permissions to allow the kubelet to read the cluster-admin-key.pem file.
-  systemd.services.kubelet-permissions = {
-    wantedBy = ["kubelet.service"];
-    after = ["network.target"];
+  systemd.services."fix-kube-permissions" = {
+    description = "Fix Kubernetes Permissions";
+    wants = ["kubelet.service"];
+    wantedBy = ["multi-user.target"];
+    requires = ["kubelet.service"];
+    requiredBy = ["kubelet.service"];
+    after = ["kubelet.service"];
+    script = ''
+      chown ${user}:users /var/lib/kubernetes/secrets/cluster-admin-key.pem
+      chmod 600 /var/lib/kubernetes/secrets/cluster-admin-key.pem
+    '';
     serviceConfig = {
-      ExecStart = ''
-        chown $(whoami):users /var/lib/kubernetes/secrets/cluster-admin-key.pem
-        chmod 600 /var/lib/kubernetes/secrets/cluster-admin-key.pem
-      '';
+      ExecStart = let
+        # Define the script as a derivation
+        fixKubePermissionsScript = pkgs.writeScriptBin "fix-kube-permissions" ''
+          #!/usr/bin/env bash
+
+          chown ${user}:users /var/lib/kubernetes/secrets/cluster-admin-key.pem
+          chmod 600 /var/lib/kubernetes/secrets/cluster-admin-key.pem
+        '';
+      in
+        lib.mkDefault "${fixKubePermissionsScript}";
+
       User = "root";
       PermissionsStartOnly = true;
       RemainAfterExit = true;
