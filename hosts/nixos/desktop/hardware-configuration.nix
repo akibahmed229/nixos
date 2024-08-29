@@ -50,7 +50,9 @@
       "nvme" # NVMe drives (really fast SSDs)
       "usbhid" # USB Human Interface Devices
       "usb_storage" # Utilize USB Mass Storage (USB flash drives)
+      "usbcore" # the core module that manages USB devices.
       "sd_mod" # SCSI, SATA, and PATA (IDE) devices
+      "uas" # USB attached SCSI drives
       "sdhci_pci" # Secure Digital Host Controller Interface (SD cards)
       "uas" # USB attached SCSI drives
       "virtio_blk" # Another Virtio module, enabling high-performance communication between the host and virtualized block devices (e.g., hard drives) in a virtualized environment.
@@ -60,6 +62,9 @@
     initrd.kernelModules = [
       "cifs" #  implementation of the Server Message Block (SMB) protocol, is used to share file systems, printers, or serial ports over a network.
       "dm-snapshot" #  a read-only copy of the entire file system and all the files contained in the file system.
+      "cryptd" # a cryptographic transform that is used to encrypt and decrypt data.
+      "dm_crypt" # a device-mapper target that provides transparent encryption of block devices using the kernel crypto API.
+      "aesni_intel" # a cryptographic transform that is used to encrypt and decrypt data.
     ];
 
     kernelModules = [
@@ -113,7 +118,6 @@
     };
   };
 
-  swapDevices = [];
   zramSwap = {
     enable = true;
     memoryPercent = 10;
