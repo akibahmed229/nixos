@@ -20,7 +20,7 @@ in {
     [(mkRelativeToRoot "home-manager/${desktopEnvironment}")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "gaming" "bbr" "samba" "fhs"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "docker" "kubernetes" "gaming" "bbr" "samba" "fhs"];
     };
 
   # Setting For OpenRGB
@@ -143,9 +143,7 @@ in {
           devbox
           distrobox
           busybox
-          docker
           # self.packages.${pkgs.system}.docker-desktop
-          docker-compose
           yarn
           mysql80
           mysql-workbench
@@ -201,20 +199,10 @@ in {
     };
   };
 
+  # Enable Waydroid
+  virtualisation.waydroid.enable = true;
+
   # List services that you want to enable:
-  virtualisation = {
-    # Enabling docker
-    docker = {
-      enable = true;
-      storageDriver = "btrfs";
-      #rootless = {
-      #  enable = true;
-      #  setSocketVariable = true;
-      #};
-    };
-    # Enable WayDroid
-    waydroid.enable = true;
-  };
   services = {
     # Enable Flatpack
     flatpak.enable = true;
@@ -224,6 +212,7 @@ in {
     atuin = {
       enable = true;
       openFirewall = true;
+      port = 9090;
     };
 
     emacs = {
