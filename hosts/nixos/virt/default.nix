@@ -32,7 +32,6 @@ in {
       spice-vdagent
       guestfs-tools
       cryptsetup
-      veracrypt
       wget
       git
     ];

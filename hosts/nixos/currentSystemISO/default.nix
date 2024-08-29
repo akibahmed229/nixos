@@ -28,7 +28,7 @@ in {
   nixpkgs.overlays = [
     self.overlays.nvim-overlay
   ];
-  environment.systemPackages = with unstable.${pkgs.system}; [neovim cryptsetup veracrypt spice-vdagent guestfs-tools];
+  environment.systemPackages = with unstable.${pkgs.system}; [neovim cryptsetup spice-vdagent guestfs-tools];
 
   # Enables copy / paste when running in a KVM with spice.
   services.spice-vdagentd.enable = true;
