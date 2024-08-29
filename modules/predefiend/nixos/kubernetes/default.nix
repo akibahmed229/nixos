@@ -28,7 +28,7 @@ in {
     kubelet.extraOpts = "--fail-swap-on=false";
   };
 
-  # Systemd services to give permissions to the kubelet secret pem  key
+  # Set up the kubelet permissions to allow the kubelet to read the cluster-admin-key.pem file.
   systemd.services.kubelet-permissions = {
     wantedBy = ["kubelet.service"];
     after = ["network.target"];
