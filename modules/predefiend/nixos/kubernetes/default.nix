@@ -30,10 +30,10 @@ in {
 
   # Systemd services to give permissions to the kubelet secret pem  key
   systemd.services.kubelet-permissions = {
-    wantedBy = ["multi-user.target"];
+    wantedBy = ["kubelet.service"];
     after = ["network.target"];
     serviceConfig = {
-      ExecStartPre = ''
+      ExecStart = ''
         chown $(whoami):users /var/lib/kubernetes/secrets/cluster-admin-key.pem
         chmod 600 /var/lib/kubernetes/secrets/cluster-admin-key.pem
       '';
