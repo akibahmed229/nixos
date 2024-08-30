@@ -268,11 +268,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1725015982,
-        "narHash": "sha256-1WXS/BBKZUcWlfeZL7U8ujuCdlLktImbpmJgN9zsZXM=",
+        "lastModified": 1725024810,
+        "narHash": "sha256-ODYRm8zHfLTH3soTFWE452ydPYz2iTvr9T8ftDMUQ3E=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "4f37dc19b47b50512008f38858734f8fa8a4e0cc",
+        "rev": "af510d4a62d071ea13925ce41c95e3dec816c01d",
         "type": "github"
       },
       "original": {
@@ -571,11 +571,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1725019943,
-        "narHash": "sha256-tAGs6TpIYkRUWjU0WYAavzHCPy4XLLMn63caFF7OCNc=",
+        "lastModified": 1725032272,
+        "narHash": "sha256-A0AiFlPoqDK/IwUiV7SGIi8uW2zOqmmiZY6j8i367LU=",
         "ref": "refs/heads/main",
-        "rev": "25e72949a1cc2368425ed81712a394cb277f514f",
-        "revCount": 5160,
+        "rev": "c5fd5771814958ad274ea9abb961fff621a35b9c",
+        "revCount": 5165,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -931,11 +931,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1724932487,
-        "narHash": "sha256-zzbqHmY1mt21omyk1+14QbAkII1B7OHlwKLcczVq22w=",
+        "lastModified": 1724999960,
+        "narHash": "sha256-LB3jqSGW5u1ZcUcX6vO/qBOq5oXHlmOCxsTXGMEitp4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b4f7fb71438d00539b21f1b1e6968c0eac060127",
+        "rev": "b96f849e725333eb2b1c7f1cb84ff102062468ba",
         "type": "github"
       },
       "original": {
@@ -1192,11 +1192,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1724956869,
-        "narHash": "sha256-oCbOKAa4D00Y/J9D/4+dTgOSC2HTri9nXMJVIdcX6hw=",
+        "lastModified": 1725043274,
+        "narHash": "sha256-D2m3SWHh91V/E+8G8maXDH7In0Q3nudNsmJRQBngs50=",
         "owner": "akibahmed229",
         "repo": "spicetify-nix",
-        "rev": "26006547e1794afabcdc4c8ffa3f074c45f963aa",
+        "rev": "a51f13dcd481c44d8520350929fcdeab0c3a2529",
         "type": "github"
       },
       "original": {
