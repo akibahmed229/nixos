@@ -1,6 +1,11 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.writeShellApplication {
   name = "wallpaper";
+
+  runtimeInputs = with pkgs; [
+    swww
+  ];
+
   text = ''
     # Directory containing the images
     IMAGE_DIR="$WALLPAPER"

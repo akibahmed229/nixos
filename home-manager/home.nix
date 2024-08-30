@@ -38,14 +38,19 @@ in {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with unstable.${pkgs.system}; [
-    xdg-utils
-    tree
-    bibata-cursors
-    adw-gtk3
-    hwinfo
-    ripgrep
-    alacritty
-    kitty
+    # 1. System Utilities
+    xdg-utils # Utilities for managing desktop integration.
+    tree # Command-line directory tree viewer.
+    hwinfo # Hardware information tool.
+    ripgrep # Line-oriented search tool.
+
+    # 2. Desktop Environment & Customization
+    bibata-cursors # Cursor theme.
+    adw-gtk3 # Adwaita theme for GTK 3.
+
+    # 3. Terminal Emulators
+    alacritty # GPU-accelerated terminal emulator.
+    kitty # GPU-based terminal emulator.
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -107,12 +112,16 @@ in {
     # The camera's /dev/video file is kept open (without streaming), sadly causing the camera to be powered on what looks to be most devices.
     # For some reason, this completely nullifies the soc power management on modern laptops and can result in increases from 3W to 8W at idle!
     ".config/wireplumber" = {
-      source = ../modules/predefiend/home-manager/wireplumber; # tells wireplumber to ignore cameras
+      source = mkRelativeToRoot "modules/predefiend/home-manager/wireplumber"; # tells wireplumber to ignore cameras
       recursive = true;
     };
-
+    # libinput config that will disable mouse acceleration
+    ".config//libinput" = {
+      source = mkRelativeToRoot "modules/predefiend/home-manager/libinput";
+      recursive = true;
+    };
     ".ssh" = lib.mkIf (user == "akib") {
-      source = ../modules/predefiend/home-manager/ssh;
+      source = mkRelativeToRoot "modules/predefiend/home-manager/ssh";
       recursive = true;
     };
   };

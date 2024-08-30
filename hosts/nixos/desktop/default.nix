@@ -20,7 +20,7 @@ in {
     [(mkRelativeToRoot "home-manager/${desktopEnvironment}")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "docker" "kubernetes" "gaming" "bbr" "samba" "fhs"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "docker" "kubernetes" "gaming" "bbr" "networking" "samba" "fhs" "intel-gpu"];
     };
 
   # Setting For OpenRGB
@@ -34,11 +34,6 @@ in {
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       # self.overlays.discord-overlay
-      # self.overlays.chromium-overlay
-      # self.overlays.nvim-overlay
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
     ];
     # Configure your nixpkgs instance
     config = {
@@ -53,144 +48,126 @@ in {
   # $ nix search wget
   environment.systemPackages =
     (with pkgs; [
-      # List programs you want in your system Stable packages
-      #cron
-      htop
-      trash-cli
-      cava
-      #espanso-wayland
+      # 1. System Utilities
+      htop # Interactive process viewer.
+      nvme-cli # Utility to manage NVMe SSDs.
+      gparted # Partition editor.
+      cryptsetup # Disk encryption setup.
+      veracrypt # Disk encryption tool.
+      i2c-tools # Utilities for I2C devices.
+      pciutils # Tools for PCI devices.
+      fail2ban # Intrusion prevention.
+      unstable.${pkgs.system}.fastfetch # System information fetcher.
+      btop # Resource monitor.
+      appimage-run # Utility to run AppImage applications.
+      tlrc # Command-line tool for TL;DR pages.
+
+      # 2. File Management
+      trash-cli # Command-line trash utility.
+      # Compression tools.
       zip
       unzip
       p7zip
-      ranger
-      nvme-cli
-      simplehttp2server
-      speedtest-cli
-      #onionshare
-      flatpak
-      appimage-run
-      bleachbit
-      gimp
-      libsForQt5.kdenlive
-      glaxnimate
-      inkscape
-      handbrake
-      audacity
-      gparted
-      libreoffice
-      qbittorrent
-      figma-linux
-      notepadqq
-      gradience
-      mangohud
-      goverlay
-      #anydesk
-      geekbench
-      kdiskmark
-      chromium
-      whatsapp-for-linux
-      btop
-      pipes
-      #davinci-resolve
-      ffmpeg_6
-      gst_all_1.gstreamer
+      ranger # Console file manager.
+      bleachbit # System cleaner.
+      obsidian # Note-taking app.
+      rclone # Cloud storage sync tool.
+      fzf # Command-line fuzzy finder.
+      fuse # Filesystem in Userspace utilities.
+
+      # 3. Communication & Social
+      telegram-desktop # Messaging app.
+      whatsapp-for-linux # WhatsApp client for Linux.
+
+      # 4. Internet & Networking
+      chromium # Web browser.
+      qbittorrent # BitTorrent client.
+      anydesk # Remote desktop software.
+      localsend # Local file transfer tool.
+
+      # 5. Productivity
+      libreoffice # Office suite.
+      figma-linux # Figma design tool.
+      notepadqq # Text editor.
+
+      # 6. Gaming & Entertainment
+      mangohud # FPS counter and system stats overlay.
+      goverlay # Vulkan/OpenGL overlay manager.
+      geekbench # Benchmarking tool.
+      kdiskmark # Disk benchmarking tool.
+      libadwaita # UI toolkit for GNOME.
+      # RGB lighting control.
       openrgb-with-all-plugins
       openrgb-plugin-hardwaresync
-      i2c-tools
-      #polychromatic
-      libverto
-      fail2ban
-      fzf
-      tlrc
-      obsidian
-      # pppoe connection
-      ppp
-      rpPPPoE
-      meson
-      #gettext
-      #rubyPackages.glib2
-      libadwaita
-      libinput
-      cryptsetup
-      veracrypt
+      cava # Console-based audio visualizer.
+      pipes # Terminal-based game.
+
+      # 7. Miscellaneous
+      gradience # GNOME customization tool.
+      libverto # Event loop abstraction library.
+      busybox # Unix utilities in a single executable.
+      libinput # Input device management library.
+      atuin # history management tool for cli
+      flatpak # Application sandboxing and distribution framework.
     ])
     ++ (
       if user == "akib" && hostname == "desktop"
       then
         with unstable.${pkgs.system}; [
-          # List unstable packages here
-          jetbrains.pycharm-community
-          jetbrains.idea-community
-          postman
-          vscode
-          zed-editor
-          android-tools
-          android-udev-rules
-          github-desktop
-          android-studio
-          gcc
-          cmake
-          gnumake
-          libtool
-          jdk21
-          python312Full
-          nodejs_22
-          jq
-          rustc
-          rustup
-          cargo
-          direnv
+          # List Of Unstable Packages
+
+          # 1. Development Tools
+          gcc # GNU Compiler Collection.
+          cmake # Build system.
+          gnumake # Build tool.
+          libtool # Library support tool.
+          meson # Build system.
+          gettext # GNU internationalization and localization library.
+          python312Full # Python programming language.
+          nodejs_22 # JavaScript runtime.
+          rustc # Rust programming language and tools.
+          cargo # Rust package manager.
+          # Development environment tools.
           devbox
           distrobox
-          busybox
-          # self.packages.${pkgs.system}.docker-desktop
-          yarn
-          mysql80
-          mysql-workbench
-          postgresql
-          pgadmin4
-        ]
-      else []
-    )
-    ++ (
-      if (hostname == "desktop" || hostname == "laptop")
-      then
-        with unstable.${pkgs.system}; [
-          git
-          fastfetch
-          # solaar # Logitech Unifying Receiver
-          localsend
-          lazygit
-          gh
-          self.packages.${pkgs.system}.custom_nsxiv
-          mpv
-          atuin
-          telegram-desktop
-          darktable
-          # obs-studio
-          (pkgs.wrapOBS {
-            plugins = with pkgs.obs-studio-plugins; [
-              obs-teleport
-              advanced-scene-switcher
-              self.packages.${pkgs.system}.obs-zoom-to-mouse
-            ];
-          })
+          direnv
+          yarn # JavaScript package manager.
+          jq # JSON processor.
+          # Android development tools.
+          android-studio
+          android-tools
+          android-udev-rules
+          jdk21 # Java Development Kit
+          jetbrains.pycharm-community # Python IDE.
+          jetbrains.idea-community # Java IDE.
+          postman # API development environment.
+          vscode # Code editor.
+          zed-editor # Code editor.
+          mysql80 # MySQL database.
+          mysql-workbench # MySQL database design tool.
+          postgresql # Relational database system.
+          pgadmin4 # PostgreSQL database administration tool.
+          git # Version control system.
+          github-desktop # Git client.
+          lazygit # Git UI.
+          gh # GitHub CLI.
+
+          # 2. Media & Design
+          gimp # Image editor.
+          krita # Digital painting software.
+          glaxnimate # Animation editor.
+          inkscape # Vector graphics editor.
+          handbrake # Video transcoder.
+          audacity # Audio editor.
+          darktable # Photography workflow application.
+          obs-studio # Video recording and streaming software.
+          ffmpeg_6 # Multimedia framework for video/audio processing.
+          gst_all_1.gstreamer # Multimedia framework.
+          mpv # Media player.
+          kdenlive # Video editor.
         ]
       else []
     );
-
-  # Eableing OpenGl support
-  hardware.opengl = lib.mkIf (hostname == "desktop" || hostname == "laptop") {
-    enable = true;
-    driSupport32Bit = true;
-    extraPackages = with unstable.${pkgs.system}; [
-      intel-compute-runtime
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      (vaapiIntel.override {enableHybridCodec = true;}) # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
 
   programs = {
     wireshark = {
@@ -211,6 +188,7 @@ in {
 
     atuin = {
       enable = true;
+      package = pkgs.atuin;
       openFirewall = true;
       port = 9090;
     };
@@ -256,11 +234,6 @@ in {
   #  systemCronJobs = [
   #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
   #  ];
-  # };
-
-  # services.plex = {
-  #   enable = true;
-  #   openFirewall = true;
   # };
 
   # Home manager configuration as a module

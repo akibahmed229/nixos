@@ -44,55 +44,58 @@
 
     systemPackages = with pkgs;
       [
-        networkmanagerapplet
-        preload
-        ark
-        lxmenu-data
-        # libsForQt5.polkit-kde-agent
-        # mpd
-        # for  qt and gtk
-        qt6.qtwayland
-        qt6Packages.qt6ct
-        libsForQt5.qt5ct
-        libsForQt5.qt5.qtwayland
-        libsForQt5.qtstyleplugin-kvantum
-        libsForQt5.ark.out
-        #qt6.qtwayland
-        #lxappearance
-        # stroge mount
-        #udiskie
-        ntfs3g
-        # sound
-        pavucontrol
-        # software of gnome for daily usage
-        gnome.gnome-software
-        gnome.eog
-        evince
-        gnome.gnome-weather
-        rhythmbox
-        mission-center
-        gnome.gnome-calculator
-        gnome.gnome-clocks
-        # color grab
-        #pywal
-        # hypr echoshystem
-        hyprpicker
-        # fot sddm theme
-        libsForQt5.qt5.qtquickcontrols2
-        libsForQt5.qt5.qtgraphicaleffects
+        # 1. System Utilities
+        networkmanagerapplet # Network management applet.
+        preload # Adaptive readahead daemon to speed up system load times.
+        ntfs3g # Read/write driver for NTFS.
+
+        # 2. Desktop Environment & Window Management
+        lxmenu-data # Menu data for LXDE desktop.
+        qt6.qtwayland # Qt 6 Wayland integration.
+        qt6Packages.qt6ct # Qt 6 configuration tool.
+        libsForQt5.qt5ct # Qt 5 configuration tool.
+        libsForQt5.qt5.qtwayland # Qt 5 Wayland integration.
+        libsForQt5.qtstyleplugin-kvantum # Kvantum style plugin for Qt 5.
+        libsForQt5.ark.out # Ark for Qt 5 (possibly a file manager or archiver).
+        gnome.gnome-software # GNOME software manager.
+        mission-center # Likely a desktop management or mission control tool.
+        libsForQt5.qt5.qtquickcontrols2 # Qt Quick Controls 2 for Qt 5.
+        libsForQt5.qt5.qtgraphicaleffects # Graphical effects for Qt 5.
+
+        # 3. Multimedia & Audio
+        pavucontrol # PulseAudio volume control.
+        rhythmbox # Music player.
+
+        # 4. GNOME Applications
+        gnome.eog # GNOME Eye of GNOME image viewer.
+        evince # Document viewer for GNOME.
+        gnome.gnome-weather # GNOME weather application.
+        gnome.gnome-calculator # GNOME calculator.
+        gnome.gnome-clocks # GNOME clocks application.
+
+        # 5. Hypr Ecosystem & Theming
+        hyprpicker # Likely a color picker for the Hypr ecosystem.
+        libsForQt5.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
+        libsForQt5.polkit-kde-agent # Polkit agent for KDE (commented out).
+
+        # 6. Archiving Tools
+        ark # Archiving tool for KDE (also included in the desktop environment list).
+
+        # 7. Uncategorized or Ambiguous
+        lxappearance # Tool to manage LXDE themes (commented out).
+        udiskie # Automatic disk mounting tool (commented out).
+        pywal # Tool to generate and set color schemes based on wallpapers (commented out).
+        mpd # Music Player Daemon (commented out).
       ]
       ++ (with unstable.${pkgs.system}; [
-        swaylock-effects
-        swaylock
+        # 2. Desktop Environment & Window Management (continued)
+        swaylock # Screen locker for Wayland.
+        swaylock-effects # Enhanced screen locker with effects for Wayland.
       ]);
   };
 
-  # swaylock config
+  # swaylock config for Hyprland lockscreen
   security.pam.services.swaylock = {};
-  #programs.sway = {
-  #  enable = true;
-  #  extraPackages = with pkgs; [swaylock-effects];
-  #};
 
   xdg.portal = {
     # Required for flatpak with window managers and for file browsing

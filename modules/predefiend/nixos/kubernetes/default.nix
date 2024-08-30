@@ -58,6 +58,7 @@ in {
         lib.mkDefault "${fixKubePermissionsScript}";
 
       User = "root";
+      Restart = "on-failure";
       PermissionsStartOnly = true;
       RemainAfterExit = true;
     };

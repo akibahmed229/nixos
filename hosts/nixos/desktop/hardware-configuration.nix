@@ -50,11 +50,8 @@
       "nvme" # NVMe drives (really fast SSDs)
       "usbhid" # USB Human Interface Devices
       "usb_storage" # Utilize USB Mass Storage (USB flash drives)
-      "usbcore" # the core module that manages USB devices.
       "sd_mod" # SCSI, SATA, and PATA (IDE) devices
-      "uas" # USB attached SCSI drives
       "sdhci_pci" # Secure Digital Host Controller Interface (SD cards)
-      "uas" # USB attached SCSI drives
       "virtio_blk" # Another Virtio module, enabling high-performance communication between the host and virtualized block devices (e.g., hard drives) in a virtualized environment.
       "virtio_pci" # Part of Virtio virtualization standard, it supports efficient communication between the host and virtual machines with PCI bus devices.
     ];
