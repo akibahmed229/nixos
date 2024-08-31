@@ -76,16 +76,16 @@
         # 5. Hypr Ecosystem & Theming
         hyprpicker # Likely a color picker for the Hypr ecosystem.
         libsForQt5.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
-        libsForQt5.polkit-kde-agent # Polkit agent for KDE (commented out).
+        # libsForQt5.polkit-kde-agent # Polkit agent for KDE (commented out).
 
         # 6. Archiving Tools
         ark # Archiving tool for KDE (also included in the desktop environment list).
 
         # 7. Uncategorized or Ambiguous
-        lxappearance # Tool to manage LXDE themes (commented out).
-        udiskie # Automatic disk mounting tool (commented out).
-        pywal # Tool to generate and set color schemes based on wallpapers (commented out).
-        mpd # Music Player Daemon (commented out).
+        # lxappearance # Tool to manage LXDE themes (commented out).
+        # udiskie # Automatic disk mounting tool (commented out).
+        # pywal # Tool to generate and set color schemes based on wallpapers (commented out).
+        # mpd # Music Player Daemon (commented out).
       ]
       ++ (with unstable.${pkgs.system}; [
         # 2. Desktop Environment & Window Management (continued)

@@ -60,7 +60,6 @@
       "cifs" #  implementation of the Server Message Block (SMB) protocol, is used to share file systems, printers, or serial ports over a network.
       "dm-snapshot" #  a read-only copy of the entire file system and all the files contained in the file system.
       "cryptd" # a cryptographic transform that is used to encrypt and decrypt data.
-      "dm_crypt" # a device-mapper target that provides transparent encryption of block devices using the kernel crypto API.
       "aesni_intel" # a cryptographic transform that is used to encrypt and decrypt data.
     ];
 
