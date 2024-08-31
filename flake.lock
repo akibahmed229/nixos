@@ -1192,11 +1192,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725129514,
-        "narHash": "sha256-0rMstF8rJMuhA0QRcolqGsz+S7BEbXtG0uLEQMsulOw=",
+        "lastModified": 1725143123,
+        "narHash": "sha256-y/D2tZrnGC92Khro5wPPfCv627X1GQw+W0gNAPOv8JQ=",
         "owner": "akibahmed229",
         "repo": "spicetify-nix",
-        "rev": "ef4af6536398833f0e3ad4e8cc310632f3c1f690",
+        "rev": "db0f231445537e145533df2b3c542d76f7d84956",
         "type": "github"
       },
       "original": {

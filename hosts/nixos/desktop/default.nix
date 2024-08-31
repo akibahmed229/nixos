@@ -9,7 +9,6 @@
   hostname,
   desktopEnvironment,
   unstable,
-  lib,
   self,
   ...
 }: let
@@ -20,14 +19,8 @@ in {
     [(mkRelativeToRoot "home-manager/${desktopEnvironment}")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "docker" "kubernetes" "gaming" "bbr" "samba" "fhs" "intel-gpu"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "docker" "kubernetes" "gaming" "bbr" "samba" "fhs" "intel-gpu" "openrgb" "openrazer" "obs"];
     };
-
-  # Setting For OpenRGB
-  services.hardware.openrgb = lib.mkIf (user == "akib" && hostname == "desktop") {
-    enable = true;
-    motherboard = "intel";
-  };
 
   nixpkgs = {
     # You can add overlays here
@@ -96,9 +89,6 @@ in {
       geekbench # Benchmarking tool.
       kdiskmark # Disk benchmarking tool.
       libadwaita # UI toolkit for GNOME.
-      # RGB lighting control.
-      openrgb-with-all-plugins
-      openrgb-plugin-hardwaresync
       cava # Console-based audio visualizer.
       pipes # Terminal-based game.
 
@@ -160,7 +150,6 @@ in {
           handbrake # Video transcoder.
           audacity # Audio editor.
           darktable # Photography workflow application.
-          obs-studio # Video recording and streaming software.
           ffmpeg_6 # Multimedia framework for video/audio processing.
           gst_all_1.gstreamer # Multimedia framework.
           mpv # Media player.
