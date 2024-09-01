@@ -4,7 +4,7 @@
   ];
   home.file = {
     ".config/dunst" = {
-      source = ./others/dunst;
+      source = ./config/dunstrc;
       recursive = true;
     };
   };

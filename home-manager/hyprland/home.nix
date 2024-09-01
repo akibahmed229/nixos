@@ -26,7 +26,6 @@
     # 1. Desktop Environment & Customization
     self.packages.${pkgs.system}.wallpaper # Wallpaper management tool.
     nwg-look # Look and feel customization tool.
-    swww # Sway wallpaper manager.
 
     # 2. Multimedia & Audio
     playerctl # Music player controller.

@@ -56,14 +56,17 @@ chown -R yourUserName:users .*
 
 <details>
   <summary>File Structure</summary>
+  Structurally, this flake is designed to interpret as much information as possible from the directories it manages. Rather than have a "master list" of configurations to manage, adding files to the hosts/, modules/, overlays/, & pkgs/ folders will cause them to be automatically detected and configured on flake rebuild. This is achieved by programmatically determining the objects that need to be evaluated and generated. The downside of this, of course, is that there's not one "master list" to reference;
 
 - **Flake.nix** : Main flake file for defining the system configuration
 
-  - **home-manager** : Configuration files for Home Manager and desktop environment
+  - **lib** : Library helper functions, providing a set of functions that can be used to mange stuff in a more concise way
   - **hosts** : Host-specific configuration files
+  - **home-manager** : Configuration files for desktop environment & window manager
   - **modules** : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
+  - **overlays** : Customize pkgs & extend entries nixpkgs itself
   - **pkgs** : Nix derivations, custom packages, and shell scripts
-  - **public** : Wallpaper folder, GTK, and QT themes and doc
+  - **public** : Wallpaper folder, Template for different system, & GTK/QT themes and doc
   - **flake.lock** : Lock file for the flake inputs
 
 - **_devShell/flake.nix_** : Flake file defining the development shell

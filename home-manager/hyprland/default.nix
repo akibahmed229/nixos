@@ -86,11 +86,14 @@
         # udiskie # Automatic disk mounting tool (commented out).
         # pywal # Tool to generate and set color schemes based on wallpapers (commented out).
         # mpd # Music Player Daemon (commented out).
-      ]
-      ++ (with unstable.${pkgs.system}; [
+
+        # TODO: uunstable packages broken, until fixed it will be in stable
         # 2. Desktop Environment & Window Management (continued)
         swaylock # Screen locker for Wayland.
         swaylock-effects # Enhanced screen locker with effects for Wayland.
+      ]
+      ++ (with unstable.${pkgs.system}; [
+        # TODO: move the above packages to unstable when they are fixed
       ]);
   };
 

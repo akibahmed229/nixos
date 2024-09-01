@@ -10,8 +10,11 @@ pkgs.writeShellApplication {
     # Directory containing the images
     IMAGE_DIR="$WALLPAPER"
 
+    # Check if nsxiv is installed then use it, otherwise use the one from nixpkgs
+    nsxiv=$(command -v nsxiv || echo "${pkgs.nsxiv}/bin/nsxiv")
+
     # Launch sxiv to select an image and capture the selected image's filename
-    SELECTED_IMAGE=$(nsxiv -t -o "$IMAGE_DIR"/* | head -n 1)
+    SELECTED_IMAGE=$("$nsxiv" -t -o "$IMAGE_DIR"/* | head -n 1)
 
     # Check if an image was selected
     if [ -n "$SELECTED_IMAGE" ]; then
@@ -25,6 +28,6 @@ pkgs.writeShellApplication {
      cp "$RELATIVE_PATH" ~/.cache/swww/Wallpaper
 
      # Use the selected image path with swww command
-     swww img "$RELATIVE_PATH"  --transition-step 2 --transition-fps 75 --transition-type right
+     ${pkgs.swww}/bin/swww img "$RELATIVE_PATH"  --transition-step 2 --transition-fps 75 --transition-type right
   '';
 }

@@ -67,9 +67,6 @@
       "kvm-intel" # KVM on Intel CPUs
       "coretemp" # Temperature monitoring on Intel CPUs
       "fuse" # userspace filesystem framework.
-      "i2c-dev" # An acronym for the “Inter-IC” bus, a simple bus protocol which is widely used where low data rate communications suffice.
-      "i2c-piix4" # I2C bus adapter driver for Intel PIIX4 chipsets.
-      "intel-speed-select" # Intel Speed Select Technology
     ];
     extraModulePackages = [
       config.boot.kernelPackages.openrazer
