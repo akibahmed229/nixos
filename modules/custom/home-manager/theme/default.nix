@@ -8,12 +8,13 @@
 in {
   options = {
     theme = {
-      enable = lib.mkEnableOption "Enable GTK and QT theme";
+      gtk.enable = lib.mkEnableOption "Enable QT theme";
+      qt.enable = lib.mkEnableOption "Enable QT theme";
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    gtk = {
+  config = {
+    gtk = lib.mkIf cfg.gtk.enable {
       enable = true;
       cursorTheme.name = "Bibata-Modern-Classic";
       cursorTheme.package = pkgs.bibata-cursors;
@@ -23,7 +24,7 @@ in {
       iconTheme.name = "oomox-gruvbox-dark";
     };
 
-    home = {
+    home = lib.mkIf cfg.gtk.enable {
       pointerCursor = {
         gtk.enable = true;
         x11.enable = true;
@@ -33,10 +34,10 @@ in {
       };
     };
 
-    qt = {
+    qt = lib.mkIf cfg.qt.enable {
       enable = true;
       # platform theme "gtk" or "gnome"
-      platformTheme.name = "gtk3";
+      platformTheme = "qt5ct";
       # name of the qt theme
       style.name = "adwaita-dark";
 

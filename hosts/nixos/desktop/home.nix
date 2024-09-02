@@ -17,7 +17,7 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["firefox" "spotify" "discord" "zsh" "tmux" "lf" "ags" "git" "sops" "thunar" "swaylock" "wofi" "wlogout" "swappy"];
+    ListOfPrograms = ["firefox" "stylix" "spotify" "discord" "zsh" "tmux" "lf" "ags" "git" "sops" "thunar" "swaylock" "wofi" "wlogout" "swappy"];
   };
 
   home.packages = with pkgs; [

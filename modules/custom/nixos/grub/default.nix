@@ -20,10 +20,10 @@ in {
       };
       grub = {
         enable = true;
-        theme = pkgs.sleek-grub-theme.override {
-          withStyle = "dark";
-          withBanner = "Yo, sleek operator!";
-        };
+        # theme = pkgs.sleek-grub-theme.override {
+        #   withStyle = "dark";
+        #   withBanner = "Yo, sleek operator!";
+        # };
         # splashImage = ../public/wallpaper/nixos.png;
         devices = ["nodev"]; # install grub on efi
         efiSupport = true;

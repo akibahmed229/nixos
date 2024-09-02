@@ -155,7 +155,7 @@
 
     # The user to build for.
     user = "akib";
-    theme = "gruvbox-dark-soft"; # available options located in ./public/themes/gtk, directory name is the theme name
+    theme = "gruvbox-dark-soft"; # available options located in ./public/themes/base16Scheme, file name without extension is the theme name
     desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
     # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]

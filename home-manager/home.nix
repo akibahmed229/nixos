@@ -12,6 +12,8 @@
 }: let
   # My custom lib helper functions
   inherit (self.lib) mkRelativeToRoot;
+
+  HomeModuleFolder = mkRelativeToRoot "modules/predefiend/home-manager";
 in {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
@@ -85,49 +87,38 @@ in {
     # '';
 
     ".config/alacritty" = {
-      source = mkRelativeToRoot "modules/predefiend/home-manager/alacritty";
+      source = HomeModuleFolder + "/alacritty";
       recursive = true;
     };
+
     ".config/fastfetch" = {
-      source = mkRelativeToRoot "modules/predefiend/home-manager/fastfetch";
-      recursive = true;
-    };
-    ".config/gtk-4.0" = {
-      source = mkRelativeToRoot "public/themes/gtk/${theme}";
-      recursive = true;
-    };
-    ".config/gtk-3.0" = {
-      source = mkRelativeToRoot "public/themes/gtk/${theme}";
-      recursive = true;
-    };
-    ".config/gtk-2.0" = {
-      source = mkRelativeToRoot "public/themes/gtk/${theme}";
+      source = HomeModuleFolder + "/fastfetch";
       recursive = true;
     };
     ".config/OpenRGB" = lib.mkIf (user == "akib") {
-      source = mkRelativeToRoot "modules/predefiend/home-manager/OpenRGB";
+      source = HomeModuleFolder + "/openrgb";
       recursive = true;
     };
 
     # The camera's /dev/video file is kept open (without streaming), sadly causing the camera to be powered on what looks to be most devices.
     # For some reason, this completely nullifies the soc power management on modern laptops and can result in increases from 3W to 8W at idle!
     ".config/wireplumber" = {
-      source = mkRelativeToRoot "modules/predefiend/home-manager/wireplumber"; # tells wireplumber to ignore cameras
+      source = HomeModuleFolder + "/wireplumber"; # tells wireplumber to ignore cameras
       recursive = true;
     };
     # libinput config that will disable mouse acceleration
-    ".config//libinput" = {
-      source = mkRelativeToRoot "modules/predefiend/home-manager/libinput";
+    ".config/libinput" = {
+      source = HomeModuleFolder + "/libinput";
       recursive = true;
     };
     ".ssh" = lib.mkIf (user == "akib") {
-      source = mkRelativeToRoot "modules/predefiend/home-manager/ssh";
+      source = HomeModuleFolder + "/ssh";
       recursive = true;
     };
   };
 
   # GTK and QT themes ( custom home-manager module )
-  theme.enable = true;
+  theme.qt.enable = false;
 
   # You can also manage environment variables but you will have to manually
   # source
@@ -148,7 +139,7 @@ in {
     package = unstable.${pkgs.system}.kitty;
     shellIntegration.enableBashIntegration = true;
     shellIntegration.enableZshIntegration = true;
-    extraConfig = builtins.readFile ../modules/predefiend/home-manager/kitty/kitty.conf;
+    extraConfig = builtins.readFile (HomeModuleFolder + "/kitty/kitty.conf");
   };
 
   # Create XDG Dirs

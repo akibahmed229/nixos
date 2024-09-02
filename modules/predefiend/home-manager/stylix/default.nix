@@ -2,22 +2,19 @@
   pkgs,
   inputs,
   self,
-  theme ? "gruvbox-dark-soft", # The default theme
+  theme ? "gruvbox-dark-soft", # Default theme
   ...
 }: let
   # My custom lib helper functions
   inherit (self.lib) mkRelativeToRoot;
 in {
-  imports = [inputs.stylix.nixosModules.stylix];
+  imports = [inputs.stylix.homeManagerModules.stylix];
 
   stylix = {
     enable = true;
     base16Scheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
     # Don't forget to apply wallpaper
     image = ./nixos.png;
-
-    homeManagerIntegration.autoImport = false;
-    homeManagerIntegration.followSystem = false;
 
     # example get cursor/scheme names
     /*
@@ -58,18 +55,30 @@ in {
     };
 
     targets = {
-      # Enable the following to use the gtk theme
       gtk.enable = true;
       gnome.enable = true;
-      # Grub theme
-      grub.enable = true;
-      grub.useImage = true;
-
-      console.enable = true;
-      nixvim = {
-        enable = true;
-        transparentBackground.main = true;
-      };
+      alacritty.enable = true;
+      bat.enable = true;
+      btop.enable = true;
+      emacs.enable = true;
+      firefox.enable = true;
+      fzf.enable = true;
+      hyprpaper.enable = true;
+      kitty.enable = true;
+      lazygit.enable = true;
+      mangohud.enable = true;
+      neovim.enable = true;
+      neovim.transparentBackground.main = true;
+      nixvim.enable = true;
+      nixvim.transparentBackground.main = true;
+      swaylock.enable = true;
+      swaylock.useImage = true;
+      sxiv.enable = true;
+      tmux.enable = true;
+      vesktop.enable = true;
+      vim.enable = true;
+      waybar.enable = true;
+      wofi.enable = true;
     };
 
     opacity = {
@@ -80,5 +89,10 @@ in {
     };
 
     polarity = "dark"; # "light" or "either"
+  };
+
+  gtk = {
+    iconTheme.package = pkgs.gruvbox-dark-icons-gtk;
+    iconTheme.name = "oomox-gruvbox-dark";
   };
 }
