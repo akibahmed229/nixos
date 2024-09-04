@@ -4,6 +4,7 @@
   pkgs,
   inputs ? {},
   self,
+  lib,
   user,
   ...
 }: {
@@ -98,6 +99,30 @@
           ]
           else []
         );
+
+      general = {
+        gaps_in = 5;
+        gaps_out = 10;
+        border_size = 3;
+        layout = "dwindle";
+        # col = {
+        #   active_border = lib.mkForce "rgb(${toString config.stylix.base16Scheme.base0E})";
+        #   inactive_border = lib.mkForce "rgb(${toString config.stylix.base16Scheme.base00})";
+        # };
+      };
+
+      env = [
+        # XDG Specifications
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+
+        # Qt Variables
+        "QT_QPA_PLATFORMTHEME,qt5ct" # Tells Qt based applications to pick your theme from qt5ct, use with Kvantum.
+        "QT_QPA_PLATFORM,wayland;xcb" # Tell Qt applications to use the Wayland backend, and fall back to x11 if Wayland is unavailable
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1" # enables automatic scaling, based on the monitor’s pixel density
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1" # Disables window decorations on Qt applications
+      ];
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mod" = "SUPER";

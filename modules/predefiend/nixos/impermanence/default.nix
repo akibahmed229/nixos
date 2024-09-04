@@ -86,6 +86,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
         ".vscode"
         ".docker"
         ".kube"
+        ".minikube"
         ".mysql"
         ".rustup"
         ".steam"

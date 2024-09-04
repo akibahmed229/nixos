@@ -16,6 +16,8 @@ in {
     kompose
     kubectl
     kubernetes
+    minikube
+    docker-machine-kvm2
   ];
 
   services.kubernetes = {

@@ -58,7 +58,7 @@
         libsForQt5.qtstyleplugin-kvantum # Kvantum style plugin for Qt 5.
         libsForQt5.ark.out # Ark for Qt 5 (possibly a file manager or archiver).
         gnome.gnome-software # GNOME software manager.
-        mission-center # Likely a desktop management or mission control tool.
+        stacer # Linux system monitoring tool.
         libsForQt5.qt5.qtquickcontrols2 # Qt Quick Controls 2 for Qt 5.
         libsForQt5.qt5.qtgraphicaleffects # Graphical effects for Qt 5.
 
@@ -69,7 +69,6 @@
         # 4. GNOME Applications
         gnome.eog # GNOME Eye of GNOME image viewer.
         evince # Document viewer for GNOME.
-        gnome.gnome-weather # GNOME weather application.
         gnome.gnome-calculator # GNOME calculator.
         gnome.gnome-clocks # GNOME clocks application.
 

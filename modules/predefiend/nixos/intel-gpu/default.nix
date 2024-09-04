@@ -9,7 +9,7 @@
     driSupport32Bit = true;
     extraPackages = with unstable.${pkgs.system}; [
       # your Open GL, Vulkan and VAAPI drivers
-      vpl-gpu-rt # or intel-media-sdk for QSV
+      # vpl-gpu-rt # or intel-media-sdk for QSV
       intel-compute-runtime
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       (vaapiIntel.override {enableHybridCodec = true;}) # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
@@ -26,8 +26,7 @@
   #     intel-media-sdk
   #   ];
   # };
-
-  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
+  # environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
 
   /*
   * 12th Gen (Alder Lake)

@@ -10,7 +10,7 @@
 
   home.file = {
     ".config/Thunar" = {
-      source = ./uca.xml;
+      source = ./config;
       recursive = true;
     };
   };

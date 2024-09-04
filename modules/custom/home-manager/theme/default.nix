@@ -37,7 +37,7 @@ in {
     qt = lib.mkIf cfg.qt.enable {
       enable = true;
       # platform theme "gtk" or "gnome"
-      platformTheme = "qt5ct";
+      platformTheme = "gtk2";
       # name of the qt theme
       style.name = "adwaita-dark";
 
