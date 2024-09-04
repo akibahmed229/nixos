@@ -45,7 +45,9 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/var/log" # system logs
       "/var/lib/systemd" # various state for systemd such as persistent timers
       "/var/lib/nixos"
-      "/var/lib/docker" # TODO: remove once I got rid of Docker on sapphire
+      "/var/lib/docker"
+      "/var/lib/kubernetes"
+      "/var/lib/kubelet"
       /*
       /var/tmp is expected to be on disk and have enough free space
       e.g. by podman when copying images, which will easily fill up the tmpfs

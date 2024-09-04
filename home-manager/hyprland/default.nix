@@ -55,7 +55,6 @@
         qt6Packages.qt6ct # Qt 6 configuration tool.
         libsForQt5.qt5ct # Qt 5 configuration tool.
         libsForQt5.qt5.qtwayland # Qt 5 Wayland integration.
-        libsForQt5.qtstyleplugin-kvantum # Kvantum style plugin for Qt 5.
         libsForQt5.ark.out # Ark for Qt 5 (possibly a file manager or archiver).
         gnome.gnome-software # GNOME software manager.
         stacer # Linux system monitoring tool.
