@@ -20,6 +20,10 @@ in {
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "docker" "kubernetes" "gaming" "bbr" "samba" "fhs" "intel-gpu" "openrgb" "openrazer" "obs"];
+    }
+    ++ mkImport {
+      path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
+      ListOfPrograms = ["pi-hole.nix"];
     };
 
   nixpkgs = {

@@ -40,7 +40,6 @@ Modules to help you handle persistent state on systems with ephemeral root stora
     hideMounts = true;
     directories = [
       "/root/.local/share" # various application state
-      "/etc/mullvad-vpn"
       "/etc/NetworkManager/system-connections"
       "/var/log" # system logs
       "/var/lib/systemd" # various state for systemd such as persistent timers
@@ -56,7 +55,6 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       on a schedule
       */
       "/var/tmp"
-      "/var/cache/mullvad-vpn" # mullvad vpn cli client settings and relay list cache
       "/var/lib/bluetooth" # bluetooth connection state stuff
       "/var/lib/microvms" # MicroVMs
       "/var/lib/flatpak" # flatpak user data
@@ -67,6 +65,8 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/var/lib/postgresql"
       "/var/lib/sops-nix/"
       "/run/secrets.d/"
+      "/var/lib/pihole/" # pihole state
+      "/var/lib/dnsmasq.d" # dnsmasq is free software providing Domain Name System (DNS) caching, a Dynamic Host Configuration Protocol (DHCP) server, router advertisement and network boot features, intended for small computer networks. dnsmasq.
     ];
     files = [
       "/etc/machine-id"

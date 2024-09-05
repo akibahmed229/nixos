@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{_, ...}: {
   # Enabling docker
   virtualisation.docker = {
     enable = true; #  To get access to the docker socket, you have to be in the docker group, set the extraGroups attribute to [ "docker" ].

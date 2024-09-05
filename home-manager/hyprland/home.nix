@@ -27,7 +27,10 @@
     # 1. Desktop Environment & Customization
     self.packages.${pkgs.system}.wallpaper # Wallpaper management tool.
     nwg-look # Look and feel customization tool.
-    libsForQt5.qtstyleplugin-kvantum # Theme engine for Qt.
+    # Theme engine for Qt.
+    libsForQt5.qtstyleplugin-kvantum
+    kdePackages.qtstyleplugin-kvantum
+
     swww # Sway wallpaper manager.
 
     # 2. Multimedia & Audio
