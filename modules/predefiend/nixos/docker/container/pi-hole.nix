@@ -1,38 +1,66 @@
-{_, ...}: {
+{
   /*
-  # You need to add IP-Address of the setup pi-hole server to your router's DNS settings or DHCP settings to use the pi-hole as the DNS server.
+  # General Instructions:
+  # To use the Pi-hole server, you need to set your router's DNS settings to the IP address of this Pi-hole server (192.168.0.111).
+  # This will make Pi-hole your network's DNS server.
 
-  # To setup pi-hole password, run the following command:
-     $ docker exec -it pihole bash
-     $ sudo pihole -a -p
+  # If you want to set a password for the Pi-hole web interface, run:
+     $ docker exec -it pihole bash  # This command opens a shell into the running Pi-hole container
+     $ sudo pihole -a -p            # This sets the admin password for the Pi-hole web interface
   */
+
+  # This enables Docker containers as systemd services in NixOS
   virtualisation.oci-containers = {
+    # Docker is used as the backend for container management
     backend = "docker";
+
+    # Defining the containers section
     containers = {
+      # Pi-hole container configuration
       pihole = let
-        ServerIP = "192.168.0.111";
+        # IP address of the Pi-hole server (static IP on your network)
+        ServerIP = "192.168.0.111"; # Replace this with your Pi-hole server IP if it changes
       in {
+        # The Docker image for Pi-hole, latest version
         image = "pihole/pihole:latest";
+
+        # Port mappings to allow external devices to access Pi-hole services
         ports = [
-          "${ServerIP}:53:53/tcp"
-          "${ServerIP}:53:53/udp"
-          "3080:80"
-          "30443:443"
+          # Forward DNS ports (53) on TCP and UDP to the host IP address (ServerIP)
+          "${ServerIP}:53:53/tcp" # DNS requests over TCP
+          "${ServerIP}:53:53/udp" # DNS requests over UDP
+
+          # Forward HTTP (80) and HTTPS (443) ports to Pi-hole for web access
+          "3080:80" # Access Pi-hole's web interface on port 3080 instead of the default port 80
+          "30443:443" # Access Pi-hole's web interface securely via HTTPS on port 30443 instead of 443
         ];
+
+        # Volume mappings to persist Pi-hole data outside the container
         volumes = [
-          "/var/lib/pihole/:/etc/pihole/"
-          "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
+          # Persist Pi-hole configuration data
+          "/var/lib/pihole/:/etc/pihole/" # The Pi-hole configuration is stored on the host under /var/lib/pihole/
+
+          # Persist DNS settings (dnsmasq configuration)
+          "/var/lib/dnsmasq.d:/etc/dnsmasq.d/" # The DNS settings are stored in /var/lib/dnsmasq.d/ on the host
         ];
+
+        # Environment variables to configure the container
         environment = {
-          ServerIP = "${ServerIP}";
-          TZ = "Asia/Dhaka";
+          ServerIP = "${ServerIP}"; # Pass the Pi-hole server IP into the container
+          TZ = "Asia/Dhaka"; # Set the time zone for the container to Asia/Dhaka (adjust based on your location)
         };
+
+        # Additional Docker options to give the container necessary permissions
         extraOptions = [
-          "--cap-add=NET_ADMIN"
-          "--dns=127.0.0.1"
-          "--dns=1.1.1.1"
+          "--cap-add=NET_ADMIN" # This adds network management capabilities to the container (required for DHCP or network operations)
+          "--dns=127.0.0.1" # Set DNS resolver for the container to localhost (Pi-hole itself)
+          "--dns=1.1.1.1" # Fallback DNS server to Cloudflare's DNS (1.1.1.1)
         ];
-        workdir = "/var/lib/pihole/";
+
+        # The working directory for the container
+        workdir = "/var/lib/pihole/"; # This sets the working directory inside the container
+
+        # Automatically start the Pi-hole container when the system boots
         autoStart = true;
       };
     };
