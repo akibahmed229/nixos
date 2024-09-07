@@ -27,6 +27,7 @@ pkgs.mkShell {
       python311Packages.matplotlib
       python311Packages.requests
       python311Packages.seaborn
+      python311Packages.openpyxl
       # python311Packages.sklearn-deap
 
       # sometimes you might need something additional like the following - you will get some useful error if it is looking for a binary in the environment.
