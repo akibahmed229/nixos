@@ -65,10 +65,10 @@
         specialArgs =
           {inherit system;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules =
-          [
-            (ifFileExists (path + "/configuration.nix")) # Base configuration
-            (ifFileExists (path + "/${name}/hardware-configuration.nix")) # Host-specific hardware configuration
-            (ifFileExists (path + "/${name}")) # Host-specific configuration
+          map ifFileExists [
+            (path + "/configuration.nix") # Base configuration
+            (path + "/${name}/hardware-configuration.nix") # Host-specific hardware configuration
+            (path + "/${name}") # Host-specific configuration
           ]
           ++
           # Include Home Manager configuration if the system is integrated
@@ -105,9 +105,9 @@
           config = {allowUnfree = true;};
         };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-        modules = [
-          (ifFileExists (path + "/home.nix")) # Base Home Manager configuration
-          (ifFileExists (path + "/${name}")) # Host-specific configuration
+        modules = map ifFileExists [
+          (path + "/home.nix") # Base Home Manager configuration
+          (path + "/${name}") # Host-specific configuration
         ];
       };
     }
@@ -130,9 +130,9 @@
           ];
         };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-        modules = [
-          (ifFileExists (path + "/configuration.nix")) # Base configuration
-          (ifFileExists (path + "/${name}")) # Host-specific configuration
+        modules = map ifFileExists [
+          (path + "/configuration.nix") # Base configuration
+          (path + "/${name}") # Host-specific configuration
           {
             home-manager = {
               backupFileExtension = "hm-bak"; # Set backup file extension
