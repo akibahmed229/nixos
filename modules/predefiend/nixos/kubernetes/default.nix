@@ -5,13 +5,11 @@
   ...
 }: let
   # Define key variables for your Kubernetes setup
-  # kubeMasterIP: The IP address of the Kubernetes master node, where the API server runs
+  # The IP address of the Kubernetes master node, where the API server runs
   kubeMasterIP = "192.168.0.111";
-
-  # kubeMasterHostname: The hostname of the Kubernetes master node, used for API server communications
+  # The hostname of the Kubernetes master node, used for API server communications
   kubeMasterHostname = "api.kube";
-
-  # kubeMasterAPIServerPort: The port where the Kubernetes API server listens (default 6443)
+  # The port where the Kubernetes API server listens (default 6443)
   kubeMasterAPIServerPort = 6443;
 in {
   # Adds an entry to /etc/hosts for the Kubernetes master node
@@ -28,9 +26,9 @@ in {
 
   # Configures the Kubernetes service on this machine
   services.kubernetes = {
-    roles = ["master" "node"]; # Defines this machine as both a master and node in the Kubernetes cluster
+    roles = ["master" "node"];
     masterAddress = kubeMasterHostname; # Master hostname used by the API server
-    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}"; # API server address with hostname and port
+    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
     easyCerts = true; # Automatically generates certificates for secure communication
 
     # Configure the API server
@@ -48,7 +46,7 @@ in {
 
   # Systemd service to fix permissions for the kubelet to access the cluster-admin key
   systemd.services."fix-kube-permissions" = {
-    description = "Fix Kubernetes Permissions"; # Describes the service's purpose
+    description = "Fix Kubernetes Permissions";
 
     # Dependencies: Make sure this service runs alongside the kubelet
     wants = ["kubelet.service"];

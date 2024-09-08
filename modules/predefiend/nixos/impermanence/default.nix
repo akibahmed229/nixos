@@ -39,14 +39,28 @@ Modules to help you handle persistent state on systems with ephemeral root stora
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
+      # system
       "/root/.local/share" # various application state
+      "/var/lib/bluetooth" # bluetooth connection state stuff
       "/etc/NetworkManager/system-connections"
       "/var/log" # system logs
       "/var/lib/systemd" # various state for systemd such as persistent timers
       "/var/lib/nixos"
+
+      # state for containers and orchestrators
       "/var/lib/docker"
       "/var/lib/kubernetes"
       "/var/lib/kubelet"
+      "/var/lib/containerd"
+      "/var/lib/etcd"
+      "/var/lib/flatpak" # flatpak user data
+      #  container persistent volumes
+      "/var/lib/pihole/" # pihole state
+      "/var/lib/dnsmasq.d" # dnsmasq is free software providing Domain Name System (DNS) caching, a Dynamic Host Configuration Protocol (DHCP) server, router advertisement and network boot features, intended for small computer networks. dnsmasq.
+      "/var/lib/mariadb"
+      "/var/lib/nextcloud/html" # HTML files, Nextcloud config
+      "/var/lib/nextcloud/data" # User data
+
       /*
       /var/tmp is expected to be on disk and have enough free space
       e.g. by podman when copying images, which will easily fill up the tmpfs
@@ -55,9 +69,9 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       on a schedule
       */
       "/var/tmp"
-      "/var/lib/bluetooth" # bluetooth connection state stuff
+
+      # other
       "/var/lib/microvms" # MicroVMs
-      "/var/lib/flatpak" # flatpak user data
       "/var/lib/samba/private" # storing samba user password
       "/var/lib/waydroid" # waydroid state
       "/var/lib/libvirt" # libvirt state for VMs
@@ -65,8 +79,6 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/var/lib/postgresql"
       "/var/lib/sops-nix/"
       "/run/secrets.d/"
-      "/var/lib/pihole/" # pihole state
-      "/var/lib/dnsmasq.d" # dnsmasq is free software providing Domain Name System (DNS) caching, a Dynamic Host Configuration Protocol (DHCP) server, router advertisement and network boot features, intended for small computer networks. dnsmasq.
     ];
     files = [
       "/etc/machine-id"
@@ -134,6 +146,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
         ".local/state/wireplumber"
         ".local/share/atuin"
         ".local/share/Steam"
+        ".local/share/lutris"
         ".local/share/zed"
         ".local/zed.app"
         ".local/share/org.localsend.localsend_app"

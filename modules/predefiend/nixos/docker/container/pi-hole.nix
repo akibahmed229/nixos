@@ -30,24 +30,21 @@
           "${ServerIP}:53:53/tcp" # DNS requests over TCP
           "${ServerIP}:53:53/udp" # DNS requests over UDP
 
-          # Forward HTTP (80) and HTTPS (443) ports to Pi-hole for web access
+          # Forward HTTP (80) ports to Pi-hole for web access
           "3080:80" # Access Pi-hole's web interface on port 3080 instead of the default port 80
-          "30443:443" # Access Pi-hole's web interface securely via HTTPS on port 30443 instead of 443
         ];
 
         # Volume mappings to persist Pi-hole data outside the container
         volumes = [
           # Persist Pi-hole configuration data
-          "/var/lib/pihole/:/etc/pihole/" # The Pi-hole configuration is stored on the host under /var/lib/pihole/
-
+          "/var/lib/pihole/:/etc/pihole/"
           # Persist DNS settings (dnsmasq configuration)
-          "/var/lib/dnsmasq.d:/etc/dnsmasq.d/" # The DNS settings are stored in /var/lib/dnsmasq.d/ on the host
+          "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
         ];
 
         # Environment variables to configure the container
         environment = {
-          ServerIP = "${ServerIP}"; # Pass the Pi-hole server IP into the container
-          TZ = "Asia/Dhaka"; # Set the time zone for the container to Asia/Dhaka (adjust based on your location)
+          TZ = "Asia/Dhaka";
         };
 
         # Additional Docker options to give the container necessary permissions
@@ -58,7 +55,7 @@
         ];
 
         # The working directory for the container
-        workdir = "/var/lib/pihole/"; # This sets the working directory inside the container
+        workdir = "/var/lib/pihole/";
 
         # Automatically start the Pi-hole container when the system boots
         autoStart = true;
