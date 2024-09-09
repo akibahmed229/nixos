@@ -38,21 +38,27 @@ in {
       # Optionally, define a MariaDB container for Nextcloud's database
       mariadb = {
         image = "mariadb";
+
         volumes = [
           "/var/lib/mariadb:/var/lib/mysql" # Persist MariaDB data
         ];
+
         environment = {
           MYSQL_ROOT_PASSWORD = "${password}";
           MYSQL_DATABASE = "nextcloud";
           MYSQL_USER = "${user}";
           MYSQL_PASSWORD = "${password}";
         };
+
+        workdir = "/var/lib/mariadb";
+
         autoStart = true;
       };
 
       # Optionally, define a Redis container for Nextcloud's cache
       redis = {
         image = "redis:alpine";
+
         autoStart = true;
       };
 
@@ -93,7 +99,7 @@ in {
         ];
 
         # Working directory for the container
-        workdir = "/var/www/html";
+        workdir = "/var/lib/nextcloud/";
 
         # Automatically start the container on boot
         autoStart = true;
@@ -102,13 +108,16 @@ in {
       # Collabora Online (CODE) container
       collabora = {
         image = "collabora/code";
+
         ports = [
           "9980:9980" # CODE port
         ];
+
         environment = {
           # Disable SSL for local testing (production requires SSL)
           extra_params = "--o:ssl.enable=false";
         };
+
         autoStart = true;
       };
     };
