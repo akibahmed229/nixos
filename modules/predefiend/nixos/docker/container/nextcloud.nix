@@ -6,6 +6,20 @@
   secretsInput = builtins.toString inputs.mySsecrets;
   password = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/nextcloud/pass.txt");
 in {
+  /*
+  # General Instructions:
+
+   *  Note: to add trusted domains, edit the config.php file in the Nextcloud container.
+            $ sudo nvim /var/lib/nextcloud/html/config/config.php
+
+            Example:
+             'trusted_domains' =>
+             array (
+               0 => 'localhost',
+               1 => 'nextcloud.example.com',
+             ),
+  */
+
   # This enables Docker containers as systemd services in NixOS
   virtualisation.oci-containers = {
     backend = "docker";
@@ -28,12 +42,11 @@ in {
       };
 
       nextcloud = {
-        # Nextcloud image
         image = "nextcloud";
 
         # Port mappings: exposing HTTP (80) and HTTPS (443) ports
         ports = [
-          "8090:80" # Nextcloud HTTP (Change 3080 to any available port)
+          "8090:80"
         ];
 
         # Volume mappings to persist Nextcloud data
@@ -53,18 +66,6 @@ in {
           # Admin user for Nextcloud
           NEXTCLOUD_ADMIN_USER = "${user}";
           NEXTCLOUD_ADMIN_PASSWORD = "${password}";
-
-          /*
-          Note: to add trusted domains, edit the config.php file in the
-              $ sudo nvim /var/lib/nextcloud/html/config/config.php
-
-          Example:
-          'trusted_domains' =>
-          array (
-            0 => 'localhost',
-            1 => 'nextcloud.example.com',
-          ),
-          */
 
           TZ = "Asia/Dhaka"; # Set your timezone
         };

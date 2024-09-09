@@ -7,6 +7,9 @@
   # If you want to set a password for the Pi-hole web interface, run:
      $ docker exec -it pihole bash  # This command opens a shell into the running Pi-hole container
      $ sudo pihole -a -p            # This sets the admin password for the Pi-hole web interface
+
+  # This command enables promiscuous mode on the Docker bridge network interface (docker0) to allow Pi-hole to monitor network traffic:
+    $ sudo ip link set docker0 promisc on
   */
 
   # This enables Docker containers as systemd services in NixOS
