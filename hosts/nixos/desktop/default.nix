@@ -202,8 +202,8 @@ in {
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443 22 465];
-      allowedUDPPorts = [67 68];
+      allowedTCPPorts = [80 443 22 465 9980];
+      allowedUDPPorts = [67 68 9980];
       allowedUDPPortRanges = [
         {
           from = 4000;
