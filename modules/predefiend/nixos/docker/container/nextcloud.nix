@@ -50,6 +50,12 @@ in {
         autoStart = true;
       };
 
+      # Optionally, define a Redis container for Nextcloud's cache
+      redis = {
+        image = "redis:alpine";
+        autoStart = true;
+      };
+
       nextcloud = {
         image = "nextcloud";
 
@@ -72,22 +78,37 @@ in {
           MYSQL_PASSWORD = "${password}";
           MYSQL_HOST = "mariadb"; # Link the MariaDB container
 
+          # Redis cache configuration
+          REDIS_HOST = "redis"; # Link the Redis container
+
           # Admin user for Nextcloud
           NEXTCLOUD_ADMIN_USER = "${user}";
           NEXTCLOUD_ADMIN_PASSWORD = "${password}";
-
-          TZ = "Asia/Dhaka"; # Set your timezone
         };
 
         # Linking the database container (optional if using an external DB)
         extraOptions = [
           "--link=mariadb:mariadb" # Assuming MariaDB container is running
+          "--link=redis:redis" # Assuming Redis container is running
         ];
 
         # Working directory for the container
         workdir = "/var/www/html";
 
         # Automatically start the container on boot
+        autoStart = true;
+      };
+
+      # Collabora Online (CODE) container
+      collabora = {
+        image = "collabora/code";
+        ports = [
+          "9980:9980" # CODE port
+        ];
+        environment = {
+          # Disable SSL for local testing (production requires SSL)
+          extra_params = "--o:ssl.enable=false";
+        };
         autoStart = true;
       };
     };
