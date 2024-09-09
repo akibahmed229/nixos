@@ -16,6 +16,11 @@
                1 => 'nextcloud.example.com',
              ),
 
+    *  Note: to enable Collabora Online (CODE) integration, configure the Nextcloud server with the Collabora Online app.
+            - Go to the Nextcloud admin panel and install the Collabora Online app.
+            - In the Nextcloud admin panel, go to Collabora Online settings and enter the Collabora Online server URL (e.g., http://yourIP:9980).
+            - Save the settings and Collabora Online should be enabled for Nextcloud.
+
     * Enter into mariadb container to check the database
             $ docker exec -it mariadb bash
             $ mariadb -u root -p
@@ -24,6 +29,17 @@
             $ show tables;
             $ select * from oc_users;
             $ exit;
+
+    * For Redis cache, enter into redis container
+            $ docker exec -it redis sh
+            $ redis-cli
+            $ keys *
+            $ exit
+
+    * For Collabora Online (CODE) container
+            $ docker exec -it collabora bash
+            $ loolwsd-admin list
+            $ exit
   */
   # Read the password from the secrets file
   secretsInput = builtins.toString inputs.mySsecrets;
@@ -67,7 +83,7 @@ in {
 
         # Port mappings: exposing HTTP (80) and HTTPS (443) ports
         ports = [
-          "8090:80"
+          "8090:80" # enable firewall for this port in order to access
         ];
 
         # Volume mappings to persist Nextcloud data
@@ -110,7 +126,7 @@ in {
         image = "collabora/code";
 
         ports = [
-          "9980:9980" # CODE port
+          "9980:9980" # enable firewall for this port in order to access
         ];
 
         environment = {
