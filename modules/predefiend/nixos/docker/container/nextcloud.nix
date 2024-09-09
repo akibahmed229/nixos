@@ -3,9 +3,6 @@
   inputs,
   ...
 }: let
-  secretsInput = builtins.toString inputs.mySsecrets;
-  password = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/nextcloud/pass.txt");
-in {
   /*
   # General Instructions:
 
@@ -18,8 +15,20 @@ in {
                0 => 'localhost',
                1 => 'nextcloud.example.com',
              ),
-  */
 
+    * Enter into mariadb container to check the database
+            $ docker exec -it mariadb bash
+            $ mariadb -u root -p
+            $ show databases;
+            $ use nextcloud;
+            $ show tables;
+            $ select * from oc_users;
+            $ exit;
+  */
+  # Read the password from the secrets file
+  secretsInput = builtins.toString inputs.mySsecrets;
+  password = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/nextcloud/pass.txt");
+in {
   # This enables Docker containers as systemd services in NixOS
   virtualisation.oci-containers = {
     backend = "docker";
