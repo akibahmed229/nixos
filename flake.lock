@@ -219,11 +219,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1725940994,
-        "narHash": "sha256-PCj5WMvCMg2g8gBNf3izt4rPu5b5Mi/7zxmXHit3N3U=",
+        "lastModified": 1726027388,
+        "narHash": "sha256-HkTiAImrog2T7roRrc2msWjTqPjr6Wth05u9e4P5ti8=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "93857a3619db67e72f5012ce3cb001e402b86dbe",
+        "rev": "675f12f64b3b5fc8809ad0ae2abd99dbeaa0f6c7",
         "type": "gitlab"
       },
       "original": {
@@ -761,10 +761,10 @@
     "mySsecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1726004207,
-        "narHash": "sha256-PatK/ZL8q0o578aVal4FvA4nE5rNnD2K3GEZfLH6mtY=",
+        "lastModified": 1726032047,
+        "narHash": "sha256-EzIpBodgorjh7P0yOJMo/XBA4R7AhZHcvQv1ASGk6uI=",
         "ref": "main",
-        "rev": "22d92c17fcb6aa4ed054ca9bde7fb8dbaf41e579",
+        "rev": "a9f386c98329ee21015f77ef13d3fe53a9ffa846",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
