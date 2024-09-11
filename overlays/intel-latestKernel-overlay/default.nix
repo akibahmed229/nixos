@@ -14,7 +14,9 @@ in {
         # Custom kernel configuration
         structuredExtraConfig = with lib.kernel; {
           EXPERT = yes; # PREEMPT_RT depends on it (in kernel/Kconfig.preempt).
+          CONFIG_PREEMPT = yes;
           PREEMPT_RT = yes;
+          PREEMPT_RT_FULL = yes;
           PREEMPT_VOLUNTARY = lib.mkForce no; # PREEMPT_RT deselects it.
           RT_GROUP_SCHED = lib.mkForce (option no); # Removed by sched-disable-rt-group-sched-on-rt.patch.
 

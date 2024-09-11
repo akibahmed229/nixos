@@ -51,6 +51,7 @@ in {
     "akib/password/root_secret".neededForUsers = true; # decrypt the secret to /run/secrets-for-users
     "akib/password/my_secret".neededForUsers = true;
     "akib/wireguard/PrivateKey".neededForUsers = true;
+    "akib/cloudflared".neededForUsers = true;
   };
 
   environment.systemPackages = with pkgs; [sops age];

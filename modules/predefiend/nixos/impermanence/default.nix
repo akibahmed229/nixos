@@ -105,6 +105,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
         ".rustup"
         ".steam"
         ".elfeed"
+        ".cloudflared"
         ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
         {
           directory = ".gnupg";
