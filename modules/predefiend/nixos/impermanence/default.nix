@@ -53,13 +53,19 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/var/lib/kubelet"
       "/var/lib/containerd"
       "/var/lib/etcd"
-      "/var/lib/flatpak" # flatpak user data
-      #  container persistent volumes
-      "/var/lib/pihole/" # pihole state
+      "/var/lib/flatpak"
+      # portainer docker & kubernetes management
+      "/var/lib/portainer"
+      #  pihole
+      "/var/lib/pihole/"
       "/var/lib/dnsmasq.d" # dnsmasq is free software providing Domain Name System (DNS) caching, a Dynamic Host Configuration Protocol (DHCP) server, router advertisement and network boot features, intended for small computer networks. dnsmasq.
+      # Nextcloud
       "/var/lib/mariadb"
-      "/var/lib/nextcloud/html" # HTML files, Nextcloud config
-      "/var/lib/nextcloud/data" # User data
+      "/var/lib/nextcloud/html"
+      "/var/lib/nextcloud/data"
+      # ngnix proxy manager
+      "/var/lib/ngnixproxymanager"
+      "/var/lib/letsencrypt"
 
       /*
       /var/tmp is expected to be on disk and have enough free space
