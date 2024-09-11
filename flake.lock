@@ -761,10 +761,10 @@
     "mySsecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1726032047,
-        "narHash": "sha256-EzIpBodgorjh7P0yOJMo/XBA4R7AhZHcvQv1ASGk6uI=",
+        "lastModified": 1726062571,
+        "narHash": "sha256-Z+j4ex9Ft6wcfVUXAp0h4/Vt4RjSAklAObbdU2MplJo=",
         "ref": "main",
-        "rev": "a9f386c98329ee21015f77ef13d3fe53a9ffa846",
+        "rev": "0102b1be8ec0c5c1a6a29821fc97ffe677eb841b",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
@@ -993,11 +993,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1726000537,
-        "narHash": "sha256-Y1dEuf2wZkg2rhE8sf73x9K0zknUald4Ia6zXnGEfjg=",
+        "lastModified": 1726027257,
+        "narHash": "sha256-hsdIfpIB5wzEehgOSaifBJwY3Tn0P0wiU9pTf8nRBQc=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "fc7e9b29271a03459191955f78d4128451b7cd81",
+        "rev": "11c133e89e4090c43445a2c3b5af2322831d7219",
         "type": "github"
       },
       "original": {
