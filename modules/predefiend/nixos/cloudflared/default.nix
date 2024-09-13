@@ -23,7 +23,7 @@ in {
     after = ["network-online.target"];
     requires = ["network-online.target"];
     serviceConfig = {
-      ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=${token}";
+      ExecStart = "${unstable.${pkgs.system}.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=${token}";
       Restart = "on-failure";
       PermissionsStartOnly = true;
       User = "root";

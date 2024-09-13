@@ -1,5 +1,6 @@
 {
   pkgs,
+  unstable,
   user,
   lib,
   ...
@@ -16,7 +17,7 @@ in {
   networking.extraHosts = "${kubeMasterIP} ${kubeMasterHostname}";
 
   # Installs required packages for Kubernetes
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with unstable.${pkgs.system}; [
     kompose # Kompose helps convert Docker Compose files into Kubernetes resources
     kubectl # The Kubernetes command-line tool to interact with clusters
     kubernetes # Kubernetes itself
