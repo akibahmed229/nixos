@@ -10,6 +10,13 @@
 
   # This command enables promiscuous mode on the Docker bridge network interface (docker0) to allow Pi-hole to monitor network traffic:
     $ sudo ip link set docker0 promisc on
+
+  # List of blocklists to add to Pi-hole for ad-blocking: (optional)
+    https://v.firebog.net/hosts/lists.php?type=tick
+
+  # To update the blocklists in Pi-hole, run:
+    $ docker exec -it pihole pihole -g  # This command updates the blocklists in Pi-hole
+  then restart the Pi-hole container to apply the changes.
   */
 
   # This enables Docker containers as systemd services in NixOS
