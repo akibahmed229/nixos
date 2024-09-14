@@ -147,6 +147,7 @@ in {
           github-desktop # Git client.
           lazygit # Git UI.
           gh # GitHub CLI.
+          self.packages.${pkgs.system}.ciscoPacketTracer
 
           # 2. Media & Design
           gimp # Image editor.
@@ -206,16 +207,6 @@ in {
       enable = true;
       allowedTCPPorts = [80 443 22 465 9980 8090];
       allowedUDPPorts = [67 68];
-      allowedUDPPortRanges = [
-        {
-          from = 4000;
-          to = 4007;
-        }
-        {
-          from = 8000;
-          to = 8010;
-        }
-      ];
     };
     enableIPv6 = true;
     enableB43Firmware = true;
