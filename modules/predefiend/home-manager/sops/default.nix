@@ -20,7 +20,7 @@ in {
     # This is the location of the host specific age-key for akib and will to have been extracted to this location via hosts/common/core/sops.nix on the host
     age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
 
-    defaultSopsFile = "${secretsInput}/secrets/secrets.yaml";
+    defaultSopsFile = "${secretsInput}/secrets/home-manager.yaml";
     validateSopsFiles = false;
 
     secrets = {
