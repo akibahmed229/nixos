@@ -5,44 +5,6 @@
   lib,
   ...
 }: let
-  /*
-  # Reference : https://wiki.nixos.org/wiki/Kubernetes
-
-  # DNS issues
-
-  # Check if coredns is running via kubectl get pods -n kube-system:
-
-     NAME                       READY   STATUS    RESTARTS   AGE
-     coredns-577478d784-bmt5s   1/1     Running   2          163m
-     coredns-577478d784-bqj65   1/1     Running   2          163m
-
-  # Run a pod to check with kubectl run curl --restart=Never --image=radial/busyboxplus:curl -i --tty:
-
-  # If you don't see a command prompt, try pressing enter.
-      [ root@curl:/ ]$  nslookup google.com
-
-      Server:    10.0.0.254
-      Address 1: 10.0.0.254 kube-dns.kube-system.svc.cluster.local
-
-      Name:      google.com
-      Address 1: 2a00:1450:4016:803::200e muc12s04-in-x0e.1e100.net
-      Address 2: 172.217.23.14 lhr35s01-in-f14.1e100.net
-
-  # In case DNS is still not working I found that sometimes, restarting services helps:
-
-      systemctl restart kube-proxy flannel kubelet
-
-  # reset to a clean state
-  # Sometimes it helps to have a clean state on all instances:
-
-  * comment kubernetes-related code in configuration.nix
-     $ nixos-rebuild switch
-  * clean up filesystem
-     $ rm -rf /var/lib/kubernetes/ /var/lib/etcd/ /var/lib/cfssl/ /var/lib/kubelet/
-     $ rm -rf /etc/kube-flannel/ /etc/kubernetes/
-  * uncomment kubernetes-related code again
-     $ nixos-rebuild switch
-  */
   # Define key variables for your Kubernetes setup
   # The IP address of the Kubernetes master node, where the API server runs
   kubeMasterIP = "192.168.0.111";
@@ -150,5 +112,40 @@ in {
   * 4. To further debug cluster issues, use the command:
   *    $ kubectl cluster-info dump
   *
+  *
+  * 5. DNS issues
+  *    Check if coredns is running via kubectl get pods -n kube-system:
+  *
+  *      NAME                       READY   STATUS    RESTARTS   AGE
+  *      coredns-577478d784-bmt5s   1/1     Running   2          163m
+  *      coredns-577478d784-bqj65   1/1     Running   2          163m
+  *
+  *   Run a pod to check with kubectl run curl --restart=Never --image=radial/busyboxplus:curl -i --tty:
+  *
+  *   If you don't see a command prompt, try pressing enter.
+  *     [ root@curl:/ ]$  nslookup google.com
+  *
+  *     Server:    10.0.0.254
+  *     Address 1: 10.0.0.254 kube-dns.kube-system.svc.cluster.local
+  *
+  *     Name:      google.com
+  *     Address 1: 2a00:1450:4016:803::200e muc12s04-in-x0e.1e100.net
+  *     Address 2: 172.217.23.14 lhr35s01-in-f14.1e100.net
+  *
+  *   In case DNS is still not working I found that sometimes, restarting services helps:
+  *
+  *    systemctl restart kube-proxy flannel kubelet
+  *
+  *   reset to a clean state
+  *   Sometimes it helps to have a clean state on all instances:
+  *
+  *   comment kubernetes-related code in configuration.nix
+  *    $ nixos-rebuild switch
+  *   clean up filesystem
+  *    $ rm -rf /var/lib/kubernetes/ /var/lib/etcd/ /var/lib/cfssl/ /var/lib/kubelet/
+  *    $ rm -rf /etc/kube-flannel/ /etc/kubernetes/
+  *   uncomment kubernetes-related code again
+  *    $ nixos-rebuild switch
+
   */
 }
