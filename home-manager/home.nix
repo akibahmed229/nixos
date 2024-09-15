@@ -4,7 +4,6 @@
   unstable,
   user,
   state-version,
-  theme,
   inputs,
   lib,
   self,
