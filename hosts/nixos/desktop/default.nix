@@ -201,7 +201,7 @@ in {
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443 22 465 9980 8090];
+      allowedTCPPorts = [80 443 22 465 9980 8090 6443];
       allowedUDPPorts = [67 68];
     };
     enableIPv6 = true;

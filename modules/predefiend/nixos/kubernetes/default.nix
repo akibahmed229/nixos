@@ -11,7 +11,7 @@
   # The hostname of the Kubernetes master node, used for API server communications
   kubeMasterHostname = "api.kube";
   # The port where the Kubernetes API server listens (default 6443)
-  kubeMasterAPIServerPort = 6443;
+  kubeMasterAPIServerPort = 6443; # make sure to enable this port in your firewall
 in {
   # Adds an entry to /etc/hosts for the Kubernetes master node
   networking.extraHosts = "${kubeMasterIP} ${kubeMasterHostname}";
