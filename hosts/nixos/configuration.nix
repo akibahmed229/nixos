@@ -28,6 +28,7 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Set your time zone.
   time.timeZone = "Asia/Dhaka";
@@ -217,6 +218,15 @@
       enable = true;
       enableSSHSupport = true;
     };
+  };
+
+  boot = {
+    # Disable init=/bin/sh as a kernel parameter to prevent root access
+    loader.systemd-boot.editor = lib.mkForce false;
+
+    # /tmp should be treated as volatile storage!
+    tmp.useTmpfs = lib.mkForce false;
+    tmp.cleanOnBoot = lib.mkForce (!config.boot.tmp.useTmpfs);
   };
 
   system = {
