@@ -1,7 +1,6 @@
 {
-  lib,
-  stdenv,
   pkgs,
+  unstable,
   ...
 }: let
   statsConfig = {
@@ -38,6 +37,11 @@ in {
       }
     ];
   };
+
+  environment.systemPackages = with unstable.${pkgs.system}; [
+    mysql80 # MySQL database.
+    mysql-workbench # MySQL database design tool.
+  ];
 
   systemd.services.setdbpass = {
     description = "MySQL database password setup";

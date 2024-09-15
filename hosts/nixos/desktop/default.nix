@@ -139,10 +139,6 @@ in {
           postman # API development environment.
           vscode # Code editor.
           zed-editor # Code editor.
-          mysql80 # MySQL database.
-          mysql-workbench # MySQL database design tool.
-          postgresql # Relational database system.
-          pgadmin4 # PostgreSQL database administration tool.
           git # Version control system.
           github-desktop # Git client.
           lazygit # Git UI.

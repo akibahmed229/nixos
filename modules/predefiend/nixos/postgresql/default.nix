@@ -1,7 +1,6 @@
 {
-  lib,
-  stdenv,
   pkgs,
+  unstable,
   ...
 }: {
   services.postgresql = {
@@ -19,4 +18,9 @@
 
     '';
   };
+
+  environment.systemPackages = with unstable.${pkgs.system}; [
+    postgresql # Relational database system.
+    pgadmin4 # PostgreSQL database administration tool.
+  ];
 }
