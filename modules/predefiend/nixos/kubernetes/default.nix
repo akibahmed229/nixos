@@ -6,6 +6,8 @@
   ...
 }: let
   /*
+  # Reference : https://wiki.nixos.org/wiki/Kubernetes
+
   # DNS issues
 
   # Check if coredns is running via kubectl get pods -n kube-system:
