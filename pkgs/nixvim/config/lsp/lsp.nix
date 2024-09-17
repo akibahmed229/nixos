@@ -36,7 +36,7 @@
         };
         nil-ls.enable = true;
         # nixd.enable = true;
-        tsserver = {
+        ts-ls = {
           enable = true;
           filetypes = ["javascript" "javascriptreact" "typescript" "typescriptreact"];
           extraOptions = {
