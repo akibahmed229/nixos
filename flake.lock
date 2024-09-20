@@ -1226,11 +1226,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1726822986,
-        "narHash": "sha256-nsVxARou/e5iTrxlEQWvec0RRVpfHceNpmZp9SS4k+8=",
+        "lastModified": 1726828291,
+        "narHash": "sha256-pGRPVVm7UXf+fx2NVpH6FFSWR9AynG6eoVlagaqH9i4=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "58b3a70b1d0f93d0edaf36790f24c85f0b0e4041",
+        "rev": "53bcceb4e46d0b3e8ae6434a7a6bcc3463092093",
         "type": "github"
       },
       "original": {
