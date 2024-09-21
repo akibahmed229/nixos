@@ -9,18 +9,19 @@
   lib,
   self,
   pkgs,
+  unstable,
   modulesPath,
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
-  nixpkgs.overlays = [self.overlays.intel-latestKernel-overlay]; # Add the latest kernel overlay for my intel processor
+  # nixpkgs.overlays = [self.overlays.intel-latestKernel-overlay]; # Add the latest kernel overlay for my intel processor
 
   boot = {
     # Other options are:- linuxPackages_xanmod_latest, linuxPackages_zen
 
     # Custom kernel packages
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = unstable.${pkgs.system}.linuxPackages_zen;
 
     kernelParams = [
       "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
