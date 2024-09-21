@@ -21,7 +21,7 @@
     # Other options are:- linuxPackages_xanmod_latest, linuxPackages_zen
 
     # Custom kernel packages
-    kernelPackages = unstable.${pkgs.system}.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [
       "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
