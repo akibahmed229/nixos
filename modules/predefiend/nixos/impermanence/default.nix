@@ -103,6 +103,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
         "Android"
         "Postman"
         "Games"
+        "pt" # FIXME: remove this once work networking course is done
         ".vscode"
         ".docker"
         ".kube"
