@@ -132,6 +132,11 @@
         "QT_QPA_PLATFORM,wayland;xcb" # Tell Qt applications to use the Wayland backend, and fall back to x11 if Wayland is unavailable
         "QT_AUTO_SCREEN_SCALE_FACTOR,1" # enables automatic scaling, based on the monitor’s pixel density
         # "QT_WAYLAND_DISABLE_WINDOWDECORATION,1" # Disables window decorations on Qt applications
+
+        # Not all apps support running natively on Wayland. To work around this, XWayland should be enabled.
+        "NIXOS_OZONE_WL,1"
+
+        "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -163,6 +168,8 @@
           "$mod CTRL, k, movefocus, u"
           "$mod CTRL, j, movefocus, d"
           # Scroll through existing workspaces with mainMod + scroll
+          "$modCONTROL, right, workspace, e+1"
+          "$modCONTROL, left, workspace, e-1"
           "$mod, mouse_down, workspace, e+1"
           "$mod, mouse_up, workspace, e-1"
 
@@ -175,6 +182,8 @@
           "$mod, h, movewindow, l"
           "$mod, k, movewindow, u"
           "$mod, j, movewindow, d"
+          "ALT, Tab, cyclenext"
+          "ALT, Tab, bringactivetotop"
         ]
         ++ (
           # workspaces
