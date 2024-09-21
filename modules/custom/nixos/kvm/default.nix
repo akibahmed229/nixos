@@ -42,6 +42,8 @@ in {
     virtualisation = {
       libvirtd = {
         enable = true;
+        onBoot = "ignore";
+        onShutdown = "shutdown";
         qemu = {
           package = unstable.${pkgs.system}.qemu_kvm;
           runAsRoot = true;
