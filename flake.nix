@@ -78,7 +78,7 @@
     };
     # Handle persistent state on systems with ephemeral root storage
     impermanence = {
-      url = "github:nix-community/impermanence";
+      url = "github:nix-community/impermanence/63f4d0443e32b0dd7189001ee1894066765d18a5"; # latest commit broken (mkIF defined)
     };
     # Firefox-addons is a collection of Firefox extensions
     firefox-addons = {
