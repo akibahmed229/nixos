@@ -4,6 +4,7 @@
   mkDerivation = import ./mkDerivation;
   mkOverlay = import ./mkOverlays {inherit lib;};
   mkModule = import ./mkModule {inherit lib;};
+  mkFlake = import ./mkFlake;
 
   # Helper functions (user level)
   mkImport = import ./mkImport {inherit lib;};

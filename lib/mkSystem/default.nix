@@ -15,6 +15,7 @@
 */
 {
   # Default arguments for the function
+  path, # Path to the directory containing system configurations
   system ? "x86_64-linux", # Default system architecture
   nixpkgs ? {}, # Allows passing custom nixpkgs
   template ? false, # Flag to indicate if it's a template system
@@ -24,7 +25,7 @@
   home-manager ? import <home-manager> {}, # Home Manager import
   nix-on-droid ? import <nix-on-droid> {}, # Nix-on-Droid import
   ...
-}: path: let
+}: let
   # Importing necessary functions and utilities from the provided imports
   inherit (nixpkgs) lib;
   inherit (builtins) readDir trace;

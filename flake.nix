@@ -165,57 +165,34 @@
         config = {allowUnfree = true;};
       });
 
+    myLib = import ./lib {inherit lib;}; # mmyLib is a custom library of helper functions
+    inherit (myLib) mkFlake mkSystem;
+  in
     # The function to generate the system configurations (derived from my custom lib helper function)
-    inherit (self.lib) mkSystem mkDerivation mkOverlay mkModule;
-    mkNixOSSystem = mkSystem {
-      inherit nixpkgs home-manager;
-      system = forAllSystems (s: s);
-      specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
+    mkFlake {inherit self inputs;} {
+      inherit (myLib) mkSystem mkModule;
+      mkNixOSSystem = mkSystem {
+        inherit nixpkgs home-manager;
+        system = forAllSystems (s: s);
+        path = ./hosts/nixos;
+        specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
+      };
+      mkHomeManagerSystem = mkSystem {
+        inherit nixpkgs home-manager;
+        homeConf = true;
+        path = ./hosts/homeManager;
+        specialArgs = {inherit inputs self unstable user theme state-version;};
+      };
+      mkNixOnDroidSystem = mkSystem {
+        inherit nixpkgs home-manager nix-on-droid;
+        droidConf = true;
+        path = ./hosts/nixOnDroid;
+        specialArgs = {inherit inputs self unstable user state-version;};
+      };
+      mkTemplate = mkSystem {
+        inherit nixpkgs;
+        template = true;
+        path = ./public/templates;
+      };
     };
-    mkHomeManagerSystem = mkSystem {
-      inherit nixpkgs home-manager;
-      homeConf = true;
-      specialArgs = {inherit inputs self unstable user theme state-version;};
-    };
-    mkNixOnDroidSystem = mkSystem {
-      inherit nixpkgs home-manager nix-on-droid;
-      droidConf = true;
-      specialArgs = {inherit inputs self unstable user state-version;};
-    };
-    mkTemplate = mkSystem {
-      inherit nixpkgs;
-      template = true;
-    };
-  in {
-    inherit (my-devShells) devShells; # available through "$ nix develop .#devShells"
-    lib = import ./lib {inherit lib;}; # Lib is a custom library of helper functions
-
-    # Accessible through 'nix build', 'nix shell', "nix run", etc
-    packages = forAllSystems (
-      system:
-        mkDerivation {
-          inherit nixpkgs system;
-          path = ./pkgs;
-        }
-        // {nixvim = inputs.nixvim.packages.${system}.default;}
-    );
-
-    # Your custom packages and modifications, exported as overlays
-    overlays = mkOverlay {
-      inherit inputs;
-      path = ./overlays;
-    };
-    # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {});
-
-    # Reusable nixos & home-manager modules you might want to export
-    nixosModules = mkModule ./modules/custom/nixos;
-    homeManagerModules = mkModule ./modules/custom/home-manager;
-
-    # The nixos system configurations for the supported systems
-    nixosConfigurations = mkNixOSSystem ./hosts/nixos; # available through "$ nixos-rebuild switch --flake .#host"
-    homeConfigurations = mkHomeManagerSystem ./hosts/homeManager; # available through "$ home-manager switch --flake .#home"
-    nixOnDroidConfigurations = mkNixOnDroidSystem ./hosts/nixOnDroid; # available through "$ nix-on-droid switch --flake .#device"
-    templates = mkTemplate ./public/templates; # available through "$ nix flake init -t .#template"
-  };
 }
