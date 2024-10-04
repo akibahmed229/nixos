@@ -90,80 +90,91 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/etc/machine-id"
       # { file = "/var/lib/sops-nix/secret_file"; parentDirectory = { mode = "u=rwx,g=rwx,o=rwx"; }; }
     ];
-    users.${user} = {
-      directories = [
-        "Desktop"
-        "Downloads"
-        "Music"
-        "Pictures"
-        "Public"
-        "Documents"
-        "Videos"
-        "VirtualBox VMs"
-        "Android"
-        "Postman"
-        "Games"
-        "pt" # FIXME: remove this once work networking course is done
-        ".vscode"
-        ".docker"
-        ".kube"
-        ".minikube"
-        ".mysql"
-        ".rustup"
-        ".steam"
-        ".elfeed"
-        ".cloudflared"
-        ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
-        {
-          directory = ".gnupg";
-          mode = "0700";
-        }
-        {
-          directory = ".ssh";
-          mode = "0700";
-        }
-        {
-          directory = ".config";
-          mode = "0700";
-        }
-        {
-          directory = ".mozilla";
-          mode = "0700";
-        }
-        {
-          directory = ".nixops";
-          mode = "0700";
-        }
-        {
-          directory = ".tmux";
-          mode = "0700";
-        }
-        {
-          directory = ".local/share/keyrings";
-          mode = "0700";
-        }
-        ".local/share/direnv"
-        ".local/share/nvim"
-        ".local/share/TelegramDesktop"
-        ".local/share/whatsapp-for-linux"
-        ".local/share/Notepadqq"
-        ".local/share/qBittorrent"
-        ".local/share/zsh"
-        ".local/share/flatpak"
-        ".local/state/nvim"
-        ".local/state/wireplumber"
-        ".local/share/atuin"
-        ".local/share/Steam"
-        ".local/share/lutris"
-        ".local/share/zed"
-        ".local/zed.app"
-        ".local/share/org.localsend.localsend_app"
-        ".var/app/sh.ppy.osu"
-      ];
-      files = [
-        ".screenrc"
-        ".mysql_history"
-      ];
+    users = {
+      ${user} = {
+        directories = [
+          "Desktop"
+          "Downloads"
+          "Music"
+          "Pictures"
+          "Public"
+          "Documents"
+          "Videos"
+          "VirtualBox VMs"
+          "Android"
+          "Postman"
+          "Games"
+          "pt" # FIXME: remove this once work networking course is done
+          ".vscode"
+          ".docker"
+          ".kube"
+          ".minikube"
+          ".mysql"
+          ".rustup"
+          ".steam"
+          ".elfeed"
+          ".cloudflared"
+          ".cache" # is persisted, but kept clean with systemd-tmpfiles, see below
+          {
+            directory = ".gnupg";
+            mode = "0700";
+          }
+          {
+            directory = ".ssh";
+            mode = "0700";
+          }
+          {
+            directory = ".config";
+            mode = "0700";
+          }
+          {
+            directory = ".mozilla";
+            mode = "0700";
+          }
+          {
+            directory = ".nixops";
+            mode = "0700";
+          }
+          {
+            directory = ".tmux";
+            mode = "0700";
+          }
+          {
+            directory = ".local/share/keyrings";
+            mode = "0700";
+          }
+          ".local/share/direnv"
+          ".local/share/nvim"
+          ".local/share/TelegramDesktop"
+          ".local/share/whatsapp-for-linux"
+          ".local/share/Notepadqq"
+          ".local/share/qBittorrent"
+          ".local/share/zsh"
+          ".local/share/flatpak"
+          ".local/state/nvim"
+          ".local/state/wireplumber"
+          ".local/share/atuin"
+          ".local/share/Steam"
+          ".local/share/lutris"
+          ".local/share/zed"
+          ".local/zed.app"
+          ".local/share/org.localsend.localsend_app"
+          ".var/app/sh.ppy.osu"
+        ];
+        files = [
+          ".screenrc"
+          ".mysql_history"
+        ];
+      };
+      "afif" = {
+        directories = [
+          "Downloads"
+          {
+            directory = ".mozilla";
+            mode = "0700";
+          }
+        ];
+      };
     };
   };
 
