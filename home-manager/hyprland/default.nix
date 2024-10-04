@@ -2,7 +2,6 @@
 {
   inputs,
   pkgs,
-  unstable,
   ...
 }: {
   # SDDM (custom module)

@@ -38,17 +38,10 @@ in {
     ];
   };
 
-<<<<<<< HEAD
-  environment.systemPackages = with unstable.${pkgs.system}; [
-    mysql80 # MySQL database.
-    mysql-workbench # MySQL database design tool.
-  ];
-=======
   # environment.systemPackages = with unstable.${pkgs.system}; [
   #   mysql80 # MySQL database.
   #   mysql-workbench # MySQL database design tool.
   # ];
->>>>>>> d02695d (changes)
 
   systemd.services.setdbpass = {
     description = "MySQL database password setup";
