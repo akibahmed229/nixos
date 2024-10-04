@@ -33,10 +33,6 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     # nix-on-droid is a project to run Nix on Android
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
