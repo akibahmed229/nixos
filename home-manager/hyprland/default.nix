@@ -71,13 +71,8 @@
       # udiskie # Automatic disk mounting tool (commented out).
       # pywal # Tool to generate and set color schemes based on wallpapers (commented out).
       # mpd # Music Player Daemon (commented out).
-      swaylock # Screen locker for Wayland.
-      swaylock-effects # Enhanced screen locker with effects for Wayland.
     ];
   };
-
-  # swaylock config for Hyprland lockscreen
-  security.pam.services.swaylock = {};
 
   xdg.portal = {
     # Required for flatpak with window managers and for file browsing

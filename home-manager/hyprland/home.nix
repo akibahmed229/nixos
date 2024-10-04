@@ -101,7 +101,7 @@
             "kitty"
           ]
           else [
-            "kitty"
+            "thunar"
             "firefox"
           ]
         );
@@ -162,7 +162,7 @@
           ''$mod, V, exec, cliphist list | wofi -n --dmenu -p "Copy Text" | cliphist decode | wl-copy''
           "$mod, Print, exec, screenshot" # from my pkgs shellscript
           "$mod, W, exec, wallpaper" # from my pkgs shellscript
-          "$mod ALT, L, exec, swaylock"
+          "$mod ALT, L, exec, hyprlock"
           "$mod SHIFT, DELETE, exec, wlogout"
 
           # Move focus with mainMod + ctrl + (h,j,k,l) keys
@@ -262,6 +262,12 @@
     };
 
     extraConfig = builtins.readFile ./hypr/hyprland.conf;
+  };
+
+  programs.hyprlock = {
+    enable = true;
+    package = pkgs.hyprlock;
+    extraConfig = builtins.readFile ./hyprlock/hyprlock.conf;
   };
 
   services.udiskie = {
