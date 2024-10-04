@@ -195,5 +195,5 @@
         path = ./public/templates;
       };
     }
-    // {inherit (my-devShells) devshells;};
+    // {inherit (my-devShells) devShells;};
 }
