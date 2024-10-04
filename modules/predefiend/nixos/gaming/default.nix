@@ -3,28 +3,26 @@
   unstable,
   ...
 }: {
-  # FIXME: have to uncomment the following lines to enable the gaming programs
-  # Gaming
-  # programs = {
-  #   gamemode.enable = true; # set of tools to optimize system performance for games
+  programs = {
+    gamemode.enable = true; # set of tools to optimize system performance for games
 
-  #   # Gamescope Compositor / "Boot to Steam Deck"
-  #   gamescope = {
-  #     enable = true;
-  #     capSysNice = true;
-  #   };
+    # Gamescope Compositor / "Boot to Steam Deck"
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
 
-  #   steam = {
-  #     enable = true;
-  #     package = pkgs.steam;
-  #     extraPackages = with pkgs.steamPackages; [
-  #       steam-runtime
-  #     ];
-  #     # remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  #     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  #     gamescopeSession.enable = true; # optimize micro compositor for games
-  #   };
-  # };
+    steam = {
+      enable = true;
+      package = pkgs.steam;
+      extraPackages = with pkgs.steamPackages; [
+        steam-runtime
+      ];
+      # remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      gamescopeSession.enable = true; # optimize micro compositor for games
+    };
+  };
 
   hardware.xone.enable = true; # support for the xbox controller USB dongle
   environment = {
