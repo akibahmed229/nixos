@@ -1,10 +1,7 @@
 {
   /*
   # General Instructions:
-<<<<<<< HEAD
-=======
   # To access the server: http://localhost:3080/admin/login.php
->>>>>>> d02695d (changes)
   # To use the Pi-hole server, you need to set your router's DNS settings to the IP address of this Pi-hole server (192.168.0.111).
   # This will make Pi-hole your network's DNS server.
 

@@ -89,15 +89,9 @@
           "kdeconnect-indicator &"
         ]
         ++ (
-<<<<<<< HEAD
-          if user == "akib"
-          then [
-            "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp " # Loads my RGB light
-=======
           if config.home.username == "akib"
           then [
             "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp" # Loads my RGB light
->>>>>>> d02695d (changes)
             # app that i want to start after login
             # "discord"
             "firefox"
@@ -106,14 +100,10 @@
             #"alacritty"
             "kitty"
           ]
-<<<<<<< HEAD
-          else []
-=======
           else [
             "kitty"
             "firefox"
           ]
->>>>>>> d02695d (changes)
         );
 
       general = {

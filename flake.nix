@@ -26,19 +26,11 @@
     ####################  Core Repositories ####################
 
     # Nixpkgs is a collection of over 100,000 software packages that can be installed with the Nix package manager. It also implements NixOS, a purely-functional Linux distribution.
-<<<<<<< HEAD
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixos-unstable"; # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
-    # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-=======
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixos-unstable"; # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
     home-manager = {
       url = "github:nix-community/home-manager/master";
->>>>>>> d02695d (changes)
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-unstable = {
@@ -154,15 +146,9 @@
   } @ inputs: let
     # The system to build.
     inherit (nixpkgs) lib;
-<<<<<<< HEAD
-    state-version = "24.05";
-    hostname = "desktop";
-    devicename = "/dev/nvme0n1";
-=======
     state-version = "24.11";
     hostname = "desktop";
     devicename = "/dev/nvme1n1";
->>>>>>> d02695d (changes)
 
     # Supported systems for your flake packages, shell, etc.
     forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
@@ -208,10 +194,6 @@
         template = true;
         path = ./public/templates;
       };
-<<<<<<< HEAD
-    };
-=======
     }
     // {inherit (my-devShells) devshells;};
->>>>>>> d02695d (changes)
 }

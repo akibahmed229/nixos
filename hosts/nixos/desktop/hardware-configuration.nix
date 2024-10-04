@@ -7,9 +7,7 @@
 {
   config,
   lib,
-  self,
   pkgs,
-  unstable,
   modulesPath,
   ...
 }: {
@@ -94,15 +92,6 @@
   };
 
   fileSystems = {
-<<<<<<< HEAD
-    # nvme samsung
-    "/mnt/samsung" = {
-      device = "/dev/disk/by-label/samsung";
-      fsType = "btrfs";
-      options = ["defaults"];
-    };
-=======
->>>>>>> d02695d (changes)
     "/mnt/sda1" = {
       device = "/dev/sda1";
       fsType = "ntfs";
