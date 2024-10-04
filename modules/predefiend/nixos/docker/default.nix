@@ -3,7 +3,11 @@
   virtualisation.docker = {
     enable = true; #  To get access to the docker socket, you have to be in the docker group, set the extraGroups attribute to [ "docker" ].
     storageDriver = "btrfs";
+<<<<<<< HEAD
 
+=======
+    liveRestore = false;
+>>>>>>> d02695d (changes)
     daemon.settings = {
       /*
       * When connecting to a public Wi-Fi, where the login page's IP-Address is within the Docker network range,

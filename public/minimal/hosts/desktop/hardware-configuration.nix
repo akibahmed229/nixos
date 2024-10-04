@@ -7,15 +7,11 @@
 {
   config,
   lib,
-  self,
   pkgs,
-  unstable,
   modulesPath,
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
-
-  # nixpkgs.overlays = [self.overlays.intel-latestKernel-overlay]; # Add the latest kernel overlay for my intel processor
 
   boot = {
     # Other options are:- linuxPackages_xanmod_latest, linuxPackages_zen
@@ -76,16 +72,6 @@
     extraModprobeConfig = "options kvm_intel nested=1"; # for intel cpu
 
     supportedFilesystems = ["ntfs" "ntfs3"];
-
-    # consoleLogLevel = 3;
-    # initrd = {
-    #     verbose = false;
-    #     systemd.enable = true; # uncomment to use initrd postDeviceCommands (e.g. to mount encrypted partitions)
-    # };
-    # plymouth = {
-    #   enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
-    #   theme = "breeze";
-    # };
   };
 
   services.btrfs.autoScrub = {
@@ -94,15 +80,6 @@
   };
 
   fileSystems = {
-<<<<<<< HEAD
-    # nvme samsung
-    "/mnt/samsung" = {
-      device = "/dev/disk/by-label/samsung";
-      fsType = "btrfs";
-      options = ["defaults"];
-    };
-=======
->>>>>>> d02695d (changes)
     "/mnt/sda1" = {
       device = "/dev/sda1";
       fsType = "ntfs";
@@ -120,14 +97,6 @@
     memoryPercent = 10;
     algorithm = "lz4";
   };
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  # networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20f0u11u2.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkOverride 1 "performance";

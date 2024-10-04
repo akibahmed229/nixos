@@ -80,6 +80,22 @@ in {
         enabled = true;
       }
       rec {
+<<<<<<< HEAD
+=======
+        name = "afif";
+        isNormalUser = true;
+        hashedPasswordFile =
+          if (config.sops.secrets."${name}/password/my_secret".path != {})
+          then config.sops.secrets."${name}/password/my_secret".path
+          else null;
+        hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
+        extraGroups = ["networkmanager" "wheel" "video" "audio" "scanner" "disk" "input" "flatpak"];
+        packages = with pkgs; [wget thunderbird vlc];
+        shell = checkUserFun name;
+        enabled = true;
+      }
+      rec {
+>>>>>>> d02695d (changes)
         name = "root";
         isNormalUser = false;
         hashedPasswordFile =

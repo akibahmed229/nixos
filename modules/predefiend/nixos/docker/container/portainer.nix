@@ -1,6 +1,10 @@
 {
   /*
   # General introduction
+<<<<<<< HEAD
+=======
+  # Access the portainer web interface by visiting https://localhost:9443
+>>>>>>> d02695d (changes)
   # portainer is a lightweight management UI which allows you to easily manage your Docker host or Swarm cluster
   # You can use portainer to manage containers, images, networks, and volumes
 

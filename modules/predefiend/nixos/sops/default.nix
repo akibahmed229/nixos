@@ -27,6 +27,7 @@ in {
   ];
 
   sops = {
+<<<<<<< HEAD
     defaultSopsFile = lib.mkIf (user == "akib") "${secretsInput}/secrets/secrets.yaml";
     defaultSopsFormat = "yaml";
     age = lib.mkIf (user == "akib") {
@@ -34,6 +35,17 @@ in {
       sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       # this will use an age key that is expected to already be in the file-system
       keyFile = "/var/lib/sops-nix/secret_file";
+=======
+    defaultSopsFile = "${secretsInput}/secrets/secrets.yaml";
+    defaultSopsFormat = "yaml";
+    age = {
+      # this will use an age key that is expected to already be in the file-system
+      keyFile = "/var/lib/sops-nix/keys.txt";
+
+      # automatically import host SSH keys as age keys
+      # sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+
+>>>>>>> d02695d (changes)
       # Generate a new key if specified above file does not exist
       generateKey = true;
     };
@@ -52,6 +64,11 @@ in {
     "akib/password/my_secret".neededForUsers = true;
     "akib/wireguard/PrivateKey".neededForUsers = true;
     "akib/cloudflared".neededForUsers = true;
+<<<<<<< HEAD
+=======
+
+    "afif/password/my_secret".neededForUsers = true;
+>>>>>>> d02695d (changes)
   };
 
   environment.systemPackages = with pkgs; [sops age];

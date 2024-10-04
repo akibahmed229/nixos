@@ -29,7 +29,11 @@ in {
   # Enabling samba file sharing over local network
   services.samba = {
     enable = true; # Dont forget to set a password for the user with smbpasswd -a ${user}
+<<<<<<< HEAD
     shares = listOfDriveConfig;
+=======
+    settings = listOfDriveConfig;
+>>>>>>> d02695d (changes)
     openFirewall = true;
   };
 }

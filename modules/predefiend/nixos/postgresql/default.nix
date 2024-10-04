@@ -21,6 +21,10 @@
 
   environment.systemPackages = with unstable.${pkgs.system}; [
     postgresql # Relational database system.
+<<<<<<< HEAD
     pgadmin4 # PostgreSQL database administration tool.
+=======
+    # pgadmin4 # PostgreSQL database administration tool.
+>>>>>>> d02695d (changes)
   ];
 }
