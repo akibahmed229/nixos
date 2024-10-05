@@ -27,7 +27,7 @@ in {
   ];
 
   sops = {
-    defaultSopsFile = "${secretsInput}/secrets/secrets.yaml";
+    defaultSopsFile = lib.mkIf (user == "akib") "${secretsInput}/secrets/secrets.yaml";
     defaultSopsFormat = "yaml";
     age = {
       # this will use an age key that is expected to already be in the file-system
