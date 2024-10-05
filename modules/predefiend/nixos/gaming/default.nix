@@ -1,8 +1,4 @@
-{
-  pkgs,
-  unstable,
-  ...
-}: {
+{pkgs, ...}: {
   programs = {
     gamemode.enable = true; # set of tools to optimize system performance for games
 
@@ -26,7 +22,7 @@
 
   hardware.xone.enable = true; # support for the xbox controller USB dongle
   environment = {
-    systemPackages = with unstable.${pkgs.system}; [
+    systemPackages = with pkgs; [
       protonup-qt
       mangohud
       bottles

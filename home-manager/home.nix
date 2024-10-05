@@ -1,7 +1,6 @@
 # common home-manager configuration across all machines
 {
   pkgs,
-  unstable,
   user,
   state-version,
   inputs,
@@ -38,7 +37,7 @@ in {
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with unstable.${pkgs.system}; [
+  home.packages = with pkgs; [
     # 1. System Utilities
     xdg-utils # Utilities for managing desktop integration.
     tree # Command-line directory tree viewer.
@@ -135,7 +134,7 @@ in {
 
   programs.kitty = {
     enable = true;
-    package = unstable.${pkgs.system}.kitty;
+    package = pkgs.kitty;
     shellIntegration.enableBashIntegration = true;
     shellIntegration.enableZshIntegration = true;
     extraConfig = builtins.readFile (HomeModuleFolder + "/kitty/kitty.conf");

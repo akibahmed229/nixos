@@ -1,8 +1,4 @@
-{
-  pkgs,
-  unstable,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # (pkgs.discord.override {
     #   withOpenASAR = true;
@@ -16,6 +12,6 @@
     #   #   };
     #   # };
     # })
-    unstable.${pkgs.system}.vesktop # for screen sharing on wayland
+    vesktop # for screen sharing on wayland
   ];
 }

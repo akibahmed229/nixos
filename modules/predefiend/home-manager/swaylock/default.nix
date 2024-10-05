@@ -1,12 +1,8 @@
-{
-  pkgs,
-  unstable,
-  ...
-}: {
-  # home.packages = with unstable.${pkgs.system}; [
-  #   swaylock-effects
-  #   swaylock
-  #];
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    swaylock-effects
+    swaylock
+  ];
 
   home.file = {
     ".config/swaylock" = {

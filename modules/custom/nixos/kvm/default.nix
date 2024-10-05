@@ -11,7 +11,6 @@
   lib,
   config,
   pkgs,
-  unstable,
   ...
 }: let
   cfg = config.kvm;
@@ -23,7 +22,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with unstable.${pkgs.system}; [
+    environment.systemPackages = with pkgs; [
       bridge-utils
       guestfs-tools
       virt-manager
@@ -45,13 +44,13 @@ in {
         onBoot = "ignore";
         onShutdown = "shutdown";
         qemu = {
-          package = unstable.${pkgs.system}.qemu_kvm;
+          package = pkgs.qemu_kvm;
           runAsRoot = true;
           swtpm.enable = true;
           ovmf = {
             enable = true;
             packages = [
-              (unstable.${pkgs.system}.OVMF.override {
+              (pkgs.OVMF.override {
                 secureBoot = true;
                 tpmSupport = true;
               })

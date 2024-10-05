@@ -1,8 +1,4 @@
-{
-  pkgs,
-  unstable,
-  ...
-}: {
+{pkgs, ...}: {
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql;
@@ -19,7 +15,7 @@
     '';
   };
 
-  environment.systemPackages = with unstable.${pkgs.system}; [
+  environment.systemPackages = with pkgs; [
     postgresql # Relational database system.
     # pgadmin4 # PostgreSQL database administration tool.
   ];

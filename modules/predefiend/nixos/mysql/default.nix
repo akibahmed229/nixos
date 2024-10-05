@@ -1,8 +1,4 @@
-{
-  pkgs,
-  unstable,
-  ...
-}: let
+{pkgs, ...}: let
   statsConfig = {
     db = "test1";
     user = "akib";
@@ -38,7 +34,7 @@ in {
     ];
   };
 
-  # environment.systemPackages = with unstable.${pkgs.system}; [
+  # environment.systemPackages = with pkgs; [
   #   mysql80 # MySQL database.
   #   mysql-workbench # MySQL database design tool.
   # ];

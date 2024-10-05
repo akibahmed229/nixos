@@ -1,9 +1,4 @@
-{
-  pkgs,
-  user,
-  unstable,
-  ...
-}: let
+{pkgs, ...}: let
   resurrectDirPath = "~/.tmux/resurrect";
 in {
   # Tmux Config
@@ -17,7 +12,7 @@ in {
     terminal = "screen-256color";
     plugins = with pkgs; [
       # tmuxPlugins.catppuccin
-      unstable.${pkgs.system}.tmuxPlugins.tmux-nova
+      tmuxPlugins.tmux-nova
       tmuxPlugins.sensible
       # tmuxPlugins.gruvbox
       tmuxPlugins.vim-tmux-navigator
@@ -118,7 +113,7 @@ in {
       #   '';
       # }
       {
-        plugin = unstable.${pkgs.system}.tmuxPlugins.tmux-nova;
+        plugin = pkgs.tmuxPlugins.tmux-nova;
         extraConfig = ''
           set -g @plugin 'o0th/tmux-nova'
 

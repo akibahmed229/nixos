@@ -1,10 +1,9 @@
 {
   pkgs,
-  unstable,
   config,
   ...
 }: {
-  home.packages = with unstable.${pkgs.system}; [
+  home.packages = with pkgs; [
     eza
     fzf
     bat
@@ -104,7 +103,7 @@
     };
     oh-my-posh = {
       enable = true;
-      package = unstable.${pkgs.system}.oh-my-posh;
+      package = pkgs.oh-my-posh;
       enableBashIntegration = true;
       enableZshIntegration = true;
       useTheme = "gruvbox";

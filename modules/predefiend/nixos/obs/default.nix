@@ -1,12 +1,11 @@
 {
   pkgs,
-  unstable,
   config,
   ...
 }: {
   environment.systemPackages = [
-    (unstable.${pkgs.system}.wrapOBS {
-      plugins = with unstable.${pkgs.system}.obs-studio-plugins; [
+    (pkgs.wrapOBS {
+      plugins = with pkgs.obs-studio-plugins; [
         wlrobs
         obs-backgroundremoval
         obs-pipewire-audio-capture

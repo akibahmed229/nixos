@@ -7,7 +7,6 @@
   pkgs,
   user,
   desktopEnvironment,
-  unstable,
   self,
   ...
 }: let
@@ -53,7 +52,7 @@ in {
     i2c-tools # Utilities for I2C devices.
     pciutils # Tools for PCI devices.
     fail2ban # Intrusion prevention.
-    unstable.${pkgs.system}.fastfetch # System information fetcher.
+    fastfetch # System information fetcher.
     btop # Resource monitor.
     appimage-run # Utility to run AppImage applications.
     tlrc # Command-line tool for TL;DR pages.
@@ -103,7 +102,7 @@ in {
     atuin # history management tool for cli
     flatpak # Application sandboxing and distribution framework.
 
-    # List Of Unstable Packages
+    # Development Section
 
     # 1. Development Tools
     gcc # GNU Compiler Collection.
@@ -155,7 +154,7 @@ in {
   programs = {
     wireshark = {
       enable = true;
-      package = unstable.${pkgs.system}.wireshark;
+      package = pkgs.wireshark;
     };
   };
 
@@ -178,7 +177,7 @@ in {
 
     emacs = {
       enable = true;
-      package = unstable.${pkgs.system}.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
+      package = pkgs.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
     };
 
     # disable password auth for openssh

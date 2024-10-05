@@ -6,8 +6,8 @@
   ...
 }: let
   secretsInput = builtins.toString inputs.mySsecrets;
-  email = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/github/email.txt");
-  username = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/github/username.txt");
+  email = lib.strings.trim (builtins.readFile "${secretsInput}/github/email.txt");
+  username = lib.strings.trim (builtins.readFile "${secretsInput}/github/username.txt");
 in
   lib.mkIf (user == "akib") {
     programs.git = {
