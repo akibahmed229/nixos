@@ -166,7 +166,6 @@
   in
     # The function to generate the system configurations (derived from my custom lib helper function)
     mkFlake {inherit self inputs;} {
-      inherit (myLib) mkSystem mkModule;
       mkNixOSSystem = mkSystem {
         inherit nixpkgs home-manager;
         system = forAllSystems (s: s);
