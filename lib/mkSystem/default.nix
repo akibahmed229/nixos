@@ -131,17 +131,20 @@
           ];
         };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-        modules = map ifFileExists [
-          (path + "/configuration.nix") # Base configuration
-          (path + "/${name}") # Host-specific configuration
-          {
-            home-manager = {
-              backupFileExtension = "hm-bak"; # Set backup file extension
-              useGlobalPkgs = true; # Use global packages
-              extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-            };
-          }
-        ];
+        modules =
+          map ifFileExists [
+            (import path + "/configuration.nix") # Base configuration
+            (path + "/${name}") # Host-specific configuration
+          ]
+          ++ [
+            {
+              home-manager = {
+                backupFileExtension = "hm-bak"; # Set backup file extension
+                useGlobalPkgs = true; # Use global packages
+                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+              };
+            }
+          ];
         # Set path to Home Manager flake
         home-manager-path = home-manager.outPath;
       };
