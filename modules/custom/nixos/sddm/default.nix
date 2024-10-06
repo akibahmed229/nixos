@@ -3,6 +3,7 @@
   config,
   pkgs,
   self,
+  user,
   ...
 }: let
   cfg = config.sddm;
@@ -25,7 +26,7 @@ in {
           };
           settings = {
             Users = {
-              DefaultUser = "Akib";
+              DefaultUser = user;
               RememberLastUser = true;
             };
           };
