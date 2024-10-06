@@ -133,7 +133,7 @@
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules =
           map ifFileExists [
-            (import path + "/configuration.nix") # Base configuration
+            (path + "/configuration.nix") # Base configuration
             (path + "/${name}") # Host-specific configuration
           ]
           ++ [
