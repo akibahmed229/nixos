@@ -3,7 +3,6 @@
   config,
   pkgs,
   self,
-  user,
   ...
 }: let
   cfg = config.sddm;
@@ -15,6 +14,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      libsForQt5.qt5.qtquickcontrols2 # Qt Quick Controls 2 for Qt 5.
+      libsForQt5.qt5.qtgraphicaleffects # Graphical effects for Qt 5.
+    ];
     services = {
       libinput.enable = true;
       displayManager = {
@@ -23,12 +26,6 @@ in {
           wayland = {
             enable = true;
             compositor = "kwin";
-          };
-          settings = {
-            Users = {
-              DefaultUser = user;
-              RememberLastUser = true;
-            };
           };
           theme = ''${self.packages.${pkgs.system}.custom_sddm.override {
               imgLink = {

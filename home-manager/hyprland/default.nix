@@ -45,8 +45,6 @@
       libsForQt5.ark.out # Ark for Qt 5 (possibly a file manager or archiver).
       gnome-software # GNOME software manager.
       stacer # Linux system monitoring tool.
-      libsForQt5.qt5.qtquickcontrols2 # Qt Quick Controls 2 for Qt 5.
-      libsForQt5.qt5.qtgraphicaleffects # Graphical effects for Qt 5.
 
       # 3. Multimedia & Audio
       pavucontrol # PulseAudio volume control.
