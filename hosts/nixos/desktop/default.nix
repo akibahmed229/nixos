@@ -5,9 +5,10 @@
 */
 {
   pkgs,
-  user,
   desktopEnvironment,
+  state-version,
   self,
+  config,
   ...
 }: let
   # My custom lib helper functions
@@ -79,6 +80,7 @@ in {
     qbittorrent # BitTorrent client.
     anydesk # Remote desktop software.
     localsend # Local file transfer tool.
+    nextcloud-client # Nextcloud sync client.
 
     # 5. Productivity
     libreoffice # Office suite.
@@ -208,55 +210,19 @@ in {
   #  ];
   # };
 
-  # Home manager configuration as a module
+  # Custom nixos modules map through list of users and configure home-manager per user with their configurations
+  inherit desktopEnvironment state-version;
   home-manager = {
     useGlobalPkgs = false;
-    users.${user} = {
-      imports =
-        map mkRelativeToRoot [
-          "home-manager/home.nix" # config of home-manager
-          "home-manager/${desktopEnvironment}/home.nix"
-        ]
-        ++ [(import ./home.nix)];
-    };
-    users."afif" = {
-      imports =
-        map mkRelativeToRoot [
-          "home-manager/${desktopEnvironment}/home.nix"
-        ]
-        ++ [
-          self.homeManagerModules.default # Custom home-manager modules
-          ./home.nix
-          {
-            home = {
-              # Home Manager needs a bit of information about you and the paths it should
-              # manage.
-              username = "afif";
-              homeDirectory = "/home/afif";
-
-              packages = with pkgs; [
-                kitty # GPU-based terminal emulator.
-                xdg-utils # Utilities for managing desktop integration.
-                tree # Command-line directory tree viewer.
-                hwinfo # Hardware information tool.
-                ripgrep # Line-oriented search tool.
-
-                # 2. Desktop Environment & Customization
-                bibata-cursors # Cursor theme.
-                adw-gtk3 # Adwaita theme for GTK 3.
-              ];
-
-              # This value determines the Home Manager release that your configuration is
-              # compatible with. This helps avoid breakage when a new Home Manager release
-              # introduces backwards incompatible changes.
-              #
-              # You should not change this value, even if you update Home Manager. If you do
-              # want to update the value, then make sure to first check the Home Manager
-              # release notes.
-              stateVersion = "24.11"; # Please read the comment before changing.
-            };
-          }
-        ];
-    };
+    users = builtins.listToAttrs (map (user:
+      if user.enabled
+      then {
+        inherit (user) name;
+        value = {
+          imports = user.homeFile;
+        };
+      }
+      else {})
+    config.myusers);
   };
 }

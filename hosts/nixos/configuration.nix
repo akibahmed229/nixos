@@ -56,19 +56,16 @@
   audio.enable = true;
   # Custom nixos modules map through list of users and create users with their configurations
   setUserName = "${user}"; # for main user
-  users.users =
-    builtins.listToAttrs
-    (map
-      (user:
-        if user.enabled
-        then {
-          inherit (user) name;
-          value = {
-            inherit (user) hashedPasswordFile hashedPassword extraGroups packages shell isNormalUser;
-          };
-        }
-        else {})
-      config.myusers);
+  users.users = builtins.listToAttrs (map (user:
+    if user.enabled
+    then {
+      inherit (user) name;
+      value = {
+        inherit (user) hashedPasswordFile hashedPassword extraGroups packages shell isNormalUser;
+      };
+    }
+    else {})
+  config.myusers);
   users.mutableUsers =
     if (config.users.users.${user}.hashedPasswordFile != null)
     then false
