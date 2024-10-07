@@ -52,13 +52,6 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-    # KDE Plasma User Settings Generator
-    # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to home-config
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "nixpkgs";
-    };
 
     ####################  Community & Other Repositories | remote flake ####################
 
