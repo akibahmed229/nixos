@@ -64,6 +64,7 @@ in {
       bat.enable = true;
       btop.enable = true;
       emacs.enable = true;
+      spicetify.enable = false;
       firefox.enable = true;
       fzf.enable = true;
       hyprpaper.enable = true;
