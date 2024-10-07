@@ -17,12 +17,11 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["firefox" "stylix" "discord" "zsh" "tmux" "lf" "ags" "git" "sops" "thunar" "wofi" "wlogout" "swappy"];
+    ListOfPrograms = ["firefox" "spotify" "stylix" "discord" "zsh" "tmux" "lf" "ags" "git" "sops" "thunar" "wofi" "wlogout" "swappy"];
   };
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
-    spotify
     neovim
   ];
 }
