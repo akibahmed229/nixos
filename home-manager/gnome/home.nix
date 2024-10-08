@@ -6,7 +6,6 @@
 {
   lib,
   pkgs,
-  unstable,
   theme,
   self,
   ...
@@ -337,24 +336,24 @@ in {
 
   home.packages = with pkgs; [
     # gnomeExtensions.tray-icons-reloaded
-    unstable.gnomeExtensions.forge
+    gnomeExtensions.forge
     #gnomeExtensions.space-bar
-    #unstable.gnomeExtensions.removable-drive-menu
+    #gnomeExtensions.removable-drive-menu
     gnomeExtensions.blur-my-shell
-    #unstable.gnomeExtensions.burn-my-windows
+    #gnomeExtensions.burn-my-windows
     gnomeExtensions.caffeine
-    #unstable.gnomeExtensions.custom-hot-corners-extended
+    #gnomeExtensions.custom-hot-corners-extended
     gnomeExtensions.clipboard-indicator
-    #unstable.gnomeExtensions.coverflow-alt-tab
-    #unstable.gnomeExtensions.dash-to-dock
-    #unstable.gnomeExtensions.dash-to-panel
+    #gnomeExtensions.coverflow-alt-tab
+    #gnomeExtensions.dash-to-dock
+    #gnomeExtensions.dash-to-panel
     gnomeExtensions.user-avatar-in-quick-settings
     gnomeExtensions.gnome-40-ui-improvements
-    unstable.gnomeExtensions.gsconnect
-    unstable.gnomeExtensions.impatience
+    gnomeExtensions.gsconnect
+    gnomeExtensions.impatience
     #gnomeExtensions.quick-settings-tweaker
     gnomeExtensions.vitals
-    unstable.gnomeExtensions.rounded-window-corners
+    gnomeExtensions.rounded-window-corners
     #gnomeExtensions.just-perfection
     #gnomeExtensions.advanced-alttab-window-switcher
   ];

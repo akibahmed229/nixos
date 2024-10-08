@@ -1,9 +1,5 @@
 # Gnome system configuration
-{
-  pkgs,
-  unstable,
-  ...
-}: {
+{pkgs, ...}: {
   programs = {
     dconf.enable = true;
     kdeconnect = {
@@ -15,7 +11,7 @@
 
   i18n.inputMethod = {
     enabled = "ibus";
-    ibus.engines = with unstable; [
+    ibus.engines = with pkgs; [
       (ibus-engines.typing-booster.override {langs = ["en_US"];})
     ];
   };
@@ -49,9 +45,9 @@
       # Packages installed
       # Login manager customizetion for gdm
       #gobject-introspection
-      unstable.gnome.dconf-editor
-      unstable.gnome.gnome-tweaks
-      unstable.gnome.adwaita-icon-theme
+      gnome.dconf-editor
+      gnome.gnome-tweaks
+      gnome.adwaita-icon-theme
       gnome-menus
       xorg.xkill
       xorg.libX11

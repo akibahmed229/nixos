@@ -1,6 +1,7 @@
 {
   user,
   inputs,
+  lib,
   ...
 }: let
   /*
@@ -43,7 +44,7 @@
   */
   # Read the password from the secrets file
   secretsInput = builtins.toString inputs.mySsecrets;
-  password = inputs.nixpkgs-unstable.lib.strings.trim (builtins.readFile "${secretsInput}/nextcloud/pass.txt");
+  password = lib.strings.trim (builtins.readFile "${secretsInput}/nextcloud/pass.txt");
 in {
   # This enables Docker containers as systemd services in NixOS
   virtualisation.oci-containers = {

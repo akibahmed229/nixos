@@ -25,9 +25,8 @@
   inputs = {
     ####################  Core Repositories ####################
 
-    # Nixpkgs is a collection of over 100,000 software packages that can be installed with the Nix package manager. It also implements NixOS, a purely-functional Linux distribution.
+    # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/?ref=nixos-unstable"; # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -46,7 +45,7 @@
     # Add "inputs.hyprland.homeManagerModules.default" to home-config
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -77,7 +76,7 @@
     # Secret management for nixos
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     # Stylix is a NixOS module which applies the same colour scheme, font and wallpaper to a range of applications and desktop environments.
@@ -89,7 +88,7 @@
     # A customizable and extensible shell
     ags = {
       url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     #################### Personal Repositories | local flake ####################
@@ -102,13 +101,13 @@
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
     nixvim = {
       url = "path:pkgs/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # My devShells for different systems
     my-devShells = {
       url = "path:devshells";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
     };
     # Private secrets repo. Authenticate via ssh and use shallow clone
     mySsecrets = {
@@ -126,7 +125,6 @@
   outputs = {
     self, # The special input named self refers to the outputs and source tree of this flake
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     nix-on-droid,
     my-devShells,
@@ -147,13 +145,6 @@
     theme = "gruvbox-dark-soft"; # available options located in ./public/themes/base16Scheme, file name without extension is the theme name
     desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
 
-    # The unstable nixpkgs can be used [ e.g., unstable.${pkgs.system} ]
-    unstable = forAllSystems (system:
-      import nixpkgs-unstable {
-        inherit system;
-        config = {allowUnfree = true;};
-      });
-
     myLib = import ./lib {inherit lib;}; # mmyLib is a custom library of helper functions
     inherit (myLib) mkFlake mkSystem;
   in
@@ -163,19 +154,19 @@
         inherit nixpkgs home-manager;
         system = forAllSystems (s: s);
         path = ./hosts/nixos;
-        specialArgs = {inherit inputs self unstable user hostname devicename desktopEnvironment theme state-version;};
+        specialArgs = {inherit inputs self user hostname devicename desktopEnvironment theme state-version;};
       };
       mkHomeManagerSystem = mkSystem {
         inherit nixpkgs home-manager;
         homeConf = true;
         path = ./hosts/homeManager;
-        specialArgs = {inherit inputs self unstable user theme state-version;};
+        specialArgs = {inherit inputs self user theme state-version;};
       };
       mkNixOnDroidSystem = mkSystem {
         inherit nixpkgs home-manager nix-on-droid;
         droidConf = true;
         path = ./hosts/nixOnDroid;
-        specialArgs = {inherit inputs self unstable user state-version;};
+        specialArgs = {inherit inputs self user state-version;};
       };
       mkTemplate = mkSystem {
         inherit nixpkgs;
