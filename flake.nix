@@ -150,28 +150,25 @@
   in
     # The function to generate the system configurations (derived from my custom lib helper function)
     mkFlake {inherit self inputs;} {
+      src = ./.;
       mkNixOSSystem = mkSystem {
         inherit nixpkgs home-manager;
         system = forAllSystems (s: s);
-        path = ./hosts/nixos;
         specialArgs = {inherit inputs self user hostname devicename desktopEnvironment theme state-version;};
       };
       mkHomeManagerSystem = mkSystem {
         inherit nixpkgs home-manager;
         homeConf = true;
-        path = ./hosts/homeManager;
         specialArgs = {inherit inputs self user theme state-version;};
       };
       mkNixOnDroidSystem = mkSystem {
         inherit nixpkgs home-manager nix-on-droid;
         droidConf = true;
-        path = ./hosts/nixOnDroid;
         specialArgs = {inherit inputs self user state-version;};
       };
       mkTemplate = mkSystem {
         inherit nixpkgs;
         template = true;
-        path = ./public/templates;
       };
     }
     // {inherit (my-devShells) devShells;};
