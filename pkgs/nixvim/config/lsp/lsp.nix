@@ -9,7 +9,7 @@
       servers = {
         eslint = {enable = true;};
         pyright = {enable = true;};
-        ruff-lsp = {enable = true;};
+        ruff_lsp = {enable = true;};
         tailwindcss = {enable = true;};
         html.enable = true;
         cssls.enable = true;
@@ -18,7 +18,7 @@
         prismals.enable = true;
         graphql.enable = true;
         clangd = {enable = true;};
-        lua-ls = {
+        lua_ls = {
           enable = true;
           extraOptions = {
             settings = {
@@ -34,9 +34,9 @@
             };
           };
         };
-        nil-ls.enable = true;
+        nil_ls.enable = true;
         # nixd.enable = true;
-        ts-ls = {
+        ts_ls = {
           enable = true;
           filetypes = ["javascript" "javascriptreact" "typescript" "typescriptreact"];
           extraOptions = {
@@ -66,7 +66,7 @@
             };
           };
         };
-        rust-analyzer = {
+        rust_analyzer = {
           enable = true;
           installCargo = true;
           installRustc = true;
