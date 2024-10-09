@@ -20,7 +20,7 @@
     # You can also use the unstable version of home-manager
     home-manager-unstable.url = "github:nix-community/home-manager/master";
 
-   disko = {
+    disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -50,7 +50,6 @@
     mkNixOSSystem = akibOS.lib.mkSystem {
       # must pass this args to mkSystem
       inherit nixpkgs system home-manager;
-      path = ./hosts;
 
       # Set all inputs parameters as special arguments for all submodules,
       # so you can directly use all dependencies in inputs in submodules
@@ -64,6 +63,6 @@
     # NixOS configuration entrypoint ( flake & home-manager as module)
     # Accessible through "$ nixos-rebuild switch --flake .#host"
     # in our case .#host with directory located in the mentioned path ./hosts
-    nixosConfigurations = mkNixOSSystem;
+    nixosConfigurations = mkNixOSSystem ./hosts;
   };
 }
