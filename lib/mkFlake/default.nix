@@ -18,7 +18,12 @@ TODO: Need to structure this file better. It's a bit messy right now.
   forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
   # The function to generate the system configurations (derived from my custom lib helper function)
-  inherit (self.lib) mkDerivation mkOverlay mkModule;
+  inherit (self.lib) mkDerivation mkOverlay mkModule mkSystem;
+
+  mkTemplate = mkSystem {
+    inherit nixpkgs;
+    template = true;
+  };
 in {
   lib = import (src + "/lib") {inherit lib;}; # Lib is a custom library of helper functions
 
