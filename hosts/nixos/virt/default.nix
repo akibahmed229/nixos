@@ -8,6 +8,7 @@
   pkgs,
   inputs,
   user,
+  state-version,
   ...
 }: let
   # My custom lib helper functions
@@ -83,7 +84,17 @@ in {
   # Home manager configuration as a module
   home-manager = {
     users.${user} = {
-      imports = [(mkRelativeToRoot "home-manager/home.nix") (import ./home.nix)];
+      imports = [
+        (mkRelativeToRoot "home-manager/home.nix")
+        (import ./home.nix)
+        {
+          home = {
+            username = user;
+            homeDirectory = "/home/${user}";
+            stateVersion = state-version;
+          };
+        }
+      ];
     };
   };
 }

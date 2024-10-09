@@ -7,6 +7,7 @@
   user,
   lib,
   desktopEnvironment,
+  state-version,
   ...
 }: let
   # My custom lib helper functions
@@ -43,7 +44,14 @@ in {
           "home-manager/home.nix"
           "home-manager/${desktopEnvironment}/home.nix"
         ]
-        ++ [(import ./home.nix)];
+        ++ [
+          (import ./home.nix)
+          {
+            home = {
+              stateVersion = state-version;
+            };
+          }
+        ];
     };
   };
 }
