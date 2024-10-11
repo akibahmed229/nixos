@@ -68,7 +68,7 @@ in {
       firefox.enable = true;
       fzf.enable = true;
       hyprpaper.enable = true;
-      kitty.enable = false;
+      kitty.enable = true;
       lazygit.enable = true;
       mangohud.enable = true;
       neovim.enable = true;
