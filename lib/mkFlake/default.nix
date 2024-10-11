@@ -5,7 +5,7 @@ TODO: Need to structure this file better. It's a bit messy right now.
   self,
   inputs,
 }: {
-  src ? ../../.,
+  src ? throw "src is required",
   mkNixOSSystem ? null,
   mkHomeManagerSystem ? null,
   mkNixOnDroidSystem ? null,

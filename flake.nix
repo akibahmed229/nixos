@@ -130,7 +130,7 @@
 
     # The user to build for.
     user = "akib";
-    theme = "gruvbox-dark-soft"; # available options located in ./public/themes/base16Scheme, file name without extension is the theme name
+    theme = "gruvbox-dark-soft"; # available options located in ./public/themes/base16Scheme
     desktopEnvironment = "hyprland"; # available options: "gnome", "dwm", "hyprland"
 
     myLib = import ./lib {inherit lib;}; # mmyLib is a custom library of helper functions
