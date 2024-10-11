@@ -49,8 +49,7 @@ in {
     nvme-cli # Utility to manage NVMe SSDs.
     gparted # Partition editor.
     cryptsetup # Disk encryption setup.
-    veracrypt # Disk encryption tool.
-    i2c-tools # Utilities for I2C devices.
+    # veracrypt # Disk encryption tool.
     pciutils # Tools for PCI devices.
     fail2ban # Intrusion prevention.
     fastfetch # System information fetcher.
@@ -64,10 +63,9 @@ in {
     zip
     unzip
     p7zip
-    ranger # Console file manager.
     bleachbit # System cleaner.
     obsidian # Note-taking app.
-    rclone # Cloud storage sync tool.
+    # rclone # Cloud storage sync tool.
     fzf # Command-line fuzzy finder.
     fuse # Filesystem in Userspace utilities.
 
@@ -97,8 +95,8 @@ in {
     pipes # Terminal-based game.
 
     # 7. Miscellaneous
-    gradience # GNOME customization tool.
-    libverto # Event loop abstraction library.
+    # gradience # GNOME customization tool.
+    # libverto # Event loop abstraction library.
     busybox # Unix utilities in a single executable.
     libinput # Input device management library.
     atuin # history management tool for cli
@@ -113,7 +111,7 @@ in {
     libtool # Library support tool.
     meson # Build system.
     gettext # GNU internationalization and localization library.
-    python312Full # Python programming language.
+    python3 # Python programming language.
     nodejs_22 # JavaScript runtime.
     rustc # Rust programming language and tools.
     cargo # Rust package manager.
