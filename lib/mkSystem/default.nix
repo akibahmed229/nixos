@@ -15,7 +15,6 @@
 */
 {
   # Default arguments for the function
-  system ? "x86_64-linux", # Default system architecture
   nixpkgs ? {}, # Allows passing custom nixpkgs
   template ? false, # Flag to indicate if it's a template system
   homeConf ? false, # Flag to indicate if it's a Home Manager system
@@ -31,6 +30,9 @@
   inherit (nix-on-droid.lib) nixOnDroidConfiguration;
   inherit (home-manager.lib) homeManagerConfiguration;
   inherit (lib) nixosSystem strings attrsets mapAttrs' nameValuePair pathExists mkDefault optionals filterAttrs attrNames lists concatStringsSep;
+
+  # Supported systems for your flake packages, shell, etc.
+  forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
   # Utility to check if a given path points to a directory
   isDirectory = attr: attr == "directory";
@@ -61,9 +63,9 @@
       inherit name;
       # Import NixOS system configuration
       value = nixosSystem {
-        inherit system;
+        system = forAllSystems (system: system);
         specialArgs =
-          {inherit system;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
+          mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules =
           map ifFileExists [
             (path + "/configuration.nix") # Base configuration
@@ -100,11 +102,13 @@
       inherit name;
       # Import Home Manager configuration
       value = homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {allowUnfree = true;};
-        };
-        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+        inherit lib;
+        pkgs = forAllSystems (system:
+          import nixpkgs {
+            inherit system;
+            config = {allowUnfree = true;};
+          });
+        extraSpecialArgs = {inherit lib;} // mapAttrs' (n: v: nameValuePair n v) specialArgs;
         modules = map ifFileExists [
           (path + "/home.nix") # Base Home Manager configuration
           (path + "/${name}") # Host-specific configuration
@@ -123,7 +127,7 @@
       # Import Nix-on-Droid system configuration
       value = nixOnDroidConfiguration {
         pkgs = import nixpkgs {
-          system = "aarch64-linux"; # Set system architecture for Nix-on-Droid
+          system = "aarch64-linux"; # System architecture for Android
           overlays = [
             nix-on-droid.overlays.default # Apply default overlays
             # add other overlays if needed

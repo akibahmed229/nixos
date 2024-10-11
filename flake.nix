@@ -1,10 +1,7 @@
 {
   description = "Akib | NixOS Configuration Go Wild";
-  /*
-  * the nixConfig here only affects the flake itself, not the system configuration!
-  * for more information, see:
-      - https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
-  */
+
+  # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
@@ -24,7 +21,6 @@
   */
   inputs = {
     ####################  Core Repositories ####################
-
     # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
@@ -40,9 +36,7 @@
     };
 
     ####################  Desktop Environments & WindowManager | remote flake ####################
-
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
-    # Add "inputs.hyprland.homeManagerModules.default" to home-config
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,7 +47,6 @@
     };
 
     ####################  Community & Other Repositories | remote flake ####################
-
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -92,7 +85,6 @@
     };
 
     #################### Personal Repositories | local flake ####################
-
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix = {
       url = "github:akibahmed229/spicetify-nix";
@@ -120,7 +112,6 @@
   * outputs is a function that takes the dependencies from inputs as its parameters,
   * and its return value is an attribute set, which represents the build results of the flake.
   * outputs section defines the different outputs that a flake can produce during its build process
-  * Following :- devshells, packages, formatter, overlays, nixosModules, homeManagerModules, nixosConfigurations, darwinConfigurations, homeConfigurations (Standalone setup) etc
   */
   outputs = {
     self, # The special input named self refers to the outputs and source tree of this flake
@@ -137,13 +128,10 @@
     hostname = "desktop";
     devicename = "/dev/nvme1n1";
 
-    # Supported systems for your flake packages, shell, etc.
-    forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
-
     # The user to build for.
     user = "akib";
     theme = "gruvbox-dark-soft"; # available options located in ./public/themes/base16Scheme, file name without extension is the theme name
-    desktopEnvironment = "hyprland"; # available options: "gnome", "kde", "dwm", "hyprland"
+    desktopEnvironment = "hyprland"; # available options: "gnome", "dwm", "hyprland"
 
     myLib = import ./lib {inherit lib;}; # mmyLib is a custom library of helper functions
     inherit (myLib) mkFlake mkSystem;
@@ -153,7 +141,6 @@
       src = ./.;
       mkNixOSSystem = mkSystem {
         inherit nixpkgs home-manager;
-        system = forAllSystems (s: s);
         specialArgs = {inherit inputs self user hostname devicename desktopEnvironment theme state-version;};
       };
       mkHomeManagerSystem = mkSystem {
