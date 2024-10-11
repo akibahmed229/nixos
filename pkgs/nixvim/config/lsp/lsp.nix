@@ -16,6 +16,7 @@
         yamlls.enable = true;
         dockerls.enable = true;
         prismals.enable = true;
+        prismals.package = null; # TODO: May need to  add prismals package
         graphql.enable = true;
         clangd = {enable = true;};
         lua_ls = {
