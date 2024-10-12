@@ -101,20 +101,17 @@
     then {
       inherit name;
       # Import Home Manager configuration
-      value = forAllSystems (
-        system:
-          homeManagerConfiguration {
-            pkgs = import nixpkgs {
-              inherit system;
-              config = {allowUnfree = true;};
-            };
-            extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
-            modules = map ifFileExists [
-              (path + "/home.nix") # Base Home Manager configuration
-              (path + "/${name}") # Host-specific configuration
-            ];
-          }
-      );
+      value = homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux"; # System architecture for Home Manager
+          config = {allowUnfree = true;};
+        };
+        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+        modules = map ifFileExists [
+          (path + "/home.nix") # Base Home Manager configuration
+          (path + "/${name}") # Host-specific configuration
+        ];
+      };
     }
     else {
       inherit name value;
