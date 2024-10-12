@@ -9,15 +9,14 @@
     flatpak.text = ''
       flatpaks=(
                 "sh.ppy.osu"
-                #"io.github.shiftey.Desktop"
                 "com.jgraph.drawio.desktop"
-                "com.jgraph.drawio.desktop"
-                "com.github.flxzt.rnote"
                 "com.github.tchx84.Flatseal"
                 "com.leinardi.gst"
                 "org.gnome.Snapshot"
-                "org.nickvision.tubeconverter"
                 "com.microsoft.Edge"
+                #"com.github.flxzt.rnote"
+                #"io.github.shiftey.Desktop"
+                #"org.nickvision.tubeconverter"
                 #"com.getpostman.Postman"
                 #"com.google.Chrome"
                 #"io.github.amit9838.weather"
