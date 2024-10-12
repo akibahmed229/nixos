@@ -15,6 +15,7 @@
 */
 {
   # Default arguments for the function
+  system ? "x86_64-linux", # Default system architecture
   nixpkgs ? {}, # Allows passing custom nixpkgs
   template ? false, # Flag to indicate if it's a template system
   homeConf ? false, # Flag to indicate if it's a Home Manager system
@@ -103,7 +104,7 @@
       # Import Home Manager configuration
       value = homeManagerConfiguration {
         pkgs = import nixpkgs {
-          system = "x86_64-linux"; # System architecture for Home Manager
+          inherit system;
           config = {allowUnfree = true;};
         };
         extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
