@@ -235,9 +235,9 @@
 
           # Window opacity rule
           #"opacity 1.0 override 0.9 override,^(firefox)$"
-          #"opacity 1.0 override 0.9 override,^(virt-manager)$"
+          "opacity 1.0 override 0.9 override,^(virt-manager)$"
           "opacity 1.0 override 0.9 override,^(vlc)$"
-          #"opacity 1.0 override 0.9 override,^(steam)$"
+          "opacity 1.0 override 0.9 override,^(steam)$"
 
           # Floating window rule
           "float,^(pavucontrol)$"
@@ -264,15 +264,42 @@
     extraConfig = builtins.readFile ./hypr/hyprland.conf;
   };
 
-  programs.hyprlock = {
+  programs. hyprlock = {
     enable = true;
     package = pkgs.hyprlock;
     extraConfig = builtins.readFile ./hyprlock/hyprlock.conf;
   };
 
-  services.udiskie = {
-    enable = true;
-    automount = true;
-    notify = true;
+  services = {
+    # For auto mounting USB devices
+    udiskie = {
+      enable = true;
+      automount = true;
+      notify = true;
+    };
+
+    # Hyprland's idle daemon
+    hypridle = {
+      enable = true;
+      package = pkgs.hypridle;
+      settings = {
+        general = {
+          after_sleep_cmd = "hyprctl dispatch dpms on";
+          ignore_dbus_inhibit = false;
+          lock_cmd = "hyprlock";
+        };
+        listener = [
+          {
+            timeout = 900;
+            on-timeout = "hyprlock";
+          }
+          {
+            timeout = 1200;
+            on-timeout = "hyprctl dispatch dpms off";
+            on-resume = "hyprctl dispatch dpms on";
+          }
+        ];
+      };
+    };
   };
 }
