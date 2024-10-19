@@ -22,6 +22,7 @@ in {
     kubernetes # Kubernetes itself
     minikube # A tool to run Kubernetes locally in a lightweight VM
     docker-machine-kvm2 # Docker driver for managing VMs via KVM2
+    kubernetes-helm # The Kubernetes package manager
   ];
 
   # Configures the Kubernetes service on this machine
