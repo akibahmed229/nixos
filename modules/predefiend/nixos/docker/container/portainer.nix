@@ -16,7 +16,7 @@
     # Defining the containers section
     containers = {
       portainer = {
-        image = "portainer/portainer-ce:2.21.1";
+        image = "portainer/portainer-ce:2.21.3";
 
         # Port mappings to allow external devices to access portainer web interface
         ports = [
