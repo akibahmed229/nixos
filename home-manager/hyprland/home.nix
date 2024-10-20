@@ -264,7 +264,7 @@
     extraConfig = builtins.readFile ./hypr/hyprland.conf;
   };
 
-  programs. hyprlock = {
+  programs.hyprlock = {
     enable = true;
     package = pkgs.hyprlock;
     extraConfig = builtins.readFile ./hyprlock/hyprlock.conf;
@@ -284,19 +284,14 @@
       package = pkgs.hypridle;
       settings = {
         general = {
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          ignore_dbus_inhibit = false;
-          lock_cmd = "hyprlock";
+          lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances.
+          before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
+          after_sleep_cmd = "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
         };
         listener = [
           {
-            timeout = 1800;
-            on-timeout = "hyprlock";
-          }
-          {
-            timeout = 2200;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
+            timeout = 60 * 60; # 1 hour.
+            on-timeout = "hyprlock"; # lock the screen after inactivity.
           }
         ];
       };
