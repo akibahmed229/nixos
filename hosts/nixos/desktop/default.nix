@@ -23,7 +23,7 @@ in {
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "kubernetes" "docker" "gaming" "bbr" "samba" "fhs" "intel-gpu" "openrazer" "openrgb" "obs" "cloudflared"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "mysql" "postgresql" "docker" "gaming" "bbr" "samba" "fhs" "intel-gpu" "openrazer" "openrgb" "obs" "cloudflared"];
     };
 
   nixpkgs = {
