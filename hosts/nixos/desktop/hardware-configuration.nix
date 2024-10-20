@@ -66,6 +66,22 @@
       "coretemp" # Temperature monitoring on Intel CPUs
       "fuse" # userspace filesystem framework.
     ];
+
+    kernel.sysctl = {
+      # Nobara Tweaks
+      "fs.aio-max-nr" = 1000000; # defines the maximum number of asynchronous I/O requests that can be in progress at a given time.     1048576
+      "fs.inotify.max_user_watches" = 65536; # sets the maximum number of file system watches, enhancing file system monitoring capabilities.       Default: 8192  TWEAKED: 524288
+      "kernel.panic" = 5; # Reboot after 5 seconds on kernel panic                                                               Default: 0
+      "kernel.pid_max" = 131072; # allows a large number of processes and threads to be managed
+
+      # SSD tweaks: Adjust settings for an SSD to optimize performance.
+      "vm.dirty_background_ratio" = "40"; # Set the ratio of dirty memory at which background writeback starts (5%). Adjusted for SSD.
+      "vm.dirty_expire_centisecs" = "3000"; # Set the time at which dirty data is old enough to be eligible for writeout (6000 centiseconds). Adjusted for SSD.
+      "vm.dirty_ratio" = "80"; # Set the ratio of dirty memory at which a process is forced to write out dirty data (10%). Adjusted for SSD.
+      "vm.dirty_time" = "0"; # Disable dirty time accounting.
+      "vm.dirty_writeback_centisecs" = "300"; # Set the interval between two consecutive background writeback passes (500 centiseconds).
+    };
+
     extraModulePackages = [
       config.boot.kernelPackages.openrazer
     ];
