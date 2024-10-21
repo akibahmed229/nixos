@@ -29,6 +29,7 @@
     # Theme engine for Qt.
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
+    brightnessctl # Brightness control tool.
 
     swww # Sway wallpaper manager.
 
@@ -217,6 +218,10 @@
         " , XF86AudioPlay, exec, playerctl play-pause"
         " , XF86AudioPrev, exec, playerctl previous"
         " , XF86AudioNext, exec, playerctl next"
+
+        # Requires brightnessctl
+        " , XF86MonBrightnessUp, exec, brightnessctl s +5%"
+        " , XF86MonBrightnessDown, exec, brightnessctl s 5%-"
       ];
 
       bindm = [
