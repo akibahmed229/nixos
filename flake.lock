@@ -943,7 +943,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-dFXy8HFbt94VmZSC7a0WU8HvPHG2fOhRK2yYYi6wXSI=",
+        "narHash": "sha256-YBYxhvzakVb8/KKTwIwWDoU1kt0vi9t3T2jMz2O1oBo=",
         "path": "pkgs/nixvim",
         "type": "path"
       },
