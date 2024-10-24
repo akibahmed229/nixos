@@ -35,8 +35,8 @@
             };
           };
         };
-        nil_ls.enable = true;
-        # nixd.enable = true;
+        # nil_ls.enable = true;
+        nixd.enable = true;
         ts_ls = {
           enable = true;
           filetypes = ["javascript" "javascriptreact" "typescript" "typescriptreact"];
