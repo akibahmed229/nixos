@@ -43,44 +43,42 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-
   boot.loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
-      grub = {
-        enable = true;
-        devices = ["nodev"]; # install grub on efi
-        efiSupport = true;
-        useOSProber = true; # To find Other boot manager like windows
-        configurationLimit = 10; # Store number of config
-      };
-      timeout = 3; # Boot Timeout
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
+    grub = {
+      enable = true;
+      devices = ["nodev"]; # install grub on efi
+      efiSupport = true;
+      useOSProber = true; # To find Other boot manager like windows
+      configurationLimit = 10; # Store number of config
+    };
+    timeout = 3; # Boot Timeout
   };
 
-
-   security.rtkit.enable = true;
-   services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
-      jack.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    jack.enable = true;
   };
 
   # User
   users.users = {
-   	 ${user} = {
-   	   # TODO: You can set an initial password for your user.
-   	   # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-   	   # Be sure to change it (using passwd) after rebooting!
-   	   initialPassword = "123456";
-   	   isNormalUser = true;
-   	   # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-   	   extraGroups = ["wheel" "networkmanager" "video" "audio" "input" "disk"];
-   	 };
+    ${user} = {
+      # TODO: You can set an initial password for your user.
+      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
+      # Be sure to change it (using passwd) after rebooting!
+      initialPassword = "123456";
+      isNormalUser = true;
+      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
+      extraGroups = ["wheel" "networkmanager" "video" "audio" "input" "disk"];
+    };
   };
 
   programs = {
@@ -104,7 +102,7 @@
   fonts = {
     packages = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       font-awesome
       lohit-fonts.bengali
