@@ -21,6 +21,7 @@ in {
     services = {
       libinput.enable = true;
       displayManager = {
+        defaultSession = "hyprland";
         sddm = {
           enable = true;
           wayland = {
