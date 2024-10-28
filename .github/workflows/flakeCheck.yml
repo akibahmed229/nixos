@@ -3,9 +3,9 @@ name: 'Flake Check'
 # Controls when the action will run. Triggers the workflow on push or pull request
 on:
   push:
-    branches: [main, dev]
+    # branches: [main, dev]
   pull_request:
-    branches: [dev]
+    # branches: [dev]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
