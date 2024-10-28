@@ -757,24 +757,6 @@
         "type": "path"
       }
     },
-    "mySsecrets": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1727970458,
-        "narHash": "sha256-076K51mwbgqfgBk5WhYEDuzNYm3ETPOI9OMKwKMzCiQ=",
-        "ref": "main",
-        "rev": "b91fe628b8f739cf5ab1d31c300bb73db1ffc4d0",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
-      },
-      "original": {
-        "ref": "main",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -1120,11 +1102,11 @@
         "hyprland-plugins": "hyprland-plugins",
         "impermanence": "impermanence",
         "my-devShells": "my-devShells",
-        "mySsecrets": "mySsecrets",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
+        "secrets": "secrets",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix"
@@ -1144,6 +1126,24 @@
         "owner": "andreymatin",
         "repo": "scss-reset",
         "type": "github"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727970458,
+        "narHash": "sha256-076K51mwbgqfgBk5WhYEDuzNYm3ETPOI9OMKwKMzCiQ=",
+        "ref": "main",
+        "rev": "b91fe628b8f739cf5ab1d31c300bb73db1ffc4d0",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
+      },
+      "original": {
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
       }
     },
     "sops-nix": {
