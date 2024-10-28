@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  secretsInput = builtins.toString inputs.mySsecrets;
+  secretsInput = builtins.toString inputs.secrets;
   token = lib.strings.trim (builtins.readFile "${secretsInput}/cloudflared/token");
 in {
   services = {

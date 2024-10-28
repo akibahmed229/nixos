@@ -10,7 +10,7 @@
   ...
 }: let
   inherit (config.home) homeDirectory;
-  secretsInput = builtins.toString inputs.mySsecrets;
+  secretsInput = builtins.toString inputs.secrets;
 in {
   imports = [
     inputs.sops-nix.homeManagerModules.sops

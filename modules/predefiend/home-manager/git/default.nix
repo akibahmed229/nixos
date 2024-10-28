@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  secretsInput = builtins.toString inputs.mySsecrets;
+  secretsInput = builtins.toString inputs.secrets;
   email = lib.strings.trim (builtins.readFile "${secretsInput}/github/email.txt");
   username = lib.strings.trim (builtins.readFile "${secretsInput}/github/username.txt");
 in

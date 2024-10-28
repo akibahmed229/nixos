@@ -102,7 +102,7 @@
       inputs.nixpkgs-unstable.follows = "nixpkgs";
     };
     # Private secrets repo. Authenticate via ssh and use shallow clone
-    mySsecrets = {
+    secrets = {
       url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git?ref=main&shallow=1";
       flake = false;
     };
