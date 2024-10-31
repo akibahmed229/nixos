@@ -46,6 +46,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/var/log" # system logs
       "/var/lib/systemd" # various state for systemd such as persistent timers
       "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
 
       # state for containers and orchestrators
       "/var/lib/docker"
