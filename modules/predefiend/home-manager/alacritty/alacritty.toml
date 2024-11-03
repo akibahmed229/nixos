@@ -1,3 +1,4 @@
+[general]
 import = ["/home/akib/.config/alacritty/themes/gruvbox_material.toml"]
 
 [colors]
