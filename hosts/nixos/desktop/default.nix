@@ -145,7 +145,7 @@ in {
     handbrake # Video transcoder.
     audacity # Audio editor.
     darktable # Photography workflow application.
-    ffmpeg_6 # Multimedia framework for video/audio processing.
+    ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
     mpv # Media player.
     kdenlive # Video editor.
