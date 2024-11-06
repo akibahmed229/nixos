@@ -542,17 +542,16 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1730143527,
-        "narHash": "sha256-3uRuQHxAd/+8PptDpIZZlC588O0eTV1mTa+z8v4cWPU=",
+        "lastModified": 1730830488,
+        "narHash": "sha256-a5VCm6ylWMtRiominRJhP+Plo8urEIba3v3vfWcDIG4=",
         "ref": "refs/heads/main",
-        "rev": "d679d200299ed4670f0d0f138c793d5f507b7cec",
-        "revCount": 5390,
+        "rev": "3bf6f78dad5f78dd8f4f519ceaa5a98671c90b14",
+        "revCount": 5418,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
       },
       "original": {
-        "rev": "d679d200299ed4670f0d0f138c793d5f507b7cec",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1399,11 +1398,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728166987,
-        "narHash": "sha256-w6dVTguAn9zJ+7aPOhBQgDz8bn6YZ7b56cY8Kg5HJRI=",
+        "lastModified": 1730743262,
+        "narHash": "sha256-iTLqj3lU8kFehPm5tXpctzkD274t/k1nwSSq3qCWXeg=",
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
-        "rev": "fb9c8d665af0588bb087f97d0f673ddf0d501787",
+        "rev": "09b23cef06fe248e61cec8862c04b9bcb62f4b6d",
         "type": "github"
       },
       "original": {
