@@ -67,7 +67,8 @@ in {
       spicetify.enable = false;
       firefox.enable = true;
       fzf.enable = true;
-      hyprpaper.enable = true;
+      # hyprpaper.enable = true;
+      hyprland.enable = true;
       kitty.enable = true;
       lazygit.enable = true;
       mangohud.enable = true;
