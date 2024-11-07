@@ -23,7 +23,7 @@
   # Importing necessary functions and utilities from the provided imports
   inherit (nixpkgs) lib;
   inherit (builtins) readDir;
-  inherit (lib) mapAttrs' pathExists filterAttrs recursiveUpdate removeSuffix attrsets strings;
+  inherit (lib) mapAttrs' pathExists filterAttrs mergeAttrs removeSuffix attrsets strings;
 
   # Import the Nix packages
   pkgs = import nixpkgs {inherit system;};
@@ -57,9 +57,9 @@
 
   # Process the main directory contents and filter out unwanted entries
   processedPkgs =
-    filterAttrs (_path: _type:
-      (_type != "regular" && _type != "symlink" && _type != "unknown")
-      && (_path != "shellscript" && _path != "nixvim"))
+    filterAttrs (_path: _type: (_type
+      == "directory"
+      || (_path != "shellscript" && _path != "nixvim")))
     (mapAttrs' processDirPkgs
       (readDir path));
 
@@ -71,8 +71,6 @@
       && (strings.hasSuffix ".nix" _path))
     (mapAttrs' processDirShellScript
       (readDir "${path}/shellscript"));
-
-  # Merge the processed packages
-  merged = recursiveUpdate processedPkgs processedShellScript;
 in
-  merged
+  # Merge the processed packages and shell scripts
+  mergeAttrs processedPkgs processedShellScript
