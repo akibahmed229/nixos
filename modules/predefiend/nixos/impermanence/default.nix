@@ -88,7 +88,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/run/secrets.d/"
     ];
     files = [
-      "/etc/machine-id"
+      # "/etc/machine-id"
       # { file = "/var/lib/sops-nix/secret_file"; parentDirectory = { mode = "u=rwx,g=rwx,o=rwx"; }; }
     ];
     users = {
