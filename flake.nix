@@ -74,13 +74,13 @@
     };
     # Stylix is a NixOS module which applies the same colour scheme, font and wallpaper to a range of applications and desktop environments.
     stylix = {
-      url = "github:danth/stylix?rev=762c07ee10b381bc8e085be5b6c2ec43139f13b0"; # TODO: have to unpinned this when the hyprland changes are merged
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
     };
     # A customizable and extensible shell
     ags = {
-      url = "github:Aylur/ags";
+      url = "github:Aylur/ags?rev=60180a184cfb32b61a1d871c058b31a3b9b0743d"; # TODO: ags v2 is out have to rewrite this to use the new version
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
