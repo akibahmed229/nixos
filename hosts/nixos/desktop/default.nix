@@ -91,7 +91,7 @@ in {
     # geekbench # Benchmarking tool.
     kdiskmark # Disk benchmarking tool.
     libadwaita # UI toolkit for GNOME.
-    cava # Console-based audio visualizer.
+    # cava # Console-based audio visualizer. # TODO: broken
     pipes # Terminal-based game.
 
     # 7. Miscellaneous
