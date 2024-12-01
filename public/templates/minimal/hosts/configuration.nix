@@ -108,7 +108,8 @@
       lohit-fonts.bengali
       jetbrains-mono
       source-han-sans
-      (nerdfonts.override {fonts = ["Meslo"];})
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.meslo-lg
     ];
     fontconfig = {
       enable = true;
