@@ -147,7 +147,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
           ".local/share/direnv"
           ".local/share/nvim"
           ".local/share/TelegramDesktop"
-          ".local/share/whatsapp-for-linux"
+          ".local/share/wasistlos"
           ".local/share/Notepadqq"
           ".local/share/qBittorrent"
           ".local/share/zsh"
