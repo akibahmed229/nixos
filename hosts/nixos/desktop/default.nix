@@ -101,6 +101,7 @@ in {
     libinput # Input device management library.
     atuin # history management tool for cli
     flatpak # Application sandboxing and distribution framework.
+    mediawriter # USB writer for Fedora Media.
 
     # Development Section
 
