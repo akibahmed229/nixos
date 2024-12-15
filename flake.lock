@@ -1038,11 +1038,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1734287585,
-        "narHash": "sha256-z8DtbhbKOL44pONeLp728xByVifI4GO5jrOQ0baVaFs=",
+        "lastModified": 1734289969,
+        "narHash": "sha256-DuX4fL9tdT6GrqeAimIh9gUbGF0907eJqV9v4YdlG1M=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "e16d2448650f6ae3841198996bb795b0f4e28b79",
+        "rev": "dc7bca6d8c5ca0a56cec0c42a74819b8caca3b25",
         "type": "github"
       },
       "original": {
@@ -1192,10 +1192,10 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1734287853,
-        "narHash": "sha256-x2NcMilWbH8wEYXWPG1a5iFwTKFSof/Wg1uAFtlPJm8=",
+        "lastModified": 1734290494,
+        "narHash": "sha256-b0lLU7m/RpAufkNeWkGuzzmua1jV3Yy1vC+SiJzBJnQ=",
         "ref": "main",
-        "rev": "7b81276fb9c62c8ed1de80283441cc6a1e87342f",
+        "rev": "b7b790e6cfc4c7fdfa56fd2d4c9d2a3b8b969c7c",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
