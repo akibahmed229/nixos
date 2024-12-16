@@ -62,6 +62,7 @@
       inherit (user) name;
       value = {
         inherit (user) hashedPasswordFile hashedPassword extraGroups packages shell isNormalUser;
+        openssh.authorizedKeys.keys = user.keys;
       };
     }
     else {})

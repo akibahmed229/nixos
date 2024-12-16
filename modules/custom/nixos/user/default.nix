@@ -74,6 +74,10 @@ in {
             example = "/etc/nixos/secrets/my_secret.nix";
             description = "password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s";
           };
+          keys = mkOption {
+            type = types.listOf types.str;
+            example = "/etc/nixos/secrets/my_secret.nix";
+          };
           extraGroups = mkOption {
             type = types.listOf types.str;
           };
@@ -106,6 +110,10 @@ in {
           if (config.sops.secrets."${name}/password/my_secret".path != {})
           then config.sops.secrets."${name}/password/my_secret".path
           else null;
+        keys = [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDjC6HW3e25jpnJ3dAR+rQiAGCCwRjdkyzVvr+hBnFPzspX/PW3kcQT40Lyi9VioDGnQhgmP81jH0osikCtMlFhEL0w7ldNQ4CwspfFTwhxq32NCEIneGe4ICKdI3QPYTlgbwPY5HZ9ADPy8ujmzYFacxji+xbqKQddzIAYF/0P2SVpMUT1FBcGCwJQec6JPBxw0dUxekNTX5atJLv50DtUR6PqIjti+dv6PS1FUWLvxVrCSOExNGTVBGXXHJP0yojnWLZFV8y6jC9/mxlzTj5E8RCH4Cws58cC/mAoRh/QpE74UmXWqLAYMaLxVW8GVGXG93he7GdO5ALPF7Wdv2oOSlTk7lIWV5mPAFZPROLnXFLkubmEFFAA4MMUXoXbdFAGDuulS7AYpG/imiyKnhdaWolPoW3J7AbBS0j/VEi6KmPyjt3XxBJvuxWxyNlHr2cQ/vcZ4jg7Wk5O1OS4akknAq+9UnxuJyDAxelHoNqX8+2RXUx8JWcGI02j2DfuUw50nSe1hmZJh9iqBaEHrQiESfeFf5vRiY9ywxG5iBswSQT3ai+kC2S9oPyxmyxfO7E5s/hy7usorfl5rW0mEaVNW1qnTFXdUhWfSRssqiYi5Pc3tSjOrVppI14PLSODioAS5K09LpncHUrPOWf2ZABTdyPTnWrUEpTtmHCiZdiZWw== user@Akib
+"
+        ];
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         extraGroups = ["networkmanager" "wheel" "systemd-journal" "docker" "video" "audio" "scanner" "libvirtd" "kvm" "disk" "input" "plugdev" "adbusers" "flatpak" "wireshark" "kubernetes" "postgres" "mysql" "openrazer"];
         packages = with pkgs; [wget thunderbird vlc];
@@ -126,8 +134,9 @@ in {
           if (config.sops.secrets."${name}/password/my_secret".path != {})
           then config.sops.secrets."${name}/password/my_secret".path
           else null;
+        keys = [];
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
-        extraGroups = ["networkmanager" "wheel" "video" "audio" "scanner" "disk" "input" "flatpak"];
+        extraGroups = ["networkmanager" "video" "audio" "scanner" "disk" "input" "flatpak"];
         packages = with pkgs; [wget thunderbird vlc];
         shell = checkUserFun name;
         homeFile =
@@ -149,6 +158,7 @@ in {
           if (config.setUserName == "akib")
           then config.sops.secrets."akib/password/root_secret".path
           else null;
+        keys = [];
         hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
         packages = with pkgs; [neovim wget];
         extraGroups = [];
