@@ -16,19 +16,19 @@
     # Enable the NetworkManager service.
     networkmanager = {
       enable = lib.mkDefault true;
-      wifi.macAddress = "54-CC-5E-B2-64-06"; # option: random, stable, or a specific MAC address.
-      ethernet.macAddress = "28:3A:4D:F2:0B:FE";
+      wifi.macAddress = "random"; # option: random, stable, or a specific MAC address.
+      ethernet.macAddress = "random";
     };
 
     # Define the DNS nameservers.
     nameservers = [
       # Public DNS Servers
-      # "1.1.1.1" # Cloudflare Primary
-      # "1.0.0.1" # Cloudflare Secondary
+      "1.1.1.1" # Cloudflare Primary
+      "1.0.0.1" # Cloudflare Secondary
       "8.8.8.8" # Google Primary
       "8.8.4.4" # Google Secondary
-      # "94.140.14.14" # AdGuard Primary
-      # "94.140.15.15" # AdGuard Secondary
+      "94.140.14.14" # AdGuard Primary
+      "94.140.15.15" # AdGuard Secondary
     ]; # List of DNS nameservers to use.
 
     # Set the domain name and search domain for the system.
@@ -38,19 +38,25 @@
     # Configure the network interfaces.
     interfaces = {
       # Configuration for the ethernet interface 'enp4s0'.
-      enp4s0.ipv4.addresses = [
-        {
-          address = "192.168.0.111"; # Static IP address for the interface.
-          prefixLength = 24; # Network prefix length (subnet mask).
-        }
-      ];
+      "Wired Connection 1" = {
+        name = "enp4s0";
+        ipv4.addresses = [
+          {
+            address = "192.168.0.111"; # Static IP address for the interface.
+            prefixLength = 24; # Network prefix length (subnet mask).
+          }
+        ];
+      };
       # Configuration for the wireless interface 'wlp0s20f0u4'.
-      wlp0s20f0u4.ipv4.addresses = [
-        {
-          address = "192.168.0.179";
-          prefixLength = 24;
-        }
-      ];
+      "Wireless Connection 1" = {
+        name = "wlp0s20f0u4";
+        ipv4.addresses = [
+          {
+            address = "192.168.0.179";
+            prefixLength = 24;
+          }
+        ];
+      };
 
       # Configuration for the VLAN interfaces.
       # vlan2.ipv4.addresses = [

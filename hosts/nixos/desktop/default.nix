@@ -23,7 +23,7 @@ in {
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "gaming" "mysql" "postgresql" "docker" "bbr" "samba" "fhs" "intel-gpu" "openrazer" "openrgb" "obs" "cloudflared"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "gaming" "mysql" "postgresql" "docker" "bbr" "samba" "fhs" "intel-gpu" "openrazer" "openrgb" "obs" "cloudflared" "networking"];
     };
 
   nixpkgs = {
@@ -127,8 +127,8 @@ in {
     android-tools
     android-udev-rules
     jdk21 # Java Development Kit
-    jetbrains.pycharm-community # Python IDE.
-    jetbrains.idea-community # Java IDE.
+    # jetbrains.pycharm-community # Python IDE.
+    # jetbrains.idea-community # Java IDE.
     postman # API development environment.
     vscode # Code editor.
     zed-editor # Code editor.
@@ -150,6 +150,11 @@ in {
     gst_all_1.gstreamer # Multimedia framework.
     mpv # Media player.
     kdenlive # Video editor.
+
+    # 3. Networking Section
+    nmap # Network scanner.
+    iperf # Network bandwidth measurement tool.
+    tcpdump # Network packet analyzer.
   ];
 
   programs = {
