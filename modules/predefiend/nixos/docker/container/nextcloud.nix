@@ -54,7 +54,7 @@ in {
     containers = {
       # Optionally, define a MariaDB container for Nextcloud's database
       mariadb = {
-        image = "mariadb";
+        image = "mariadb:latest";
 
         volumes = [
           "/var/lib/mariadb:/var/lib/mysql" # Persist MariaDB data
@@ -80,7 +80,7 @@ in {
       };
 
       nextcloud = {
-        image = "nextcloud";
+        image = "nextcloud:latest";
 
         # Port mappings: exposing HTTP (80) and HTTPS (443) ports
         ports = [
@@ -124,7 +124,7 @@ in {
 
       # Collabora Online (CODE) container
       collabora = {
-        image = "collabora/code";
+        image = "collabora/code:latest";
 
         ports = [
           "9980:9980" # enable firewall for this port in order to access
