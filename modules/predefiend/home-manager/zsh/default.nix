@@ -21,6 +21,7 @@
         ignoreSpace = true;
         path = "${config.xdg.dataHome}/zsh/zsh_history";
       };
+
       envExtra = ''
           colorscript random
           set -o vi
@@ -49,6 +50,7 @@
         # bindkey 'Ctrl-A' beginning-of-line
         # bindkey 'Ctrl-E' end-of-line
       '';
+
       shellAliases = {
         la = "eza --icons -la  --group-directories-first";
         ls = "eza --icons --grid --group-directories-first";
@@ -56,14 +58,17 @@
         find-file = "nvim $(fzf --preview 'bat --color=always {}')";
         gp-all = "git push github main && git push gitlab main";
       };
+
       enableCompletion = true;
+
       initExtra = ''
         eval "$(atuin init zsh)"
         eval "$(direnv hook zsh)"
 
         export DIRENV_LOG_FORMAT=""
-
         export LANG="en_US.UTF-8";
+        export MANPAGER="nvim +Man!"
+
 
         #function tmux-sesssion {
         #BUFFER='tmux-sessionizer'
@@ -72,8 +77,8 @@
 
         #zle -N tmux-sesssion
         #bindkey '^f' tmux-sesssion
-
       '';
+
       syntaxHighlighting = {
         enable = true;
         highlighters = [
@@ -87,6 +92,7 @@
         ];
         styles = {"alias" = "fg=magenta,bold";};
       };
+
       #autosuggestions.highlightStyle = "fg=cyan";
       #oh-my-zsh = {
       #  #enableBashCompletion = true;
@@ -101,6 +107,7 @@
       #  theme = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       #};
     };
+
     oh-my-posh = {
       enable = true;
       package = pkgs.oh-my-posh;
