@@ -112,8 +112,8 @@ in {
     libtool # Library support tool.
     meson # Build system.
     gettext # GNU internationalization and localization library.
-    python3 # Python programming language.
-    nodejs_22 # JavaScript runtime.
+    python313Full # Python programming language.
+    nodejs_23 # JavaScript runtime.
     rustc # Rust programming language and tools.
     cargo # Rust package manager.
     # Development environment tools.
@@ -127,8 +127,8 @@ in {
     android-tools
     android-udev-rules
     jdk21 # Java Development Kit
-    # jetbrains.pycharm-community # Python IDE.
-    # jetbrains.idea-community # Java IDE.
+    # jetbrains.pycharm-community # Python IDE. FIX: Broken
+    # jetbrains.idea-community # Java IDE. FIX: Broken
     postman # API development environment.
     vscode # Code editor.
     zed-editor # Code editor.
