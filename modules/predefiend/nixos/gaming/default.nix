@@ -24,8 +24,8 @@
     systemPackages = with pkgs; [
       protonup-qt
       mangohud
-      # bottles # FIX: broken
-      # heroic # FIX: broken
+      bottles
+      heroic
       (lutris.override {
         extraPkgs = pkgs: [
           # List package dependencies here
