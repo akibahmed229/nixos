@@ -10,7 +10,7 @@
 
 <details>
 
-<summary>NixOS setup using falke and home-manager as module. Hyperland as default Window Manager.</summary>
+<summary>NixOS setup using falke and home-manager as module. Hyperland as default Window Manager. (as so many changes regarding my config and since added my custom lib helper this section need changes, will change once i get free time)</summary>
 
 ## Installation Prerequisites
 
