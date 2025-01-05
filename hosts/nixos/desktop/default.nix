@@ -20,6 +20,7 @@ in {
       "modules/predefiend/nixos/docker/container/pi-hole.nix"
       "modules/predefiend/nixos/docker/container/nextcloud.nix"
       "modules/predefiend/nixos/docker/container/portainer.nix"
+      "modules/predefiend/nixos/docker/container/gitea.nix"
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
