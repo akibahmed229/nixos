@@ -1,12 +1,9 @@
 {
   /*
   # General introduction
-  # Access the portainer web interface by visiting https://localhost:9443
-  # portainer is a lightweight management UI which allows you to easily manage your Docker host or Swarm cluster
-  # You can use portainer to manage containers, images, networks, and volumes
+  # Access the gitea web interface by visiting https://localhost:3333
 
-  # You can access the portainer web interface by visiting http://localhost:8010
-  # you can also manage remote docker & kubernetes clusters using portainer
+  # Gitea is a lightweight code hosting solution written in Go.
   */
   # This enables Docker containers as systemd services in NixOS
   virtualisation.oci-containers = {
