@@ -17,6 +17,9 @@ in {
     environment.systemPackages = with pkgs; [
       libsForQt5.qt5.qtquickcontrols2 # Qt Quick Controls 2 for Qt 5.
       libsForQt5.qt5.qtgraphicaleffects # Graphical effects for Qt 5.
+      libsForQt5.qt5.qtvirtualkeyboard
+      libsForQt5.qt5.qtsvg
+      libsForQt5.qt5.qtmultimedia
     ];
     services = {
       libinput.enable = true;
@@ -33,6 +36,7 @@ in {
                 url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/nixos.png";
                 sha256 = "sha256-QcY0x7pE8pKQy3At81/OFl+3CUAbx0K99ZHk85QLSo0=";
               };
+              sugar-dark = true;
             }}'';
         };
       };
