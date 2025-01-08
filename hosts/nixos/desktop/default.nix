@@ -128,8 +128,8 @@ in {
     android-tools
     android-udev-rules
     jdk21 # Java Development Kit
-    # jetbrains.pycharm-community # Python IDE. FIX: Broken
-    # jetbrains.idea-community # Java IDE. FIX: Broken
+    jetbrains.pycharm-community
+    jetbrains.idea-community
     postman # API development environment.
     vscode # Code editor.
     zed-editor # Code editor.
