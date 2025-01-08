@@ -19,7 +19,7 @@
   # imports hyprland home-manager modules
   imports = [
     inputs.hyprland.homeManagerModules.default
-    {wayland.windowManager.hyprland.systemd.enable = true;}
+    {wayland.windowManager.hyprland.systemd.enable = false;}
   ];
 
   home.packages = with pkgs; [
@@ -47,7 +47,7 @@
   ];
 
   # Fix: systemd not importing the environment by default.
-  wayland.windowManager.hyprland.systemd.variables = ["--all"];
+  # wayland.windowManager.hyprland.systemd.variables = ["--all"];
   wayland.windowManager.hyprland = {
     enable = true;
     plugins = [
