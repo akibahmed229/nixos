@@ -84,6 +84,7 @@ in {
       vim.enable = true;
       waybar.enable = true;
       wofi.enable = true;
+      yazi.enable = true;
     };
 
     opacity = {

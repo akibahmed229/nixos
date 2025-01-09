@@ -5,6 +5,7 @@
   inputs ? {},
   self,
   user,
+  lib,
   ...
 }: {
   nixpkgs = {
@@ -151,7 +152,11 @@
           "$mod, RETURN, exec, kitty"
           "$mod, Q, killactive,"
           "$mod, DELETE, exit,"
-          "$mod, E, exec, thunar"
+          "${
+            if config.programs.yazi.enable
+            then "$mod, E, exec, kitty -e yazi"
+            else "$mod, E, exec, thunar"
+          }"
           "$mod, T, togglefloating,"
           "$mod, F, fullscreen"
           # ''$mod, R, exec, wofi -n --show drun -p "Run App"''
