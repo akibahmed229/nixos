@@ -5,7 +5,6 @@
   inputs ? {},
   self,
   user,
-  lib,
   ...
 }: {
   nixpkgs = {
