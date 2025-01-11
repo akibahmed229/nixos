@@ -1,15 +1,20 @@
 @use 'sass:color';
 
-$bg: #212223;
-$fg: #f1f1f1;
-$accent: #378df7;
+$bg: #3c3836;
+$fg: #458588;
+$accent: #8ec07c;
 $radius: 7px;
+$text-white: #fbf1c7;
 
 window.Bar {
-  border: none;
+  border: 1px solid shade($fg, 0.7);
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 6px;
+  margin-right: 6px;
   box-shadow: none;
   background-color: $bg;
-  color: $fg;
+  color: $text-white;
   font-size: 1.1em;
   font-weight: bold;
 
@@ -50,7 +55,12 @@ window.Bar {
     margin-right: 8px;
 
     button {
-      padding: 0 4px;
+      background: transparent;
+    }
+
+    button:hover {
+      background-color: color.adjust($fg, $alpha: -0.84);
+      border-color: color.adjust($accent, $alpha: -0.8);
     }
   }
 

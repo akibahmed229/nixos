@@ -94,6 +94,11 @@ function Media() {
               css={bind(ps[0], "coverArt").as(
                 (cover) => `background-image: url('${cover}');`,
               )}
+              justification={"left"}
+              truncate={"end"}
+              wrap={true}
+              xalign={0}
+              maxWidthChars={16}
             />
             <label
               label={bind(ps[0], "title").as(
@@ -141,13 +146,22 @@ function FocusedClient() {
     <box className="Focused" visible={focused.as(Boolean)}>
       {focused.as(
         (client) =>
-          client && <label label={bind(client, "title").as(String)} />,
+          client && (
+            <label
+              label={bind(client, "title").as(String)}
+              justification={"left"}
+              truncate={"end"}
+              xalign={0}
+              wrap={true}
+              maxWidthChars={26}
+            />
+          ),
       )}
     </box>
   );
 }
 
-function Time({ format = "%H:%M - %A %e." }) {
+function Time({ format = "%A %I:%M %p,  %B %d." }) {
   const time = Variable<string>("").poll(
     1000,
     () => GLib.DateTime.new_now_local().format(format)!,
@@ -177,10 +191,10 @@ export default function Bar(monitor: Gdk.Monitor) {
           <Media />
         </box>
         <box hexpand halign={Gtk.Align.END}>
-          <Wifi />
+          {/* <Wifi /> */}
           <AudioSlider />
-          <BatteryLevel />
           <Time />
+          <BatteryLevel />
           <SysTray />
         </box>
       </centerbox>
