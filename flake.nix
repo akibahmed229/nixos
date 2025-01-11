@@ -79,7 +79,8 @@
     };
     # A customizable and extensible shell
     ags = {
-      url = "github:Aylur/ags?rev=60180a184cfb32b61a1d871c058b31a3b9b0743d"; # TODO: ags v2 is out have to rewrite this to use the new version
+      url = "github:Aylur/ags";
+      # url = "github:Aylur/ags?rev=60180a184cfb32b61a1d871c058b31a3b9b0743d"; # TODO: ags v2 is out have to rewrite this to use the new version
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

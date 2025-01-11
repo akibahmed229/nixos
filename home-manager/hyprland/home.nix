@@ -80,7 +80,7 @@
         [
           # "waybar"
           # "hyprpaper"
-          "ags"
+          "ags run"
           "swww init"
           "nm-applet --indicator" # simple network manager indicator
           "udiskie &" # USB Mass storage devices mounting
@@ -158,9 +158,9 @@
           }"
           "$mod, T, togglefloating,"
           "$mod, F, fullscreen"
-          # ''$mod, R, exec, wofi -n --show drun -p "Run App"''
+          ''$mod, R, exec, wofi -n --show drun -p "Run App"''
+          #''$mod, R, exec, astal "launcher"''
           ''$mod, D, exec, emacsclient -c -a "emacs"''
-          "$mod, R, exec, ags -t applauncher"
           "$mod, P, pseudo," # dwindle
           "$mod ALT, J, togglesplit," # dwindle
           "$mod, B, exec, firefox"
