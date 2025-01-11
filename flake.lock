@@ -75,6 +75,26 @@
         "type": "github"
       }
     },
+    "astal_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1736497508,
+        "narHash": "sha256-murrCQMYKtZ8rkZ5O726ZCsCDee1l3ZdmV8yC9gRaIc=",
+        "owner": "aylur",
+        "repo": "astal",
+        "rev": "ef4f95608481414053ecdbe4de29bd86fb452813",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aylur",
+        "repo": "astal",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -170,11 +190,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736589330,
-        "narHash": "sha256-y1Y5vcr+9fHV2x1VRYFuJkpfE1cB/5FyeeO4Xwff7mY=",
+        "lastModified": 1736591904,
+        "narHash": "sha256-LFO8pSrPKrH8OPq2HaAuBG5skk8/MNJ/9YmK3KsnSks=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "cb6297acebb15ebffef7d36b4b880b9dfe15638e",
+        "rev": "33827d2bd16bfe2e21b62956526c72d313595dfd",
         "type": "github"
       },
       "original": {
@@ -1223,6 +1243,7 @@
     "root": {
       "inputs": {
         "ags": "ags",
+        "astal": "astal_2",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
