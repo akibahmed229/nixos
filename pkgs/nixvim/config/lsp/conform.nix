@@ -4,17 +4,17 @@
     settings = {
       notify_on_error = true;
       formatters_by_ft = {
-        html = [["prettier" "prettierd"]];
-        css = [["prettier" "prettierd"]];
-        javascript = [["prettier" "prettierd"]];
-        javascriptreact = [["prettier" "prettierd"]];
-        typescript = [["prettierd" "prettier"]];
-        typescriptreact = [["prettierd" "prettier"]];
+        html = [["prettier"]];
+        css = [["prettier"]];
+        javascript = [["prettier"]];
+        javascriptreact = [["prettier"]];
+        typescript = [["prettier"]];
+        typescriptreact = [["prettier"]];
         java = ["google-java-format"];
         python = ["black"];
         lua = ["stylua"];
         nix = ["alejandra"];
-        markdown = [["prettierd" "prettier"]];
+        markdown = [["prettier"]];
         rust = ["rustfmt"];
       };
     };
