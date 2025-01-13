@@ -13,19 +13,18 @@
     configDir = ./config;
 
     # additional packages to add to gjs's runtime
-    extraPackages = with pkgs; [
-      inputs.ags.packages.${pkgs.system}.hyprland
-      inputs.ags.packages.${pkgs.system}.apps
-      inputs.ags.packages.${pkgs.system}.mpris
-      inputs.ags.packages.${pkgs.system}.notifd
-      inputs.ags.packages.${pkgs.system}.network
-      inputs.ags.packages.${pkgs.system}.tray
-      inputs.ags.packages.${pkgs.system}.wireplumber
-      inputs.ags.packages.${pkgs.system}.battery
-      fzf
+    extraPackages = with inputs.ags.packages.${pkgs.system}; [
+      hyprland
+      apps
+      mpris
+      notifd
+      network
+      tray
+      wireplumber
+      battery
     ];
   };
 
   # The home-manager module does not expose the astal cli to the home environment
-  home.packages = [inputs.ags.packages.${pkgs.system}.io];
+  home.packages = with inputs.ags.packages.${pkgs.system}; [io notifd];
 }
