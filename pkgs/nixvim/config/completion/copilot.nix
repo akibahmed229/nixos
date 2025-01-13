@@ -20,12 +20,12 @@
 
       suggestion = {
         enabled = true;
-        autoTrigger = true;
+        auto_trigger = true;
         debounce = 75;
         keymap = {
           accept = "<M-l>";
-          acceptWord = false;
-          acceptLine = false;
+          accept_word = false;
+          accept_line = false;
           next = "<M-]>";
           prev = "<M-[>";
           dismiss = "<C-]>";
