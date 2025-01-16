@@ -3,6 +3,7 @@ import style from "./scss/style.scss";
 import Bar from "./widget/bar/Bar";
 import Applauncher from "./widget/launcher/Applauncher";
 import NotificationPopups from "./widget/notification/NotificationPopups";
+import OSD from "./widget/osd/osd";
 
 App.start({
   css: style,
@@ -14,6 +15,7 @@ App.start({
   main() {
     App.get_monitors().map(Bar);
     App.get_monitors().map(NotificationPopups);
+    App.get_monitors().map(OSD);
     Applauncher;
   },
 });
