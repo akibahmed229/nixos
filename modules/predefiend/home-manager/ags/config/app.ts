@@ -16,6 +16,6 @@ App.start({
     App.get_monitors().map(Bar);
     App.get_monitors().map(NotificationPopups);
     App.get_monitors().map(OSD);
-    Applauncher;
+    Applauncher();
   },
 });
