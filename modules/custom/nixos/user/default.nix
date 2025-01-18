@@ -13,7 +13,7 @@ This module will help to manage multiple users with different configurations and
   inherit (self.lib) mkRelativeToRoot;
 
   checkUserFun = user:
-    if user == config.setUserName
+    if user == config.setUser.name
     then pkgs.zsh
     else pkgs.bash;
 
@@ -30,24 +30,33 @@ This module will help to manage multiple users with different configurations and
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
-    stateVersion = lib.mkDefault "${config.state-version}"; # Please read the comment before changing.
+    stateVersion = lib.mkDefault "${config.setUser.state-version}"; # Please read the comment before changing.
   };
 in {
   options = {
-    setUserName = lib.mkOption {
-      description = "The user to be created";
-      default = "test";
-      type = lib.types.str;
-    };
-    state-version = lib.mkOption {
-      description = "State version of home-manager";
-      default = "24.11";
-      type = lib.types.str;
-    };
-    desktopEnvironment = lib.mkOption {
-      description = "Desktop Environment";
-      default = "hyprland";
-      type = lib.types.str;
+    setUser = mkOption {
+      type = types.submodule {
+        options = {
+          name = lib.mkOption {
+            description = "The user to be created";
+            default = "test";
+            type = lib.types.str;
+          };
+          state-version = lib.mkOption {
+            description = "State version of home-manager";
+            default = "24.11";
+            type = lib.types.str;
+          };
+          desktopEnvironment = lib.mkOption {
+            description = "Desktop Environment";
+            default = "hyprland";
+            type = lib.types.str;
+          };
+          users.enable = lib.mkEnableOption "Enable User's Configuration";
+          homeUsers.enable = lib.mkEnableOption "Enable Home User's Configuration";
+        };
+      };
+      default = {};
     };
   };
 
@@ -104,7 +113,7 @@ in {
     # List of users
     myusers = [
       rec {
-        name = config.setUserName;
+        inherit (config.setUser) name;
         isNormalUser = true;
         hashedPasswordFile =
           if (config.sops.secrets."${name}/password/my_secret".path != {})
@@ -121,7 +130,7 @@ in {
         homeFile =
           map mkRelativeToRoot [
             "home-manager/home.nix" # config of home-manager
-            "home-manager/${config.desktopEnvironment}/home.nix"
+            "home-manager/${config.setUser.desktopEnvironment}/home.nix"
             "hosts/nixos/desktop/home.nix"
           ]
           ++ [{home = userHome name;}];
@@ -142,12 +151,12 @@ in {
         homeFile =
           map mkRelativeToRoot [
             "home-manager/home.nix" # config of home-manager
-            "home-manager/${config.desktopEnvironment}/home.nix"
+            "home-manager/${config.setUser.desktopEnvironment}/home.nix"
             "hosts/nixos/desktop/home.nix"
           ]
           ++ [{home = userHome name;}];
         enabled =
-          if config.setUserName == "akib"
+          if config.setUser.name == "akib"
           then true
           else false;
       }
@@ -155,7 +164,7 @@ in {
         name = "root";
         isNormalUser = false;
         hashedPasswordFile =
-          if (config.setUserName == "akib")
+          if (config.setUser.name == "akib")
           then config.sops.secrets."akib/password/root_secret".path
           else null;
         keys = [];
@@ -167,5 +176,41 @@ in {
         enabled = true;
       }
     ];
+
+    # Nixos User's configuration
+    users =
+      if config.setUser.users.enable
+      then {
+        users = builtins.listToAttrs (map (user:
+          if user.enabled
+          then {
+            inherit (user) name;
+            value = {
+              inherit (user) hashedPasswordFile hashedPassword extraGroups packages shell isNormalUser;
+              openssh.authorizedKeys.keys = user.keys;
+            };
+          }
+          else {})
+        config.myusers);
+      }
+      else {};
+
+    # Home User's configuration
+    home-manager =
+      if config.setUser.homeUsers.enable
+      then {
+        useGlobalPkgs = false;
+        users = builtins.listToAttrs (map (user:
+          if user.enabled
+          then {
+            inherit (user) name;
+            value = {
+              imports = user.homeFile;
+            };
+          }
+          else {})
+        config.myusers);
+      }
+      else {};
   };
 }

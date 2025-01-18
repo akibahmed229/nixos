@@ -7,6 +7,7 @@
   lib,
   inputs,
   self,
+  desktopEnvironment,
   state-version,
   devicename,
   ...
@@ -55,18 +56,13 @@
   # Enable sound.
   audio.enable = true;
   # Custom nixos modules map through list of users and create users with their configurations
-  setUserName = "${user}"; # for main user
-  users.users = builtins.listToAttrs (map (user:
-    if user.enabled
-    then {
-      inherit (user) name;
-      value = {
-        inherit (user) hashedPasswordFile hashedPassword extraGroups packages shell isNormalUser;
-        openssh.authorizedKeys.keys = user.keys;
-      };
-    }
-    else {})
-  config.myusers);
+  setUser = {
+    name = "${user}";
+    inherit desktopEnvironment state-version;
+    users.enable = true;
+    homeUsers.enable = true;
+  };
+
   users.mutableUsers =
     if (config.users.users.${user}.hashedPasswordFile != null)
     then false

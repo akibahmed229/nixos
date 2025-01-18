@@ -6,9 +6,7 @@
 {
   pkgs,
   desktopEnvironment,
-  state-version,
   self,
-  config,
   ...
 }: let
   # My custom lib helper functions
@@ -214,20 +212,4 @@ in {
   #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
   #  ];
   # };
-
-  # Custom nixos modules map through list of users and configure home-manager per user with their configurations
-  inherit desktopEnvironment state-version;
-  home-manager = {
-    useGlobalPkgs = false;
-    users = builtins.listToAttrs (map (user:
-      if user.enabled
-      then {
-        inherit (user) name;
-        value = {
-          imports = user.homeFile;
-        };
-      }
-      else {})
-    config.myusers);
-  };
 }
