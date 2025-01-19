@@ -62,6 +62,8 @@
       enableCompletion = true;
 
       initExtra = ''
+        source <(fzf --zsh)
+
         eval "$(atuin init zsh)"
         eval "$(direnv hook zsh)"
 
