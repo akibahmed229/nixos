@@ -19,14 +19,14 @@ in {
   imports =
     map mkRelativeToRoot [
       "home-manager/${desktopEnvironment}"
-      "modules/predefiend/nixos/docker/container/pi-hole.nix"
-      "modules/predefiend/nixos/docker/container/nextcloud.nix"
-      "modules/predefiend/nixos/docker/container/portainer.nix"
-      "modules/predefiend/nixos/docker/container/gitea.nix"
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["sops" "stylix" "impermanence" "gaming" "mysql" "postgresql" "docker" "bbr" "samba" "fhs" "intel-gpu" "openrazer" "openrgb" "obs" "cloudflared"];
+    }
+    ++ mkImport {
+      path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
+      ListOfPrograms = ["pi-hole.nix" "nextcloud.nix" "portainer.nix" "gitea.nix"];
     };
 
   nixpkgs = {
