@@ -38,19 +38,24 @@ in {
       type = types.submodule {
         options = {
           name = lib.mkOption {
-            description = "The user to be created";
-            default = "test";
             type = lib.types.str;
+            default = "test";
+            description = "The main user to be created";
           };
           state-version = lib.mkOption {
-            description = "State version of home-manager";
-            default = "24.11";
             type = lib.types.str;
+            default = "25.05";
+            description = "State version of home-manager";
           };
           desktopEnvironment = lib.mkOption {
-            description = "Desktop Environment";
-            default = "hyprland";
             type = lib.types.str;
+            default = "hyprland";
+            description = "Desktop Environment of the system";
+          };
+          hostname = lib.mkOption {
+            type = lib.types.str;
+            default = "desktop";
+            description = "Hostname of the system";
           };
           users.enable = lib.mkEnableOption "Enable User's Configuration";
           homeUsers.enable = lib.mkEnableOption "Enable Home User's Configuration";
@@ -66,43 +71,56 @@ in {
       (types.submodule {
         options = {
           name = mkOption {
-            description = "The user to be created";
             type = types.str;
+            example = "akib";
+            description = "The user to be created";
           };
           isNormalUser = mkOption {
             type = types.bool;
             default = true;
+            description = "Normal user or not";
           };
           hashedPassword = mkOption {
-            type = types.str or null;
+            type = types.nullOr types.str;
             example = "$/kc0mR9DIF03ooxkNHJLjDQbXbFO8lzN3spAWeszws4K1saheHEzIDxI6NNyr3xHyH.VQPHCs0";
             description = "password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s";
           };
           hashedPasswordFile = mkOption {
-            type = types.str or null;
+            type = types.nullOr types.str;
             example = "/etc/nixos/secrets/my_secret.nix";
             description = "password can be hashed with: nix run nixpkgs#mkpasswd -- -m SHA-512 -s";
           };
           keys = mkOption {
             type = types.listOf types.str;
-            example = "/etc/nixos/secrets/my_secret.nix";
+            example = "ssh-ed25519 KKKKC3NzaC1lZDI1NTE5OOOIOn1TJvpzEJxCvW6zAnUDLJF2BYlN+KiaMsuTQ3bH5iy example@gmail.com";
+            description = "List of OpenSSH public keys";
           };
           extraGroups = mkOption {
             type = types.listOf types.str;
+            example = ["networkmanager" "wheel" "systemd-journal"];
+            description = "List of extra groups";
           };
           packages = mkOption {
             type = types.listOf types.package;
+            example = "with pkgs; [ vlc thunderbird ]";
+            description = "List of packages to be installed";
           };
           shell = mkOption {
             type = types.package;
             default = pkgs.bash;
+            example = "pkgs.zsh";
+            description = "Shell to be used";
           };
           homeFile = mkOption {
+            type = types.anything;
             default = [];
+            example = "home-manager/home.nix or {home = username= 'akib';}";
+            description = "List of home-manager configuration files or home-manager configuration object";
           };
           enabled = mkOption {
             type = types.bool;
             default = true;
+            description = "Enable or disable the user";
           };
         };
       });
@@ -131,11 +149,12 @@ in {
           map mkRelativeToRoot [
             "home-manager/home.nix" # config of home-manager
             "home-manager/${config.setUser.desktopEnvironment}/home.nix"
-            "hosts/nixos/desktop/home.nix"
+            "hosts/nixos/${config.setUser.hostname}/home.nix"
           ]
           ++ [{home = userHome name;}];
         enabled = true;
       }
+
       rec {
         name = "afif";
         isNormalUser = true;
@@ -152,7 +171,7 @@ in {
           map mkRelativeToRoot [
             "home-manager/home.nix" # config of home-manager
             "home-manager/${config.setUser.desktopEnvironment}/home.nix"
-            "hosts/nixos/desktop/home.nix"
+            "hosts/nixos/${config.setUser.hostname}/home.nix"
           ]
           ++ [{home = userHome name;}];
         enabled =
@@ -160,6 +179,7 @@ in {
           then true
           else false;
       }
+
       rec {
         name = "root";
         isNormalUser = false;

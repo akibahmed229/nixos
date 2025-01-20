@@ -8,6 +8,7 @@
   lib,
   desktopEnvironment,
   state-version,
+  hostname,
   ...
 }: let
   # My custom lib helper functions
@@ -18,10 +19,18 @@ in {
     "modules/predefiend/nixos/sops"
   ];
 
+  # Custom nixos modules for
+  setUser = {
+    name = "${user}";
+    inherit hostname desktopEnvironment state-version;
+    users.enable = true;
+    homeUsers.enable = false;
+  };
+
   # (Custom nixos modules)
   grub.enable = lib.mkForce false;
   networking = {
-    hostName = lib.mkDefault "CurrentISO";
+    hostName = lib.mkDefault hostname;
     wireless.enable = false;
   };
 

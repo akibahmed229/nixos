@@ -5,7 +5,11 @@
 */
 {
   pkgs,
+  config,
+  user,
   desktopEnvironment,
+  state-version,
+  hostname,
   self,
   ...
 }: let
@@ -37,6 +41,19 @@ in {
       allowUnfree = true;
     };
   };
+
+  # Custom nixos modules for
+  setUser = {
+    name = "${user}";
+    inherit hostname desktopEnvironment state-version;
+    users.enable = true;
+    homeUsers.enable = true;
+  };
+
+  users.mutableUsers =
+    if (config.users.users.${user}.hashedPasswordFile != null)
+    then false
+    else true; # required for password to be set via sops during system activation
 
   # remove bloat
   documentation.nixos.enable = true;

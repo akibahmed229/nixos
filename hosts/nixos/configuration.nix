@@ -7,7 +7,6 @@
   lib,
   inputs,
   self,
-  desktopEnvironment,
   state-version,
   devicename,
   ...
@@ -55,18 +54,6 @@
   # Custom nixos modules
   # Enable sound.
   audio.enable = true;
-  # Custom nixos modules map through list of users and create users with their configurations
-  setUser = {
-    name = "${user}";
-    inherit desktopEnvironment state-version;
-    users.enable = true;
-    homeUsers.enable = true;
-  };
-
-  users.mutableUsers =
-    if (config.users.users.${user}.hashedPasswordFile != null)
-    then false
-    else true; # required for password to be set via sops during system activation
 
   programs = {
     # Enable ADB for Android and other stuff.

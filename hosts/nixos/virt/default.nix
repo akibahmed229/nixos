@@ -6,9 +6,9 @@
 {
   self,
   pkgs,
-  inputs,
   user,
   state-version,
+  hostname,
   ...
 }: let
   # My custom lib helper functions
@@ -23,6 +23,15 @@ in {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["impermanence" "sops"];
     };
+
+  # Custom nixos modules for
+  setUser = {
+    name = "${user}";
+    inherit hostname state-version;
+    desktopEnvironment = "dwm";
+    users.enable = true;
+    homeUsers.enable = true;
+  };
 
   users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
@@ -59,9 +68,6 @@ in {
         theme = "agnoster";
       };
     };
-
-    command-not-found.dbPath = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
-    command-not-found.enable = false;
   };
 
   # Enables copy / paste when running in a KVM with spice.
@@ -80,21 +86,4 @@ in {
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # Home manager configuration as a module
-  home-manager = {
-    users.${user} = {
-      imports = [
-        (mkRelativeToRoot "home-manager/home.nix")
-        (import ./home.nix)
-        {
-          home = {
-            username = user;
-            homeDirectory = "/home/${user}";
-            stateVersion = state-version;
-          };
-        }
-      ];
-    };
-  };
 }
