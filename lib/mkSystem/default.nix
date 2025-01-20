@@ -66,7 +66,8 @@
       value = nixosSystem {
         system = forAllSystems (system: system);
         specialArgs =
-          mapAttrs' (n: v: nameValuePair n v) specialArgs;
+          (mapAttrs' (n: v: nameValuePair n v) specialArgs)
+          // {hostname = name;};
         modules =
           map ifFileExists [
             (path + "/configuration.nix") # Base configuration
@@ -107,7 +108,9 @@
           inherit system;
           config = {allowUnfree = true;};
         };
-        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+        extraSpecialArgs =
+          mapAttrs' (n: v: nameValuePair n v) specialArgs
+          // {hostname = name;};
         modules = map ifFileExists [
           (path + "/home.nix") # Base Home Manager configuration
           (path + "/${name}") # Host-specific configuration

@@ -124,7 +124,6 @@
     # The system to build.
     inherit (nixpkgs) lib;
     state-version = "24.11";
-    hostname = "desktop";
     devicename = "/dev/nvme1n1";
 
     # The user to build for.
@@ -140,7 +139,7 @@
       src = ./.;
       mkNixOSSystem = mkSystem {
         inherit nixpkgs home-manager;
-        specialArgs = {inherit inputs self user hostname devicename desktopEnvironment theme state-version;};
+        specialArgs = {inherit inputs self user devicename desktopEnvironment theme state-version;};
       };
       mkHomeManagerSystem = mkSystem {
         inherit nixpkgs home-manager;
