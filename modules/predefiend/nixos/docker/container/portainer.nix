@@ -4,8 +4,6 @@
   # Access the portainer web interface by visiting https://localhost:9443
   # portainer is a lightweight management UI which allows you to easily manage your Docker host or Swarm cluster
   # You can use portainer to manage containers, images, networks, and volumes
-
-  # You can access the portainer web interface by visiting http://localhost:8010
   # you can also manage remote docker & kubernetes clusters using portainer
   */
   # This enables Docker containers as systemd services in NixOS
