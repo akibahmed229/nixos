@@ -37,7 +37,7 @@
     gcc
     neovim
     xcompmgr
-    rPackages.pkgmaker
+    # rPackages.pkgmaker # FIXME: currently broken
     xorg.xrandr
     xorg.xinit
     xorg.makedepend
