@@ -1,5 +1,6 @@
 {
   plugins = {
+    flutter-tools.enable = true;
     lsp-format = {
       enable = true; # Enable it if you want lsp-format integration for none-ls
     };
@@ -67,6 +68,7 @@
             };
           };
         };
+        dartls.enable = true;
         rust_analyzer = {
           enable = true;
           installCargo = true;
