@@ -33,36 +33,34 @@ This module will help to manage multiple users with different configurations and
     stateVersion = lib.mkDefault "${config.setUser.state-version}"; # Please read the comment before changing.
   };
 in {
-  options = {
-    setUser = mkOption {
-      type = types.submodule {
-        options = {
-          name = lib.mkOption {
-            type = lib.types.str;
-            default = "test";
-            description = "The main user to be created";
-          };
-          state-version = lib.mkOption {
-            type = lib.types.str;
-            default = "25.05";
-            description = "State version of home-manager";
-          };
-          desktopEnvironment = lib.mkOption {
-            type = lib.types.str;
-            default = "hyprland";
-            description = "Desktop Environment of the system";
-          };
-          hostname = lib.mkOption {
-            type = lib.types.str;
-            default = "desktop";
-            description = "Hostname of the system";
-          };
-          users.enable = lib.mkEnableOption "Enable User's Configuration";
-          homeUsers.enable = lib.mkEnableOption "Enable Home User's Configuration";
+  options.setUser = mkOption {
+    type = types.submodule {
+      options = {
+        name = lib.mkOption {
+          type = lib.types.str;
+          default = "test";
+          description = "The main user to be created";
         };
+        state-version = lib.mkOption {
+          type = lib.types.str;
+          default = "25.05";
+          description = "State version of home-manager";
+        };
+        desktopEnvironment = lib.mkOption {
+          type = lib.types.str;
+          default = "hyprland";
+          description = "Desktop Environment of the system";
+        };
+        hostname = lib.mkOption {
+          type = lib.types.str;
+          default = "desktop";
+          description = "Hostname of the system";
+        };
+        users.enable = lib.mkEnableOption "Enable User's Configuration";
+        homeUsers.enable = lib.mkEnableOption "Enable Home User's Configuration";
       };
-      default = {};
     };
+    default = {};
   };
 
   options.myusers = mkOption {
