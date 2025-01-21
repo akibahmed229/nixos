@@ -26,7 +26,6 @@ in
   unstable.mkShell {
     name = "flutter-shell";
     ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
-    GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/31.0.0/aapt2";
     PKG_CONFIG_PATH = "${unstable.sysprof}/lib/pkgconfig";
     CHROME_EXECUTABLE = "$HOME/.nix-profile/bin/google-chrome-stable";
     ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
