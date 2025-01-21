@@ -166,11 +166,12 @@
 
   # XDG  paths
   environment.sessionVariables = rec {
-    WALLPAPER = "/home/${user}/.config/flake/public/wallpapers";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
+    FLAKE_DIR = "${XDG_CONFIG_HOME}/flake";
+    WALLPAPER = "${FLAKE_DIR}/public/wallpapers";
 
     # Not officially in the specification
     XDG_BIN_HOME = "$HOME/.local/bin";
