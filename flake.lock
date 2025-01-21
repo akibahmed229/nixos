@@ -888,7 +888,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-uFG9qWNF851wUc+1b8ffqBaMu9m6ynH1M6+b+kJXdI0=",
+        "narHash": "sha256-WTNDcFfh563w04WdqW8NHPs0ad3Zdo7qa4KLS1eS1pc=",
         "path": "devshells",
         "type": "path"
       },
