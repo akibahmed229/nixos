@@ -135,8 +135,8 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "image/jpeg" = ["image-roll.desktop" "feh.desktop" "org.gnome.eog.desktop"];
-        "image/png" = ["image-roll.desktop" "feh.desktop" "org.gnome.eog.desktop"];
+        "image/jpeg" = ["org.gnome.eog.desktop" "image-roll.desktop" "feh.desktop"];
+        "image/png" = ["org.gnome.eog.desktop" "image-roll.desktop" "feh.desktop"];
         "text/plain" = "nvim.desktop";
         "text/csv" = "nvim.desktop";
         "application/pdf" = ["org.gnome.Evince.desktop" "firefox.desktop" "google-chrome.desktop"];
