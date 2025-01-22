@@ -82,9 +82,9 @@
       "vm.dirty_writeback_centisecs" = "300"; # Set the interval between two consecutive background writeback passes (500 centiseconds).
     };
 
-    extraModulePackages = [
-      config.boot.kernelPackages.openrazer
-    ];
+    # extraModulePackages = [
+    #   config.boot.kernelPackages.openrazer
+    # ];
 
     extraModprobeConfig = "options kvm_intel nested=1"; # for intel cpu
 
