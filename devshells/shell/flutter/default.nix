@@ -25,11 +25,10 @@
 in
   unstable.mkShell {
     name = "flutter-shell";
-    ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
-    PKG_CONFIG_PATH = "${unstable.sysprof}/lib/pkgconfig";
-    CHROME_EXECUTABLE = "$HOME/.nix-profile/bin/google-chrome-stable";
-    ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
+    ANDROID_SDK_ROOT = "${toString ./android-sdk}";
+    ANDROID_HOME = "${toString ./android-sdk}";
     JAVA_HOME = "${unstable.jdk17}";
+    PKG_CONFIG_PATH = "${unstable.sysprof}/lib/pkgconfig";
 
     buildInputs = with unstable; [
       flutter
@@ -47,4 +46,20 @@ in
       sysprof
       atkmm
     ];
+
+    shellHook = ''
+      # Ensure Android SDK is set up in a writable directory
+      export ANDROID_SDK_ROOT=$(pwd)/android-sdk
+      export ANDROID_HOME=$ANDROID_SDK_ROOT
+
+      # Copy SDK files to writable directory if not already present
+      if [ ! -d "$ANDROID_SDK_ROOT" ]; then
+        mkdir -p "$ANDROID_SDK_ROOT"
+        cp -r ${androidSdk}/libexec/android-sdk/* "$ANDROID_SDK_ROOT/"
+        chmod -R u+w "$ANDROID_SDK_ROOT"
+      fi
+
+      # Generate local.properties for Gradle
+      echo "sdk.dir=$ANDROID_SDK_ROOT" > ./android/local.properties
+    '';
   }
