@@ -22,7 +22,7 @@ in {
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "gaming" "mysql" "postgresql" "docker" "bbr" "samba" "fhs" "intel-gpu" "openrazer" "openrgb" "obs" "cloudflared"];
+      ListOfPrograms = ["sops" "stylix" "impermanence" "gaming" "mysql" "postgresql" "docker" "bbr" "samba" "fhs" "intel-gpu" "openrgb" "obs" "cloudflared"]; # "openrazer" currently broken
     }
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
@@ -129,7 +129,7 @@ in {
     meson # Build system.
     gettext # GNU internationalization and localization library.
     python313Full # Python programming language.
-    nodejs_23 # JavaScript runtime.
+    nodejs_22 # JavaScript runtime.
     rustc # Rust programming language and tools.
     cargo # Rust package manager.
     # Development environment tools.
