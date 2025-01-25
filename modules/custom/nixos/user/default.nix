@@ -199,6 +199,7 @@ in {
     users =
       if config.setUser.users.enable
       then {
+        # Converting above myusers list to a set of users and map through it configure users
         users = builtins.listToAttrs (map (user:
           if user.enabled
           then {
@@ -218,6 +219,7 @@ in {
       if config.setUser.homeUsers.enable
       then {
         useGlobalPkgs = false;
+        # Converting above myusers list to a set of home-manager users and map through it configure home-manager
         users = builtins.listToAttrs (map (user:
           if user.enabled
           then {
