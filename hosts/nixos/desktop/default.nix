@@ -22,11 +22,33 @@ in {
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["sops" "stylix" "impermanence" "gaming" "mysql" "postgresql" "docker" "bbr" "samba" "fhs" "intel-gpu" "openrgb" "obs" "cloudflared"]; # "openrazer" currently broken
+      ListOfPrograms = [
+        "sops"
+        "stylix"
+        "impermanence"
+        "gaming"
+        "mysql"
+        "postgresql"
+        "docker"
+        "bbr"
+        "samba"
+        "fhs"
+        "intel-gpu"
+        "openrgb"
+        "obs"
+        "cloudflared"
+      ]; # "openrazer" currently broken
     }
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
-      ListOfPrograms = map (x: x + ".nix") ["pi-hole" "nextcloud" "portainer" "gitea"];
+      ListOfPrograms =
+        map (x: x + ".nix")
+        [
+          "pi-hole"
+          "nextcloud"
+          "portainer"
+          "gitea"
+        ];
     };
 
   nixpkgs = {
