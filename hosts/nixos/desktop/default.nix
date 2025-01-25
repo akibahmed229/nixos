@@ -26,7 +26,7 @@ in {
     }
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
-      ListOfPrograms = ["pi-hole.nix" "nextcloud.nix" "portainer.nix" "gitea.nix"];
+      ListOfPrograms = map (x: x + ".nix") ["pi-hole" "nextcloud" "portainer" "gitea"];
     };
 
   nixpkgs = {
