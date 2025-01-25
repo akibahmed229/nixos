@@ -24,7 +24,7 @@ in {
     name = "${user}";
     inherit hostname desktopEnvironment state-version;
     users.enable = true;
-    homeUsers.enable = false;
+    homeUsers.enable = true;
   };
 
   # (Custom nixos modules)
@@ -44,23 +44,4 @@ in {
   services.qemuGuest.enable = true;
   # Use faster squashfs compression
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
-
-  home-manager = {
-    useGlobalPkgs = false;
-    users.${user} = {
-      imports =
-        map mkRelativeToRoot [
-          "home-manager/home.nix"
-          "home-manager/${desktopEnvironment}/home.nix"
-        ]
-        ++ [
-          (import ./home.nix)
-          {
-            home = {
-              stateVersion = state-version;
-            };
-          }
-        ];
-    };
-  };
 }
