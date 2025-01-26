@@ -35,9 +35,10 @@ in {
         "fhs"
         "intel-gpu"
         "openrgb"
+        "openrazer"
         "obs"
         "cloudflared"
-      ]; # "openrazer" currently broken
+      ];
     }
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
