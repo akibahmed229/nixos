@@ -87,27 +87,28 @@ function Media() {
     <box className="Media">
       {bind(mpris, "players").as((ps) =>
         ps[0] ? (
-          <box>
+          // <box>
             <box
               className="Cover"
               valign={Gtk.Align.CENTER}
+              tooltipMarkup={bind(ps[0], "title").as( (title) => `${title} - ${ps[0].artist}`)}
               css={bind(ps[0], "coverArt").as(
                 (cover) => `background-image: url('${cover}');`,
               )}
             />
-            <label
-              label={bind(ps[0], "title").as(
-                () => `${ps[0].title} - ${ps[0].artist}`,
-              )}
-              justification="right"
-              truncate="end"
-              wrap={true}
-              xalign={0}
-              maxWidthChars={18}
-            />
-          </box>
+                //<label
+                //  label={bind(ps[0], "title").as(
+                //    () => `${ps[0].title} - ${ps[0].artist}`,
+                //  )}
+                //  justification="right"
+                //  truncate="end"
+                //  wrap={true}
+                //  xalign={0}
+                //  maxWidthChars={18}
+                ///>
+          // </box>
         ) : (
-          "Nothing Playing"
+          "🎵"
         ),
       )}
     </box>
@@ -149,6 +150,7 @@ function FocusedClient() {
           client && (
             <label
               label={bind(client, "title").as(String)}
+              tooltipMarkup={bind(client, "title").as(String)}
               justification="left"
               truncate="end"
               xalign={0}
