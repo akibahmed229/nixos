@@ -2,27 +2,32 @@
   pkgs,
   inputs,
   ...
-}: let
-  inherit (inputs) spicetify-nix;
-  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
-in {
-  # import the flake's module for your system
-  imports = [spicetify-nix.homeManagerModule];
+}: {
+  imports = [
+    # For home-manager
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
 
-  # configure spicetify :)
-  programs.spicetify = {
+  programs.spicetify = let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  in {
     enable = true;
-    theme = spicePkgs.themes.Onepunch;
-    colorScheme = "gruvbox";
-
-    # use spotify from the nixpkgs master branch
-    # spotifyPackage = pkgs.spotify;
 
     enabledExtensions = with spicePkgs.extensions; [
-      fullAppDisplay
-      shuffle # shuffle+ (special characters are sanitized out of ext names)
+      adblock
       hidePodcasts
-      autoSkipExplicit
+      shuffle # shuffle+ (special characters are sanitized out of extension names)
     ];
+    enabledCustomApps = with spicePkgs.apps; [
+      newReleases
+      ncsVisualizer
+    ];
+    enabledSnippets = with spicePkgs.snippets; [
+      rotatingCoverart
+      pointer
+    ];
+
+    theme = spicePkgs.themes.onepunch;
+    colorScheme = "gruvbox";
   };
 }

@@ -82,13 +82,13 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #################### Personal Repositories | local flake ####################
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix = {
-      url = "github:akibahmed229/spicetify-nix";
+      url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    #################### Personal Repositories | local flake ####################
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
     nixvim = {
       url = "path:pkgs/nixvim";
