@@ -7,39 +7,45 @@
 pkgs.mkShell {
   name = "DataScience-dev-environment";
 
-  nativeBuildInputs =
-    (with pkgs; [
-      pkgs.stdenv.cc.cc.lib
-      git-crypt
-      stdenv.cc.cc # jupyter lab needs
-      # sometimes you might need something additional like the following - you will get some useful error if it is looking for a binary in the environment.
-      taglib
-      openssl
-      git
-      libxml2
-      libxslt
-      libzip
-      zlib
-    ])
-    ++ (with unstable.python311Packages; [
-      virtualenv
-      pip
-      ipykernel
-      jupyterlab
-      pyzmq
-      venvShellHook
-      pip
-      numpy
-      pandas
-      pandas-datareader
-      matplotlib
-      requests
-      seaborn
-      openpyxl
-      cufflinks
-      plotly
-      # sklearn-deap
-    ]);
+  packages = [
+    (pkgs.python313.withPackages (p:
+      with p; [
+        virtualenv
+        pip
+        ipykernel
+        jupyterlab
+        pyzmq
+        venvShellHook
+        pip
+        numpy
+        pandas
+        # pandas-datareader
+        matplotlib
+        requests
+        seaborn
+        openpyxl
+        # cufflinks
+        plotly
+        # sklearn-deap
+      ]))
+  ];
+
+  # LD_LIBRARY_PATH
+  env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+    pkgs.stdenv.cc.cc.lib
+    pkgs.stdenv.cc.cc
+    pkgs.git-crypt
+    # sometimes you might need something additional like the following - you will get some useful error if it is looking for a binary in the environment.
+    pkgs.taglib
+    pkgs.openssl
+    pkgs.git
+    pkgs.libxml2
+    pkgs.libxslt
+    pkgs.libzip
+    pkgs.zlib
+    pkgs.libz
+    pkgs.libffi # numpy uses libffi for some features
+  ];
 
   # Workaround: make vscode's python extension read the .venv
   shellHook = ''
