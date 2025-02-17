@@ -12,7 +12,7 @@
 
         # Droidcam is a mobile app (Android, iOS). With Droidcam the mobile device can be used as webcam for a PC.
         # https://droidcam.app/
-        droidcam-obs
+        # droidcam-obs # FIXME: currently broken
       ];
     })
   ];

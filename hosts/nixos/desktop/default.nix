@@ -170,7 +170,7 @@ in {
     jetbrains.idea-community
     postman # API development environment.
     vscode # Code editor.
-    zed-editor # Code editor.
+    # zed-editor # Code editor. # FIXME: currently broken
     git # Version control system.
     github-desktop # Git client.
     lazygit # Git UI.
