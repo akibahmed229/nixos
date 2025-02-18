@@ -138,17 +138,19 @@
         userChrome = builtins.readFile ./userChrome.css;
         userContent = builtins.readFile ./userContent.css;
 
-        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-          bitwarden
-          ublock-origin
-          sponsorblock
-          darkreader
-          tridactyl
-          youtube-shorts-block
-          gsconnect
-          #gnome-shell-integration
-          gruvbox-dark-theme
-        ];
+        extensions = {
+          packages = with inputs.firefox-addons.packages."x86_64-linux"; [
+            bitwarden
+            ublock-origin
+            sponsorblock
+            darkreader
+            tridactyl
+            youtube-shorts-block
+            gsconnect
+            #gnome-shell-integration
+            gruvbox-dark-theme
+          ];
+        };
       };
 
       # profile for Other user
