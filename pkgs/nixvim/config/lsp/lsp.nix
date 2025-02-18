@@ -18,7 +18,7 @@
         dockerls.enable = true;
         prismals.enable = true;
         prismals.package = null; # TODO: May need to  add prismals package
-        graphql.enable = true;
+        # graphql.enable = true; # FIXME: broken
         clangd = {enable = true;};
         lua_ls = {
           enable = true;
