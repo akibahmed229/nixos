@@ -188,7 +188,7 @@ in {
     ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
     mpv # Media player.
-    kdenlive # Video editor.
+    kdePackages.kdenlive # Video editor.
 
     # 3. Networking Section
     nmap # Network scanner.

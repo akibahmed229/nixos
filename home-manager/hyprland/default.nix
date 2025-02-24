@@ -44,9 +44,7 @@
       lxmenu-data # Menu data for LXDE desktop.
       qt6.qtwayland # Qt 6 Wayland integration.
       qt6Packages.qt6ct # Qt 6 configuration tool.
-      libsForQt5.qt5ct # Qt 5 configuration tool.
-      libsForQt5.qt5.qtwayland # Qt 5 Wayland integration.
-      libsForQt5.ark.out # Ark for Qt 5 (possibly a file manager or archiver).
+      kdePackages.ark # Ark for Qt 5 (possibly a file manager or archiver).
       gnome-software # GNOME software manager.
       stacer # Linux system monitoring tool.
 
@@ -62,11 +60,11 @@
 
       # 5. Hypr Ecosystem & Theming
       hyprpicker # Likely a color picker for the Hypr ecosystem.
-      libsForQt5.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
-      # libsForQt5.polkit-kde-agent # Polkit agent for KDE (commented out).
+      kdePackages.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
+      # kdePackages.polkit-kde-agent # Polkit agent for KDE (commented out).
 
       # 6. Archiving Tools
-      ark # Archiving tool for KDE (also included in the desktop environment list).
+      kdePackages.ark # Archiving tool for KDE (also included in the desktop environment list).
 
       # 7. Uncategorized or Ambiguous
       # lxappearance # Tool to manage LXDE themes (commented out).
