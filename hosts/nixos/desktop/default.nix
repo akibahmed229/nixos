@@ -166,8 +166,8 @@ in {
     android-tools
     android-udev-rules
     jdk21 # Java Development Kit
-    jetbrains.pycharm-community
-    jetbrains.idea-community
+    # jetbrains.pycharm-community # FIXME: currently broken
+    # jetbrains.idea-community # FIXME: currently broken
     postman # API development environment.
     vscode # Code editor.
     # zed-editor # Code editor. # FIXME: currently broken
