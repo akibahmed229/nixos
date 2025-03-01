@@ -38,7 +38,7 @@
     ####################  Desktop Environments & WindowManager | remote flake ####################
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=410da2e46fc44d93196cd902a070391a416cff01"; # FIXME: latest commit making qt stuff to compile so pinning to a working commit
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
