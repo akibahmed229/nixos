@@ -56,7 +56,7 @@
         ls = "eza --icons --grid --group-directories-first";
         find-dir = "cd $(find -type d | fzf)";
         find-file = "nvim $(fzf --preview 'bat --color=always {}')";
-        gp-all = "git push github main && git push gitlab main";
+        gp-all = "git push -u github main && git push -u gitlab main";
       };
 
       enableCompletion = true;
