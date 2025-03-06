@@ -166,11 +166,11 @@ in {
     android-tools
     android-udev-rules
     jdk21 # Java Development Kit
-    # jetbrains.pycharm-community # FIXME: currently broken
-    # jetbrains.idea-community # FIXME: currently broken
+    jetbrains.pycharm-community # Python IDE.
+    jetbrains.idea-community # Java IDE.
     postman # API development environment.
     vscode # Code editor.
-    # zed-editor # Code editor. # FIXME: currently broken
+    zed-editor # Code editor.
     git # Version control system.
     github-desktop # Git client.
     lazygit # Git UI.
