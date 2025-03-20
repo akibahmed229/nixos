@@ -166,7 +166,7 @@
           ''$mod, V, exec, cliphist list | wofi -n --dmenu -p "Copy Text" | cliphist decode | wl-copy''
           "$mod, Print, exec, screenshot" # from my pkgs shellscript
           "$mod, W, exec, wallpaper" # from my pkgs shellscript
-          "$mod SHIFT, L, exec, hyprlock"
+          "$mod ALT, L, exec, hyprlock"
           "$mod SHIFT, DELETE, exec, wlogout"
 
           # Move focus with mainMod + ctrl + (h,j,k,l) keys
@@ -239,27 +239,27 @@
 
           # Window opacity rule
           #"opacity 1.0 override 0.9 override,^(firefox)$"
-          "opacity 1.0 override 0.9 override,^(virt-manager)$"
-          "opacity 1.0 override 0.9 override,^(vlc)$"
-          "opacity 1.0 override 0.9 override,^(steam)$"
+          "opacity 1.0 override 0.9 override,class:.virt-manager-wrapped"
+          "opacity 1.0 override 0.9 override,class:vlc"
+          "opacity 1.0 override 0.9 override,class:steam"
 
           # Floating window rule
-          "float,^(pavucontrol)$"
-          "float,^(blueman-manager)$"
-          "float,^(nm-connection-editor)$"
-          "float,^(openrgb)$"
+          "float,class:org.pulseaudio.pavucontrol, title:Volume Control"
+          "float,class:blueman-manager, title:blueman-manager"
+          "float,class:nm-connection-editor, title:Network Connections"
+          "float,class:openrgb, title:OpenRGB"
         ]
         ++ (
           if user == "akib"
           then [
             # Window open rule
             #"workspace 1,Alacritty"
-            "workspace 1,kitty"
-            "workspace 2,firefox"
+            "workspace 1,class:kitty"
+            "workspace 2,class:firefox"
             # "workspace 3,discord"
-            "workspace 3,vesktop"
-            "workspace 4,Spotify"
-            "workspace 5,virt-manager"
+            "workspace 3,class:vesktop"
+            "workspace 4,class:spotify"
+            "workspace 5,class:.virt-manager-wrapped"
           ]
           else []
         );
