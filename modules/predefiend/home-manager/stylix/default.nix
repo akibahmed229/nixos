@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   self,
+  user,
   theme ? "gruvbox-dark-soft", # Default theme
   ...
 }: let
@@ -65,7 +66,10 @@ in {
       btop.enable = true;
       emacs.enable = true;
       spicetify.enable = false;
-      firefox.enable = true;
+      firefox = {
+        enable = true;
+        profileNames = [user];
+      };
       fzf.enable = true;
       # hyprpaper.enable = true;
       hyprland.enable = true;
