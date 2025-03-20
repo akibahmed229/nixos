@@ -48,80 +48,83 @@
         };
         search.force = true;
 
-        bookmarks = [
-          {
-            name = "youtube";
-            tags = ["video"];
-            keyword = "yt";
-            url = "https://www.youtube.com/";
-          }
-          {
-            name = "github";
-            tags = ["git"];
-            keyword = "gh";
-            url = "github.com/akibahmed229";
-          }
-          {
-            name = "reddit";
-            tags = ["social"];
-            keyword = "r";
-            url = "https://www.reddit.com/";
-          }
-          {
-            name = "DIU Blender";
-            tags = ["education"];
-            keyword = "varsity";
-            url = "https://elearn.daffodilvarsity.edu.bd/";
-          }
-          {
-            name = "DIU Strudent Portal";
-            tags = ["education"];
-            keyword = "portal";
-            url = "http://studentportal.diu.edu.bd";
-          }
-          {
-            name = "Gmail";
-            tags = ["email"];
-            keyword = "mail";
-            url = "https://mail.google.com/mail/u/0/#inbox";
-          }
-          {
-            name = "Nix Packages";
-            tags = ["nix" "pkgs"];
-            keyword = "nixpkgs";
-            url = "https://search.nixos.org/packages";
-          }
-          {
-            name = "Nix Home-Manager options";
-            tags = ["nix" "home-manager"];
-            keyword = "home-manager";
-            url = "https://mipmip.github.io/home-manager-option-search/";
-          }
-          {
-            name = "noogle";
-            tags = ["nix" "lib"];
-            keyword = "nix-lib";
-            url = "https://noogle.dev/";
-          }
-          {
-            name = "Chat Gpt";
-            tags = ["chat" "gpt" "ai"];
-            keyword = "chat";
-            url = "https://chat.openai.com/";
-          }
-          {
-            name = "Google Bird";
-            tags = ["ai" "google" "bird" "gemini"];
-            keyword = "chat";
-            url = "https://gemini.google.com/";
-          }
-          {
-            name = "Binge Ai";
-            tags = ["ai" "binge"];
-            keyword = "binge";
-            url = "https://www.bing.com/search?q=Bing+AI&showconv=1";
-          }
-        ];
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              name = "youtube";
+              tags = ["video"];
+              keyword = "yt";
+              url = "https://www.youtube.com/";
+            }
+            {
+              name = "github";
+              tags = ["git"];
+              keyword = "gh";
+              url = "github.com/akibahmed229";
+            }
+            {
+              name = "reddit";
+              tags = ["social"];
+              keyword = "r";
+              url = "https://www.reddit.com/";
+            }
+            {
+              name = "DIU Blender";
+              tags = ["education"];
+              keyword = "varsity";
+              url = "https://elearn.daffodilvarsity.edu.bd/";
+            }
+            {
+              name = "DIU Strudent Portal";
+              tags = ["education"];
+              keyword = "portal";
+              url = "http://studentportal.diu.edu.bd";
+            }
+            {
+              name = "Gmail";
+              tags = ["email"];
+              keyword = "mail";
+              url = "https://mail.google.com/mail/u/0/#inbox";
+            }
+            {
+              name = "Nix Packages";
+              tags = ["nix" "pkgs"];
+              keyword = "nixpkgs";
+              url = "https://search.nixos.org/packages";
+            }
+            {
+              name = "Nix Home-Manager options";
+              tags = ["nix" "home-manager"];
+              keyword = "home-manager";
+              url = "https://mipmip.github.io/home-manager-option-search/";
+            }
+            {
+              name = "noogle";
+              tags = ["nix" "lib"];
+              keyword = "nix-lib";
+              url = "https://noogle.dev/";
+            }
+            {
+              name = "Chat Gpt";
+              tags = ["chat" "gpt" "ai"];
+              keyword = "chat";
+              url = "https://chat.openai.com/";
+            }
+            {
+              name = "Google Bird";
+              tags = ["ai" "google" "bird" "gemini"];
+              keyword = "chat";
+              url = "https://gemini.google.com/";
+            }
+            {
+              name = "Binge Ai";
+              tags = ["ai" "binge"];
+              keyword = "binge";
+              url = "https://www.bing.com/search?q=Bing+AI&showconv=1";
+            }
+          ];
+        };
 
         settings = {
           "media.mediasource.enabled" = true;
