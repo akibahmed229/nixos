@@ -33,8 +33,8 @@ in {
           };
           theme = ''${self.packages.${pkgs.system}.custom_sddm.override {
               imgLink = {
-                url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/nixos.png";
-                sha256 = "sha256-QcY0x7pE8pKQy3At81/OFl+3CUAbx0K99ZHk85QLSo0=";
+                url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/gruv_saturn.png";
+                sha256 = "sha256-AKSBdzNhqnHfQNqcjalXDrRV0qPidPrd7o+CV5tdQ98=";
               };
             }}'';
         };
