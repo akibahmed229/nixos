@@ -35,9 +35,9 @@ in {
         "fhs"
         "intel-gpu"
         "openrgb"
-        "openrazer"
+        # "openrazer"
         "obs"
-        "cloudflared"
+        # "cloudflared"
       ];
     }
     ++ mkImport {

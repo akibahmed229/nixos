@@ -27,7 +27,7 @@ in {
         # splashImage = ../public/wallpaper/nixos.png;
         devices = ["nodev"]; # install grub on efi
         efiSupport = true;
-        useOSProber = true; # To find Other boot manager like windows
+        useOSProber = false; # To find Other boot manager like windows
         configurationLimit = 10; # Store number of config
       };
       timeout = 3; # Boot Timeout

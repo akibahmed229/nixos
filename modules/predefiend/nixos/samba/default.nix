@@ -1,9 +1,9 @@
 {_, ...}: let
   listOfDrive = [
-    # {
-    #   device = "sda1";
-    #   mountPoint = "/mnt/sda1";
-    # }
+    {
+      device = "sda1";
+      mountPoint = "/mnt/sda1";
+    }
     {
       device = "sda2";
       mountPoint = "/mnt/sda2";
