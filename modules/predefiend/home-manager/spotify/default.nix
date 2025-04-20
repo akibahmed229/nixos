@@ -28,6 +28,6 @@
     ];
 
     theme = spicePkgs.themes.onepunch;
-    colorScheme = "gruvbox";
+    colorScheme = "dark";
   };
 }
