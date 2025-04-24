@@ -61,7 +61,7 @@
 
       enableCompletion = true;
 
-      initExtra = ''
+      initContent = ''
         source <(fzf --zsh)
 
         eval "$(atuin init zsh)"
