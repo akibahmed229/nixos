@@ -10,7 +10,6 @@
       servers = {
         eslint = {enable = true;};
         pyright = {enable = true;};
-        ruff_lsp = {enable = true;};
         tailwindcss = {enable = true;};
         html.enable = true;
         cssls.enable = true;
