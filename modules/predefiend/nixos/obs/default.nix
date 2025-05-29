@@ -22,7 +22,7 @@
   boot = {
     # Virtual cam settings: see https://wiki.nixos.org/wiki/OBS_Studio#Using_the_Virtual_Camera
     extraModulePackages = with config.boot.kernelPackages; [
-      v4l2loopback
+      # v4l2loopback # FIXME: currently broken
     ];
     kernelModules = ["v4l2loopback"];
     extraModprobeConfig = ''

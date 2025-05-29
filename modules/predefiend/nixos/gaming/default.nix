@@ -19,7 +19,7 @@
     };
   };
 
-  hardware.xone.enable = true; # support for the xbox controller USB dongle
+  # hardware.xone.enable = true; # support for the xbox controller USB dongle FIXME: currently broken
   environment = {
     systemPackages = with pkgs; [
       protonup-qt
