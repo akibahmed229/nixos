@@ -47,7 +47,7 @@ in {
 
   # Reusable nixos & home-manager modules you might want to export
   nixosModules = mkModule (src + "/modules/custom/nixos");
-  homeManagerModules = mkModule (src + "/modules/custom/home-manager");
+  homeModules = mkModule (src + "/modules/custom/home-manager");
 
   # The nixos system configurations for the supported systems
   nixosConfigurations = mkNixOSSystem (src + "/hosts/nixos"); # available through "$ nixos-rebuild switch --flake .#host"

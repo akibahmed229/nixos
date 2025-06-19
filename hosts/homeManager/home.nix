@@ -10,7 +10,7 @@
   inherit (self.lib) mkRelativeToRoot;
 in {
   imports = [
-    self.homeManagerModules.default # Custom home-manager modules
+    self.homeModules.default # Custom home-manager modules
   ];
 
   home = {

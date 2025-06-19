@@ -15,7 +15,7 @@ in {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
     {programs.nix-index-database.comma.enable = true;} # optional to also wrap and install comma
-    self.homeManagerModules.default # Custom home-manager modules
+    self.homeModules.default # Custom home-manager modules
   ];
 
   # The home.packages option allows you to install Nix packages into your
