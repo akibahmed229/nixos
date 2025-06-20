@@ -35,7 +35,7 @@ in {
         "fhs"
         "intel-gpu"
         "openrgb"
-        # "openrazer"
+        # "openrazer" # FIXME: currently broken
         "obs"
         # "cloudflared"
       ];
@@ -172,7 +172,7 @@ in {
     jetbrains.idea-community # Java IDE.
     postman # API development environment.
     vscode # Code editor.
-    # zed-editor # Code editor. # FIXME: currently broken.
+    zed-editor # Code editor.
     git # Version control system.
     github-desktop # Git client.
     lazygit # Git UI.

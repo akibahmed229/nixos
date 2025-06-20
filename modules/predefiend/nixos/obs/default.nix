@@ -12,7 +12,7 @@
 
         # Droidcam is a mobile app (Android, iOS). With Droidcam the mobile device can be used as webcam for a PC.
         # https://droidcam.app/
-        # droidcam-obs # FIXME: currently broken
+        droidcam-obs
       ];
     })
   ];
@@ -22,7 +22,7 @@
   boot = {
     # Virtual cam settings: see https://wiki.nixos.org/wiki/OBS_Studio#Using_the_Virtual_Camera
     extraModulePackages = with config.boot.kernelPackages; [
-      # v4l2loopback # FIXME: currently broken
+      v4l2loopback
     ];
     kernelModules = ["v4l2loopback"];
     extraModprobeConfig = ''
