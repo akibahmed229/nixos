@@ -151,7 +151,7 @@
           "$mod, Q, killactive,"
           "$mod, DELETE, exit,"
           "${
-            if config.programs.yazi.enable
+            if !config.programs.yazi.enable # NOTE: thunar is currently in used
             then "$mod, E, exec, kitty -e yazi"
             else "$mod, E, exec, thunar"
           }"
