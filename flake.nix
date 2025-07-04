@@ -79,7 +79,7 @@
     };
     # A customizable and extensible shell
     ags = {
-      url = "github:Aylur/ags";
+      url = "github:Aylur/ags?rev=3ed9737bdbc8fc7a7c7ceef2165c9109f336bff6";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
