@@ -35,7 +35,7 @@ in {
         "fhs"
         "intel-gpu"
         "openrgb"
-        # "openrazer" # FIXME: currently broken
+        "openrazer"
         "obs"
         # "cloudflared"
       ];
