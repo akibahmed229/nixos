@@ -2,11 +2,11 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-driver
-      intel-media-sdk
-      (vaapiIntel.override {enableHybridCodec = true;}) # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
+      # your Open GL, Vulkan and VAAPI drivers
+      vpl-gpu-rt # or intel-media-sdk for QSV
+
+      intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+      intel-vaapi-driver # For older processors. LIBVA_DRIVER_NAME=i965
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [intel-vaapi-driver]; # For older processors. LIBVA_DRIVER_NAME=i965
   };
