@@ -13,7 +13,7 @@
   HomeModuleFolder = mkRelativeToRoot "modules/predefiend/home-manager";
 in {
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
     {programs.nix-index-database.comma.enable = true;} # optional to also wrap and install comma
     self.homeModules.default # Custom home-manager modules
   ];
