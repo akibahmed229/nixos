@@ -9,7 +9,7 @@
   # My custom lib helper functions
   inherit (self.lib) mkRelativeToRoot;
 in {
-  imports = [inputs.stylix.homeManagerModules.stylix];
+  imports = [inputs.stylix.homeModules.stylix];
 
   stylix = {
     enable = true;
