@@ -48,7 +48,7 @@ in {
           "pi-hole"
           "nextcloud"
           "portainer"
-          "gitea"
+          # "gitea" # currently not using
         ];
     };
 
@@ -62,6 +62,9 @@ in {
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "libsoup-2.74.3" # libsoup-2.74.3 is insecure, but required for some gnome applications.
+      ];
     };
   };
 
@@ -141,6 +144,7 @@ in {
     atuin # history management tool for cli
     flatpak # Application sandboxing and distribution framework.
     mediawriter # USB writer for Fedora Media.
+    lact # Gui for Graphic card overclocking and other stuff.
 
     # Development Section
 
