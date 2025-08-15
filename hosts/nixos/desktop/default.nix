@@ -48,6 +48,7 @@ in {
           "pi-hole"
           "nextcloud"
           "portainer"
+          "n8n"
           # "gitea" # currently not using
         ];
     };
