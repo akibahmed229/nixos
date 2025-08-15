@@ -176,21 +176,21 @@ in {
     jetbrains.idea-community # Java IDE.
     postman # API development environment.
     vscode # Code editor.
-    zed-editor # Code editor.
+    # zed-editor # Code editor.
     git # Version control system.
-    github-desktop # Git client.
+    # github-desktop # Git client.
     lazygit # Git UI.
     gh # GitHub CLI.
-    self.packages.${pkgs.system}.ciscoPacketTracer
+    # self.packages.${pkgs.system}.ciscoPacketTracer
 
     # 2. Media & Design
     gimp # Image editor.
-    krita # Digital painting software.
-    glaxnimate # Animation editor.
-    inkscape # Vector graphics editor.
+    # krita # Digital painting software.
+    # glaxnimate # Animation editor.
+    # inkscape # Vector graphics editor.
     handbrake # Video transcoder.
     audacity # Audio editor.
-    darktable # Photography workflow application.
+    # darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
     mpv # Media player.
@@ -242,7 +242,7 @@ in {
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443 22 465 9980 8090 6443];
+      allowedTCPPorts = [80 443 22 465 3000 9980 8090 6443];
       allowedUDPPorts = [67 68];
     };
     enableIPv6 = true;
