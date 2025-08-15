@@ -67,6 +67,10 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       # ngnix proxy manager
       "/var/lib/ngnixproxymanager"
       "/var/lib/letsencrypt"
+      # n8n
+      "/var/lib/postgresqln8n"
+      "/var/lib/ollama"
+      # "/var/lib/ollama-webui"
 
       /*
       /var/tmp is expected to be on disk and have enough free space
