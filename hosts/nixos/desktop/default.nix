@@ -49,6 +49,7 @@ in {
           "nextcloud"
           "portainer"
           "n8n"
+          "ollama"
           # "gitea" # currently not using
         ];
     };
