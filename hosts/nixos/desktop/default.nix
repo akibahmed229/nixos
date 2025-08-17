@@ -37,6 +37,7 @@ in {
         "openrgb"
         "openrazer"
         "obs"
+        "ngrok"
         # "cloudflared"
       ];
     }
