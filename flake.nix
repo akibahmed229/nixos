@@ -94,12 +94,6 @@
       url = "path:pkgs/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # My devShells for different systems
-    my-devShells = {
-      url = "path:devshells";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-unstable.follows = "nixpkgs";
-    };
     # Private secrets repo. Authenticate via ssh and use shallow clone
     secrets = {
       url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git?ref=main&shallow=1";
@@ -117,7 +111,6 @@
     nixpkgs,
     home-manager,
     nix-on-droid,
-    my-devShells,
     ...
     # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
   } @ inputs: let
@@ -152,6 +145,5 @@
         droidConf = true;
         specialArgs = {inherit inputs self user state-version;};
       };
-    }
-    // {inherit (my-devShells) devShells;};
+    };
 }
