@@ -710,26 +710,6 @@
         "type": "github"
       }
     },
-    "my-devShells": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-unstable": [
-          "nixpkgs"
-        ],
-        "python27-pkgs": "python27-pkgs"
-      },
-      "locked": {
-        "path": "devshells",
-        "type": "path"
-      },
-      "original": {
-        "path": "devshells",
-        "type": "path"
-      },
-      "parent": []
-    },
     "nix-formatter-pack": {
       "inputs": {
         "nixpkgs": [
@@ -1032,22 +1012,6 @@
         "type": "github"
       }
     },
-    "python27-pkgs": {
-      "locked": {
-        "lastModified": 1606071860,
-        "narHash": "sha256-9DDVLft8vbQOZVPOgO4zOFZzT92Mj6OYDPWjSxtbwGo=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "272744825d28f9cea96fe77fe685c8ba2af8eb12",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "272744825d28f9cea96fe77fe685c8ba2af8eb12",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "ags": "ags",
@@ -1057,7 +1021,6 @@
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "impermanence": "impermanence",
-        "my-devShells": "my-devShells",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs",
