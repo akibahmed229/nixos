@@ -14,6 +14,7 @@
           tailwindcss = {enable = true;};
           html.enable = true;
           cssls.enable = true;
+          phpactor.enable = true;
           yamlls.enable = true;
           dockerls.enable = true;
           prismals.enable = true;
