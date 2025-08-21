@@ -87,13 +87,13 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #################### Personal Repositories | local flake ####################
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    #################### Personal Repositories | local flake ####################
     # Private secrets repo. Authenticate via ssh and use shallow clone
     secrets = {
       url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git?ref=main&shallow=1";

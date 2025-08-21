@@ -9,8 +9,6 @@ TODO: Need to structure this file better. It's a bit messy right now.
   mkNixOSSystem ? null,
   mkHomeManagerSystem ? null,
   mkNixOnDroidSystem ? null,
-  mkTemplate ? null,
-  mkSystem ? null,
 }: let
   inherit (inputs) nixpkgs;
   inherit (nixpkgs) lib;
@@ -49,8 +47,15 @@ in {
   homeModules = mkModule (src + "/modules/custom/home-manager");
 
   # The nixos system configurations for the supported systems
-  nixosConfigurations = mkNixOSSystem (src + "/hosts/nixos"); # available through "$ nixos-rebuild switch --flake .#host"
-  homeConfigurations = mkHomeManagerSystem (src + "/hosts/homeManager"); # available through "$ home-manager switch --flake .#home"
-  nixOnDroidConfigurations = mkNixOnDroidSystem (src + "/hosts/nixOnDroid"); # available through "$ nix-on-droid switch --flake .#device"
-  templates = mkTemplate (src + "/public/templates"); # available through "$ nix flake init -t .#template"
+  # available through "$ nixos-rebuild switch --flake .#host"
+  nixosConfigurations = mkNixOSSystem (src + "/hosts/nixos");
+
+  # available through "$ home-manager switch --flake .#home"
+  homeConfigurations = mkHomeManagerSystem (src + "/hosts/homeManager");
+
+  # available through "$ nix-on-droid switch --flake .#device"
+  nixOnDroidConfigurations = mkNixOnDroidSystem (src + "/hosts/nixOnDroid");
+
+  # available through "$ nix flake init -t .#template"
+  templates = mkTemplate (src + "/public/templates");
 }
