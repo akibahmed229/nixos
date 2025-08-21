@@ -116,7 +116,7 @@
   } @ inputs: let
     # The system to build.
     inherit (nixpkgs) lib;
-    state-version = "24.11";
+    state-version = "25.11";
     devicename = "/dev/nvme1n1";
 
     # The user to build for.
