@@ -37,7 +37,7 @@ in {
         "openrgb"
         "openrazer"
         "obs"
-        "ngrok"
+        # "ngrok" # FIXME: busy
         # "cloudflared"
       ];
     }
@@ -46,7 +46,7 @@ in {
       ListOfPrograms =
         map (x: x + ".nix")
         [
-          "pi-hole"
+          # "pi-hole" # FIXME: busy
           "nextcloud"
           "portainer"
           "n8n"
