@@ -91,7 +91,7 @@
     #################### Personal Repositories | local flake ####################
     # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
     nixvim = {
-      url = "path:pkgs/nixvim";
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Private secrets repo. Authenticate via ssh and use shallow clone

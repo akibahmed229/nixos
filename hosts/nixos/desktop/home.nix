@@ -10,7 +10,6 @@ in {
     # You can add overlays here
     overlays = [
       self.overlays.discord-overlay
-      self.overlays.nvim-overlay
     ];
   };
 
@@ -21,6 +20,7 @@ in {
       "firefox"
       "spotify"
       "stylix"
+      "nixvim"
       "discord"
       "zsh"
       "tmux"
@@ -37,6 +37,5 @@ in {
 
   home.packages = with pkgs; [
     self.packages.${pkgs.system}.wallpaper
-    neovim
   ];
 }
