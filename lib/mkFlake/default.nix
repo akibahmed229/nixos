@@ -34,7 +34,7 @@ in {
         inherit nixpkgs system;
         path = src + "/pkgs";
       }
-    #  // {nixvim = inputs.nixvim.packages.${system}.default;} # TODO: move to a separate module
+    // {nixvim = inputs.nixvim.packages.${system}.default;} # TODO: move to a separate module
   );
 
   # Your custom packages and modifications, exported as overlays
