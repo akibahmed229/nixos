@@ -17,7 +17,7 @@
       git
       direnv
     ];
-    stateVersion = state-version; # Please read the comment before changing.
+    stateVersion = "24.05"; # Please read the comment before changing.
   };
 
   programs = {

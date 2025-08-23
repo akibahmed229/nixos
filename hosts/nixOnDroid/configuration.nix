@@ -12,5 +12,5 @@
   time.timeZone = "Asia/Dhaka";
 
   # Read the changelog before changing this value
-  system.stateVersion = state-version;
+  system.stateVersion = "24.05";
 }
