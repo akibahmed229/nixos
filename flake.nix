@@ -145,5 +145,9 @@
         droidConf = true;
         specialArgs = {inherit inputs self user state-version;};
       };
+      mkTemplate = mkSystem {
+        inherit nixpkgs;
+        template = true;
+      };
     };
 }

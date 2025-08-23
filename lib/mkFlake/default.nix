@@ -6,9 +6,10 @@ TODO: Need to structure this file better. It's a bit messy right now.
   inputs,
 }: {
   src ? throw "src is required",
-  mkNixOSSystem ? null,
-  mkHomeManagerSystem ? null,
-  mkNixOnDroidSystem ? null,
+  mkNixOSSystem ? {},
+  mkHomeManagerSystem ? {},
+  mkNixOnDroidSystem ? {},
+  mkTemplate ? {},
 }: let
   inherit (inputs) nixpkgs;
   inherit (nixpkgs) lib;
@@ -16,12 +17,7 @@ TODO: Need to structure this file better. It's a bit messy right now.
   forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
   # The function to generate the system configurations (derived from my custom lib helper function)
-  inherit (self.lib) mkDerivation mkOverlay mkModule mkSystem;
-
-  mkTemplate = mkSystem {
-    inherit nixpkgs;
-    template = true;
-  };
+  inherit (self.lib) mkDerivation mkOverlay mkModule;
 in {
   lib = import "${src}/lib" {inherit lib;}; # Lib is a custom library of helper functions
 
