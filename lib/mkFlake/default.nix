@@ -23,7 +23,7 @@ TODO: Need to structure this file better. It's a bit messy right now.
     template = true;
   };
 in {
-  lib = import (src + "/lib") {inherit lib;}; # Lib is a custom library of helper functions
+  lib = import "${src}/lib" {inherit lib;}; # Lib is a custom library of helper functions
 
   # Accessible through 'nix build', 'nix shell', "nix run", etc
   packages = forAllSystems (
@@ -43,19 +43,19 @@ in {
   formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {});
 
   # Reusable nixos & home-manager modules you might want to export
-  nixosModules = mkModule (src + "/modules/custom/nixos");
-  homeModules = mkModule (src + "/modules/custom/home-manager");
+  nixosModules = mkModule "${src}/modules/custom/nixos";
+  homeModules = mkModule "${src}/modules/custom/home-manager";
 
   # The nixos system configurations for the supported systems
   # available through "$ nixos-rebuild switch --flake .#host"
-  nixosConfigurations = mkNixOSSystem (src + "/hosts/nixos");
+  nixosConfigurations = mkNixOSSystem "${src}/hosts/nixos";
 
   # available through "$ home-manager switch --flake .#home"
-  homeConfigurations = mkHomeManagerSystem (src + "/hosts/homeManager");
+  homeConfigurations = mkHomeManagerSystem "${src}/hosts/homeManager";
 
   # available through "$ nix-on-droid switch --flake .#device"
-  nixOnDroidConfigurations = mkNixOnDroidSystem (src + "/hosts/nixOnDroid");
+  nixOnDroidConfigurations = mkNixOnDroidSystem "${src}/hosts/nixOnDroid";
 
   # available through "$ nix flake init -t .#template"
-  templates = mkTemplate (src + "/public/templates");
+  templates = mkTemplate "${src}/public/templates";
 }
