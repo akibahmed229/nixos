@@ -34,9 +34,6 @@ in {
     wireless.enable = false;
   };
 
-  nixpkgs.overlays = [
-    self.overlays.nvim-overlay
-  ];
   environment.systemPackages = with pkgs; [neovim cryptsetup spice-vdagent guestfs-tools];
 
   # Enables copy / paste when running in a KVM with spice.

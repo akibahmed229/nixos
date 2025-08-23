@@ -9,7 +9,7 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["zsh" "tmux" "lf" "ags"];
+    ListOfPrograms = ["zsh" "tmux" "lf" "ags" "nixvim"];
   };
 
   home.packages = with pkgs; [
