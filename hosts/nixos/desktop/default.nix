@@ -37,7 +37,7 @@ in {
         "openrgb"
         "openrazer"
         "obs"
-        # "ngrok" # FIXME: busy
+        "ngrok"
         # "cloudflared"
       ];
     }
