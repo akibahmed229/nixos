@@ -16,13 +16,13 @@
 {
   # Default arguments for the function
   system ? "x86_64-linux", # Default system architecture
-  nixpkgs ? {}, # Allows passing custom nixpkgs
-  template ? false, # Flag to indicate if it's a template system
-  homeConf ? false, # Flag to indicate if it's a Home Manager system
-  droidConf ? false, # Flag to indicate if it's a Nix-on-Droid system
-  specialArgs ? {}, # Additional special arguments to pass
-  home-manager ? import <home-manager> {}, # Home Manager import
-  nix-on-droid ? import <nix-on-droid> {}, # Nix-on-Droid import
+  nixpkgs ? {},
+  template ? false,
+  homeConf ? false,
+  droidConf ? false,
+  specialArgs ? {},
+  home-manager ? {},
+  nix-on-droid ? {},
   ...
 }: path: let
   # Importing necessary functions and utilities from the provided imports
@@ -76,9 +76,7 @@
           ]
           ++
           # Include Home Manager configuration if the system is integrated
-          optionals (attrsets.filterAttrs
-            (n: _: n == "home-manager")
-            != {})
+          optionals (home-manager != {})
           [
             home-manager.nixosModules.home-manager # Home Manager integration
 
