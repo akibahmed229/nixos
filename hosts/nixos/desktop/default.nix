@@ -70,12 +70,12 @@ in {
     };
   };
 
-  # Custom nixos modules for
+  # User management configuration ( custom module ) - see modules/custom/nixos/user
   setUser = {
+    nixosUsers.enable = true;
+    homeUsers.enable = true;
     name = "${user}";
     inherit hostname desktopEnvironment state-version;
-    users.enable = true;
-    homeUsers.enable = true;
   };
 
   users.mutableUsers =
