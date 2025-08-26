@@ -81,7 +81,7 @@ in {
       nixvim.enable = true;
       nixvim.transparentBackground.main = true;
       swaylock.enable = true;
-      swaylock.useImage = true;
+      swaylock.useWallpaper = true;
       sxiv.enable = true;
       tmux.enable = true;
       vesktop.enable = true;

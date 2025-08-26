@@ -66,7 +66,7 @@ in {
       gnome.enable = true;
       # Grub theme
       grub.enable = true;
-      grub.useImage = true;
+      grub.useWallpaper = true;
 
       console.enable = true;
       nixvim = {
