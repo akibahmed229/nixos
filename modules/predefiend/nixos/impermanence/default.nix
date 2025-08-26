@@ -171,15 +171,15 @@ Modules to help you handle persistent state on systems with ephemeral root stora
           ".mysql_history"
         ];
       };
-      "afif" = {
-        directories = [
-          "Downloads"
-          {
-            directory = ".mozilla";
-            mode = "0700";
-          }
-        ];
-      };
+      # "afif" = {
+      #   directories = [
+      #     "Downloads"
+      #     {
+      #       directory = ".mozilla";
+      #       mode = "0700";
+      #     }
+      #   ];
+      # };
     };
   };
 
