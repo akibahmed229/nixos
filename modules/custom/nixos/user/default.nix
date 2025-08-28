@@ -4,139 +4,151 @@
   pkgs,
   self,
   ...
-}: let
-  inherit (lib) mkOption types;
+}:
+with lib; let
   inherit (self.lib) mkScanPath mkRelativeToRoot;
-
-  # Home-manager defaults per user
-  userHome = name: {
-    username = lib.mkDefault "${name}";
-    homeDirectory = lib.mkDefault "/home/${name}";
-    stateVersion = lib.mkDefault "${config.setUser.state-version}";
-  };
-
-  # Load all user modules from the current directory
-  fileContents = map (path:
-    import path {
-      inherit pkgs config mkRelativeToRoot;
-      inherit (config.setUser) desktopEnvironment hostname;
-
-      inherit userHome;
-    })
-  (mkScanPath ./.);
 in {
-  # Define a setUser option to configure main user settings
+  # ── Top-level knobs for per-machine defaults (desktop env, hostname, etc.)
   options.setUser = mkOption {
     type = types.submodule {
       options = {
-        name = lib.mkOption {
-          type = lib.types.str;
+        name = mkOption {
+          type = types.str;
           default = "test";
-          description = "The main user to be created";
+          description = "Primary user name";
         };
-        state-version = lib.mkOption {
-          type = lib.types.str;
+        usersPath = mkOption {
+          type = types.nullOr types.path;
+          default = null;
+          description = "Path for list of user modules (./user/*/default.nix)";
+        };
+        state-version = mkOption {
+          type = types.str;
           default = "25.05";
-          description = "State version of home-manager";
+          description = "Home Manager stateVersion";
         };
-        desktopEnvironment = lib.mkOption {
-          type = lib.types.str;
+        desktopEnvironment = mkOption {
+          type = types.str;
           default = "hyprland";
-          description = "Desktop Environment of the system";
+          description = "Default desktop environment";
         };
-        hostname = lib.mkOption {
-          type = lib.types.str;
+        hostname = mkOption {
+          type = types.str;
           default = "desktop";
-          description = "Hostname of the system";
+          description = "Host name";
         };
-        nixosUsers.enable = lib.mkEnableOption "Enable NixOS user configuration";
-        homeUsers.enable = lib.mkEnableOption "Enable Home Manager user configuration";
+        nixosUsers.enable = mkEnableOption "Create NixOS users";
+        homeUsers.enable = mkEnableOption "Create Home Manager users";
       };
     };
     default = {};
   };
 
-  # Define a list of users options with their configurations
+  # ── Schema for each user attrset imported from ./user/*/default.nix
   options.myusers = mkOption {
-    type =
-      types.listOf
-      (types.submodule {
-        options = {
-          name = mkOption {type = types.str;};
-          isNormalUser = mkOption {
-            type = types.bool;
-            default = true;
-          };
-
-          hashedPassword = mkOption {
-            type = types.nullOr types.str;
-            default = null;
-            description = "SHA-512 hashed password";
-          };
-          hashedPasswordFile = mkOption {
-            type = types.nullOr types.str;
-            default = null;
-            description = "Path to file containing hashed password";
-          };
-
-          keys = mkOption {
-            type = types.listOf types.str;
-            default = [];
-          };
-          extraGroups = mkOption {
-            type = types.listOf types.str;
-            default = [];
-          };
-          packages = mkOption {
-            type = types.listOf types.package;
-            default = [];
-          };
-          shell = mkOption {
-            type = types.package;
-            default = pkgs.bash;
-          };
-
-          homeFile = mkOption {
-            type = types.anything;
-            default = [];
-            description = "Home-manager config paths or objects";
-          };
-
-          enabledSystemConf = mkOption {
-            type = types.bool;
-            default = false;
-          };
-          enabledHomeConf = mkOption {
-            type = types.bool;
-            default = false;
-          };
+    type = types.listOf (types.submodule {
+      options = {
+        name = mkOption {type = types.str;};
+        isNormalUser = mkOption {
+          type = types.bool;
+          default = true;
         };
-      });
+        hashedPassword = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        hashedPasswordFile = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        keys = mkOption {
+          type = types.listOf types.str;
+          default = [];
+        };
+        extraGroups = mkOption {
+          type = types.listOf types.str;
+          default = [];
+        };
+        packages = mkOption {
+          type = types.listOf types.package;
+          default = [];
+        };
+        shell = mkOption {
+          type = types.package;
+          default = pkgs.bash;
+        };
+        homeFile = mkOption {
+          type = types.anything;
+          default = [];
+          description = "HM imports or inline objects";
+        };
+        # enable flags
+        enableSystemConf = mkOption {
+          type = types.bool;
+          default = false;
+        };
+        enableHomeConf = mkOption {
+          type = types.bool;
+          default = false;
+        };
+      };
+    });
     default = [];
   };
 
-  config = {
-    # Load user configurations from the scanned files
-    myusers = fileContents;
+  config = let
+    cfg = config.setUser;
+    path =
+      if cfg.usersPath != null
+      then cfg.usersPath
+      else throw "Please set 'usersPath' in 'setUser' option.";
 
-    # NixOS system users
-    users = lib.mkIf config.setUser.nixosUsers.enable {
-      users = builtins.listToAttrs (map (user: {
-        inherit (user) name;
-        value = {
-          inherit (user) hashedPasswordFile hashedPassword extraGroups packages shell isNormalUser;
-          openssh.authorizedKeys.keys = user.keys;
-        };
-      }) (builtins.filter (u: u.enabledSystemConf) config.myusers));
+    # Default HM “home” fragment per user (provided to each user module).
+    userHome = name: {
+      username = mkDefault name;
+      homeDirectory = mkDefault "/home/${name}";
+      stateVersion = mkDefault cfg.state-version;
     };
 
-    # Home-manager users
-    home-manager = lib.mkIf config.setUser.homeUsers.enable {
+    # Import all user files lazily *inside* config, so cfg is available.
+    rawUsers =
+      map (
+        path:
+          import path {
+            inherit config pkgs mkRelativeToRoot userHome;
+            inherit (cfg) desktopEnvironment hostname;
+          }
+      )
+      (mkScanPath path);
+
+    # Small helper to pick only users with a given boolean flag set.
+    filterBy = flag: builtins.filter (u: u.${flag}) config.myusers;
+  in {
+    # Make the imported list visible as the option value (defaults fill in).
+    myusers = rawUsers;
+
+    # NixOS system users
+    users = mkIf cfg.nixosUsers.enable {
+      users = builtins.listToAttrs (map
+        (u: {
+          name = u.name;
+          value = {
+            inherit (u) isNormalUser hashedPassword hashedPasswordFile extraGroups packages shell;
+            openssh.authorizedKeys.keys = u.keys;
+          };
+        })
+        (filterBy "enableSystemConf"));
+    };
+
+    # Home-Manager users
+    home-manager = mkIf cfg.homeUsers.enable {
       useGlobalPkgs = false;
-      users = builtins.listToAttrs (map (user: {
-        inherit (user) name;
-        value = {imports = user.homeFile;};
-      }) (builtins.filter (u: u.enabledHomeConf) config.myusers));
+      users = builtins.listToAttrs (map
+        (u: {
+          name = u.name;
+          value = {imports = u.homeFile;};
+        })
+        (filterBy "enableHomeConf"));
     };
   };
 }

@@ -25,12 +25,14 @@ in {
     };
 
   # Custom nixos modules for
+  # User management configuration ( custom module ) - see modules/custom/nixos/user
   setUser = {
     name = "${user}";
-    inherit hostname state-version;
-    desktopEnvironment = "dwm";
-    users.enable = true;
+    usersPath = ./users/.;
+    nixosUsers.enable = true;
     homeUsers.enable = true;
+    desktopEnvironment = "dwm";
+    inherit hostname state-version;
   };
 
   users.defaultUserShell = pkgs.zsh;

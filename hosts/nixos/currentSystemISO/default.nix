@@ -19,12 +19,13 @@ in {
     "modules/predefiend/nixos/sops"
   ];
 
-  # Custom nixos modules for
+  # User management configuration ( custom module ) - see modules/custom/nixos/user
   setUser = {
     name = "${user}";
-    inherit hostname desktopEnvironment state-version;
-    users.enable = true;
+    usersPath = ./users/.;
+    nixosUsers.enable = true;
     homeUsers.enable = true;
+    inherit hostname desktopEnvironment state-version;
   };
 
   # (Custom nixos modules)

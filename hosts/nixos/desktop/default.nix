@@ -72,10 +72,12 @@ in {
   };
 
   # User management configuration ( custom module ) - see modules/custom/nixos/user
+  # Per-system user configuration
   setUser = {
+    name = "${user}";
+    usersPath = ./users/.;
     nixosUsers.enable = true;
     homeUsers.enable = true;
-    name = "${user}";
     inherit hostname desktopEnvironment state-version;
   };
 
