@@ -131,7 +131,7 @@ in {
     users = mkIf cfg.nixosUsers.enable {
       users = builtins.listToAttrs (map
         (u: {
-          name = u.name;
+          inherit (u) name;
           value = {
             inherit (u) isNormalUser hashedPassword hashedPasswordFile extraGroups packages shell;
             openssh.authorizedKeys.keys = u.keys;
@@ -145,7 +145,7 @@ in {
       useGlobalPkgs = false;
       users = builtins.listToAttrs (map
         (u: {
-          name = u.name;
+          inherit (u) name;
           value = {imports = u.homeFile;};
         })
         (filterBy "enableHomeConf"));
