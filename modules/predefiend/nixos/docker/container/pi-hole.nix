@@ -40,6 +40,8 @@
           # Forward DNS ports (53) on TCP and UDP to the host IP address (ServerIP)
           "${ServerIP}:53:53/tcp" # DNS requests over TCP
           "${ServerIP}:53:53/udp" # DNS requests over UDP
+          "${ServerIP}:67:67/udp" # Pi-hole as your DHCP Server
+          "${ServerIP}:443:443/tcp"
 
           # Forward HTTP (80) ports to Pi-hole for web access
           "3080:80" # Access Pi-hole's web interface on port 3080 instead of the default port 80
@@ -56,11 +58,15 @@
         # Environment variables to configure the container
         environment = {
           TZ = "Asia/Dhaka";
+          FTLCONF_dns_listeningMode = "all";
+          FTLCONF_misc_etc_dnsmasq_d = "true";
         };
 
         # Additional Docker options to give the container necessary permissions
         extraOptions = [
           "--cap-add=NET_ADMIN" # This adds network management capabilities to the container (required for DHCP or network operations)
+          "--cap-add=SYS_TIME"
+          "--cap-add=SYS_NICE"
           "--dns=127.0.0.1" # Set DNS resolver for the container to localhost (Pi-hole itself)
           "--dns=1.1.1.1" # Fallback DNS server to Cloudflare's DNS (1.1.1.1)
         ];

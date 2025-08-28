@@ -49,6 +49,7 @@ in {
           # "pi-hole" # FIXME: busy
           "nextcloud"
           "portainer"
+          "pi-hole"
           "n8n"
           "ollama"
         ];
