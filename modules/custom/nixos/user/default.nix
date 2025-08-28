@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mkOption types;
-  inherit (self.lib) mkRelativeToRoot;
+  inherit (self.lib) mkScanPath mkRelativeToRoot;
 
   # Home-manager defaults per user
   userHome = name: {
@@ -14,6 +14,16 @@
     homeDirectory = lib.mkDefault "/home/${name}";
     stateVersion = lib.mkDefault "${config.setUser.state-version}";
   };
+
+  # Load all user modules from the current directory
+  fileContents = map (path:
+    import path {
+      inherit pkgs config mkRelativeToRoot;
+      inherit (config.setUser) desktopEnvironment hostname;
+
+      inherit userHome;
+    })
+  (mkScanPath ./.);
 in {
   # Define a setUser option to configure main user settings
   options.setUser = mkOption {
@@ -106,77 +116,8 @@ in {
   };
 
   config = {
-    # Define users config with their specific configurations
-    myusers = [
-      rec {
-        inherit (config.setUser) name;
-        isNormalUser = true;
-
-        hashedPasswordFile =
-          if config ? sops.secrets."${name}/password/my_secret"
-          then config.sops.secrets."${name}/password/my_secret".path
-          else null;
-
-        keys = [];
-        hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
-        extraGroups = ["networkmanager" "wheel" "docker" "video" "audio"];
-        packages = with pkgs; [wget thunderbird vlc];
-        shell = pkgs.zsh;
-
-        homeFile =
-          [{home = userHome name;}]
-          ++ map mkRelativeToRoot [
-            "home-manager/home.nix"
-            "home-manager/${config.setUser.desktopEnvironment}/home.nix"
-            "hosts/nixos/${config.setUser.hostname}/home.nix"
-          ];
-        enabledSystemConf = true;
-        enabledHomeConf = true;
-      }
-
-      rec {
-        name = "afif";
-        isNormalUser = true;
-
-        hashedPasswordFile =
-          if config ? sops.secrets."${name}/password/my_secret"
-          then config.sops.secrets."${name}/password/my_secret".path
-          else null;
-
-        keys = [];
-        hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
-        extraGroups = ["networkmanager" "video" "audio"];
-        packages = with pkgs; [wget thunderbird vlc];
-        shell = pkgs.bash;
-
-        homeFile =
-          [{home = userHome name;}]
-          ++ map mkRelativeToRoot [
-            "home-manager/home.nix"
-            "home-manager/${config.setUser.desktopEnvironment}/home.nix"
-            "hosts/nixos/${config.setUser.hostname}/home.nix"
-          ];
-      }
-
-      rec {
-        name = "root";
-        isNormalUser = false;
-
-        hashedPasswordFile =
-          if (config.setUser.name == "akib")
-          then config.sops.secrets."akib/password/root_secret".path
-          else null;
-
-        keys = [];
-        hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
-        packages = with pkgs; [neovim wget];
-        extraGroups = [];
-        shell = pkgs.bash;
-
-        homeFile = [{home = userHome name;}];
-        enabledHomeConf = false;
-      }
-    ];
+    # Load user configurations from the scanned files
+    myusers = fileContents;
 
     # NixOS system users
     users = lib.mkIf config.setUser.nixosUsers.enable {

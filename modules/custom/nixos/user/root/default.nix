@@ -1,16 +1,9 @@
 {
   config,
-  lib,
   pkgs,
+  userHome,
   ...
-}: let
-  # Home-manager defaults per user
-  userHome = name: {
-    username = lib.mkDefault "${name}";
-    homeDirectory = lib.mkDefault "/home/${name}";
-    stateVersion = lib.mkDefault "${config.setUser.state-version}";
-  };
-in rec {
+}: rec {
   name = "root";
   isNormalUser = false;
 
@@ -26,5 +19,6 @@ in rec {
   shell = pkgs.bash;
 
   homeFile = [{home = userHome name;}];
+  enabledSystemConf = false;
   enabledHomeConf = false;
 }

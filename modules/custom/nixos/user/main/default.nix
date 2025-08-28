@@ -1,19 +1,12 @@
 {
   config,
-  self,
-  lib,
+  mkRelativeToRoot,
   pkgs,
+  desktopEnvironment,
+  hostname,
+  userHome,
   ...
-}: let
-  inherit (self.lib) mkRelativeToRoot;
-
-  # Home-manager defaults per user
-  userHome = name: {
-    username = lib.mkDefault "${name}";
-    homeDirectory = lib.mkDefault "/home/${name}";
-    stateVersion = lib.mkDefault "${config.setUser.state-version}";
-  };
-in rec {
+}: rec {
   inherit (config.setUser) name;
   isNormalUser = true;
 
@@ -32,8 +25,8 @@ in rec {
     [{home = userHome name;}]
     ++ map mkRelativeToRoot [
       "home-manager/home.nix"
-      "home-manager/${config.setUser.desktopEnvironment}/home.nix"
-      "hosts/nixos/${config.setUser.hostname}/home.nix"
+      "home-manager/${desktopEnvironment}/home.nix"
+      "hosts/nixos/${hostname}/home.nix"
     ];
   enabledSystemConf = true;
   enabledHomeConf = true;
