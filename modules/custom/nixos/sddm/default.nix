@@ -16,10 +16,10 @@ in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       libsForQt5.qt5.qtgraphicaleffects
-      kdePackages.qtgraphs # Graphical effects for Qt 5.
-      kdePackages.qtvirtualkeyboard
-      kdePackages.qtsvg
-      kdePackages.qtmultimedia
+      qt6Packages.qtgraphs
+      qt6Packages.qtvirtualkeyboard
+      qt6Packages.qtsvg
+      qt6Packages.qtmultimedia
     ];
     services = {
       libinput.enable = true;

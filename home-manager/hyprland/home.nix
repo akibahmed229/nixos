@@ -27,7 +27,7 @@
     self.packages.${pkgs.system}.wallpaper # Wallpaper management tool.
     nwg-look # Look and feel customization tool.
     # Theme engine for Qt.
-    kdePackages.qtstyleplugin-kvantum
+    qt6Packages.qtstyleplugin-kvantum
     brightnessctl # Brightness control tool.
 
     swww # Sway wallpaper manager.
