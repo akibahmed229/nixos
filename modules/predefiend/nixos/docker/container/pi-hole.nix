@@ -41,7 +41,7 @@
           "${ServerIP}:53:53/tcp" # DNS requests over TCP
           "${ServerIP}:53:53/udp" # DNS requests over UDP
           "${ServerIP}:67:67/udp" # Pi-hole as your DHCP Server
-          "${ServerIP}:443:443/tcp"
+          # "${ServerIP}:443:443/tcp"
 
           # Forward HTTP (80) ports to Pi-hole for web access
           "3080:80" # Access Pi-hole's web interface on port 3080 instead of the default port 80
