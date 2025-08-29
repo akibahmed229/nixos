@@ -111,7 +111,7 @@ in {
     };
 
     # Import all user files lazily *inside* config, so cfg is available.
-    rawUsers =
+    myusers =
       map (
         path:
           import path {
@@ -125,7 +125,7 @@ in {
     filterBy = flag: builtins.filter (u: u.${flag}) config.myusers;
   in {
     # Make the imported list visible as the option value (defaults fill in).
-    myusers = rawUsers;
+    inherit myusers;
 
     # NixOS system users
     users = mkIf cfg.nixosUsers.enable {
