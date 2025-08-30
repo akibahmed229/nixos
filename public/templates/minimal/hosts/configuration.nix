@@ -7,16 +7,45 @@
   lib,
   inputs,
   self,
+  state-version,
+  devicename,
   ...
 }: {
   imports =
     [
       inputs.disko.nixosModules.default
+      inputs.nix-index-database.nixosModules.nix-index
+      {programs.nix-index-database.comma.enable = true;}
     ]
-    ++ [(import ./desktop/disko.nix {device = "/dev/nvme1n1";})];
+    ++ [(import ../utils/disko.nix {device = lib.mkDefault devicename;})];
+
+  # Dual Booting using grub
+  boot = {
+    loader = {
+      # Disable init=/bin/sh as a kernel parameter to prevent root access
+      systemd-boot.editor = lib.mkForce false;
+
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        enable = true;
+        devices = ["nodev"]; # install grub on efi
+        efiSupport = true;
+        useOSProber = true; # To find Other boot manager like windows
+        configurationLimit = 10; # Store number of config
+      };
+      timeout = 3; # Boot Timeout
+    };
+
+    # /tmp should be treated as volatile storage!
+    tmp.useTmpfs = lib.mkForce false;
+    tmp.cleanOnBoot = lib.mkForce (!config.boot.tmp.useTmpfs);
+  };
 
   # networking options
-  networking.hostName = "${hostname}"; # Define your hostname.
+  networking.hostName = hostname; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -43,48 +72,16 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    grub = {
-      enable = true;
-      devices = ["nodev"]; # install grub on efi
-      efiSupport = true;
-      useOSProber = true; # To find Other boot manager like windows
-      configurationLimit = 10; # Store number of config
-    };
-    timeout = 3; # Boot Timeout
-  };
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    jack.enable = true;
-  };
-
-  # User
-  users.users = {
-    ${user} = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "123456";
-      isNormalUser = true;
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel" "networkmanager" "video" "audio" "input" "disk"];
-    };
-  };
+  # Custom nixos modules
+  # Enable sound.
+  audio.enable = true;
 
   programs = {
     # Enable ADB for Android and other stuff.
     adb.enable = true;
     zsh.enable = true;
+    command-not-found.enable = false;
+    nix-index.enable = true;
     dconf.enable = true; # Enable dconf to manage settings.
   };
 
@@ -109,7 +106,6 @@
       jetbrains-mono
       source-han-sans
       nerd-fonts.jetbrains-mono
-      nerd-fonts.meslo-lg
     ];
     fontconfig = {
       enable = true;
@@ -191,11 +187,12 @@
 
   # XDG  paths
   environment.sessionVariables = rec {
-    WALLPAPER = "/home/${user}/.config/flake/public/wallpapers";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
+    FLAKE_DIR = "${XDG_CONFIG_HOME}/flake";
+    WALLPAPER = "${FLAKE_DIR}/public/wallpapers";
 
     # Not officially in the specification
     XDG_BIN_HOME = "$HOME/.local/bin";
@@ -226,14 +223,6 @@
     };
   };
 
-  boot = {
-    # Disable init=/bin/sh as a kernel parameter to prevent root access
-
-    # /tmp should be treated as volatile storage!
-    tmp.useTmpfs = lib.mkForce false;
-    tmp.cleanOnBoot = lib.mkForce (!config.boot.tmp.useTmpfs);
-  };
-
   system = {
     # Auto upgrade system for flake inputs and nixpkgs weekly
     autoUpgrade = {
@@ -253,6 +242,6 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    stateVersion = "24.05"; # Did you read the comment?
+    stateVersion = state-version; # Did you read the comment?
   };
 }

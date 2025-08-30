@@ -3,15 +3,15 @@
 {
   pkgs,
   user,
+  state-version,
   ...
 }: {
   # your imports & home configuration goes here,...
   home = {
-    username = "${user}";
+    username = user;
     homeDirectory = "/home/${user}";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
-
+  home.stateVersion = state-version;
 }

@@ -5,6 +5,10 @@
   user,
   ...
 }: {
+  imports = [
+    (import ../../utils/impermance.nix)
+  ];
+
   # your configuration goes here,...
   environment.systemPackages = with pkgs; [
     neovim
@@ -19,11 +23,10 @@
     cryptsetup
   ];
 
-
   # home-manager configuration
   home-manager = {
-   users.${user} ={
-    imports = [(import ./home.nix)];
-   };
+    users.${user} = {
+      imports = [(import ./home.nix)];
+    };
   };
 }
