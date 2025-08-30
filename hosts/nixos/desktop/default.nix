@@ -161,6 +161,7 @@ in {
     meson # Build system.
     gettext # GNU internationalization and localization library.
     python313Full # Python programming language.
+    python313Packages.uv # python uv pkgs manager.
     nodejs_22 # JavaScript runtime.
     rustc # Rust programming language and tools.
     cargo # Rust package manager.
