@@ -21,6 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     akibOS = {
       url = "github:akibahmed229/nixos";
       inputs.nixpkgs.follows = "nixpkgs";
