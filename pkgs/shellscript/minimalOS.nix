@@ -93,7 +93,7 @@ pkgs.writeShellApplication {
         print_message "Initaliation of minimal flake repository..."
         mkdir -p "$flake_dir"
         cd "$flake_dir"
-        nix flake init -t github:akibahmed229/nixos#homeManager --experimental-features "nix-command flakes"
+        nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
         print_message "Successfully Initialize minimalOS template"
 
 
