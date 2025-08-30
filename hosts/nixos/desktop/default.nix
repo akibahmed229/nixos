@@ -46,7 +46,6 @@ in {
       ListOfPrograms =
         map (x: x + ".nix")
         [
-          # "pi-hole" # FIXME: busy
           "nextcloud"
           "portainer"
           "pi-hole"
