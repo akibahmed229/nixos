@@ -42,7 +42,7 @@
   } @ inputs: let
     system = "x86_64-linux";
     # FIXME: Replace with your username
-    user = "akib";
+    user = "test";
     state-version = "25.11";
     devicename = "/dev/nvme1n1";
 
