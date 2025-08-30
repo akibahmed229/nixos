@@ -27,9 +27,9 @@ in {
         "stylix"
         "impermanence"
         "gaming"
-        "mysql"
-        "postgresql"
         "docker"
+        "flatpak"
+        "dbus"
         "bbr"
         "samba"
         "fhs"
@@ -51,7 +51,6 @@ in {
           "portainer"
           "pi-hole"
           "n8n"
-          "ollama"
         ];
     };
 
@@ -146,7 +145,6 @@ in {
     # libverto # Event loop abstraction library.
     busybox # Unix utilities in a single executable.
     libinput # Input device management library.
-    atuin # history management tool for cli
     flatpak # Application sandboxing and distribution framework.
     mediawriter # USB writer for Fedora Media.
     lact # Gui for Graphic card overclocking and other stuff.
@@ -208,35 +206,8 @@ in {
     tcpdump # Network packet analyzer.
   ];
 
-  programs = {
-    wireshark = {
-      enable = true;
-      package = pkgs.wireshark;
-    };
-  };
-
-  # Enable Waydroid
-  virtualisation.waydroid.enable = true;
-
   # List services that you want to enable:
   services = {
-    # Enable Flatpack
-    flatpak.enable = true;
-    # Enable dbus
-    dbus.enable = true;
-
-    atuin = {
-      enable = true;
-      package = pkgs.atuin;
-      openFirewall = true;
-      port = 9090;
-    };
-
-    emacs = {
-      enable = true;
-      package = pkgs.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
-    };
-
     # disable password auth for openssh
     openssh.settings.PasswordAuthentication = false;
   };
@@ -254,14 +225,4 @@ in {
     enableIPv6 = true;
     enableB43Firmware = true;
   };
-
-  # Enable cron service
-  # Note: *     *    *     *     *          command to run
-  #      min  hour  day  month  year        user command
-  # cron = {
-  #  enable = true;
-  #  systemCronJobs = [
-  #    ''* * * * * akib     echo "Hello World" >> /home/akib/hello.txt''
-  #  ];
-  # };
 }

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   # Enable cron service
   # Note: *     *    *     *     *          command to run
   #      min  hour  day  month  year        user command

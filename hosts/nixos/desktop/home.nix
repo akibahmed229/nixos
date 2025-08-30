@@ -32,6 +32,8 @@ in {
       "wofi"
       "wlogout"
       "swappy"
+      "atuin"
+      "emacs"
     ];
   };
 
