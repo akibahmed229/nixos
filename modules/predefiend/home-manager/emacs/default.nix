@@ -4,10 +4,13 @@
     package = pkgs.emacs-gtk;
   };
 
-  home.file = {
-    ".config/emacs" = {
-      source = ./config;
-      recursive = true;
+  home = {
+    packages = with pkgs; [emacs-gtk];
+    file = {
+      ".config/emacs" = {
+        source = ./config;
+        recursive = true;
+      };
     };
   };
 }
