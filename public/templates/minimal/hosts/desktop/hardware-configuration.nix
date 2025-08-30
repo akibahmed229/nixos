@@ -79,19 +79,6 @@
     interval = "weekly";
   };
 
-  fileSystems = {
-    "/mnt/sda1" = {
-      device = "/dev/sda1";
-      fsType = "ntfs";
-      options = ["defaults"]; # Mount options (rw,exec,auto,user,async)
-    };
-    "/mnt/sda2" = {
-      device = "/dev/sda2";
-      fsType = "ntfs";
-      options = ["defaults"];
-    };
-  };
-
   zramSwap = {
     enable = true;
     memoryPercent = 10;

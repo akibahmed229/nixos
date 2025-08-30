@@ -1,15 +1,15 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
-  pkgs,
+  lib,
   user,
   state-version,
   ...
 }: {
   # your imports & home configuration goes here,...
   home = {
-    username = user;
-    homeDirectory = "/home/${user}";
+    username = lib.mkDefault user;
+    homeDirectory = lib.mkDefault "/home/${user}";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

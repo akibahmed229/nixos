@@ -72,35 +72,20 @@ pkgs.writeShellApplication {
         fi
     }
 
-    # Function to move the flake directory to the persist directory
-    function move_flake() {
-        local flake_dir="$1"
-        local persist_dir="$2"
-
-        mkdir -p "$persist_dir"
-        mv "$flake_dir" "$persist_dir"
-        useradd -m "$username"
-        chown -R "$username":users "$persist_dir"/flake/*
-        chown -R "$username":users "$persist_dir"/flake/.*
-    }
-
     # Function to install the flake and NixOS
     function install_flake() {
-        local flake_dir="/home/$username/flake"
-        local persist_dir="/mnt/persist/home/$username/.config"
+       local flake_dir="/home/$username/flake"
+       local persist_dir="/mnt/persist/home/$username/.config"
 
-
-        print_message "Initaliation of minimal flake repository..."
-        mkdir -p "$flake_dir"
-        cd "$flake_dir"
-        nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
-        print_message "Successfully Initialize minimalOS template"
-
+       print_message "Initaliation of minimal flake repository..."
+       mkdir -p "$flake_dir"
+       cd "$flake_dir"
+       nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
+       print_message "Successfully Initialize minimalOS template"
 
        print_message "### Mounting Disk ###"
        sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "$flake_dir"/utils/disko.nix --arg device "\"$device\""
        print_message "### Disko Format Done ###"
-
 
         # Update user data and generate hardware configuration
         update_flake_data
@@ -109,7 +94,6 @@ pkgs.writeShellApplication {
 
         # Install NixOS
         nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
-        move_flake "$flake_dir" "$persist_dir"
     }
 
     # Check if /mnt/home directory exists
