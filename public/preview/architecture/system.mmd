@@ -1,0 +1,94 @@
+---
+config:
+  theme: dark
+  layout: elk
+  look: classic
+---
+flowchart TD
+ subgraph MPKG["Modules & Packages"]
+        MKM(["mkModule"])
+        MKD(["mkDerivation"])
+        MKO(["mkOverlay"])
+        MODULES["modules/predefined/*"]
+        PKGS["pkgs/*"]
+        OVERLAYS["overlays/*"]
+  end
+ subgraph HOSTS["Hosts"]
+        H["hosts/*"]
+        MKS["mkSystem"]
+        NXS(["NixOS Systems"])
+        HM(["Home-Manager Systems"])
+        NOD(["Nix-on-Droid Systems"])
+  end
+ subgraph NIXOS["NixOS Hosts"]
+        NXS_GLOBAL["configuration.nix"]
+        DSK["desktop"]
+        VIRT["virt"]
+        ISO["minimalISO / currentSystemISO"]
+        DSK_CONF["default.nix"]
+        DSK_HOME["home.nix"]
+        DSK_USERS["users/*"]
+        MAIN_USER["main/default.nix"]
+        AFIF["afif/default.nix"]
+        ROOT["root/default.nix"]
+  end
+ subgraph HMGR["Home Manager Hosts"]
+        HM_GLOBAL["home.nix"]
+        HM_ARCH["arch/default.nix"]
+        HM_NIXONDROID["redmi12/home.nix"]
+  end
+ subgraph NODGR["Nix-on-Droid Hosts"]
+        NOD_GLOBAL["configuration.nix"]
+        NOD_NIXONDROID["redmi12/home.nix"]
+  end
+    FN["flake.nix (Entry)"] --> LIB["lib helpers"]
+    LIB --> MKF(["mkFlake"])
+    MKM --> MODULES
+    MKD --> PKGS
+    MKO --> OVERLAYS
+    MKF --> MKS & MKO & MKM & MKD
+    MKS --> H & PKGS_NIX["nixpkgs"]
+    H --> NXS & HM & NOD
+    NXS --> DSK & VIRT & ISO & NXS_GLOBAL
+    DSK --> DSK_CONF & DSK_HOME & DSK_USERS
+    DSK_USERS --> MAIN_USER & AFIF & ROOT
+    MAIN_USER --> USER_FLAGS["enableSystemConf / enableHomeConf"] & USER_HOME["homeFile
+→ home-manager files"]
+    HM --> HM_GLOBAL & HM_ARCH & HM_NIXONDROID
+    NOD --> NOD_GLOBAL & NOD_NIXONDROID
+    PKGS_NIX --> OVERLAYS
+    MODULES@{ shape: rect}
+    PKGS@{ shape: cyl}
+    OVERLAYS@{ shape: cyl}
+    H@{ shape: rect}
+    MKS@{ shape: rect}
+    DSK@{ shape: rect}
+    VIRT@{ shape: rect}
+    ISO@{ shape: rect}
+    DSK_CONF@{ shape: doc}
+    DSK_HOME@{ shape: doc}
+    DSK_USERS@{ shape: procs}
+    MAIN_USER@{ shape: rect}
+    AFIF@{ shape: rect}
+    ROOT@{ shape: rect}
+    HM_GLOBAL@{ shape: doc}
+    HM_ARCH@{ shape: doc}
+    HM_NIXONDROID@{ shape: doc}
+    NOD_GLOBAL@{ shape: doc}
+    NOD_NIXONDROID@{ shape: doc}
+    FN@{ shape: hex}
+    LIB@{ shape: rect}
+    PKGS_NIX@{ shape: cyl}
+    USER_FLAGS@{ shape: hex}
+    USER_HOME@{ shape: doc}
+     PKGS:::overlay
+     OVERLAYS:::overlay
+     FN:::entry
+     PKGS_NIX:::overlay
+    classDef entry fill:#FFDDCC,stroke:#333,stroke-width:2px
+    classDef overlay fill:#CCE5FF,stroke:#222,stroke-width:2px
+    style PKGS color:#000000
+    style OVERLAYS color:#000000
+    style FN color:#000000
+    style PKGS_NIX color:#D50000,stroke:#000000
+    click FN "www.github.com/akibahmed229/nixos"

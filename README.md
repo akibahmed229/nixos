@@ -4,7 +4,7 @@
 
 <h2 align="center"> Current System Preview </h2>
 
-![my current setup](./public/preview/Current.png)
+![my current setup](./public/preview/system/Current.png)
 
 # 1. Installation My version of NixOS
 
@@ -57,8 +57,11 @@ chown -R yourUserName:users .*
 <details>
   <summary>Structurally, this flake is designed to interpret as much information as possible from the directories it manages. Rather than have a "master list" of configurations to manage, adding files to the hosts/, modules/, overlays/, & pkgs/ folders will cause them to be automatically detected and configured on flake rebuild. This is achieved by programmatically determining the objects that need to be evaluated and generated. The downside of this, of course, is that there's not one "master list" to reference;</summary>
 
-- **Flake.nix** : Main flake file for defining the system configuration
+<h3 align="center">System Architecture </h3>
 
+![my current setup](./public/preview/architecture/system.svg)
+
+- **Flake.nix** : Main flake file for defining the system configuration
   - **lib** : Library helper functions, providing a set of functions that can be used to mange stuff in a more concise way
   - **hosts** : Host-specific configuration files
   - **home-manager** : Configuration files for desktop environment & window manager
