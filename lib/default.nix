@@ -8,7 +8,15 @@
 
   # Helper functions (user level)
   mkImport = import ./mkImport {inherit lib;};
-  mkScanPath = import ./mkScanPath {inherit lib;};
-  mkRecursiveImport = import ./mkRecursiveImport {inherit lib;};
   mkRelativeToRoot = lib.path.append ../.; # appends a relative path from the current directory to the root directory
+  inherit
+    (import ./mkScanPaths {inherit lib;})
+    mkScanPaths
+    mkScanImportPaths
+    ;
+  inherit
+    (import ./mkRecursiveScanPaths {inherit lib;})
+    mkRecursiveScanPaths
+    mkRecursiveImportPaths
+    ;
 }

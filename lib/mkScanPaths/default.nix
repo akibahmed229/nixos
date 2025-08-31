@@ -3,7 +3,7 @@
 * It returns a list of paths to the .nix files and directories.
 */
 {lib}: let
-  scanPaths = path:
+  mkScanPaths = path:
     builtins.map (f: "${path}/${f}") (
       builtins.attrNames (
         lib.attrsets.filterAttrs (
@@ -16,5 +16,21 @@
         ) (builtins.readDir path)
       )
     );
-in
-  scanPaths
+
+  mkScanImportPaths = args: path:
+    builtins.map
+    (
+      path: let
+        imported = import path;
+      in
+        # Normalize both module styles:
+        # - foo.nix as `{ lib, ... }: { ... }`
+        # - bar.nix as `{ ... }`
+        if builtins.isFunction imported
+        then imported args
+        else imported
+    )
+    (mkScanPaths path);
+in {
+  inherit mkScanPaths mkScanImportPaths;
+}

@@ -15,16 +15,16 @@ Output (list of attrsets):
     { services.bar.enable = true; }
   ]
 */
-{lib}: {...} @ args
+{lib}
 : let
   # Recursively scan a directory for all `.nix` files (excluding default.nix)
-  recursiveScanPaths = path:
+  mkRecursiveScanPaths = path:
     lib.flatten (
       builtins.attrValues (
         builtins.mapAttrs (
           name: _type:
             if (_type == "directory")
-            then recursiveScanPaths (path + "/${name}") # go deeper
+            then mkRecursiveScanPaths (path + "/${name}") # go deeper
             else if (name != "default.nix") && (lib.strings.hasSuffix ".nix" name)
             then path + "/${name}" # collect nix file
             else []
@@ -33,7 +33,7 @@ Output (list of attrsets):
     );
 
   # Import all `.nix` files found by recursiveScanPaths
-  recursiveImport = path:
+  mkRecursiveImportPaths = args: path:
     builtins.map
     (
       path: let
@@ -46,6 +46,7 @@ Output (list of attrsets):
         then imported args
         else imported
     )
-    (recursiveScanPaths path);
-in
-  recursiveImport
+    (mkRecursiveScanPaths path);
+in {
+  inherit mkRecursiveScanPaths mkRecursiveImportPaths;
+}
