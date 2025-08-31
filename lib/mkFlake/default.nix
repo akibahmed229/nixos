@@ -19,7 +19,7 @@ TODO: Need to structure this file better. It's a bit messy right now.
   # The function to generate the system configurations (derived from my custom lib helper function)
   inherit (self.lib) mkDerivation mkOverlay mkModule;
 in {
-  lib = import "${src}/lib" {inherit lib;}; # Lib is a custom library of helper functions
+  lib = import "${src}/lib" {lib = lib // self.lib;}; # Lib is a custom library of helper functions
 
   # Accessible through 'nix build', 'nix shell', "nix run", etc
   packages = forAllSystems (

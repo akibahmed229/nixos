@@ -3,6 +3,8 @@
 * It returns a list of paths to the .nix files and directories.
 */
 {lib}: let
+  inherit (lib) mkImportPath;
+
   mkScanPath = path:
     builtins.map (f: "${path}/${f}") (
       builtins.attrNames (
@@ -17,20 +19,24 @@
       )
     );
 
-  mkScanImportPath = args: path:
-    builtins.map
-    (
-      path: let
-        imported = import path;
-      in
-        # Normalize both module styles:
-        # - foo.nix as `{ lib, ... }: { ... }`
-        # - bar.nix as `{ ... }`
-        if builtins.isFunction imported
-        then imported args
-        else imported
-    )
-    (mkScanPath path);
+  # Recursively scan a directory for all `.nix` files (excluding default.nix)
+  mkRecursiveScanPaths = path:
+    lib.flatten (
+      builtins.attrValues (
+        builtins.mapAttrs (
+          name: _type:
+            if (_type == "directory")
+            then mkRecursiveScanPaths (path + "/${name}") # go deeper
+            else if (name != "default.nix") && (lib.strings.hasSuffix ".nix" name)
+            then path + "/${name}" # collect nix file
+            else []
+        ) (builtins.readDir path)
+      )
+    );
+
+  mkScanImportPath = args: path: mkImportPath args path mkScanPath;
+
+  mkRecursiveImportPaths = args: path: mkImportPath args path mkRecursiveScanPaths;
 in {
-  inherit mkScanPath mkScanImportPath;
+  inherit mkScanPath mkRecursiveScanPaths mkScanImportPath mkRecursiveImportPaths;
 }

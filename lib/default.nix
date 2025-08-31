@@ -10,13 +10,14 @@
   mkImport = import ./mkImport {inherit lib;};
   mkRelativeToRoot = lib.path.append ../.; # appends a relative path from the current directory to the root directory
   inherit
-    (import ./mkScanPaths {inherit lib;})
-    mkScanPath
-    mkScanImportPath
+    (import ./mkImportPath {inherit lib;})
+    mkImportPath
     ;
   inherit
-    (import ./mkRecursiveScanPaths {inherit lib;})
+    (import ./mkScanPaths {inherit lib;})
+    mkScanPath
     mkRecursiveScanPaths
+    mkScanImportPath
     mkRecursiveImportPaths
     ;
 }
