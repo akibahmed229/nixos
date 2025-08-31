@@ -3,7 +3,7 @@
 * It returns a list of paths to the .nix files and directories.
 */
 {lib}: let
-  mkScanPaths = path:
+  mkScanPath = path:
     builtins.map (f: "${path}/${f}") (
       builtins.attrNames (
         lib.attrsets.filterAttrs (
@@ -17,7 +17,7 @@
       )
     );
 
-  mkScanImportPaths = args: path:
+  mkScanImportPath = args: path:
     builtins.map
     (
       path: let
@@ -30,7 +30,7 @@
         then imported args
         else imported
     )
-    (mkScanPaths path);
+    (mkScanPath path);
 in {
-  inherit mkScanPaths mkScanImportPaths;
+  inherit mkScanPath mkScanImportPath;
 }

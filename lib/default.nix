@@ -11,8 +11,8 @@
   mkRelativeToRoot = lib.path.append ../.; # appends a relative path from the current directory to the root directory
   inherit
     (import ./mkScanPaths {inherit lib;})
-    mkScanPaths
-    mkScanImportPaths
+    mkScanPath
+    mkScanImportPath
     ;
   inherit
     (import ./mkRecursiveScanPaths {inherit lib;})
