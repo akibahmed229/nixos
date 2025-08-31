@@ -9,9 +9,12 @@
   lib,
   pkgs,
   modulesPath,
+  devicename,
   ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports =
+    [(import ../../../modules/predefiend/nixos/disko {device = lib.mkDefault devicename;})]
+    ++ [(modulesPath + "/installer/scan/not-detected.nix")];
 
   # nixpkgs.overlays = [self.overlays.intel-latestKernel-overlay]; # Add the latest kernel overlay for my intel processor
 

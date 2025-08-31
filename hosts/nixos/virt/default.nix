@@ -7,6 +7,7 @@
   self,
   pkgs,
   user,
+  lib,
   state-version,
   hostname,
   ...
@@ -15,10 +16,7 @@
   inherit (self.lib) mkImport mkRelativeToRoot;
 in {
   imports =
-    [
-      (import ../../../modules/predefiend/nixos/disko {device = "/dev/vda";})
-      (mkRelativeToRoot "home-manager/dwm")
-    ]
+    [(mkRelativeToRoot "home-manager/dwm")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms = ["impermanence" "sops"];
