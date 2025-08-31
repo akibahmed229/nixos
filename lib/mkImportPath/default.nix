@@ -1,5 +1,14 @@
+/*
+Imports all `.nix` files from a path (using mkScan/mkRecursiveScanPaths).
+
+Handles both styles:
+  - foo.nix: { lib, ... }: { ... }
+  - bar.nix: { ... }
+Example:
+  mkImportPath { lib = pkgs.lib; } ./modules mkRecursiveScanPaths
+*/
 {lib}: let
-  # Import all `.nix` files found by recursiveScanPaths
+  # Collects & normalizes modules into a list for imports in flake.nix.
   mkImportPath = {...} @ args: path: mkScan:
     builtins.map
     (
