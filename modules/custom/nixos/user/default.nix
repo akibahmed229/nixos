@@ -6,7 +6,7 @@
   ...
 }:
 with lib; let
-  inherit (self.lib) mkScanPath mkRelativeToRoot;
+  inherit (self.lib) mkScanImportPath mkRelativeToRoot;
 in {
   # ── Top-level knobs for per-machine defaults (desktop env, hostname, etc.)
   options.setUser = mkOption {
@@ -112,14 +112,11 @@ in {
 
     # Import all user files lazily *inside* config, so cfg is available.
     myusers =
-      map (
-        path:
-          import path {
-            inherit config pkgs mkRelativeToRoot userHome;
-            inherit (cfg) desktopEnvironment hostname;
-          }
-      )
-      (mkScanPath path);
+      mkScanImportPath {
+        inherit config pkgs mkRelativeToRoot userHome;
+        inherit (cfg) desktopEnvironment hostname;
+      }
+      path;
 
     # Small helper to pick only users with a given boolean flag set.
     filterBy = flag: builtins.filter (u: u.${flag}) config.myusers;
