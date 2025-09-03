@@ -4,10 +4,12 @@
 {
   lib,
   modulesPath,
+  inputs,
   ...
 }: {
   imports =
     [
+      inputs.disko.nixosModules.default
       (import ../../../modules/predefiend/nixos/disko {device = lib.mkDefault "/dev/vda";})
     ]
     ++ [(modulesPath + "/profiles/qemu-guest.nix")];
