@@ -80,7 +80,7 @@
           # "waybar"
           # "hyprpaper"
           "ags run"
-          "swww init"
+          "swww-daemon"
           "nm-applet --indicator" # simple network manager indicator
           "udiskie &" # USB Mass storage devices mounting
           "wl-paste --type text --watch cliphist store" #Stores only text data
