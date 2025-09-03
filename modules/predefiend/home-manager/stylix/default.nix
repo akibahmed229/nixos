@@ -15,10 +15,10 @@ in {
     enable = true;
     base16Scheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
     # Don't forget to apply wallpaper
-    image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/gruv_saturn.png";
-      sha256 = "sha256-AKSBdzNhqnHfQNqcjalXDrRV0qPidPrd7o+CV5tdQ98=";
-    };
+    # image = pkgs.fetchurl {
+    #   url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/gruv_saturn.png";
+    #   sha256 = "sha256-AKSBdzNhqnHfQNqcjalXDrRV0qPidPrd7o+CV5tdQ98=";
+    # };
 
     # example get cursor/scheme names
     /*
