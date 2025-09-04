@@ -31,8 +31,8 @@ pkgs.writeShellApplication {
     # ---- runtime info -------------------------------------------------------
     USERNAME="$(id -un)"
     HOSTNAME="$(hostname -s)"
-    BOOT_PART="$(lsblk -ln -o NAME,MOUNTPOINT | awk '$2=="/boot" {print $1; exit}')"
-    DEVICE="$(if [ -n "$BOOT_PART" ]; then lsblk -no PKNAME "/dev/$BOOT_PART" || true; fi)"
+    BOOT_PATH="$(lsblk -l | grep -i "boot" | awk '{print $1}')"
+    DEVICE="$(lsblk -no pkname /dev/"$BOOT_PATH")"
 
     # ask user for USB device (instead of hardcoding)
     info "Available block devices:"
