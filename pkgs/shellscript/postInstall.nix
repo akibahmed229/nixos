@@ -88,13 +88,7 @@ pkgs.writeShellApplication {
       cp -a "$MOUNT_POINT/Backup/AGE/home-key.txt" "/home/$USERNAME/.config/sops/age/keys.txt" || true
 
       # Configure SSH to use the GitLab key
-      cat <<'EOF' >> "/home/$USERNAME/.ssh/config"
-      Host gitlab.com
-        User git
-        IdentityFile /home/$USERNAME/.ssh/id_ed25519_gitlab
-        IdentitiesOnly yes
-      EOF
-
+      echo -e "Host gitlab.com\n  User git\n  IdentityFile /home/$USERNAME/.ssh/id_ed25519_gitlab\n  IdentitiesOnly yes" >> "/home/$USERNAME/.ssh/config"
       sudo chown "$USERNAME":users "/home/$USERNAME/.ssh/config"
       chmod 600 "/home/$USERNAME/.ssh/config"
 
