@@ -116,8 +116,8 @@ pkgs.writeShellApplication {
     }
 
     # ---- main ---------------------------------------------------------------
-    # copy_secrets_from_usb
-    # install_flake "$FLAKE_DIR"
+    copy_secrets_from_usb
+    install_flake "$FLAKE_DIR"
 
     info "Post-install finished"
   '';
