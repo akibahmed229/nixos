@@ -56,8 +56,6 @@ pkgs.writeShellApplication {
       [ -d "$repo" ] || die "flake dir '$repo' not found"
         info "Updating flake with local values"
         sed -i "s/akib/$USERNAME/g" "$repo/flake.nix" || true
-        sed -i "s/desktop/$HOSTNAME/g" "$repo/flake.nix" || true
-        sed -i "s/\?ref=main&shallow=1//g" "$repo/flake.nix" || true
         sed -i "s,/dev/nvme0n1,/dev/$DEVICE,g" "$repo/flake.nix" || true
     }
 
@@ -112,7 +110,6 @@ pkgs.writeShellApplication {
 
     # ---- main ---------------------------------------------------------------
     copy_secrets_from_usb
-    ssh git@gitlab.com
     install_flake
 
     info "Post-install finished"
