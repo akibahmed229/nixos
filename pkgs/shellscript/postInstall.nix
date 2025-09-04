@@ -65,8 +65,8 @@ pkgs.writeShellApplication {
 
     # ---- copy secrets from encrypted USB -----------------------------------
     copy_secrets_from_usb() {
-      if [ "$USERNAME" = "akib" ]; then
-        info "Running as akib — skipping secret import"
+      if [ "$USERNAME" != "akib" ]; then
+        info "Running as $USERNAME — skipping secret import"
         return 0
       fi
 
