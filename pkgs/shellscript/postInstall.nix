@@ -105,6 +105,7 @@ pkgs.writeShellApplication {
       git clone https://www.github.com/akibahmed229/nixos . --depth 1 || die "git clone failed"
 
       update_flake_data "$repo"
+      nix flake update
       info "Running nixos-rebuild switch for $HOSTNAME"
       sudo nixos-rebuild switch --flake ".#$HOSTNAME" --show-trace
     }
