@@ -96,7 +96,7 @@
     #################### Personal Repositories | local flake ####################
     # Private secrets repo. Authenticate via ssh and use shallow clone
     secrets = {
-      url = "git+ssh://git@gitlab.com/akibahmed/sops-secrects.git?ref=main&shallow=1";
+      url = "git+ssh://git@gitlab.com/akibahmed/sops-secrets.git?ref=main&shallow=1&allRefs=1";
       flake = false;
     };
   };
