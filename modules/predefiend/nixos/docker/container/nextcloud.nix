@@ -123,20 +123,20 @@ in {
       };
 
       # Collabora Online (CODE) container
-      collabora = {
-        image = "collabora/code:latest";
+      # collabora = {
+      #   image = "collabora/code:latest";
 
-        ports = [
-          "9980:9980" # enable firewall for this port in order to access
-        ];
+      #   ports = [
+      #     "9980:9980" # enable firewall for this port in order to access
+      #   ];
 
-        environment = {
-          # Disable SSL for local testing (production requires SSL)
-          extra_params = "--o:ssl.enable=false";
-        };
+      #   environment = {
+      #     # Disable SSL for local testing (production requires SSL)
+      #     extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
+      #   };
 
-        autoStart = true;
-      };
+      #   autoStart = true;
+      # };
     };
   };
 }
