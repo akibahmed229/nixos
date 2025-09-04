@@ -51,7 +51,7 @@ pkgs.writeShellApplication {
 
     # ---- update flake metadata ---------------------------------------------
     update_flake_data() {
-      local repo="$1"
+      local repo="$FLAKE_DIR"
       [ -d "$repo" ] || die "flake dir '$repo' not found"
       if [ "$USERNAME" != "akib" ]; then
         info "Updating flake with local values"
