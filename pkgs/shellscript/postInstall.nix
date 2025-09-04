@@ -37,10 +37,6 @@ pkgs.writeShellApplication {
     # try to detect block device backing /boot (fallback to /dev/nvme0n1)
     BOOT_PART="$(lsblk -ln -o NAME,MOUNTPOINT | awk '$2=="/boot" {print $1; exit}')"
     DEVICE="$(if [ -n "$BOOT_PART" ]; then lsblk -no PKNAME "/dev/$BOOT_PART" || true; fi)"
-    DEVICE="$DEVICE"
-
-    # flake dir may be provided by env; default to ~/flake
-    FLAKE_DIR="$FLAKE_DIR"
 
     # usb device to use for secrets (env override allowed)
     USB_DEV="/dev/sdb"
