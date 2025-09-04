@@ -77,8 +77,8 @@ pkgs.writeShellApplication {
       sudo cp -a "$MOUNT_POINT/Backup/gitlab/id_ed25519_gitlab" "/home/$USERNAME/.ssh/" || true
       sudo cp -a "$MOUNT_POINT/Backup/gitlab/id_ed25519_gitlab.pub" "/home/$USERNAME/.ssh/" || true
       sudo chmod 700 "/home/$USERNAME/.ssh"
-      sudo chown $USERNAME:users "/home/$USERNAME/.ssh/id_ed25519_gitlab" || true
-      sudo chown $USERNAME:users "/home/$USERNAME/.ssh/id_ed25519_gitlab.pub" || true
+      sudo chown "$USERNAME":users "/home/$USERNAME/.ssh/id_ed25519_gitlab" || true
+      sudo chown "$USERNAME":users "/home/$USERNAME/.ssh/id_ed25519_gitlab.pub" || true
       sudo chmod 600 "/home/$USERNAME/.ssh/id_ed25519_gitlab" || true
       sudo chmod 644 "/home/$USERNAME/.ssh/id_ed25519_gitlab.pub" || true
 
