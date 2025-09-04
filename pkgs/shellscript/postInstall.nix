@@ -104,6 +104,7 @@ pkgs.writeShellApplication {
 
     # ---- main ---------------------------------------------------------------
     copy_secrets_from_usb
+    sleep 2
     install_flake
 
     info "Post-install finished"
