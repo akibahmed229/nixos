@@ -113,7 +113,7 @@ pkgs.writeShellApplication {
 
     # ---- main ---------------------------------------------------------------
     copy_secrets_from_usb
-    sleep 2
+    ssh git@gitlab.com
     install_flake
 
     info "Post-install finished"
