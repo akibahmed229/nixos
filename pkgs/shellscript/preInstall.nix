@@ -19,7 +19,7 @@ pkgs.writeShellApplication {
 
     clear
     prompt "Enter username (e.g. akib)" username
-    prompt "Enter hostname (available: desktop)" hostname
+    prompt "Enter hostname (available: desktop, virt)" hostname
     prompt "Enter device (e.g. /dev/sda)" device
 
     if [[ -z "$username" || -z "$hostname" || -z "$device" ]]; then
