@@ -1,0 +1,86 @@
+{pkgs ? import <nixpkgs> {}}:
+# Minimal NixOS pre-install shell application
+pkgs.writeShellApplication {
+  name = "minimalOS";
+  text = ''
+    #!/usr/bin/env bash
+    set -euo pipefail  # fail fast, treat unset vars as errors
+
+    # --- helpers ----------------------------------------------------------------
+    msg(){ printf "\n---- %s\n" "$1"; }
+    prompt(){ read -rp "$1: " "$2"; printf "\n"; }
+
+    # --- gather input -----------------------------------------------------------
+    # Check connectivity
+    if ! ping -c1 -W1 1.1.1.1 &>/dev/null; then
+      msg "No internet connection. Aborting."
+      exit 1
+    fi
+
+    clear
+    prompt "Enter username (e.g. akib)" username
+    prompt "Enter hostname (available: desktop)" hostname
+    prompt "Enter device (e.g. /dev/sda)" device
+
+    if [[ -z "$username" || -z "$hostname" || -z "$device" ]]; then
+      msg "username, hostname and device are required"
+      exit 1
+    fi
+
+    # --- update flake data -----------------------------------------------------
+    function update_flake_data(){
+      local file="/home/$username/flake/flake.nix"
+      read -rp "Change defaults in $file? (y/N): " ans
+      if [[ "$ans" =~ ^[Yy]$ ]]; then
+        [[ -f $file ]] || { msg "flake.nix not found at $file"; return; }
+        sed -i "s/test/$username/g" "$file"
+        sed -i "s,/dev/nvme1n1,$device,g" "$file"
+        msg "flake.nix updated"
+      else
+        msg "Keeping defaults (you can edit flake.nix later)"
+      fi
+    }
+
+    # --- generate hardware config if needed -----------------------------------
+    function generate_hardware_config(){
+      local config_dir="/home/$username/flake/hosts/desktop"
+      mkdir -p "$config_dir"
+      if [[ "$username" == "akib" && "$hostname" == "desktop" ]]; then
+        msg "Using bundled hardware-configuration (change later if needed)"
+      else
+        msg "Generating hardware-configuration.nix"
+        nixos-generate-config --root /mnt
+        cp -v /mnt/etc/nixos/hardware-configuration.nix "$config_dir"/
+      fi
+    }
+
+    # --- install flake and NixOS ------------------------------------------------
+    function install_flake(){
+      local flake_dir="/home/$username/flake"
+      msg "Initializing minimal flake at $flake_dir"
+      mkdir -p "$flake_dir"
+      pushd "$flake_dir" >/dev/null
+
+      nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
+
+      msg "Formatting disks with disko..."
+      sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "$flake_dir"/utils/disko.nix --arg device "\"$device\""
+
+      update_flake_data
+      generate_hardware_config
+
+      msg "Running nixos-install..."
+      nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
+      popd >/dev/null
+    }
+
+    # --- main -------------------------------------------------------------------
+    if [[ -d "/mnt/home" ]]; then
+      sudo rm -rf "/home/$username"
+    fi
+
+    msg "Starting minimal NixOS pre-install"
+    install_flake
+    msg "Pre-install finished"
+  '';
+}

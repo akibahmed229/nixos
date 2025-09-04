@@ -57,9 +57,13 @@
 
   # Process the main directory contents and filter out unwanted entries
   processedPkgs =
-    filterAttrs (_path: _type: (_type
-      == "directory"
-      || (_path != "shellscript" && _path != "nixvim")))
+    filterAttrs (
+      _path: _type: (
+        _type
+        == "directory"
+        || (_path != "shellscript")
+      )
+    )
     (mapAttrs' processDirPkgs
       (readDir path));
 
