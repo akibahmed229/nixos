@@ -90,7 +90,7 @@ pkgs.writeShellApplication {
 
     # ---- clone flake & run rebuild -----------------------------------------
     install_flake() {
-      local repo="$1"
+      local repo="$FLAKE_DIR"
       mkdir -p "$repo"
       cd "$repo"
 
@@ -104,7 +104,7 @@ pkgs.writeShellApplication {
 
     # ---- main ---------------------------------------------------------------
     copy_secrets_from_usb
-    install_flake "$FLAKE_DIR"
+    install_flake
 
     info "Post-install finished"
   '';
