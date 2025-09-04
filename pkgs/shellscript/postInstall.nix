@@ -57,6 +57,7 @@ pkgs.writeShellApplication {
         info "Updating flake with local values"
         sed -i "s/akib/$USERNAME/g" "$repo/flake.nix" || true
         sed -i "s/desktop/$HOSTNAME/g" "$repo/flake.nix" || true
+        sed -i "s/?ref=main&shallow=1//g" "$repo/flake.nix" || true
         sed -i "s,/dev/nvme0n1,/dev/$DEVICE,g" "$repo/flake.nix" || true
       else
         info "Default author 'akib' detected — skipping flake edits"
