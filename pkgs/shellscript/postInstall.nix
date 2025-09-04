@@ -73,16 +73,16 @@ pkgs.writeShellApplication {
       info "Mounting LUKS USB ($USB_DEV) to copy secrets"
       mount_luks "$USB_DEV" "$LUKS_NAME" "$MOUNT_POINT"
 
-      sudo mkdir -p "$HOME/.ssh"
-      sudo cp -a "$MOUNT_POINT/Backup/gitlab/"* "$HOME/.ssh/" || true
-      sudo chmod 700 "$HOME/.ssh"
-      sudo chmod 600 "$HOME/.ssh/id_ed25519_gitlab" || true
-      sudo chmod 644 "$HOME/.ssh/id_ed25519_gitlab.pub" || true
+      sudo mkdir -p "/home/$USERNAME/.ssh"
+      sudo cp -a "$MOUNT_POINT/Backup/gitlab/"* "/home/$USERNAME/.ssh/" || true
+      sudo chmod 700 "/home/$USERNAME/.ssh"
+      sudo chmod 600 "/home/$USERNAME/.ssh/id_ed25519_gitlab" || true
+      sudo chmod 644 "/home/$USERNAME/.ssh/id_ed25519_gitlab.pub" || true
 
       sudo mkdir -p /var/lib/sops-nix
       sudo cp -a "$MOUNT_POINT/Backup/AGE/system-keys.txt" /var/lib/sops-nix/keys.txt || true
-      mkdir -p "$HOME/.config/sops/age"
-      cp -a "$MOUNT_POINT/Backup/AGE/home-key.txt" "$HOME/.config/sops/age/keys.txt" || true
+      mkdir -p "/home/$USERNAME/.config/sops/age"
+      cp -a "$MOUNT_POINT/Backup/AGE/home-key.txt" "/home/$USERNAME/.config/sops/age/keys.txt" || true
 
       info "Secrets copied; unmounting USB"
       unmount_luks "$LUKS_NAME" "$MOUNT_POINT"
