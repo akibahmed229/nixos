@@ -19,7 +19,13 @@ in {
     [(mkRelativeToRoot "home-manager/dwm")]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = ["impermanence" "sops"];
+      ListOfPrograms =
+        [
+          "impermanence"
+        ]
+        ++ lib.optionals (user == "akib") [
+          "sops"
+        ];
     };
 
   # Custom nixos modules for
