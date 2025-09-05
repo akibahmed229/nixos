@@ -22,7 +22,7 @@ pkgs.writeShellApplication {
     DEVICE="$(lsblk -no pkname /dev/"$BOOT_PATH")"
 
     # ask user for USB device (instead of hardcoding)
-    if [[ "$SERNAME" == "akib" ]] then
+    if [[ "$SERNAME" == "akib" ]]; then
       info "Available block devices:"
       lsblk -dpno NAME,SIZE,MODEL | grep -E "/dev/"
       USB_DEV="$(prompt "Enter USB device path (e.g., /dev/sdb)")"
