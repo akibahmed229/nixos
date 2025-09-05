@@ -27,6 +27,8 @@ pkgs.writeShellApplication {
       lsblk -dpno NAME,SIZE,MODEL | grep -E "/dev/"
       USB_DEV="$(prompt "Enter USB device path (e.g., /dev/sdb)")"
       [ -b "$USB_DEV" ] || die "Invalid block device: $USB_DEV"
+    else
+      USB_DEV="/dev/vda"
     fi
 
     LUKS_NAME="myusb"
