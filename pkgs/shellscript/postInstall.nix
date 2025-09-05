@@ -54,7 +54,7 @@ pkgs.writeShellApplication {
     # ---- update flake metadata ---------------------------------------------
     function update_flake_data() {
       local repo="$1"
-      cd $repo
+      cd "$repo"
 
       [ -d "$repo" ] || die "flake dir '$repo' not found"
         info "Updating flake with local values"
