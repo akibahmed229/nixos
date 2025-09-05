@@ -171,11 +171,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1756872219,
-        "narHash": "sha256-KsX15cRMZzJlwkwgTf7JwnFqEaU80SekgHLu/3xcX10=",
+        "lastModified": 1757045015,
+        "narHash": "sha256-K3+OooIM2hf8fauVMMY79C+CHHxbUkOyWfz8YpNxZcM=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "5512d414aa6ccd07d5c7145a85ca9bd4608f845e",
+        "rev": "1b0f57c7a959cdfe8e68b98845ae8445cb0aa132",
         "type": "gitlab"
       },
       "original": {
@@ -339,11 +339,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1756903364,
-        "narHash": "sha256-vZh/YH2D7oDFek10r0TbGn3qJrqGv69sSP+oF8PFDqQ=",
+        "lastModified": 1756991914,
+        "narHash": "sha256-4ve/3ah5H/SpL2m3qmZ9GU+VinQYp2MN1G7GamimTds=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6159629d05a0e92bb7fb7211e74106ae1d552401",
+        "rev": "b08f8737776f10920c330657bee8b95834b7a70f",
         "type": "github"
       },
       "original": {
@@ -429,11 +429,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1756811803,
-        "narHash": "sha256-MuR2EcPnJ7VOhK1ipdOcyRvGgRFZbRWA1fl27Gzrie0=",
+        "lastModified": 1756977414,
+        "narHash": "sha256-HBiLw2Ev+eKOjfwPa0nyL8jIXkSQcwyWP/QPAlWdks8=",
         "ref": "refs/heads/main",
-        "rev": "127aab815908ecbd3db4d23f127d2e96b79855f9",
-        "revCount": 6408,
+        "rev": "4e785d12a91117cd5b255052799d1a051d9976c0",
+        "revCount": 6409,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -821,11 +821,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1756727835,
-        "narHash": "sha256-767guSN146cmLD1lvjYzU4Bh7Ry3fzXzj+6hXEtF7rY=",
+        "lastModified": 1756946299,
+        "narHash": "sha256-N4PjGA0rittpNZGscKPel+mr/dMcKF73j0yr4rbG3T0=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "f5026663f68261a201cd0700ced14971945d8dd9",
+        "rev": "63496f00c681b3e200bd17878a43ec68b7139a66",
         "type": "github"
       },
       "original": {
@@ -981,10 +981,10 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1755419966,
-        "narHash": "sha256-FPBTfAJN53RXwVuEXdsUmoHclO+TtigWttOnGgVBRg0=",
+        "lastModified": 1757065266,
+        "narHash": "sha256-YYYbdKPahYWcV4949DtY0UVbjjekgoM0/ZnP/rYCdqs=",
         "ref": "main",
-        "rev": "33847b97be7168fd8159f306f999f370bcebd848",
+        "rev": "16c7061e532129c60e0c045888399466d8822cf9",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
@@ -1058,11 +1058,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1756811338,
-        "narHash": "sha256-fwgklhY9kJSTDMGuwHJUVBCuJDVvxxljjGOLhxC84ko=",
+        "lastModified": 1756960927,
+        "narHash": "sha256-iG2DUobrDPzuVpDVHyqph1jtgAS0XOg1x8KGdsEkBms=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "989312ab49e6eb1d076f9d194d43f9f9c513087e",
+        "rev": "584d9c57a8550bace5ffa2901dfebbde367bea54",
         "type": "github"
       },
       "original": {
