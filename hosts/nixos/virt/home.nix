@@ -16,6 +16,9 @@ in {
         "zsh"
         "tmux"
         "lf"
+        "atuin"
+        "nixvim"
+        "stylix"
       ]
       ++ lib.optionals (user == "akib") [
         "git"

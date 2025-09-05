@@ -21,10 +21,13 @@ in {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms =
         [
+          "stylix"
           "impermanence"
+          "dbus"
         ]
         ++ lib.optionals (user == "akib") [
           "sops"
+          "intel-gpu"
         ];
     };
 
