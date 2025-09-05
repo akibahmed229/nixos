@@ -22,10 +22,12 @@ pkgs.writeShellApplication {
     DEVICE="$(lsblk -no pkname /dev/"$BOOT_PATH")"
 
     # ask user for USB device (instead of hardcoding)
-    info "Available block devices:"
-    lsblk -dpno NAME,SIZE,MODEL | grep -E "/dev/"
-    USB_DEV="$(prompt "Enter USB device path (e.g., /dev/sdb)")"
-    [ -b "$USB_DEV" ] || die "Invalid block device: $USB_DEV"
+    if [[ "$SERNAME" == "akib" ]] then
+      info "Available block devices:"
+      lsblk -dpno NAME,SIZE,MODEL | grep -E "/dev/"
+      USB_DEV="$(prompt "Enter USB device path (e.g., /dev/sdb)")"
+      [ -b "$USB_DEV" ] || die "Invalid block device: $USB_DEV"
+    fi
 
     LUKS_NAME="myusb"
     MOUNT_POINT="/mnt/usb"
@@ -52,11 +54,17 @@ pkgs.writeShellApplication {
     # ---- update flake metadata ---------------------------------------------
     function update_flake_data() {
       local repo="$1"
+      cd $repo
 
       [ -d "$repo" ] || die "flake dir '$repo' not found"
         info "Updating flake with local values"
         sed -i "s/akib/$USERNAME/g" "$repo/flake.nix" || true
-        sed -i "s,/dev/nvme0n1,/dev/$DEVICE,g" "$repo/flake.nix" || true
+        sed -i "s,/dev/nvme1n1,/dev/$DEVICE,g" "$repo/flake.nix" || true
+
+     [ "$USERNAME" != "akib"] || die "flake dir '$repo' not found"
+        sed -i '/secrets = {/,/};/d' "$repo/flake.nix"
+
+      nix flake update
     }
 
     # ---- copy secrets from encrypted USB -----------------------------------
@@ -103,7 +111,6 @@ pkgs.writeShellApplication {
       git clone https://www.github.com/akibahmed229/nixos . --depth 1 || die "git clone failed"
 
       update_flake_data "$repo"
-      nix flake update
       info "Running nixos-rebuild switch for $HOSTNAME"
       sudo nixos-rebuild switch --flake ".#$HOSTNAME" --show-trace
     }
