@@ -11,6 +11,7 @@
   state-version,
   hostname,
   self,
+  lib,
   ...
 }: let
   # My custom lib helper functions
@@ -22,35 +23,39 @@ in {
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms = [
-        "sops"
-        "stylix"
-        "impermanence"
-        "gaming"
-        "docker"
-        "flatpak"
-        "dbus"
-        "bbr"
-        "samba"
-        "fhs"
-        "intel-gpu"
-        "openrgb"
-        "openrazer"
-        "obs"
-        "ngrok"
-        # "cloudflared"
-      ];
+      ListOfPrograms =
+        [
+          "stylix"
+          "impermanence"
+          "gaming"
+          "flatpak"
+          "dbus"
+          "bbr"
+          "fhs"
+          "obs"
+        ]
+        ++ lib.optionals (user == "akib")
+        [
+          "samba"
+          "docker"
+          "sops"
+          "ngrok"
+          "openrgb"
+          "openrazer"
+          "intel-gpu"
+        ];
     }
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
       ListOfPrograms =
         map (x: x + ".nix")
-        [
-          "nextcloud"
-          "portainer"
-          "pi-hole"
-          "n8n"
-        ];
+        (lib.optionals (user == "akib")
+          [
+            "n8n"
+            "nextcloud"
+            "portainer"
+            "pi-hole"
+          ]);
     };
 
   nixpkgs = {

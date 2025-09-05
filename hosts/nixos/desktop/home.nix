@@ -1,6 +1,8 @@
 {
   pkgs,
   self,
+  lib,
+  user,
   ...
 }: let
   # My custom lib helper functions
@@ -16,25 +18,28 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = [
-      "firefox"
-      "spotify"
-      "stylix"
-      "nixvim"
-      "discord"
-      "zsh"
-      "tmux"
-      "yazi"
-      "ags"
-      "git"
-      "sops"
-      "thunar"
-      "wofi"
-      "wlogout"
-      "swappy"
-      "atuin"
-      "emacs"
-    ];
+    ListOfPrograms =
+      [
+        "firefox"
+        "spotify"
+        "stylix"
+        "nixvim"
+        "discord"
+        "zsh"
+        "tmux"
+        "yazi"
+        "ags"
+        "thunar"
+        "wofi"
+        "wlogout"
+        "swappy"
+        "atuin"
+        "emacs"
+      ]
+      ++ lib.optionals (user == "akib") [
+        "git"
+        "sops"
+      ];
   };
 
   home.packages = with pkgs; [
