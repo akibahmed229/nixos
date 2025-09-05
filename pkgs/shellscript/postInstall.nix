@@ -61,7 +61,7 @@ pkgs.writeShellApplication {
         sed -i "s/akib/$USERNAME/g" "$repo/flake.nix" || true
         sed -i "s,/dev/nvme1n1,/dev/$DEVICE,g" "$repo/flake.nix" || true
 
-     [ "$USERNAME" != "akib"] || die "flake dir '$repo' not found"
+     [ "$USERNAME" != "akib" ] || die "flake dir '$repo' not found"
         sed -i '/secrets = {/,/};/d' "$repo/flake.nix"
 
       nix flake update
