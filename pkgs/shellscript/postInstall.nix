@@ -6,26 +6,13 @@ pkgs.writeShellApplication {
     set -euo pipefail
 
     # ---- helpers ------------------------------------------------------------
-    info() { printf "\n----- %s\n" "$1"; }
-    die()  { echo "ERROR: $1" >&2; exit 1; }
+    function info() { printf "\n----- %s\n" "$1"; }
+    function die()  { echo "ERROR: $1" >&2; exit 1; }
 
-    prompt() { read -r -p "$1: " REPLY; echo "$REPLY"; }
+    function prompt() { read -r -p "$1: " REPLY; echo "$REPLY"; }
 
-    network_ok() {
+    function network_ok() {
       command -v ping >/dev/null 2>&1 && ping -c1 -W3 1.1.1.1 >/dev/null 2>&1
-    }
-
-    mount_luks() {
-      local dev="$1" name="myusb" mnt="/mnt/usb"
-      sudo cryptsetup luksOpen "$dev" "$name"
-      sudo mkdir -p "$mnt"
-      sudo mount "/dev/mapper/$name" "$mnt"
-      echo "$mnt"
-    }
-    unmount_luks() {
-      local name="$1" mnt="/mnt/usb"
-      sudo umount "$mnt" || true
-      sudo cryptsetup luksClose "$name" || true
     }
 
     # ---- runtime info -------------------------------------------------------
@@ -49,8 +36,21 @@ pkgs.writeShellApplication {
       die "No network connectivity; aborting."
     fi
 
+    function mount_luks() {
+      local dev="$1" name="$2" mnt="$3"
+      sudo cryptsetup luksOpen "$dev" "$name"
+      sudo mkdir -p "$mnt"
+      sudo mount "/dev/mapper/$name" "$mnt"
+      echo "$mnt"
+    }
+    function unmount_luks() {
+      local name="$1" mnt="$2"
+      sudo umount "$mnt" || true
+      sudo cryptsetup luksClose "$name" || true
+    }
+
     # ---- update flake metadata ---------------------------------------------
-    update_flake_data() {
+    function update_flake_data() {
       local repo="$1"
 
       [ -d "$repo" ] || die "flake dir '$repo' not found"
@@ -60,7 +60,7 @@ pkgs.writeShellApplication {
     }
 
     # ---- copy secrets from encrypted USB -----------------------------------
-    copy_secrets_from_usb() {
+    function copy_secrets_from_usb() {
       if [ "$USERNAME" != "akib" ]; then
         info "Running as $USERNAME — skipping secret import"
         return 0
@@ -94,7 +94,7 @@ pkgs.writeShellApplication {
     }
 
     # ---- clone flake & run rebuild -----------------------------------------
-    install_flake() {
+    function install_flake() {
       local repo="$FLAKE_DIR"
       mkdir -p "$repo"
       cd "$repo"

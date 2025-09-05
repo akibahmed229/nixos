@@ -7,8 +7,8 @@ pkgs.writeShellApplication {
     set -euo pipefail  # fail fast, treat unset vars as errors
 
     # --- helpers ----------------------------------------------------------------
-    msg(){ printf "\n---- %s\n" "$1"; }
-    prompt(){ read -rp "$1: " "$2"; printf "\n"; }
+    function msg(){ printf "\n---- %s\n" "$1"; }
+    function prompt(){ read -rp "$1: " "$2"; printf "\n"; }
 
     # --- gather input -----------------------------------------------------------
     # Check connectivity
