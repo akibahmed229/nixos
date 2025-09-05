@@ -6,49 +6,114 @@
 
 ![my current setup](./public/preview/system/Current.png)
 
-# 1. Installation My version of NixOS
+# 1. Installation — My Version of NixOS
 
 <details>
+  <summary>NixOS setup using Flake + Home Manager. Hyprland as the default WM.</summary>
 
-<summary>NixOS setup using falke and home-manager as module. Hyperland as default Window Manager. (as so many changes regarding my config and since added my custom lib helper this section need changes, will change once i get free time)</summary>
+---
 
-## Installation Prerequisites
+## Overview
 
-Before you begin, ensure you have the following:
+This repository provides two helper scripts (flakes) to automate a two-stage installation:
 
-- A Linux system with an EFI-enabled BIOS (for BIOS installations, adjust the commands accordingly).
-- The disk identifier (`/dev/sdX`) for the target installation disk. Replace `sdX` with the appropriate disk identifier for your system.
+- **Pre-install** (`preInstall`) — run from a Nix live ISO. Partitions & formats disks, bootstraps a minimal flake, optionally updates flake defaults, generates hardware config, and runs `nixos-install`.
+- **Post-install** (`postInstall`) — run on the newly installed system. Optionally imports secrets from an encrypted USB (for the maintainer user), updates the flake, clones the repo, and applies the system configuration with `nixos-rebuild`.
+
+Both scripts check for internet connectivity before proceeding.
+
+---
+
+## Prerequisites
+
+- A Linux machine (UEFI recommended). If using legacy BIOS, adjust commands accordingly.
+- A target disk device (e.g. `/dev/sda`) — know your device identifier.
+- Internet connection (scripts use `ping` to verify).
+- For secret import (optional): an encrypted USB containing SSH keys and SOPS/AGE keys (used only when running as the maintainer user).
+
+---
 
 ## Installation Steps
 
-**Install NixOS**
+<details>
+  <summary>Step 0 — Prepare & boot the NixOS live ISO (if needed)</summary>
+
+Prepare a bootable NixOS USB and boot into the live environment. Ensure network access (wired is easiest).
+
+</details>
+
+<details>
+  <summary>Step 1 — Pre-install (run from the live ISO)</summary>
+
+Run:
 
 ```bash
 sudo su
-nix-shell -p git --command 'nix run github:akibahmed229/nixos#akibOS --experimental-features "nix-command flakes"'
+nix-shell -p git --command 'nix run github:akibahmed229/nixos#preInstall --experimental-features "nix-command flakes"'
 ```
 
 > **NOTE**:
-> During the installation process, [akibOS](./pkgs/akibOS/default.nix) will prompt for the disk identifier (`/dev/sdX`) , hostname and the username. Replace `sdX` with the appropriate disk identifier for your system.
-> also replace `hostname` with (available options: desktop, virt) and `username` with your desired username.
-> the default password for the user is `123456` you can change it later.
+> What the `preInstall` script does:
 
-Congratulations! You have successfully installed NixOS with a Btrfs filesystem. Enjoy your fault-tolerant, advanced feature-rich, and easy-to-administer system!
+> - Verifies internet connectivity.
+> - Prompts for:
+>   - **Username** (e.g. `akib`)
+>   - **Hostname** (`desktop` or `virt`)
+>   - **Device** (e.g. `/dev/sda`)
+> - Initializes a minimal flake under `/home/<username>/flake` using the `minimal` template.
+> - Formats and partitions disks using `disko` (the script invokes `nix run github:nix-community/disko`).
+> - Optionally updates `flake.nix` defaults (username & device) via `sed` if you confirm.
+> - Generates or copies `hardware-configuration.nix`:
+>   - Uses the bundled hardware configuration for the default maintainer (`akib` + `desktop`).
+>   - Otherwise runs `nixos-generate-config --root /mnt` and copies `/mnt/etc/nixos/hardware-configuration.nix` into the flake.
+> - Runs `nixos-install --no-root-passwd --flake "/home/<username>/flake#<hostname>"`.
+> - The default password for the user is `123456` you can change it later from `./hosts/nixos/{desktop,virt}/users/main/default.nix`.
 
-> **NOTE**:
-> The Configuration will clone from this repository and will be placed in `/home/username/.config/flake` respectively.
-> For more information about NixOS and its configuration options, refer to the official [NixOS documentation](https://nixos.org/).
+**Important:** the script will ask for confirmation before changing `flake.nix`. You can still edit `flake.nix` manually later.
 
-**After installation:**
+</details>
 
-- Open a terminal with "Super + Return".
-- Navigate to the `~/.config/flake` directory in the terminal.
-- Fix permission issues by running these commands:
+<details>
+  <summary>Step 2 — Post-install (run on the installed system)</summary>
+
+After rebooting into your new NixOS installation, run:
 
 ```bash
-chown -R yourUserName:users *
-chown -R yourUserName:users .*
+nix run github:akibahmed229/nixos#postInstall
 ```
+
+> **NOTE**:
+> What the `postInstall` script does:
+
+> Detects current user and system hostname.
+> Verifies internet connectivity.
+> If running as the repository maintainer user (e.g. `akib`) it will:
+>
+> - Prompt for an encrypted USB device path (e.g. `/dev/sdb`).
+> - Mount the LUKS USB, and copy SSH keys and AGE/SOPS keys into:
+>   - `/home/<username>/.ssh/` (gitlab key)
+>   - `/var/lib/sops-nix/` and `/home/<username>/.config/sops/age/` (sops/age keys)
+> - Configure `~/.ssh/config` to use the GitLab key.
+>
+> Updates the flake metadata in the cloned repo (replaces defaults like username & device).
+
+> Removes the `secrets` input from `flake.nix` (so the flake update won't attempt to fetch the private secrets repo).
+
+> Clones (shallow) this repository into the script's working flake directory.
+
+> Runs `nixos-rebuild switch --flake ".#<hostname>"` (applies the system configuration).
+
+</details>
+
+---
+
+## Paths & outputs
+
+- Flake used during pre-install: `/home/<username>/flake` (created on live environment).
+- Repository cloned during post-install: typically placed under the script's configured flake directory (see the script; commonly `/home/<username>/.config/flake` or `/home/<username>/flake`).
+- Hardware config copied to: `/home/<username>/flake/hosts/desktop/hardware-configuration.nix` (if generated).
+
+---
 
 </details>
 
@@ -61,6 +126,16 @@ chown -R yourUserName:users .*
 
 ![my current setup](./public/preview/architecture/system.svg)
 
+**Designing my config around a small set of custom helpers in lib**. For example:
+
+- **mkSystem** and **mkFlake** handle pulling everything together in one place, so each system lives in its own directory and is built the same way. This is achieved by programmatically determining the objects that need to be evaluated and generated.
+
+- **mkImport** and **mkScanPath** let me bulk-import predefined modules or user configs without writing long lists of imports by hand. I just point to a folder and it picks them up.
+
+- Each user/module has enable flags (**enableSystemConf**, **enableHomeConf**) and a clear schema, so I don’t have to wonder what’s active — it’s explicit.
+
+So instead of manually tracking dozens of scattered imports, I rely on these patterns to keep things predictable and scalable.
+
 - **Flake.nix** : Main flake file for defining the system configuration
   - **lib** : Library helper functions, providing a set of functions that can be used to mange stuff in a more concise way
   - **hosts** : Host-specific configuration files
@@ -70,8 +145,7 @@ chown -R yourUserName:users .*
   - **pkgs** : Nix derivations, custom packages, and shell scripts
   - **public** : Wallpaper folder, Template for different system, & GTK/QT themes and doc
   - **flake.lock** : Lock file for the flake inputs
-
-- **_devShell/flake.nix_** : Flake file defining the development shell
+  - **_devShell/flake.nix_** : Flake file defining the development shell
 
 </details>
 
