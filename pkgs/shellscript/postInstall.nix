@@ -58,7 +58,7 @@ pkgs.writeShellApplication {
       local repo="$1"
       cd "$repo"
 
-      [ -d "$repo" ] || die "flake dir '$repo' not found"
+     [ -d "$repo" ] || die "flake dir '$repo' not found"
         info "Updating flake with local values"
         sed -i "s/akib/$USERNAME/g" "$repo/flake.nix" || true
         sed -i "s,/dev/nvme1n1,/dev/$DEVICE,g" "$repo/flake.nix" || true
