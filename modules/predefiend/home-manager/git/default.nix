@@ -2,110 +2,104 @@
   pkgs,
   user,
   lib,
-  inputs,
+  config,
   ...
-}: let
-  secretsInput = builtins.toString inputs.secrets;
-  email = lib.strings.trim (builtins.readFile "${secretsInput}/github/email.txt");
-  username = lib.strings.trim (builtins.readFile "${secretsInput}/github/username.txt");
-in
-  lib.mkIf (user == "akib") {
-    home.packages = with pkgs; [diff-so-fancy];
-    programs.git = {
-      enable = true;
-      package = pkgs.git;
-      userName = username;
-      extraConfig = {
-        user = {
-          userEmail = email;
-          signingkey = email;
-        };
-        commit = {
-          gpgSign = true;
-        };
-        core = {
-          compression = 9;
-          whitespace = "error";
-          preloadindex = true;
-        };
+}:
+lib.mkIf (user == "akib") {
+  home.packages = with pkgs; [diff-so-fancy];
+  programs.git = {
+    enable = true;
+    package = pkgs.git;
+    includes = [
+      {path = config.sops.templates."git-user.conf".path;}
+    ];
+    extraConfig = {
+      commit = {
+        gpgSign = true;
+      };
+      core = {
+        compression = 9;
+        whitespace = "error";
+        preloadindex = true;
+      };
 
-        init = {
-          defaultBranch = "main";
-        };
+      init = {
+        defaultBranch = "main";
+      };
 
-        diff = {
-          context = 3; # less context in diffs
-          renames = "copies"; # detect copies as renames in diffs
-          interHunkContext = 10; # merge near hunks in diffs
-        };
+      diff = {
+        context = 3; # less context in diffs
+        renames = "copies"; # detect copies as renames in diffs
+        interHunkContext = 10; # merge near hunks in diffs
+      };
 
-        log = {
-          abbrevCommit = true; # short commits
-          graphColors = "blue,yellow,cyan,magenta,green,red";
-        };
+      log = {
+        abbrevCommit = true; # short commits
+        graphColors = "blue,yellow,cyan,magenta,green,red";
+      };
 
-        status = {
-          branch = true;
-          short = true;
-          showStash = true;
-          showUntrackedFiles = "all"; # show individual untracked files
-        };
+      status = {
+        branch = true;
+        short = true;
+        showStash = true;
+        showUntrackedFiles = "all"; # show individual untracked files
+      };
 
-        pager = {
-          branch = false; # no need to use pager for git branch
-          diff = "diff-so-fancy | $PAGER"; # diff-so-fancy as diff pager
-        };
+      pager = {
+        branch = false; # no need to use pager for git branch
+        diff = "diff-so-fancy | $PAGER"; # diff-so-fancy as diff pager
+      };
 
-        push = {
-          autoSetupRemote = true; # easier to push new branches
-          default = "current"; # push only current branch by default
-          followTags = true; # push also tags
-          gpgSign = false; # my remotes doesn't support sign pushes
-        };
+      push = {
+        autoSetupRemote = true; # easier to push new branches
+        default = "current"; # push only current branch by default
+        followTags = true; # push also tags
+        gpgSign = false; # my remotes doesn't support sign pushes
+      };
 
-        pull = {
-          rebase = true;
-        };
+      pull = {
+        rebase = true;
+      };
 
-        submodule = {
-          fetchJobs = 16;
-        };
+      submodule = {
+        fetchJobs = 16;
+      };
 
-        rebase = {
-          autoStash = true;
-        };
+      rebase = {
+        autoStash = true;
+      };
 
-        # Colors
-        "color \"blame\"" = {
-          highlightRecent = "black bold,1 year ago,white,1 month ago,default,7 days ago,blue";
-        };
+      # Colors
+      "color \"blame\"" = {
+        highlightRecent = "black bold,1 year ago,white,1 month ago,default,7 days ago,blue";
+      };
 
-        "color \"branch\"" = {
-          current = "magenta";
-          local = "default";
-          remote = "yellow";
-          upstream = "green";
-          plain = "blue";
-        };
+      "color \"branch\"" = {
+        current = "magenta";
+        local = "default";
+        remote = "yellow";
+        upstream = "green";
+        plain = "blue";
+      };
 
-        "color \"diff\"" = {
-          meta = "black bold";
-          frag = "magenta";
-          context = "white";
-          whitespace = "yellow reverse";
-        };
+      "color \"diff\"" = {
+        meta = "black bold";
+        frag = "magenta";
+        context = "white";
+        whitespace = "yellow reverse";
+      };
 
-        interactive = {
-          diffFilter = "diff-so-fancy --patch";
-          singlekey = true;
-        };
+      interactive = {
+        diffFilter = "diff-so-fancy --patch";
+        singlekey = true;
+      };
 
-        "url \"git@github.com:\"" = {
-          insteadOf = "gh:";
-        };
-        "url \"git@gitlab.com:\"" = {
-          insteadOf = "gl:";
-        };
+      "url \"git@github.com:\"" = {
+        insteadOf = "gh:";
+      };
+      "url \"git@gitlab.com:\"" = {
+        insteadOf = "gl:";
       };
     };
-  }
+  };
+}

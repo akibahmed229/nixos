@@ -30,6 +30,23 @@ in {
       "gitlab/sshKey" = {
         path = "${homeDirectory}/.ssh/id_ed25519_gitlab";
       };
+      "github/username" = {
+        path = "${homeDirectory}/.config/git/username";
+      };
+      "github/email" = {
+        path = "${homeDirectory}/.config/git/email";
+      };
+    };
+
+    # Render a tiny gitconfig snippet at activation time (no impurity at eval)
+    templates."git-user.conf" = {
+      content = ''
+        [user]
+          name = ${config.sops.placeholder."github/username"}
+          email = ${config.sops.placeholder."github/email"}
+          signingkey = ${config.sops.placeholder."github/email"}
+      '';
+      mode = "0400";
     };
   };
 }
