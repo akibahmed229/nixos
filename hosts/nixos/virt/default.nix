@@ -53,6 +53,7 @@ in {
       cryptsetup
       wget
       git
+      direnv
     ];
     shells = [pkgs.zsh];
     pathsToLink = ["/share/zsh" "/tmp" "/home/${user}"];
