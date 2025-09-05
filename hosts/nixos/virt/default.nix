@@ -52,8 +52,8 @@ in {
       guestfs-tools
       cryptsetup
       wget
-      git
       direnv
+      fastfetch
     ];
     shells = [pkgs.zsh];
     pathsToLink = ["/share/zsh" "/tmp" "/home/${user}"];
