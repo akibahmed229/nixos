@@ -75,13 +75,6 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  # Home manager configuration as a module
-  home-manager = {
-    users.${user} = {
-      imports = map self.lib.mkRelativeToRoot [
-        "home-manager/home.nix" # config of home-manager
-        "home-manager/dwm/home.nix"
-      ];
-    };
-  };
+  # polkit for authentication ( from custom nixos module )
+  polkit-gnome.enable = true;
 }
