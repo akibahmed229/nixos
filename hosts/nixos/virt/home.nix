@@ -19,6 +19,7 @@ in {
         "atuin"
         "nixvim"
         "stylix"
+        "thunar"
       ]
       ++ lib.optionals (user == "akib") [
         "git"
