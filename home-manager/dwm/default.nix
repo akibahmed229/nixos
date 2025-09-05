@@ -37,6 +37,9 @@
     gcc
     neovim
     xcompmgr
+    kdePackages.ark
+    eog
+    networkmanagerapplet
     # rPackages.pkgmaker # FIXME: currently broken
     xorg.xrandr
     xorg.xinit
@@ -74,6 +77,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+
+  services.gnome.gnome-keyring.enable = true;
 
   # polkit for authentication ( from custom nixos module )
   polkit-gnome.enable = true;

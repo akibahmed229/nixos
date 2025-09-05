@@ -5,6 +5,8 @@
   ...
 }: {
   home.packages = with pkgs; [
+    cliphist
+    wl-clipboard
     self.packages.${pkgs.system}.wallpaper
     picom
     (st.overrideAttrs {
