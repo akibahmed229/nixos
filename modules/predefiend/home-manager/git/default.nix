@@ -11,7 +11,7 @@ lib.mkIf (user == "akib") {
     enable = true;
     package = pkgs.git;
     includes = [
-      {path = config.sops.templates."git-user.conf".path;}
+      {inherit (config.sops.templates."git-user.conf") path;}
     ];
     extraConfig = {
       commit = {
