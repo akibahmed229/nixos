@@ -6,12 +6,12 @@
 
 ![my current setup](./public/preview/system/Current.png)
 
+---
+
 # 1. Installation — My Version of NixOS
 
 <details>
   <summary>NixOS setup using Flake + Home Manager. Hyprland as the default WM.</summary>
-
----
 
 ## Overview
 
@@ -22,16 +22,12 @@ This repository provides two helper scripts (flakes) to automate a two-stage ins
 
 Both scripts check for internet connectivity before proceeding.
 
----
-
 ## Prerequisites
 
 - A Linux machine (UEFI recommended). If using legacy BIOS, adjust commands accordingly.
 - A target disk device (e.g. `/dev/sda`) — know your device identifier.
 - Internet connection (scripts use `ping` to verify).
 - For secret import (optional): an encrypted USB containing SSH keys and SOPS/AGE keys (used only when running as the maintainer user).
-
----
 
 ## Installation Steps
 
@@ -105,17 +101,9 @@ nix run github:akibahmed229/nixos#postInstall
 
 </details>
 
----
-
-## Paths & outputs
-
-- Flake used during pre-install: `/home/<username>/flake` (created on live environment).
-- Repository cloned during post-install: typically placed under the script's configured flake directory (see the script; commonly `/home/<username>/.config/flake` or `/home/<username>/flake`).
-- Hardware config copied to: `/home/<username>/flake/hosts/desktop/hardware-configuration.nix` (if generated).
-
----
-
 </details>
+
+---
 
 # 2. File Structure
 
@@ -148,6 +136,8 @@ So instead of manually tracking dozens of scattered imports, I rely on these pat
   - **_devShell/flake.nix_** : Flake file defining the development shell
 
 </details>
+
+---
 
 # 3. This Flake Provide
 
@@ -280,3 +270,5 @@ So instead of manually tracking dozens of scattered imports, I rely on these pat
   ```
 
     </details>
+
+---
