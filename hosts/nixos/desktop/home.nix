@@ -28,7 +28,7 @@ in {
         "zsh"
         "tmux"
         "yazi"
-        "ags"
+        #"ags"
         "quickshell"
         "thunar"
         "wofi"

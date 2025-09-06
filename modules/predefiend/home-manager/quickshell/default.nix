@@ -12,6 +12,12 @@ in {
     ln -sfn "${quickshellConfig}" "${quickshellTarget}"
   '';
 
+  home.packages = with pkgs; [
+    qt6.qt5compat
+    libsForQt5.qtquickcontrols2
+    lm_sensors
+  ];
+
   programs.quickshell = {
     enable = true;
     package = inputs.quickshell.packages.${pkgs.system}.default;

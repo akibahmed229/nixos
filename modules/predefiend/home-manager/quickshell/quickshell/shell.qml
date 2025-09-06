@@ -1,6 +1,13 @@
+//@ pragma UseQApplication
 import Quickshell
+import QtQuick
+import "./Modules/Bar/"
 
-Scope {
-    Bar {}
-    VolumeOsd {}
+ShellRoot {
+    id: root
+
+    Loader {
+        active: true
+        sourceComponent: Bar {}
+    }
 }
