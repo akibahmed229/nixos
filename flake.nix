@@ -82,6 +82,12 @@
       url = "github:Aylur/ags?rev=3ed9737bdbc8fc7a7c7ceef2165c9109f336bff6";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Flexible toolkit for making desktop shells with QtQuick, for Wayland and X11
+    quickshell = {
+      # add ?ref=<tag> to track a tag
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";

@@ -29,6 +29,7 @@ in {
         "tmux"
         "yazi"
         "ags"
+        "quickshell"
         "thunar"
         "wofi"
         "wlogout"
