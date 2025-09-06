@@ -1,5 +1,3 @@
-<p align="center"><img src="https://i.imgur.com/NbxQ8MY.png" width=600px></p>
-
 <h2 align="center">Akib | NixOS Config Go Wilde</h2>
 
 <h2 align="center"> Current System Preview </h2>
@@ -103,8 +101,6 @@ nix run github:akibahmed229/nixos#postInstall
 
 </details>
 
----
-
 # 2. File Structure
 
 <details>
@@ -136,8 +132,6 @@ So instead of manually tracking dozens of scattered imports, I rely on these pat
   - **_devShell/flake.nix_** : Flake file defining the development shell
 
 </details>
-
----
 
 # 3. This Flake Provide
 
@@ -270,5 +264,3 @@ So instead of manually tracking dozens of scattered imports, I rely on these pat
   ```
 
     </details>
-
----
