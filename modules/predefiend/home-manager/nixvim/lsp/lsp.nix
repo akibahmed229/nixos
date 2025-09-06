@@ -20,6 +20,7 @@
           prismals.enable = true;
           prismals.package = null; # TODO: May need to  add prismals package
           # graphql.enable = true; # FIXME: broken
+          qmlls.enable = true;
           clangd = {enable = true;};
           lua_ls = {
             enable = true;
