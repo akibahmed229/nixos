@@ -120,16 +120,18 @@ nix run github:akibahmed229/nixos#postInstall
 
 So instead of manually tracking dozens of scattered imports, I rely on these patterns to keep things predictable and scalable.
 
-- **Flake.nix** : Main flake file for defining the system configuration
-  - **lib** : Library helper functions, providing a set of functions that can be used to mange stuff in a more concise way
-  - **hosts** : Host-specific configuration files
-  - **home-manager** : Configuration files for desktop environment & window manager
-  - **modules** : Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)
-  - **overlays** : Customize pkgs & extend entries nixpkgs itself
-  - **pkgs** : Nix derivations, custom packages, and shell scripts
-  - **public** : Wallpaper folder, Template for different system, & GTK/QT themes and doc
-  - **flake.lock** : Lock file for the flake inputs
-  - **_devShell/flake.nix_** : Flake file defining the development shell
+| **File/Folder**  | **Purpose**                                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------ |
+| **flake.nix**    | Main flake file for defining the system configuration                                                        |
+| **flake.lock**   | Lock file for the flake inputs                                                                               |
+| **lib**          | Library helper functions, providing a set of functions that can be used to mange stuff in a more concise way |
+| **hosts**        | Host-specific configuration files                                                                            |
+| **home-manager** | Configuration files for desktop environment & window manager                                                 |
+| **modules**      | Program-specific configuration files (includes custom and predefined modules for NixOS and Home Manager)     |
+| **overlays**     | Customize pkgs & extend entries nixpkgs itself                                                               |
+| **pkgs**         | Nix derivations, custom packages, and shell scripts                                                          |
+| **public**       | Wallpaper folder, Template for different system, & GTK/QT themes and doc                                     |
+| **devShell**     | Flake file defining the development shell                                                                    |
 
 </details>
 
