@@ -5,7 +5,6 @@
 */
 {
   pkgs,
-  config,
   user,
   desktopEnvironment,
   state-version,
@@ -83,11 +82,6 @@ in {
     homeUsers.enable = true;
     inherit hostname desktopEnvironment state-version;
   };
-
-  users.mutableUsers =
-    if (config.users.users.${user}.hashedPasswordFile != null)
-    then false
-    else true; # required for password to be set via sops during system activation
 
   # remove bloat
   documentation.nixos.enable = true;

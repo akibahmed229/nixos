@@ -126,6 +126,12 @@ in {
 
     # NixOS system users
     users = mkIf cfg.nixosUsers.enable {
+      # required for password to be set via sops during system activation
+      mutableUsers =
+        if (config.users.users.${user}.hashedPasswordFile != null)
+        then false
+        else true;
+
       users = builtins.listToAttrs (map
         (u: {
           inherit (u) name;
