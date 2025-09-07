@@ -11,7 +11,7 @@ ShellRoot {
         }
 
         LogoutButton {
-            command: "loginctl terminate-user $USER"
+            command: "uwsm stop"
             keybind: Qt.Key_E
             text: "Logout"
             icon: "logout"

@@ -13,7 +13,7 @@ Row {
 
     Text {
         id: clock
-        color: "#8ec07c"
+        color: "#ebdbb2"
     }
 
     Process {

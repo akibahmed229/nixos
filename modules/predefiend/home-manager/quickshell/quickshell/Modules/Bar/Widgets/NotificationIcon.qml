@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls as QQC
+import QtQuick.Controls
 import qs.Modules.Notification
 
 // This Item acts as a container for the button and its associated panel.
@@ -11,7 +11,7 @@ Item {
     implicitHeight: notifToggle.implicitHeight
 
     // The notification bell icon button
-    QQC.Button {
+    Button {
         id: notifToggle
         text: "🔔"
         background: null

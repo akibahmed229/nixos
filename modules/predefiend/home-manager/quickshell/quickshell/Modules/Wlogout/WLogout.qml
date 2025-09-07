@@ -7,8 +7,8 @@ import Quickshell.Wayland
 Variants {
     id: root
     property color backgroundColor: "#e60c0c0c"
-    property color buttonColor: "#1e1e1e"
-    property color buttonHoverColor: "#3700b3"
+    property color buttonColor: "#282828"
+    property color buttonHoverColor: "#fb4934"
     default property list<LogoutButton> buttons
 
     model: Quickshell.screens
