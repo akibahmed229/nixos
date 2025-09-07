@@ -29,8 +29,8 @@ in {
           enable = true;
           wayland = {
             enable = true;
-            compositor = "kwin";
           };
+          settings.General.DisplayServer = "wayland";
           theme = ''${self.packages.${pkgs.system}.custom_sddm.override {
               imgLink = {
                 url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/gruv_saturn.png";
