@@ -295,7 +295,7 @@
         };
         listener = [
           {
-            timeout = 60 * 1; # 1 hour.
+            timeout = 60 * 60; # 1 hour.
             on-timeout = "quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"; # lock the screen after inactivity.
           }
         ];
