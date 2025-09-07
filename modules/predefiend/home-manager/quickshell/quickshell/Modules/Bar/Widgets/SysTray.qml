@@ -1,47 +1,82 @@
 import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Services.SystemTray
-import QtQuick.Controls  // For ToolTip
+import qs.Utils
 
-Repeater {
-    model: SystemTray.items
+RowLayout {
+    spacing: 5
 
-    delegate: Item {
-        implicitWidth: 18
-        implicitHeight: 18
+    Repeater {
+        model: SystemTray.items.values
 
-        Image {
-            anchors.fill: parent
-            width: 16
-            height: 16
-            source: {
-                let icon = modelData?.icon || "";
-                if (!icon)
-                    return "";
-                // Process icon path
-                if (icon.includes("?path=")) {
-                    const [name, path] = icon.split("?path=");
-                    const fileName = name.substring(name.lastIndexOf("/") + 1);
-                    return `file://${path}/${fileName}`;
-                }
-                return icon;
-            }
-            fillMode: Image.PreserveAspectFit
-        }
         MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
+            id: delegate
+            required property SystemTrayItem modelData
+            property alias item: delegate.modelData
+
+            Layout.fillHeight: true
+            implicitWidth: icon.implicitWidth + 5
+
             acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-            onClicked: function (mouse) {
-                if (mouse.button === Qt.LeftButton) {
-                    modelData.activate(mouse.x, mouse.y);
-                } else if (mouse.button === Qt.MiddleButton) {
-                    modelData.secondaryActivate(mouse.x, mouse.y);
+            hoverEnabled: true
+
+            onClicked: event => {
+                if (event.button == Qt.LeftButton) {
+                    item.activate();
+                } else if (event.button == Qt.MiddleButton) {
+                    item.secondaryActivate();
+                } else if (event.button == Qt.RightButton) {
+                    menuAnchor.open();
                 }
             }
-            onPressed: function (mouse) {
-                if (mouse.button === Qt.RightButton) {
-                    modelData.open(mouse.x, mouse.y);
+
+            onWheel: event => {
+                event.accepted = true;
+                const points = event.angleDelta.y / 120;
+                item.scroll(points, false);
+            }
+
+            IconImage {
+                id: icon
+                anchors.centerIn: parent
+                source: {
+                    let icon = modelData?.icon || "";
+                    if (!icon)
+                        return "";
+                    // Process icon path
+                    if (icon.includes("?path=")) {
+                        const [name, path] = icon.split("?path=");
+                        const fileName = name.substring(name.lastIndexOf("/") + 1);
+                        return `file://${path}/${fileName}`;
+                    }
+                    return icon;
+                }
+                implicitSize: 16
+            }
+
+            QsMenuAnchor {
+                id: menuAnchor
+                menu: item.menu
+
+                anchor.window: delegate.QsWindow.window
+                anchor.adjustment: PopupAdjustment.Flip
+
+                anchor.onAnchoring: {
+                    const window = delegate.QsWindow.window;
+                    const widgetRect = window.contentItem.mapFromItem(delegate, 0, delegate.height, delegate.width, delegate.height);
+
+                    menuAnchor.anchor.rect = widgetRect;
+                }
+            }
+
+            Tooltip {
+                relativeItem: delegate.containsMouse ? delegate : null
+
+                Label {
+                    text: delegate.item.tooltipTitle || delegate.item.id
                 }
             }
         }
