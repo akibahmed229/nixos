@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import qs.Modules.Bar.Widgets
 import QtQuick.Controls as QQC
 import qs.Modules.Notification
+import Quickshell.Io
 
 PanelWindow {
     id: panel
@@ -71,5 +72,8 @@ PanelWindow {
         }
         CpuMem {}
         SysTray {}
+
+        // poweroff
+        PowerOff {}
     }
 }
