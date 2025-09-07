@@ -40,7 +40,4 @@ in {
         "sops"
       ];
   };
-
-  home.packages = with pkgs; [
-  ];
 }
