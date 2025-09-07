@@ -22,20 +22,19 @@ PanelWindow {
         id: bar
         anchors.fill: parent
         color: "#1a1a1a"
-        radius: 0 // Remove overall radius if you only want a bottom border
-        // No border properties here, to avoid any unintended borders
+        radius: 0
     }
 
-    // Add a separate rectangle for the bottom border
+    // Modified Rectangle for the subtle bottom border
     Rectangle {
         anchors {
             left: bar.left
             right: bar.right
             bottom: bar.bottom
         }
-        height: 2 // Adjust border thickness as desired
-        color: "#4285F4" // Google Material Blue, or choose your desired color
-        radius: 0 // Ensure this border is not rounded
+        height: 1 // Keep it very thin, possibly even 0.5 if supported and desired
+        color: "#282828" // A very dark gray, slightly lighter than #1a1a1a but still dark. You can experiment with adding transparency, e.g., "#282828C0"
+        radius: 0
     }
 
     // Main Block
@@ -44,8 +43,6 @@ PanelWindow {
         spacing: 10
         // Left Side
         WorkSpaces {}
-        CpuMem {}
-
         // Spacer
         Item {
             Layout.fillWidth: true
@@ -54,7 +51,6 @@ PanelWindow {
         DateTime {
             anchors.centerIn: parent
         }
-
         // Spacer
         Item {
             Layout.fillWidth: true
@@ -62,18 +58,18 @@ PanelWindow {
         // Right side
         QQC.Button {
             id: notifToggle
-            text: "🔔" // bell icon (can swap for proper icon later)
+            text: "🔔"
             background: null
             font.pixelSize: 16
             onClicked: {
                 notifPanel.visible = !notifPanel.visible;
             }
         }
-
         NotificationPanel {
             id: notifPanel
             text_color: "white"
         }
+        CpuMem {}
         SysTray {}
     }
 }
