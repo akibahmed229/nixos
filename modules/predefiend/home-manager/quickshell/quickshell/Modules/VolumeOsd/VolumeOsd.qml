@@ -7,38 +7,58 @@ import Quickshell.Widgets
 Scope {
     id: root
 
-    // Bind the pipewire node so its volume will be tracked
+    // Track the pipewire node so it's ready once available (optional/helpful)
     PwObjectTracker {
+        id: pwTracker
         objects: [Pipewire.defaultAudioSink]
     }
 
-    Connections {
-        target: Pipewire.defaultAudioSink?.audio
+    // last polled volume (null means unknown)
+    property real lastVolume: -1.0
 
-        function onVolumeChanged() {
-            root.shouldShowOsd = true;
-            hideTimer.restart();
-        }
-    }
-
+    // Whether to show the OSD
     property bool shouldShowOsd: false
 
+    // Timer that hides the OSD after a short delay
     Timer {
         id: hideTimer
         interval: 1000
+        repeat: false
         onTriggered: root.shouldShowOsd = false
     }
 
-    // The OSD window will be created and destroyed based on shouldShowOsd.
-    // PanelWindow.visible could be set instead of using a loader, but using
-    // a loader will reduce the memory overhead when the window isn't open.
+    // Poller: checks the sink's current volume periodically.
+    Timer {
+        id: pollTimer
+        interval: 150   // 150ms is responsive without being too hot
+        running: true
+        repeat: true
+
+        onTriggered: {
+            // Safely read the volume (may be undefined)
+            var volObj = Pipewire.defaultAudioSink && Pipewire.defaultAudioSink.audio ? Pipewire.defaultAudioSink.audio : null;
+            var v = volObj && typeof volObj.volume !== "undefined" ? volObj.volume : null;
+
+            if (v === null) {
+                // sink not available yet
+                return;
+            }
+
+            // If value changed (accounting for small float jitter), show OSD
+            if (root.lastVolume < 0 || Math.abs(v - root.lastVolume) > 0.0005) {
+                root.lastVolume = v;
+                root.shouldShowOsd = true;
+                hideTimer.restart();
+            }
+        }
+    }
+
+    // Create/destroy the PanelWindow based on shouldShowOsd (LazyLoader keeps memory down)
     LazyLoader {
         active: root.shouldShowOsd
 
         PanelWindow {
-            // Since the panel's screen is unset, it will be picked by the compositor
-            // when the window is created. Most compositors pick the current active monitor.
-
+            // Position near the bottom center of the current screen
             anchors.bottom: true
             margins.bottom: screen.height / 5
             exclusiveZone: 0
@@ -46,9 +66,7 @@ Scope {
             implicitWidth: 400
             implicitHeight: 50
             color: "transparent"
-
-            // An empty click mask prevents the window from blocking mouse events.
-            mask: Region {}
+            mask: Region {} // let clicks pass through
 
             Rectangle {
                 anchors.fill: parent
@@ -70,19 +88,21 @@ Scope {
                     Rectangle {
                         // Stretches to fill all left-over space
                         Layout.fillWidth: true
-
                         implicitHeight: 10
                         radius: 20
                         color: "#50ffffff"
 
                         Rectangle {
+                            id: filled
                             anchors {
                                 left: parent.left
                                 top: parent.top
                                 bottom: parent.bottom
                             }
 
-                            implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+                            // safe computation: clamp volume (0..1), fallback to 0
+                            property real safeVol: Math.max(0, Math.min(1, Pipewire.defaultAudioSink?.audio?.volume ?? root.lastVolume ?? 0))
+                            implicitWidth: parent.width * filled.safeVol
                             radius: parent.radius
                         }
                     }

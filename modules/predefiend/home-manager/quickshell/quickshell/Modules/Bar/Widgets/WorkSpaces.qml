@@ -6,10 +6,6 @@ import Quickshell.Hyprland
 Row {
     id: root // | 1 | 2 | 3 | 4 | 5 |
 
-    anchors {
-        leftMargin: 16
-    }
-
     spacing: 8
 
     Repeater {

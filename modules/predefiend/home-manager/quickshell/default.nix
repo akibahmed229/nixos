@@ -16,6 +16,14 @@ in {
     qt6.qt5compat
     libsForQt5.qtquickcontrols2
     lm_sensors
+
+    # Quickshell stuff
+    qt6Packages.qt5compat
+    libsForQt5.qt5.qtgraphicaleffects
+    kdePackages.qtbase
+    kdePackages.qtdeclarative
+    kdePackages.qtstyleplugin-kvantum
+    wallust
   ];
 
   programs.quickshell = {

@@ -61,8 +61,8 @@ LazyLoader {
         }
         mask: root.hoverable ? null : emptyRegion
 
-        width: body.implicitWidth
-        height: body.implicitHeight
+        implicitWidth: body.implicitWidth
+        implicitHeight: body.implicitHeight
 
         MouseArea {
             id: body
@@ -78,7 +78,7 @@ LazyLoader {
 
                 radius: 5
                 border.width: 1
-                color: palette.active.toolTipBase
+                color: "#282828"
                 border.color: palette.active.light
 
                 Loader {
