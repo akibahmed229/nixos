@@ -3,6 +3,7 @@
   config,
   pkgs,
   self,
+  user,
   ...
 }:
 with lib; let
