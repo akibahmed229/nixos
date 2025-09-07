@@ -68,7 +68,7 @@ in {
       # Disable if you don't want unfree packages
       allowUnfree = true;
       permittedInsecurePackages = [
-        "libsoup-2.74.3" # libsoup-2.74.3 is insecure, but required for some gnome applications.
+        "qtwebengine-5.15.19" # FIXME
       ];
     };
   };
