@@ -1,7 +1,7 @@
 import Quickshell
 import QtQuick // For SystemPalette
 import QtQuick.Layouts
-import "./Widgets/"
+import qs.Modules.Bar.Widgets
 
 PanelWindow {
     id: panel

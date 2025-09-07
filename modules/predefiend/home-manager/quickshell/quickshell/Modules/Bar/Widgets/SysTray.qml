@@ -9,9 +9,23 @@ Repeater {
     delegate: Item {
         implicitWidth: 18
         implicitHeight: 18
+
         Image {
             anchors.fill: parent
-            source: modelData.icon
+            width: 16
+            height: 16
+            source: {
+                let icon = modelData?.icon || "";
+                if (!icon)
+                    return "";
+                // Process icon path
+                if (icon.includes("?path=")) {
+                    const [name, path] = icon.split("?path=");
+                    const fileName = name.substring(name.lastIndexOf("/") + 1);
+                    return `file://${path}/${fileName}`;
+                }
+                return icon;
+            }
             fillMode: Image.PreserveAspectFit
         }
         MouseArea {
@@ -27,7 +41,7 @@ Repeater {
             }
             onPressed: function (mouse) {
                 if (mouse.button === Qt.RightButton) {
-                    modelData.contextMenu(mouse.x, mouse.y);
+                    modelData.open(mouse.x, mouse.y);
                 }
             }
         }

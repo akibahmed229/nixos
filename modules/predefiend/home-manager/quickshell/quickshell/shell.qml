@@ -1,8 +1,7 @@
-//@ pragma UseQApplication
 import Quickshell
 import QtQuick
-import "./Modules/Bar/"
-import "./Modules/Volume-Osd/"
+import qs.Modules.Bar
+import qs.Modules.VolumeOsd
 
 ShellRoot {
     id: root
