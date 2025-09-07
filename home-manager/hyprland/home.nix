@@ -168,7 +168,7 @@
           "$mod, Print, exec, screenshot" # from my pkgs shellscript
           "$mod, W, exec, wallpaper" # from my pkgs shellscript
           "$mod ALT, L, exec, hyprlock"
-          "$mod SHIFT, DELETE, exec, wlogout"
+          "$mod SHIFT, DELETE, exec, quickshell -p ~/.config/quickshell/Modules/Wlogout/WLogoutShell.qml"
 
           # Move focus with mainMod + ctrl + (h,j,k,l) keys
           "$mod CTRL, h, movefocus, l"
