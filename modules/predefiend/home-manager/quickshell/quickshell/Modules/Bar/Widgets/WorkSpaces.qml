@@ -18,9 +18,7 @@ Row {
             width: 32
             height: 24
             radius: 4
-            color: modelData.active ? "#4a9eff" : "#333333"
-            border.color: "#555555"
-            border.width: 2
+            color: "transparent"
 
             MouseArea {
                 anchors.fill: parent
@@ -30,9 +28,10 @@ Row {
             Text {
                 text: modelData.id
                 anchors.centerIn: parent
-                color: modelData.active ? "#ffffff" : "#5cccc9"
-                font.pixelSize: 12
+                color: modelData.active ? "#8ec07c" : "#458588"
+                font.pixelSize: 14
                 font.family: "Inter, sans-serif"
+                font.weight: modelData.active ? Font.ExtraBold : Font.Normal
             }
         }
     }

@@ -3,7 +3,6 @@ import QtQuick // For SystemPalette
 import QtQuick.Layouts
 import qs.Modules.Bar.Widgets
 import QtQuick.Controls as QQC
-import qs.Modules.Notification
 import Quickshell.Io
 
 PanelWindow {
@@ -22,7 +21,7 @@ PanelWindow {
     Rectangle {
         id: bar
         anchors.fill: parent
-        color: "#1a1a1a"
+        color: "#282828"
         radius: 0
     }
 
@@ -33,47 +32,51 @@ PanelWindow {
             right: bar.right
             bottom: bar.bottom
         }
-        height: 1 // Keep it very thin, possibly even 0.5 if supported and desired
-        color: "#282828" // A very dark gray, slightly lighter than #1a1a1a but still dark. You can experiment with adding transparency, e.g., "#282828C0"
-        radius: 0
+        height: 2
+        color: "#282828"
+        bottomLeftRadius: 12
+        bottomRightRadius: 12
+        gradient: Gradient {
+            GradientStop {
+                position: 0.0
+                color: "gray"
+            }
+            GradientStop {
+                position: 1.0
+                color: "black"
+            }
+        }
     }
 
     // Main Block
     RowLayout {
         anchors.fill: parent
         spacing: 10
+
         // Left Side
-        WorkSpaces {}
+        DateTime {}
+        NotificationIcon {} // MOVED here with other right-side items
+
         // Spacer
         Item {
             Layout.fillWidth: true
         }
+
         // Center clock
-        DateTime {
+        // REMOVED: anchors.centerIn: parent
+        // The RowLayout and spacers will now handle centering.
+        WorkSpaces {
             anchors.centerIn: parent
         }
+
         // Spacer
         Item {
             Layout.fillWidth: true
         }
+
         // Right side
-        QQC.Button {
-            id: notifToggle
-            text: "🔔"
-            background: null
-            font.pixelSize: 16
-            onClicked: {
-                notifPanel.visible = !notifPanel.visible;
-            }
-        }
-        NotificationPanel {
-            id: notifPanel
-            text_color: "white"
-        }
         CpuMem {}
         SysTray {}
-
-        // poweroff
         PowerOff {}
     }
 }

@@ -5,6 +5,7 @@ import QtQuick.Layouts
 
 Row {
     id: root
+    leftPadding: 10
 
     anchors {
         leftMargin: 16
@@ -12,36 +13,35 @@ Row {
 
     Text {
         id: clock
-        color: "white"
-        anchors.centerIn: parent
+        color: "#8ec07c"
+    }
 
-        Process {
-            // give the process object an id so we can talk
-            // about it from the timer
-            id: dateProc
+    Process {
+        id: dateProc
 
-            command: ["date"]
-            running: true
+        // We pass a format string to the 'date' command
+        command: ["date", "+%A %I:%M %P, %B %e"]
+        running: true
 
-            stdout: StdioCollector {
-                onStreamFinished: clock.text = this.text
-            }
+        stdout: StdioCollector {
+            // .trim() removes any potential extra whitespace from the command's output
+            onStreamFinished: clock.text = this.text.trim()
         }
+    }
 
-        // use a timer to rerun the process at an interval
-        Timer {
-            // 1000 milliseconds is 1 second
-            interval: 1000
+    // use a timer to rerun the process at an interval
+    Timer {
+        // 1000 milliseconds is 1 second
+        interval: 1000
 
-            // start the timer immediately
-            running: true
+        // start the timer immediately
+        running: true
 
-            // run the timer again when it ends
-            repeat: true
+        // run the timer again when it ends
+        repeat: true
 
-            // when the timer is triggered, set the running property of the
-            // process to true, which reruns it if stopped.
-            onTriggered: dateProc.running = true
-        }
+        // when the timer is triggered, set the running property of the
+        // process to true, which reruns it if stopped.
+        onTriggered: dateProc.running = true
     }
 }

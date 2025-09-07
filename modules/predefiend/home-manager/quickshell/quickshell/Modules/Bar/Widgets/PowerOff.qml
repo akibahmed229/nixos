@@ -4,6 +4,9 @@ import QtQuick.Controls as QQC
 import Quickshell.Io
 
 Row {
+    id: root
+    rightPadding: 10
+
     Process {
         id: wlogoutProcess
         command: ["quickshell", "-p", "/home/akib/.config/quickshell/Modules/Wlogout/WLogoutShell.qml"]
@@ -12,7 +15,7 @@ Row {
         id: poweroff
         text: "⏻"
         background: null
-        font.pixelSize: 18
+        font.pixelSize: 22
         onClicked: wlogoutProcess.running = true
     }
 }

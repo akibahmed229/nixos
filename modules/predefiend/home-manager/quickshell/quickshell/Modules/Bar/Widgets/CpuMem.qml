@@ -7,18 +7,20 @@ RowLayout {
     spacing: 12
     Text {
         id: cpuLabel
-        text: "󰍛 : N/A%"
-        color: "red"
+        text: "Cpu: N/A%"
+        color: "#fb4934"
     }
-    Text {
-        id: cpuTempLabel
-        text: " : N/A%"
-        color: "orange"
-    }
+
+    // Text {
+    //     id: cpuTempLabel
+    //     text: " : N/A%"
+    //     color: "orange"
+    // }
+
     Text {
         id: memLabel
-        text: " : N/A"
-        color: "green"
+        text: "Mem: N/A"
+        color: "#b8bb26"
     }
 
     Process {
@@ -26,22 +28,24 @@ RowLayout {
         command: ["bash", "-c", "top -bn1 | awk '/Cpu/ { print $2}'"]
 
         stdout: StdioCollector {
-            onStreamFinished: cpuLabel.text = "󰍛 : " + text.trim() + "%"
+            onStreamFinished: cpuLabel.text = "cpu: " + text.trim() + "%"
         }
     }
-    Process {
-        id: cpuTempProc
-        command: ["bash", "-c", "sensors | grep Package | awk '{print $4}'"]
 
-        stdout: StdioCollector {
-            onStreamFinished: cpuTempLabel.text = " : " + text.trim() + "%"
-        }
-    }
+    // Process {
+    //     id: cpuTempProc
+    //     command: ["bash", "-c", "sensors | grep Package | awk '{print $4}'"]
+
+    //     stdout: StdioCollector {
+    //         onStreamFinished: cpuTempLabel.text = " : " + text.trim() + "%"
+    //     }
+    // }
+
     Process {
         id: memProc
         command: ["sh", "-c", "free -m | awk '/Mem:/ {print int($3/$2 * 100)}'"]
         stdout: StdioCollector {
-            onStreamFinished: memLabel.text = " : " + text.trim() + "%"
+            onStreamFinished: memLabel.text = "Mem: " + text.trim() + "%"
         }
     }
     Timer {
@@ -51,7 +55,7 @@ RowLayout {
         onTriggered: {
             cpuProc.running = true;
             memProc.running = true;
-            cpuTempProc.running = true;
+            // cpuTempProc.running = true;
         }
     }
 }

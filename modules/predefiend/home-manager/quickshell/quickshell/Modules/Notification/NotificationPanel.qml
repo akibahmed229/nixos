@@ -15,12 +15,12 @@ PanelWindow {
     implicitWidth: 500
     implicitHeight: 600
 
-    color: "#171a18"
+    color: "#282828"
 
     WlrLayershell.layer: WlrLayer.Overlay
 
     Rectangle {
-        border.width: 5
+        border.width: 3
         border.color: "#8ec07c"
         anchors.fill: parent
         color: "transparent"
