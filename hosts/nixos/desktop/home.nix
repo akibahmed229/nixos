@@ -42,6 +42,5 @@ in {
   };
 
   home.packages = with pkgs; [
-    self.packages.${pkgs.system}.wallpaper
   ];
 }

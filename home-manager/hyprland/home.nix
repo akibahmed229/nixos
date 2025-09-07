@@ -36,6 +36,7 @@
     playerctl # Music player controller.
 
     # 3. Screenshot & Screen Tools
+    self.packages.${pkgs.system}.wallpaper
     self.packages.${pkgs.system}.screenshot # Screenshot tool.
     imagemagick # Image manipulation tool, often used for screenshots.
     self.packages.${pkgs.system}.custom_nsxiv # Image viewer.
