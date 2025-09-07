@@ -9,6 +9,7 @@ RowLayout {
         id: cpuLabel
         text: "Cpu: N/A%"
         color: "#fb4934"
+        font.family: "Inter, sans-serif"
     }
 
     // Text {
@@ -21,6 +22,7 @@ RowLayout {
         id: memLabel
         text: "Mem: N/A"
         color: "#b8bb26"
+        font.family: "Inter, sans-serif"
     }
 
     Process {

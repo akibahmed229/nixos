@@ -14,6 +14,7 @@ Row {
     Text {
         id: clock
         color: "#ebdbb2"
+        font.family: "Inter, sans-serif"
     }
 
     Process {

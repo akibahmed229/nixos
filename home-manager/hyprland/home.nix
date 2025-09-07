@@ -167,7 +167,7 @@
           ''$mod, V, exec, cliphist list | wofi -n --dmenu -p "Copy Text" | cliphist decode | wl-copy''
           "$mod, Print, exec, screenshot" # from my pkgs shellscript
           "$mod, W, exec, wallpaper" # from my pkgs shellscript
-          "$mod ALT, L, exec, hyprlock"
+          "$mod ALT, L, exec, quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"
           "$mod SHIFT, DELETE, exec, quickshell -p ~/.config/quickshell/Modules/Wlogout/WLogoutShell.qml"
 
           # Move focus with mainMod + ctrl + (h,j,k,l) keys
@@ -269,11 +269,11 @@
     extraConfig = builtins.readFile ./hypr/hyprland.conf;
   };
 
-  programs.hyprlock = {
-    enable = true;
-    package = pkgs.hyprlock;
-    extraConfig = builtins.readFile ./hyprlock/hyprlock.conf;
-  };
+  # programs.hyprlock = {
+  #   enable = true;
+  #   package = pkgs.hyprlock;
+  #   extraConfig = builtins.readFile ./hyprlock/hyprlock.conf;
+  # };
 
   services = {
     # For auto mounting USB devices
@@ -289,14 +289,14 @@
       package = pkgs.hypridle;
       settings = {
         general = {
-          lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances.
+          # lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances.
           before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
           after_sleep_cmd = "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
         };
         listener = [
           {
-            timeout = 60 * 60; # 1 hour.
-            on-timeout = "hyprlock"; # lock the screen after inactivity.
+            timeout = 60 * 1; # 1 hour.
+            on-timeout = "quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"; # lock the screen after inactivity.
           }
         ];
       };
