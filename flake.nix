@@ -22,7 +22,7 @@
   inputs = {
     ####################  Core Repositories ####################
     # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
-    nixpkgs.url = "github:nixos/nixpkgs?ref=0d2f6d15555fb17210c29ae038c5599f21d86782"; # FIXME: nixos-unstable
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
     home-manager = {
       url = "github:nix-community/home-manager/master";
