@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
-import qs.Utils
+import qs.Utils.Tooltip
 
 RowLayout {
     spacing: 5

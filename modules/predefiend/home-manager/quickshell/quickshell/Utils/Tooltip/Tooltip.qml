@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import qs.Utils
+import qs.Utils.Tooltip
 
 LazyLoader {
     id: root
