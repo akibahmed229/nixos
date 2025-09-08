@@ -8,7 +8,7 @@ RowLayout {
 
     Text {
         id: cpuLabel
-        text: "mpu: N/A%"
+        text: "cpu: N/A%"
         color: "#fb4934"
         font.family: "Inter, sans-serif"
     }

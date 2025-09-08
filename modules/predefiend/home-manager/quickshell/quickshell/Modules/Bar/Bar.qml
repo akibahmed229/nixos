@@ -2,7 +2,6 @@ import Quickshell
 import QtQuick // For SystemPalette
 import QtQuick.Layouts
 import qs.Modules.Bar.Widgets
-import QtQuick.Controls as QQC
 import Quickshell.Io
 
 PanelWindow {

@@ -1,9 +1,7 @@
-import Quickshell
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Io
 import QtQuick.Layouts
-import qs.Modules.Wlogout
 
 RowLayout {
     spacing: 5
