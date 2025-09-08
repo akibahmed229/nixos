@@ -7,7 +7,7 @@
         settings = {
           highlight.enable = true;
           indent.enable = true;
-          ensure_installed = ["c" "lua" "vim" "vimdoc" "query" "elixir" "heex" "javascript" "html" "nix" "python" "rust" "css" "sql" "java" "json" "typescript" "yaml" "toml" "bash"];
+          ensure_installed = ["c" "lua" "vim" "vimdoc" "query" "elixir" "heex" "javascript" "html" "nix" "python" "rust" "css" "sql" "java" "json" "typescript" "yaml" "toml" "bash" "qmljs"];
         };
         nixvimInjections = true;
         languageRegister.nu = "nu";
