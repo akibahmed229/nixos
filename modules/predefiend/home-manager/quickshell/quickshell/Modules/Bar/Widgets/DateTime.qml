@@ -5,7 +5,6 @@ import QtQuick.Layouts
 
 Row {
     id: root
-    leftPadding: 10
 
     anchors {
         leftMargin: 16
