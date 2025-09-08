@@ -41,8 +41,10 @@ PanelWindow {
         RowLayout {
             id: leftBlocks
             spacing: 10
-            DateTime {}
+
             NotificationIcon {}
+            DateTime {}
+            WindowTitle {}
         }
 
         Item {
@@ -53,6 +55,7 @@ PanelWindow {
         RowLayout {
             id: rightBlocks
             spacing: 10
+
             CpuMem {}
             SysTray {}
             PowerOff {}
