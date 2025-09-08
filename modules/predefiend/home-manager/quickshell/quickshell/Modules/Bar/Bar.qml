@@ -7,65 +7,75 @@ import Quickshell.Io
 
 PanelWindow {
     id: panel
+    color: "transparent"
+    implicitHeight: 32
+
     anchors {
         top: true
         left: true
         right: true
     }
-    implicitHeight: 30
+
     margins {
-        top: 0
-        right: 0
-        left: 0
+        top: 4
+        right: 8
+        left: 8
     }
 
+    // Bar
     Rectangle {
         id: bar
-        anchors.fill: parent
+        radius: 6
         color: "#282828"
-        radius: 0
-    }
 
-    // Main Block
-    // keep the RowLayout for left/right only (no WorkSpaces in the RowLayout)
-    RowLayout {
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-        spacing: 0
+        border.color: "transparent"
+        border.width: 2
 
-        // Left Blocks
+        anchors.fill: parent
+
+        // Main Block
+        // keep the RowLayout for left/right only (no WorkSpaces in the RowLayout)
         RowLayout {
-            id: leftBlocks
-            spacing: 10
+            id: mainBlock
+            spacing: 0
 
-            NotificationIcon {}
-            DateTime {}
-            WindowTitle {}
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
+            }
+
+            // Left Blocks
+            RowLayout {
+                id: leftBlocks
+                spacing: 10
+
+                NotificationIcon {}
+                DateTime {}
+                WindowTitle {}
+            }
+
+            Item {
+                Layout.fillWidth: true
+            } // push right side
+
+            // Right Blocks
+            RowLayout {
+                id: rightBlocks
+                spacing: 10
+
+                CpuMem {}
+                SysTray {}
+                PowerOff {}
+            }
         }
 
-        Item {
-            Layout.fillWidth: true
-        } // push right side
-
-        // Right Blocks
-        RowLayout {
-            id: rightBlocks
-            spacing: 10
-
-            CpuMem {}
-            SysTray {}
-            PowerOff {}
+        // overlay WorkSpaces centered
+        WorkSpaces {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            // ensure it doesn't use Layout.* properties
         }
-    }
-
-    // overlay WorkSpaces centered
-    WorkSpaces {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        // ensure it doesn't use Layout.* properties
     }
 }

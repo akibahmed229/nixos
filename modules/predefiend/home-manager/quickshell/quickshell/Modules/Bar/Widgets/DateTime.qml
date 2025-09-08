@@ -3,7 +3,7 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 
-Row {
+RowLayout {
     id: root
 
     anchors {

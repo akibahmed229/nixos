@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Controls
 import qs.Modules.Notification
+import QtQuick.Layouts
 
 // This Row acts as a container for the button and its associated panel.
-Row {
+RowLayout {
     id: root
-    leftPadding: 10
+    Layout.leftMargin: 10
 
     Item {
 
@@ -16,9 +17,9 @@ Row {
         // The notification bell icon button
         Button {
             id: notifToggle
-            icon.source: "Icons/bell-solid-full.svg"
+            icon.source: "Icons/notification-bell.svg"
             background: null
-            font.pixelSize: 16
+            font.pixelSize: 22
 
             // When clicked, toggle the visibility of the notification panel.
             onClicked: {

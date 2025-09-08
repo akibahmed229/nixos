@@ -5,9 +5,10 @@ import QtQuick.Layouts
 
 RowLayout {
     spacing: 12
+
     Text {
         id: cpuLabel
-        text: "Cpu: N/A%"
+        text: "mpu: N/A%"
         color: "#fb4934"
         font.family: "Inter, sans-serif"
     }
@@ -20,7 +21,7 @@ RowLayout {
 
     Text {
         id: memLabel
-        text: "Mem: N/A"
+        text: "mem: N/A%"
         color: "#b8bb26"
         font.family: "Inter, sans-serif"
     }
@@ -47,7 +48,7 @@ RowLayout {
         id: memProc
         command: ["sh", "-c", "free -m | awk '/Mem:/ {print int($3/$2 * 100)}'"]
         stdout: StdioCollector {
-            onStreamFinished: memLabel.text = "Mem: " + text.trim() + "%"
+            onStreamFinished: memLabel.text = "mem: " + text.trim() + "%"
         }
     }
     Timer {

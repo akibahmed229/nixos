@@ -11,10 +11,12 @@ Row {
     Repeater {
         model: Hyprland.workspaces
         Rectangle {
-            width: 32
-            height: 24
-            radius: 4
+            width: 26
+            height: 26
+            radius: 6
             color: "transparent"
+            border.color: modelData.active ? "#8ec07c" : "transparent"
+            border.width: 1
 
             MouseArea {
                 anchors.fill: parent
@@ -24,7 +26,7 @@ Row {
             Text {
                 text: modelData.id
                 anchors.centerIn: parent
-                color: modelData.active ? "#8ec07c" : "#458588"
+                color: modelData.active ? "#8ec07c" : "#ebdbb2"
                 font.pixelSize: 14
                 font.family: "Inter, sans-serif"
                 font.weight: modelData.active ? Font.ExtraBold : Font.Normal
