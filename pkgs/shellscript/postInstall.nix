@@ -112,11 +112,7 @@ pkgs.writeShellApplication {
 
       info "Cloning flake repository (shallow)"
 
-      if [[ "$USERNAME" == "akib" ]]; then
-        git clone git@github.com:akibahmed229/nixos.git . --depth 1 || die "git clone failed"
-      else
-        git clone https://www.github.com/akibahmed229/nixos . --depth 1 || die "git clone failed"
-      fi
+      git clone https://www.github.com/akibahmed229/nixos . --depth 1 || die "git clone failed"
 
       update_flake_data "$repo"
       info "Running nixos-rebuild switch for $HOSTNAME"
