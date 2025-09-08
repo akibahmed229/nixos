@@ -79,14 +79,15 @@ PanelWindow {
         id: server
         onNotification: notification => {
             notification.tracked = true;
-            console.log(JSON.stringify(notification));
+            // console.log(JSON.stringify(notification));
+
             var notification_component = Qt.createComponent("Notification.qml");
             var notification_object = notification_component.createObject(content, {
                 id: notification.id,
                 body: notification.body,
                 summary: notification.summary,
-                // font: custom_font,
-                color: text_color,
+                font: "Intern, sans-serif",
+                color: "#ebdbb2",
                 margin: 10
             });
             if (notification_object == null) {
