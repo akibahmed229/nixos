@@ -100,6 +100,7 @@ in {
     btop # Resource monitor.
     appimage-run # Utility to run AppImage applications.
     tlrc # Command-line tool for TL;DR pages.
+    nix-diff # used to compare derivations
 
     # 2. File Management
     trash-cli # Command-line trash utility.
