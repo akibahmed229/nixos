@@ -60,6 +60,7 @@ in {
 
     targets = {
       gtk.enable = true;
+      qt.enable = true;
       gnome.enable = true;
       alacritty.enable = true;
       bat.enable = true;
