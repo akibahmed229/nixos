@@ -52,9 +52,18 @@ RowLayout {
                         const fileName = name.substring(name.lastIndexOf("/") + 1);
                         return `file://${path}/${fileName}`;
                     }
+                    // For named icons like "drive-removable-media-usb-pendrive", return as-is for theme resolution
+                    // Fallback: If it's a known USB/media icon, use a generic one (adjust as needed)
+                    if (icon === "image://icon/drive-removable-media-usb-pendrive") {
+                        return Qt.resolvedUrl("Icons/usb-drive.png");
+                    }
                     return icon;
                 }
                 implicitSize: 16
+                // Optional: Add error handling for failed loads
+                onStatusChanged: if (status === Image.Error) {
+                    source = Qt.resolvedUrl("Icons/warning.png");  // Generic warning icon as ultimate fallback
+                }
             }
 
             QsMenuAnchor {

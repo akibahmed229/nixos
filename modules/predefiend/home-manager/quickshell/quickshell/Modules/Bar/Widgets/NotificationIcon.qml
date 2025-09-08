@@ -13,7 +13,7 @@ Item {
     // The notification bell icon button
     Button {
         id: notifToggle
-        text: "🔔"
+        icon.source: "Icons/bell-solid-full.svg"
         background: null
         font.pixelSize: 16
 

@@ -81,8 +81,8 @@ Scope {
                     }
 
                     IconImage {
-                        implicitSize: 30
-                        source: Quickshell.iconPath("audio-volume-high-symbolic")
+                        implicitSize: 40
+                        source: Qt.resolvedUrl("volume.svg")
                     }
 
                     Rectangle {
