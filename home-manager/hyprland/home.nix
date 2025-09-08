@@ -29,6 +29,7 @@
     # Theme engine for Qt.
     qt6Packages.qtstyleplugin-kvantum
     brightnessctl # Brightness control tool.
+    ddcutil # Control the settings of connected displays via DDC/CI.
 
     swww # Sway wallpaper manager.
 
@@ -220,9 +221,9 @@
         " , XF86AudioPrev, exec, playerctl previous"
         " , XF86AudioNext, exec, playerctl next"
 
-        # Requires brightnessctl
-        " , XF86MonBrightnessUp, exec, brightnessctl s +5%"
-        " , XF86MonBrightnessDown, exec, brightnessctl s 5%-"
+        # Requires ddcutil
+        " , XF86MonBrightnessUp, exec,  ddcutil --display 1 setvcp 10 + 5"
+        " , XF86MonBrightnessDown, exec,  ddcutil --display 1 setvcp 10 + 5"
       ];
 
       bindm = [
