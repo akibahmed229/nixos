@@ -1,20 +1,22 @@
-// system import
+// system imports
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import QtQuick.Layouts
 
-// Custom import
-import qs.Modules.Bar.Widgets
-import qs.Settings
+// custom imports
+import qs.Modules.Bar.Widgets   // bar widgets (CPU, datetime, tray, etc.)
+import qs.Settings              // theme settings (colors, borders, etc.)
+import qs.Components            // reusable components (margins, etc.)
 
+// Main top bar window
 PanelWindow {
     id: panel
-    color: "transparent"
-    implicitHeight: 32
+    color: Theme.get.transparent        // keep window transparent
+    implicitHeight: 32                  // bar height
 
     anchors {
-        top: true
+        top: true       // stick to top
         left: true
         right: true
     }
@@ -25,60 +27,51 @@ PanelWindow {
         left: 8
     }
 
-    // Bar
+    // Rounded background rectangle (styled via Theme.qml)
     Rectangle {
         id: bar
         radius: 6
         color: Theme.get.bgColor
-
         border.color: Theme.get.buttonBorder
         border.width: 2
-
         anchors.fill: parent
 
-        // Main Block
-        // keep the RowLayout for left/right only (no WorkSpaces in the RowLayout)
+        // --- Main layout (split left & right sections)
         RowLayout {
             id: mainBlock
             spacing: 0
+            anchors.fill: parent
 
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
-            }
-
-            // Left Blocks
+            // --- Left section of bar
             RowLayout {
                 id: leftBlocks
                 spacing: 10
-
-                NotificationIcon {}
-                DateTime {}
-                WindowTitle {}
+                MarginLeft {}          // padding
+                NotificationIcon {}    // shows system/app notifications
+                DateTime {}            // clock widget
+                WindowTitle {}         // current window title
             }
 
             Item {
                 Layout.fillWidth: true
-            } // push right side
+            }  // spacer to push right side
 
-            // Right Blocks
+            // --- Right section of bar
             RowLayout {
                 id: rightBlocks
                 spacing: 10
-
-                CpuMem {}
-                SysTray {}
-                PowerOff {}
+                CpuMem {}              // CPU + memory usage
+                SysTray {}             // system tray icons
+                PowerOff {}            // shutdown/logout button
+                MarginRight {}         // padding
             }
         }
 
-        // overlay WorkSpaces centered
+        // --- Centered workspace indicator (overlays above left/right blocks)
         WorkSpaces {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
-            // ensure it doesn't use Layout.* properties
+            // must not use Layout.* to avoid conflicts
         }
     }
 }

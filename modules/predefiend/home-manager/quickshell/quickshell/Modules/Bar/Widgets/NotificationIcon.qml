@@ -9,7 +9,6 @@ import qs.Modules.Notification
 // This Row acts as a container for the button and its associated panel.
 RowLayout {
     id: root
-    Layout.leftMargin: 10
 
     Item {
         // We set the size of this widget to be the same size as the button inside it.

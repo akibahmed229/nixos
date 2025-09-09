@@ -1,27 +1,27 @@
-// system import
+// system imports
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Io
 import QtQuick.Layouts
 
-// custom import
+// custom imports
 import qs.Modules.Wlogout
 
+// Power button + logout/power panel
 RowLayout {
     spacing: 5
-    Layout.rightMargin: 10
 
     Button {
         id: poweroff
-        icon.source: "./Icons/power-off.svg"
+        icon.source: "./Icons/power-off.svg" // power icon
         background: null
         font.pixelSize: 22
 
+        // toggle Wlogout panel on click
         onClicked: wlogoutPanel.visible = !wlogoutPanel.visible
     }
 
-    // The Wlogout panel that appears when the icon is clicked
     WLogoutShell {
-        id: wlogoutPanel
+        id: wlogoutPanel // logout/power options panel
     }
 }

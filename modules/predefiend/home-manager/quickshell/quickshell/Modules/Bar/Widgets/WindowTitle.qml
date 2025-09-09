@@ -1,54 +1,46 @@
-// system import
+// system imports
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Hyprland
+import Quickshell.Hyprland   // Hyprland integration
 
-// custom import
-import qs.Settings
+// custom imports
+import qs.Settings           // theme colors
 
+// Container for active window title
 Rectangle {
     color: "transparent"
     Layout.fillHeight: true
     Layout.fillWidth: true
-    Layout.maximumWidth: 300
+    Layout.maximumWidth: 300   // prevent overly long titles
 
-    // Ensure toplevels are refreshed on startup (Hyprland data might not be loaded initially)
-    Component.onCompleted: {
-        Hyprland.refreshToplevels();
-    }
+    // --- Ensure Hyprland data is initialized ---
+    Component.onCompleted: Hyprland.refreshToplevels()
 
+    // --- Computed property: get current active window title ---
     property string activeWindowTitle: {
-        // Directly use Hyprland.activeToplevel for the currently active window
         const activeToplevel = Hyprland.activeToplevel;
-        if (activeToplevel && activeToplevel.title) {
-            const title = activeToplevel.title;
-            // console.log("DEBUG qml: Found active toplevel title:", title);  // Temporary debug; remove after testing
-            return title;
-        }
-
-        // console.log("DEBUG qml: No active toplevel or title available");
-        return "";
+        return activeToplevel && activeToplevel.title ? activeToplevel.title : "";
     }
 
+    // --- Display window title ---
     Text {
         id: windowTitle
         anchors.centerIn: parent
         text: parent.activeWindowTitle
         color: Theme.get.infoColor
-        font.pixelSize: parent.height * 0.0
-        elide: Text.ElideMiddle
+        font.pixelSize: parent.height * 0.0   // FIXME: currently 0 (invisible)
+        elide: Text.ElideMiddle               // truncate long titles in the middle
         width: parent.width
     }
 
+    // --- React to Hyprland events ---
     Connections {
         target: Hyprland
         function onRawEvent(event) {
-            // console.log("Raw event:", event.event, "Name:", event.name);
-            // Trigger refresh and recompute on relevant events
+            // Refresh on window focus/title change
             if (["windowtitle", "windowtitlev2", "activewindow", "activewindowv2", "focusedmon", "openwindow", "closewindow"].includes(event.name)) {
-                Hyprland.refreshToplevels();  // Ensure latest data
-                const title = activeWindowTitle;  // Forces property recompute
-                // console.log("Window event:", event.name, "Title:", title);
+                Hyprland.refreshToplevels();
+                const title = activeWindowTitle; // recompute
             }
         }
     }

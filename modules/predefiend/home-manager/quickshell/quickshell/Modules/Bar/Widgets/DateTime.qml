@@ -1,50 +1,43 @@
-// system import
+// system imports
 import QtQuick
 import Quickshell.Io
 import QtQuick.Layouts
 
-// custom import
-import qs.Settings
+// custom imports
+import qs.Settings   // theme colors
 
+// Container for date + time widget
 RowLayout {
     id: root
+    anchors.leftMargin: 16   // spacing from left side
 
-    anchors {
-        leftMargin: 16
-    }
-
+    // --- Clock text display ---
     Text {
         id: clock
         color: Theme.get.textColor
         font.family: "Inter, sans-serif"
     }
 
+    // --- Date/time fetch process ---
     Process {
         id: dateProc
-
-        // We pass a format string to the 'date' command
+        // Format string for `date`:
+        // Example output: "Monday 03:15 pm, September  7"
         command: ["date", "+%A %I:%M %P, %B %e"]
         running: true
 
         stdout: StdioCollector {
-            // .trim() removes any potential extra whitespace from the command's output
+            // Assign formatted date to clock text
             onStreamFinished: clock.text = this.text.trim()
         }
     }
 
-    // use a timer to rerun the process at an interval
+    // --- Timer to refresh clock every second ---
     Timer {
-        // 1000 milliseconds is 1 second
-        interval: 1000
+        interval: 1000      // 1 second
+        running: true       // start immediately
+        repeat: true        // keep looping
 
-        // start the timer immediately
-        running: true
-
-        // run the timer again when it ends
-        repeat: true
-
-        // when the timer is triggered, set the running property of the
-        // process to true, which reruns it if stopped.
         onTriggered: dateProc.running = true
     }
 }

@@ -4,6 +4,7 @@ import Quickshell
 
 // custom import
 import qs.Utils.Tooltip
+import qs.Settings
 
 LazyLoader {
     id: root
@@ -81,8 +82,8 @@ LazyLoader {
 
                 radius: 5
                 border.width: 1
-                color: "#282828"
-                border.color: palette.active.light
+                color: Theme.get.bgColor
+                border.color: Theme.get.buttonBorder
 
                 Loader {
                     id: content
