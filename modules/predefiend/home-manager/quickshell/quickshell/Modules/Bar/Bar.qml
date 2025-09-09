@@ -1,8 +1,12 @@
+// system import
+import QtQuick
 import Quickshell
-import QtQuick // For SystemPalette
-import QtQuick.Layouts
-import qs.Modules.Bar.Widgets
 import Quickshell.Io
+import QtQuick.Layouts
+
+// Custom import
+import qs.Modules.Bar.Widgets
+import qs.Settings
 
 PanelWindow {
     id: panel
@@ -25,9 +29,9 @@ PanelWindow {
     Rectangle {
         id: bar
         radius: 6
-        color: "#282828"
+        color: Theme.get.bgColor
 
-        border.color: "transparent"
+        border.color: Theme.get.buttonBorder
         border.width: 2
 
         anchors.fill: parent

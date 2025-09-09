@@ -1,9 +1,12 @@
+// system import
 import QtQuick
+import Quickshell
 import QtQuick.Controls
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
+
+// custom import
 import qs.Utils.Tooltip
 
 RowLayout {
@@ -41,7 +44,9 @@ RowLayout {
 
             IconImage {
                 id: icon
+                implicitSize: 16
                 anchors.centerIn: parent
+
                 source: {
                     let icon = modelData?.icon || "";
                     if (!icon)
@@ -59,7 +64,7 @@ RowLayout {
                     }
                     return icon;
                 }
-                implicitSize: 16
+
                 // Optional: Add error handling for failed loads
                 onStatusChanged: if (status === Image.Error) {
                     source = Qt.resolvedUrl("Icons/warning.png");  // Generic warning icon as ultimate fallback

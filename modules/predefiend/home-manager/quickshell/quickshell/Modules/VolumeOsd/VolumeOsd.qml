@@ -1,8 +1,12 @@
+// system import
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
+
+// custom import
+import qs.Settings
 
 Scope {
     id: root
@@ -71,7 +75,7 @@ Scope {
             Rectangle {
                 anchors.fill: parent
                 radius: height / 2
-                color: "#80000000"
+                color: Theme.get.fbColor
 
                 RowLayout {
                     anchors {
@@ -90,7 +94,7 @@ Scope {
                         Layout.fillWidth: true
                         implicitHeight: 10
                         radius: 20
-                        color: "#50ffffff"
+                        color: Theme.get.bgColor
 
                         Rectangle {
                             id: filled

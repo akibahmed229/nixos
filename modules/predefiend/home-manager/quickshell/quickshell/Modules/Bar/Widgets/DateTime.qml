@@ -1,6 +1,10 @@
-import Quickshell.Io
+// system import
 import QtQuick
+import Quickshell.Io
 import QtQuick.Layouts
+
+// custom import
+import qs.Settings
 
 RowLayout {
     id: root
@@ -11,7 +15,7 @@ RowLayout {
 
     Text {
         id: clock
-        color: "#ebdbb2"
+        color: Theme.get.textColor
         font.family: "Inter, sans-serif"
     }
 

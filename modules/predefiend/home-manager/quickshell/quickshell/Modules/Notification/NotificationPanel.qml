@@ -1,9 +1,13 @@
+// system import
+import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Quickshell
 import Quickshell.Wayland
 import Quickshell.Services.Notifications
+
+// custom import
+import qs.Settings
 
 PanelWindow {
     id: notifPanel   // give it an id so we can toggle
@@ -15,13 +19,13 @@ PanelWindow {
     implicitWidth: 500
     implicitHeight: 600
 
-    color: "#282828"
+    color: Theme.get.bgColor
 
     WlrLayershell.layer: WlrLayer.Overlay
 
     Rectangle {
         border.width: 3
-        border.color: "#8ec07c"
+        border.color: Theme.get.buttonBorder
         anchors.fill: parent
         color: "transparent"
 
@@ -43,13 +47,13 @@ PanelWindow {
                     Layout.fillWidth: true
                     text: "Notifications:"
                     // font: custom_font
-                    color: text_color
+                    color: Theme.get.textColor
                 }
 
                 Text {
                     text: "clear"
                     // font: custom_font
-                    color: text_color
+                    color: Theme.get.textColor
 
                     TapHandler {
                         id: tapHandler
@@ -87,7 +91,7 @@ PanelWindow {
                 body: notification.body,
                 summary: notification.summary,
                 font: "Intern, sans-serif",
-                color: "#ebdbb2",
+                color: Theme.get.whiteColor,
                 margin: 10
             });
             if (notification_object == null) {

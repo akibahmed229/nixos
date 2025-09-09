@@ -1,7 +1,10 @@
+// system import
 import QtQuick
-import Quickshell
 import Quickshell.Io
 import QtQuick.Layouts
+
+// custom import
+import qs.Settings
 
 RowLayout {
     spacing: 12
@@ -9,7 +12,7 @@ RowLayout {
     Text {
         id: cpuLabel
         text: "cpu: N/A%"
-        color: "#fb4934"
+        color: Theme.get.errorColor
         font.family: "Inter, sans-serif"
     }
 
@@ -22,7 +25,7 @@ RowLayout {
     Text {
         id: memLabel
         text: "mem: N/A%"
-        color: "#b8bb26"
+        color: Theme.get.successColor
         font.family: "Inter, sans-serif"
     }
 

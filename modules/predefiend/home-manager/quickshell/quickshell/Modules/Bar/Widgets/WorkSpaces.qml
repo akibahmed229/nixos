@@ -1,21 +1,25 @@
+// system import
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
 
+// custom import
+import qs.Settings
+
 Row {
     id: root // | 1 | 2 | 3 | 4 | 5 |
-
     spacing: 8
 
     Repeater {
         model: Hyprland.workspaces
+
         Rectangle {
             width: 26
             height: 26
             radius: 6
             color: "transparent"
-            border.color: modelData.active ? "#8ec07c" : "transparent"
             border.width: 1
+            border.color: modelData.active ? Theme.get.infoColor : "transparent"
 
             MouseArea {
                 anchors.fill: parent
@@ -24,8 +28,8 @@ Row {
 
             Text {
                 text: modelData.id
+                color: modelData.active ? Theme.get.infoColor : Theme.get.textColor
                 anchors.centerIn: parent
-                color: modelData.active ? "#8ec07c" : "#ebdbb2"
                 font.pixelSize: 14
                 font.family: "Inter, sans-serif"
                 font.weight: modelData.active ? Font.ExtraBold : Font.Normal

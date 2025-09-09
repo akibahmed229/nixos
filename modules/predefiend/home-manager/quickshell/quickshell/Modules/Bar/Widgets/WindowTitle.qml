@@ -1,10 +1,14 @@
+// system import
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
 
+// custom import
+import qs.Settings
+
 Rectangle {
-    Layout.fillHeight: true
     color: "transparent"
+    Layout.fillHeight: true
     Layout.fillWidth: true
     Layout.maximumWidth: 300
 
@@ -30,7 +34,7 @@ Rectangle {
         id: windowTitle
         anchors.centerIn: parent
         text: parent.activeWindowTitle
-        color: "#8ec07c"
+        color: Theme.get.infoColor
         font.pixelSize: parent.height * 0.0
         elide: Text.ElideMiddle
         width: parent.width

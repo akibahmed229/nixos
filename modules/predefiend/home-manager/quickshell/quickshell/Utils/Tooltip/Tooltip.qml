@@ -1,5 +1,8 @@
+// system import
 import QtQuick
 import Quickshell
+
+// custom import
 import qs.Utils.Tooltip
 
 LazyLoader {
