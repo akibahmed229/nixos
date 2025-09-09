@@ -12,8 +12,6 @@ import qs.Settings
 PanelWindow {
     id: notifPanel   // give it an id so we can toggle
     visible: false   // hidden by default
-    // required property font custom_font
-    required property color text_color
     property list<QtObject> notification_objects
 
     implicitWidth: 500

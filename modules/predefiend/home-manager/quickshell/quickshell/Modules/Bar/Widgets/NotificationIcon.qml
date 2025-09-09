@@ -32,8 +32,6 @@ RowLayout {
         // The notification panel that appears when the icon is clicked
         NotificationPanel {
             id: notifPanel
-            visible: false // Start hidden by default
-            text_color: "white"
         }
     }
 }

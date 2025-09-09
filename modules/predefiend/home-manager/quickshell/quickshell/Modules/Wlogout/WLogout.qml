@@ -5,20 +5,24 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 
+// custom import
+import qs.Settings
+
 Variants {
-    id: root
-    property color backgroundColor: "#e60c0c0c"
-    property color buttonColor: "#282828"
-    property color buttonHoverColor: "#fb4934"
+    id: wlogoutPanel
+
+    property bool visible: false  // New property to control panel visibility
+    property color backgroundColor: Theme.get.bgColor
+    property color buttonColor: Theme.get.buttonBackground
+    property color buttonHoverColor: Theme.get.buttonHover
     default property list<LogoutButton> buttons
 
     model: Quickshell.screens
     PanelWindow {
-        id: w
-
         property var modelData
-        screen: modelData
 
+        visible: wlogoutPanel.visible  // Bind to the new property
+        screen: modelData
         exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
@@ -29,7 +33,7 @@ Variants {
             focus: true
             Keys.onPressed: event => {
                 if (event.key == Qt.Key_Escape)
-                    Qt.quit();
+                    wlogoutPanel.visible = false;
                 else {
                     for (let i = 0; i < buttons.length; i++) {
                         let button = buttons[i];
@@ -53,7 +57,7 @@ Variants {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: Qt.quit()
+                onClicked: wlogoutPanel.visible = false  // Hide on background click
 
                 GridLayout {
                     anchors.centerIn: parent

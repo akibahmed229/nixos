@@ -8,13 +8,12 @@ QtObject {
     required property string text
     required property string icon
     property var keybind: null
-
     readonly property var process: Process {
         command: ["sh", "-c", button.command]
     }
-
     function exec() {
         process.startDetached();
-        Qt.quit();
+        // For the shell instance, hide Quickshell panel
+        wlogoutPanel.visible = false;
     }
 }

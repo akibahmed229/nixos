@@ -6,6 +6,7 @@ import QtQuick
 // custom import
 import qs.Modules.Bar
 import qs.Modules.VolumeOsd
+import qs.Modules.Notification
 import qs.Modules.Wlogout
 
 ShellRoot {
@@ -20,7 +21,11 @@ ShellRoot {
         sourceComponent: VolumeOsd {}
     }
     Loader {
-        active: false
+        active: true
+        sourceComponent: NotificationPanel {}
+    }
+    Loader {
+        active: true
         sourceComponent: WLogoutShell {}
     }
 }

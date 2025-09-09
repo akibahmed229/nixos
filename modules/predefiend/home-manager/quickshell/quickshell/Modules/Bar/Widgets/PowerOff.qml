@@ -4,6 +4,9 @@ import QtQuick.Controls
 import Quickshell.Io
 import QtQuick.Layouts
 
+// custom import
+import qs.Modules.Wlogout
+
 RowLayout {
     spacing: 5
     Layout.rightMargin: 10
@@ -14,11 +17,11 @@ RowLayout {
         background: null
         font.pixelSize: 22
 
-        onClicked: wlogoutProcess.running = true
+        onClicked: wlogoutPanel.visible = !wlogoutPanel.visible
     }
 
-    Process {
-        id: wlogoutProcess
-        command: ["sh", "-c", "quickshell -p ~/.config/quickshell/Modules/Wlogout/WLogoutShell.qml"]
+    // The Wlogout panel that appears when the icon is clicked
+    WLogoutShell {
+        id: wlogoutPanel
     }
 }
