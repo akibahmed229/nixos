@@ -7,14 +7,6 @@
   user,
   ...
 }: {
-  nixpkgs = {
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-  };
-
   # imports = [(import ./others/hyprutility.nix)];
   # imports hyprland home-manager modules
   imports = [
@@ -81,7 +73,7 @@
         [
           # "waybar"
           # "hyprpaper"
-          "ags run"
+          # "ags run"
           "swww-daemon"
           "nm-applet --indicator" # simple network manager indicator
           "udiskie &" # USB Mass storage devices mounting
