@@ -386,11 +386,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1757418993,
-        "narHash": "sha256-GduccAqUGor2PzPdM07TCeTBOxSCQP/7tDSCEkvoTwk=",
+        "lastModified": 1757423991,
+        "narHash": "sha256-AESU0zzBZu51Di4BS2OGF4GemWQpkbtXA6Y3PF354bo=",
         "ref": "refs/heads/main",
-        "rev": "ecc9e4d8cd7a86f5f7d7541bee9b092122d2fa83",
-        "revCount": 6415,
+        "rev": "150d693fe794a01aab762a18d2d8a2c8bc54b43c",
+        "revCount": 6416,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -646,6 +646,29 @@
         "type": "github"
       }
     },
+    "niri": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1757358784,
+        "narHash": "sha256-rt5bb2oTqtsCpXoobAAUvUFaDAQMrYxZAIeawsMi7Tc=",
+        "ref": "refs/heads/main",
+        "rev": "bdee1a657699a77bc4cdb050f7355f37f64c45a6",
+        "revCount": 2370,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/YaLTeR/niri"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/YaLTeR/niri"
+      }
+    },
     "nix-formatter-pack": {
       "inputs": {
         "nixpkgs": [
@@ -778,11 +801,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1757420686,
-        "narHash": "sha256-RORT+Wy11nb8eJRAIdhOY3ramMZk/P+wr1gWqh3j49Y=",
+        "lastModified": 1757437784,
+        "narHash": "sha256-GFbRW1QCBNK/0di2Dj0WZJxdN+EZgTTn6gm7af4/r9s=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "e3faa69c0d094b94249225d4d98c29d73d26b87e",
+        "rev": "51edc33c9763e486beacf6a066ae41a3c18827fa",
         "type": "github"
       },
       "original": {
@@ -928,6 +951,7 @@
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "impermanence": "impermanence",
+        "niri": "niri",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs",
@@ -937,6 +961,27 @@
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "niri",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752374969,
+        "narHash": "sha256-Ky3ynEkJXih7mvWyt9DWoiSiZGqPeHLU1tlBU4b0mcc=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "75fb000638e6d0f57cb1e8b7a4550cbdd8c76f1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "scss-reset": {
