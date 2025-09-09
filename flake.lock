@@ -128,11 +128,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1757304222,
-        "narHash": "sha256-s070stByAXxeCLgftTXxFxZ2ynJhghne4Y6cTuqGAaw=",
+        "lastModified": 1757410664,
+        "narHash": "sha256-MVjY6naARVAOIcNCDPUeNqqw1ttIuaDxBhE5c+i21nI=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "fa312c0175ffb82bc67da095439b9cb683ac52bd",
+        "rev": "59d32d171d43bbe5ba9f3cb4723066f91595786f",
         "type": "gitlab"
       },
       "original": {
@@ -296,11 +296,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1757256385,
-        "narHash": "sha256-WK7tOhWwr15mipcckhDg2no/eSpM1nIh4C9le8HgHhk=",
+        "lastModified": 1757385184,
+        "narHash": "sha256-LCxtQn9ajvOgGRbQIRUJgfP7clMGGvV1SDW1HcSb0zk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f35703b412c67b48e97beb6e27a6ab96a084cd37",
+        "rev": "26993d87fd0d3b14f7667b74ad82235f120d986e",
         "type": "github"
       },
       "original": {
@@ -386,11 +386,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1757322502,
-        "narHash": "sha256-/91c40cXye2No6YQZcoXaMcIDqGkdE0hmRPC4SSTlRU=",
+        "lastModified": 1757359491,
+        "narHash": "sha256-C/JfN8iva77IMq5NDG0MVOZb5yUfIORmGRuDj8dGHfA=",
         "ref": "refs/heads/main",
-        "rev": "b619f39555b96c70330f4a933dedde7e897e0d81",
-        "revCount": 6413,
+        "rev": "1e3a06560fa6b2d906f8ecc9ec41b50e9b034cef",
+        "revCount": 6414,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -778,11 +778,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1757327900,
-        "narHash": "sha256-eQE1fpafP31ovR77C3X2e/xIDGk/+iOF1ck1Q7+D0aQ=",
+        "lastModified": 1757406327,
+        "narHash": "sha256-j0V1ba9Op2caXdtmcBJfc1Q6RSzwt6PCxEy3XuDlf3E=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "cf170ed677fa595ec0370e83278c0d40c6c2638c",
+        "rev": "77eb9ea9cccd71a80d10b47d324ceb6390ba3c2b",
         "type": "github"
       },
       "original": {
@@ -1035,11 +1035,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1757172691,
-        "narHash": "sha256-VOn/s24rb+iO6auhmGfT5kyr0ixRK6weBsNCKkGo2yY=",
+        "lastModified": 1757360005,
+        "narHash": "sha256-VwzdFEQCpYMU9mc7BSQGQe5wA1MuTYPJnRc9TQCTMcM=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "9991299fe9aad330fb6b96bb58def37033271177",
+        "rev": "834a743c11d66ea18e8c54872fbcc72ce48bc57f",
         "type": "github"
       },
       "original": {
