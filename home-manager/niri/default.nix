@@ -2,10 +2,10 @@
 in {
   services.displayManager.sessionPackages = [
     (pkgs.runCommand "niri-desktop" {
-        passthru.providedSessions = ["niri"];
+        passthru.providedSessions = ["Niri"];
       } ''
         mkdir -p $out/share/wayland-sessions
-        cat > $out/share/wayland-sessions/niri.desktop <<EOF
+        cat > $out/share/wayland-sessions/Niri.desktop <<EOF
         [Desktop Entry]
         Name=Niri
         Comment=Wayland session using Niri
