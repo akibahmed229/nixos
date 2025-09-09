@@ -19,6 +19,7 @@ in {
   imports =
     map mkRelativeToRoot [
       "home-manager/${desktopEnvironment}"
+      "home-manager/niri"
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
@@ -208,7 +209,7 @@ in {
   # List services that you want to enable:
   services = {
     # disable password auth for openssh
-    openssh.settings.PasswordAuthentication = false;
+    openssh.settings.PasswordAuthentication = true;
   };
 
   # Enable virtualisation ( custom module )

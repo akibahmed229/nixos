@@ -1,4 +1,3 @@
-// Niri configuration for CachyOS
 // For documentation and full reference, see: https://github.com/YaLTeR/niri/wiki
 
 // ────────────── Input Configuration ──────────────
@@ -31,6 +30,33 @@ output "DP-1" {
     scale 1 // No scaling (use 2 for HiDPI)
 }
 
+// ────────────── Workspace ──────────────
+// https://yalter.github.io/niri/Configuration%3A-Named-Workspaces.html
+workspace "dev" {
+    open-on-output "DP-1"
+}
+
+workspace "browser" {
+    open-on-output "DP-1"
+}
+
+workspace "chat" {
+    open-on-output "DP-1"
+}
+
+workspace "music" {
+    open-on-output "DP-1"
+}
+
+workspace "office" {
+    open-on-output "DP-1"
+}
+
+workspace "virt" {
+    open-on-output "DP-1"
+}
+
+
 // ────────────── Keybindings ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
 
@@ -38,13 +64,16 @@ binds {
     MOD+SHIFT+ESCAPE                     { show-hotkey-overlay; }
 
     // ─── Applications ───
-    MOD+RETURN                          hotkey-overlay-title="Open Terminal: alacritty" { spawn-sh "alacritty"; }
-    MOD+SPACE                           hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
+    MOD+RETURN                          hotkey-overlay-title="Open Terminal: kitty" { spawn-sh "kitty"; }
+    MOD+PRINT                           hotkey-overlay-title="Take Screenshots: screenshot" { spawn-sh "screenshot"; }
+    MOD+R                               hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
-    MOD+ALT+L                           hotkey-overlay-title="Lock Screen: swaylock" { spawn-sh "swaylock"; }
-    
+    MOD+SHIFT+W                         hotkey-overlay-title="Set Wallpaper: Wallpaper" { spawn-sh "wallpaper"; }
+    MOD+V                               hotkey-overlay-title="Clip Board: ClipBoard" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
+    MOD+ALT+L                           hotkey-overlay-title="Lock Screen: quickshellLock" { spawn-sh "quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"; }
+
     // Please choose your own file manager
-    MOD+E                             hotkey-overlay-title="File Manager: Nautilus" { spawn-sh "nautilus"; }
+    MOD+E                             hotkey-overlay-title="File Manager: thunar" { spawn-sh "thunar"; }
 
     // ─── Audio Controls ───
     // Example volume keys mappings for PipeWire & WirePlumber.
@@ -53,6 +82,8 @@ binds {
     XF86AudioLowerVolume                allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
     XF86AudioMute                       allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute                    allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86MonBrightnessUp                 allow-when-locked=true { spawn "ddcutil --display 1 setvcp 10 + 5" ; }
+    XF86MonBrightnessDown               allow-when-locked=true { spawn "ddcutil --display 1 setvcp 10 - 5" ; }
     XF86AudioNext                       allow-when-locked=true { spawn-sh "playerctl next"; }
     XF86AudioPause                      allow-when-locked=true { spawn-sh "playerctl play-pause"; }
     XF86AudioPlay                       allow-when-locked=true { spawn-sh "playerctl play-pause"; }
@@ -120,20 +151,21 @@ binds {
     MOD+8                               { focus-workspace 8; }
     MOD+9                               { focus-workspace 9; }
 
-    MOD+CTRL+1                          { move-column-to-workspace 1; }
-    MOD+CTRL+2                          { move-column-to-workspace 2; }
-    MOD+CTRL+3                          { move-column-to-workspace 3; }
-    MOD+CTRL+4                          { move-column-to-workspace 4; }
-    MOD+CTRL+5                          { move-column-to-workspace 5; }
-    MOD+CTRL+6                          { move-column-to-workspace 6; }
-    MOD+CTRL+7                          { move-column-to-workspace 7; }
-    MOD+CTRL+8                          { move-column-to-workspace 8; }
-    MOD+CTRL+9                          { move-column-to-workspace 9; }
+    MOD+SHIFT+1                          { move-column-to-workspace 1; }
+    MOD+SHIFT+2                          { move-column-to-workspace 2; }
+    MOD+SHIFT+3                          { move-column-to-workspace 3; }
+    MOD+SHIFT+4                          { move-column-to-workspace 4; }
+    MOD+SHIFT+5                          { move-column-to-workspace 5; }
+    MOD+SHIFT+6                          { move-column-to-workspace 6; }
+    MOD+SHIFT+7                          { move-column-to-workspace 7; }
+    MOD+SHIFT+8                          { move-column-to-workspace 8; }
+    MOD+SHIFT+9                          { move-column-to-workspace 9; }
 
-    MOD+TAB                             { focus-workspace-previous; }
+    MOD+SHIFT+TAB   repeat=false               { focus-workspace-previous; }
+    Mod+Tab         repeat=false               { toggle-overview; }
 
     // ─── Layout Controls ───
-    MOD+CTRL+F                          { expand-column-to-available-width; }
+    MOD+F                          { expand-column-to-available-width; }
     MOD+C                               { center-column; }
     MOD+CTRL+C                          { center-visible-columns; }
     MOD+MINUS                           { set-column-width "-10%"; }
@@ -143,7 +175,7 @@ binds {
 
     // ─── Modes ───
     MOD+T                               { toggle-window-floating; }
-    MOD+F                               { fullscreen-window; }
+    MOD+SHIFT+F                               { fullscreen-window; }
     MOD+W                               { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
@@ -159,109 +191,210 @@ binds {
     // ─── Exit / Power ───
     CTRL+ALT+DELETE                     { quit; } // Also quits Niri
     MOD+SHIFT+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
-    MOD+O                               repeat=false { toggle-overview; }
 }
 
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
-    spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
-    spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
-    spawn-sh-at-startup "swww img /usr/share/wallpapers/cachyos-wallpapers/Skyscraper.png" // Set wallpaper
-    spawn-sh-at-startup "waybar" // Launch waybar
+spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
+spawn-sh-at-startup "quickshell" // Launch quickshell
+spawn-sh-at-startup "nm-applet --indicator" // simple network manager indicator
+spawn-sh-at-startup "udiskie" // USB Mass storage devices mounting
+spawn-sh-at-startup "wl-paste --type text --watch cliphist store" // Stores only text data
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store" // Stores only image data
+spawn-sh-at-startup "kdeconnect-cli --refresh &" // KDE Connect daemon
+spawn-sh-at-startup "kdeconnect-indicator &"
 
-    prefer-no-csd // Disable program decorations
-    screenshot-path null // Disable screenshot saving
+spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp" // # Loads my RGB light
+spawn-sh-at-startup "firefox"
+spawn-sh-at-startup "spotify"
+spawn-sh-at-startup "vesktop"
+spawn-sh-at-startup "kitty"
+
+
+prefer-no-csd // Disable program decorations
+screenshot-path null // Disable screenshot saving
 
 // ────────────── Layout Settings ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
-    layout {
-        gaps 16 // Gap between windows
-        center-focused-column "never" // Don’t auto-center focused column
+layout {
+    gaps 16 // Gap between windows
+    background-color "transparent"
+    center-focused-column "never" // Don’t auto-center focused column
 
-        preset-column-widths {
-            proportion 0.33333
-            proportion 0.5
-            proportion 0.66667
-        }
-
-        focus-ring {
-            width 3
-            active-color "#00ac89"
-            inactive-color "#505050"
-        }
-
-        shadow {
-            softness 30
-            spread 5
-            offset x=0 y=5
-            color "#0007"
-        }
-
-        struts {}
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
     }
+
+    focus-ring {
+        width 3
+        active-color "#00ac89"
+        inactive-color "#505050"
+    }
+
+    shadow {
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+
+    struts {}
+}
 
 // ────────────── Animation Settings ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
-    animations {
-        workspace-switch {
-            spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
-        }
-        window-open {
-            duration-ms 200
-            curve "ease-out-quad"
-        }
-        window-close {
-            duration-ms 200
-            curve "ease-out-cubic"
-        }
-        horizontal-view-movement {
-            spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
-        }
-        window-movement {
-            spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
-        }
-        window-resize {
-            spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
-        }
-        config-notification-open-close {
-            spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
-        }
-        screenshot-ui-open {
-            duration-ms 300
-            curve "ease-out-quad"
-        }
-        overview-open-close {
-            spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
-        }
+animations {
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
     }
+    window-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    window-close {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
+    }
+    screenshot-ui-open {
+        duration-ms 300
+        curve "ease-out-quad"
+    }
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+}
 
 // ────────────── Window Rules ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
-    window-rule {
-        match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-        open-floating true // Always float Firefox PiP windows
-    }
 
-    window-rule {
-        geometry-corner-radius 20 // Set every window radius to 20
-        clip-to-geometry true
-    }
+window-rule {
+    match app-id=r#"kitty$"# 
+    open-maximized false
+    open-on-workspace "dev"
+}
+window-rule {
+    match app-id=r#"Alacritty$"# 
+    open-floating true
+    open-on-workspace "dev"
+}
+window-rule {
+    match app-id=r#"emacs$"# 
+    open-maximized true
+    open-on-workspace "dev"
+}
+window-rule {
+    match app-id=r#"android-studio$"# 
+    open-maximized true 
+    open-on-workspace "dev"
+}
+window-rule {
+    match app-id=r#"Postman$"# 
+    open-maximized true 
+    open-on-workspace "dev"
+}
+
+
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true // Always float Firefox PiP windows
+}
+window-rule {
+    match app-id=r#"firefox$"# 
+    open-maximized true 
+    open-on-workspace "browser"
+}
+window-rule {
+    match app-id=r#"chromium-browser$"# 
+    open-maximized false
+    open-on-workspace "browser"
+}
+
+window-rule {
+    match app-id=r#"vesktop$"# 
+    open-maximized true
+    open-on-workspace "chat"
+}
+window-rule {
+    match app-id=r#"wasistlos$"# 
+    open-maximized false
+    open-on-workspace "chat"
+}
+window-rule {
+    match app-id=r#"telegram$"# 
+    open-maximized false
+    open-on-workspace "chat"
+}
+
+window-rule {
+    match app-id=r#"spotify$"# 
+    open-maximized true
+    open-on-workspace "music"
+}
+
+window-rule {
+    match app-id=r#"soffice$"# 
+    open-maximized true
+    open-on-workspace "office"
+}
+window-rule {
+    match app-id=r#"libreoffice-impress$"# 
+    open-maximized true
+    open-on-workspace "office"
+}
+window-rule {
+    match app-id=r#"libreoffice-startcenter$"# 
+    open-maximized false
+    open-on-workspace "office"
+}
+window-rule {
+    match app-id=r#"libreoffice-calc$"# 
+    open-maximized true
+    open-on-workspace "office"
+}
+
+
+window-rule {
+    match app-id=r#".virt-manager-wrapped$"# 
+    open-maximized false
+    open-on-workspace "virt"
+}
+
+
+window-rule {
+    geometry-corner-radius 20 // Set every window radius to 20
+    clip-to-geometry true
+}
 
 // ────────────── Environment Variables ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#environment
 
-    environment {
-        DISPLAY ":1"
-        ELECTRON_OZONE_PLATFORM_HINT "auto"
-        QT_QPA_PLATFORM "wayland"
-        QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
-        XDG_SESSION_TYPE "wayland"
-        XDG_CURRENT_DESKTOP "niri"
-    }
+environment {
+    DISPLAY ":1"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORM "wayland"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+}
 
-    hotkey-overlay {
-        skip-at-startup
-    }
+hotkey-overlay {
+    skip-at-startup
+}

@@ -9,6 +9,11 @@
   inherit (self.lib) mkImport mkRelativeToRoot;
 in {
   nixpkgs = {
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+    };
+
     # You can add overlays here
     overlays = [
       self.overlays.discord-overlay
