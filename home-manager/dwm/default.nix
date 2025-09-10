@@ -81,5 +81,5 @@
   services.gnome.gnome-keyring.enable = true;
 
   # polkit for authentication ( from custom nixos module )
-  polkit-gnome.enable = true;
+  myPolkit.enable = true;
 }
