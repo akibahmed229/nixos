@@ -91,7 +91,6 @@ in {
     # 1. System Utilities
     htop # Interactive process viewer.
     nvme-cli # Utility to manage NVMe SSDs.
-    gparted # Partition editor.
     cryptsetup # Disk encryption setup.
     # veracrypt # Disk encryption tool.
     pciutils # Tools for PCI devices.
