@@ -97,7 +97,7 @@ PanelWindow {
             id: name
             text: qsTr("Desktop")
             color: Theme.get.infoColor
-            font.weight: Font.ExtraBold
+            font.weight: Font.Bold
         }
     }
 

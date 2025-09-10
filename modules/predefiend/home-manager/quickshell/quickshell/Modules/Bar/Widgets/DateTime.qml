@@ -16,6 +16,7 @@ RowLayout {
         id: clock
         color: Theme.get.textColor
         font.family: "Inter, sans-serif"
+        font.weight: Font.Bold
     }
 
     // --- Date/time fetch process ---
