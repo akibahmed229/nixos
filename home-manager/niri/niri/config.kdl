@@ -48,7 +48,7 @@ workspace "music" {
     open-on-output "DP-1"
 }
 
-workspace "office" {
+workspace "work" {
     open-on-output "DP-1"
 }
 
@@ -294,11 +294,6 @@ window-rule {
     open-on-workspace "dev"
 }
 window-rule {
-    match app-id=r#"Alacritty$"# 
-    open-floating true
-    open-on-workspace "dev"
-}
-window-rule {
     match app-id=r#"emacs$"# 
     open-maximized true
     open-on-workspace "dev"
@@ -361,27 +356,27 @@ window-rule {
 window-rule {
     match app-id=r#"soffice$"# 
     open-maximized true
-    open-on-workspace "office"
+    open-on-workspace "work"
 }
 window-rule {
     match app-id=r#"libreoffice-impress$"# 
     open-maximized true
-    open-on-workspace "office"
+    open-on-workspace "work"
 }
 window-rule {
     match app-id=r#"libreoffice-startcenter$"# 
     open-maximized false
-    open-on-workspace "office"
+    open-on-workspace "work"
 }
 window-rule {
     match app-id=r#"libreoffice-calc$"# 
     open-maximized true
-    open-on-workspace "office"
+    open-on-workspace "work"
 }
 window-rule {
     match app-id=r#"obsidian$"# 
     open-maximized false
-    open-on-workspace "office"
+    open-on-workspace "work"
 }
 
 
@@ -391,6 +386,10 @@ window-rule {
     open-on-workspace "utils"
 }
 
+window-rule {
+    match app-id=r#"Alacritty$"# 
+    open-floating true
+}
 window-rule {
     match app-id=r#"Nsxiv$"# 
     open-floating true
