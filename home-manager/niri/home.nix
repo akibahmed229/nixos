@@ -11,7 +11,7 @@ in {
   home.packages = with pkgs; [
     # For niri
     xwayland-satellite
-    wl-copy
+    wl-clipboard
     cliphist
   ];
 
