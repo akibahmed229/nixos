@@ -52,7 +52,7 @@ workspace "office" {
     open-on-output "DP-1"
 }
 
-workspace "virt" {
+workspace "utils" {
     open-on-output "DP-1"
 }
 
@@ -304,6 +304,11 @@ window-rule {
     open-on-workspace "dev"
 }
 window-rule {
+    match app-id=r#"code$"# 
+    open-maximized false
+    open-on-workspace "dev"
+}
+window-rule {
     match app-id=r#"android-studio$"# 
     open-maximized true 
     open-on-workspace "dev"
@@ -373,16 +378,37 @@ window-rule {
     open-maximized true
     open-on-workspace "office"
 }
+window-rule {
+    match app-id=r#"obsidian$"# 
+    open-maximized false
+    open-on-workspace "office"
+}
 
 
 window-rule {
     match app-id=r#".virt-manager-wrapped$"# 
     open-maximized false
-    open-on-workspace "virt"
+    open-on-workspace "utils"
 }
 
 window-rule {
     match app-id=r#"Nsxiv$"# 
+    open-floating true
+}
+window-rule {
+    match app-id=r#"org.pulseaudio.pavucontrol$"# 
+    open-floating true
+}
+window-rule {
+    match app-id=r#"nm-connection-editor$"# 
+    open-floating true
+}
+window-rule {
+    match app-id=r#"org.kde.ark$"# 
+    open-floating true
+}
+window-rule {
+    match app-id=r#"openrgb$"# 
     open-floating true
 }
 
