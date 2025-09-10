@@ -107,8 +107,8 @@ in {
     };
   };
 
-  # Enable GNOME keyring for PAM
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  # Enable Kde keyring for PAM
+  security.pam.services.greetd.enableKwallet = true;
   # polkit for authentication ( from custom nixos module )
-  polkit-gnome.enable = true;
+  myPolkit.enable = true;
 }

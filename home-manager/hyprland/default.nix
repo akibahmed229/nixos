@@ -119,5 +119,5 @@
   # Enable GNOME keyring for PAM
   security.pam.services.greetd.enableGnomeKeyring = true;
   # polkit for authentication ( from custom nixos module )
-  polkit-gnome.enable = true;
+  myPolkit.enable = true;
 }
