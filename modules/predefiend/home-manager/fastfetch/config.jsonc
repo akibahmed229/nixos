@@ -32,6 +32,16 @@
       "outputColor": "separator",
     },
     {
+      "type": "de",
+      "key": "   DE       ",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "wm",
+      "key": "   WM       ",
+      "keyColor": "yellow",
+    },
+    {
       "type": "uptime",
       "key": "   Uptime   ",
       "keyColor": "green",
@@ -61,6 +71,7 @@
       "format": "{$1}",
       "outputColor": "separator",
     },
+
     {
       "type": "display",
       "key": "   Display  ",
@@ -86,6 +97,13 @@
       "key": "   SWAP     ",
       "keyColor": "cyan",
     },
+
+    {
+      "type": "custom",
+      "format": "{$1}",
+      "outputColor": "separator",
+    },
+
     {
       "type": "disk",
       "key": "   Disk     ",
