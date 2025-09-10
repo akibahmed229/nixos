@@ -50,7 +50,7 @@
           # "ags run"
           "swww-daemon"
           "nm-applet --indicator" # simple network manager indicator
-          "udiskie &" # USB Mass storage devices mounting
+          # "udiskie &" # USB Mass storage devices mounting
           "wl-paste --type text --watch cliphist store" #Stores only text data
           "wl-paste --type image --watch cliphist store" #Stores only image data
           "kdeconnect-cli --refresh &" # KDE Connect daemon

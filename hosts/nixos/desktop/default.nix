@@ -28,7 +28,6 @@ in {
           "stylix"
           "impermanence"
           "gaming"
-          "flatpak"
           "dbus"
           "bbr"
           "fhs"

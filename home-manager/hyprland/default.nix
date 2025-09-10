@@ -2,8 +2,13 @@
 {
   inputs,
   pkgs,
+  self,
   ...
-}: {
+}: let
+  inherit (self.lib) mkRelativeToRoot;
+in {
+  imports = [(mkRelativeToRoot "modules/predefiend/nixos/flatpak")];
+
   # SDDM (custom module)
   sddm.enable = true;
 

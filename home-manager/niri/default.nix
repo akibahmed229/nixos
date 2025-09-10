@@ -1,9 +1,20 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  self,
+  ...
+}: let
+  inherit (self.lib) mkRelativeToRoot;
 in {
+  imports = [(mkRelativeToRoot "modules/predefiend/nixos/flatpak")];
+
   # SDDM (custom module)
   sddm.enable = true;
 
   programs = {
+    niri = {
+      enable = true;
+      package = pkgs.niri;
+    };
     dconf.enable = true;
     kdeconnect = {
       enable = true;
@@ -13,7 +24,6 @@ in {
 
   environment = {
     systemPackages = with pkgs; [
-      niri
       # 1. System Utilities
       networkmanagerapplet # Network management applet.
       preload # Adaptive readahead daemon to speed up system load times.
@@ -51,6 +61,7 @@ in {
     };
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
     ];
   };
 
@@ -78,23 +89,6 @@ in {
       enable = true;
       mountOnMedia = true;
     };
-
-    # craete desktop entry for Niri
-    displayManager.sessionPackages = [
-      (pkgs.runCommand "niri-desktop" {
-          passthru.providedSessions = ["Niri"];
-        } ''
-          mkdir -p $out/share/wayland-sessions
-          cat > $out/share/wayland-sessions/Niri.desktop <<EOF
-          [Desktop Entry]
-          Name=Niri
-          Comment=Wayland session using Niri
-          Exec=${pkgs.niri}/bin/niri
-          Type=Application
-          DesktopNames=Niri
-          EOF
-        '')
-    ];
   };
 
   # Enable Kde keyring for PAM
