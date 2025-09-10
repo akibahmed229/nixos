@@ -13,22 +13,6 @@ in {
   Specialisation is a way to configure your system based on your needs.
   It will Create boot entry for each specialisation and will allow you to switch between them.
   */
-  specialisation = {
-    "DevOPS".configuration = {
-      imports = mkImport {
-        inherit path;
-        ListOfPrograms = ["kubernetes"];
-      };
-    };
-
-    "Gaming".configuration = {
-      imports = mkImport {
-        inherit path;
-        ListOfPrograms = ["gaming"];
-      };
-    };
-  };
-
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "switch-spec" ''
       if [ $# -ne 1 ]; then
