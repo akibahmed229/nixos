@@ -204,8 +204,8 @@ spawn-sh-at-startup "udiskie" // USB Mass storage devices mounting
 spawn-sh-at-startup "nextcloud --background" 
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store" // Stores only text data
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store" // Stores only image data
-spawn-sh-at-startup "kdeconnect-cli --refresh &" // KDE Connect daemon
-spawn-sh-at-startup "kdeconnect-indicator &"
+spawn-sh-at-startup "kdeconnect-cli --refresh" // KDE Connect daemon
+spawn-sh-at-startup "kdeconnect-indicator"
 
 spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp" // # Loads my RGB light
 spawn-at-startup "firefox"
