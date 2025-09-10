@@ -197,19 +197,21 @@ binds {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
 spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
-spawn-sh-at-startup "quickshell" // Launch quickshell
+spawn-sh-at-startup "xwayland-satellite"
+spawn-sh-at-startup "qs" // Launch quickshell
 spawn-sh-at-startup "nm-applet --indicator" // simple network manager indicator
 spawn-sh-at-startup "udiskie" // USB Mass storage devices mounting
+spawn-sh-at-startup "nextcloud --background" 
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store" // Stores only text data
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store" // Stores only image data
 spawn-sh-at-startup "kdeconnect-cli --refresh &" // KDE Connect daemon
 spawn-sh-at-startup "kdeconnect-indicator &"
 
 spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp" // # Loads my RGB light
-spawn-sh-at-startup "firefox"
-spawn-sh-at-startup "spotify"
-spawn-sh-at-startup "vesktop"
-spawn-sh-at-startup "kitty"
+spawn-at-startup "firefox"
+spawn-at-startup "spotify"
+spawn-at-startup "vesktop"
+spawn-at-startup "kitty"
 
 
 prefer-no-csd // Disable program decorations
@@ -283,7 +285,6 @@ animations {
 // ────────────── Window Rules ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
-
 window-rule {
     match app-id=r#"kitty$"# 
     open-maximized false
@@ -338,13 +339,13 @@ window-rule {
     open-on-workspace "chat"
 }
 window-rule {
-    match app-id=r#"telegram$"# 
+    match app-id=r#"org.telegram.desktop$"# 
     open-maximized false
     open-on-workspace "chat"
 }
 
 window-rule {
-    match app-id=r#"spotify$"# 
+    match app-id=r#"Spotify$"# 
     open-maximized true
     open-on-workspace "music"
 }
@@ -377,6 +378,10 @@ window-rule {
     open-on-workspace "virt"
 }
 
+window-rule {
+    match app-id=r#"Nsxiv$"# 
+    open-floating true
+}
 
 window-rule {
     geometry-corner-radius 20 // Set every window radius to 20
@@ -393,6 +398,25 @@ environment {
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
     XDG_SESSION_TYPE "wayland"
     XDG_CURRENT_DESKTOP "niri"
+}
+
+// ────────────── Miscellaneous ──────────────
+// https://yalter.github.io/niri/Configuration%3A-Miscellaneous.html
+
+overview {
+    zoom 0.5
+
+    workspace-shadow {
+        // off
+        softness 40
+        spread 10
+        offset x=0 y=10
+        color "#00000050"
+    }
+}
+
+clipboard {
+    disable-primary
 }
 
 hotkey-overlay {
