@@ -6,6 +6,7 @@
     exo
     thunar-archive-plugin
     thunar-volman
+    kdePackages.ark
   ];
 
   home.file = {

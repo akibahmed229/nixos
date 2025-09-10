@@ -39,16 +39,6 @@ in {
       # 5. Hypr Ecosystem & Theming
       hyprpicker # Likely a color picker for the Hypr ecosystem.
       qt6Packages.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
-      # qt6Packages.polkit-kde-agent # Polkit agent for KDE (commented out).
-
-      # 6. Archiving Tools
-      kdePackages.ark # Archiving tool for KDE (also included in the desktop environment list).
-
-      # 7. Uncategorized or Ambiguous
-      # lxappearance # Tool to manage LXDE themes (commented out).
-      # udiskie # Automatic disk mounting tool (commented out).
-      # pywal # Tool to generate and set color schemes based on wallpapers (commented out).
-      # mpd # Music Player Daemon (commented out).
     ];
   };
 
@@ -56,7 +46,7 @@ in {
     # Required for flatpak with window managers and for file browsing
     enable = true;
     wlr.enable = true;
-    #xdgOpenUsePortal = true; # disable to work default browser
+    # xdgOpenUsePortal = true; # disable to work default browser
     config = {
       common.default = ["gtk"];
     };

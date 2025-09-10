@@ -11,6 +11,8 @@ in {
   home.packages = with pkgs; [
     # For niri
     xwayland-satellite
+    wl-copy
+    cliphist
   ];
 
   home.activation.symlinkNiriWMConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''

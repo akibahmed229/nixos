@@ -62,10 +62,7 @@
       qt6Packages.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
       # qt6Packages.polkit-kde-agent # Polkit agent for KDE (commented out).
 
-      # 6. Archiving Tools
-      kdePackages.ark # Archiving tool for KDE (also included in the desktop environment list).
-
-      # 7. Uncategorized or Ambiguous
+      # 6. Uncategorized or Ambiguous
       # lxappearance # Tool to manage LXDE themes (commented out).
       # udiskie # Automatic disk mounting tool (commented out).
       # pywal # Tool to generate and set color schemes based on wallpapers (commented out).
