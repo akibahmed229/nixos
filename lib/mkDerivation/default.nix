@@ -26,7 +26,12 @@
   inherit (lib) mapAttrs' pathExists filterAttrs mergeAttrs removeSuffix attrsets strings;
 
   # Import the Nix packages
-  pkgs = import nixpkgs {inherit system;};
+  pkgs = import nixpkgs {
+    inherit system;
+    config = {
+      permittedInsecurePackages = ["qtwebengine-5.15.19"]; # FIXME
+    };
+  };
   # Function to check if a file exists and return the path or throw an error if not found
   ifFileExists = _path:
     if pathExists _path
