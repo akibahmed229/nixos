@@ -224,7 +224,7 @@ screenshot-path null // Disable screenshot saving
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
 layout {
-    gaps 16 // Gap between windows
+    gaps 12 // Gap between windows
     background-color "transparent"
     center-focused-column "never" // Don’t auto-center focused column
 
@@ -252,6 +252,7 @@ layout {
 
 // ────────────── Animation Settings ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
+
 animations {
     workspace-switch {
         spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
@@ -412,7 +413,7 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius 12 // Set every window radius to 20
+    geometry-corner-radius 12 // Set every window radius to 12
     clip-to-geometry true
 }
 
