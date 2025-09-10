@@ -12,11 +12,11 @@ import qs.Components            // reusable components (margins, etc.)
 // Main top bar window
 PanelWindow {
     id: panel
-    color: Theme.get.transparent        // keep window transparent
-    implicitHeight: 32                  // bar height
+    color: Theme.get.transparent
+    implicitHeight: 32
 
     anchors {
-        top: true       // stick to top
+        top: true
         left: true
         right: true
     }
@@ -27,7 +27,9 @@ PanelWindow {
         left: 8
     }
 
-    // Rounded background rectangle (styled via Theme.qml)
+    // bar property
+    property string currentDesktop: "niri"
+
     Rectangle {
         id: bar
         radius: 6
@@ -36,42 +38,80 @@ PanelWindow {
         border.width: 2
         anchors.fill: parent
 
-        // --- Main layout (split left & right sections)
         RowLayout {
             id: mainBlock
             spacing: 0
             anchors.fill: parent
 
-            // --- Left section of bar
             RowLayout {
                 id: leftBlocks
                 spacing: 10
-                MarginLeft {}          // padding
-                NotificationIcon {}    // shows system/app notifications
-                DateTime {}            // clock widget
-                WindowTitle {}         // current window title
+                MarginLeft {}
+                NotificationIcon {}
+                DateTime {}
+
+                // --- Conditionally load the correct workspace title indicator
+                Loader {
+                    sourceComponent: currentDesktop.toLowerCase().indexOf("niri") !== -1 ? niriWindowTitle : hyprlandWindowTitle
+                }
             }
 
             Item {
                 Layout.fillWidth: true
-            }  // spacer to push right side
+            } // spacer
 
-            // --- Right section of bar
             RowLayout {
                 id: rightBlocks
                 spacing: 10
-                CpuMem {}              // CPU + memory usage
-                SysTray {}             // system tray icons
-                PowerOff {}            // shutdown/logout button
-                MarginRight {}         // padding
+                CpuMem {}
+                SysTray {}
+                PowerOff {}
+                MarginRight {}
             }
         }
 
+        // --- Conditionally load the correct workspace indicator
         // --- Centered workspace indicator (overlays above left/right blocks)
-        WorkSpaces {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            // must not use Layout.* to avoid conflicts
+        Loader {
+            anchors.centerIn: parent
+            sourceComponent: currentDesktop.toLowerCase().indexOf("niri") !== -1 ? niriWorkspaces : hyprlandWorkspaces
         }
     }
+
+    // Component
+    Component {
+        id: hyprlandWorkspaces
+        HyprlandWorkspaces {}
+    }
+    Component {
+        id: niriWorkspaces
+        NiriWorkspaces {}
+    }
+    Component {
+        id: hyprlandWindowTitle
+        HyprlandWindowTitle {}
+    }
+    Component {
+        id: niriWindowTitle
+        Text {
+            id: name
+            text: qsTr("Desktop")
+            color: Theme.get.infoColor
+            font.weight: Font.ExtraBold
+        }
+    }
+
+    // --- detect desktop env from environment
+    Process {
+        id: envProcess
+        command: ["sh", "-c", "echo $XDG_CURRENT_DESKTOP"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                panel.currentDesktop = text.trim();
+            }
+        }
+    }
+
+    // run on startup
+    Component.onCompleted: envProcess.running = true
 }
