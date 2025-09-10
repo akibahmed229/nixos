@@ -35,6 +35,13 @@
   # Supported systems for your flake packages, shell, etc.
   forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
+  eachPkgs = import nixpkgs {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   # Utility to check if a given path points to a directory
   isDirectory = attr: attr == "directory";
   # Utility to check if a given path is a Nix file
@@ -102,10 +109,7 @@
       inherit name;
       # Import Home Manager configuration
       value = homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {allowUnfree = true;};
-        };
+        pkgs = eachPkgs;
         extraSpecialArgs =
           mapAttrs' (n: v: nameValuePair n v) specialArgs
           // {hostname = name;};
