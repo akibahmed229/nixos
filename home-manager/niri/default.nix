@@ -1,21 +1,5 @@
 {pkgs, ...}: let
 in {
-  services.displayManager.sessionPackages = [
-    (pkgs.runCommand "niri-desktop" {
-        passthru.providedSessions = ["Niri"];
-      } ''
-        mkdir -p $out/share/wayland-sessions
-        cat > $out/share/wayland-sessions/Niri.desktop <<EOF
-        [Desktop Entry]
-        Name=Niri
-        Comment=Wayland session using Niri
-        Exec=${pkgs.niri}/bin/niri
-        Type=Application
-        DesktopNames=Niri
-        EOF
-      '')
-  ];
-
   # SDDM (custom module)
   sddm.enable = true;
 
@@ -105,6 +89,23 @@ in {
       enable = true;
       mountOnMedia = true;
     };
+
+    # craete desktop entry for Niri
+    displayManager.sessionPackages = [
+      (pkgs.runCommand "niri-desktop" {
+          passthru.providedSessions = ["Niri"];
+        } ''
+          mkdir -p $out/share/wayland-sessions
+          cat > $out/share/wayland-sessions/Niri.desktop <<EOF
+          [Desktop Entry]
+          Name=Niri
+          Comment=Wayland session using Niri
+          Exec=${pkgs.niri}/bin/niri
+          Type=Application
+          DesktopNames=Niri
+          EOF
+        '')
+    ];
   };
 
   # Enable Kde keyring for PAM
