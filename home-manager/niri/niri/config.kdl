@@ -16,7 +16,7 @@ input {
         natural-scroll // Enable natural (macOS-style) scrolling
     }
 
-    focus-follows-mouse // Automatically focus windows under the mouse pointer
+    focus-follows-mouse max-scroll-amount="0%" // Automatically focus windows under the mouse pointer
     workspace-auto-back-and-forth // Enable workspace back & forth switching
 }
 
@@ -161,11 +161,14 @@ binds {
     MOD+SHIFT+8                          { move-column-to-workspace 8; }
     MOD+SHIFT+9                          { move-column-to-workspace 9; }
 
-    MOD+SHIFT+TAB   repeat=false               { focus-workspace-previous; }
-    Mod+Tab         repeat=false               { toggle-overview; }
+    MOD+COMMA                            { consume-or-expel-window-left; }
+    MOD+PERIOD                           { consume-or-expel-window-right; }
+
+    MOD+SHIFT+TAB repeat=false           { focus-workspace-previous; }
+    Mod+Tab       repeat=false           { toggle-overview; }
 
     // ─── Layout Controls ───
-    MOD+F                          { expand-column-to-available-width; }
+    MOD+F                               { expand-column-to-available-width; }
     MOD+C                               { center-column; }
     MOD+CTRL+C                          { center-visible-columns; }
     MOD+MINUS                           { set-column-width "-10%"; }
@@ -175,7 +178,7 @@ binds {
 
     // ─── Modes ───
     MOD+T                               { toggle-window-floating; }
-    MOD+SHIFT+F                               { fullscreen-window; }
+    MOD+SHIFT+F                         { fullscreen-window; }
     MOD+W                               { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
@@ -400,6 +403,16 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
 }
 
+
+// ────────────── Layer Rules ──────────────
+// https://yalter.github.io/niri/Configuration%3A-Layer-Rules.html
+
+layer-rule {
+    match namespace="^swww-daemon$"
+
+    place-within-backdrop true
+}
+
 // ────────────── Miscellaneous ──────────────
 // https://yalter.github.io/niri/Configuration%3A-Miscellaneous.html
 
@@ -407,11 +420,11 @@ overview {
     zoom 0.5
 
     workspace-shadow {
-        // off
-        softness 40
-        spread 10
-        offset x=0 y=10
-        color "#00000050"
+        off
+        // softness 40
+        // spread 10
+        // offset x=0 y=10
+        // color "#00000050"
     }
 }
 
