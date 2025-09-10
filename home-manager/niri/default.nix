@@ -36,8 +36,7 @@ in {
       gnome-calculator # GNOME calculator.
       gnome-clocks # GNOME clocks application.
 
-      # 5. Hypr Ecosystem & Theming
-      hyprpicker # Likely a color picker for the Hypr ecosystem.
+      # 5. Theming
       qt6Packages.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
     ];
   };
