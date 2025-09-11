@@ -119,9 +119,22 @@ pkgs.writeShellApplication {
       sudo nixos-rebuild switch --flake ".#$HOSTNAME" --show-trace
     }
 
+    # ---- Maintainer Related ---------------------------------------------------------------
+    function maintenance() {
+      if [ "$USERNAME" == "akib" ]; then
+        cd "$FLAKE_DIR"
+        git remote remove origin
+        git remote add origin gh:akibahmed229/nixos.git
+
+        git submodule init
+        git submodule update
+      fi
+    }
+
     # ---- main ---------------------------------------------------------------
     copy_secrets_from_usb
     install_flake
+    maintenance
 
     info "Post-install finished"
   '';
