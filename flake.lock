@@ -386,11 +386,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1757606048,
-        "narHash": "sha256-0E8l1AbCo7r+ZqBM2vz/m9Jsvh6BVdBnrltVfSo9OXs=",
+        "lastModified": 1757612540,
+        "narHash": "sha256-cgY4og5H5grQH6Y3cXk0bqoqcM8InDcEjcE6GPsfYQ8=",
         "ref": "refs/heads/main",
-        "rev": "231b800784e2bd9bc168070d6769e97f93ff53b2",
-        "revCount": 6420,
+        "rev": "38169c8fddcd21bd2c4ccebfa0c32100d5356aa0",
+        "revCount": 6422,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -724,16 +724,17 @@
       "locked": {
         "lastModified": 1757487488,
         "narHash": "sha256-zwE/e7CuPJUWKdvvTCB7iunV4E/+G0lKfv4kk/5Izdg=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
+        "ref": "nixos-unstable",
         "rev": "ab0f3607a6c7486ea22229b92ed2d355f1482ee0",
-        "type": "github"
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/NixOS/nixpkgs"
       },
       "original": {
-        "owner": "nixos",
         "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/NixOS/nixpkgs"
       }
     },
     "nixpkgs-docs": {
@@ -936,7 +937,8 @@
         "secrets": "secrets",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "wallpapers": "wallpapers"
       }
     },
     "scss-reset": {
@@ -1202,6 +1204,24 @@
         "owner": "tinted-theming",
         "repo": "base16-zed",
         "type": "github"
+      }
+    },
+    "wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736770871,
+        "narHash": "sha256-d8XlnvzeNqF8RPTqr7D2uCBg93U5FmJlETqaGiYWYGo=",
+        "ref": "main",
+        "rev": "f60f00e623e10ae53da68fe1753e3f25b3e628d4",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/akibahmed229/wallpaper.git"
+      },
+      "original": {
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/akibahmed229/wallpaper.git"
       }
     },
     "xdph": {
