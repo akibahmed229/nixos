@@ -937,8 +937,7 @@
         "secrets": "secrets",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
-        "stylix": "stylix",
-        "wallpapers": "wallpapers"
+        "stylix": "stylix"
       }
     },
     "scss-reset": {
@@ -1204,24 +1203,6 @@
         "owner": "tinted-theming",
         "repo": "base16-zed",
         "type": "github"
-      }
-    },
-    "wallpapers": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736770871,
-        "narHash": "sha256-d8XlnvzeNqF8RPTqr7D2uCBg93U5FmJlETqaGiYWYGo=",
-        "ref": "main",
-        "rev": "f60f00e623e10ae53da68fe1753e3f25b3e628d4",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/akibahmed229/wallpaper.git"
-      },
-      "original": {
-        "ref": "main",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/akibahmed229/wallpaper.git"
       }
     },
     "xdph": {
