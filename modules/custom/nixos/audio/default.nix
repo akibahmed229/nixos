@@ -13,7 +13,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # Enable RTKit for real-time audio (helps with PipeWire)
     security.rtkit.enable = true;
+
+    # Enable PipeWire for audio/video sharing (required for screen sharing)
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -24,7 +27,7 @@ in {
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)
-      # wireplumber.enable = true;
+      wireplumber.enable = true;
     };
   };
 }
