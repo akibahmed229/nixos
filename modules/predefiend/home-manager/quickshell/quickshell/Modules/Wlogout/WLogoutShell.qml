@@ -10,7 +10,7 @@ WLogout {
         icon: "lock"
     }
     LogoutButton {
-        command: "uwsm stop"  // Or loginctl terminate-session $XDG_SESSION_ID for systemd
+        command: "bash -c 'if [ \"$XDG_CURRENT_DESKTOP\" = Hyprland ]; then loginctl terminate-user \"\"; else niri msg action quit --skip-confirmation; fi'"
         keybind: Qt.Key_E
         text: "Logout"
         icon: "logout"
