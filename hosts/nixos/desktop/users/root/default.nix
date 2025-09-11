@@ -2,7 +2,6 @@
 {
   config,
   pkgs,
-  userHome,
   ...
 }: rec {
   name = "root"; # Root account
@@ -27,7 +26,7 @@
   shell = pkgs.bash; # Default shell for root
 
   # Minimal home configuration for root
-  homeFile = [{home = userHome name;}];
+  homeFile = [];
 
   # Disable user/home-manager integration for root
   enableSystemConf = false;

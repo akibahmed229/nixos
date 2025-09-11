@@ -114,7 +114,7 @@ in {
     # Import all user files lazily *inside* config, so cfg is available.
     myusers =
       mkScanImportPath {
-        inherit config pkgs mkRelativeToRoot userHome;
+        inherit config pkgs mkRelativeToRoot;
         inherit (cfg) desktopEnvironment hostname;
       }
       path;
@@ -150,7 +150,13 @@ in {
       users = builtins.listToAttrs (map
         (u: {
           inherit (u) name;
-          value = {imports = u.homeFile;};
+          value = {
+            imports =
+              [
+                {home = userHome name;}
+              ]
+              ++ u.homeFile;
+          };
         })
         (filterBy "enableHomeConf"));
     };

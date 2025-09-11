@@ -4,7 +4,6 @@
   pkgs,
   desktopEnvironment,
   hostname,
-  userHome,
   ...
 }: rec {
   # Username is inherited from the parent config
@@ -45,13 +44,11 @@
   shell = pkgs.zsh;
 
   # Home Manager configurations
-  homeFile =
-    [{home = userHome name;}]
-    ++ map mkRelativeToRoot [
-      "home-manager/home.nix"
-      "home-manager/${desktopEnvironment}/home.nix"
-      "hosts/nixos/${hostname}/home.nix"
-    ];
+  homeFile = map mkRelativeToRoot [
+    "home-manager/home.nix"
+    "home-manager/${desktopEnvironment}/home.nix"
+    "hosts/nixos/${hostname}/home.nix"
+  ];
 
   # Enable system + home-level configurations
   enableSystemConf = true;

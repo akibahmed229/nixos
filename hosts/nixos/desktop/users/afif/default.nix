@@ -3,7 +3,6 @@
   mkRelativeToRoot,
   pkgs,
   desktopEnvironment,
-  userHome,
   hostname,
   ...
 }: rec {
@@ -21,13 +20,11 @@
   packages = with pkgs; [wget thunderbird vlc];
   shell = pkgs.bash;
 
-  homeFile =
-    [{home = userHome name;}]
-    ++ map mkRelativeToRoot [
-      "home-manager/home.nix"
-      "home-manager/${desktopEnvironment}/home.nix"
-      "hosts/nixos/${hostname}/home.nix"
-    ];
+  homeFile = map mkRelativeToRoot [
+    "home-manager/home.nix"
+    "home-manager/${desktopEnvironment}/home.nix"
+    "hosts/nixos/${hostname}/home.nix"
+  ];
   enableSystemConf = false;
   enableHomeConf = false;
 }
