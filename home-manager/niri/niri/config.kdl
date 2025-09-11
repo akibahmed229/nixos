@@ -68,7 +68,7 @@ binds {
     MOD+PRINT                           hotkey-overlay-title="Take Screenshots: screenshot" { spawn-sh "screenshot"; }
     MOD+R                               hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
-    MOD+SHIFT+W                         hotkey-overlay-title="Set Wallpaper: Wallpaper" { spawn-sh "wallpaper"; }
+    MOD+W                               hotkey-overlay-title="Set Wallpaper: Wallpaper" { spawn-sh "wallpaper"; }
     MOD+V                               hotkey-overlay-title="Clip Board: ClipBoard" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen: quickshellLock" { spawn-sh "quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"; }
 
@@ -179,7 +179,7 @@ binds {
     // ─── Modes ───
     MOD+T                               { toggle-window-floating; }
     MOD+SHIFT+F                         { fullscreen-window; }
-    MOD+W                               { toggle-column-tabbed-display; }
+    MOD+SHIFT+W                         { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
     CTRL+SHIFT+1                        { screenshot; }
@@ -374,12 +374,6 @@ window-rule {
     open-maximized true
     open-on-workspace "work"
 }
-window-rule {
-    match app-id=r#"obsidian$"# 
-    open-maximized false
-    open-on-workspace "work"
-}
-
 
 window-rule {
     match app-id=r#".virt-manager-wrapped$"# 
@@ -427,6 +421,7 @@ environment {
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
     XDG_SESSION_TYPE "wayland"
     XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
 }
 
 

@@ -31,14 +31,6 @@ in {
   };
 
   environment = {
-    variables = {
-      #WLR_NO_HARDWARE_CURSORS="1";         # Possible variables needed in vm
-      #WLR_RENDERER_ALLOW_SOFTWARE="1";
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_SESSION_DESKTOP = "Hyprland";
-    };
-
     systemPackages = with pkgs; [
       # 1. System Utilities
       networkmanagerapplet # Network management applet.
@@ -81,7 +73,6 @@ in {
     wlr.enable = true;
     #xdgOpenUsePortal = true; # disable to work default browser
     config = {
-      common.default = ["gtk"];
       hyprland.default = ["gtk" "hyprland"];
     };
     extraPortals = with pkgs; [

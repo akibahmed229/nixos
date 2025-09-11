@@ -1,12 +1,12 @@
 {
   pkgs,
   self,
+  config,
   ...
 }: let
   inherit (self.lib) mkRelativeToRoot;
 in {
   imports = [(mkRelativeToRoot "modules/predefiend/nixos/flatpak")];
-
   # SDDM (custom module)
   sddm.enable = true;
 
@@ -57,11 +57,24 @@ in {
     wlr.enable = true;
     # xdgOpenUsePortal = true; # disable to work default browser
     config = {
-      common.default = ["gtk"];
+      common = {
+        default = ["gnome" "gtk"];
+        "org.freedesktop.impl.portal.FileChooser" = "gtk";
+      };
+      niri = {
+        # Niri-specific section to assign portals properly
+        default = ["gtk" "gnome"];
+        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+        "org.freedesktop.impl.portal.RemoteDesktop" = "gnome";
+        "org.freedesktop.impl.portal.Screenshot" = "gnome";
+      };
     };
+    configPackages = [config.programs.niri.package];
     extraPortals = with pkgs; [
+      xdg-desktop-portal
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
+      xdg-desktop-portal-wlr # Explicitly add for fallback if needed
     ];
   };
 
@@ -72,7 +85,6 @@ in {
       # needed for GNOME services outside of GNOME Desktop
       packages = [pkgs.gcr];
     };
-
     udev = {
       packages = with pkgs; [gnome-settings-daemon];
       extraRules = ''
@@ -91,6 +103,8 @@ in {
     };
   };
 
+  # Disable PulseAudio if PipeWire is enabled
+  services.pulseaudio.enable = false;
   # Enable Kde keyring for PAM
   security.pam.services.greetd.enableKwallet = true;
   # polkit for authentication ( from custom nixos module )
