@@ -18,11 +18,21 @@
   * Inputs is an attribute set that defines all the dependencies of this flake.
   * These dependencies will be passed as arguments to the outputs function after they are fetched
   * Inputs can be :- another flake, a regular Git repository, or a local path
+
+  * Version Pinning in Nix Flakes (GitHub/GitLab/Git)
+      - ?ref=<tag> → use a specific tag (e.g., ?ref=v1.2.3)
+      - &ref=refs/tags/<version> → explicitly reference a tag ref
+      - &rev=<hash> → pin to an exact commit
+      - &shallow=1 → fetch a shallow clone (faster, truncated history)
+
+  * Symbols
+      - ? → starts query parameters in a URL
+      - & → separates multiple parameters
   */
   inputs = {
     ####################  Core Repositories ####################
     # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&rev=b599843bad24621dcaa5ab60dac98f9b0eb1cabe"; # FIXME
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -38,7 +48,7 @@
     ####################  Desktop Environments & WindowManager | remote flake ####################
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.51.0"; # FIXME
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
@@ -79,7 +89,6 @@
     };
     # Flexible toolkit for making desktop shells with QtQuick, for Wayland and X11
     quickshell = {
-      # add ?ref=<tag> to track a tag
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
