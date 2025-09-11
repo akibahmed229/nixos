@@ -117,7 +117,7 @@
           ## Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           "$mod, RETURN, exec, kitty"
           "$mod, Q, killactive,"
-          ''$mod, DELETE, loginctl terminate-user ""''
+          "$mod, DELETE, exec, loginctl terminate-user \"\""
           "${
             if !config.programs.yazi.enable # NOTE: thunar is currently in used
             then "$mod, E, exec, kitty -e yazi"
