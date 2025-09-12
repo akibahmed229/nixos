@@ -1,5 +1,6 @@
 // system import
 import QtQuick
+import QtQuick.Layouts
 
 Text {
     required property int id
@@ -8,4 +9,7 @@ Text {
     property int margin
 
     text: `- ${summary}: ${body}`
+    width: parent.width
+    wrapMode: Text.WordWrap
+    Layout.fillWidth: true
 }

@@ -30,11 +30,17 @@ Row {
 
             MouseArea {
                 anchors.fill: parent
+
                 onClicked: {
                     switchProcess.command = ["niri", "msg", "action", "focus-workspace", model.idx.toString()];
                     switchProcess.running = true;
+
+                    // Optimistic update
+                    for (let i = 0; i < workspaceModel.count; i++) {
+                        workspaceModel.setProperty(i, "is_focused", false);
+                    }
+                    workspaceModel.setProperty(index, "is_focused", true);
                 }
-                hoverEnabled: true
             }
 
             Text {
@@ -65,20 +71,20 @@ Row {
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
+                    workspaceModel.clear();
                     var json = JSON.parse(text.trim());
+
                     // Sort by idx for consistent order
                     json.sort((a, b) => a.idx - b.idx);
-                    workspaceModel.clear();
                     for (var i = 0; i < json.length; ++i) {
-                        workspaceModel.append({
-                            id: json[i].id,
-                            idx: json[i].idx,
-                            workspaceName: json[i].name || "" // Rename 'name' to 'workspaceName' and fallback to "" to avoid null warnings
-                            ,
-                            output: json[i].output,
-                            active: json[i].is_active,
-                            is_focused: json[i].is_focused
-                        });
+                        if (json[i].active_window_id != null) {
+                            workspaceModel.append({
+                                idx: json[i].idx,
+                                // Rename 'name' to 'workspaceName' and fallback to "" to avoid null warnings
+                                workspaceName: json[i].name || "",
+                                is_focused: json[i].is_focused
+                            });
+                        }
                     }
                 } catch (e) {
                     console.error("Failed to parse Niri workspaces JSON:", e);
@@ -89,7 +95,7 @@ Row {
 
     // Timer to periodically refresh workspaces (polling, as Niri has no built-in Quickshell module)
     Timer {
-        interval: 500
+        interval: 250
         running: true
         repeat: true
         onTriggered: getWorkspaces.running = true
