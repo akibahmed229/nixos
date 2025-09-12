@@ -17,7 +17,7 @@ input {
     }
 
     focus-follows-mouse max-scroll-amount="0%" // Automatically focus windows under the mouse pointer
-    workspace-auto-back-and-forth // Enable workspace back & forth switching
+    // workspace-auto-back-and-forth // Enable workspace back & forth switching
 }
 
 // ────────────── Output Configuration ──────────────
@@ -61,7 +61,7 @@ workspace "utils" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
 
 binds {
-    MOD+SHIFT+ESCAPE                     { show-hotkey-overlay; }
+    MOD+SHIFT+ESCAPE                    { show-hotkey-overlay; }
 
     // ─── Applications ───
     MOD+RETURN                          hotkey-overlay-title="Open Terminal: kitty" { spawn-sh "kitty"; }
@@ -73,7 +73,7 @@ binds {
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen: quickshellLock" { spawn-sh "quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"; }
 
     // Please choose your own file manager
-    MOD+E                             hotkey-overlay-title="File Manager: thunar" { spawn-sh "thunar"; }
+    MOD+E                               hotkey-overlay-title="File Manager: thunar" { spawn-sh "thunar"; }
 
     // ─── Audio Controls ───
     // Example volume keys mappings for PipeWire & WirePlumber.
@@ -102,9 +102,9 @@ binds {
     MOD+J                               { focus-window-down; }
 
     MOD+CTRL+LEFT                       { move-column-left; }
-    MOD+CTRL+H                          { move-column-left; }
+    MOD+SHIFT+H                         { move-column-left; }
     MOD+CTRL+RIGHT                      { move-column-right; }
-    MOD+CTRL+L                          { move-column-right; }
+    MOD+SHIFT+L                         { move-column-right; }
     MOD+CTRL+UP                         { move-window-up; }
     MOD+CTRL+K                          { move-window-up; }
     MOD+CTRL+DOWN                       { move-window-down; }
@@ -126,10 +126,10 @@ binds {
     MOD+SHIFT+CTRL+DOWN                 { move-column-to-monitor-down; }
 
     // ─── Workspace Switching ───
-    MOD+WHEELSCROLLDOWN                 cooldown-ms=150 { focus-workspace-down; }
-    MOD+WHEELSCROLLUP                   cooldown-ms=150 { focus-workspace-up; }
-    MOD+CTRL+WHEELSCROLLDOWN            cooldown-ms=150 { move-column-to-workspace-down; }
-    MOD+CTRL+WHEELSCROLLUP              cooldown-ms=150 { move-column-to-workspace-up; }
+    MOD+SHIFT+j                         cooldown-ms=150 { focus-workspace-down; }
+    MOD+SHIFT+k                         cooldown-ms=150 { focus-workspace-up; }
+    MOD+SHIFT+CTRL+j                    cooldown-ms=150 { move-column-to-workspace-down; }
+    MOD+SHIFT+CTRL+k                    cooldown-ms=150 { move-column-to-workspace-up; }
 
     MOD+WHEELSCROLLRIGHT                { focus-column-right; }
     MOD+WHEELSCROLLLEFT                 { focus-column-left; }
@@ -151,21 +151,21 @@ binds {
     MOD+8                               { focus-workspace 8; }
     MOD+9                               { focus-workspace 9; }
 
-    MOD+SHIFT+1                          { move-column-to-workspace 1; }
-    MOD+SHIFT+2                          { move-column-to-workspace 2; }
-    MOD+SHIFT+3                          { move-column-to-workspace 3; }
-    MOD+SHIFT+4                          { move-column-to-workspace 4; }
-    MOD+SHIFT+5                          { move-column-to-workspace 5; }
-    MOD+SHIFT+6                          { move-column-to-workspace 6; }
-    MOD+SHIFT+7                          { move-column-to-workspace 7; }
-    MOD+SHIFT+8                          { move-column-to-workspace 8; }
-    MOD+SHIFT+9                          { move-column-to-workspace 9; }
+    MOD+SHIFT+1                         { move-column-to-workspace 1; }
+    MOD+SHIFT+2                         { move-column-to-workspace 2; }
+    MOD+SHIFT+3                         { move-column-to-workspace 3; }
+    MOD+SHIFT+4                         { move-column-to-workspace 4; }
+    MOD+SHIFT+5                         { move-column-to-workspace 5; }
+    MOD+SHIFT+6                         { move-column-to-workspace 6; }
+    MOD+SHIFT+7                         { move-column-to-workspace 7; }
+    MOD+SHIFT+8                         { move-column-to-workspace 8; }
+    MOD+SHIFT+9                         { move-column-to-workspace 9; }
 
-    MOD+COMMA                            { consume-or-expel-window-left; }
-    MOD+PERIOD                           { consume-or-expel-window-right; }
+    MOD+COMMA                           { consume-or-expel-window-left; }
+    MOD+PERIOD                          { consume-or-expel-window-right; }
 
-    MOD+SHIFT+TAB repeat=false           { focus-workspace-previous; }
-    Mod+Tab       repeat=false           { toggle-overview; }
+    MOD+SHIFT+TAB repeat=false          { focus-workspace-previous; }
+    Mod+Tab       repeat=false          { toggle-overview; }
 
     // ─── Layout Controls ───
     MOD+F                               { expand-column-to-available-width; }
@@ -192,8 +192,8 @@ binds {
     MOD+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // ─── Exit / Power ───
-    CTRL+ALT+DELETE                     { quit; } // Also quits Niri
-    MOD+SHIFT+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
+    MOD+DELETE                          { quit; } // Also quits Niri
+    CTRL+SHIFT+D                        { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
 }
 
 // ────────────── Startup Applications ──────────────
@@ -289,37 +289,27 @@ animations {
 // ────────────── Window Rules ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
+
+// Workspace "dev" rules
 window-rule {
     match app-id=r#"kitty$"# 
-    open-maximized false
-    open-on-workspace "dev"
-}
-window-rule {
-    match app-id=r#"emacs$"# 
-    open-maximized true
-    open-on-workspace "dev"
-}
-window-rule {
     match app-id=r#"code$"# 
     open-maximized false
     open-on-workspace "dev"
 }
 window-rule {
+    match app-id=r#"emacs$"# 
     match app-id=r#"android-studio$"# 
-    open-maximized true 
-    open-on-workspace "dev"
-}
-window-rule {
     match app-id=r#"Postman$"# 
     open-maximized true 
     open-on-workspace "dev"
 }
 
-
-
+// Workspace "browser" rules
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true // Always float Firefox PiP windows
+    open-on-workspace "browser"
 }
 window-rule {
     match app-id=r#"firefox$"# 
@@ -332,6 +322,7 @@ window-rule {
     open-on-workspace "browser"
 }
 
+// Workspace "chat" rules
 window-rule {
     match app-id=r#"vesktop$"# 
     open-maximized true
@@ -339,28 +330,23 @@ window-rule {
 }
 window-rule {
     match app-id=r#"wasistlos$"# 
-    open-maximized false
-    open-on-workspace "chat"
-}
-window-rule {
     match app-id=r#"org.telegram.desktop$"# 
     open-maximized false
     open-on-workspace "chat"
 }
 
+// Workspace "music" rules
 window-rule {
     match app-id=r#"Spotify$"# 
     open-maximized true
     open-on-workspace "music"
 }
 
+// Workspace "work" rules
 window-rule {
     match app-id=r#"soffice$"# 
-    open-maximized true
-    open-on-workspace "work"
-}
-window-rule {
     match app-id=r#"libreoffice-impress$"# 
+    match app-id=r#"libreoffice-calc$"# 
     open-maximized true
     open-on-workspace "work"
 }
@@ -369,39 +355,21 @@ window-rule {
     open-maximized false
     open-on-workspace "work"
 }
-window-rule {
-    match app-id=r#"libreoffice-calc$"# 
-    open-maximized true
-    open-on-workspace "work"
-}
 
+// Workspace "utils" rules
 window-rule {
     match app-id=r#".virt-manager-wrapped$"# 
     open-maximized false
     open-on-workspace "utils"
 }
 
+// Floating app with no workspaces defined
 window-rule {
     match app-id=r#"Alacritty$"# 
-    open-floating true
-}
-window-rule {
     match app-id=r#"Nsxiv$"# 
-    open-floating true
-}
-window-rule {
     match app-id=r#"org.pulseaudio.pavucontrol$"# 
-    open-floating true
-}
-window-rule {
     match app-id=r#"nm-connection-editor$"# 
-    open-floating true
-}
-window-rule {
     match app-id=r#"org.kde.ark$"# 
-    open-floating true
-}
-window-rule {
     match app-id=r#"openrgb$"# 
     open-floating true
 }
