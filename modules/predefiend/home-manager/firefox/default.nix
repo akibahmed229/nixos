@@ -138,6 +138,9 @@
           "signon.rememberSignons" = false;
 
           # --- Theme Adjustments ---
+          "sidebar.verticalTabs" = true;
+          "sidebar.visibility" = "always-show";
+          "sidebar.expandOnHover" = true;
           "browser.uidensity" = 1;
           "sidebar.revamp" = false;
           "widget.windows.mica.popups" = 0;
