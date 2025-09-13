@@ -110,6 +110,7 @@ binds {
     MOD+CTRL+K                          { focus-window-up; }
     MOD+DOWN                            { focus-window-down; }
     MOD+CTRL+J                          { focus-window-down; }
+    Mod+Shift+V                         { switch-focus-between-floating-and-tiling; }
 
     MOD+CTRL+LEFT                       { move-column-left; }
     MOD+SHIFT+H                         { move-column-left; }
@@ -178,7 +179,8 @@ binds {
     Mod+Tab       repeat=false          { toggle-overview; }
 
     // ─── Layout Controls ───
-    MOD+F                               { expand-column-to-available-width; }
+    MOD+F                               { maximize-column; }
+    MOD+SHIFT+R                         { switch-preset-column-width; }
     MOD+C                               { center-column; }
     MOD+CTRL+C                          { center-visible-columns; }
     MOD+MINUS                           { set-column-width "-10%"; }
