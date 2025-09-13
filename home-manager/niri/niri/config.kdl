@@ -16,7 +16,16 @@ input {
         natural-scroll // Enable natural (macOS-style) scrolling
     }
 
+    mouse {
+        // scroll-method "no-scroll"
+        accel-speed 0.1
+        accel-profile "adaptive"
+        scroll-factor 0.9
+        middle-emulation
+    }
+
     focus-follows-mouse max-scroll-amount="0%" // Automatically focus windows under the mouse pointer
+
     // workspace-auto-back-and-forth // Enable workspace back & forth switching
 }
 
@@ -236,7 +245,7 @@ layout {
     }
 
     focus-ring {
-        width 3
+        width 2
         active-color "#00ac89"
         inactive-color "#505050"
     }
@@ -376,9 +385,21 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius 12 // Set every window radius to 12
+    geometry-corner-radius 6 // Set every window radius to 12
     clip-to-geometry true
 }
+
+// Transparency and blur
+// window-rule {
+//     match is-active=true
+//     // Apply to all windows
+//     opacity 0.99
+// }
+// window-rule {
+//     match is-active=false
+//     // Apply to all windows
+//     opacity 0.98
+// }
 
 // ────────────── Environment Variables ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#environment
