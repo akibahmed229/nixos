@@ -13,6 +13,19 @@
     {wayland.windowManager.hyprland.systemd.enable = false;}
   ];
 
+  xdg.portal = {
+    # Required for flatpak with window managers and for file browsing
+    enable = true;
+    config = {
+      hyprland.default = ["gtk" "hyprland"];
+    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-wlr
+    ];
+  };
+
   # Fix: systemd not importing the environment by default.
   # wayland.windowManager.hyprland.systemd.variables = ["--all"];
   wayland.windowManager.hyprland = {
