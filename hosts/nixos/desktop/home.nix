@@ -38,6 +38,7 @@ in {
         "wofi"
         "swappy"
         "atuin"
+        "direnv"
         "emacs"
       ]
       ++ lib.optionals (user == "akib") [

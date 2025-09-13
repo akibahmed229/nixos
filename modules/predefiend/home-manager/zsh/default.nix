@@ -64,10 +64,20 @@
       initContent = ''
         source <(fzf --zsh)
 
-        eval "$(atuin init zsh)"
-        eval "$(direnv hook zsh)"
+        ${
+          if config.programs.atuin.enable
+          then ''eval "$(atuin init zsh)"''
+          else ""
+        }
+        ${
+          if config.programs.direnv.enable
+          then ''
+            eval "$(direnv hook zsh)"
+            export DIRENV_LOG_FORMAT=""
+          ''
+          else ""
+        }
 
-        export DIRENV_LOG_FORMAT=""
         export LANG="en_US.UTF-8";
         export MANPAGER="nvim +Man!"
 
@@ -79,6 +89,9 @@
 
         #zle -N tmux-sesssion
         #bindkey '^f' tmux-sesssion
+
+        stty -ixon
+        bindkey -s '^Q' 'clear\n'
       '';
 
       syntaxHighlighting = {

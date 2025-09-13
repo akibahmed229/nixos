@@ -167,7 +167,6 @@ in {
     # Development environment tools.
     devbox
     distrobox
-    direnv
     yarn # JavaScript package manager.
     jq # JSON processor.
     # Android development tools.
