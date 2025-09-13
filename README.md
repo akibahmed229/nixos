@@ -2,15 +2,12 @@
 
 <h2 align="center"> Current System Preview </h2>
 
----
-
 |                                                |                                                |
 | :--------------------------------------------: | :--------------------------------------------: |
 | <img src="./public/preview/system/niri-1.png"> | <img src="./public/preview/system/niri-6.png"> |
 | <img src="./public/preview/system/niri-5.png"> | <img src="./public/preview/system/niri-3.png"> |
 | <img src="./public/preview/system/niri-4.png"> | <img src="./public/preview/system/niri-2.png"> |
-
----
+|                                                |                                                |
 
 # 1. Installation — My Version of NixOS
 
