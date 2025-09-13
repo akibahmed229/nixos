@@ -82,4 +82,7 @@ in {
       notify = true;
     };
   };
+
+  # enable systemd service for per-user
+  systemd.user.enable = true;
 }
