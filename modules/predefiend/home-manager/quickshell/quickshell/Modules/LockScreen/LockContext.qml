@@ -44,6 +44,7 @@ Scope {
         // pam_unix won't send any important messages so all we need is the completion status.
         onCompleted: result => {
             if (result == PamResult.Success) {
+                root.currentText = "";
                 root.unlocked();
             } else {
                 root.currentText = "";

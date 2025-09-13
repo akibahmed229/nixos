@@ -5,7 +5,7 @@ import Quickshell.Io
 import QtQuick.Layouts
 
 // custom imports
-import qs.Modules.Wlogout
+import qs.Modules.Wlogout as Wlogout
 
 // Power button + logout/power panel
 RowLayout {
@@ -18,10 +18,8 @@ RowLayout {
         font.pixelSize: 22
 
         // toggle Wlogout panel on click
-        onClicked: wlogoutPanel.visible = !wlogoutPanel.visible
-    }
-
-    WLogoutShell {
-        id: wlogoutPanel // logout/power options panel
+        onPressed: () => {
+            Wlogout.Controller.isOpen = true;
+        }
     }
 }

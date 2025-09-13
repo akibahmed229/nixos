@@ -7,7 +7,8 @@ import QtQuick
 import qs.Modules.Bar
 import qs.Modules.VolumeOsd
 import qs.Modules.Notification
-import qs.Modules.Wlogout
+import qs.Modules.Wlogout as Wlogout
+import qs.Modules.LockScreen as LockScreen
 
 // Root of the entire shell setup
 ShellRoot {
@@ -31,9 +32,9 @@ ShellRoot {
         sourceComponent: NotificationPanel {}
     }
 
-    // --- Logout/Shutdown/Restart menu (Wlogout replacement)
-    Loader {
-        active: true
-        sourceComponent: WLogoutShell {}
+    // --- Logout/Shutdown/Restart menu (Wlogout replacement) & Screen Lock
+    Component.onCompleted: () => {
+        Wlogout.Controller.init();
+        LockScreen.Controller.init();
     }
 }

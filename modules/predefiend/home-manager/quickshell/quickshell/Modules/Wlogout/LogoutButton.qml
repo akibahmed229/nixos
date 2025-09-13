@@ -2,6 +2,10 @@
 import QtQuick
 import Quickshell.Io
 
+// custom import
+import qs.Settings
+import qs.Modules.Wlogout
+
 QtObject {
     id: button
     required property string command
@@ -14,6 +18,6 @@ QtObject {
     function exec() {
         process.startDetached();
         // For the shell instance, hide Quickshell panel
-        wlogoutPanel.visible = false;
+        Controller.isOpen = false;
     }
 }

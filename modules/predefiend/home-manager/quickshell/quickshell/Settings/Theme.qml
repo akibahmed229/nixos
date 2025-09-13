@@ -40,7 +40,7 @@ Singleton {
         property string errorColor: red
         property string warningColor: yellow
         property string infoColor: aqua
-        property string accentColor: orange             // highlight/accent
+        property string accentColor: blue             // highlight/accent
 
         // Utility
         property string whiteColor: "#ffffff"

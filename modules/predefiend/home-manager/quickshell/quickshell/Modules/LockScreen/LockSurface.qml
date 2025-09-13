@@ -4,6 +4,9 @@ import QtQuick.Layouts
 import QtQuick.Controls.Fusion
 import Quickshell.Wayland
 
+// custom module imports
+import qs.Settings
+
 Item {
     id: root
     required property LockContext context
@@ -35,7 +38,7 @@ Item {
 
         renderType: Text.NativeRendering
         font.pointSize: 80
-        color: "white"
+        color: Theme.get.textColor
 
         Timer {
             running: true
@@ -62,25 +65,23 @@ Item {
         RowLayout {
             TextField {
                 id: passwordBox
-
                 implicitWidth: 400
                 padding: 10
-                focus: true
+                focus: parent.visible && !root.context.unlockInProgress  // Conditional focus to avoid early input enable
                 enabled: !root.context.unlockInProgress
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhSensitiveData
                 onTextChanged: root.context.currentText = this.text
                 onAccepted: root.context.tryUnlock()
-
                 // colors
-                color: "#ebdbb2"                   // text color
+                color: Theme.get.infoColor // text color
                 placeholderText: "Enter password"
-                placeholderTextColor: "#928374"
+                placeholderTextColor: Theme.get.textColor
                 background: Rectangle {
                     implicitHeight: 40
                     radius: 6
-                    color: "#3c3836"               // bg0_hard
-                    border.color: passwordBox.activeFocus ? "#83a598" : "#665c54"
+                    color: Theme.get.bgColor
+                    border.color: passwordBox.activeFocus ? Theme.get.accentColor : Theme.get.buttonHover
                     border.width: 2
                 }
 
@@ -94,10 +95,11 @@ Item {
 
             Button {
                 text: "Unlock"
+                font.weight: Font.Bold
                 padding: 10
                 background: Rectangle {
                     radius: 6
-                    color: enabled ? "#458588" : "#504945"   // Gruvbox blue / gray
+                    color: enabled ? Theme.get.successColor : Theme.get.fbColor
                 }
                 focusPolicy: Qt.NoFocus
                 enabled: !root.context.unlockInProgress && root.context.currentText !== ""
@@ -108,7 +110,8 @@ Item {
         Label {
             visible: root.context.showFailure
             text: "Incorrect password"
-            color: "red"
+            color: Theme.get.errorColor
+            font.weight: Font.ExtraBold
         }
     }
 }

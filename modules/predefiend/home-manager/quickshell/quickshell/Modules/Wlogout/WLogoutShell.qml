@@ -4,7 +4,7 @@ import Quickshell
 
 WLogout {
     LogoutButton {
-        command: "quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"
+        command: "qs ipc call lockscreen lock"
         keybind: Qt.Key_L  // Changed from K to L for Lock
         text: "Lock"
         icon: "lock"

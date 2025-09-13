@@ -34,12 +34,6 @@ Row {
                 onClicked: {
                     switchProcess.command = ["niri", "msg", "action", "focus-workspace", model.idx.toString()];
                     switchProcess.running = true;
-
-                    // Optimistic update
-                    for (let i = 0; i < workspaceModel.count; i++) {
-                        workspaceModel.setProperty(i, "is_focused", false);
-                    }
-                    workspaceModel.setProperty(index, "is_focused", true);
                 }
             }
 
