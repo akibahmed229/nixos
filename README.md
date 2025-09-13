@@ -2,7 +2,13 @@
 
 <h2 align="center"> Current System Preview </h2>
 
-![my current setup](./public/preview/system/Current.png)
+---
+
+|                                                |                                                |
+| :--------------------------------------------: | :--------------------------------------------: |
+| <img src="./public/preview/system/niri-1.png"> | <img src="./public/preview/system/niri-6.png"> |
+| <img src="./public/preview/system/niri-5.png"> | <img src="./public/preview/system/niri-3.png"> |
+| <img src="./public/preview/system/niri-4.png"> | <img src="./public/preview/system/niri-2.png"> |
 
 ---
 
