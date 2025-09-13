@@ -1,4 +1,4 @@
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+/* === LEFT MINIMAL SIDEBAR — persistent (icons-only) === */
 
 /* collapsed */
 #sidebar-box {
@@ -14,10 +14,29 @@
   transition: width 150ms ease !important;
 }
 
-/* expand on hover */
-#sidebar-box:hover {
-  width: 220px !important;
-  /* expanded width */
+/* Hide the sidebar switcher (star/book/history/tabs icons) and close button */
+#sidebar-switcher-target,
+#sidebar-close {
+  display: none !important;
+}
+
+/* Remove border + shadow around sidebar panels (Customize, History, Bookmarks, etc.) */
+#sidebar-box,
+#sidebar,
+.sidebar-panel,
+.sidebar-panel::part(content) {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: -moz-Dialog !important; /* keep same bg as sidebar */
+}
+
+/* Also kill hover highlight on sidebar panel */
+.sidebar-panel:hover,
+#sidebar:hover {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 /* hide splitter */
