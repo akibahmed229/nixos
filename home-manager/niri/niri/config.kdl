@@ -65,12 +65,13 @@ binds {
 
     // ─── Applications ───
     MOD+RETURN                          hotkey-overlay-title="Open Terminal: kitty" { spawn-sh "kitty"; }
-    MOD+PRINT                           hotkey-overlay-title="Take Screenshots: screenshot" { spawn-sh "screenshot"; }
+    MOD+PRINT                           hotkey-overlay-title="Take Screenshots: custom tool" { spawn-sh "screenshot"; }
     MOD+R                               hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
-    MOD+W                               hotkey-overlay-title="Set Wallpaper: Wallpaper" { spawn-sh "wallpaper"; }
-    MOD+V                               hotkey-overlay-title="Clip Board: ClipBoard" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
-    MOD+ALT+L                           hotkey-overlay-title="Lock Screen: quickshellLock" { spawn-sh "quickshell -p ~/.config/quickshell/Modules/LockScreen/shell.qml"; }
+    MOD+W                               hotkey-overlay-title="Set Wallpaper" { spawn-sh "wallpaper"; }
+    MOD+V                               hotkey-overlay-title="Clip History" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
+    MOD+ALT+L                           hotkey-overlay-title="Lock Screen" { spawn-sh "qs ipc call lockscreen lock"; }
+    MOD+CTRL+DELETE                     hotkey-overlay-title="Power Off Menu" { spawn-sh "qs ipc call wlogout toggle"; }
 
     // Please choose your own file manager
     MOD+E                               hotkey-overlay-title="File Manager: thunar" { spawn-sh "thunar"; }
@@ -390,6 +391,7 @@ environment {
     XDG_SESSION_TYPE "wayland"
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
+    QT_LOGGING_RULES "qt.qpa.wayland=false"
 }
 
 
