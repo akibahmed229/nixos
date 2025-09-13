@@ -44,14 +44,14 @@ PanelWindow {
                 Text {
                     Layout.fillWidth: true
                     text: "Notifications:"
-                    // font: custom_font
-                    color: Theme.get.textColor
+                    font: "Intern, sans-serif"
+                    color: Theme.get.successColor
                 }
 
                 Text {
                     text: "clear"
-                    // font: custom_font
-                    color: Theme.get.textColor
+                    font: "Intern, sans-serif"
+                    color: Theme.get.errorColor
 
                     TapHandler {
                         id: tapHandler
