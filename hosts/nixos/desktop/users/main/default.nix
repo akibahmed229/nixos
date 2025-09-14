@@ -28,9 +28,18 @@
   extraGroups = [
     "networkmanager"
     "wheel"
+    "systemd-journal"
     "docker"
     "video"
     "audio"
+    "scanner"
+    "libvirtd"
+    "kvm"
+    "disk"
+    "input"
+    "adbusers"
+    "wireshark"
+    "openrazer"
   ];
 
   # Default packages for the user
