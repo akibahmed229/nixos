@@ -54,6 +54,7 @@ in {
             "nextcloud"
             "portainer"
             "pi-hole"
+            "jenkins"
           ]);
     };
 
@@ -206,7 +207,7 @@ in {
   # List services that you want to enable:
   services = {
     # disable password auth for openssh
-    openssh.settings.PasswordAuthentication = true;
+    openssh.settings.PasswordAuthentication = false;
   };
 
   # Enable virtualisation ( custom module )
