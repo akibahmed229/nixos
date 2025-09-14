@@ -127,6 +127,10 @@
         };
 
         settings = {
+          # Enable Dev Tool
+          "devtools.chrome.enabled" = true;
+          "devtools.debugger.remote-enabled" = true;
+
           # Example Section (yours)
           "media.mediasource.enabled" = true;
           "dom.security.https_only_mode" = true;

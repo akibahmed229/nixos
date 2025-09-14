@@ -1,4 +1,5 @@
 /* === LEFT MINIMAL SIDEBAR — persistent (icons-only) === */
+/* CTRL + SHIFT + ALT + I - to open devtools */
 
 /* collapsed */
 #sidebar-box {
@@ -6,7 +7,7 @@
   left: 0 !important;
   top: 0 !important;
   bottom: 0 !important;
-  width: 44px !important;
+  width: 250px !important;
   z-index: 10000 !important;
   background: -moz-Dialog !important;
   border-right: none !important;
@@ -28,7 +29,7 @@
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
-  background: -moz-Dialog !important; /* keep same bg as sidebar */
+  background: -moz-Dialog !important;
 }
 
 /* Also kill hover highlight on sidebar panel */
@@ -66,7 +67,7 @@
 }
 
 #sidebar-box:hover #sidebar-header {
-  display: flex !important;
+  display: none !important;
 }
 
 /* keep icons visible always */
@@ -74,6 +75,15 @@
   width: 20px !important;
   height: 20px !important;
   margin-inline-start: 12px !important;
+}
+
+.tab-throbber,
+.tab-icon-pending,
+.tab-icon-image,
+.tab-sharing-icon-overlay,
+.tab-icon-overlay {
+  height: 18px;
+  width: 18px;
 }
 
 /* show tree text only on expanded state */
