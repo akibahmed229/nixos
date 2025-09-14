@@ -38,6 +38,8 @@ in {
       virtiofsd # <binary path="/run/current-system/sw/bin/virtiofsd"/> # virtiofsd binary path for virt-manager add this in virt-manager FileSystem Share
     ];
 
+    programs.virt-manager.enable = true;
+
     virtualisation = {
       libvirtd = {
         enable = true;
@@ -46,6 +48,7 @@ in {
         qemu = {
           package = pkgs.qemu_kvm;
           runAsRoot = true;
+          vhostUserPackages = with pkgs; [virtiofsd]; # share a folder with a guest,
           swtpm.enable = true;
           ovmf = {
             enable = true;
@@ -62,6 +65,7 @@ in {
       spiceUSBRedirection.enable = true;
     };
     services = {
+      qemuGuest.enable = true;
       spice-vdagentd.enable = true;
       spice-webdavd.enable = true;
     };
