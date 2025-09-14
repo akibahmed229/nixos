@@ -21,9 +21,8 @@
   shell = pkgs.bash;
 
   homeFile = map mkRelativeToRoot [
-    "home-manager/home.nix"
-    "home-manager/${desktopEnvironment}/home.nix"
     "hosts/nixos/${hostname}/home.nix"
+    "home-manager/${desktopEnvironment}/home.nix"
   ];
   enableSystemConf = false;
   enableHomeConf = false;

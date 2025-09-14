@@ -95,7 +95,6 @@ in {
     # veracrypt # Disk encryption tool.
     pciutils # Tools for PCI devices.
     fail2ban # Intrusion prevention.
-    fastfetch # System information fetcher.
     btop # Resource monitor.
     appimage-run # Utility to run AppImage applications.
     tlrc # Command-line tool for TL;DR pages.
@@ -195,7 +194,7 @@ in {
     # darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
-    mpv # Media player.
+    # mpv # Media player.
     kdePackages.kdenlive # Video editor.
 
     # 3. Networking Section

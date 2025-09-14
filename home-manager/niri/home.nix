@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  self,
   ...
 }: let
   niriConfig = "$FLAKE_DIR/home-manager/niri/niri";

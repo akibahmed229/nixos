@@ -45,7 +45,6 @@
 
   # Home Manager configurations
   homeFile = map mkRelativeToRoot [
-    "home-manager/home.nix"
     "home-manager/${desktopEnvironment}/home.nix"
     "hosts/nixos/${hostname}/home.nix"
   ];

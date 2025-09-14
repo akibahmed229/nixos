@@ -15,8 +15,8 @@
   inherit (self.lib) mkRelativeToRoot;
 in {
   imports = map mkRelativeToRoot [
-    "home-manager/hyprland"
-    "modules/predefiend/nixos/sops"
+    "home-manager/${desktopEnvironment}"
+    "home-manager/niri"
   ];
 
   # User management configuration ( custom module ) - see modules/custom/nixos/user
