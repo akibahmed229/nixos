@@ -21,6 +21,7 @@
   shell = pkgs.bash;
 
   homeFile = map mkRelativeToRoot [
+    "hosts/nixos/home.nix"
     "hosts/nixos/${hostname}/home.nix"
     "home-manager/${desktopEnvironment}/home.nix"
   ];
