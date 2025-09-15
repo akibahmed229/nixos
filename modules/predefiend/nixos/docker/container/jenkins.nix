@@ -19,8 +19,8 @@
 
         # Volume mappings to persist jenkins-docker data outside the container
         volumes = [
-          "/var/lib/jenkins/certs:/certs/client"
-          "/var/lib/jenkins/data:/var/jenkins_home"
+          "/var/lib/jenkins/certs/:/certs/client"
+          "/var/lib/jenkins/data/:/var/jenkins_home"
         ];
 
         environment = {
@@ -35,6 +35,8 @@
         networks = ["jenkins"];
 
         cmd = ["--storage-driver" "overlay2"];
+
+        workdir = "/var/lib/jenkins/";
 
         autoStart = true;
       };
@@ -68,8 +70,8 @@
 
         # Volume mappings to persist jenkins-blueocean data outside the container
         volumes = [
-          "/var/lib/jenkins/data:/var/jenkins_home"
-          "/var/lib/jenkins/certs:/certs/client:ro"
+          "/var/lib/jenkins/data/:/var/jenkins_home"
+          "/var/lib/jenkins/certs/:/certs/client:ro"
         ];
 
         ports = [
@@ -84,6 +86,8 @@
         };
 
         networks = ["jenkins"];
+
+        workdir = "/var/lib/jenkins/";
 
         # Always restart Jenkins on failure
         autoStart = true;

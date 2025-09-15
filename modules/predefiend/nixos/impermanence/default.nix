@@ -90,6 +90,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/var/lib/postgresql"
       "/var/lib/sops-nix/"
       "/run/secrets.d/"
+      "/var/lib/jenkins/"
     ];
     files = [
       "/etc/machine-id" # TODO: investigate if this is needed
