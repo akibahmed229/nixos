@@ -217,8 +217,8 @@ in {
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443 22 465 3000 9980 8090 6443];
-      allowedUDPPorts = [67 68];
+      allowedTCPPorts = [80 443 465 53 3000];
+      allowedUDPPorts = [67 53];
     };
     enableIPv6 = true;
     enableB43Firmware = true;

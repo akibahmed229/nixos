@@ -50,16 +50,13 @@
         # Volume mappings to persist Pi-hole data outside the container
         volumes = [
           # Persist Pi-hole configuration data
-          "/var/lib/pihole/:/etc/pihole/"
-          # Persist DNS settings (dnsmasq configuration)
-          "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
+          "/var/lib/pihole:/etc/pihole"
         ];
 
         # Environment variables to configure the container
         environment = {
           TZ = "Asia/Dhaka";
           FTLCONF_dns_listeningMode = "all";
-          FTLCONF_misc_etc_dnsmasq_d = "true";
         };
 
         # Additional Docker options to give the container necessary permissions
@@ -67,12 +64,11 @@
           "--cap-add=NET_ADMIN" # This adds network management capabilities to the container (required for DHCP or network operations)
           "--cap-add=SYS_TIME"
           "--cap-add=SYS_NICE"
-          "--dns=127.0.0.1" # Set DNS resolver for the container to localhost (Pi-hole itself)
-          "--dns=1.1.1.1" # Fallback DNS server to Cloudflare's DNS (1.1.1.1)
+          "--dns=127.27.0.1" # Set DNS resolver for the container to localhost (Pi-hole itself)
         ];
 
         # The working directory for the container
-        workdir = "/var/lib/pihole/";
+        workdir = "/var/lib/pihole";
 
         # Automatically start the Pi-hole container when the system boots
         autoStart = true;

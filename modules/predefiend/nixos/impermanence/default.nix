@@ -59,7 +59,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       "/var/lib/portainer"
       #  pihole
       "/var/lib/pihole/"
-      "/var/lib/dnsmasq.d" # dnsmasq is free software providing Domain Name System (DNS) caching, a Dynamic Host Configuration Protocol (DHCP) server, router advertisement and network boot features, intended for small computer networks. dnsmasq.
+      #"/var/lib/dnsmasq.d" # dnsmasq is free software providing Domain Name System (DNS) caching, a Dynamic Host Configuration Protocol (DHCP) server, router advertisement and network boot features, intended for small computer networks. dnsmasq.
       # Nextcloud
       "/var/lib/mariadb"
       "/var/lib/nextcloud/html"

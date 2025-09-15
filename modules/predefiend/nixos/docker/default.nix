@@ -23,6 +23,10 @@
       # https://docs.docker.com/storage/containerd/
       "features" = {"containerd-snapshotter" = true;};
 
+      # isable Docker's automatic management of iptables rules, which are responsible for opening ports on the host system.
+      # This allows for manual control over port exposure and integration with existing firewall solutions like firewalld or ufw.
+      # "iptables" = false;
+
       # Changing Docker Daemon's Data Root
       # data-root = "/some-place/to-store-the-docker-data";
     };
