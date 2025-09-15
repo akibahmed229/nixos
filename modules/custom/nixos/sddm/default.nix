@@ -33,8 +33,8 @@ in {
           settings.General.DisplayServer = "wayland";
           theme = ''${self.packages.${pkgs.system}.custom_sddm.override {
               imgLink = {
-                url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/gruv_saturn.png";
-                sha256 = "sha256-AKSBdzNhqnHfQNqcjalXDrRV0qPidPrd7o+CV5tdQ98=";
+                url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/gruv-wallhaven-4gmevq.png";
+                sha256 = "sha256-rSr0xgLC8EdshOUPzrjPvkc/Ym+1TE7Au/RPalC+QEA=";
               };
             }}'';
         };
