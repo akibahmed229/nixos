@@ -4,9 +4,7 @@
   config,
   ...
 }: {
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-  ];
+  imports = [inputs.impermanence.homeManagerModules.impermanence];
 
   home.persistence."/persist${config.home.homeDirectory}" = {
     directories = [
