@@ -13,7 +13,7 @@
 */
 {lib}: path: let
   inherit (builtins) readDir;
-  inherit (lib) strings attrsets mapAttrs' removeSuffix;
+  inherit (lib) strings attrsets mapAttrs' removeSuffix mkScanPath;
 
   # Utility to check if a given path points to a directory
   isDirectory = attr: attr == "directory";
@@ -55,5 +55,21 @@
   # Apply the processing function to each valid module
   processedModules = mapAttrs' processModule (getModules path);
 in
+  /*
   # Filter out null values from the resulting attribute set (i.e., unsupported files)
-  attrsets.filterAttrs (_: m: m != null) processedModules
+
+  # available through the
+      - `self.nixosModules.<foldername>.<your define option>`
+      - `self.homeManagerModules.<foldername>.<your define option>`
+  */
+  (attrsets.filterAttrs (_: m: m != null) processedModules)
+  // {
+    /*
+    # Default module imports all the available modules in the parent directory
+
+    # available through the
+         - `self.nixosModules.default`
+         - `self.homeModules.default`
+    */
+    default.imports = mkScanPath "${path}/.";
+  }
