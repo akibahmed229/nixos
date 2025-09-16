@@ -9,66 +9,75 @@
     bat
     dwt1-shell-color-scripts
   ];
-  # Zsh and Oh-My-Zsh setup
+
   programs = {
+    # --- Zsh setup ---
     zsh = {
       enable = true;
+      enableCompletion = true;
       autosuggestion.enable = true;
+
+      # History config
       history = {
-        size = 10000;
-        save = 10000;
+        size = 1000000;
+        save = 1000000;
         ignoreDups = true;
         ignoreSpace = true;
         path = "${config.xdg.dataHome}/zsh/zsh_history";
       };
 
+      # Extra shell environment / aliases / bindings
       envExtra = ''
-          colorscript random
-          set -o vi
-          setopt hist_ignore_all_dups     # Ignore duplicate commands in history
-          setopt hist_ignore_space        # Ignore commands starting with a space in h>
-          setopt hist_reduce_blanks       # Remove redundant blanks from history
-          setopt hist_verify              # Verify history expansions before execution
-          # setopt
-          setopt extended_glob            #  control over file matching
-          setopt autocd                   # enable auto cd
-          setopt correct                  # Enable auto-correction
-          # alias
-          alias ll='ls -l'
-          alias cat='bat'
-          alias ga='git add'
-          alias gc='git commit'
-          alias gs='git status'
-          alias gd='git diff'
-          alias ..='cd ..'
-          # alias vim='nvim'
+        # Startup
+        colorscript random
+        set -o vi
 
-        # history search
-        # bindkey "^[[A" history-beginning-search-backward
-        # bindkey "^[[B" history-beginning-search-forward
-        # bindkey 'Ctrl-g' kill-line
-        # bindkey 'Ctrl-A' beginning-of-line
-        # bindkey 'Ctrl-E' end-of-line
+        # History options
+        setopt hist_ignore_all_dups
+        setopt hist_ignore_space
+        setopt hist_reduce_blanks
+        setopt hist_verify
+
+        # Usability
+        setopt extended_glob   # Advanced globbing
+        setopt autocd          # Auto cd into dirs
+        setopt correct         # Command auto-correct
+
+        # Custom Keybinds
+        bindkey -s '^O' 'find-file\n'  # Ctrl-O → open file
+        bindkey -s '^F' 'find-dir\n' # Ctrl-F → open dir
+
+
+        # Short aliases
+        alias ll='ls -l'
+        alias cat='bat'
+        alias ga='git add'
+        alias gc='git commit'
+        alias gs='git status'
+        alias gd='git diff'
+        alias ..='cd ..'
       '';
 
+      # Declarative aliases
       shellAliases = {
-        la = "eza --icons -la  --group-directories-first";
+        la = "eza --icons -la --group-directories-first";
         ls = "eza --icons --grid --group-directories-first";
-        find-dir = "cd $(find -type d | fzf)";
-        find-file = "nvim $(fzf --preview 'bat --color=always {}')";
         gp-all = "git push -u github main && git push -u gitlab main";
       };
 
-      enableCompletion = true;
-
+      # Initialization hooks
       initContent = ''
+        # Fzf
         source <(fzf --zsh)
 
+        # Atuin history sync (if enabled)
         ${
           if config.programs.atuin.enable
           then ''eval "$(atuin init zsh)"''
           else ""
         }
+
+        # Direnv (if enabled)
         ${
           if config.programs.direnv.enable
           then ''
@@ -78,22 +87,33 @@
           else ""
         }
 
-        export LANG="en_US.UTF-8";
+        # Locale + manpager
+        export LANG="en_US.UTF-8"
         export MANPAGER="nvim +Man!"
 
+        # Key bindings
+        stty -ixon                 # Disable Ctrl-S/Ctrl-Q flow control
+        bindkey -s '^Q' 'clear\n'  # Ctrl-Q = clear
 
-        #function tmux-sesssion {
-        #BUFFER='tmux-sessionizer'
-        #     zle accept-line
-        # }
+        # fzf-based directory finder
+        function find-dir() {
+          local dir
+          dir=$(find . -type d 2>/dev/null | fzf)
+          [[ -n "$dir" ]] && cd "$dir" || cd "$(pwd)"
+        }
 
-        #zle -N tmux-sesssion
-        #bindkey '^f' tmux-sesssion
+        # fzf-based file finder with preview in bat
+        function find-file() {
+          local file
+          file=$(fzf --preview 'bat --style=numbers --color=always {}' 2>/dev/null)
 
-        stty -ixon
-        bindkey -s '^Q' 'clear\n'
+          if [[ -n "$file" ]]; then
+            nvim "$file"
+          fi
+        }
       '';
 
+      # Syntax highlighting
       syntaxHighlighting = {
         enable = true;
         highlighters = [
@@ -105,24 +125,13 @@
           "root"
           "line"
         ];
-        styles = {"alias" = "fg=magenta,bold";};
+        styles = {
+          alias = "fg=magenta,bold";
+        };
       };
-
-      #autosuggestions.highlightStyle = "fg=cyan";
-      #oh-my-zsh = {
-      #  #enableBashCompletion = true;
-      #  enable = true;
-      #  plugins = [
-      #    "git"
-      #    "sudo"
-      #    "terraform"
-      #    "systemadmin"
-      #    "vi-mode"
-      #  ];
-      #  theme = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      #};
     };
 
+    # --- Prompt setup (Oh My Posh) ---
     oh-my-posh = {
       enable = true;
       package = pkgs.oh-my-posh;
