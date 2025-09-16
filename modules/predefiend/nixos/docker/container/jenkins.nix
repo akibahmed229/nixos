@@ -24,6 +24,7 @@
         ];
 
         environment = {
+          TZ = "Asia/Dhaka";
           DOCKER_TLS_CERTDIR = "/certs";
         };
 
@@ -80,6 +81,7 @@
         ];
 
         environment = {
+          TZ = "Asia/Dhaka";
           DOCKER_HOST = "tcp://docker:2376";
           DOCKER_CERT_PATH = "/certs/client";
           DOCKER_TLS_VERIFY = "1";
