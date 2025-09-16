@@ -8,7 +8,7 @@
   user,
   desktopEnvironment,
   state-version,
-  hostname,
+  system, # system info like (system name,path) directly coming from mkSystem functions
   self,
   lib,
   ...
@@ -81,7 +81,11 @@ in {
     usersPath = ./users/.;
     nixosUsers.enable = true;
     homeUsers.enable = true;
-    inherit hostname desktopEnvironment state-version;
+
+    system = {
+      inherit (system) name path;
+      inherit desktopEnvironment state-version;
+    };
   };
 
   # remove bloat

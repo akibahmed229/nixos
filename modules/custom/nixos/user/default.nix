@@ -23,21 +23,35 @@ in {
           default = null;
           description = "Path for list of user modules (./user/*/default.nix)";
         };
-        state-version = mkOption {
-          type = types.str;
-          default = "25.05";
-          description = "Home Manager stateVersion";
+
+        # system related info
+        system = mkOption {
+          type = types.submodule {
+            options = {
+              state-version = mkOption {
+                type = types.str;
+                default = "25.11";
+                description = "State version of your system";
+              };
+              desktopEnvironment = mkOption {
+                type = types.str;
+                default = "hyprland";
+                description = "Default desktop environment";
+              };
+              name = mkOption {
+                type = types.str;
+                default = "desktop";
+                description = "Host name";
+              };
+              path = mkOption {
+                type = types.str;
+                default = "desktop";
+                description = "Host name";
+              };
+            };
+          };
         };
-        desktopEnvironment = mkOption {
-          type = types.str;
-          default = "hyprland";
-          description = "Default desktop environment";
-        };
-        hostname = mkOption {
-          type = types.str;
-          default = "desktop";
-          description = "Host name";
-        };
+
         nixosUsers.enable = mkEnableOption "Create NixOS users";
         homeUsers.enable = mkEnableOption "Create Home Manager users";
       };
@@ -108,14 +122,14 @@ in {
     userHome = name: {
       username = mkDefault name;
       homeDirectory = mkDefault "/home/${name}";
-      stateVersion = mkDefault cfg.state-version;
+      stateVersion = mkDefault cfg.system.state-version;
     };
 
     # Import all user files lazily *inside* config, so cfg is available.
     myusers =
       mkScanImportPath {
         inherit config pkgs mkRelativeToRoot;
-        inherit (cfg) desktopEnvironment hostname;
+        inherit (cfg) system;
       }
       path;
 
@@ -154,6 +168,8 @@ in {
             imports =
               [
                 {home = userHome name;}
+                (import "${cfg.system.path}/home.nix")
+                (import "${cfg.system.path}/${cfg.system.name}/home.nix")
               ]
               ++ u.homeFile;
           };

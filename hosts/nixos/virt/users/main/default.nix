@@ -2,8 +2,7 @@
   config,
   mkRelativeToRoot,
   pkgs,
-  desktopEnvironment,
-  hostname,
+  system,
   ...
 }: rec {
   # Username is inherited from the parent config
@@ -45,9 +44,7 @@
 
   # Home Manager configurations
   homeFile = map mkRelativeToRoot [
-    "hosts/nixos/home.nix"
-    "home-manager/${desktopEnvironment}/home.nix"
-    "hosts/nixos/${hostname}/home.nix"
+    "home-manager/${system.desktopEnvironment}/home.nix"
   ];
 
   # Enable system + home-level configurations

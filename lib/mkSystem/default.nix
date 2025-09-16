@@ -74,7 +74,9 @@
         system = forAllSystems (system: system);
         specialArgs =
           (mapAttrs' (n: v: nameValuePair n v) specialArgs)
-          // {hostname = name;};
+          // {
+            system = {inherit name path;};
+          };
         modules =
           map ifFileExists [
             (path + "/configuration.nix") # Base configuration

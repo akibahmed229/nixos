@@ -3,7 +3,7 @@
   config,
   pkgs,
   user,
-  hostname,
+  system,
   lib,
   inputs,
   self,
@@ -20,7 +20,7 @@
   grub.enable = true;
 
   # networking options
-  networking.hostName = "${hostname}"; # Define your hostname.
+  networking.hostName = "${system.name}"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.

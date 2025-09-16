@@ -9,7 +9,7 @@
   user,
   lib,
   state-version,
-  hostname,
+  system,
   ...
 }: let
   # My custom lib helper functions
@@ -38,8 +38,12 @@ in {
     usersPath = ./users/.;
     nixosUsers.enable = true;
     homeUsers.enable = true;
-    desktopEnvironment = "dwm";
-    inherit hostname state-version;
+
+    system = {
+      desktopEnvironment = "dwm";
+      inherit state-version;
+      inherit (system) path name;
+    };
   };
 
   users.defaultUserShell = pkgs.zsh;

@@ -8,7 +8,7 @@
   lib,
   desktopEnvironment,
   state-version,
-  hostname,
+  system,
   ...
 }: let
   # My custom lib helper functions
@@ -25,13 +25,17 @@ in {
     usersPath = ./users/.;
     nixosUsers.enable = true;
     homeUsers.enable = true;
-    inherit hostname desktopEnvironment state-version;
+
+    system = {
+      inherit (system) path name;
+      inherit desktopEnvironment state-version;
+    };
   };
 
   # (Custom nixos modules)
   grub.enable = lib.mkForce false;
   networking = {
-    hostName = lib.mkDefault hostname;
+    hostName = lib.mkDefault system.name;
     wireless.enable = false;
   };
 

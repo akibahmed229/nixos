@@ -2,8 +2,7 @@
   config,
   mkRelativeToRoot,
   pkgs,
-  desktopEnvironment,
-  hostname,
+  system,
   ...
 }: rec {
   name = "afif";
@@ -21,9 +20,7 @@
   shell = pkgs.bash;
 
   homeFile = map mkRelativeToRoot [
-    "hosts/nixos/home.nix"
-    "hosts/nixos/${hostname}/home.nix"
-    "home-manager/${desktopEnvironment}/home.nix"
+    "home-manager/${system.desktopEnvironment}/home.nix"
   ];
   enableSystemConf = false;
   enableHomeConf = false;
