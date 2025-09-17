@@ -27,6 +27,7 @@ in {
           "direnv"
           "fastfetch"
           "xdg"
+          "pipewire/pipewire-pulse.conf.d"
         ]
         ++ lib.optionals (user == "akib") [
           "libinput"
