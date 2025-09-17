@@ -94,7 +94,6 @@ in {
     };
 
     # To auto mount usb and other useb devices pluged in
-    gnome.gnome-keyring.enable = true;
     devmon.enable = true;
     gvfs.enable = true;
     udisks2 = {
@@ -105,8 +104,11 @@ in {
 
   # Disable PulseAudio if PipeWire is enabled
   services.pulseaudio.enable = false;
-  # Enable Kde keyring for PAM
-  security.pam.services.greetd.enableKwallet = true;
+
+  # Enable Gnome keyring for PAM
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
+
   # polkit for authentication ( from custom nixos module )
   myPolkit.enable = true;
 }

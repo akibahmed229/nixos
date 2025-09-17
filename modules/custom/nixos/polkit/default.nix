@@ -15,12 +15,14 @@
       after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
-        ExecStart = ''
-          case 'XDG_CURRENT_DESKTOP' in
-            niri|KDE|Plasma|KDE*)
+        ExecStart = pkgs.writeShellScript "polkit-agent" ''
+          #!/usr/bin/env bash
+
+          case "$XDG_CURRENT_DESKTOP" in
+            KDE|Plasma|KDE*)
               exec ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
               ;;
-            Hyprland|GNOME|Unity|X-Cinnamon|MATE|LXDE|XFCE|*)
+            niri|Hyprland|GNOME|Unity|X-Cinnamon|MATE|LXDE|XFCE|*)
               exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
               ;;
           esac
