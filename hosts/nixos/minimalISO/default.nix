@@ -5,7 +5,7 @@
   pkgs,
   lib,
   self,
-  hostname,
+  system,
   ...
 }: let
   # My custom lib helper functions
@@ -61,7 +61,7 @@ in {
   };
 
   networking = {
-    hostName = lib.mkDefault hostname;
+    hostName = lib.mkDefault system.name;
     wireless.enable = false;
   };
 
