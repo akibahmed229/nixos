@@ -17,22 +17,19 @@ in {
     ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/home-manager";
-      ListOfPrograms =
-        [
-          "stylix"
-          "zsh"
-          "tmux"
-          "yazi"
-          "atuin"
-          "direnv"
-          "fastfetch"
-          "xdg"
-          "pipewire/pipewire-pulse.conf.d"
-        ]
-        ++ lib.optionals (user == "akib") [
-          "libinput"
-          "wireplumber"
-        ];
+      ListOfPrograms = [
+        "stylix"
+        "zsh"
+        "tmux"
+        "yazi"
+        "atuin"
+        "direnv"
+        "fastfetch"
+        "xdg"
+        "libinput"
+        "pipewire/pipewire-pulse.conf.d"
+        "pipewire/wireplumber.conf.d"
+      ];
     };
 
   nixpkgs = {
