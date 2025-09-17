@@ -121,10 +121,11 @@ pkgs.writeShellApplication {
 
     # ---- Maintainer Related ---------------------------------------------------------------
     function maintenance() {
-      if [ "$USERNAME" == "akib" ]; then
+      if [[ "$USERNAME" == "akib" ]]; then
         cd "$FLAKE_DIR"
         git remote remove origin
-        git remote add origin gh:akibahmed229/nixos.git
+        git remote add github gh:akibahmed229/nixos.git
+        git remote add gitlab gl::akibahmed/nixos.git
 
         git submodule init
         git submodule update
@@ -133,7 +134,9 @@ pkgs.writeShellApplication {
 
     # ---- main ---------------------------------------------------------------
     copy_secrets_from_usb
+    sleep 1
     install_flake
+    sleep 1
     maintenance
 
     info "Post-install finished"
