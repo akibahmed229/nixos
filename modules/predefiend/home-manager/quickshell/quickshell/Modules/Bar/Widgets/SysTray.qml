@@ -29,6 +29,7 @@ RowLayout {
 
             acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
             hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
 
             // Handle mouse clicks on tray icons
             onClicked: event => {
