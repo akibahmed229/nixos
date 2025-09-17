@@ -15,6 +15,7 @@ in {
       [
         "firefox"
         "nixvim"
+        "thunar"
       ]
       ++ lib.optionals (user == "akib") [
         "git"

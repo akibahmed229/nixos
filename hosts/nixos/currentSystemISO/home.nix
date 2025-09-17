@@ -16,6 +16,8 @@ in {
       "nixvim"
       "wofi"
       "swappy"
+      "kitty"
+      "thunar"
     ];
   };
 

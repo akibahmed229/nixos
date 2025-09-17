@@ -23,11 +23,8 @@ in {
           "zsh"
           "tmux"
           "yazi"
-          "thunar"
           "atuin"
           "direnv"
-          "alacritty"
-          "kitty"
           "fastfetch"
           "xdg"
         ]

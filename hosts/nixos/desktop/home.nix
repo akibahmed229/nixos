@@ -21,6 +21,9 @@ in {
         "wofi"
         "swappy"
         "emacs"
+        "alacritty"
+        "kitty"
+        "thunar"
       ]
       ++ lib.optionals (user == "akib") [
         "git"
