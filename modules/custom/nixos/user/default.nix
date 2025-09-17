@@ -159,7 +159,7 @@ in {
     };
 
     # Home-Manager users
-    home-manager = mkIf cfg.homeUsers.enable {
+    home-manager = mkIf (cfg.nixosUsers.enable && cfg.homeUsers.enable) {
       useGlobalPkgs = false;
       users = builtins.listToAttrs (map
         (u: {
