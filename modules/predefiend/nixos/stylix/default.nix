@@ -3,7 +3,6 @@
   inputs,
   self,
   theme ? "gruvbox-dark-soft", # The default theme
-  user,
   ...
 }: let
   # My custom lib helper functions
