@@ -75,7 +75,7 @@ Row {
                     var newFocusedIdx = -1;
 
                     // Filter for active workspaces and find the new focused index
-                    var activeWorkspaces = json.filter(ws => ws.active_window_id !== null);
+                    var activeWorkspaces = json.filter(ws => ws.active_window_id !== null || ws.is_active);
                     for (var i = 0; i < activeWorkspaces.length; ++i) {
                         if (activeWorkspaces[i].is_focused) {
                             newFocusedIdx = activeWorkspaces[i].idx;
