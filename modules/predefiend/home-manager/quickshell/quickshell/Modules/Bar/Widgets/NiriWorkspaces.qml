@@ -11,7 +11,13 @@ Row {
     id: root
     spacing: 8
 
-    // data model populated by getWorkspaces process
+    // Property holding current WorkSpace value
+    property var currentWorkSpace: ({
+            idx: "",
+            workspaceName: ""
+        })
+
+    // Data model populated by getWorkspaces process
     Repeater {
         model: workspaceModel
 
@@ -49,7 +55,7 @@ Row {
         }
     }
 
-    // the model that getWorkspaces fills
+    // The model that getWorkspaces fills
     ListModel {
         id: workspaceModel
     }
@@ -65,18 +71,32 @@ Row {
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
-                    workspaceModel.clear();
                     var json = JSON.parse(text.trim());
+                    var newFocusedIdx = -1;
 
-                    // Sort by idx for consistent order
-                    json.sort((a, b) => a.idx - b.idx);
-                    for (var i = 0; i < json.length; ++i) {
-                        if (json[i].active_window_id != null) {
+                    // Filter for active workspaces and find the new focused index
+                    var activeWorkspaces = json.filter(ws => ws.active_window_id !== null);
+                    for (var i = 0; i < activeWorkspaces.length; ++i) {
+                        if (activeWorkspaces[i].is_focused) {
+                            newFocusedIdx = activeWorkspaces[i].idx;
+                            break;
+                        }
+                    }
+
+                    // --- OPTIMIZATION ---
+                    // Only update the model if the focused workspace has changed. This avoids expensive UI rebuilds.
+                    if (newFocusedIdx.toString() !== root.currentWorkSpace.idx) {
+                        // Update the current workspace tracker
+                        root.currentWorkSpace.idx = newFocusedIdx.toString();
+
+                        // Rebuild the model
+                        workspaceModel.clear();
+                        activeWorkspaces.sort((a, b) => a.idx - b.idx);
+                        for (i = 0; i < activeWorkspaces.length; ++i) {
                             workspaceModel.append({
-                                idx: json[i].idx,
-                                // Rename 'name' to 'workspaceName' and fallback to "" to avoid null warnings
-                                workspaceName: json[i].name || "",
-                                is_focused: json[i].is_focused
+                                idx: activeWorkspaces[i].idx,
+                                workspaceName: activeWorkspaces[i].name || "",
+                                is_focused: activeWorkspaces[i].is_focused
                             });
                         }
                     }
@@ -87,12 +107,14 @@ Row {
         }
     }
 
-    // Timer to periodically refresh workspaces (polling, as Niri has no built-in Quickshell module)
+    // Timer to periodically refresh workspaces.
     Timer {
         interval: 150
         running: true
         repeat: true
-        onTriggered: getWorkspaces.running = true
+        onTriggered: {
+            getWorkspaces.running = true;
+        }
     }
 
     Component.onCompleted: getWorkspaces.running = true // Initial fetch
