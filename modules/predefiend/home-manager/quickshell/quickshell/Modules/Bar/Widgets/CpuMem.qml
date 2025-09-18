@@ -6,48 +6,59 @@ import QtQuick.Layouts
 // custom imports
 import qs.Settings    // theme colors
 
-// Layout container for CPU + Memory stats
-RowLayout {
-    spacing: 12
+// Root container to hold both the layout and the overlay MouseArea
+Item {
+    id: root
 
-    // --- CPU usage label ---
-    Text {
-        id: cpuLabel
-        text: "cpu: N/A%"
-        color: Theme.get.errorColor    // red tone for CPU
-        font.family: "Inter, sans-serif"
+    // The RowLayout now becomes a child, responsible for positioning the visible items.
+    RowLayout {
+        id: contentLayout // Give it an ID to reference its size
+        spacing: 12
+
+        // --- CPU usage label ---
+        Text {
+            id: cpuLabel
+            text: "cpu: N/A%"
+            color: Theme.get.errorColor    // red tone for CPU
+            font.family: "Inter, sans-serif"
+        }
+
+        // --- Memory usage label ---
+        Text {
+            id: memLabel
+            text: "mem: N/A%"
+            color: Theme.get.successColor // green tone for RAM
+            font.family: "Inter, sans-serif"
+        }
     }
 
-    // --- Memory usage label ---
-    Text {
-        id: memLabel
-        text: "mem: N/A%"
-        color: Theme.get.successColor // green tone for RAM
-        font.family: "Inter, sans-serif"
+    // Set the root item's size to match the layout's implicit size.
+    // This makes the component size itself correctly based on its content.
+    implicitWidth: contentLayout.implicitWidth
+    implicitHeight: contentLayout.implicitHeight
+
+    // The MouseArea is now a sibling of the layout, not a child.
+    // It fills the root Item, covering the layout without interfering with it.
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+
+        onClicked: {
+            btopLauncher.running = true;
+        }
     }
 
+    // Non-visual components can remain at the root level.
     // --- Process to launch btop on click ---
     Process {
         id: btopLauncher
         command: ["bash", "-c", "$TERMINAL -e btop"]
-        // This process is only run when triggered by the MouseArea
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true // Enable hover events
-        cursorShape: Qt.PointingHandCursor // Change cursor to a hand on hover
-
-        onClicked: {
-            // Run the btopLauncher process when the area is clicked
-            btopLauncher.running = true;
-        }
     }
 
     // --- CPU usage process ---
     Process {
         id: cpuProc
-        // Run top once (-bn1) and extract CPU usage from its output
         command: ["bash", "-c", "top -bn1 | awk '/Cpu/ { print $2}'"]
 
         stdout: StdioCollector {
@@ -58,7 +69,6 @@ RowLayout {
     // --- Memory usage process ---
     Process {
         id: memProc
-        // free -m → get Mem line → calculate percentage
         command: ["sh", "-c", "free -m | awk '/Mem:/ {print int($3/$2 * 100)}'"]
 
         stdout: StdioCollector {
@@ -72,8 +82,8 @@ RowLayout {
         running: true
         repeat: true
         onTriggered: {
-            cpuProc.running = true;    // refresh CPU usage
-            memProc.running = true;    // refresh memory usage
+            cpuProc.running = true;
+            memProc.running = true;
         }
     }
 }
