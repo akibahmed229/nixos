@@ -53,7 +53,7 @@ workspace "chat" {
     open-on-output "DP-1"
 }
 
-workspace "music" {
+workspace "lounge" {
     open-on-output "DP-1"
 }
 
@@ -347,11 +347,17 @@ window-rule {
     open-on-workspace "chat"
 }
 
-// Workspace "music" rules
+// Workspace "lounge" rules
 window-rule {
     match app-id=r#"Spotify$"# 
     open-maximized true
-    open-on-workspace "music"
+    open-on-workspace "lounge"
+}
+window-rule {
+    match app-id=r#"vlc$"# 
+    open-maximized true
+    open-focused true
+    open-on-workspace "lounge"
 }
 
 // Workspace "work" rules
