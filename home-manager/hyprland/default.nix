@@ -45,7 +45,7 @@ in {
       stacer # Linux system monitoring tool.
 
       # 3. Multimedia & Audio
-      pavucontrol # PulseAudio volume control.
+      pwvucontrol # Pipewire Volume Control.
       rhythmbox # Music player.
 
       # 4. GNOME Applications

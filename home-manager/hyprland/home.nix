@@ -226,7 +226,7 @@
           "opacity 1.0 override 0.9 override,class:steam"
 
           # Floating window rule
-          "float,class:org.pulseaudio.pavucontrol, title:Volume Control"
+          "float,class:com.saivert.pwvucontrol, title:Pipewire Volume Control"
           "float,class:blueman-manager, title:blueman-manager"
           "float,class:nm-connection-editor, title:Network Connections"
           "float,class:openrgb, title:OpenRGB"

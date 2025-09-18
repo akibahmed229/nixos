@@ -379,7 +379,7 @@ window-rule {
 window-rule {
     match app-id=r#"Alacritty$"# 
     match app-id=r#"Nsxiv$"# 
-    match app-id=r#"org.pulseaudio.pavucontrol$"# 
+    match app-id=r#"com.saivert.pwvucontrol$"# 
     match app-id=r#"nm-connection-editor$"# 
     match app-id=r#"org.kde.ark$"# 
     match app-id=r#"openrgb$"# 
