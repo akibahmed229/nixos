@@ -68,9 +68,6 @@ in {
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      permittedInsecurePackages = [
-        "qtwebengine-5.15.19" # FIXME
-      ];
     };
   };
 
@@ -132,7 +129,7 @@ in {
     # 5. Productivity
     libreoffice # Office suite.
     figma-linux # Figma design tool.
-    notepadqq # Text editor.
+    # notepadqq # Text editor.
 
     # 6. Gaming & Entertainment
     mangohud # FPS counter and system stats overlay.
