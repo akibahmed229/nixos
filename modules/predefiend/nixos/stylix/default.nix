@@ -3,6 +3,7 @@
   inputs,
   self,
   theme ? "gruvbox-dark-soft", # The default theme
+  user,
   ...
 }: let
   # My custom lib helper functions
@@ -83,6 +84,6 @@ in {
       popups = 1.0;
     };
 
-    # polarity = "dark"; # "light" or "either" required to set wallpaper using stylix
+    polarity = "dark"; # "light" or "either"
   };
 }

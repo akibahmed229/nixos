@@ -87,7 +87,6 @@ in {
       tmux.enable = true;
       vesktop.enable = true;
       vim.enable = true;
-      waybar.enable = true;
       wofi.enable = true;
       yazi.enable = true;
     };
@@ -99,7 +98,7 @@ in {
       popups = 1.0;
     };
 
-    # polarity = "dark"; # "light" or "either" required to set wallpaper using stylix
+    polarity = "dark"; # "light" or "either"
   };
 
   gtk = {
