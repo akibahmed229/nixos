@@ -2,6 +2,7 @@
 import QtQuick
 import Quickshell.Io
 import QtQuick.Layouts
+import Quickshell.Widgets
 
 // custom imports
 import qs.Settings    // theme colors
@@ -13,22 +14,24 @@ Item {
     // The RowLayout now becomes a child, responsible for positioning the visible items.
     RowLayout {
         id: contentLayout // Give it an ID to reference its size
-        spacing: 12
+        spacing: 8
 
         // --- CPU usage label ---
         Text {
             id: cpuLabel
-            text: "cpu: N/A%"
+            text: "---N/A%"
             color: Theme.get.errorColor    // red tone for CPU
             font.family: "Inter, sans-serif"
+            opacity: 0.9
         }
 
         // --- Memory usage label ---
         Text {
             id: memLabel
-            text: "mem: N/A%"
+            text: "---N/A%"
             color: Theme.get.successColor // green tone for RAM
             font.family: "Inter, sans-serif"
+            opacity: 0.9
         }
     }
 
@@ -62,7 +65,7 @@ Item {
         command: ["bash", "-c", "top -bn1 | awk '/Cpu/ { print $2}'"]
 
         stdout: StdioCollector {
-            onStreamFinished: cpuLabel.text = "cpu: " + text.trim() + "%"
+            onStreamFinished: cpuLabel.text = "  " + text.trim() + "%"
         }
     }
 
@@ -72,7 +75,7 @@ Item {
         command: ["sh", "-c", "free -m | awk '/Mem:/ {print int($3/$2 * 100)}'"]
 
         stdout: StdioCollector {
-            onStreamFinished: memLabel.text = "mem: " + text.trim() + "%"
+            onStreamFinished: memLabel.text = "  " + text.trim() + "%"
         }
     }
 

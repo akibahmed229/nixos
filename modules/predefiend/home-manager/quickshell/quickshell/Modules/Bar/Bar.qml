@@ -64,6 +64,7 @@ PanelWindow {
                 id: rightBlocks
                 spacing: 10
                 CpuMem {}
+                VolumeMicControlIcon {}
                 SysTray {}
                 PowerOff {}
                 MarginRight {}
