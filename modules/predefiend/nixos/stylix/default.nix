@@ -63,6 +63,7 @@ in {
     targets = {
       # Enable the following to use the gtk theme
       gtk.enable = true;
+      qt.enable = true;
       gnome.enable = true;
       # Grub theme
       grub.enable = true;
@@ -82,6 +83,6 @@ in {
       popups = 1.0;
     };
 
-    polarity = "dark"; # "light" or "either"
+    # polarity = "dark"; # "light" or "either" required to set wallpaper using stylix
   };
 }

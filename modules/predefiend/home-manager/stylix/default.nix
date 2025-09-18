@@ -99,7 +99,7 @@ in {
       popups = 1.0;
     };
 
-    polarity = "dark"; # "light" or "either"
+    # polarity = "dark"; # "light" or "either" required to set wallpaper using stylix
   };
 
   gtk = {
