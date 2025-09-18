@@ -89,7 +89,7 @@ Row {
 
     // Timer to periodically refresh workspaces (polling, as Niri has no built-in Quickshell module)
     Timer {
-        interval: 500
+        interval: 150
         running: true
         repeat: true
         onTriggered: getWorkspaces.running = true
