@@ -1,9 +1,7 @@
 {
   pkgs,
   self,
-  lib,
   inputs,
-  user,
   ...
 }: let
   # My custom lib helper functions
