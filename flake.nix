@@ -32,7 +32,7 @@
   inputs = {
     ####################  Core Repositories ####################
     # Between nixpkgs-unstable and master is about 3 days and a binary cache And then like 1-2 more days till nixos-unstable
-    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&rev=b599843bad24621dcaa5ab60dac98f9b0eb1cabe"; # FIXME
+    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -48,7 +48,7 @@
     ####################  Desktop Environments & WindowManager | remote flake ####################
     # Hyprland is a collection of NixOS modules and packages for a more modern and minimal desktop experience. with plugins for home-manager.
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.51.0"; # FIXME
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.51.0"; # NOTE: if new version release update the tags
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
