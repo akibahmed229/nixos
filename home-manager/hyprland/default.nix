@@ -53,11 +53,12 @@ in {
       evince # Document viewer for GNOME.
       gnome-calculator # GNOME calculator.
       gnome-clocks # GNOME clocks application.
+      gnome-calendar # GNOME calender application.
 
       # 5. Hypr Ecosystem & Theming
       hyprpicker # Likely a color picker for the Hypr ecosystem.
       qt6Packages.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
-      # qt6Packages.polkit-kde-agent # Polkit agent for KDE (commented out).
+      nwg-look # Look and feel customization tool.
 
       # 6. Uncategorized or Ambiguous
       # lxappearance # Tool to manage LXDE themes (commented out).

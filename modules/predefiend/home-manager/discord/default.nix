@@ -14,4 +14,9 @@
     # })
     vesktop # for screen sharing on wayland
   ];
+
+  programs.vesktop = {
+    enable = true;
+    package = pkgs.vesktop;
+  };
 }

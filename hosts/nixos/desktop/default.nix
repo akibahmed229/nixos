@@ -109,7 +109,7 @@ in {
     zip
     unzip
     p7zip
-    bleachbit # System cleaner.
+    # bleachbit # System cleaner.
     obsidian # Note-taking app.
     # rclone # Cloud storage sync tool.
     fzf # Command-line fuzzy finder.
@@ -146,7 +146,7 @@ in {
     busybox # Unix utilities in a single executable.
     libinput # Input device management library.
     flatpak # Application sandboxing and distribution framework.
-    mediawriter # USB writer for Fedora Media.
+    # mediawriter # USB writer for Fedora Media.
     lact # Gui for Graphic card overclocking and other stuff.
 
     # Development Section

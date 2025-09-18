@@ -45,9 +45,11 @@ in {
       evince # Document viewer for GNOME.
       gnome-calculator # GNOME calculator.
       gnome-clocks # GNOME clocks application.
+      gnome-calendar # GNOME calender application.
 
       # 5. Theming
       qt6Packages.qtstyleplugin-kvantum # Kvantum style plugin, possibly for theming.
+      nwg-look # Look and feel customization tool.
     ];
   };
 

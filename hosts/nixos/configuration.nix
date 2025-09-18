@@ -44,9 +44,6 @@
     #   useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Custom nixos modules
   # Enable sound.
   audio.enable = true;

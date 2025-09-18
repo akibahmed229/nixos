@@ -1,22 +1,13 @@
-{
-  pkgs,
-  self,
-  ...
-}: let
-  # My custom lib helper functions
-  inherit (self.lib) mkRelativeToRoot;
-in {
-  home = {
-    packages = with pkgs; [
-      alacritty # GPU-accelerated terminal emulator.
-    ];
-    file = {
-      ".config/alacritty" = {
-        source =
-          mkRelativeToRoot
-          "modules/predefiend/home-manager/alacritty/config";
-        recursive = true;
-      };
-    };
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    alacritty # GPU-accelerated terminal emulator.
+  ];
+
+  programs.alacritty = {
+    enable = true;
+    package = pkgs.alacritty;
+    settings =
+      builtins.fromTOML
+      (builtins.readFile ./config/alacritty.toml);
   };
 }
