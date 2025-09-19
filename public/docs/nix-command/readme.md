@@ -1,31 +1,101 @@
-1. `sudo nix-store --repair --verify --check-contents` - Check the integrity of the Nix store and repair any inconsistencies. This command is useful if you suspect that the Nix store has been corrupted or if you are experiencing issues with your Nix installation
-2. `sudo nix-env --list-generations --profile /nix/var/nix/profiles/system` - List all the generations of the system profile.
+# NixOS Command Cheatsheet
 
-3. `sudo nix-collect-garbage -d` - Remove all the unused packages from the Nix store.
+## A collection of useful Nix and NixOS commands for system management.
 
-4. `nix-prefetch-url "https://discord.com/api/download?platform=linux&format=tar.gz"` - Fetch the hash of a remote file. This is useful when you want to add a new package to your Nix configuration.
+---
 
-5. `nix flake update --commit-lock-file --accept-flake-config` - Update the flake.lock file and accept the changes in the flake configuration. This command is useful when you want to update the dependencies of a flake project.
+### System & Store Maintenance
 
-6. `nix-eval --file default.nix` - Evaluate a Nix expression in a file. This command is useful when you want to test a Nix expression before using it in your configuration.
+- **Verify & Repair Store**: Checks the integrity of the Nix store and repairs any issues. Use this if you suspect corruption.
 
-7. `nix flake metadata --json | nix run nixpkgs\#jq` - Get the metadata of a flake and use jq to parse the JSON output. This command is useful when you want to inspect the metadata of a flake.
+  ```bash
+  sudo nix-store --repair --verify --check-contents
+  ```
 
-8. `sudo nixos-rebuild switch --flake .#host --option tarball-ttl 0` Will not use cache to rebuild
+- **Garbage Collection**: Removes all unused packages from the Nix store to free up space.
 
-9. `nixos-rebuild --use-remote-sudo switch --flake .#host` will append for sudo while system activation script
+  ```bash
+  sudo nix-collect-garbage -d
+  sudo nix-collect-garbage --delete-older-than 7d
+  sudo nix store gc
+  ```
 
-10. Switching Generations without reboot
+---
 
-```bash
-nix-env --list-generations -p /nix/var/nix/profiles/system
-nix-env --switch-generation <number> -p /nix/var/nix/profiles/system
-# sets selected generation to be activated
-/nix/var/nix/profiles/system/bin/switch-to-configuration { switch or boot }
-```
+### Generation Management
 
-Set current config to default boot
+- **List System Generations**: Shows all past system configurations (generations).
 
-use this when you boot a previous generation via the boot manager menu and want it to be set to default on next boot
+  ```bash
+  sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+  ```
 
-`/run/current-system/bin/switch-to-configuration { switch or boot }`
+- **Switch Generation (No Reboot)**: Allows you to roll back to a previous system configuration without restarting.
+  1.  List generations:
+
+      ```bash
+      nix-env --list-generations -p /nix/var/nix/profiles/system
+      ```
+
+  2.  Switch to generation:
+
+      ```bash
+      bashsudo nix-env --switch-generation <number> -p /nix/var/nix/profiles/system
+      ```
+
+  3.  Activate configuration:
+
+      ```bash
+      sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+      ```
+
+  4.  Set Booted Generation as Default\*\*: If you boot into an older generation, run this to make it the default.
+
+      ```bash
+      /run/current-system/bin/switch-to-configuration boot
+      ```
+
+---
+
+### System Rebuilding
+
+- **Rebuild without Cache**: Forces a rebuild without using cached tarballs.
+  ```bash
+  sudo nixos-rebuild switch --flake .#host --option tarball-ttl 0
+  ```
+- **Rebuild on a Remote Machine**: Uses `sudo` on a remote machine during activation.
+  ```bash
+  nixos-rebuild --use-remote-sudo switch --flake .#host
+  ```
+
+---
+
+### Flake Management
+
+- **Update Flake Inputs**: Updates flake dependencies and commits to `flake.lock`.
+
+  ```bash
+  nix flake update --commit-lock-file --accept-flake-config
+  ```
+
+- **Inspect Flake Metadata**: Shows flake metadata in JSON format.
+
+  ```bash
+  nix flake metadata --json | nix run nixpkgs#jq
+  ```
+
+---
+
+### Development & Packaging
+
+- **Prefetch URL**: Downloads a file and prints its hash. Essential for packaging.
+
+  ```bash
+  nix-prefetch-url "https://discord.com/api/download?platform=linux&format=tar.gz"
+  ```
+
+- **Evaluate a Nix File**: Tests a Nix expression from a file.
+
+  ```bash
+  nix-eval --file default.nix
+  ```
