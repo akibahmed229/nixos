@@ -43,7 +43,9 @@
         setopt autocd          # Auto cd into dirs
         setopt correct         # Command auto-correct
 
-        # Custom Keybinds
+        # Key bindings
+        stty -ixon                 # Disable Ctrl-S/Ctrl-Q flow control
+        bindkey -s '^Q' 'clear\n'  # Ctrl-Q = clear
         bindkey -s '^O' 'find-file\n'  # Ctrl-O → open file
         bindkey -s '^F' 'find-dir\n' # Ctrl-F → open dir
 
@@ -90,10 +92,6 @@
         # Locale + manpager
         export LANG="en_US.UTF-8"
         export MANPAGER="nvim +Man!"
-
-        # Key bindings
-        stty -ixon                 # Disable Ctrl-S/Ctrl-Q flow control
-        bindkey -s '^Q' 'clear\n'  # Ctrl-Q = clear
 
         # fzf-based directory finder
         function find-dir() {
