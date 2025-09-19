@@ -46,28 +46,37 @@
       make sure to build the docker image for blueocean
       Dockerfile
       ```docker
-          -$  FROM jenkins/jenkins:2.516.2-jdk21
-          -$  USER root
-          -$  RUN apt-get update && apt-get install -y lsb-release
-          -$  RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
-          -$      https://download.docker.com/linux/debian/gpg
-          -$  RUN echo "deb [arch=$(dpkg --print-architecture) \
-          -$      signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
-          -$      https://download.docker.com/linux/debian \
-          -$      $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-          -$  RUN apt-get update && apt-get install -y docker-ce-cli
-          -$  USER jenkins
-          -$  RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
+        -$   FROM jenkins/jenkins:2.516.3-jdk21
+        -$
+        -$   USER root
+        -$
+        -$   RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
+        -$       install -m 0755 -d /etc/apt/keyrings && \
+        -$       curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
+        -$       chmod a+r /etc/apt/keyrings/docker.asc && \
+        -$       echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+        -$       https://download.docker.com/linux/debian $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" \
+        -$       | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+        -$       apt-get update && apt-get install -y docker-ce-cli && \
+        -$       apt-get clean && rm -rf /var/lib/apt/lists/*
+        -$
+        -$   # Install Python 3 and pip
+        -$   RUN apt-get update && \
+        -$       apt-get install -y python3 python3-pip python3-venv && \
+        -$       rm -rf /var/lib/apt/lists/*
+        -$
+        -$   USER jenkins
+        -$
+        -$   RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
       ```
 
-      then run: `docker build -t myjenkins-blueocean:2.516.2-1 .`
+      Then Build the Image with: `docker build -t myjenkins-blueocean:2.516.3-1 .`
       */
 
       # Jenkins with Blue Ocean + Docker CLI support
       jenkins-blueocean = {
         # You need to build this custom image yourself before using
-        # docker build -t myjenkins-blueocean:2.516.2-1 .
-        image = "myjenkins-blueocean:2.516.2-1";
+        image = "myjenkins-blueocean:2.516.3-1";
 
         # Volume mappings to persist jenkins-blueocean data outside the container
         volumes = [
