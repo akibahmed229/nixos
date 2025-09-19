@@ -16,9 +16,11 @@ Scope {
         id: pwTracker
         objects: [Pipewire.defaultAudioSink]
     }
-
     // last polled volume (null means unknown)
     property real lastVolume: -1.0
+
+    // last polled muted state
+    property bool lastMuted: false
 
     // Whether to show the OSD
     property bool shouldShowOsd: false
@@ -34,23 +36,28 @@ Scope {
     // Poller: checks the sink's current volume periodically.
     Timer {
         id: pollTimer
-        interval: 150   // 150ms is responsive without being too hot
+        interval: 150 // 150ms is responsive without being too hot
         running: true
         repeat: true
 
         onTriggered: {
-            // Safely read the volume (may be undefined)
+            // Safely read the volume and muted (may be undefined)
             var volObj = Pipewire.defaultAudioSink && Pipewire.defaultAudioSink.audio ? Pipewire.defaultAudioSink.audio : null;
             var v = volObj && typeof volObj.volume !== "undefined" ? volObj.volume : null;
+            var m = volObj && typeof volObj.muted !== "undefined" ? volObj.muted : null;
 
-            if (v === null) {
+            if (v === null || m === null) {
                 // sink not available yet
                 return;
             }
 
-            // If value changed (accounting for small float jitter), show OSD
-            if (root.lastVolume < 0 || Math.abs(v - root.lastVolume) > 0.0005) {
+            // If value changed (accounting for small float jitter) or muted changed, show OSD
+            var volChanged = root.lastVolume < 0 || Math.abs(v - root.lastVolume) > 0.0005;
+            var mutedChanged = root.lastMuted !== m;
+
+            if (volChanged || mutedChanged) {
                 root.lastVolume = v;
+                root.lastMuted = m;
                 root.shouldShowOsd = true;
                 hideTimer.restart();
             }
@@ -76,7 +83,6 @@ Scope {
                 anchors.fill: parent
                 radius: height / 2
                 color: Theme.get.fbColor
-
                 RowLayout {
                     anchors {
                         fill: parent
@@ -86,7 +92,7 @@ Scope {
 
                     IconImage {
                         implicitSize: 40
-                        source: Qt.resolvedUrl("volume.svg")
+                        source: Qt.resolvedUrl(Pipewire.defaultAudioSink.audio.volume === 0 ? "volume-off.svg" : Pipewire.defaultAudioSink.audio.muted ? "volume-xmark.svg" : "volume.svg")
                     }
 
                     Rectangle {
@@ -95,7 +101,6 @@ Scope {
                         implicitHeight: 10
                         radius: 20
                         color: Theme.get.bgColor
-
                         Rectangle {
                             id: filled
                             anchors {
