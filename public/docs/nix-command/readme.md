@@ -40,7 +40,7 @@
   2.  Switch to generation:
 
       ```bash
-      bashsudo nix-env --switch-generation <number> -p /nix/var/nix/profiles/system
+      sudo nix-env --switch-generation <number> -p /nix/var/nix/profiles/system
       ```
 
   3.  Activate configuration:
@@ -49,7 +49,7 @@
       sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
       ```
 
-  4.  Set Booted Generation as Default\*\*: If you boot into an older generation, run this to make it the default.
+  4.  Set Booted Generation as Default: If you boot into an older generation, run this to make it the default.
 
       ```bash
       /run/current-system/bin/switch-to-configuration boot
