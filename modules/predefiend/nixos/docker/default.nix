@@ -79,4 +79,18 @@
     ip link set ipvl-pi up
     ip addr add 192.168.10.1/24 dev ipvl-pi
   '';
+
+  # Configure firewall rules to allow Docker container traffic to be routed through the host machine.
+  networking.firewall.extraCommands = ''
+    # NAT (masquerade) → Rewrite container source IPs (172.27.0.0/16) to host’s IP
+    # so containers can reach the internet.
+    iptables -t nat -A POSTROUTING -s 172.27.0.0/16 -o enp4s0 -j MASQUERADE
+
+
+    # Allow traffic forwarding: containers → internet
+    iptables -A FORWARD -i docker0 -o enp4s0 -j ACCEPT
+
+    # Allow return traffic: internet → containers (for established connections)
+    iptables -A FORWARD -i enp4s0 -o docker0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+  '';
 }

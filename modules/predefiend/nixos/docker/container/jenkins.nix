@@ -107,6 +107,7 @@
     };
   };
 
+  # Allow SSH from the Docker subnet to the  virtual machines subnet (libvirt)
   networking.firewall.extraCommands = ''
     iptables -I FORWARD -s 172.27.0.0/16 -d 192.168.122.0/24 -p tcp --dport 22 -j ACCEPT
   '';
