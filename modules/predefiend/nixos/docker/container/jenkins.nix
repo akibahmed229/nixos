@@ -30,7 +30,7 @@
 
         extraOptions = [
           # Running jenkins in Docker currently requires privileged access to function properly. This requirement may be relaxed with newer Linux kernel versions.
-          # "--privileged"
+          "--privileged"
           "--network-alias=docker"
         ];
 
