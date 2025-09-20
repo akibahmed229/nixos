@@ -166,8 +166,8 @@ in {
     nixd # Nix language server.
     nil # Nix .
     # Development environment tools.
-    devbox
-    distrobox
+    # devbox
+    # distrobox
     yarn # JavaScript package manager.
     jq # JSON processor.
     # Android development tools.
@@ -193,11 +193,12 @@ in {
     # inkscape # Vector graphics editor.
     handbrake # Video transcoder.
     audacity # Audio editor.
-    # darktable # Photography workflow application.
+    darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
     # mpv # Media player.
     kdePackages.kdenlive # Video editor.
+    # davinci-resolve # Professional video editing and color grading software.
 
     # 3. Networking Section
     nmap # Network scanner.
