@@ -74,13 +74,7 @@
               --subnet 192.168.10.0/24 -o parent=enp4s0 \
               -o ipvlan_mode=l3 --subnet 192.168.11.0/24 \
               level3
-        ``
-
-        * Make sure to create a routing table on your main router
-          - Network Destination: 192.168.10.0 (your created subnet)
-          - Subnet Mask: 255.255.255.0 (your assign subnet for the destination)
-          - Default Gateway: (your desktop IP address, e.g., 192.168.0.111)
-          - Interface: LAN (not WAN, because the route is internal)
+        ```
         */
         networks = ["level3"];
 

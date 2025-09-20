@@ -36,7 +36,20 @@
     enableOnBoot = true;
   };
 
+  # desktop must act as a router between LAN and the Docker ipvlan:
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+  };
+
+  /*
   # (Optional but Recommended) Best Practice: Create the Docker network declaratively
+
+        * Make sure to create a routing table on your main router
+          - Network Destination: 192.168.10.0 (your Docker subnet ip address eg,. ip: 101.101.0.0)
+          - Subnet Mask: 255.255.255.0 (your Docker subnet mask              eg,. ip/16 -> subnet: 255.255.0.0)
+          - Default Gateway: (your desktop IP address, e.g., 192.168.0.111)
+          - Interface: LAN (not WAN, because the route is internal)
+  */
   systemd.services.docker-network-level3 = {
     description = "Create Docker network for Level3 routing";
     wantedBy = ["multi-user.target"];
@@ -54,11 +67,6 @@
           level3 || true
       fi
     '';
-  };
-
-  # desktop must act as a router between LAN and the Docker ipvlan:
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
   };
 
   /*
