@@ -2,6 +2,9 @@
 # Minimal NixOS pre-install shell application
 pkgs.writeShellApplication {
   name = "minimalOS";
+  runtimeInputs = with pkgs; [
+    git
+  ];
   text = ''
     #!/usr/bin/env bash
     set -euo pipefail  # fail fast, treat unset vars as errors

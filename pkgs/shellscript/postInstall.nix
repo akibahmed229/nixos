@@ -125,10 +125,13 @@ pkgs.writeShellApplication {
         cd "$FLAKE_DIR"
         git remote remove origin
         git remote add github gh:akibahmed229/nixos.git
-        git remote add gitlab gl::akibahmed/nixos.git
+        git remote add gitlab gl:akibahmed/nixos.git
 
         git submodule init
         git submodule update
+
+        cd /modules/predefiend/nixos/sops/config
+        git clone gl:akibahmed/sops-secrects.git
       fi
     }
 

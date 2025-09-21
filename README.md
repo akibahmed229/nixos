@@ -45,8 +45,7 @@ Prepare a bootable NixOS USB and boot into the live environment. Ensure network 
 Run:
 
 ```bash
-sudo su
-nix-shell -p git --command 'nix run github:akibahmed229/nixos#preInstall --experimental-features "nix-command flakes"'
+sudo nix run github:akibahmed229/nixos#preInstall --experimental-features "nix-command flakes"
 ```
 
 > **NOTE**:
