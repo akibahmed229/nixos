@@ -1,6 +1,12 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.writeShellApplication {
   name = "akibOS";
+  runtimeInputs = with pkgs; [
+    git
+    coreutils
+    gnugrep
+    gnused
+  ];
   text = ''
     #!/usr/bin/env bash
     set -euo pipefail
@@ -123,7 +129,7 @@ pkgs.writeShellApplication {
     function maintenance() {
       if [[ "$USERNAME" == "akib" ]]; then
         cd "$FLAKE_DIR"
-        git remote remove origin
+        git remote remove origin || true
         git remote add github gh:akibahmed229/nixos.git
         git remote add gitlab gl:akibahmed/nixos.git
 
@@ -131,7 +137,7 @@ pkgs.writeShellApplication {
         git submodule update
 
         cd modules/predefiend/nixos/sops/config
-        git clone gl:akibahmed/sops-secrects.git
+        git clone gl:akibahmed/sops-secrects.git || true
       fi
     }
 

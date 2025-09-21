@@ -12,6 +12,7 @@ pkgs.writeShellApplication {
     # --- helpers ----------------------------------------------------------------
     function msg(){ printf "\n---- %s\n" "$1"; }
     function prompt(){ read -rp "$1: " "$2"; printf "\n"; }
+    function die()  { echo "ERROR: $1" >&2; exit 1; }
 
     # --- gather input -----------------------------------------------------------
     # Check connectivity
@@ -23,7 +24,12 @@ pkgs.writeShellApplication {
     clear
     prompt "Enter username (e.g. akib)" username
     prompt "Enter hostname (available: desktop, virt)" hostname
+
+    msg "Available block devices:"
+    lsblk -dpno NAME,SIZE,MODEL | grep -E "/dev/"
     prompt "Enter device (e.g. /dev/sda)" device
+    [ -b "$device" ] || die "Invalid block device: $device"
+
 
     if [[ -z "$username" || -z "$hostname" || -z "$device" ]]; then
       msg "username, hostname and device are required"
