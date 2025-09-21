@@ -130,7 +130,7 @@ pkgs.writeShellApplication {
         git submodule init
         git submodule update
 
-        cd /modules/predefiend/nixos/sops/config
+        cd modules/predefiend/nixos/sops/config
         git clone gl:akibahmed/sops-secrects.git
       fi
     }
