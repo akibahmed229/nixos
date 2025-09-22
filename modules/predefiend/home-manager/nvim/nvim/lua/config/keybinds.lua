@@ -50,12 +50,9 @@ vim.keymap.set("n", "<leader>rl", "<cmd>source ~/.config/nvim/init.lua<cr>")
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
--- Quickfix list stuff
-vim.keymap.set("n", "<leader>cl", ":cclose<CR>", { silent = true })
-vim.keymap.set("n", "<leader>co", ":copen<CR>", { silent = true })
-vim.keymap.set("n", "<leader>cn", ":cnext<CR>zz")
-vim.keymap.set("n", "<leader>cp", ":cprev<CR>zz")
-vim.keymap.set("n", "<leader>li", ":checkhealth vim.lsp<CR>", { desc = "LSP Info" })
+-- Buffer
+vim.keymap.set("n", "<C-y>", "ggVGy")
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 
 -- source file
 vim.keymap.set("n", "<leader><leader>", function()

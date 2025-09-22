@@ -1,14 +1,13 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   nvimConfig = "${config.home.homeDirectory}/.config/flake/modules/predefiend/home-manager/nvim/nvim";
   nvimTarget = "${config.home.homeDirectory}/.config/nvim";
-in
-{
-  home.activation.symlinkQuickshellConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+in {
+  home.activation.symlinkQuickshellConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     ln -sfn "${nvimConfig}" "${nvimTarget}"
   '';
 
@@ -16,10 +15,10 @@ in
     # Nvim stuff
     neovim-unwrapped
     ripgrep
-    nixpkgs-fmt
 
     # Lsp server
-    nil
+    nixd # Nix language server.
+    alejandra
     nodejs
     python3
     pyright
@@ -34,7 +33,7 @@ in
     yaml-language-server
     lua-language-server
     typescript-language-server
+
     vscode-langservers-extracted
   ];
 }
-

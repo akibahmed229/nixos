@@ -31,6 +31,7 @@ set.clipboard:append("unnamedplus")
 
 -- backspace
 set.backspace = "indent,eol,start"
+set.wrap = true
 
 -- split windows
 set.splitbelow = true

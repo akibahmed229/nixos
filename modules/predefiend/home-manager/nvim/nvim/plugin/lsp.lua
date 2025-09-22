@@ -136,16 +136,16 @@ vim.lsp.config['ts_ls'] = {
     },
 }
 
--- Nix LSP (nil)
-vim.lsp.config['nil_ls'] = {
-    cmd = { 'nil' },
+-- Nix LSP (nixd)
+vim.lsp.config['nixd_ls'] = {
+    cmd = { 'nixd' },
     filetypes = { 'nix' },
     root_markers = { 'flake.nix', 'default.nix', '.git' },
     capabilities = caps,
     settings = {
-        ['nil'] = {
+        ['nixd'] = {
             formatting = {
-                command = { "nixpkgs-fmt" } -- or "alejandra" if you prefer
+                command = { "alejandra" } -- or "alejandra" if you prefer
             }
         }
     }
@@ -195,12 +195,31 @@ vim.lsp.config['dartls'] = {
     },
 }
 
+-- Rust (rust_analyzer)
+vim.lsp.config['rust_analyzer'] = {
+    cmd = { 'rust-analyzer' },               -- correct Rust LSP binary
+    filetypes = { 'rust' },                  -- Rust filetypes
+    root_markers = { 'Cargo.toml', '.git' }, -- project root detection
+    capabilities = caps,
+    settings = {
+        ['rust-analyzer'] = {
+            cargo = {
+                allFeatures = true, -- enable all features
+            },
+            checkOnSave = {
+                command = 'clippy', -- run clippy on save
+            },
+        },
+    },
+}
+
 
 vim.lsp.enable('luals')
 vim.lsp.enable('cssls')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('phpls')
-vim.lsp.enable('nil_ls')
+vim.lsp.enable('nixd_ls')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
 vim.lsp.enable('dartls')
+vim.lsp.enable('rust_analyzer')
