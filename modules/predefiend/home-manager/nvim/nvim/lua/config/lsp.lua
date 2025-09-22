@@ -95,6 +95,7 @@ vim.lsp.config['luals'] = {
     },
 }
 
+-- CSS
 vim.lsp.config['cssls'] = {
     cmd = { 'vscode-css-language-server', '--stdio' },
     filetypes = { 'css', 'scss', 'less' },
@@ -104,6 +105,21 @@ vim.lsp.config['cssls'] = {
         css = { validate = true },
         scss = { validate = true },
         less = { validate = true },
+    },
+}
+
+-- HTML/JSON
+vim.lsp.config["htmlls"] = {
+    cmd = { "vscode-html-language-server", "--stdio" },
+    filetypes = { "html", "json", "jsonc" },
+    root_markers = { ".git", "index.html" },
+    capabilities = caps,
+    settings = {
+        html = {
+            format = { enable = true },
+            hover = { documentation = true, references = true },
+        },
+        json = { validate = true },
     },
 }
 
@@ -249,3 +265,4 @@ vim.lsp.enable('dartls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('bashls')
 vim.lsp.enable('yamlls')
+vim.lsp.enable('htmlls')

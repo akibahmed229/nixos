@@ -12,28 +12,48 @@ in {
   '';
 
   home.packages = with pkgs; [
-    # Nvim stuff
+    ## Core
     neovim-unwrapped
     ripgrep
 
-    # Lsp server
-    nixd # Nix language server.
-    alejandra
-    nodejs
-    pyright
-    black
-    isort
-    clang-tools # provides clangd, clang-format, etc.
-    cmake # if your project uses it
-    bear # optional, auto-generate compile_commands.json
-    rust-analyzer # for Rust
-    gopls # for Go
-    intelephense # for php
-    dart # for dart
-    bash-language-server
-    yaml-language-server
-    lua-language-server
-    typescript-language-server
-    vscode-langservers-extracted
+    ## Nix
+    nixd # Nix language server
+    alejandra # Nix formatter
+
+    ## Python
+    pyright # LSP
+    black # Formatter
+    isort # Import sorter
+
+    ## C / C++
+    clang-tools # clangd, clang-format, etc.
+    cmake # Build system
+    bear # Generate compile_commands.json (optional)
+
+    ## Rust
+    rust-analyzer # Rust LSP
+
+    ## Go
+    gopls # Go LSP
+
+    ## PHP
+    intelephense # PHP LSP
+
+    ## Dart
+    (hiPrio dart) # Dart SDK (hiPrio avoids collisions)
+
+    ## Web / Frontend
+    (lowPrio prettier) # Prettier formatter (lowPrio avoids conflicts)
+    typescript-language-server # TS/JS LSP
+    vscode-langservers-extracted # HTML, CSS, JSON, ESLint
+
+    ## Shell
+    bash-language-server # Bash LSP
+
+    ## YAML
+    yaml-language-server # YAML LSP
+
+    ## Lua
+    lua-language-server # Lua LSP
   ];
 }
