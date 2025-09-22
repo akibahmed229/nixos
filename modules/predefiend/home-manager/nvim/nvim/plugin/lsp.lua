@@ -213,7 +213,31 @@ vim.lsp.config['rust_analyzer'] = {
     },
 }
 
+-- Bash (bash-language-server)
+vim.lsp.config['bashls'] = {
+    cmd = { 'bash-language-server', 'start' },             -- standard command
+    filetypes = { 'sh', 'bash' },                          -- filetypes to attach LSP
+    root_markers = { '.git', '.bashrc', '.bash_profile' }, -- root detection
+    capabilities = caps,
+    settings = {},                                         -- bashls doesn’t require extra settings by default
+}
 
+-- YAML (yaml-language-server)
+vim.lsp.config['yamlls'] = {
+    cmd = { 'yaml-language-server', '--stdio' }, -- standard command for yaml-ls
+    filetypes = { 'yaml', 'yml' },               -- attach to YAML files
+    root_markers = { '.git', '.yamllint' },      -- root detection
+    capabilities = caps,
+    settings = {
+        yaml = {
+            schemas = {},      -- add schema mappings if needed
+            validate = true,   -- enable validation
+            completion = true, -- enable completion suggestions
+        },
+    },
+}
+
+-- Enable LSP server
 vim.lsp.enable('luals')
 vim.lsp.enable('cssls')
 vim.lsp.enable('ts_ls')
@@ -223,3 +247,5 @@ vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
 vim.lsp.enable('dartls')
 vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('bashls')
+vim.lsp.enable('yamlls')

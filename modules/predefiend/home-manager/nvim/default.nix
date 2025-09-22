@@ -33,7 +33,6 @@ in {
     yaml-language-server
     lua-language-server
     typescript-language-server
-
     vscode-langservers-extracted
   ];
 }
