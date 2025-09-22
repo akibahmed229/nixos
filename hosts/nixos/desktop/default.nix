@@ -163,8 +163,6 @@ in {
     nodejs_22 # JavaScript runtime.
     rustc # Rust programming language and tools.
     cargo # Rust package manager.
-    nixd # Nix language server.
-    nil # Nix .
     # Development environment tools.
     # devbox
     # distrobox

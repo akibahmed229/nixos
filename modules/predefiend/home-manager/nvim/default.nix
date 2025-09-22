@@ -20,7 +20,6 @@ in {
     nixd # Nix language server.
     alejandra
     nodejs
-    python3
     pyright
     clang-tools # provides clangd, clang-format, etc.
     cmake # if your project uses it
