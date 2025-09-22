@@ -21,6 +21,8 @@ in {
     alejandra
     nodejs
     pyright
+    black
+    isort
     clang-tools # provides clangd, clang-format, etc.
     cmake # if your project uses it
     bear # optional, auto-generate compile_commands.json
