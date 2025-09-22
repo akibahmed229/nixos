@@ -96,12 +96,12 @@ in {
     cryptsetup # Disk encryption setup.
     # veracrypt # Disk encryption tool.
     pciutils # Tools for PCI devices.
-    fail2ban # Intrusion prevention.
+    # fail2ban # Intrusion prevention.
     btop # Resource monitor.
     appimage-run # Utility to run AppImage applications.
     tlrc # Command-line tool for TL;DR pages.
     nix-diff # used to compare derivations
-    libnotify
+    libnotify # Desktop notification
 
     # 2. File Management
     trash-cli # Command-line trash utility.
