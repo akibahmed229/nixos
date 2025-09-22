@@ -3,20 +3,21 @@
 * This is your system's configuration file.
 * Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 */
-{
-  self,
-  pkgs,
-  user,
-  lib,
-  state-version,
-  system,
-  ...
-}: let
+{ self
+, pkgs
+, user
+, lib
+, state-version
+, system
+, ...
+}:
+let
   # My custom lib helper functions
   inherit (self.lib) mkImport mkRelativeToRoot;
-in {
+in
+{
   imports =
-    [(mkRelativeToRoot "home-manager/dwm")]
+    [ (mkRelativeToRoot "home-manager/dwm") ]
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms =
@@ -59,8 +60,8 @@ in {
       direnv
       fastfetch
     ];
-    shells = [pkgs.zsh];
-    pathsToLink = ["/share/zsh" "/tmp" "/home/${user}"];
+    shells = [ pkgs.zsh ];
+    pathsToLink = [ "/share/zsh" "/tmp" "/home/${user}" ];
   };
 
   programs = {

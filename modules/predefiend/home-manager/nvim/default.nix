@@ -16,15 +16,25 @@ in
     # Nvim stuff
     neovim-unwrapped
     ripgrep
-    nil
     nixpkgs-fmt
+
+    # Lsp server
+    nil
     nodejs
-    gcc
+    python3
+    pyright
+    clang-tools # provides clangd, clang-format, etc.
+    cmake # if your project uses it
+    bear # optional, auto-generate compile_commands.json
+    rust-analyzer # for Rust
+    gopls # for Go
+    intelephense # for php
+    dart # for dart
+    bash-language-server
+    yaml-language-server
     lua-language-server
-    vscode-langservers-extracted
     typescript-language-server
-    intelephense
-    vimPlugins.nvim-treesitter.withAllGrammars
+    vscode-langservers-extracted
   ];
 }
 

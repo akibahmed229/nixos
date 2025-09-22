@@ -6,9 +6,15 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
+            -- Snippets
+            'saadparwaiz1/cmp_luasnip',
+            "L3MON4D3/LuaSnip",
+            "rafamadriz/friendly-snippets",
         },
         config = function()
             local cmp = require("cmp")
+            require('luasnip.loaders.from_vscode').lazy_load()
+            vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
             cmp.setup({
                 preselect = cmp.PreselectMode.Item, -- <— preselect first item
@@ -33,6 +39,12 @@ return {
                     { name = "nvim_lsp" },
                     { name = "path" },
                     { name = "buffer",  keyword_length = 3 },
+                    { name = 'luasnip', keyword_length = 2 },
+                },
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body)
+                    end,
                 },
             })
         end,

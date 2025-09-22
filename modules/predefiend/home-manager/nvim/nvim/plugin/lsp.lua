@@ -151,9 +151,56 @@ vim.lsp.config['nil_ls'] = {
     }
 }
 
+-- C / C++ (clangd)
+vim.lsp.config['clangd'] = {
+    cmd = { 'clangd' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+    root_markers = { 'compile_commands.json', 'compile_flags.txt', '.git' },
+    capabilities = caps,
+    settings = {
+        clangd = {
+            fallbackFlags = { "-std=c++20" },
+        },
+    },
+}
+
+-- Python (pyright)
+vim.lsp.config['pyright'] = {
+    cmd = { 'pyright-langserver', '--stdio' },
+    filetypes = { 'python' },
+    root_markers = { 'pyproject.toml', 'setup.py', 'requirements.txt', '.git' },
+    capabilities = caps,
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "basic",
+                autoImportCompletions = true,
+                useLibraryCodeForTypes = true,
+            },
+        },
+    },
+}
+
+-- Dart (for Flutter)
+vim.lsp.config['dartls'] = {
+    cmd = { 'dart', 'language-server', '--protocol=lsp' },
+    filetypes = { 'dart' },
+    root_markers = { 'pubspec.yaml', '.git' },
+    capabilities = caps,
+    settings = {
+        dart = {
+            completeFunctionCalls = true,
+            analysisExcludedFolders = { "build" },
+        },
+    },
+}
+
 
 vim.lsp.enable('luals')
 vim.lsp.enable('cssls')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('phpls')
 vim.lsp.enable('nil_ls')
+vim.lsp.enable('clangd')
+vim.lsp.enable('pyright')
+vim.lsp.enable('dartls')
