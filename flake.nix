@@ -51,10 +51,6 @@
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.51.0"; # NOTE: if new version release update the tags
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
 
     ####################  Community & Other Repositories | remote flake ####################
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
@@ -95,11 +91,6 @@
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # nixvim is a nix flake that provides a vim configuration with plugins and themes managed by nix
-    nixvim = {
-      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
