@@ -7,7 +7,7 @@
   nvimConfig = "${config.home.homeDirectory}/.config/flake/modules/predefiend/home-manager/nvim/nvim";
   nvimTarget = "${config.home.homeDirectory}/.config/nvim";
 in {
-  home.activation.symlinkQuickshellConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.symlinkNvimConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     ln -sfn "${nvimConfig}" "${nvimTarget}"
   '';
 

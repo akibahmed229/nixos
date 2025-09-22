@@ -15,7 +15,7 @@ in {
       [
         "firefox"
         "spotify"
-        "nixvim"
+        "nvim"
         "discord"
         "quickshell"
         "wofi"
