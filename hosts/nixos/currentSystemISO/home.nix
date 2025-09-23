@@ -13,7 +13,7 @@ in {
       "firefox"
       "spotify"
       "quickshell"
-      "nixvim"
+      "nvim"
       "wofi"
       "swappy"
       "kitty"
