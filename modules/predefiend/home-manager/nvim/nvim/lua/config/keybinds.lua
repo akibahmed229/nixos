@@ -1,6 +1,5 @@
 -- KEYBINDS
 vim.g.mapleader = " "
--- vim.keymap.set("n", "<leader>cd", vim.cmd.Ex)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Alt Up/Down in vscode
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -29,17 +28,8 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- getting Alex off my back :)
-vim.keymap.set("n", "<leader>dg", "<cmd>DogeGenerate<cr>")
-
--- lint / format php files for LC
-vim.keymap.set("n", "<leader>cc", "<cmd>!php-cs-fixer fix % --using-cache=no<cr>")
-
 -- Replace all instances of whatever is under cursor (on line)
 vim.keymap.set("n", "<leader>s", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
-
--- make file executable
--- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- yank into clipboard even if on ssh
 vim.keymap.set('n', '<leader>y', '<Plug>OSCYankOperator')
