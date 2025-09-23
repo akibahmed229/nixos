@@ -138,7 +138,7 @@ pkgs.writeShellApplication {
 
         mkdir -p modules/predefiend/nixos/sops/config
         cd modules/predefiend/nixos/sops/config
-        git clone gl:akibahmed/sops-secrects.git || true
+        git clone gl:akibahmed/sops-secrects.git . || true
       fi
     }
 
