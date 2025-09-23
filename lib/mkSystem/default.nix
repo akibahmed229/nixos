@@ -97,28 +97,49 @@
     };
 
   # Function to process directories for Home Manager systems
-  processDirHome = name: value: system:
-    if isDirectory value
-    then {
-      inherit name;
-      # Import Home Manager configuration
-      value = homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {allowUnfree = true;};
-        };
-        extraSpecialArgs =
-          mapAttrs' (n: v: nameValuePair n v) specialArgs
-          // {hostname = name;};
-        modules = map ifFileExists [
-          (path + "/home.nix") # Base Home Manager configuration
-          (path + "/${name}") # Host-specific configuration
-        ];
-      };
-    }
-    else {
-      inherit name value;
-    };
+  # This function now correctly scans the nested directory structure
+  processDirHomeManager = let
+    # 1. Get all architecture directories like { "x86_64-linux" = "directory"; ... }
+    archDirs = getHosts path;
+
+    # 2. For each architecture, find the home-manager configs inside.
+    listOfConfigs =
+      lib.attrsets.mapAttrsToList (
+        archName: archValue:
+        # Only process directories
+          if !(isDirectory archValue)
+          then {}
+          else let
+            # Get all entries in the architecture directory first...
+            allEntriesInArch = getHosts (path + "/${archName}");
+
+            # ...then filter this set to keep ONLY the directories.
+            hostDirsInArch = lib.attrsets.filterAttrs (name: value: isDirectory value) allEntriesInArch;
+          in
+            # Now, mapAttrs' is only called on valid directories, so the 'if' is no longer needed.
+            lib.mapAttrs' (hostName: hostValue: {
+              # The final key in our output set is the hostname
+              name = hostName;
+              # The value is the complete homeManagerConfiguration
+              value = homeManagerConfiguration {
+                pkgs = import nixpkgs {
+                  system = archName; # Use the architecture from the parent directory
+                  config = {allowUnfree = true;};
+                };
+                extraSpecialArgs = specialArgs // {hostname = hostName;};
+                # Use the corrected paths for the modules
+                modules = map ifFileExists [
+                  (path + "/${archName}/home.nix") # Base config for this architecture
+                  (path + "/${archName}/${hostName}") # Host-specific config
+                ];
+              };
+            })
+            hostDirsInArch
+      )
+      archDirs;
+  in
+    # 3. Merge the list of attribute sets from all architectures into one big set.
+    lib.foldl lib.recursiveUpdate {} listOfConfigs;
 
   # Function to process directories for Nix-on-Droid systems
   processDirNixOnDroid = name: value:
@@ -173,16 +194,14 @@
       inherit name value;
     };
 
-  processed = (
-    mapAttrs' (
-      if droidConf
-      then processDirNixOnDroid
-      else if template
-      then processDirTemplate
-      else processDirNixOS
-    )
-    (getHosts path)
-  );
+  processed =
+    if homeConf
+    then processDirHomeManager
+    else if droidConf
+    then (mapAttrs' processDirNixOnDroid (getHosts path))
+    else if template
+    then (mapAttrs' processDirTemplate (getHosts path))
+    else (mapAttrs' processDirNixOS (getHosts path));
 
   # Filter out non-directory entries from the processed list
   validAttrs = filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
@@ -203,11 +222,4 @@
     else trace "systems found in: ${path}\navailable systems: ${foundHosts}" _;
   # Return the final list of valid systems
 in
-  isHostsEmpty (let
-    processWithSystem = system:
-      mapAttrs' (name: value: nameValuePair name (processDirHome name value system)) (getHosts path);
-  in (
-    if homeConf
-    then forAllSystems (system: processWithSystem system)
-    else builtins.listToAttrs validList
-  ))
+  isHostsEmpty builtins.listToAttrs validList
