@@ -194,7 +194,9 @@
       inherit name value;
     };
 
+  # Process directory contents based on the type of system being configured
   processed =
+    # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems
     if homeConf
     then processDirHomeManager
     else if droidConf
