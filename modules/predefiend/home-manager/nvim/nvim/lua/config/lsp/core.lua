@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('n', 'gs', vim.lsp.buf.signature_help)
         map('n', 'gl', vim.diagnostic.open_float)
         map('n', '<F2>', vim.lsp.buf.rename)
-        map({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({ async = true }) end)
+        map('n', '<leader>fm', function() vim.lsp.buf.format({ async = true }) end)
         map('n', '<F4>', vim.lsp.buf.code_action)
 
         -- Put near your LSP on_attach

@@ -15,6 +15,7 @@ in {
     ## Core
     neovim-unwrapped
     ripgrep
+    git
 
     ## Nix
     nixd # Nix language server
