@@ -252,15 +252,17 @@
 
         extensions = {
           packages = with inputs.firefox-addons.packages."x86_64-linux"; [
-            bitwarden
+            # bitwarden
+            # tridactyl
+            # gsconnect
+            # gnome-shell-integration
+            # gruvbox-dark-theme
             ublock-origin
             sponsorblock
             darkreader
-            tridactyl
             youtube-shorts-block
-            gsconnect
-            #gnome-shell-integration
-            gruvbox-dark-theme
+            dearrow
+            multi-account-containers
           ];
         };
       };
