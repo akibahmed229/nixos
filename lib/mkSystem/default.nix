@@ -15,7 +15,6 @@
 */
 {
   # Default arguments for the function
-  system ? "x86_64-linux", # Default system architecture
   nixpkgs ? {},
   template ? false,
   homeConf ? false,
@@ -33,14 +32,7 @@
   inherit (lib) nixosSystem strings attrsets mapAttrs' nameValuePair pathExists mkDefault optionals filterAttrs attrNames lists concatStringsSep;
 
   # Supported systems for your flake packages, shell, etc.
-  forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
-
-  eachPkgs = import nixpkgs {
-    inherit system;
-    config = {
-      allowUnfree = true;
-    };
-  };
+  forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux"];
 
   # Utility to check if a given path points to a directory
   isDirectory = attr: attr == "directory";
@@ -105,13 +97,16 @@
     };
 
   # Function to process directories for Home Manager systems
-  processDirHome = name: value:
+  processDirHome = name: value: system:
     if isDirectory value
     then {
       inherit name;
       # Import Home Manager configuration
       value = homeManagerConfiguration {
-        pkgs = eachPkgs;
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {allowUnfree = true;};
+        };
         extraSpecialArgs =
           mapAttrs' (n: v: nameValuePair n v) specialArgs
           // {hostname = name;};
@@ -178,19 +173,16 @@
       inherit name value;
     };
 
-  # Process directory contents based on the type of system being configured
-  processed =
+  processed = (
     mapAttrs' (
-      # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems
-      if homeConf
-      then processDirHome
-      else if droidConf
+      if droidConf
       then processDirNixOnDroid
       else if template
       then processDirTemplate
-      else processDirNixOS # Default to NixOS
+      else processDirNixOS
     )
-    (getHosts path);
+    (getHosts path)
+  );
 
   # Filter out non-directory entries from the processed list
   validAttrs = filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
@@ -211,4 +203,11 @@
     else trace "systems found in: ${path}\navailable systems: ${foundHosts}" _;
   # Return the final list of valid systems
 in
-  isHostsEmpty builtins.listToAttrs validList
+  isHostsEmpty (let
+    processWithSystem = system:
+      mapAttrs' (name: value: nameValuePair name (processDirHome name value system)) (getHosts path);
+  in (
+    if homeConf
+    then forAllSystems (system: processWithSystem system)
+    else builtins.listToAttrs validList
+  ))
