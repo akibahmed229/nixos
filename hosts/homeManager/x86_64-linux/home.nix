@@ -18,7 +18,6 @@
     homeDirectory = "/home/${user}";
 
     shell.enableZshIntegration = true;
-
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
@@ -27,6 +26,11 @@
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     stateVersion = "${state-version}"; # Please read the comment before changing.
+  };
+
+  home.activation = {
+    # Example: Append ".backup" to existing files instead of exiting with an error
+    backupFileExtension = "hm-bak";
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
