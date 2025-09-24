@@ -108,10 +108,10 @@
       lib.attrsets.mapAttrsToList (
         archName: archValue:
         # Only process directories & Valid system architectures
-          if !(isDirectory archValue)
-          then {}
-          else if !(builtins.hasAttr archName (forAllSystems (system: system)))
+          if !(builtins.hasAttr archName (forAllSystems (system: system)))
           then throw "Invalid system architecture type!!!: ${archName}"
+          else if !(isDirectory archValue)
+          then {}
           else let
             # Get all home-manager host entries in the architecture directory first...
             allEntriesInArch = getHosts (path + "/${archName}");
