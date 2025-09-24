@@ -15,6 +15,17 @@
 
   targets.genericLinux.enable = true;
 
+  home.activation = {
+    myBackupScript = lib.hm.dag.entryAfter ["checkLinkTargets"] ''
+      # Custom backup logic if needed
+      for f in ~/.bashrc ~/.zshrc ~/.config/systemd/user/tmux.service; do
+        if [ -f "$f" ]; then
+          mv "$f" "$f.hm-bak"
+        fi
+      done
+    '';
+  };
+
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
