@@ -60,6 +60,12 @@
     EDITOR = "nvim";
   };
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   # Set up nix for flakes
   nix = {
     extraOptions = ''
@@ -78,10 +84,12 @@
     };
   };
 
+  services.home-manager.autoUpgrade.frequency = "weekly";
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
-
-  services.home-manager.autoUpgrade.frequency = "weekly";
+  # enable systemd service for per-user
+  systemd.user.enable = true;
 }
