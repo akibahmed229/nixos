@@ -113,7 +113,7 @@
   systemd.user = {
     services.tmux = {
       Unit = {
-        description = "Start the tmux server";
+        Description = "Start the tmux server";
       };
       Install = {
         WantedBy = ["default.target"]; # Where the service should be enabled
