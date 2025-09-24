@@ -25,6 +25,7 @@
         name = "Akib";
         id = 0;
         search.engines = {
+          # --- Nix ---
           "Nix Packages" = {
             urls = [
               {
@@ -41,11 +42,93 @@
                 ];
               }
             ];
-
-            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@np"];
           };
+
+          "Nix Options" = {
+            urls = [
+              {
+                template = "https://search.nixos.org/options";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["@no"];
+          };
+
+          # --- YouTube ---
+          "YouTube" = {
+            urls = [
+              {
+                template = "https://www.youtube.com/results";
+                params = [
+                  {
+                    name = "search_query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["@yt"];
+          };
+
+          # --- npm packages ---
+          "npm" = {
+            urls = [
+              {
+                template = "https://www.npmjs.com/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["@npm"];
+          };
+
+          # --- Flutter pub.dev packages ---
+          "Flutter Pub" = {
+            urls = [
+              {
+                template = "https://pub.dev/packages";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["@fp"];
+          };
+
+          # --- Docker Hub images ---
+          "Docker Hub" = {
+            urls = [
+              {
+                template = "https://hub.docker.com/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                  {
+                    name = "type";
+                    value = "image";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["@dh" "@docker"];
+          };
         };
+
         search.force = true;
 
         bookmarks = {
