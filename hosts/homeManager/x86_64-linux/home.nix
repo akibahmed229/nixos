@@ -6,9 +6,7 @@
   state-version,
   self,
   ...
-}: let
-  inherit (self.lib) mkRelativeToRoot;
-in {
+}: {
   imports = [
     self.homeModules.default # Custom home-manager modules
   ];
@@ -42,13 +40,6 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-
-    # The camera's /dev/video file is kept open (without streaming), sadly causing the camera to be powered on what looks to be most devices.
-    # For some reason, this completely nullifies the soc power management on modern laptops and can result in increases from 3W to 8W at idle!
-    ".config/wireplumber" = {
-      source = mkRelativeToRoot "modules/predefiend/home-manager/wireplumber"; # tells wireplumber to ignore cameras
-      recursive = true;
-    };
   };
 
   # You can also manage environment variables but you will have to manually
@@ -77,7 +68,7 @@ in {
     # Garbage collection
     gc = {
       automatic = true;
-      frequency = "weekly";
+      dates = "weekly";
       options = "--delete-older-than 7d";
     };
   };
