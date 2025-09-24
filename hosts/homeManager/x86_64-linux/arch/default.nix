@@ -7,6 +7,8 @@
 {
   pkgs,
   self,
+  lib,
+  user,
   ...
 }: let
   inherit (self.lib) mkImport mkRelativeToRoot;
@@ -22,15 +24,24 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = [
-      "zsh"
-      "tmux"
-      "lf"
-      "sops"
-      "git"
-      "pipewire/pipewire-pulse.conf.d"
-      "pipewire/wireplumber.conf.d"
-    ];
+    ListOfPrograms =
+      [
+        "stylix"
+        "zsh"
+        "tmux"
+        "yazi"
+        "atuin"
+        "direnv"
+        "fastfetch"
+        "libinput"
+        "pipewire/pipewire-pulse.conf.d"
+        "pipewire/wireplumber.conf.d"
+      ]
+      ++ lib.optionals (user == "akib") [
+        "git"
+        "sops"
+        "ssh"
+      ];
   };
 
   # The home.packages option allows you to install Nix packages into your
