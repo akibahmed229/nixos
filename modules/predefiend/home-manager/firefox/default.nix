@@ -421,6 +421,7 @@
             youtube-shorts-block
             dearrow
             multi-account-containers
+            facebook-container
           ];
         };
       };
