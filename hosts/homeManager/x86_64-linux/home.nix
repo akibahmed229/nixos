@@ -16,7 +16,7 @@
   targets.genericLinux.enable = true;
 
   home.activation = {
-    myBackupScript = lib.hm.dag.entryAfter ["checkLinkTargets"] ''
+    myBackupScript = lib.hm.dag.entryAfter ["writeBoundary"] ''
       # Custom backup logic if needed
       for f in ${config.home.homeDirectory}/.bashrc ${config.home.homeDirectory}/.zshrc ${config.home.homeDirectory}/.config/systemd/user/tmux.service; do
         if [ -f "$f" ]; then
