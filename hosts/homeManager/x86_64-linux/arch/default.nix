@@ -26,7 +26,6 @@ in {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
     ListOfPrograms =
       [
-        "stylix"
         "zsh"
         "tmux"
         "yazi"
