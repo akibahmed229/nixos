@@ -11,6 +11,8 @@
     self.homeModules.default # Custom home-manager modules
   ];
 
+  targets.genericLinux.enable = true;
+
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.

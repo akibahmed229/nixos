@@ -52,9 +52,6 @@ in {
     tree
     hwinfo
     ripgrep
-    atuin
-    direnv
-    neovim
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
