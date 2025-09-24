@@ -6,6 +6,7 @@
   state-version,
   self,
   lib,
+  config,
   ...
 }: {
   imports = [
@@ -29,17 +30,6 @@
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     stateVersion = "${state-version}"; # Please read the comment before changing.
-  };
-
-  home.activation = {
-    myBackupScript = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      # Custom backup logic if needed
-      for f in ~/.bashrc ~/.zshrc ~/.config/systemd/user/tmux.service; do
-        if [ -f "$f" ]; then
-          mv "$f" "$f.hm-bak"
-        fi
-      done
-    '';
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -76,7 +66,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
       accept-flake-config = true # Enable substitution from flake.nix
-      trusted-users = ${user}
+      trusted-users = ${config.home.username}
     '';
     package = pkgs.nix;
 
