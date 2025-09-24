@@ -28,6 +28,8 @@ in {
       [
         "zsh"
         "tmux"
+        "nvim"
+        "kitty"
         "yazi"
         "atuin"
         "direnv"
