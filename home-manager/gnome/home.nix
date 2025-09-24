@@ -15,12 +15,11 @@
 in {
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["firefox" "spicetify" "discord" "zsh" "tmux" "lf"];
+    ListOfPrograms = ["firefox" "spicetify" "zsh" "tmux" "lf" "vencord"];
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      "discord"
       "spotify"
     ];
 

@@ -16,7 +16,7 @@ in {
         "firefox"
         "spotify"
         "nvim"
-        "discord"
+        "vencord"
         "quickshell"
         "wofi"
         "swappy"
