@@ -16,9 +16,9 @@
   targets.genericLinux.enable = true;
 
   home.activation = {
-    myBackupScript = lib.hm.dag.entryAfter ["checkFilesChanged"] ''
+    myBackupScript = lib.hm.dag.entryAfter ["checkLinkTargets"] ''
       # Custom backup logic if needed
-      for f in ~/.bashrc ~/.zshrc ~/.config/systemd/user/tmux.service; do
+      for f in ${config.home.homeDirectory}/.bashrc ${config.home.homeDirectory}/.zshrc ${config.home.homeDirectory}/.config/systemd/user/tmux.service; do
         if [ -f "$f" ]; then
           mv "$f" "$f.hm-bak"
         fi
@@ -76,7 +76,8 @@
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
-      accept-flake-config = true # Enable substitution from flake.nix
+      # Enable substitution from flake.nix
+      accept-flake-config = true
       trusted-users = ${config.home.username}
     '';
     package = pkgs.nix;
