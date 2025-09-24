@@ -22,7 +22,15 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["zsh" "tmux" "lf" "sops" "git"];
+    ListOfPrograms = [
+      "zsh"
+      "tmux"
+      "lf"
+      "sops"
+      "git"
+      "pipewire/pipewire-pulse.conf.d"
+      "pipewire/wireplumber.conf.d"
+    ];
   };
 
   # The home.packages option allows you to install Nix packages into your
