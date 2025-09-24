@@ -33,7 +33,12 @@
 
   home.activation = {
     myBackupScript = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      home-manager switch -b backup
+      # Custom backup logic if needed
+      for f in ~/.bashrc ~/.zshrc ~/.config/systemd/user/tmux.service; do
+        if [ -f "$f" ]; then
+          mv "$f" "$f.hm-bak"
+        fi
+      done
     '';
   };
 
