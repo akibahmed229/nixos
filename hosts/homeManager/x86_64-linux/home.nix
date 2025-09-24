@@ -32,7 +32,7 @@
 
   home.activation = {
     # Example: Append ".backup" to existing files instead of exiting with an error
-    backupFileExtension = "hm-bak";
+    backupFileExtension = ".hm-bak";
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
