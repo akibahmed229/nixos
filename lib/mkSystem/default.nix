@@ -57,7 +57,7 @@
     else throw "File not found: ${_path}";
 
   # Function to process directories for NixOS systems
-  processDirNixOS = name: value:
+  processDirNixOS = mapAttrs' (name: value:
     if isDirectory value
     then {
       inherit name;
@@ -94,7 +94,8 @@
     }
     else {
       inherit name value;
-    };
+    })
+  (getHosts path);
 
   # Function to process directories for Home Manager systems
   # This function now correctly scans the nested directory structure
@@ -106,28 +107,27 @@
     listOfConfigs =
       lib.attrsets.mapAttrsToList (
         archName: archValue:
-        # Only process directories
+        # Only process directories & Valid system architectures
           if !(isDirectory archValue)
           then {}
+          else if !(builtins.hasAttr archName (forAllSystems (system: system)))
+          then throw "Invalid system architecture type!!!: ${archName}"
           else let
-            # Get all entries in the architecture directory first...
+            # Get all home-manager host entries in the architecture directory first...
             allEntriesInArch = getHosts (path + "/${archName}");
 
             # ...then filter this set to keep ONLY the directories.
             hostDirsInArch = lib.attrsets.filterAttrs (name: value: isDirectory value) allEntriesInArch;
           in
-            # Now, mapAttrs' is only called on valid directories, so the 'if' is no longer needed.
             lib.mapAttrs' (hostName: hostValue: {
-              # The final key in our output set is the hostname
               name = hostName;
-              # The value is the complete homeManagerConfiguration
+              # Import Home-Manager Configuration
               value = homeManagerConfiguration {
                 pkgs = import nixpkgs {
                   system = archName; # Use the architecture from the parent directory
                   config = {allowUnfree = true;};
                 };
                 extraSpecialArgs = specialArgs // {hostname = hostName;};
-                # Use the corrected paths for the modules
                 modules = map ifFileExists [
                   (path + "/${archName}/home.nix") # Base config for this architecture
                   (path + "/${archName}/${hostName}") # Host-specific config
@@ -142,7 +142,7 @@
     lib.foldl lib.recursiveUpdate {} listOfConfigs;
 
   # Function to process directories for Nix-on-Droid systems
-  processDirNixOnDroid = name: value:
+  processDirNixOnDroid = mapAttrs' (name: value:
     if isDirectory value
     then {
       inherit name;
@@ -176,10 +176,11 @@
     }
     else {
       inherit name value;
-    };
+    })
+  (getHosts path);
 
   # Function to process template directories
-  processDirTemplate = name: value:
+  processDirTemplate = mapAttrs' (name: value:
     if isDirectory value
     then {
       inherit name;
@@ -192,18 +193,20 @@
     }
     else {
       inherit name value;
-    };
+    })
+  (getHosts path);
 
   # Process directory contents based on the type of system being configured
+  # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems
   processed =
-    # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems
     if homeConf
     then processDirHomeManager
     else if droidConf
-    then (mapAttrs' processDirNixOnDroid (getHosts path))
+    then processDirNixOnDroid
     else if template
-    then (mapAttrs' processDirTemplate (getHosts path))
-    else (mapAttrs' processDirNixOS (getHosts path));
+    then processDirTemplate
+    # Default to NixOS
+    else processDirNixOS;
 
   # Filter out non-directory entries from the processed list
   validAttrs = filterAttrs (_: v: v != "regular" && v != "symlink" && v != "unknown") processed;
