@@ -52,76 +52,151 @@
           force = true;
           settings = [
             {
-              name = "youtube";
-              tags = ["video"];
-              keyword = "yt";
-              url = "https://www.youtube.com/";
+              name = "NixOS";
+              bookmarks = [
+                {
+                  name = "Nix Packages";
+                  tags = ["nix" "pkgs"];
+                  keyword = "nixpkgs";
+                  url = "https://search.nixos.org/packages";
+                }
+                {
+                  name = "Nix Home-Manager options";
+                  tags = ["nix" "home-manager"];
+                  keyword = "home-manager";
+                  url = "https://mipmip.github.io/home-manager-option-search/";
+                }
+                {
+                  name = "noogle";
+                  keyword = "noogle";
+                  url = "https://noogle.dev/";
+                }
+              ];
             }
             {
-              name = "github";
-              tags = ["git"];
-              keyword = "gh";
-              url = "github.com/akibahmed229";
+              name = "AI";
+              bookmarks = [
+                {
+                  name = "Google Gemini";
+                  keyword = "gemini";
+                  url = "https://gemini.google.com/";
+                }
+                {
+                  name = "Grok";
+                  keyword = "grok";
+                  url = "https://grok.com/";
+                }
+                {
+                  name = "ChatGPT";
+                  keyword = "gpt";
+                  url = "https://chat.openai.com/";
+                }
+                {
+                  name = "Bing AI";
+                  keyword = "bing";
+                  url = "https://www.bing.com/search?q=Bing+AI&showconv=1";
+                }
+              ];
             }
             {
-              name = "reddit";
-              tags = ["social"];
-              keyword = "r";
-              url = "https://www.reddit.com/";
+              name = "Personal";
+              bookmarks = [
+                {
+                  name = "YouTube";
+                  keyword = "yt";
+                  url = "https://www.youtube.com/";
+                }
+                {
+                  name = "GitHub";
+                  keyword = "gh";
+                  url = "https://github.com/akibahmed229";
+                }
+                {
+                  name = "Reddit";
+                  keyword = "r";
+                  url = "https://www.reddit.com/";
+                }
+                {
+                  name = "Gmail";
+                  keyword = "mail";
+                  url = "https://mail.google.com/mail/u/0/#inbox";
+                }
+              ];
             }
             {
-              name = "DIU Blender";
-              tags = ["education"];
-              keyword = "varsity";
-              url = "https://elearn.daffodilvarsity.edu.bd/";
+              name = "Varsity";
+              bookmarks = [
+                {
+                  name = "DIU Blender";
+                  url = "https://elearn.daffodilvarsity.edu.bd/";
+                }
+                {
+                  name = "DIU Student Portal";
+                  url = "http://studentportal.diu.edu.bd";
+                }
+              ];
             }
             {
-              name = "DIU Strudent Portal";
-              tags = ["education"];
-              keyword = "portal";
-              url = "http://studentportal.diu.edu.bd";
-            }
-            {
-              name = "Gmail";
-              tags = ["email"];
-              keyword = "mail";
-              url = "https://mail.google.com/mail/u/0/#inbox";
-            }
-            {
-              name = "Nix Packages";
-              tags = ["nix" "pkgs"];
-              keyword = "nixpkgs";
-              url = "https://search.nixos.org/packages";
-            }
-            {
-              name = "Nix Home-Manager options";
-              tags = ["nix" "home-manager"];
-              keyword = "home-manager";
-              url = "https://mipmip.github.io/home-manager-option-search/";
-            }
-            {
-              name = "noogle";
-              tags = ["nix" "lib"];
-              keyword = "nix-lib";
-              url = "https://noogle.dev/";
-            }
-            {
-              name = "Chat Gpt";
-              tags = ["chat" "gpt" "ai"];
-              keyword = "chat";
-              url = "https://chat.openai.com/";
-            }
-            {
-              name = "Google Bird";
-              tags = ["ai" "google" "bird" "gemini"];
-              keyword = "chat";
-              url = "https://gemini.google.com/";
-            }
-            {
-              name = "Binge Ai";
-              tags = ["ai" "binge"];
-              keyword = "binge";
-              url = "https://www.bing.com/search?q=Bing+AI&showconv=1";
+              name = "Dev";
+              bookmarks = [
+                # --- Docs & References ---
+                {
+                  name = "MDN Docs";
+                  url = "https://developer.mozilla.org/";
+                }
+                {
+                  name = "DevDocs";
+                  url = "https://devdocs.io/";
+                }
+                {
+                  name = "Stack Overflow";
+                  url = "https://stackoverflow.com/";
+                }
+                {
+                  name = "NixOS Manual";
+                  url = "https://nixos.org/manual/nixos/unstable/";
+                }
+                {
+                  name = "Docker Docs";
+                  url = "https://docs.docker.com/";
+                }
+                {
+                  name = "Kubernetes Docs";
+                  url = "https://kubernetes.io/docs/";
+                }
+
+                # --- Full Stack / DevOps ---
+                {
+                  name = "GitHub";
+                  url = "https://github.com/";
+                }
+                {
+                  name = "GitLab";
+                  url = "https://gitlab.com/";
+                }
+                {
+                  name = "PostgreSQL Docs";
+                  url = "https://www.postgresql.org/docs/";
+                }
+                {
+                  name = "Node.js Docs";
+                  url = "https://nodejs.org/docs/latest/api/";
+                }
+                {
+                  name = "Flutter Docs";
+                  url = "https://docs.flutter.dev/";
+                }
+
+                # --- News / Tech Updates ---
+                {
+                  name = "Hacker News";
+                  url = "https://news.ycombinator.com/";
+                }
+                {
+                  name = "Dev.to";
+                  url = "https://dev.to/";
+                }
+              ];
             }
           ];
         };
