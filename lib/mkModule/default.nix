@@ -12,25 +12,7 @@
 *     - default.nix
 */
 {lib}: path: let
-  inherit (builtins) readDir;
-  inherit (lib) strings attrsets mapAttrs' removeSuffix mkScanPath;
-
-  # Utility to check if a given path points to a directory
-  isDirectory = attr: attr == "directory";
-
-  # Utility to check if a given path is a Nix file
-  isNixFile = name: strings.hasSuffix ".nix" name;
-
-  # Reads the directory contents from the provided path and filters out unwanted entries
-  getModules = path: let
-    contents = readDir path;
-  in
-    # Keep only directories with a default.nix file and nix files themselves
-    attrsets.filterAttrs (
-      name: attr:
-        isDirectory attr || (isNixFile name && name != "default.nix")
-    )
-    contents;
+  inherit (lib) attrsets mapAttrs' removeSuffix mkScanPath isDirectory isNixFile getEntries;
 
   # Function to import modules from valid directories or files
   processModule = name: attr: let
@@ -53,7 +35,7 @@
       null;
 
   # Apply the processing function to each valid module
-  processedModules = mapAttrs' processModule (getModules path);
+  processedModules = mapAttrs' processModule (getEntries path);
 in
   /*
   # Filter out null values from the resulting attribute set (i.e., unsupported files)

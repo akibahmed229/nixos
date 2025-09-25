@@ -31,25 +31,7 @@
   ...
 }: let
   # Importing necessary functions and utilities from the provided imports
-  inherit (builtins) readDir;
-  inherit (lib) mapAttrs' attrsets strings removeSuffix;
-
-  # Utility to check if a given path points to a directory
-  isDirectory = attr: attr == "directory";
-
-  # Utility to check if a given path is a Nix file
-  isNixFile = name: strings.hasSuffix ".nix" name;
-
-  # Reads the directory contents from the provided path and filters out unwanted entries
-  getOverlays = path: let
-    contents = readDir path;
-  in
-    # Keep only directories with a default.nix file and nix files themselves
-    attrsets.filterAttrs (
-      name: attr:
-        isDirectory attr || (isNixFile name && name != "default.nix")
-    )
-    contents;
+  inherit (lib) mapAttrs' attrsets removeSuffix isDirectory isNixFile getEntries;
 
   # Process the overlays by importing them with the provided inputs and path
   processOverlays = name: value: let
@@ -72,7 +54,7 @@
   # Apply the processing function to each valid module
   processed =
     mapAttrs' processOverlays
-    (getOverlays path);
+    (getEntries path);
 in
   # Filter out null values from the resulting attribute set (i.e., unsupported files)
   attrsets.filterAttrs (_: m: m != null) processed

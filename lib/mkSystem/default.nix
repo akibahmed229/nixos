@@ -13,7 +13,7 @@
 
 * Final Output: The script returns the final list of valid systems using builtins.listToAttrs.
 */
-{
+{myLib}: {
   # Default arguments for the function
   nixpkgs ? {},
   template ? false,
@@ -25,36 +25,44 @@
   ...
 }: path: let
   # Importing necessary functions and utilities from the provided imports
-  inherit (nixpkgs) lib;
-  inherit (builtins) readDir trace;
-  inherit (nix-on-droid.lib) nixOnDroidConfiguration;
-  inherit (home-manager.lib) homeManagerConfiguration;
-  inherit (lib) nixosSystem strings attrsets mapAttrs' nameValuePair pathExists mkDefault optionals filterAttrs attrNames lists concatStringsSep;
+  inherit
+    (nixpkgs)
+    lib
+    ;
+  inherit
+    (builtins)
+    trace
+    ;
+  inherit
+    (nix-on-droid.lib)
+    nixOnDroidConfiguration
+    ;
+  inherit
+    (home-manager.lib)
+    homeManagerConfiguration
+    ;
+  inherit
+    (lib)
+    nixosSystem
+    mapAttrs'
+    nameValuePair
+    mkDefault
+    optionals
+    filterAttrs
+    attrNames
+    lists
+    concatStringsSep
+    ;
+
+  inherit
+    (myLib)
+    isDirectory
+    getEntries
+    ifFileExists
+    ;
 
   # Supported systems for your flake packages, shell, etc.
   forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux"];
-
-  # Utility to check if a given path points to a directory
-  isDirectory = attr: attr == "directory";
-  # Utility to check if a given path is a Nix file
-  isNixFile = name: strings.hasSuffix ".nix" name;
-
-  # Read directory contents from the provided path
-  getHosts = path: let
-    contents = readDir path;
-  in
-    # Keep only directories with a default.nix file and nix files themselves
-    attrsets.filterAttrs (
-      name: attr:
-        isDirectory attr || (isNixFile name && name != "default.nix")
-    )
-    contents;
-
-  # Function to check if a file exists at the specified path
-  ifFileExists = _path:
-    if pathExists _path
-    then _path
-    else throw "File not found: ${_path}";
 
   # Function to process directories for NixOS systems
   processDirNixOS = mapAttrs' (name: value:
@@ -95,13 +103,13 @@
     else {
       inherit name value;
     })
-  (getHosts path);
+  (getEntries path);
 
   # Function to process directories for Home Manager systems
   # This function now correctly scans the nested directory structure
   processDirHomeManager = let
     # 1. Get all architecture directories like { "x86_64-linux" = "directory"; ... }
-    archDirs = getHosts path;
+    archDirs = getEntries path;
 
     # 2. For each architecture, find the home-manager configs inside.
     listOfConfigs =
@@ -114,7 +122,7 @@
           then {}
           else let
             # Get all home-manager host entries in the architecture directory first...
-            allEntriesInArch = getHosts (path + "/${archName}");
+            allEntriesInArch = getEntries (path + "/${archName}");
 
             # ...then filter this set to keep ONLY the directories.
             hostDirsInArch = lib.attrsets.filterAttrs (name: value: isDirectory value) allEntriesInArch;
@@ -177,7 +185,7 @@
     else {
       inherit name value;
     })
-  (getHosts path);
+  (getEntries path);
 
   # Function to process template directories
   processDirTemplate = mapAttrs' (name: value:
@@ -194,7 +202,7 @@
     else {
       inherit name value;
     })
-  (getHosts path);
+  (getEntries path);
 
   # Process directory contents based on the type of system being configured
   # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems

@@ -19,13 +19,8 @@ Example:
   ListOfPrograms ? [],
   ...
 }: let
-  inherit (lib) lists concatStringsSep flatten;
-  inherit (builtins) trace pathExists;
-
-  ifFileExists = file:
-    if pathExists file
-    then import file
-    else throw "File not found: ${file}";
+  inherit (lib) lists concatStringsSep flatten ifFileExists;
+  inherit (builtins) trace;
 
   flattenListOfPrograms = flatten ListOfPrograms;
 

@@ -17,17 +17,34 @@
 
 Instead of importing each helper manually.
 */
-{lib, ...}: {
+{lib}: rec {
   # Core functions (system level)
   mkFlake = import ./mkFlake;
-  mkSystem = import ./mkSystem;
+  mkSystem = import ./mkSystem {
+    myLib = {
+      inherit
+        isDirectory
+        isNixFile
+        getEntries
+        ifFileExists
+        ;
+    };
+  };
   mkModule = import ./mkModule {inherit lib;};
   mkOverlay = import ./mkOverlays {inherit lib;};
-  mkDerivation = import ./mkDerivation;
+  mkDerivation = import ./mkDerivation {inherit lib;};
 
   # Helper functions (user level)
   mkImport = import ./mkImport {inherit lib;};
   mkRelativeToRoot = lib.path.append ../.; # relative path resolver from repo root
+
+  inherit
+    (import ./mkUtils {inherit lib;})
+    isDirectory
+    isNixFile
+    getEntries
+    ifFileExists
+    ;
 
   inherit
     (import ./mkImportPath {inherit lib;})
