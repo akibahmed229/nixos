@@ -37,7 +37,6 @@ Instead of importing each helper manually.
   # Helper functions (user level)
   mkImport = import ./mkImport {inherit lib;};
   mkRelativeToRoot = lib.path.append ../.; # relative path resolver from repo root
-
   inherit
     (import ./mkUtils {inherit lib;})
     isDirectory
@@ -45,12 +44,10 @@ Instead of importing each helper manually.
     getEntries
     ifFileExists
     ;
-
   inherit
     (import ./mkImportPath {inherit lib;})
     mkImportPath
     ;
-
   inherit
     (import ./mkScan {inherit lib;})
     mkScanPath # scan dir for nix files → [paths]
