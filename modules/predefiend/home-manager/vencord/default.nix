@@ -14,8 +14,8 @@
       checkUpdates = false;
       customTitleBar = false;
       disableMinSize = true;
-      minimizeToTray = false;
-      tray = false;
+      minimizeToTray = true;
+      tray = true;
       splashBackground = "#3c3836";
       splashColor = "#2a2725";
       splashTheming = true;
