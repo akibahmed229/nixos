@@ -31,7 +31,15 @@
   ...
 }: let
   # Importing necessary functions and utilities from the provided imports
-  inherit (lib) mapAttrs' attrsets removeSuffix isDirectory isNixFile getEntries;
+  inherit
+    (lib)
+    mapAttrs'
+    attrsets
+    removeSuffix
+    isDirectory
+    isNixFile
+    getEntries
+    ;
 
   # Process the overlays by importing them with the provided inputs and path
   processOverlays = name: value: let

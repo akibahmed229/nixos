@@ -12,7 +12,16 @@
                           - option2/default.nix
 */
 {lib}: path: let
-  inherit (lib) attrsets mapAttrs' removeSuffix isDirectory isNixFile getEntries mkRecursiveScanPaths;
+  inherit
+    (lib)
+    attrsets
+    mapAttrs'
+    removeSuffix
+    isDirectory
+    isNixFile
+    getEntries
+    mkRecursiveScanPaths
+    ;
 
   # Function to import modules from valid directories or files
   processModule = name: attr: let
