@@ -18,6 +18,7 @@ in {
       ListOfPrograms = [
         "stylix"
         "zsh"
+        "starship"
         "tmux"
         "yazi"
         "atuin"

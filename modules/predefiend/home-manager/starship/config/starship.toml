@@ -1,0 +1,109 @@
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+# Prompt format: directory, git, etc., ending with character
+format = """
+$directory$git_branch$git_status$git_metrics$package$nodejs$python$rust$golang$php$nix_shell$docker_context$kubernetes$aws$azure$gcloud$cmd_duration
+$character
+"""
+
+
+# --- CORE INFO ---
+[username]
+show_always = true
+style_user = "bold green"
+
+[hostname]
+ssh_only = false
+format = "[@$hostname]($style) "
+style = "dimmed purple"
+
+
+# Directory: Truncate to repo root or 3 levels
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold blue"
+
+# Git branch: Show branch name
+[git_branch]
+symbol = " "
+style = "bold green"
+
+# Git status: Symbols for changes
+[git_status]
+style = "bold yellow"
+
+# Git metrics: Added/removed lines
+[git_metrics]
+disabled = false
+
+# Package: Show version from package.json, Cargo.toml, etc.
+[package]
+disabled = false
+
+# Node.js: Triggered by package.json or .js files
+[nodejs]
+symbol = "⬢ "
+style = "bold green"
+
+# Python: Triggered by pyproject.toml or .py files
+[python]
+symbol = "🐍 "
+style = "bold yellow"
+
+# Rust: Triggered by Cargo.toml or .rs files
+[rust]
+symbol = "🦀 "
+style = "bold red"
+
+# Go: Triggered by go.mod or .go files
+[golang]
+symbol = " "
+style = "bold cyan"
+
+# PHP: Triggered by composer.json or .php files
+[php]
+symbol = "🐘 "
+style = "bold purple"
+
+# Docker context: Show if not default
+[docker_context]
+symbol = "🐳 "
+style = "bold blue"
+
+# Kubernetes: Show context/namespace
+[kubernetes]
+symbol = "☸️ "
+style = "bold cyan"
+disabled = false
+
+# AWS: Show region/profile
+[aws]
+symbol = "☁️ "
+style = "bold orange"
+
+# Azure: Show subscription
+[azure]
+symbol = "🔷 "
+style = "bold blue"
+
+# Google Cloud: Show project
+[gcloud]
+symbol = "☁️ "
+style = "bold blue"
+
+# Nix-shell: Indicator for Nix dev environments
+[nix_shell]
+symbol = "❄️ "
+style = "bold blue"
+
+# Command duration: Show if > 2s
+[cmd_duration]
+min_time = 2000
+style = "bold yellow"
+
+# Character: Success/failure indicator
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
