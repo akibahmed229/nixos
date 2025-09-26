@@ -1,9 +1,10 @@
 # Disable the blank line at the start of the prompt
-add_newline = false
+add_newline = true
 
 # Prompt format: directory, git, etc., ending with character
 format = """
-$directory$git_branch$git_status$git_metrics$package$nodejs$python$rust$golang$php$nix_shell$docker_context$kubernetes$aws$azure$gcloud$cmd_duration
+$username$hostname$directory$git_branch$git_status$git_metrics
+$package$nodejs$python$rust$golang$lua$php$nix_shell$docker_context$kubernetes$aws$azure$gcloud$cmd_duration
 $character
 """
 
@@ -21,9 +22,17 @@ style = "dimmed purple"
 
 # Directory: Truncate to repo root or 3 levels
 [directory]
-truncation_length = 3
-truncate_to_repo = true
+format = '[$path ]($style)'
 style = "bold blue"
+truncation_symbol = '…/'
+truncation_length = 3
+truncate_to_repo = false
+
+# [directory.substitutions]
+# 'Documents' = '󰈙'
+# 'Downloads' = ' '
+# 'Music' = ' '
+# 'Pictures' = ' '
 
 # Git branch: Show branch name
 [git_branch]
@@ -56,6 +65,10 @@ style = "bold yellow"
 [rust]
 symbol = "🦀 "
 style = "bold red"
+
+# Lua
+[lua]
+symbol = ' '
 
 # Go: Triggered by go.mod or .go files
 [golang]
