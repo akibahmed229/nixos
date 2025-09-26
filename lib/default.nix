@@ -18,7 +18,10 @@
 Instead of importing each helper manually.
 */
 {lib}: let
-  myUtils = import ./mkUtils {inherit lib;};
+  myUtils =
+    (import ./mkUtils {inherit lib;})
+    // (import ./mkImport {inherit lib;})
+    // (import ./mkScan {inherit lib;});
 in {
   # Core functions (system level)
   /*
@@ -47,17 +50,11 @@ in {
     getEntries
     ifFileExists
     forAllSystems
-    ;
-  inherit
-    (import ./mkScan {inherit lib;})
+    mkImport
+    mkImportModulesFrom
     mkScanPath # scan dir for nix files → [paths]
     mkRecursiveScanPaths # recursive scan dir → [paths]
     mkScanImportPath # scan + import dir → [modules]
     mkRecursiveScanImportPaths # recursive scan + import dir → [modules]
-    ;
-  inherit
-    (import ./mkImport {inherit lib;})
-    mkImport
-    mkImportModulesFrom
     ;
 }
