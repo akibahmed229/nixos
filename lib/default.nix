@@ -56,8 +56,8 @@ in {
     mkRecursiveScanImportPaths # recursive scan + import dir → [modules]
     ;
   inherit
-    (import ./mkImportModulesFrom {inherit lib;})
-    mkImportModulesFrom # it is a function
+    (import ./mkImport {inherit lib;})
+    mkImport
+    mkImportModulesFrom
     ;
-  mkImport = import ./mkImport {inherit lib;}; # it is a set
 }
