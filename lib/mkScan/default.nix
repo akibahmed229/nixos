@@ -30,7 +30,10 @@
 *   # => [ { ...module1 config... } { ...module2 config... } ]
 */
 {lib}: let
-  inherit (lib) mkImportPath;
+  inherit
+    (lib)
+    mkImportModulesFrom
+    ;
 
   # Scans a directory for .nix files and subdirs (excludes default/ and default.nix)
   mkScanPath = path:
@@ -63,10 +66,15 @@
     );
 
   # Like mkScanPath but imports each module with given args
-  mkScanImportPath = args: path: mkImportPath args path mkScanPath;
+  mkScanImportPath = args: path: mkImportModulesFrom args path mkScanPath;
 
   # Like mkRecursiveScanPaths but recursively imports each module with args
-  mkRecursiveScanImportPaths = args: path: mkImportPath args path mkRecursiveScanPaths;
+  mkRecursiveScanImportPaths = args: path: mkImportModulesFrom args path mkRecursiveScanPaths;
 in {
-  inherit mkScanPath mkRecursiveScanPaths mkScanImportPath mkRecursiveScanImportPaths;
+  inherit
+    mkScanPath
+    mkRecursiveScanPaths
+    mkScanImportPath
+    mkRecursiveScanImportPaths
+    ;
 }

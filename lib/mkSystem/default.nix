@@ -13,7 +13,7 @@
 
 * Final Output: The script returns the final list of valid systems using builtins.listToAttrs.
 */
-{myLib}: {
+{myUtils}: {
   # Default arguments for the function
   nixpkgs ? {},
   template ? false,
@@ -55,14 +55,12 @@
     ;
 
   inherit
-    (myLib)
+    (myUtils)
     isDirectory
     getEntries
     ifFileExists
+    forAllSystems
     ;
-
-  # Supported systems for your flake packages, shell, etc.
-  forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux"];
 
   # Function to process directories for NixOS systems
   processDirNixOS = mapAttrs' (name: value:

@@ -1,7 +1,7 @@
 /*
 TODO: Need to structure this file better. It's a bit messy right now.
 */
-{
+{lib}: {
   self,
   inputs,
 }: {
@@ -11,13 +11,19 @@ TODO: Need to structure this file better. It's a bit messy right now.
   mkNixOnDroidSystem ? {},
   mkTemplate ? {},
 }: let
-  inherit (inputs) nixpkgs;
-  inherit (nixpkgs) lib;
-  # Supported systems for your flake packages, shell, etc.
-  forAllSystems = lib.genAttrs ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
+  inherit
+    (inputs)
+    nixpkgs
+    ;
 
   # The function to generate the system configurations (derived from my custom lib helper function)
-  inherit (self.lib) mkDerivation mkOverlay mkModule;
+  inherit
+    (self.lib)
+    mkDerivation
+    mkOverlay
+    mkModule
+    forAllSystems
+    ;
 in {
   lib = import "${src}/lib" {lib = lib // self.lib;}; # Lib is a custom library of helper functions
 

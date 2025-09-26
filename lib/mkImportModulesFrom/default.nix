@@ -9,7 +9,7 @@ Example:
 */
 {lib}: let
   # Collects & normalizes modules into a list for imports in flake.nix.
-  mkImportPath = {...} @ args: path: mkScan:
+  mkImportModulesFrom = {...} @ args: path: mkScan:
     builtins.map
     (
       path: let
@@ -24,5 +24,5 @@ Example:
     )
     (mkScan path);
 in {
-  inherit mkImportPath;
+  inherit mkImportModulesFrom;
 }

@@ -19,8 +19,17 @@ Example:
   ListOfPrograms ? [],
   ...
 }: let
-  inherit (lib) lists concatStringsSep flatten ifFileExists;
-  inherit (builtins) trace;
+  inherit
+    (lib)
+    lists
+    concatStringsSep
+    flatten
+    ifFileExists
+    ;
+  inherit
+    (builtins)
+    trace
+    ;
 
   flattenListOfPrograms = flatten ListOfPrograms;
 

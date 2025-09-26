@@ -2,7 +2,7 @@
  Aggregates all custom helper functions for easier access.
 
     - Core (system-level): mkSystem, mkFlake, mkDerivation, mkOverlay, mkModule
-    - Helpers (user-level): mkImport, mkImportPath, mkScanPath, mkRecursiveScanPaths, etc.
+    - Helpers (user-level): mkImport, mkImportModulesFrom, mkScanPath, mkRecursiveScanPaths, etc.
 
  This acts as a single entrypoint so other parts of your flake can just do:
 
@@ -17,36 +17,36 @@
 
 Instead of importing each helper manually.
 */
-{lib}: rec {
+{lib}: let
+  myUtils = import ./mkUtils {inherit lib;};
+in {
   # Core functions (system level)
-  mkFlake = import ./mkFlake;
-  mkSystem = import ./mkSystem {
-    myLib = {
-      inherit
-        isDirectory
-        isNixFile
-        getEntries
-        ifFileExists
-        ;
-    };
-  };
+  /*
+  # NOTE:
+
+  # mkSystem function is created before other custom helper functions (getEntries, isDirectory, etc.)
+  # are defined in my library. Therefore, mkSystem has no knowledge of them.
+  # So if i want to use my custom helper function inside my mkSystem then i have to explecitely import (eg {inherit myUtils;})
+
+  # The reason it (lib) works for (mkImport, mkModule and all other helper function excluding mkSystem)  is likely because
+  # i passed the fully assembled library to it somewhere else, whereas mkSystem is being constructed with only the initial, basic lib.
+  */
+  mkFlake = import ./mkFlake {inherit lib;};
+  mkSystem = import ./mkSystem {inherit myUtils;};
   mkModule = import ./mkModule {inherit lib;};
   mkOverlay = import ./mkOverlays {inherit lib;};
   mkDerivation = import ./mkDerivation {inherit lib;};
 
   # Helper functions (user level)
-  mkImport = import ./mkImport {inherit lib;};
-  mkRelativeToRoot = lib.path.append ../.; # relative path resolver from repo root
   inherit
-    (import ./mkUtils {inherit lib;})
+    # Expose all utilities at the top level.
+    (myUtils)
     isDirectory
     isNixFile
+    mkRelativeToRoot
     getEntries
     ifFileExists
-    ;
-  inherit
-    (import ./mkImportPath {inherit lib;})
-    mkImportPath
+    forAllSystems
     ;
   inherit
     (import ./mkScan {inherit lib;})
@@ -55,4 +55,9 @@ Instead of importing each helper manually.
     mkScanImportPath # scan + import dir → [modules]
     mkRecursiveScanImportPaths # recursive scan + import dir → [modules]
     ;
+  inherit
+    (import ./mkImportModulesFrom {inherit lib;})
+    mkImportModulesFrom # it is a function
+    ;
+  mkImport = import ./mkImport {inherit lib;}; # it is a set
 }
