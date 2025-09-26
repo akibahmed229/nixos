@@ -7,7 +7,7 @@ return {
         keys = {
             { "<Tab>",      "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
             { "<S-Tab>",    "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
-            { "<leader>bd", "<Cmd>bdelete<CR>",             desc = "Delete Buffer" },
+            { "<leader>bd", "<Cmd>bdelete<CR>",             desc = "Delete Buffer" }
         },
         config = function()
             require("bufferline").setup({
@@ -16,9 +16,18 @@ return {
                     diagnostics = "nvim_lsp", -- shows LSP diagnostics in bufferline
                     separator_style = "thin", -- "slant" | "thick" | "thin"
                     show_buffer_close_icons = true,
-                    show_close_icon = false,
+                    show_close_icon = true,
                     always_show_bufferline = true,
                     indicator = { style = 'underline' }, -- highlights current buffer with underline
+                    offsets = {
+                        {
+                            filetype = "neo-tree",   -- detect the Neo-tree window
+                            text = "Explorer",       -- optional label (shown in the empty space)
+                            highlight = "Directory", -- highlight group for the label
+                            text_align = "left",     -- "left" | "center" | "right"
+                            separator = true,        -- add a vertical separator between neo-tree and buffers
+                        },
+                    },
                 },
                 highlights = {
                     -- change background/foreground for active buffer

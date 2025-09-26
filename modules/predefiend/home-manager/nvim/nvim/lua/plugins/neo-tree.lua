@@ -9,11 +9,11 @@ return {
         },
         lazy = false,                      -- neo-tree will lazily load itself
         keys = {
-            { "<leader>n", "<cmd>Neotree toggle reveal_force_cwd<CR>", desc = "Toggle Neo-tree" },
+            { "<leader>e", "<cmd>Neotree toggle<CR>", desc = "Toggle Neo-tree" },
         },
         config = function()
             require("neo-tree").setup({
-                close_if_last_window = true, -- auto close if it's the last window
+                close_if_last_window = false, -- auto close if it's the last window
                 filesystem = {
                     follow_current_file = {
                         enabled = true,                     -- syncs with your current buffer
