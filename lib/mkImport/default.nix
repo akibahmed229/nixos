@@ -61,5 +61,8 @@
     )
     (mkScan path);
 in {
-  inherit mkImport mkImportModulesFrom;
+  inherit
+    mkImport
+    mkImportModulesFrom
+    ;
 }
