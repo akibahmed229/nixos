@@ -1,6 +1,3 @@
-/*
-TODO: Need to structure this file better. It's a bit messy right now.
-*/
 {lib}: {
   self,
   inputs,
