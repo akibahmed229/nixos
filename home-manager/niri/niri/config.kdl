@@ -77,7 +77,7 @@ binds {
     MOD+PRINT                           hotkey-overlay-title="Take Screenshots: custom tool" { spawn-sh "screenshot"; }
     MOD+R                               hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
-    MOD+W                               hotkey-overlay-title="Set Wallpaper" { spawn-sh "wallpaper"; }
+    MOD+SHIFT+W                               hotkey-overlay-title="Set Wallpaper" { spawn-sh "wallpaper"; }
     MOD+V                               hotkey-overlay-title="Clip History" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen" { spawn-sh "qs ipc call lockscreen lock"; }
     MOD+CTRL+DELETE                     hotkey-overlay-title="Power Off Menu" { spawn-sh "qs ipc call wlogout toggle"; }
@@ -191,7 +191,7 @@ binds {
     // ─── Modes ───
     MOD+T                               { toggle-window-floating; }
     MOD+SHIFT+F                         { fullscreen-window; }
-    MOD+SHIFT+W                         { toggle-column-tabbed-display; }
+    MOD+W                         { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
     CTRL+SHIFT+1                        { screenshot; }
