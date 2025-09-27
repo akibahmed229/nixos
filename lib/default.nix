@@ -49,6 +49,8 @@ in {
     mkRelativeToRoot
     getEntries
     ifFileExists
+    ifPathExistsFn
+    ifPathExistsSet
     forAllSystems
     mkImport
     mkImportModulesFrom

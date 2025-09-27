@@ -24,6 +24,16 @@
     then _path
     else throw "File not found: ${_path}";
 
+  ifPathExistsFn = _path: mkFunc:
+    if (lib.pathExists _path)
+    then mkFunc _path
+    else {};
+
+  ifPathExistsSet = _path: mkSet:
+    if (lib.pathExists _path)
+    then mkSet
+    else {};
+
   forAllSystems = lib.genAttrs [
     "aarch64-linux"
     "i686-linux"
@@ -38,6 +48,8 @@ in {
     mkRelativeToRoot
     getEntries
     ifFileExists
+    ifPathExistsFn
+    ifPathExistsSet
     forAllSystems
     ;
 }

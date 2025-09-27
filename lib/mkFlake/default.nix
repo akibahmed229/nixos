@@ -23,41 +23,50 @@ TODO: Need to structure this file better. It's a bit messy right now.
     mkOverlay
     mkModule
     forAllSystems
+    ifPathExistsFn
+    ifPathExistsSet
     ;
 in {
   lib = import "${src}/lib" {lib = lib // self.lib;}; # Lib is a custom library of helper functions
 
   # Accessible through 'nix build', 'nix shell', "nix run", etc
-  packages = forAllSystems (
-    system:
-      mkDerivation {
-        inherit nixpkgs system;
-        path = src + "/pkgs";
-      }
-  );
+  packages =
+    ifPathExistsSet "${src}/pkgs"
+    (forAllSystems (
+      system:
+        mkDerivation {
+          inherit nixpkgs system;
+          path = src + "/pkgs";
+        }
+    ));
 
   # Your custom packages and modifications, exported as overlays
-  overlays = mkOverlay {
-    inherit inputs;
-    path = src + "/overlays";
-  };
+  overlays =
+    ifPathExistsSet "${src}/overlays"
+    (mkOverlay {
+      inherit inputs;
+      path = src + "/overlays";
+    });
+
   # available through 'nix fmt'. option: "alejandra" or "nixpkgs-fmt"
   formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {});
 
   # Reusable nixos & home-manager modules you might want to export
-  nixosModules = mkModule "${src}/modules/custom/nixos";
-  homeModules = mkModule "${src}/modules/custom/home-manager";
+  nixosModules = ifPathExistsFn "${src}/modules/custom/nixos" mkModule;
+  homeModules = ifPathExistsFn "${src}/modules/custom/home-manager" mkModule;
 
   # The nixos system configurations for the supported systems
   # available through "$ nixos-rebuild switch --flake .#host"
-  nixosConfigurations = mkNixOSSystem "${src}/hosts/nixos";
+  nixosConfigurations = ifPathExistsFn "${src}/hosts/nixos" mkNixOSSystem;
 
   # available through "$ home-manager switch --flake .#home"
-  homeConfigurations = mkHomeManagerSystem "${src}/hosts/homeManager";
+  homeConfigurations = ifPathExistsFn "${src}/hosts/homeManager" mkHomeManagerSystem;
 
   # available through "$ nix-on-droid switch --flake .#device"
-  nixOnDroidConfigurations = mkNixOnDroidSystem "${src}/hosts/nixOnDroid";
+  nixOnDroidConfigurations = ifPathExistsFn "${src}/hosts/nixOnDroid" mkNixOnDroidSystem;
 
   # available through "$ nix flake init -t .#template"
-  templates = mkTemplate "${src}/public/templates";
+  templates =
+    ifPathExistsFn "${src}/public/templates" mkTemplate
+    // ifPathExistsFn "${src}/devshells" mkTemplate;
 }
