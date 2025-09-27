@@ -61,42 +61,13 @@ in {
   # ── Schema for each user attrset imported from ./user/*/default.nix
   options.myusers = mkOption {
     type = types.listOf (types.submodule {
+      # 1. Custom options.
       options = {
-        name = mkOption {type = types.str;};
-        isNormalUser = mkOption {
-          type = types.bool;
-          default = true;
-        };
-        hashedPassword = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-        };
-        hashedPasswordFile = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-        };
-        extraGroups = mkOption {
-          type = types.listOf types.str;
-          default = [];
-        };
-        packages = mkOption {
-          type = types.listOf types.package;
-          default = [];
-        };
-        shell = mkOption {
-          type = types.package;
-          default = pkgs.bash;
-        };
-        openssh.authorizedKeys.keys = mkOption {
-          type = types.listOf types.str;
-          default = [];
-        };
         homeFile = mkOption {
           type = types.anything;
           default = [];
           description = "HM imports or inline objects";
         };
-        # enable flags
         enableSystemConf = mkOption {
           type = types.bool;
           default = false;
@@ -106,6 +77,9 @@ in {
           default = false;
         };
       };
+
+      # 2. Allow any other attributes to pass through without validation.
+      freeformType = types.anything;
     });
     default = [];
   };
