@@ -21,7 +21,7 @@
   hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
 
   # SSH or GPG keys (extend as needed)
-  keys = [];
+  openssh.authorizedKeys.keys = [];
 
   # User groups for permissions
   extraGroups = [

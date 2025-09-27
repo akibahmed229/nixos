@@ -45,7 +45,6 @@
     (lib)
     nixosSystem
     mapAttrs'
-    nameValuePair
     mkDefault
     optionals
     filterAttrs
@@ -71,7 +70,7 @@
       value = nixosSystem {
         system = forAllSystems (system: system);
         specialArgs =
-          (mapAttrs' (n: v: nameValuePair n v) specialArgs)
+          specialArgs
           // {
             system = {inherit name path;};
           };
@@ -92,7 +91,7 @@
                 backupFileExtension = "hm-bak"; # Set backup file extension
                 useGlobalPkgs = mkDefault true;
                 useUserPackages = mkDefault true;
-                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+                extraSpecialArgs = specialArgs;
               };
             }
           ];
@@ -161,7 +160,7 @@
             # add other overlays if needed
           ];
         };
-        extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+        extraSpecialArgs = specialArgs;
         modules =
           map ifFileExists [
             (path + "/configuration.nix") # Base configuration
@@ -172,7 +171,7 @@
               home-manager = {
                 backupFileExtension = "hm-bak"; # Set backup file extension
                 useGlobalPkgs = true; # Use global packages
-                extraSpecialArgs = mapAttrs' (n: v: nameValuePair n v) specialArgs;
+                extraSpecialArgs = specialArgs;
               };
             }
           ];

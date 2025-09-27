@@ -3,7 +3,6 @@
   config,
   pkgs,
   self,
-  user,
   ...
 }:
 with lib; let
@@ -76,10 +75,6 @@ in {
           type = types.nullOr types.str;
           default = null;
         };
-        keys = mkOption {
-          type = types.listOf types.str;
-          default = [];
-        };
         extraGroups = mkOption {
           type = types.listOf types.str;
           default = [];
@@ -91,6 +86,10 @@ in {
         shell = mkOption {
           type = types.package;
           default = pkgs.bash;
+        };
+        openssh.authorizedKeys.keys = mkOption {
+          type = types.listOf types.str;
+          default = [];
         };
         homeFile = mkOption {
           type = types.anything;
@@ -143,17 +142,18 @@ in {
     users = mkIf cfg.nixosUsers.enable {
       # required for password to be set via sops during system activation
       mutableUsers =
-        if (config.users.users.${user}.hashedPasswordFile != null)
+        if (config.users.users.${cfg.name}.hashedPasswordFile != null)
         then false
         else true;
 
       users = builtins.listToAttrs (map
         (u: {
           inherit (u) name;
-          value = {
-            inherit (u) isNormalUser hashedPassword hashedPasswordFile extraGroups packages shell;
-            openssh.authorizedKeys.keys = u.keys;
-          };
+          value = lib.attrsets.removeAttrs u [
+            "homeFile"
+            "enableSystemConf"
+            "enableHomeConf"
+          ];
         })
         (filterBy "enableSystemConf"));
     };
