@@ -31,18 +31,6 @@ in {
       ];
     };
 
-  nixpkgs = {
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-
-    # You can add overlays here
-    overlays = [
-      self.overlays.discord-overlay
-    ];
-  };
-
   home.packages = with pkgs; [
     # 1. Desktop Environment & Customization
     self.packages.${pkgs.system}.wallpaper # Wallpaper management tool.

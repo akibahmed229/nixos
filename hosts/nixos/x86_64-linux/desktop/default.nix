@@ -64,11 +64,6 @@ in {
       # Add overlays your own flake exports (from overlays and pkgs dir):
       # self.overlays.discord-overlay
     ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
   };
 
   # User management configuration ( custom module ) - see modules/custom/nixos/user

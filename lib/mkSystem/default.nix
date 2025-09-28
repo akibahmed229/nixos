@@ -45,7 +45,6 @@
     (lib)
     nixosSystem
     mapAttrs'
-    mkDefault
     optionals
     filterAttrs
     attrNames
@@ -62,45 +61,78 @@
     ;
 
   # Function to process directories for NixOS systems
-  processDirNixOS = mapAttrs' (name: value:
-    if isDirectory value
-    then {
-      inherit name;
-      # Import NixOS system configuration
-      value = nixosSystem {
-        system = forAllSystems (system: system);
-        specialArgs =
-          specialArgs
-          // {
-            system = {inherit name path;};
-          };
-        modules =
-          map ifFileExists [
-            (path + "/configuration.nix") # Base configuration
-            (path + "/${name}/hardware-configuration.nix") # Host-specific hardware configuration
-            (path + "/${name}") # Host-specific configuration
-          ]
-          ++
-          # Include Home Manager configuration if the system is integrated
-          optionals (home-manager != {})
-          [
-            home-manager.nixosModules.home-manager # Home Manager integration
+  processDirNixOS = let
+    # 1. Get all architecture directories like { "x86_64-linux" = "directory"; ... }
+    archDirs = getEntries path;
 
-            {
-              home-manager = {
-                backupFileExtension = "hm-bak"; # Set backup file extension
-                useGlobalPkgs = mkDefault true;
-                useUserPackages = mkDefault true;
-                extraSpecialArgs = specialArgs;
+    forAllSystemsAttrsets = forAllSystems (system: system);
+
+    # 2. For each architecture, find the nixos configs inside.
+    listOfConfigs =
+      lib.attrsets.mapAttrsToList (
+        archName: archValue:
+        # Only process directories & Valid system architectures
+          if
+            !(builtins.hasAttr archName (lib.attrsets.removeAttrs forAllSystemsAttrsets [
+              "aarch64-darwin"
+              "aarch64-linux"
+            ]))
+          then throw "Invalid system architecture type!!!: ${archName}"
+          else if !(isDirectory archValue)
+          then {}
+          else let
+            # Get all nixos host entries in the architecture directory first...
+            allEntriesInArch = getEntries (path + "/${archName}");
+
+            # ...then filter this set to keep ONLY the directories.
+            hostDirsInArch = lib.attrsets.filterAttrs (name: value: isDirectory value) allEntriesInArch;
+          in
+            lib.mapAttrs' (hostName: hostValue: {
+              name = hostName;
+              # Import NixOS system configuration
+              value = nixosSystem {
+                system = archName;
+                pkgs = import nixpkgs {
+                  system = archName;
+                  config = {allowUnfree = true;};
+                };
+                specialArgs =
+                  specialArgs
+                  // {
+                    system = {
+                      path = path + "/${archName}";
+                      name = hostName;
+                    };
+                  };
+                modules =
+                  map ifFileExists [
+                    (path + "/${archName}/configuration.nix") # Base configuration
+                    (path + "/${archName}/${hostName}/hardware-configuration.nix") # Host-specific hardware configuration
+                    (path + "/${archName}/${hostName}") # Host-specific configuration
+                  ]
+                  ++
+                  # Include Home Manager configuration if the system is integrated
+                  optionals (home-manager != {})
+                  [
+                    home-manager.nixosModules.home-manager # Home Manager integration
+
+                    {
+                      home-manager = {
+                        backupFileExtension = "hm-bak"; # Set backup file extension
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        extraSpecialArgs = specialArgs;
+                      };
+                    }
+                  ];
               };
-            }
-          ];
-      };
-    }
-    else {
-      inherit name value;
-    })
-  (getEntries path);
+            })
+            hostDirsInArch
+      )
+      archDirs;
+  in
+    # 3. Merge the list of attribute sets from all architectures into one big set.
+    lib.foldl lib.recursiveUpdate {} listOfConfigs;
 
   # Function to process directories for Home Manager systems
   # This function now correctly scans the nested directory structure

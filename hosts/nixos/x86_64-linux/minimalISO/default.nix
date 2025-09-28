@@ -19,7 +19,6 @@ in {
   # The default compression-level is (6) and takes too long on some machines (>30m). 3 takes <2m
   isoImage.squashfsCompression = "zstd -Xcompression-level 3";
 
-  nixpkgs.config.allowUnfree = true;
   # FIXME: Reference generic nix file
   nix = lib.mkDefault {
     settings.experimental-features = [

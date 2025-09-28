@@ -16,7 +16,7 @@
   imports =
     [
       inputs.disko.nixosModules.default
-      (import ../../../modules/predefiend/nixos/disko {device = lib.mkDefault devicename;})
+      (import ../../../../modules/predefiend/nixos/disko {device = lib.mkDefault devicename;})
     ]
     ++ [(modulesPath + "/installer/scan/not-detected.nix")];
 
