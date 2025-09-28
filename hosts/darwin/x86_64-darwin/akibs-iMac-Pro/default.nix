@@ -16,6 +16,7 @@
     name = user;
     home = "/Users/${user}";
   };
+  system.primaryUser = user;
 
   # ── Home Manager Setup ───────────────────────────────────────────────────────
   # Integrate Home Manager for this user.
