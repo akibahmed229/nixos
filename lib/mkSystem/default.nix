@@ -16,12 +16,14 @@
 {myUtils}: {
   # Default arguments for the function
   nixpkgs ? {},
-  template ? false,
-  homeConf ? false,
-  droidConf ? false,
-  specialArgs ? {},
   home-manager ? {},
+  darwin ? {},
   nix-on-droid ? {},
+  specialArgs ? {},
+  homeConf ? false,
+  darwinConf ? false,
+  droidConf ? false,
+  template ? false,
   ...
 }: path: let
   # Importing necessary functions and utilities from the provided imports
@@ -40,6 +42,10 @@
   inherit
     (home-manager.lib)
     homeManagerConfiguration
+    ;
+  inherit
+    (darwin.lib)
+    darwinSystem
     ;
   inherit
     (lib)
@@ -175,7 +181,50 @@
     };
   };
 
-  # ── 4. NixOnDroid Processor ────────────────────────────────────────────────
+  # ── 4. Nix Darwin Processor ────────────────────────────────────────────────
+  # This is also a simple call to the generic `processDir` function.
+  processDirNixDarwin = processDir {
+    # Nix Darwin configurations don't run on generic processor.
+    validSystems = lib.attrsets.removeAttrs (forAllSystems (system: system)) [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+    ];
+
+    # We provide the specific function to build a `nixDarwinConfiguration`.
+    mkConfig = {
+      archName,
+      hostName,
+    }: {
+      name = hostName;
+      value = darwinSystem {
+        system = archName;
+        pkgs = import nixpkgs {
+          system = archName;
+          config = {allowUnfree = true;};
+        };
+        extraSpecialArgs = specialArgs // {inherit hostName;};
+        modules =
+          map ifFileExists [
+            (path + "/${archName}/configuration.nix")
+            (path + "/${archName}/${hostName}")
+          ]
+          ++ optionals (home-manager != {}) [
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                backupFileExtension = "hm-bak";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = specialArgs;
+              };
+            }
+          ];
+      };
+    };
+  };
+
+  # ── 5. NixOnDroid Processor ────────────────────────────────────────────────
   # Function to process directories for Nix-on-Droid systems
   processDirNixOnDroid = mapAttrs' (name: value:
     if isDirectory value
@@ -214,7 +263,7 @@
     })
   (getEntries path);
 
-  # ── 5. Template Processor ────────────────────────────────────────────────
+  # ── 6. Template Processor ────────────────────────────────────────────────
   # Function to process template directories
   processDirTemplate = mapAttrs' (name: value:
     if isDirectory value
@@ -233,10 +282,12 @@
   (getEntries path);
 
   # Process directory contents based on the type of system being configured
-  # Check if we are processing Home Manager, Nix-on-Droid, or NixOS systems
+  # Check if we are processing Home Manager, Nix Darwin, Nix-on-Droid, or NixOS systems
   processed =
     if homeConf
     then processDirHomeManager
+    else if darwinConf
+    then processDirNixDarwin
     else if droidConf
     then processDirNixOnDroid
     else if template

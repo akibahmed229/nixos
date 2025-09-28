@@ -38,6 +38,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Manage your macOS using Nix
+    darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # nix-on-droid is a project to run Nix on Android
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/master";

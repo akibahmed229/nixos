@@ -5,6 +5,7 @@
   src ? throw "src is required",
   mkNixOSSystem ? {},
   mkHomeManagerSystem ? {},
+  mkNixDarwinSystem ? {},
   mkNixOnDroidSystem ? {},
   mkTemplate ? {},
 }: let
@@ -53,13 +54,16 @@ in {
   homeModules = ifPathExistsFn "${src}/modules/custom/home-manager" mkModule;
 
   # The nixos system configurations for the supported systems
-  # available through "$ nixos-rebuild switch --flake .#host"
+  # available through "$ nixos-rebuild switch --flake .#<host>"
   nixosConfigurations = ifPathExistsFn "${src}/hosts/nixos" mkNixOSSystem;
 
-  # available through "$ home-manager switch --flake .#home"
+  # available through "$ home-manager switch --flake .#<home>"
   homeConfigurations = ifPathExistsFn "${src}/hosts/homeManager" mkHomeManagerSystem;
 
-  # available through "$ nix-on-droid switch --flake .#device"
+  # available through "$ darwin-rebuild build --flake .#<darwin>"
+  darwinConfigurations = ifPathExistsFn "${src}/hosts/darwin" mkNixDarwinSystem;
+
+  # available through "$ nix-on-droid switch --flake .#<device>"
   nixOnDroidConfigurations = ifPathExistsFn "${src}/hosts/nixOnDroid" mkNixOnDroidSystem;
 
   # available through "$ nix flake init -t .#template"
