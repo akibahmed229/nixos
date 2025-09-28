@@ -60,12 +60,6 @@
     EDITOR = "nvim";
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
-
   # Set up nix for flakes
   nix = {
     extraOptions = ''

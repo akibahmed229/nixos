@@ -4,7 +4,6 @@
 # Dconf settings can be found by running "$ dconf watch /"
 */
 {
-  lib,
   pkgs,
   theme,
   self,
@@ -17,11 +16,6 @@ in {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
     ListOfPrograms = ["firefox" "spicetify" "zsh" "tmux" "lf" "vencord"];
   };
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "spotify"
-    ];
 
   dconf.settings = {
     "org/gnome/shell" = {
