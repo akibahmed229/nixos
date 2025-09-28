@@ -203,7 +203,14 @@
           system = archName;
           config = {allowUnfree = true;};
         };
-        extraSpecialArgs = specialArgs // {inherit hostName;};
+        specialArgs =
+          specialArgs
+          // {
+            system = {
+              path = path + "/${archName}";
+              name = hostName;
+            };
+          };
         modules =
           map ifFileExists [
             (path + "/${archName}/configuration.nix")

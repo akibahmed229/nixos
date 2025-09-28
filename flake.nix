@@ -116,6 +116,7 @@
     self, # The special input named self refers to the outputs and source tree of this flake
     nixpkgs,
     home-manager,
+    darwin,
     nix-on-droid,
     ...
     # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
@@ -144,6 +145,11 @@
       mkHomeManagerSystem = mkSystem {
         inherit nixpkgs home-manager;
         homeConf = true;
+        specialArgs = {inherit inputs self user theme state-version;};
+      };
+      mkNixDarwinSystem = mkSystem {
+        inherit nixpkgs darwin home-manager;
+        darwinConf = true;
         specialArgs = {inherit inputs self user theme state-version;};
       };
       mkNixOnDroidSystem = mkSystem {
