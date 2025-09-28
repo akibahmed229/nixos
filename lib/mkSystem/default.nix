@@ -199,6 +199,10 @@
       name = hostName;
       value = darwinSystem {
         system = archName;
+        pkgs = import nixpkgs {
+          system = archName;
+          config = {allowUnfree = true;};
+        };
         specialArgs =
           specialArgs
           // {
