@@ -52,9 +52,6 @@
 
   # ── Security ─────────────────────────────────────────────────────────────────
 
-  # Enable the macOS firewall.
-  security.firewall.enable = true;
-
   # You can add more security settings here.
   # For example, to enable Gatekeeper:
   # security.gatekeeper.enable = true;
