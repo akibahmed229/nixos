@@ -31,7 +31,6 @@
 
   # Set zsh as the default shell.
   programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
 
   # ── Homebrew ─────────────────────────────────────────────────────────────────
   # Enable and configure Homebrew for GUI apps (casks) and CLI tools (brews).
