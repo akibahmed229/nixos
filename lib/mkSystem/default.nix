@@ -196,7 +196,7 @@
       archName,
       hostName,
     }: {
-      name = hostName;
+      name = archName;
       value = darwinSystem {
         system = archName;
         pkgs = import nixpkgs {
