@@ -91,7 +91,9 @@
               hostName: hostValue:
               # This is the key: we call the function passed as an argument
               # to generate the final configuration value.
-                mkConfig {inherit archName hostName;}
+                if !(isDirectory hostValue)
+                then {}
+                else mkConfig {inherit archName hostName;}
             )
             hostDirsInArch
       )
