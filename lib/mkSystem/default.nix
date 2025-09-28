@@ -51,6 +51,7 @@
     lists
     concatStringsSep
     ;
+
   inherit
     (myUtils)
     isDirectory
@@ -59,121 +60,124 @@
     forAllSystems
     ;
 
-  # ── 1. Generic Directory Processor ───────────────────────────────────────────
-  # This new function contains all the shared logic for iterating through
-  # architectures and hosts. It takes a `mkConfig` function as an argument
-  # to handle the parts that are different.
-  processDir = {
-    validSystems ? (forAllSystems (system: system)),
-    mkConfig,
-  }: let
-    # Get all architecture directories like { "x86_64-linux" = "directory"; ... }
+  # Function to process directories for NixOS systems
+  processDirNixOS = let
+    # 1. Get all architecture directories like { "x86_64-linux" = "directory"; ... }
     archDirs = getEntries path;
 
-    # For each architecture, find the configs inside.
+    forAllSystemsAttrsets = forAllSystems (system: system);
+
+    # 2. For each architecture, find the nixos configs inside.
     listOfConfigs =
       lib.attrsets.mapAttrsToList (
         archName: archValue:
-        # Only process directories & valid system architectures
-          if !(builtins.hasAttr archName validSystems)
-          then throw "Invalid or unsupported system architecture type for this configuration: ${archName}"
+        # Only process directories & Valid system architectures
+          if
+            !(builtins.hasAttr archName (lib.attrsets.removeAttrs forAllSystemsAttrsets [
+              "aarch64-darwin"
+              "x86_64-darwin"
+            ]))
+          then throw "Invalid system architecture type!!!: ${archName}"
           else if !(isDirectory archValue)
           then {}
           else let
-            # Get all host entries in the architecture directory first...
+            # Get all nixos host entries in the architecture directory first...
             allEntriesInArch = getEntries (path + "/${archName}");
 
             # ...then filter this set to keep ONLY the directories.
             hostDirsInArch = lib.attrsets.filterAttrs (name: value: isDirectory value) allEntriesInArch;
           in
-            # Map over each host and apply the specific `mkConfig` function
-            lib.mapAttrs' (
-              hostName: hostValue:
-              # This is the key: we call the function passed as an argument
-              # to generate the final configuration value.
-                mkConfig {inherit archName hostName;}
-            )
+            lib.mapAttrs' (hostName: hostValue: {
+              name = hostName;
+              # Import NixOS system configuration
+              value = nixosSystem {
+                system = archName;
+                pkgs = import nixpkgs {
+                  system = archName;
+                  config = {allowUnfree = true;};
+                };
+                specialArgs =
+                  specialArgs
+                  // {
+                    system = {
+                      path = path + "/${archName}";
+                      name = hostName;
+                    };
+                  };
+                modules =
+                  map ifFileExists [
+                    (path + "/${archName}/configuration.nix") # Base configuration
+                    (path + "/${archName}/${hostName}/hardware-configuration.nix") # Host-specific hardware configuration
+                    (path + "/${archName}/${hostName}") # Host-specific configuration
+                  ]
+                  ++
+                  # Include Home Manager configuration if the system is integrated
+                  optionals (home-manager != {})
+                  [
+                    home-manager.nixosModules.home-manager # Home Manager integration
+
+                    {
+                      home-manager = {
+                        backupFileExtension = "hm-bak"; # Set backup file extension
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        extraSpecialArgs = specialArgs;
+                      };
+                    }
+                  ];
+              };
+            })
             hostDirsInArch
       )
       archDirs;
   in
-    # Merge the list of attribute sets from all architectures into one big set.
+    # 3. Merge the list of attribute sets from all architectures into one big set.
     lib.foldl lib.recursiveUpdate {} listOfConfigs;
 
-  # ── 2. NixOS System Processor ────────────────────────────────────────────────
-  # This is now a simple call to the generic `processDir` function.
-  processDirNixOS = processDir {
-    # NixOS configurations don't run on Darwin.
-    validSystems = lib.attrsets.removeAttrs (forAllSystems (system: system)) [
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
+  # Function to process directories for Home Manager systems
+  # This function now correctly scans the nested directory structure
+  processDirHomeManager = let
+    # 1. Get all architecture directories like { "x86_64-linux" = "directory"; ... }
+    archDirs = getEntries path;
 
-    # We provide the specific function to build a `nixosSystem`.
-    mkConfig = {
-      archName,
-      hostName,
-    }: {
-      name = hostName;
-      value = nixosSystem {
-        system = archName;
-        pkgs = import nixpkgs {
-          system = archName;
-          config = {allowUnfree = true;};
-        };
-        specialArgs =
-          specialArgs
-          // {
-            system = {
-              path = path + "/${archName}";
+    # 2. For each architecture, find the home-manager configs inside.
+    listOfConfigs =
+      lib.attrsets.mapAttrsToList (
+        archName: archValue:
+        # Only process directories & Valid system architectures
+          if !(builtins.hasAttr archName (forAllSystems (system: system)))
+          then throw "Invalid system architecture type!!!: ${archName}"
+          else if !(isDirectory archValue)
+          then {}
+          else let
+            # Get all home-manager host entries in the architecture directory first...
+            allEntriesInArch = getEntries (path + "/${archName}");
+
+            # ...then filter this set to keep ONLY the directories.
+            hostDirsInArch = lib.attrsets.filterAttrs (name: value: isDirectory value) allEntriesInArch;
+          in
+            lib.mapAttrs' (hostName: hostValue: {
               name = hostName;
-            };
-          };
-        modules =
-          map ifFileExists [
-            (path + "/${archName}/configuration.nix")
-            (path + "/${archName}/${hostName}/hardware-configuration.nix")
-            (path + "/${archName}/${hostName}")
-          ]
-          ++ optionals (home-manager != {}) [
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                backupFileExtension = "hm-bak";
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = specialArgs;
+              # Import Home-Manager Configuration
+              value = homeManagerConfiguration {
+                pkgs = import nixpkgs {
+                  system = archName; # Use the architecture from the parent directory
+                  config = {allowUnfree = true;};
+                };
+                extraSpecialArgs = specialArgs // {hostname = hostName;};
+                modules = map ifFileExists [
+                  (path + "/${archName}/home.nix") # Base config for this architecture
+                  (path + "/${archName}/${hostName}") # Host-specific config
+                ];
               };
-            }
-          ];
-      };
-    };
-  };
+            })
+            hostDirsInArch
+      )
+      archDirs;
+  in
+    # 3. Merge the list of attribute sets from all architectures into one big set.
+    lib.foldl lib.recursiveUpdate {} listOfConfigs;
 
-  # ── 3. Home Manager Processor ────────────────────────────────────────────────
-  # This is also a simple call to the generic `processDir` function.
-  processDirHomeManager = processDir {
-    # We provide the specific function to build a `homeManagerConfiguration`.
-    mkConfig = {
-      archName,
-      hostName,
-    }: {
-      name = hostName;
-      value = homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = archName;
-          config = {allowUnfree = true;};
-        };
-        extraSpecialArgs = specialArgs // {inherit hostName;};
-        modules = map ifFileExists [
-          (path + "/${archName}/home.nix")
-          (path + "/${archName}/${hostName}")
-        ];
-      };
-    };
-  };
-
-  # ── 4. NixOnDroid Processor ────────────────────────────────────────────────
   # Function to process directories for Nix-on-Droid systems
   processDirNixOnDroid = mapAttrs' (name: value:
     if isDirectory value
@@ -212,7 +216,6 @@
     })
   (getEntries path);
 
-  # ── 5. Template Processor ────────────────────────────────────────────────
   # Function to process template directories
   processDirTemplate = mapAttrs' (name: value:
     if isDirectory value
