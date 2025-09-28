@@ -75,7 +75,7 @@
           if
             !(builtins.hasAttr archName (lib.attrsets.removeAttrs forAllSystemsAttrsets [
               "aarch64-darwin"
-              "aarch64-linux"
+              "x86_64-darwin"
             ]))
           then throw "Invalid system architecture type!!!: ${archName}"
           else if !(isDirectory archValue)
