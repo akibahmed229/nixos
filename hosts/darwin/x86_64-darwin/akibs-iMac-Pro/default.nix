@@ -15,8 +15,6 @@
   users.users.${user} = {
     name = user;
     home = "/Users/${user}";
-    # You can add groups here if needed, e.g.:
-    extraGroups = ["admin" "wheel"];
   };
 
   # ── Home Manager Setup ───────────────────────────────────────────────────────
