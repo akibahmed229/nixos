@@ -24,6 +24,22 @@
     coreutils # Provides GNU utilities like `gsha256sum`
     wget
     vim
+
+    # Development
+    neovim
+    lazygit
+    ripgrep # A better grep
+    fd # A better find
+
+    # Shell tools
+    eza # A modern `ls`
+    bat # A modern `cat` with syntax highlighting
+    zoxide # A smarter `cd` command
+
+    # Utilities
+    htop # System monitor
+    tldr # Simplified man pages
+    jq # JSON processor
   ];
 
   # ── User Environment ─────────────────────────────────────────────────────────
