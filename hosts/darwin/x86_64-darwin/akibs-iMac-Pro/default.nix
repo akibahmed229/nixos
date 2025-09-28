@@ -8,7 +8,6 @@
 
   # Set the hostname and computer name.
   networking.hostName = "akibs-imac-pro";
-  system.computerName = "Akib's iMac Pro";
 
   # ── User Account ─────────────────────────────────────────────────────────────
   # Define your user account on this machine.
