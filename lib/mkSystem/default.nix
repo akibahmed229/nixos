@@ -125,10 +125,6 @@
       name = hostName;
       value = nixosSystem {
         system = archName;
-        pkgs = import nixpkgs {
-          system = archName;
-          config = {allowUnfree = true;};
-        };
         specialArgs =
           specialArgs
           // {
