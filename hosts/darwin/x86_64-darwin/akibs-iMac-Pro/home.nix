@@ -41,7 +41,7 @@
   # ── Shell (Zsh) ──────────────────────────────────────────────────────────────
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
       l = "eza -l";
