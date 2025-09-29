@@ -155,7 +155,7 @@ in {
     gettext # GNU internationalization and localization library.
     python313 # Python programming language.
     python313Packages.uv # python uv pkgs manager.
-    nodejs_22 # JavaScript runtime.
+    nodejs_24 # JavaScript runtime.
     rustc # Rust programming language and tools.
     cargo # Rust package manager.
     # Development environment tools.
@@ -167,7 +167,7 @@ in {
     android-studio
     android-tools
     android-udev-rules
-    jdk21 # Java Development Kit
+    jdk24 # Java Development Kit
     jetbrains.pycharm-community # Python IDE.
     jetbrains.idea-community # Java IDE.
     postman # API development environment.

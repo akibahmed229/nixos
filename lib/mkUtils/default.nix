@@ -34,13 +34,19 @@
     then mkSet
     else {};
 
-  forAllSystems = lib.genAttrs [
-    "aarch64-linux"
-    "i686-linux"
-    "x86_64-linux"
-    "aarch64-darwin"
-    "x86_64-darwin"
-  ];
+  forAllSystems = perSystem: let
+    # --- Customize your list of supported systems here ---
+    supportedSystems = [
+      "x86_64-linux" # For standard PCs and servers
+      "i686-linux" # For 32-bit PCs and servers system
+      "aarch64-linux" # For Raspberry Pi, some cloud servers, etc.
+      "x86_64-darwin" # For Intel-based Macs
+      "aarch64-darwin" # For Apple Silicon (M1/M2/M3) Macs
+    ];
+  in
+    # This function takes the list of systems and your logic (`perSystem`)
+    # and generates the final attribute set.
+    lib.genAttrs supportedSystems perSystem;
 in {
   inherit
     isDirectory
