@@ -115,8 +115,9 @@
       # given the users in this list the right to specify additional substituters via:
       #    1. `nixConfig.substituters` in `flake.nix`
       trusted-users = [user];
-
+      accept-flake-config = true;
       experimental-features = ["nix-command" "flakes"];
+      warn-dirty = false;
     };
   };
 }

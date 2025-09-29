@@ -6,6 +6,7 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
     accept-flake-config = true # Enable substitution from flake.nix
+    warn-dirty = false
   '';
 
   # Set your time zone

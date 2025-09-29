@@ -21,7 +21,7 @@ in {
 
   # User management configuration ( custom module ) - see modules/custom/nixos/user
   setUser = {
-    name = "${user}";
+    name = user;
     usersPath = ./users/.;
     nixosUsers.enable = true;
     homeUsers.enable = true;
@@ -35,7 +35,6 @@ in {
   # (Custom nixos modules)
   grub.enable = lib.mkForce false;
   networking = {
-    hostName = lib.mkDefault system.name;
     wireless.enable = false;
   };
 

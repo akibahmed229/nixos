@@ -20,7 +20,7 @@
   grub.enable = true;
 
   # networking options
-  networking.hostName = "${system.name}"; # Define your hostname.
+  networking.hostName = system.name; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -117,14 +117,14 @@
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
+
+      warn-dirty = false;
+      accept-flake-config = true; # Enable substitution from flake.nix
+      keep-outputs = true; # Keep build outputs for debugging purposes
+      keep-derivations = true;
     };
 
     extraOptions = ''
-      accept-flake-config = true # Enable substitution from flake.nix
-
-      keep-outputs = true # Keep build outputs for debugging purposes
-      keep-derivations = true
-
       #  free up to 5GiB whenever there is less than 10GiB left:
       min-free = ${toString (10240 * 1024 * 1024)}
       max-free = ${toString (5120 * 1024 * 1024)}
@@ -147,6 +147,7 @@
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
+
   # This will additionally add your inputs to the system's legacy channels
   # Making legacy nix commands consistent as well, awesome!
   environment.etc =
@@ -223,6 +224,6 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    stateVersion = "${state-version}"; # Did you read the comment?
+    stateVersion = state-version; # Did you read the comment?
   };
 }

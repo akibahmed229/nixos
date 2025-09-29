@@ -69,7 +69,7 @@ in {
   # User management configuration ( custom module ) - see modules/custom/nixos/user
   # Per-system user configuration
   setUser = {
-    name = "${user}";
+    name = user;
     usersPath = ./users/.;
     nixosUsers.enable = true;
     homeUsers.enable = true;

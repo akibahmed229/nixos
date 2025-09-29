@@ -60,7 +60,6 @@ in {
   };
 
   networking = {
-    hostName = lib.mkDefault system.name;
     wireless.enable = false;
   };
 

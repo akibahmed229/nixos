@@ -17,7 +17,7 @@
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
-    username = "${user}";
+    username = user;
     homeDirectory = "/home/${user}";
 
     shell.enableZshIntegration = true;
@@ -28,7 +28,7 @@
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
-    stateVersion = "${state-version}"; # Please read the comment before changing.
+    stateVersion = state-version; # Please read the comment before changing.
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -62,11 +62,14 @@
 
   # Set up nix for flakes
   nix = {
+    settings = {
+      warn-dirty = false;
+      trusted-users = config.home.username;
+      accept-flake-config = true;
+    };
+
     extraOptions = ''
       experimental-features = nix-command flakes
-      # Enable substitution from flake.nix
-      accept-flake-config = true
-      trusted-users = ${config.home.username}
     '';
     package = pkgs.nix;
 
