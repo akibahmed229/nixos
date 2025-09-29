@@ -18,7 +18,6 @@ in {
       "direnv"
       "fastfetch"
       "nvim"
-      "firefox"
     ];
   };
 
