@@ -17,6 +17,7 @@ in {
       "atuin"
       "direnv"
       "fastfetch"
+      "nvim"
     ];
   };
 
@@ -39,7 +40,6 @@ in {
   # Install personal command-line packages here.
   home.packages = with pkgs; [
     # Development
-    neovim
     lazygit
     ripgrep # A better grep
     fd # A better find

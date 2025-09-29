@@ -80,7 +80,6 @@
     git
     coreutils # Provides GNU utilities like `gsha256sum`
     wget
-    neovim
   ];
 
   # ── User Environment ─────────────────────────────────────────────────────────
