@@ -9,8 +9,6 @@
   networking.hostName = system.name;
 
   # ── User Account ─────────────────────────────────────────────────────────────
-  # Define your user account on this machine.
-  # Replace 'akib' with your actual username if it's different.
   users.users.${user} = {
     name = user;
     home = "/Users/${user}";

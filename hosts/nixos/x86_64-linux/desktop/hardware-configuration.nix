@@ -145,6 +145,9 @@
   # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f0u11u2.useDHCP = lib.mkDefault true;
 
-  powerManagement.cpuFreqGovernor = lib.mkOverride 1 "performance";
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = lib.mkForce "performance";
+  };
   hardware.cpu.intel.updateMicrocode = lib.mkForce config.hardware.enableRedistributableFirmware;
 }
