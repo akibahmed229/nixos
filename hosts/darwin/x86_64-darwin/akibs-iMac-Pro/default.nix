@@ -120,7 +120,6 @@
     "firefox"
     "visual-studio-code"
     "iterm2"
-    "ghostty"
     "spotify"
     "discord"
     "rectangle" # A great window manager

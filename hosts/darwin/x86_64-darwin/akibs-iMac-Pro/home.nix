@@ -67,6 +67,12 @@ in {
     };
   };
 
+  # enable ghostty
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   # An example of linking a file from your flake into your home directory.
   # This is the best way to manage entire config directories.
   # For this to work, you would create a file at:
