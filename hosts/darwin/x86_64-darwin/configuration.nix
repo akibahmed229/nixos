@@ -70,7 +70,7 @@
     ];
   };
 
-  programs.nix-index.enable = true;
+  # programs.nix-index.enable = true;
 
   # Set your timezone.
   time.timeZone = "Asia/Dhaka";
