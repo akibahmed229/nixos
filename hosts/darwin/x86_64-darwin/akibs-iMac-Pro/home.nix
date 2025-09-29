@@ -18,6 +18,7 @@ in {
       "direnv"
       "fastfetch"
       "nvim"
+      "alacritty"
     ];
   };
 
@@ -65,12 +66,6 @@ in {
       init.defaultBranch = "main";
       core.editor = "nvim";
     };
-  };
-
-  # enable ghostty
-  programs.ghostty = {
-    enable = true;
-    enableZshIntegration = true;
   };
 
   # An example of linking a file from your flake into your home directory.
