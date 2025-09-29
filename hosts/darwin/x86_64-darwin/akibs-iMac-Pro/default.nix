@@ -117,7 +117,7 @@
   # ── GUI Applications via Homebrew Casks ──────────────────────────────────────
   # Install applications that are specific to this iMac.
   homebrew.casks = [
-    "firefox"
+    # "firefox"
     "visual-studio-code"
     "iterm2"
     "spotify"
