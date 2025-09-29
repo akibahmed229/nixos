@@ -409,7 +409,7 @@
         userContent = builtins.readFile ./userContent.css;
 
         extensions = {
-          packages = with inputs.firefox-addons.packages."x86_64-linux"; [
+          packages = with inputs.firefox-addons.packages.${pkgs.system}; [
             # bitwarden
             # tridactyl
             # gsconnect
