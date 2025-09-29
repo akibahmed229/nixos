@@ -1,10 +1,11 @@
 {
-  config,
   pkgs,
+  state-version,
+  user,
   ...
 }: {
   # It's crucial to set this.
-  system.stateVersion = 4;
+  system.stateVersion = state-version;
 
   # ── Global Settings ──────────────────────────────────────────────────────────
   # System-wide settings and packages.
@@ -12,7 +13,13 @@
   # Enable flakes and the new nix command.
   nix = {
     enable = false;
-    settings.experimental-features = ["nix-command" "flakes"];
+    settings = {
+      # given the users in this list the right to specify additional substituters via:
+      #    1. `nixConfig.substituters` in `flake.nix`
+      trusted-users = [user];
+
+      experimental-features = ["nix-command" "flakes"];
+    };
   };
 
   # Set your timezone.
@@ -23,14 +30,11 @@
     git
     coreutils # Provides GNU utilities like `gsha256sum`
     wget
-    vim
+    neovim
   ];
 
   # ── User Environment ─────────────────────────────────────────────────────────
   # Define default settings for users.
-
-  # Set zsh as the default shell.
-  programs.zsh.enable = true;
 
   # ── Homebrew ─────────────────────────────────────────────────────────────────
   # Enable and configure Homebrew for GUI apps (casks) and CLI tools (brews).

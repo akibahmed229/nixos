@@ -1,13 +1,12 @@
-{user, ...}: {
-  # Import the base Darwin configuration.
-  imports = [
-    ../configuration.nix
-  ];
-
+{
+  user,
+  system,
+  ...
+}: {
   # ── Host-Specific Settings ───────────────────────────────────────────────────
 
   # Set the hostname and computer name.
-  networking.hostName = "akibs-imac-pro";
+  networking.hostName = system.name;
 
   # ── User Account ─────────────────────────────────────────────────────────────
   # Define your user account on this machine.
@@ -37,5 +36,5 @@
   ];
 
   # You can also install specific command-line tools for this machine.
-  # homebrew.brews = [ "imagemagick" ];
+  homebrew.brews = ["imagemagick"];
 }

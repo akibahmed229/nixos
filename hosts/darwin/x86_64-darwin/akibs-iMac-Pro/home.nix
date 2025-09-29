@@ -1,8 +1,25 @@
 {
   pkgs,
   user,
+  self,
   ...
-}: {
+}: let
+  inherit (self.lib) mkImport mkRelativeToRoot;
+in {
+  # imports from the predefiend modules folder
+  imports = mkImport {
+    path = mkRelativeToRoot "modules/predefiend/home-manager";
+    ListOfPrograms = [
+      "zsh"
+      "starship"
+      "tmux"
+      "yazi"
+      "atuin"
+      "direnv"
+      "fastfetch"
+    ];
+  };
+
   # ── Meta ─────────────────────────────────────────────────────────────────────
   # Let Home Manager manage itself.
   programs.home-manager.enable = true;
@@ -37,33 +54,6 @@
     tldr # Simplified man pages
     jq # JSON processor
   ];
-
-  # ── Shell (Zsh) ──────────────────────────────────────────────────────────────
-  programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      l = "eza -l";
-      la = "eza -la";
-      lt = "eza --tree --level=2";
-      n = "nvim";
-    };
-    # You can add custom Zsh configuration here.
-    initExtra = ''
-      # Custom Zsh settings go here
-    '';
-  };
-
-  # Enable Starship, a modern and customizable prompt.
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-    # You can configure starship directly in Nix...
-    # settings = {
-    #   add_newline = false;
-    # };
-  };
 
   # ── Dotfiles & Programs ──────────────────────────────────────────────────────
   # You can manage your dotfiles and configure programs here.
