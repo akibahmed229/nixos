@@ -77,7 +77,7 @@
 
         ## Default shell for general Data Science (CPU only)
         # To use: `nix develop`
-        devShells.default = pkgs.mkShell {
+        devShells.${system}.default = pkgs.mkShell {
           name = "ds-shell-${system}";
           packages = systemLibs ++ [pyEnv];
 
@@ -101,7 +101,7 @@
 
         ## GPU-enabled shell for ML/AI
         # To use: `nix develop .#gpu`
-        devShells.gpu = pkgs.mkShell {
+        devShells.${system}.gpu = pkgs.mkShell {
           name = "ml-gpu-shell-${system}";
           packages = systemLibs ++ cudaLibs ++ [pyEnvGpu];
 
