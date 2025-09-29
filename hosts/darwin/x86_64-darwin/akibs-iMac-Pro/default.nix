@@ -123,6 +123,7 @@
     "spotify"
     "discord"
     "rectangle" # A great window manager
+    "kitty"
   ];
 
   # You can also install specific command-line tools for this machine.

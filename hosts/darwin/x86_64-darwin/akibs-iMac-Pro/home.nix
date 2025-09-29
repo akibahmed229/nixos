@@ -17,7 +17,6 @@ in {
       "atuin"
       "direnv"
       "fastfetch"
-      "kitty"
     ];
   };
 
