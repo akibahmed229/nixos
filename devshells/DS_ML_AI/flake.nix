@@ -3,18 +3,22 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    akibLib = {
+    akibLibSrc = {
       url = "github:akibahmed229/nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false; # Keeps the dependency graph small, as intended
     };
   };
 
   outputs = {
     nixpkgs,
-    akibLib,
+    akibLibSrc,
     ...
-  }:
-    akibLib.lib.forAllSystems (
+  }: let
+    lib = nixpkgs.lib;
+    akibLib = import "${akibLibSrc}/lib" {inherit lib;};
+    inherit (akibLib) forAllSystems; # Extract the helper function
+  in {
+    devShells = forAllSystems (
       system: let
         pkgs = import nixpkgs {
           inherit system;
@@ -77,7 +81,7 @@
 
         ## Default shell for general Data Science (CPU only)
         # To use: `nix develop`
-        devShells.${system}.default = pkgs.mkShell {
+        default = pkgs.mkShell {
           name = "ds-shell-${system}";
           packages = systemLibs ++ [pyEnv];
 
@@ -101,7 +105,7 @@
 
         ## GPU-enabled shell for ML/AI
         # To use: `nix develop .#gpu`
-        devShells.${system}.gpu = pkgs.mkShell {
+        gpu = pkgs.mkShell {
           name = "ml-gpu-shell-${system}";
           packages = systemLibs ++ cudaLibs ++ [pyEnvGpu];
 
@@ -134,4 +138,5 @@
         };
       }
     );
+  };
 }
