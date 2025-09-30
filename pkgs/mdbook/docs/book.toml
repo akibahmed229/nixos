@@ -1,0 +1,12 @@
+[book]
+title = "My Learning Experience"
+authors = ["Akib Ahmed"]
+description = "Documentation generated from my README."
+src = "src"
+
+[preprocessor.cmds]
+# This enables the `{{#cmd}}...{{/cmd}}` preprocessor
+
+[output.html]
+# Optional: Add a link to your repo in the sidebar
+git-repository-url = "https://github.com/akibahmed229/nixos"

@@ -1,0 +1,40 @@
+name: Deploy Documentation
+
+# Run this workflow automatically on every push to the `main` branch.
+on:
+  push:
+    branches: ["main"]
+
+# Set permissions for the GitHub token to allow deployment to GitHub Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Check out your repository's code.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install Nix and configure the binary cache for speed.
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v12
+
+      # 3. Build the mdBook site using your flake's `docs` package.
+      #    This creates a `./result` symlink to the built HTML site.
+      - name: Build mdBook Site
+        run: nix build .#mdbook
+
+      # 4. Upload the built site as an artifact for GitHub Pages.
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload the contents of the `./result` directory
+          path: ./result
+
+      # 5. Deploy the uploaded artifact to GitHub Pages.
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
