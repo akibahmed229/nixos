@@ -72,6 +72,7 @@ in
       runHook preInstall
       mkdir -p $out
       cp -R book/* $out/
+      cp src/favicon.* $out/
       runHook postInstall
     '';
 
