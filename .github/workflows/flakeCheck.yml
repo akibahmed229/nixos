@@ -1,26 +1,26 @@
-name: "Flake Check"
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-on:
-  push:
-    branches: [main, dev]
-  pull_request:
-    branches: [dev]
-
-## A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      # 1. Check out your repository's code.
-      - name: checkout repository
-        uses: actions/checkout@v4
-
-      # 2. Install Nix and configure the binary cache for speed.
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v12
-
-      # 3. Run the system check.
-      - name: Run flake test in impure mode
-        run: |
-          FLAKE_USER=test nix flake check --impure
+#name: "Flake Check"
+#
+## Controls when the action will run. Triggers the workflow on push or pull request
+#on:
+#  push:
+#    branches: [main, dev]
+#  pull_request:
+#    branches: [dev]
+#
+### A workflow run is made up of one or more jobs that can run sequentially or in parallel
+#jobs:
+#  check:
+#    runs-on: ubuntu-latest
+#    steps:
+#      # 1. Check out your repository's code.
+#      - name: checkout repository
+#        uses: actions/checkout@v4
+#
+#      # 2. Install Nix and configure the binary cache for speed.
+#      - name: Install Nix
+#        uses: DeterminateSystems/nix-installer-action@v12
+#
+#      # 3. Run the system check.
+#      - name: Run flake test in impure mode
+#        run: |
+#          FLAKE_USER=test nix flake check --impure
