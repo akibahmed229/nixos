@@ -15,8 +15,6 @@ in
     src = custom;
     nativeBuildInputs = [mdbook];
 
-    # --- MODIFIED SECTION ---
-    # The logic is now entirely inside the buildPhase shell script.
     buildPhase = ''
             runHook preBuild
 
