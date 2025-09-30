@@ -21,4 +21,4 @@
   - [Bash Scripting](./Linux/Tools/Bash/readme.md)
   - [Git](./Linux/Tools/Git/readme.md)
   - [Nginx](./Linux/Tools/Nginx/readme.md)
-  - [System Monitoring](./Linux/Tools/SysMonitor/linux-monitor-command.md)
+  - [System Monitoring](./Linux/Tools/SysMonitor/readme.md)
