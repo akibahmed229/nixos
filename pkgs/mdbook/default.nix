@@ -24,40 +24,42 @@ in
             # A shell function to find subdirectories and format them as markdown links.
             # Arg 1: The path to scan (e.g., "Linux/Installation")
             # Arg 2: The indentation string (e.g., "  ")
-            generate_sub_links() {
+            generate_links() {
               local path="$1"
               local indent="$2"
-              # Find all directories exactly one level deep, sort them, and process each one.
-              find "$path" -mindepth 1 -maxdepth 1 -type d | sort | while read -r dir; do
-                local name=$(basename "$dir")
-                echo "$indent- [$name]($dir/readme.md)"
+
+              # List only directories directly under $path
+              for dir in "$path"/*; do
+                [ -d "$dir" ] || continue
+                name=$(basename "$dir")
+
+                if [ "$indent" = "" ]; then
+                  # Top-level directory -> section header
+                  echo "# $name"
+                fi
+
+                # Always print a link for the current dir (if it has a readme.md)
+                if [ -f "$dir/readme.md" ]; then
+                  echo "$indent- [$name](./$dir/readme.md)"
+                fi
+
+                # Recurse into subdirectories with increased indent
+                generate_links "$dir" "  $indent"
               done
             }
 
             echo "Appending generated content to SUMMARY.md..."
 
             # Use a temporary file to build the new content
-            cat > linux_summary.md <<- EOF
-      # DataBase
-
-      $(generate_sub_links "DataBase" "")
-
-      # Deployment
-
-      $(generate_sub_links "Deployment" "")
-
-      # Linux
-
-      - [Installation](./Linux/Installation/readme.md)
-      $(generate_sub_links "Linux/Installation" "    ")
-      - [Tools](./Linux/Tools/readme.md)
-      $(generate_sub_links "Linux/Tools" "    ")
+            cat > tmp_contents.md <<- EOF
+      $(generate_links "./" "")
       EOF
 
             # Now, append the generated content to the main SUMMARY.md file.
-            cat linux_summary.md >> SUMMARY.md
+            cat tmp_contents.md >> SUMMARY.md
 
             echo "SUMMARY.md updated successfully."
+
 
             # Go back to the build root before running mdbook
             cd ..

@@ -8,15 +8,15 @@ This site is automatically built and deployed from my [NixOS configuration repos
 
 You can use the sidebar on the left to navigate through the topics, or use the links below to jump to a specific section.
 
-### [💾 DataBase](./DataBase/index.md)
+### [💾 DataBase](./DataBase/MySQL/index.md)
 
 Notes and guides related to database management systems like MySQL.
 
-### [🚀 Deployment](./Deployment/index.md)
+### [🚀 Deployment](./Deployment/MERN_App/index.md)
 
 Walkthroughs on deploying applications, starting with a MERN stack project.
 
-### [🐧 Linux](./Linux/index.md)
+### [🐧 Linux](./Linux/Tools/index.md)
 
 A deep dive into the world of Linux, including installation guides for distributions like Arch and Gentoo, and documentation on essential command-line tools.
 
