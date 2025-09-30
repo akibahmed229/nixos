@@ -106,6 +106,9 @@
     #   enable = true; # Enable Plymouth boot screen for a nice graphical boot experience
     #   theme = "breeze";
     # };
+
+    # use the QEMU emulator whenever it needs to run a program for aarch64-linux
+    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
   services.btrfs.autoScrub = {

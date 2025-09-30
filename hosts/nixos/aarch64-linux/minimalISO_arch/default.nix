@@ -4,14 +4,8 @@
 {
   pkgs,
   lib,
-  self,
   ...
-}: let
-  # My custom lib helper functions
-  inherit (self.lib) mkRelativeToRoot;
-in {
-  imports = [(mkRelativeToRoot "modules/predefiend/nixos/sops")];
-
+}: {
   # (Custom nixos modules)
   grub.enable = lib.mkForce false;
 
@@ -43,15 +37,11 @@ in {
     openssh
     # for nix
     nix
-    # for qemu
-    spice-vdagent
-    guestfs-tools
   ];
 
   services = {
     # Enables copy / paste when running in a KVM with spice.
     spice-vdagentd.enable = true;
-    qemuGuest.enable = true;
     openssh = {
       ports = [8080];
       settings.PermitRootLogin = lib.mkForce "yes";
