@@ -128,10 +128,7 @@
 
     # The user to build for.
     # Override user via env var in impure mode
-    user =
-      if builtins.getEnv "FLAKE_USER" != ""
-      then "test"
-      else "akib";
+    user = "akib";
     theme = "gruvbox-dark-soft"; # available options located in ./public/themes/base16Scheme
     desktopEnvironment = "hyprland"; # available options: "gnome", "dwm", "hyprland"
 

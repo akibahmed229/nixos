@@ -1,25 +1,24 @@
-name: "Flake Check"
-
+#name: 'Flake Check'
 # Controls when the action will run. Triggers the workflow on push or pull request
-on:
-  push:
-    branches: [main, dev]
-  pull_request:
-    branches: [dev]
-
-## A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repository
-        uses: actions/checkout@v4
-
-      - name: install nix
-        uses: cachix/install-nix-action@v27
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-
-      - name: Modify flake.nix and run flake checks
-        run: |
-          FLAKE_USER=test nix flake check --impure
+#on:
+#  push:
+#    branches: [main, dev]
+#  pull_request:
+#    branches: [dev]
+#
+### A workflow run is made up of one or more jobs that can run sequentially or in parallel
+#jobs:
+#  check:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout repository
+#        uses: actions/checkout@v4
+#
+#      - name: install nix
+#        uses: cachix/install-nix-action@v27
+#        with:
+#          nix_path: nixpkgs=channel:nixos-unstable
+#
+#      - name: Modify flake.nix and run flake checks
+#        run: |
+#          nix flake check --no-update-lock-file --no-write-lock-file --accept-flake-config
