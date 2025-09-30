@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload the contents of the `./result` directory
-          path: ./result
+          path: result
 
       # 5. Deploy the uploaded artifact to GitHub Pages.
       - name: Deploy to GitHub Pages
