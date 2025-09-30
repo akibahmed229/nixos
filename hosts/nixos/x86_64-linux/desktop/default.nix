@@ -66,6 +66,12 @@ in {
     ];
   };
 
+  # A lightweight TUI (ncurses-like) display manager for Linux and BSD.
+  services.displayManager = {
+    ly.enable = true;
+    defaultSession = "Niri";
+  };
+
   # User management configuration ( custom module ) - see modules/custom/nixos/user
   # Per-system user configuration
   setUser = {

@@ -8,7 +8,7 @@
 in {
   imports = [(mkRelativeToRoot "modules/predefiend/nixos/flatpak")];
   # SDDM (custom module)
-  sddm.enable = true;
+  # sddm.enable = true;
 
   programs = {
     niri = {
