@@ -10,3 +10,4 @@ src = "src"
 [output.html]
 # Optional: Add a link to your repo in the sidebar
 git-repository-url = "https://github.com/akibahmed229/nixos"
+default-theme = "ayu" # Or "dark", "coal", etc.
