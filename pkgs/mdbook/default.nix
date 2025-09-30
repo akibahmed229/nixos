@@ -12,21 +12,51 @@ in
   stdenv.mkDerivation {
     pname = "my-project-docs";
     version = "0.1.0";
-
-    # Use the current directory as the source
     src = custom;
-
-    # Add mdbook to the build environment
     nativeBuildInputs = [mdbook];
 
-    # Commands to build the site
+    # --- MODIFIED SECTION ---
+    # The logic is now entirely inside the buildPhase shell script.
     buildPhase = ''
-      runHook preBuild
-      mdbook build
-      runHook postBuild
+            runHook preBuild
+
+            # Change directory into the `src` folder to make all paths simpler.
+            cd src
+
+            # A shell function to find subdirectories and format them as markdown links.
+            # Arg 1: The path to scan (e.g., "Linux/Installation")
+            # Arg 2: The indentation string (e.g., "  ")
+            generate_sub_links() {
+              local path="$1"
+              # Find all directories exactly one level deep, sort them, and process each one.
+              find "$path" -mindepth 1 -maxdepth 1 -type d | sort | while read -r dir; do
+                local name=$(basename "$dir")
+                echo "  - [$name]($dir/readme.md)"
+              done
+            }
+
+            echo "Appending generated content to SUMMARY.md..."
+
+            # Use a temporary file to build the new content
+            cat > linux_summary.md <<- EOF
+      - [Installation](./Linux/Installation/readme.md)
+        $(generate_sub_links "Linux/Installation")
+      - [Tools](./Linux/Tools/readme.md)
+        $(generate_sub_links "Linux/Tools")
+      EOF
+
+            # Now, append the generated content to the main SUMMARY.md file.
+            cat linux_summary.md >> SUMMARY.md
+
+            echo "SUMMARY.md updated successfully."
+
+            # Go back to the build root before running mdbook
+            cd ..
+
+            mdbook build
+            runHook postBuild
     '';
 
-    # Commands to install the site into the Nix store
     installPhase = ''
       runHook preInstall
       mkdir -p $out
