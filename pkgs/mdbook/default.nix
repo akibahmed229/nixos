@@ -28,10 +28,11 @@ in
             # Arg 2: The indentation string (e.g., "  ")
             generate_sub_links() {
               local path="$1"
+              local indent="$2"
               # Find all directories exactly one level deep, sort them, and process each one.
               find "$path" -mindepth 1 -maxdepth 1 -type d | sort | while read -r dir; do
                 local name=$(basename "$dir")
-                echo "  - [$name]($dir/readme.md)"
+                echo "$indent- [$name]($dir/readme.md)"
               done
             }
 
@@ -39,10 +40,20 @@ in
 
             # Use a temporary file to build the new content
             cat > linux_summary.md <<- EOF
+      # DataBase
+
+      $(generate_sub_links "DataBase" "")
+
+      # Deployment
+
+      $(generate_sub_links "Deployment" "")
+
+      # Linux
+
       - [Installation](./Linux/Installation/readme.md)
-        $(generate_sub_links "Linux/Installation")
+      $(generate_sub_links "Linux/Installation" "    ")
       - [Tools](./Linux/Tools/readme.md)
-        $(generate_sub_links "Linux/Tools")
+      $(generate_sub_links "Linux/Tools" "    ")
       EOF
 
             # Now, append the generated content to the main SUMMARY.md file.
