@@ -159,7 +159,7 @@ Networking
 3. Rebuild:
 
    ```bash
-   nix build .#my-project-docs
+   nix build .#
    ```
 
 4. mdBook will automatically regenerate the sidebar and include your new section. 🎉
