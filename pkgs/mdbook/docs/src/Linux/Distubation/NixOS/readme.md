@@ -99,3 +99,51 @@
   ```bash
   nix-eval --file default.nix
   ```
+
+---
+
+### Nixpkgs Legacy: Using Old OpenSSH with DSS
+
+Sometimes you need to connect to legacy SSH servers that only support **ssh-dss** (DSA) keys. Modern Nixpkgs disables DSS by default, but you can pin an older package.
+
+#### 1. Create a Nix file for legacy OpenSSH
+
+**`legacy-ssh.nix`**:
+
+```nix
+{ pkgs ? import <nixpkgs> {} }:
+
+let
+  # Pin an older nixpkgs commit with DSS support
+  legacyPkgs = import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/2f6ef9aa6a7eecea9ff7e185ca40855f36597327.tar.gz";
+    sha256 = "0jcs9r4q57xgnbrc76davqy10b1xph15qlkvyw1y0vk5xw5vmxfz";
+  }) {};
+in
+  legacyPkgs.openssh
+```
+
+> Browse older package versions: [Nix Versions](https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=openssh)
+
+#### 2. Build the package
+
+```bash
+nix build -f legacy-ssh.nix
+```
+
+#### 3. Use the legacy `ssh` binary
+
+```bash
+./result/bin/ssh -F /dev/null \
+  -o HostKeyAlgorithms=ssh-dss \
+  -o KexAlgorithms=diffie-hellman-group1-sha1 \
+  -o PreferredAuthentications=password,keyboard-interactive \
+  admin@192.168.0.1 -vvv
+```
+
+**Explanation of key options:**
+
+- `-F /dev/null` → Ignore default SSH config.
+- `HostKeyAlgorithms=ssh-dss` → Allow DSS host keys.
+- `KexAlgorithms=diffie-hellman-group1-sha1` → Use legacy key exchange.
+- `PreferredAuthentications=password,keyboard-interactive` → Only use password or interactive login.
