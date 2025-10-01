@@ -1,9 +1,3 @@
-Got it 🚀 — I’ll refactor your raw Wireshark cheat sheet into a clean **Markdown (`.md`) file format**.
-
-Here’s the structured version:
-
----
-
 # Wireshark Cheat Sheet
 
 Wireshark is one of the most popular and powerful tools for capturing, analyzing, and troubleshooting network traffic.
