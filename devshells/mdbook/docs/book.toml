@@ -1,0 +1,14 @@
+[book]
+title = "My Docs"
+authors = ["your name"]
+description = "Documentation generated from my README."
+src = "src"
+
+[preprocessor.cmdrun]
+# This enables the `<!-- cmdrun date -->` preprocessor
+
+[output.html]
+# Optional: Add a link to your repo in the sidebar
+git-repository-url = "your repo"
+default-theme = "ayu" # Or "dark", "coal", etc.
+
