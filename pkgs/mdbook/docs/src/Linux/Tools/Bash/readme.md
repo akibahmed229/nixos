@@ -261,6 +261,296 @@ This is a reference guide for commonly used Linux commands. The following comman
 
 - `zcat` - Concatenate and display compressed files.
 
-Please note that this is not an exhaustive list of all available Linux commands, but it covers many commonly used ones. Feel free to explore the man pages and online resources for more information on each command.
+---
 
-If you need more specific help with any command or have further questions, please don't hesitate to ask!
+# 🐚 Bash Cheat Sheet
+
+This cheat sheet helps you **navigate, automate, and debug** efficiently in Bash. It covers file operations, permissions, variables, regex, flow control, and more.
+
+Useful for:
+
+- Linux/Mac users
+- System administrators
+- Security professionals
+- Students (LPIC, OSCP, etc.)
+
+---
+
+## 📂 File Test Operators
+
+Check file types and permissions in scripts.
+
+| Flag        | Description                         |
+| ----------- | ----------------------------------- |
+| `-e`        | File exists                         |
+| `-f`        | Regular file (not directory/device) |
+| `-d`        | Directory                           |
+| `-s`        | File is not empty                   |
+| `-r`        | Read permission                     |
+| `-w`        | Write permission                    |
+| `-x`        | Execute permission                  |
+| `-L`        | Symbolic link                       |
+| `-O`        | You own the file                    |
+| `f1 -nt f2` | `f1` is newer than `f2`             |
+| `f1 -ef f2` | Hard links to the same file         |
+
+**Example:**
+
+```bash
+if [ -f "/etc/passwd" ]; then
+  echo "File exists"
+fi
+```
+
+---
+
+## 🔢 Integer Comparisons
+
+| Operator | Description      |
+| -------- | ---------------- |
+| `-eq`    | Equal            |
+| `-ne`    | Not equal        |
+| `-gt`    | Greater than     |
+| `-lt`    | Less than        |
+| `-ge`    | Greater or equal |
+| `-le`    | Less or equal    |
+
+**Example:**
+
+```bash
+a=5; b=10
+if [ "$a" -lt "$b" ]; then
+  echo "a is less than b"
+fi
+```
+
+---
+
+## 🔤 String Comparisons
+
+| Operator   | Description         |
+| ---------- | ------------------- |
+| `=` / `==` | Equal               |
+| `!=`       | Not equal           |
+| `-z`       | String is empty     |
+| `-n`       | String is not empty |
+
+**Example:**
+
+```bash
+str="hello"
+if [ -n "$str" ]; then
+  echo "String is not empty"
+fi
+```
+
+---
+
+## 🔄 Compound Operators
+
+| Operator | Description |
+| -------- | ----------- |
+| `-a`     | Logical AND |
+| `-o`     | Logical OR  |
+| `!`      | NOT         |
+
+**Example:**
+
+```bash
+if [ -r file.txt -a -w file.txt ]; then
+  echo "Readable and writable"
+fi
+```
+
+---
+
+## ⚙️ Job Control
+
+| Notation    | Meaning                   |
+| ----------- | ------------------------- |
+| `%%` / `%+` | Current job               |
+| `%-`        | Previous job              |
+| `%N`        | Job number                |
+| `%?S`       | Job containing string `S` |
+
+**Example:**
+
+```bash
+sleep 100 &
+jobs
+fg %1
+```
+
+---
+
+## 🔀 List Constructs
+
+| Construct | Description                   |     |                            |
+| --------- | ----------------------------- | --- | -------------------------- |
+| `&&`      | Run next if previous succeeds |     |                            |
+| `         |                               | `   | Run next if previous fails |
+
+**Example:**
+
+```bash
+mkdir test && cd test
+```
+
+---
+
+## 🚪 Exit Codes
+
+| Code  | Meaning                        |
+| ----- | ------------------------------ |
+| `0`   | Success                        |
+| `1`   | General error                  |
+| `126` | Command invoked cannot execute |
+| `127` | Command not found              |
+| `130` | Script terminated (Ctrl+C)     |
+
+**Example:**
+
+```bash
+echo "test"
+echo $?   # prints 0 if successful
+```
+
+---
+
+## 📡 Signals & Shortcuts
+
+| Signal    | Key             | Action     |
+| --------- | --------------- | ---------- |
+| `SIGINT`  | `Ctrl+C`        | Interrupt  |
+| `SIGTSTP` | `Ctrl+Z`        | Suspend    |
+| `SIGKILL` | `kill -9 <PID>` | Force kill |
+
+---
+
+## 📜 Permissions
+
+| Symbol | Meaning       |
+| ------ | ------------- |
+| `r`    | Read          |
+| `w`    | Write         |
+| `x`    | Execute       |
+| `s`    | SetUID/SetGID |
+| `t`    | Sticky bit    |
+
+**Example:**
+
+```bash
+chmod 755 script.sh   # rwxr-xr-x
+```
+
+---
+
+## ✂️ String Manipulation
+
+| Expression        | Meaning                  |
+| ----------------- | ------------------------ |
+| `${#var}`         | String length            |
+| `${var:pos}`      | Substring                |
+| `${var/pat/rep}`  | Replace first occurrence |
+| `${var//pat/rep}` | Replace all              |
+
+**Example:**
+
+```bash
+text="Hello World"
+echo ${#text}       # 11
+echo ${text:0:5}    # Hello
+```
+
+---
+
+## 📌 Command Parameters
+
+| Symbol    | Description              |
+| --------- | ------------------------ |
+| `$0`      | Script name              |
+| `$1...$9` | Arguments                |
+| `$@`      | All args (individually)  |
+| `$*`      | All args (single string) |
+| `$#`      | Number of args           |
+| `$$`      | Script PID               |
+| `$?`      | Last exit code           |
+
+**Example:**
+
+```bash
+echo "Script name: $0"
+echo "First arg: $1"
+```
+
+---
+
+## 🔁 History Expansion
+
+| Command   | Meaning                              |
+| --------- | ------------------------------------ |
+| `!!`      | Last command                         |
+| `!n`      | n-th command                         |
+| `!string` | Last command starting with string    |
+| `^a^b`    | Replace `a` with `b` in last command |
+
+---
+
+## 🎭 Globbing vs Regex
+
+- **Globbing (filenames):**
+  - `*` → any string
+  - `?` → single char
+  - `[a-z]` → range
+
+- **Regex (text matching):**
+  - `.` → any char
+  - `*` → zero or more
+  - `+` → one or more
+  - `^` → start of line
+  - `$` → end of line
+
+**Example (globbing):**
+
+```bash
+ls *.txt
+```
+
+**Example (regex with grep):**
+
+```bash
+grep "^[0-9]" file.txt
+```
+
+---
+
+## 🔄 Flow Control
+
+```bash
+# If / Else
+if [ "$USER" == "akib" ]; then
+  echo "Welcome Akib"
+else
+  echo "Access Denied"
+fi
+
+# For loop
+for i in {1..5}; do
+  echo "Number $i"
+done
+
+# While loop
+count=1
+while [ $count -le 3 ]; do
+  echo "Count $count"
+  ((count++))
+done
+```
+
+---
+
+# ✅ Final Notes
+
+- Use `man bash` for full docs
+- Prefer `[[ ... ]]` over `[ ... ]` for conditionals
+- Practice with small scripts before automation
