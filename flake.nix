@@ -6,11 +6,11 @@
     # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org"
+      # "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      # "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
 
@@ -47,7 +47,6 @@
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/master";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
 
     ####################  Desktop Environments & WindowManager | remote flake ####################
@@ -86,7 +85,6 @@
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "nixpkgs";
     };
     # Flexible toolkit for making desktop shells with QtQuick, for Wayland and X11
     quickshell = {

@@ -26,7 +26,7 @@
         id = 0;
         search.engines = {
           # --- Nix ---
-          "Nix Packages" = {
+          "nix packages" = {
             urls = [
               {
                 template = "https://search.nixos.org/packages";
@@ -45,7 +45,7 @@
             definedAliases = ["@np"];
           };
 
-          "Nix Options" = {
+          "nix options" = {
             urls = [
               {
                 template = "https://search.nixos.org/options";
@@ -61,7 +61,7 @@
           };
 
           # --- YouTube ---
-          "YouTube" = {
+          "youtube" = {
             urls = [
               {
                 template = "https://www.youtube.com/results";
@@ -93,7 +93,7 @@
           };
 
           # --- Flutter pub.dev packages ---
-          "Flutter Pub" = {
+          "flutter pub" = {
             urls = [
               {
                 template = "https://pub.dev/packages";
@@ -109,7 +109,7 @@
           };
 
           # --- Docker Hub images ---
-          "Docker Hub" = {
+          "docker hub" = {
             urls = [
               {
                 template = "https://hub.docker.com/search";
