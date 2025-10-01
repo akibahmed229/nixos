@@ -24,4 +24,4 @@ This site is automatically built and deployed from my
 - 🛠️ **Dev Tools** → Shell scripts, Git, automation tricks, and configs.
 
 ✨ Happy learning!  
-It’s **Tuesday, 1 October 2025** — a great day to document something new.
+It’s **<!-- cmdrun date -->** — a great day to document something new.

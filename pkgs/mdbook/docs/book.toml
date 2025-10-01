@@ -4,8 +4,8 @@ authors = ["Akib Ahmed"]
 description = "Documentation generated from my README."
 src = "src"
 
-[preprocessor.cmds]
-# This enables the `{{#cmd}}...{{/cmd}}` preprocessor
+[preprocessor.cmdrun]
+# This enables the `<!-- cmdrun date -->` preprocessor
 
 [output.html]
 # Optional: Add a link to your repo in the sidebar
