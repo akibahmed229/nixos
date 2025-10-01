@@ -4,8 +4,11 @@
   pkgs,
   ...
 }: rec {
-  name = "root"; # Root account
-  isNormalUser = false; # System/root account, not a normal user
+  # Root account
+  name = "root";
+
+  # System/root account, not a normal user
+  isNormalUser = false;
 
   # Use a sops-managed secret for the root password if user is "akib"
   hashedPasswordFile =
@@ -14,7 +17,12 @@
     else null;
 
   openssh.authorizedKeys.keys = []; # No SSH keys configured
-  hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41"; # Fallback password
+
+  # Optional fallback password (hashed) if secret not used
+  hashedPassword =
+    if !(config ? sops.secrets."${name}/password/my_secret")
+    then "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41"
+    else null;
 
   packages = with pkgs; [
     # Packages available for root
@@ -22,7 +30,9 @@
     wget
   ];
 
-  extraGroups = []; # Root doesn't need extra groups
+  # Root doesn't need extra groups
+  extraGroups = [];
+
   shell = pkgs.bash; # Default shell for root
 
   # Minimal home configuration for root

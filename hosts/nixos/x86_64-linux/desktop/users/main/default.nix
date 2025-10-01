@@ -5,6 +5,12 @@
   system,
   ...
 }: rec {
+  /*
+  ####################  NixOS provided default option ####################
+  # Supported module options are `users.users.<name>.`
+    - https://search.nixos.org/options?channel=25.05&query=users.users.%3Cname%3E.
+  */
+
   # Username is inherited from the parent config
   inherit (config.setUser) name;
 
@@ -18,7 +24,10 @@
     else null;
 
   # Optional fallback password (hashed) if secret not used
-  hashedPassword = "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41";
+  hashedPassword =
+    if !(config ? sops.secrets."${name}/password/my_secret")
+    then "$6$udP2KZ8FM5LtH3od$m61..P7kY3ckU55LhG1oR8KgsqOj7T9uS1v4LUChRAn1tu/fkRa2fZskKVBN4iiKqJE5IwsUlUQewy1jur8z41"
+    else null;
 
   # SSH or GPG keys (extend as needed)
   openssh.authorizedKeys.keys = [];
@@ -50,6 +59,8 @@
 
   # Default shell
   shell = pkgs.zsh;
+
+  ####################  My custom module option will merge into default user ####################
 
   # Home Manager configurations
   homeFile = map mkRelativeToRoot [
