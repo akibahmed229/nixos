@@ -74,6 +74,7 @@
           # Only include pkgs.skim if we are on a system that supports it (not i686-linux)
           (nixpkgs.lib.optional pkgs.stdenv.isDarwin pkgs.skim)
           pkgs.git
+          pkgs.zathura
         ];
         shellHook = ''
           echo -e "\n✅ Entering LaTeX devshell\n"
