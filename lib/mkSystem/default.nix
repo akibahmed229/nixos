@@ -105,8 +105,15 @@
       )
       archDirs;
   in
+    /*
     # Merge the list of attribute sets from all architectures into one big set.
-    lib.foldl lib.recursiveUpdate {} listOfConfigs;
+      - builtins.foldl' (carry: current: carry // current) {} listOfConfigs; # Shallow
+
+    # Primary Use:
+      - Shallow Merge: Overriding flat attribute sets.
+      - Deep (Recursive) Merge: Combining nested configurations.
+    */
+    lib.foldl lib.recursiveUpdate {} listOfConfigs; # Deep
 
   # ── 2. NixOS System Processor ────────────────────────────────────────────────
   # This is now a simple call to the generic `processDir` function.
