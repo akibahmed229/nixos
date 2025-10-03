@@ -2,7 +2,6 @@
 {
   pkgs,
   user,
-  inputs,
   ...
 }: {
   xdg.mimeApps.defaultApplications = {
@@ -409,7 +408,7 @@
         userContent = builtins.readFile ./userContent.css;
 
         extensions = {
-          packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+          packages = with pkgs.nur.repos.rycee.firefox-addons; [
             # bitwarden
             # tridactyl
             # gsconnect

@@ -148,6 +148,15 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      # self.overlays.discord-overlay
+      inputs.nur.overlays.default # accisable through: `pkgs.nur.repos.<name>.<packages>`
+    ];
+  };
+
   # This will additionally add your inputs to the system's legacy channels
   # Making legacy nix commands consistent as well, awesome!
   environment.etc =

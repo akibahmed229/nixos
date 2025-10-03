@@ -58,14 +58,6 @@ in {
           ]);
     };
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      # self.overlays.discord-overlay
-    ];
-  };
-
   # A lightweight TUI (ncurses-like) display manager for Linux and BSD.
   services.displayManager = {
     ly.enable = true;

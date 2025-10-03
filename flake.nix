@@ -71,9 +71,9 @@
     impermanence = {
       url = "github:nix-community/impermanence";
     };
-    # Firefox-addons is a collection of Firefox extensions
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    # Nix User Repository: User contributed nix packages
+    nur = {
+      url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Secret management for nixos
