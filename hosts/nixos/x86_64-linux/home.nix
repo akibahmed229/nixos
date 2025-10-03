@@ -16,6 +16,7 @@ in {
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/home-manager";
       ListOfPrograms = [
+        "cloneOrUpdateFlakeConfig"
         "stylix"
         "zsh"
         "starship"

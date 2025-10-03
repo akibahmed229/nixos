@@ -1,4 +1,7 @@
-{config, ...}: {
+{config, ...}: let
+  pipewireConfQuirkRules = ".config/pipewire/pipewire-pulse.conf.d/10-adjustQuirkRules.conf";
+  pipewireTargeQuirkRules = "${config.home.homeDirectory}/.config/flake/modules/predefiend/home-manager/pipewire/pipewire-pulse.conf.d/10-adjustQuirkRules.conf";
+in {
   /*
   # systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.service
 
@@ -32,9 +35,8 @@
   */
 
   home.file = {
-    ".config/pipewire/pipewire-pulse.conf.d/10-adjustQuirkRules.conf" = {
-      source = config.lib.file.mkOutOfStoreSymlink ./10-adjustQuirkRules.conf; # tells wireplumber to ignore cameras
-      recursive = true;
+    ${pipewireConfQuirkRules} = {
+      source = config.lib.file.mkOutOfStoreSymlink pipewireTargeQuirkRules; # tells wireplumber to ignore cameras
     };
   };
 }
