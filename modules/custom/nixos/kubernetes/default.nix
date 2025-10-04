@@ -77,35 +77,43 @@ with lib; {
     mkIf cfg.enable {
       # -- Common settings for ALL nodes (master and worker) --
       networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
-      services.flannel.enable = true;
       environment.systemPackages = with pkgs; [kubectl];
 
       # --- UNIFIED services.kubernetes block ---
-      services.kubernetes = lib.mkMerge [
-        # 1. Common settings for ALL nodes
-        {
-          easyCerts = true;
-          masterAddress = cfg.kubeMasterHostname;
-          kubelet.extraOpts = "--fail-swap-on=false";
-        }
+      services.kubernetes = let
+        api = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
+      in
+        lib.mkMerge [
+          # 1. Common settings for ALL nodes
+          {
+            apiserverAddress = api;
+            easyCerts = true;
+            masterAddress = cfg.kubeMasterHostname;
+            # needed if you use swap
+            kubelet.extraOpts = "--fail-swap-on=false";
+            # use coredns
+            addons.dns.enable = true;
+          }
 
-        # 2. Master-ONLY settings (conditionally included)
-        (lib.mkIf (cfg.role == "master") {
-          roles = ["master" "node"];
-          apiserverAddress = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
-          apiserver = {
-            securePort = cfg.kubeMasterAPIServerPort;
-            advertiseAddress = cfg.kubeMasterIP;
-          };
-          addons.dns.enable = true;
-          proxy.enable = true;
-        })
+          # 2. Master-ONLY settings (conditionally included)
+          (lib.mkIf (cfg.role == "master") {
+            roles = ["master" "node"];
+            apiserver = {
+              securePort = cfg.kubeMasterAPIServerPort;
+              advertiseAddress = cfg.kubeMasterIP;
+            };
+            proxy.enable = true;
+          })
 
-        # 3. Worker-ONLY settings (conditionally included)
-        (lib.mkIf (cfg.role == "worker") {
-          roles = ["node"];
-        })
-      ];
+          # 3. Worker-ONLY settings (conditionally included)
+          (lib.mkIf (cfg.role == "worker") {
+            roles = ["node"];
+            masterAddress = cfg.kubeMasterHostname;
+
+            # point kubelet and other services to kube-apiserver
+            kubelet.kubeconfig.server = api;
+          })
+        ];
 
       # -- Other Master-ONLY settings --
       networking.firewall.allowedTCPPorts = mkIf (cfg.role == "master") [
