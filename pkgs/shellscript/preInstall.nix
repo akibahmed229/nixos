@@ -59,7 +59,7 @@ pkgs.writeShellApplication {
       else
         msg "Generating hardware-configuration.nix"
         nixos-generate-config --root /mnt
-        cp -v /mnt/etc/nixos/hardware-configuration.nix "$config_dir"/
+        cp -v /mnt/etc/nixos/hardware-configuration.nix "$config_dir/$hostname"
       fi
     }
 
