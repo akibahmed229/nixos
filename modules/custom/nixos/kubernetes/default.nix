@@ -84,17 +84,6 @@ with lib; {
         api = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
       in
         lib.mkMerge [
-          # 1. Common settings for ALL nodes
-          {
-            apiserverAddress = api;
-            easyCerts = true;
-            masterAddress = cfg.kubeMasterHostname;
-            # needed if you use swap
-            kubelet.extraOpts = "--fail-swap-on=false";
-            # use coredns
-            addons.dns.enable = true;
-          }
-
           # 2. Master-ONLY settings (conditionally included)
           (lib.mkIf (cfg.role == "master") {
             roles = ["master" "node"];
@@ -103,6 +92,14 @@ with lib; {
               advertiseAddress = cfg.kubeMasterIP;
             };
             proxy.enable = true;
+
+            apiserverAddress = api;
+            easyCerts = true;
+            masterAddress = cfg.kubeMasterHostname;
+            # needed if you use swap
+            kubelet.extraOpts = "--fail-swap-on=false";
+            # use coredns
+            addons.dns.enable = true;
           })
 
           # 3. Worker-ONLY settings (conditionally included)
@@ -111,6 +108,14 @@ with lib; {
 
             # point kubelet and other services to kube-apiserver
             kubelet.kubeconfig.server = api;
+
+            apiserverAddress = api;
+            easyCerts = true;
+            masterAddress = cfg.kubeMasterHostname;
+            # needed if you use swap
+            kubelet.extraOpts = "--fail-swap-on=false";
+            # use coredns
+            addons.dns.enable = true;
           })
         ];
 
