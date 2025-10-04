@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Enabling docker
   virtualisation.docker = {
     enable = true; #  To get access to the docker socket, you have to be in the docker group, set the extraGroups attribute to [ "docker" ].
@@ -37,7 +41,7 @@
   };
 
   # desktop must act as a router between LAN and the Docker ipvlan:
-  boot.kernel.sysctl = {
+  boot.kernel.sysctl = lib.mkDefault {
     "net.ipv4.ip_forward" = 1;
   };
 

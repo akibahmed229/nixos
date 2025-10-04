@@ -206,6 +206,13 @@ in {
   # Enable virtualisation ( custom module )
   kvm.enable = true;
 
+  # kubernetes  ( custom module )
+  nm.k8s = {
+    enable = true;
+    role = "master";
+    kubeMasterIP = "192.168.0.111";
+  };
+
   # Open ports in the firewall.
   networking = {
     firewall = {

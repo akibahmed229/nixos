@@ -11,7 +11,9 @@
   modulesPath,
   ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [
+    (modulesPath + "/profiles/qemu-guest.nix")
+  ];
 
   boot = {
     # Other options are:- linuxPackages_xanmod_latest, linuxPackages_zen
@@ -85,7 +87,6 @@
     algorithm = "lz4";
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkOverride 1 "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkForce config.hardware.enableRedistributableFirmware;
 }

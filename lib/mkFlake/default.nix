@@ -25,7 +25,10 @@
     mkSystem
     ;
 in {
-  lib = import "${src}/lib" {lib = lib // self.lib;}; # Lib is a custom library of helper functions
+  lib =
+    if lib.pathExists "${src}/lib"
+    then (import "${src}/lib" {lib = lib // self.lib;}) # Lib is a custom library of helper functions
+    else {};
 
   # Accessible through 'nix build', 'nix shell', "nix run", etc
   packages =
