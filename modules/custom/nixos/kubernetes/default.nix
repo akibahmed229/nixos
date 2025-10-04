@@ -77,7 +77,12 @@ with lib; {
     mkIf cfg.enable {
       # -- Common settings for ALL nodes (master and worker) --
       networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
-      environment.systemPackages = with pkgs; [kubectl];
+      environment.systemPackages = with pkgs; [
+        kompose # Kompose helps convert Docker Compose files into Kubernetes resources
+        kubectl # The Kubernetes command-line tool to interact with clusters
+        kubernetes # Kubernetes itself
+        kubernetes-helm # The Kubernetes package manager
+      ];
 
       # --- UNIFIED services.kubernetes block ---
       services.kubernetes = let
