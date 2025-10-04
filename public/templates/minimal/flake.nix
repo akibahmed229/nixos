@@ -49,7 +49,6 @@
     akibOS,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
     # FIXME: Replace with your username
     user = "test";
     state-version = "25.11";
@@ -58,7 +57,7 @@
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
     mkNixOSSystem = akibOS.lib.mkSystem {
       # must pass this args to mkSystem
-      inherit nixpkgs system home-manager;
+      inherit nixpkgs home-manager;
 
       # Set all inputs parameters as special arguments for all submodules,
       # so you can directly use all dependencies in inputs in submodules
