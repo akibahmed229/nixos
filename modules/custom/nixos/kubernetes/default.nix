@@ -113,7 +113,7 @@ with lib; {
             easyCerts = true;
             masterAddress = cfg.kubeMasterHostname;
             # needed if you use swap
-            kubelet.extraOpts = "--fail-swap-on=false";
+            # kubelet.extraOpts = "--fail-swap-on=false";
             # use coredns
             addons.dns.enable = true;
           })
