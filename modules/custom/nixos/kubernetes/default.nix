@@ -35,36 +35,36 @@ with lib; {
   };
 
   /*
+  ####################### For Master ############################################
 
   # Set up your kubectl command to point to the cluster's configuration:
-
-
       ```bash
-
         mkdir -p ~/.kube
-
         sudo ln -s /etc/kubernetes/cluster-admin.kubeconfig ~/.kube/config
-
         sudo chown -R $(whoami) ~/.kube
 
       ```
 
+  ####################### For Worker ############################################
+
+  # on the master, grab the apitoken
+      - `cat /var/lib/kubernetes/secrets/apitoken.secret`
+
+  # on the node, join the node with
+      - `echo TOKEN | nixos-kubernetes-node-join`
+
+
+  ####################### For Join Cluster ############################################
+
   # Check the status of your nodes. You should see both your master and worker, and they should both be in the Ready state after a minute or two.
-
-
-      `kubectl get nodes`
+     - `kubectl get nodes`
 
 
   # Expected Output:
-
-
     ```bash
-
       NAME      STATUS   ROLES           AGE   VERSION
-
-      master    Ready    control-plane   5m    v1.28.x
-
-      worker    Ready    <none>          2m    v1.28.x
+      desktop    Ready    control-plane   5m    v1.28.x
+      virt    Ready    <none>          2m    v1.28.x
 
     ```
 
@@ -84,38 +84,40 @@ with lib; {
         api = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
       in
         lib.mkMerge [
+          # 1. Common settings
+          {
+            apiserverAddress = api;
+            easyCerts = true;
+            masterAddress = cfg.kubeMasterHostname;
+            # use coredns
+            addons.dns.enable = true;
+          }
+
           # 2. Master-ONLY settings (conditionally included)
           (lib.mkIf (cfg.role == "master") {
             roles = ["master" "node"];
             apiserver = {
               securePort = cfg.kubeMasterAPIServerPort;
               advertiseAddress = cfg.kubeMasterIP;
-            };
-            proxy.enable = true;
 
-            apiserverAddress = api;
-            easyCerts = true;
-            masterAddress = cfg.kubeMasterHostname;
+              # ADD the custom hostname to the API server SANs
+              extraSANs = [
+                cfg.kubeMasterHostname # 'api.kube'
+                cfg.kubeMasterIP # '192.168.0.111'
+              ];
+            };
             # needed if you use swap
             kubelet.extraOpts = "--fail-swap-on=false";
-            # use coredns
-            addons.dns.enable = true;
+            proxy.enable = true;
           })
 
           # 3. Worker-ONLY settings (conditionally included)
           (lib.mkIf (cfg.role == "worker") {
             roles = ["node"];
-
             # point kubelet and other services to kube-apiserver
             kubelet.kubeconfig.server = api;
-
-            apiserverAddress = api;
-            easyCerts = true;
-            masterAddress = cfg.kubeMasterHostname;
             # needed if you use swap
             kubelet.extraOpts = "--fail-swap-on=false";
-            # use coredns
-            addons.dns.enable = true;
           })
         ];
 
