@@ -54,7 +54,7 @@ pkgs.writeShellApplication {
     function generate_hardware_config(){
       local config_dir="/home/$username/flake/hosts/x86_64-linux"
       mkdir -p "$config_dir"
-      if [[ "$username" == "akib" && "$hostname" == "desktop" ]]; then
+      if [[ "$username" == "akib" && "$hostname" == "desktop" && "$hostname" == "virt" ]]; then
         msg "Using bundled hardware-configuration (change later if needed)"
       else
         msg "Generating hardware-configuration.nix"
