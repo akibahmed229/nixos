@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    (import ../../utils/impermance.nix)
+    (import ../../../utils/impermance.nix)
   ];
 
   # your configuration goes here,...

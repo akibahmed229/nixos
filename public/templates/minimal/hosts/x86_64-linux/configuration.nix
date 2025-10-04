@@ -17,7 +17,7 @@
       inputs.nix-index-database.nixosModules.nix-index
       {programs.nix-index-database.comma.enable = true;}
     ]
-    ++ [(import ../utils/disko.nix {device = lib.mkDefault devicename;})];
+    ++ [(import ../../utils/disko.nix {device = lib.mkDefault devicename;})];
 
   # Dual Booting using grub
   boot = {
