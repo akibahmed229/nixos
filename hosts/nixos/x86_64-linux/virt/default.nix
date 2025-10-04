@@ -84,6 +84,13 @@ in {
     };
   };
 
+  # kubernetes  ( custom module )
+  nm.k8s = {
+    enable = true;
+    role = "master";
+    kubeMasterIP = "192.168.0.111";
+  };
+
   # Enables copy / paste when running in a KVM with spice.
   services = {
     spice-vdagentd.enable = true;
