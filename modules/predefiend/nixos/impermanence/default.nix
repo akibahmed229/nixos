@@ -51,6 +51,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
       # state for containers and orchestrators
       "/var/lib/docker"
       "/var/lib/kubernetes"
+      "/var/lib/cfssl"
       "/var/lib/kubelet"
       "/var/lib/containerd"
       "/var/lib/etcd"
