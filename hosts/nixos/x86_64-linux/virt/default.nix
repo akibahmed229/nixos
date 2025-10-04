@@ -87,7 +87,7 @@ in {
   # kubernetes  ( custom module )
   nm.k8s = {
     enable = true;
-    role = "master";
+    role = "worker";
     kubeMasterIP = "192.168.0.111";
   };
 
