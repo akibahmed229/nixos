@@ -90,6 +90,7 @@ in {
     role = "worker";
     kubeMasterIP = "192.168.0.111";
   };
+  networking.nameservers = ["8.8.8.8"];
 
   # Enables copy / paste when running in a KVM with spice.
   services = {

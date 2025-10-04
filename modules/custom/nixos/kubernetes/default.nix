@@ -122,6 +122,7 @@ with lib; {
       # -- Other Master-ONLY settings --
       networking.firewall.allowedTCPPorts = mkIf (cfg.role == "master") [
         cfg.kubeMasterAPIServerPort
+        8888
       ];
 
       systemd.tmpfiles.rules = mkIf (cfg.role == "master") [
