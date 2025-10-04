@@ -13,10 +13,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.kvm;
+  cfg = config.nm.kvm;
 in {
   options = {
-    kvm = {
+    nm.kvm = {
       enable = lib.mkEnableOption "Enable KVM";
     };
   };

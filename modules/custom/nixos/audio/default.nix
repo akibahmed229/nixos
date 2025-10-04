@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.audio;
+  cfg = config.nm.audio;
 in {
   options = {
-    audio = {
+    nm.audio = {
       enable = lib.mkEnableOption "Enable audio support";
     };
   };

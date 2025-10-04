@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: {
-  options.myPolkit.enable = lib.mkEnableOption "Enable a polkit agent";
+  options.nm.myPolkit.enable = lib.mkEnableOption "Enable a polkit agent";
 
-  config = lib.mkIf config.myPolkit.enable {
+  config = lib.mkIf config.nm.myPolkit.enable {
     security.polkit.enable = true;
 
     systemd.user.services.polkit-agent = {

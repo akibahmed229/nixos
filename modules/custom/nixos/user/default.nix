@@ -9,7 +9,7 @@ with lib; let
   inherit (self.lib) mkScanImportPath mkRelativeToRoot;
 in {
   # ── Top-level knobs for per-machine defaults (desktop env, hostname, etc.)
-  options.setUser = mkOption {
+  options.nm.setUser = mkOption {
     type = types.submodule {
       options = {
         name = mkOption {
@@ -59,7 +59,7 @@ in {
   };
 
   # ── Schema for each user attrset imported from ./user/*/default.nix
-  options.myusers = mkOption {
+  options.nm.myusers = mkOption {
     type = types.listOf (types.submodule {
       # 1. Custom options.
       options = {
@@ -85,7 +85,7 @@ in {
   };
 
   config = let
-    cfg = config.setUser;
+    cfg = config.nm.setUser;
     path =
       if cfg.usersPath != null
       then cfg.usersPath
@@ -107,10 +107,10 @@ in {
       path;
 
     # Small helper to pick only users with a given boolean flag set.
-    filterBy = flag: builtins.filter (u: u.${flag}) config.myusers;
+    filterBy = flag: builtins.filter (u: u.${flag}) config.nm.myusers;
   in {
     # Make the imported list visible as the option value (defaults fill in).
-    inherit myusers;
+    nm.myusers = myusers;
 
     # NixOS system users
     users = mkIf cfg.nixosUsers.enable {

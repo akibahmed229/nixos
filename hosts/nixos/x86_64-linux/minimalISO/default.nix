@@ -13,7 +13,7 @@ in {
   imports = [(mkRelativeToRoot "modules/predefiend/nixos/sops")];
 
   # (Custom nixos modules)
-  grub.enable = lib.mkForce false;
+  nm.grub.enable = lib.mkForce false;
 
   # The default compression-level is (6) and takes too long on some machines (>30m). 3 takes <2m
   isoImage.squashfsCompression = "zstd -Xcompression-level 3";

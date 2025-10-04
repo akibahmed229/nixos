@@ -19,21 +19,24 @@ in {
     "home-manager/niri"
   ];
 
-  # User management configuration ( custom module ) - see modules/custom/nixos/user
-  setUser = {
-    name = user;
-    usersPath = ./users/.;
-    nixosUsers.enable = true;
-    homeUsers.enable = true;
+  # Custom nixos modules
+  nm = {
+    # User management configuration - see modules/custom/nixos/user
+    setUser = {
+      name = user;
+      usersPath = ./users/.;
+      nixosUsers.enable = true;
+      homeUsers.enable = true;
 
-    system = {
-      inherit (system) path name;
-      inherit desktopEnvironment state-version;
+      system = {
+        inherit (system) path name;
+        inherit desktopEnvironment state-version;
+      };
     };
   };
 
   # (Custom nixos modules)
-  grub.enable = lib.mkForce false;
+  nm.grub.enable = lib.mkForce false;
   networking = {
     wireless.enable = false;
   };

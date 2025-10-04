@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.grub;
+  cfg = config.nm.grub;
 in {
   options = {
-    grub = {
+    nm.grub = {
       enable = lib.mkEnableOption "Enable the GRUB boot loader";
     };
   };

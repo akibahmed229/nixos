@@ -64,20 +64,6 @@ in {
     defaultSession = "Niri";
   };
 
-  # User management configuration ( custom module ) - see modules/custom/nixos/user
-  # Per-system user configuration
-  setUser = {
-    name = user;
-    usersPath = ./users/.;
-    nixosUsers.enable = true;
-    homeUsers.enable = true;
-
-    system = {
-      inherit (system) name path;
-      inherit desktopEnvironment state-version;
-    };
-  };
-
   # remove bloat
   documentation.nixos.enable = true;
   # List packages installed in system profile. To search, run:
@@ -203,14 +189,31 @@ in {
     openssh.settings.PasswordAuthentication = false;
   };
 
-  # Enable virtualisation ( custom module )
-  kvm.enable = true;
+  # Custom nixos modules
+  nm = {
+    # User management configuration - see modules/custom/nixos/user
+    # Per-system user configuration
+    setUser = {
+      name = user;
+      usersPath = ./users/.;
+      nixosUsers.enable = true;
+      homeUsers.enable = true;
 
-  # kubernetes  ( custom module )
-  nm.k8s = {
-    enable = true;
-    role = "master";
-    kubeMasterIP = "192.168.0.111";
+      system = {
+        inherit (system) name path;
+        inherit desktopEnvironment state-version;
+      };
+    };
+
+    # Enable virtualisation ( custom module )
+    kvm.enable = true;
+
+    # kubernetes  ( custom module )
+    k8s = {
+      enable = true;
+      role = "master";
+      kubeMasterIP = "192.168.0.111";
+    };
   };
 
   # Open ports in the firewall.

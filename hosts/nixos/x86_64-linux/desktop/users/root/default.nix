@@ -12,7 +12,7 @@
 
   # Use a sops-managed secret for the root password if user is "akib"
   hashedPasswordFile =
-    if config.setUser.name == "akib"
+    if config.nm.setUser.name == "akib"
     then config.sops.secrets."akib/password/root_secret".path
     else null;
 

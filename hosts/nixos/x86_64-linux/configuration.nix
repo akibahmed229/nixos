@@ -16,8 +16,14 @@
     {programs.nix-index-database.comma.enable = true;}
   ];
 
-  # Dual Booting using grub (Custom nixos modules)
-  grub.enable = true;
+  # Custom nixos modules
+  nm = {
+    # Dual Booting using grub
+    grub.enable = true;
+
+    # Enable sound.
+    audio.enable = true;
+  };
 
   # networking options
   networking.hostName = system.name; # Define your hostname.
@@ -43,10 +49,6 @@
     keyMap = "us";
     #   useXkbConfig = true; # use xkbOptions in tty.
   };
-
-  # Custom nixos modules
-  # Enable sound.
-  audio.enable = true;
 
   programs = {
     # Enable ADB for Android and other stuff.

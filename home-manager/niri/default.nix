@@ -8,7 +8,7 @@
 in {
   imports = [(mkRelativeToRoot "modules/predefiend/nixos/flatpak")];
   # SDDM (custom module)
-  # sddm.enable = true;
+  # nm.sddm.enable = true;
 
   programs = {
     niri = {
@@ -112,5 +112,5 @@ in {
   security.pam.services.greetd.enableGnomeKeyring = true;
 
   # polkit for authentication ( from custom nixos module )
-  myPolkit.enable = true;
+  nm.myPolkit.enable = true;
 }

@@ -12,7 +12,7 @@
   */
 
   # Username is inherited from the parent config
-  inherit (config.setUser) name;
+  inherit (config.nm.setUser) name;
 
   # Define user type
   isNormalUser = true;

@@ -5,10 +5,10 @@
   self,
   ...
 }: let
-  cfg = config.sddm;
+  cfg = config.nm.sddm;
 in {
   options = {
-    sddm = {
+    nm.sddm = {
       enable = lib.mkEnableOption "Enable SDDM";
     };
   };

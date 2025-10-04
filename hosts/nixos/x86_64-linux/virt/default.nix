@@ -31,21 +31,6 @@ in {
         ];
     };
 
-  # Custom nixos modules for
-  # User management configuration ( custom module ) - see modules/custom/nixos/user
-  setUser = {
-    name = user;
-    usersPath = ./users/.;
-    nixosUsers.enable = true;
-    homeUsers.enable = true;
-
-    system = {
-      desktopEnvironment = "dwm";
-      inherit state-version;
-      inherit (system) path name;
-    };
-  };
-
   users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -84,12 +69,30 @@ in {
     };
   };
 
-  # kubernetes  ( custom module )
-  nm.k8s = {
-    enable = true;
-    role = "worker";
-    kubeMasterIP = "192.168.0.111";
+  # Custom nixos modules for
+  nm = {
+    # User management configuration ( custom module ) - see modules/custom/nixos/user
+    setUser = {
+      name = user;
+      usersPath = ./users/.;
+      nixosUsers.enable = true;
+      homeUsers.enable = true;
+
+      system = {
+        desktopEnvironment = "dwm";
+        inherit state-version;
+        inherit (system) path name;
+      };
+    };
+
+    # kubernetes  ( custom module )
+    k8s = {
+      enable = true;
+      role = "worker";
+      kubeMasterIP = "192.168.0.111";
+    };
   };
+
   networking.nameservers = ["8.8.8.8"];
 
   # Enables copy / paste when running in a KVM with spice.
