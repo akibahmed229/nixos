@@ -7,7 +7,6 @@
   mkHomeManagerSystem ? {},
   mkNixDarwinSystem ? {},
   mkNixOnDroidSystem ? {},
-  mkTemplate ? {},
 }: let
   inherit
     (inputs)
@@ -23,6 +22,7 @@
     forAllSystems
     ifPathExistsFn
     ifPathExistsSet
+    mkSystem
     ;
 in {
   lib = import "${src}/lib" {lib = lib // self.lib;}; # Lib is a custom library of helper functions
@@ -67,7 +67,12 @@ in {
   nixOnDroidConfigurations = ifPathExistsFn "${src}/hosts/nixOnDroid" mkNixOnDroidSystem;
 
   # available through "$ nix flake init -t .#template"
-  templates =
+  templates = let
+    mkTemplate = mkSystem {
+      inherit nixpkgs;
+      template = true;
+    };
+  in
     ifPathExistsFn "${src}/public/templates" mkTemplate
     // ifPathExistsFn "${src}/devshells" mkTemplate;
 }
