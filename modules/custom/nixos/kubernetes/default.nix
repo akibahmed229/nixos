@@ -108,7 +108,6 @@ with lib; {
           # 3. Worker-ONLY settings (conditionally included)
           (lib.mkIf (cfg.role == "worker") {
             roles = ["node"];
-            masterAddress = cfg.kubeMasterHostname;
 
             # point kubelet and other services to kube-apiserver
             kubelet.kubeconfig.server = api;
