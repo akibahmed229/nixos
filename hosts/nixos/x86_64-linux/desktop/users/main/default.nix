@@ -38,6 +38,8 @@
     "wheel"
     "systemd-journal"
     "docker"
+    "kubernetes"
+    "flatpak"
     "video"
     "audio"
     "scanner"

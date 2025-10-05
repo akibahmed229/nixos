@@ -1,7 +1,6 @@
 # modules/kubernetes.nix
 {
   pkgs,
-  user,
   lib,
   config,
   ...
@@ -126,14 +125,12 @@ with lib; {
           })
         ];
 
+      services.etcd.enable = mkIf (cfg.role == "master") true;
+
       # -- Other Master-ONLY settings --
       networking.firewall.allowedTCPPorts = mkIf (cfg.role == "master") [
         cfg.kubeMasterAPIServerPort
         8888
-      ];
-
-      systemd.tmpfiles.rules = mkIf (cfg.role == "master") [
-        "Z /var/lib/kubernetes/secrets/cluster-admin-key.pem 0600 ${user} users -"
       ];
     };
 }

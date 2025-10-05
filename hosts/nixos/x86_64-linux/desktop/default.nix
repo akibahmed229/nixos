@@ -36,26 +36,12 @@ in {
         ++ lib.optionals (user == "akib")
         [
           "samba"
-          "docker"
           "sops"
           "ngrok"
           "openrgb"
           "openrazer"
           "intel-gpu"
         ];
-    }
-    ++ mkImport {
-      path = mkRelativeToRoot "modules/predefiend/nixos/docker/container";
-      ListOfPrograms =
-        map (x: x + ".nix")
-        (lib.optionals (user == "akib")
-          [
-            "n8n"
-            "nextcloud"
-            "portainer"
-            "pi-hole"
-            "jenkins"
-          ]);
     };
 
   # A lightweight TUI (ncurses-like) display manager for Linux and BSD.
@@ -205,14 +191,35 @@ in {
       };
     };
 
-    # Enable virtualisation ( custom module )
+    # Enable virtualisation
     kvm.enable = true;
 
-    # kubernetes  ( custom module )
+    # kubernetes
     k8s = {
       enable = true;
       role = "master";
       kubeMasterIP = "192.168.0.111";
+    };
+
+    # Docker
+    docker = lib.mkIf (user == "akib") {
+      enable = true;
+      iptables.enable = false;
+
+      # container
+      container = {
+        n8n = {
+          enable = true;
+          defaultUser = user;
+        };
+        pihole.enable = true;
+        jenkins.enable = true;
+        portainer.enable = true;
+        nextcloud = {
+          enable = true;
+          defaultUser = user;
+        };
+      };
     };
   };
 
