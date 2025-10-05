@@ -16,7 +16,7 @@ with lib; {
     };
 
     defaultUser = mkOption {
-      type = types.nullOr types.string;
+      type = types.nullOr types.str;
       default = null;
       description = "The user name for the kubernetes admin required for fixed permissions";
     };
@@ -139,10 +139,34 @@ with lib; {
         8888
       ];
 
-      systemd.tmpfiles.rules = mkIf (cfg.role == "master" && cfg.defaultUser != null) [
-        # set file owner and permissions on every boot
-        # f <path> <mode> <owner> <group> <age> <argument>
-        "f /var/lib/kubernetes/secrets/cluster-admin-key.pem 0600 ${cfg.defaultUser} - -"
-      ];
+      # Part 1: The "Fixer" Service
+      # This is a simple, one-shot service that corrects the file permissions.
+      systemd.services.fix-kube-permissions = mkIf (cfg.role == "master" && cfg.defaultUser != null) {
+        description = "Correct permissions for the K8s cluster-admin key";
+        # This service doesn't start on its own; it's triggered by the path unit.
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root"; # <-- Must run as root to chown/chmod system files.
+        };
+        # The script to execute when triggered.
+        script = ''
+          echo "Correcting permissions for /var/lib/kubernetes/secrets/cluster-admin-key.pem"
+          chown ${cfg.defaultUser}:users /var/lib/kubernetes/secrets/cluster-admin-key.pem
+          chmod 600 /var/lib/kubernetes/secrets/cluster-admin-key.pem
+        '';
+      };
+
+      # Part 2: The "Watcher" Path Unit
+      # This unit monitors the file and triggers the service above when it changes.
+      systemd.paths.fix-kube-permissions = mkIf (cfg.role == "master" && cfg.defaultUser != null) {
+        description = "Watch for changes to the K8s cluster-admin key permissions";
+        wantedBy = ["multi-user.target"]; # Enable this watcher on boot.
+        pathConfig = {
+          # Trigger when the file is written to or its attributes change.
+          PathModified = "/var/lib/kubernetes/secrets/cluster-admin-key.pem";
+          # When triggered, start the following service unit.
+          Unit = "fix-kube-permissions.service";
+        };
+      };
     };
 }
