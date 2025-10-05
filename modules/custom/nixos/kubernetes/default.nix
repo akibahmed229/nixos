@@ -15,6 +15,12 @@ with lib; {
       description = "The role of this node in the Kubernetes cluster.";
     };
 
+    defaultUser = mkOption {
+      type = types.nullOr types.string;
+      default = null;
+      description = "The user name for the kubernetes admin required for fixed permissions";
+    };
+
     kubeMasterIP = mkOption {
       type = types.str;
       description = "The IP address of the Kubernetes master node.";
@@ -131,6 +137,12 @@ with lib; {
       networking.firewall.allowedTCPPorts = mkIf (cfg.role == "master") [
         cfg.kubeMasterAPIServerPort
         8888
+      ];
+
+      systemd.tmpfiles.rules = mkIf (cfg.role == "master" && cfg.defaultUser != null) [
+        # set file owner and permissions on every boot
+        # f <path> <mode> <owner> <group> <age> <argument>
+        "f /var/lib/kubernetes/secrets/cluster-admin-key.pem 0600 ${cfg.defaultUser} - -"
       ];
     };
 }

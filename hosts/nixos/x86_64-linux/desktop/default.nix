@@ -198,6 +198,7 @@ in {
     k8s = {
       enable = true;
       role = "master";
+      defaultUser = "akib";
       kubeMasterIP = "192.168.0.111";
     };
 
