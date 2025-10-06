@@ -82,12 +82,15 @@ with lib; {
     mkIf cfg.enable {
       # -- Common settings for ALL nodes (master and worker) --
       networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
-      environment.systemPackages = with pkgs; [
-        kompose # Kompose helps convert Docker Compose files into Kubernetes resources
-        kubectl # The Kubernetes command-line tool to interact with clusters
-        kubernetes # Kubernetes itself
-        kubernetes-helm # The Kubernetes package manager
-      ];
+      environment.systemPackages = with pkgs;
+        [
+          kubernetes # Kubernetes itself
+        ]
+        ++ lib.optionals (cfg.role == "master") [
+          kompose # Kompose helps convert Docker Compose files into Kubernetes resources
+          kubectl # The Kubernetes command-line tool to interact with clusters
+          kubernetes-helm # The Kubernetes package manager
+        ];
 
       # --- UNIFIED services.kubernetes block ---
       services.kubernetes = let
@@ -100,7 +103,19 @@ with lib; {
             easyCerts = true;
             masterAddress = cfg.kubeMasterHostname;
             # use coredns
-            addons.dns.enable = true;
+            addons.dns = {
+              enable = true;
+              # Fix the CoreDNS image details for AArch64 builds
+              coredns = lib.mkIf pkgs.stdenv.isAarch64 {
+                # Use the standard Kubernetes CoreDNS tag
+                finalImageTag = "v1.11.1";
+                imageDigest = "sha256:1eeb4c7316bacb1d4c8ead65571cd92dd21e27359f0d4917f1a5822a73b75db1";
+                imageName = "coredns/coredns";
+                # NOTE: This SHA256 is the Nix content hash for the layers of the v1.11.1 AArch64 image.
+                # It is crucial for reproducible builds.
+                sha256 = "190m0j32x617a2w3x8y7ygl7w6b5q93h8d0y5b045h0g5j0y1d5d";
+              };
+            };
           }
 
           # 2. Master-ONLY settings (conditionally included)
@@ -132,6 +147,10 @@ with lib; {
         ];
 
       services.etcd.enable = mkIf (cfg.role == "master") true;
+
+      systemd.services.etcd.environment = lib.mkIf pkgs.stdenv.isAarch64 {
+        ETCD_UNSUPPORTED_ARCH = "arm64";
+      };
 
       # -- Other Master-ONLY settings --
       networking.firewall.allowedTCPPorts = mkIf (cfg.role == "master") [
