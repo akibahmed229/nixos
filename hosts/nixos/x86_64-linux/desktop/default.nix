@@ -216,21 +216,15 @@ in {
       };
     };
 
-    # Enable the full gaming environment
+    # Full gaming environment
     gaming.enable = true;
-    # Enable BBR congestion control
+    # BBR congestion control
     bbr.enable = true;
-    # Enable FHS shell and nix-ld support
-    fhs = {
-      enable = true;
-      # Example: Add an extra library needed by a third-party binary (optional)
-      extraNixLdLibraries = with pkgs; [
-        libglvnd # Often needed for graphics/gaming binaries
-      ];
-    };
-    # D-Bus is an inter-process communication (IPC) for enabling communication between different applications and system components.
+    # FHS shell and nix-ld support
+    fhs.enable = true;
+    # (IPC) communication between different applications and system components.
     dbus.enable = true;
-    # Enable OBS with default plugins and the virtual camera feature
+    # OBS with default plugins and the virtual camera feature
     obs.enable = true;
   };
 
