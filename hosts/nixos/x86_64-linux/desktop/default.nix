@@ -27,11 +27,6 @@ in {
         [
           "stylix"
           "impermanence"
-          "gaming"
-          "dbus"
-          "bbr"
-          "fhs"
-          "obs"
         ]
         ++ lib.optionals (user == "akib")
         [
@@ -193,7 +188,6 @@ in {
 
     # Enable virtualisation
     kvm.enable = true;
-
     # kubernetes
     k8s = {
       enable = true;
@@ -201,7 +195,6 @@ in {
       defaultUser = "akib";
       kubeMasterIP = "192.168.0.111";
     };
-
     # Docker
     docker = lib.mkIf (user == "akib") {
       enable = true;
@@ -222,6 +215,23 @@ in {
         };
       };
     };
+
+    # Enable the full gaming environment
+    gaming.enable = true;
+    # Enable BBR congestion control
+    bbr.enable = true;
+    # Enable FHS shell and nix-ld support
+    fhs = {
+      enable = true;
+      # Example: Add an extra library needed by a third-party binary (optional)
+      extraNixLdLibraries = with pkgs; [
+        libglvnd # Often needed for graphics/gaming binaries
+      ];
+    };
+    # D-Bus is an inter-process communication (IPC) for enabling communication between different applications and system components.
+    dbus.enable = true;
+    # Enable OBS with default plugins and the virtual camera feature
+    obs.enable = true;
   };
 
   # Open ports in the firewall.
