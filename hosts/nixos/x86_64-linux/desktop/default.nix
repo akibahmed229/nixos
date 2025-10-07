@@ -62,6 +62,7 @@ in {
     tlrc # Command-line tool for TL;DR pages.
     nix-diff # used to compare derivations
     libnotify # Desktop notification
+    # stacer # Linux system monitoring tool. # FIXME: broken
 
     # 2. File Management
     trash-cli # Command-line trash utility.
@@ -87,7 +88,7 @@ in {
     nextcloud-client # Nextcloud sync client.
 
     # 5. Productivity
-    libreoffice # Office suite.
+    # libreoffice # Office suite. # FIXME: broken
     figma-linux # Figma design tool.
     # notepadqq # Text editor.
 
@@ -133,8 +134,8 @@ in {
     android-tools
     android-udev-rules
     jdk24 # Java Development Kit
-    jetbrains.pycharm-community # Python IDE.
-    jetbrains.idea-community # Java IDE.
+    # jetbrains.pycharm-community # Python IDE. # FIXME: broken
+    # jetbrains.idea-community # Java IDE. # FIXME: broken
     postman # API development environment.
     vscode # Code editor.
     # zed-editor # Code editor.
@@ -149,7 +150,7 @@ in {
     # krita # Digital painting software.
     # glaxnimate # Animation editor.
     # inkscape # Vector graphics editor.
-    handbrake # Video transcoder.
+    # handbrake # Video transcoder. # FIXME: broken
     audacity # Audio editor.
     darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
@@ -198,8 +199,8 @@ in {
     # Docker
     docker = lib.mkIf (user == "akib") {
       enable = true;
+      ipvlan.enable = true;
       iptables.enable = false;
-
       # container
       container = {
         n8n = {
@@ -217,7 +218,7 @@ in {
     };
 
     # Full gaming environment
-    gaming.enable = true;
+    gaming.enable = false; # FIXME: broken
     # BBR congestion control
     bbr.enable = true;
     # FHS shell and nix-ld support
@@ -226,6 +227,21 @@ in {
     dbus.enable = true;
     # OBS with default plugins and the virtual camera feature
     obs.enable = true;
+
+    # --- Core Networking Configuration ---
+    networking = {
+      enable = true;
+      domain = "${user}lab";
+      defaultGateway = {
+        address = "192.168.0.1";
+        interface = "enp4s0";
+      };
+      # Static IPs for physical interfaces
+      interfaces = {
+        "enp4s0" = ["192.168.0.111/24"];
+        "wlp0s20f0u4" = ["192.168.0.179/24"];
+      };
+    };
   };
 
   # Open ports in the firewall.
