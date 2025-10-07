@@ -32,7 +32,6 @@ in {
         [
           "sops"
           "ngrok"
-          "openrgb"
           "openrazer"
           "intel-gpu"
         ];
@@ -248,6 +247,16 @@ in {
       shares = [
         {device = "sda1";}
         {device = "sda2";}
+      ];
+    };
+
+    # Openrgb setup.
+    openrgb = {
+      enable = true;
+      motherboard = "intel"; # Explicitly set motherboard type
+      # Pass your custom package here
+      extraSystemPackages = [
+        self.packages.${pkgs.system}.toggleRGB
       ];
     };
   };
