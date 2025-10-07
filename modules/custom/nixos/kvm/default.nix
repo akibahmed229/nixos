@@ -50,16 +50,6 @@ in {
           runAsRoot = true;
           vhostUserPackages = with pkgs; [virtiofsd]; # share a folder with a guest,
           swtpm.enable = true;
-          ovmf = {
-            enable = true;
-            packages = [
-              (pkgs.OVMF.override {
-                secureBoot = true;
-                tpmSupport = true;
-              })
-              .fd
-            ];
-          };
         };
       };
       spiceUSBRedirection.enable = true;
