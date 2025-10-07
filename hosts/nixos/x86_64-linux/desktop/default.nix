@@ -31,7 +31,6 @@ in {
         ++ lib.optionals (user == "akib")
         [
           "sops"
-          "ngrok"
           "openrazer"
           "intel-gpu"
         ];
