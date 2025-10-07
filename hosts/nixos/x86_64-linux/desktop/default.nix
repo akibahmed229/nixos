@@ -186,7 +186,6 @@ in {
     gpu = {
       enable = true;
       vendor = "intel";
-      enableLegacyDrivers = true;
       kernelParams = ["i915.force_probe=4680"];
     };
 
