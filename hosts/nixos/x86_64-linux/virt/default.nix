@@ -23,11 +23,9 @@ in {
         [
           "stylix"
           "impermanence"
-          "dbus"
         ]
         ++ lib.optionals (user == "akib") [
           "sops"
-          "intel-gpu"
         ];
     };
 
@@ -85,12 +83,21 @@ in {
       };
     };
 
+    # Enable Intel gpu
+    gpu = {
+      enable = true;
+      vendor = "intel";
+    };
+
     # kubernetes  ( custom module )
     k8s = {
       enable = true;
       role = "worker";
       kubeMasterIP = "192.168.0.111";
     };
+
+    # (IPC) communication between different applications and system components.
+    dbus.enable = true;
   };
 
   networking.nameservers = ["8.8.8.8"];
