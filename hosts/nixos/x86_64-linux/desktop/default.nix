@@ -231,7 +231,6 @@ in {
     # --- Core Networking Configuration ---
     networking = {
       enable = true;
-      domain = "${user}lab";
       defaultGateway = {
         address = "192.168.0.1";
         interface = "enp4s0";

@@ -29,7 +29,8 @@ in {
     };
 
     domain = mkOption {
-      type = types.str;
+      type = types.nullOr types.str;
+      default = null;
       description = "The domain name of the system (e.g., example.com).";
       example = "example.com";
     };
@@ -89,8 +90,8 @@ in {
     networking = {
       defaultGateway = cfg.defaultGateway;
       nameservers = cfg.nameservers;
-      domain = cfg.domain;
-      search = [cfg.domain]; # Set search domain equal to the domain name
+      domain = mkIf (cfg.domain != null) cfg.domain;
+      search = mkIf (cfg.domain != null) [cfg.domain]; # Set search domain equal to the domain name
     };
 
     # 2.2 NetworkManager
