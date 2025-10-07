@@ -34,7 +34,6 @@ in {
       qt6.qtwayland # Qt 6 Wayland integration.
       qt6Packages.qt6ct # Qt 6 configuration tool.
       gnome-software # GNOME software manager.
-      stacer # Linux system monitoring tool.
 
       # 3. Multimedia & Audio
       pwvucontrol # Pipewire volume control.
