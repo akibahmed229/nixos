@@ -118,9 +118,9 @@ in {
     # B. Host Configuration for Direct Container Routing
     # Creates the virtual L3 interface on the host for clean routing.
     networking.localCommands = mkIf cfg.ipvlan.enable ''
-      local IFACE="ipvl-${cfg.ipvlan.parentInterface}" # ipvl-enp4s0
-      local PARENT="${shellQuote cfg.ipvlan.parentInterface}"
-      local HOST_IP="${shellQuote cfg.ipvlan.hostIP}"
+      IFACE="ipvl-" # ipvl-enp4s0
+      PARENT="${shellQuote cfg.ipvlan.parentInterface}"
+      HOST_IP="${shellQuote cfg.ipvlan.hostIP}"
 
       # Add the IPvlan link (ignore if it already exists)
       ip link add "$IFACE" link "$PARENT" type ipvlan mode l3 || true
