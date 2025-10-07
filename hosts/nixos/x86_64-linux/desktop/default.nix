@@ -30,7 +30,6 @@ in {
         ]
         ++ lib.optionals (user == "akib")
         [
-          "samba"
           "sops"
           "ngrok"
           "openrgb"
@@ -240,6 +239,16 @@ in {
         "enp4s0" = ["192.168.0.111/24"];
         "wlp0s20f0u4" = ["192.168.0.179/24"];
       };
+    };
+
+    # Samba shares.
+    samba = {
+      enable = true;
+      # Define the drives you want to share
+      shares = [
+        {device = "sda1";}
+        {device = "sda2";}
+      ];
     };
   };
 
