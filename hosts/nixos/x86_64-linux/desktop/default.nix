@@ -31,7 +31,7 @@ in {
         ++ lib.optionals (user == "akib")
         [
           "sops"
-          "intel-gpu"
+          # "intel-gpu"
         ];
     };
 
@@ -181,6 +181,14 @@ in {
         inherit (system) name path;
         inherit desktopEnvironment state-version;
       };
+    };
+
+    # Enable Intel gpu
+    gpu = {
+      enable = true;
+      vendor = "intel";
+      enableLegacyDrivers = true;
+      kernelParams = ["i915.force_probe=4680"];
     };
 
     # Enable virtualisation

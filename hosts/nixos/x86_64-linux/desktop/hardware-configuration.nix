@@ -29,7 +29,6 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [
-      "i915.force_probe=4680" # Force the i915 driver to load for the Intel Iris Xe Graphics
       "hibernate=no" # Disable hibernation
       "intel_iommu=on" # Enable IOMMU
       "iommu=pt" # set IOMMU to passthrough mode
