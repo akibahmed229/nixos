@@ -31,7 +31,6 @@ in {
         ++ lib.optionals (user == "akib")
         [
           "sops"
-          "openrazer"
           "intel-gpu"
         ];
     };
@@ -224,6 +223,8 @@ in {
     dbus.enable = true;
     # OBS with default plugins and the virtual camera feature
     obs.enable = true;
+    # OpenRazer phereparels
+    openrazer.enable = true;
 
     # --- Core Networking Configuration ---
     networking = {
