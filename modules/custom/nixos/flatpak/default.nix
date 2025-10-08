@@ -16,20 +16,23 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.flatpak = {
-    enable = mkEnableOption "Enable and configure the Flatpak service and managed applications.";
+    enable = mkEnableOption "Enable and configure the Flatpak service.";
 
-    apps = mkOption {
-      type = types.listOf types.str;
-      default = [];
-      description = ''
-        A list of Flatpak application IDs (e.g., "org.telegram.desktop") that should be installed and managed.
-        The activation script ensures only apps in this list are installed.
-      '';
-      example = [
-        "com.google.Chrome"
-        "md.obsidian.Obsidian"
-        "org.telegram.desktop"
-      ];
+    apps = {
+      enable = mkEnableOption "Enable Flatpak service to manage applications.";
+      lists = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        description = ''
+          A list of Flatpak application IDs (e.g., "org.telegram.desktop") that should be installed and managed.
+          The activation script ensures only apps in this list are installed.
+        '';
+        example = [
+          "com.google.Chrome"
+          "md.obsidian.Obsidian"
+          "org.telegram.desktop"
+        ];
+      };
     };
   };
 
@@ -40,17 +43,20 @@ in {
       enable = true;
 
       # Easily manage the list of all desired applications here
-      apps = [
-        "sh.ppy.osu"
-        "com.jgraph.drawio.desktop"
-        "com.github.tchx84.Flatseal"
-        "com.google.Chrome"
-        "md.obsidian.Obsidian"
-        "org.telegram.desktop"
-        "org.mozilla.firefox"
-        "org.qbittorrent.qBittorrent"
-        "io.github.Figma_Linux.figma_linux"
-      ];
+      apps = {
+        enable = true;
+        lists = [
+          "sh.ppy.osu"
+          "com.jgraph.drawio.desktop"
+          "com.github.tchx84.Flatseal"
+          "com.google.Chrome"
+          "md.obsidian.Obsidian"
+          "org.telegram.desktop"
+          "org.mozilla.firefox"
+          "org.qbittorrent.qBittorrent"
+          "io.github.Figma_Linux.figma_linux"
+        ];
+      };
     };
   ```
   */
@@ -61,7 +67,7 @@ in {
     services.flatpak.enable = true;
 
     # Inject the management script into the system activation phase
-    system.activationScripts = {
+    system.activationScripts = mkIf cfg.apps.enable {
       flatpak = {
         # Ensure the script runs *after* basic file systems are set up
         # We give it a high priority (20) to ensure it runs

@@ -95,7 +95,7 @@ in {
     };
 
     # 2.2 NetworkManager
-    networking.networkmanager = mkIf cfg.enableNetworkManager {
+    networking.networkmanager = mkIf (!cfg.enableNetworkManager) {
       enable = true;
       wifi.macAddress = cfg.macAddressStrategy;
       ethernet.macAddress = cfg.macAddressStrategy;

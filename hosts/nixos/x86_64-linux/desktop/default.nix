@@ -99,11 +99,7 @@ in {
         address = "192.168.0.1";
         interface = "enp4s0";
       };
-      # Static IPs for physical interfaces
-      interfaces = {
-        "enp4s0" = ["192.168.0.111/24"];
-        "wlp0s20f0u4" = ["192.168.0.179/24"];
-      };
+      enableNetworkManager = false;
     };
 
     # Samba shares.
