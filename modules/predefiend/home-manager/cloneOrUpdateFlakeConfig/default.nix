@@ -10,7 +10,7 @@ in {
     function cloneOrUpdateFlakeConfig {
       local config_dir="${homeDir}/.config/flake"
       local repo_url="https://github.com/akibahmed229/nixos.git"
-      local secret_dir="${homeDir}/.config/flake/modules/predefiend/nixos/sops/config"
+      local secret_dir="${homeDir}/.config/flake/modules/custom/nixos/sops/config"
       local git="${pkgs.git}/bin/git"
       local ssh="${pkgs.openssh}/bin/ssh"
 

@@ -12,29 +12,152 @@
   self,
   theme,
   lib,
+  inputs,
   ...
 }: let
   # My custom lib helper functions
-  inherit (self.lib) mkImport mkRelativeToRoot;
+  inherit (self.lib) mkRelativeToRoot;
 in {
-  imports =
-    map mkRelativeToRoot [
-      "home-manager/${desktopEnvironment}"
-      "home-manager/niri"
-    ]
-    ++ mkImport {
-      path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms =
-        lib.optionals (user == "akib")
-        [
-          "sops"
-        ];
-    };
+  imports = map mkRelativeToRoot [
+    "home-manager/${desktopEnvironment}"
+    "home-manager/niri"
+  ];
 
   # A lightweight TUI (ncurses-like) display manager for Linux and BSD.
   services.displayManager = {
     ly.enable = true;
     defaultSession = "Niri";
+  };
+
+  # Custom nixos modules
+  nm = {
+    # User management configuration - see modules/custom/nixos/user
+    # Per-system user configuration
+    setUser = {
+      name = user;
+      usersPath = ./users/.;
+      nixosUsers.enable = true;
+      homeUsers.enable = true;
+
+      system = {
+        inherit (system) name path;
+        inherit desktopEnvironment state-version;
+      };
+    };
+
+    # Enable Intel gpu
+    gpu = {
+      enable = true;
+      vendor = "intel";
+      kernelParams = ["i915.force_probe=4680"];
+    };
+
+    # Enable virtualisation
+    kvm.enable = true;
+
+    # kubernetes
+    k8s = {
+      enable = true;
+      role = "master";
+      defaultUser = "akib";
+      kubeMasterIP = "192.168.0.111";
+    };
+
+    # Docker
+    docker = lib.mkIf (user == "akib") {
+      enable = true;
+      ipvlan.enable = true;
+      iptables.enable = false;
+      # container
+      container = {
+        n8n = {
+          enable = true;
+          defaultUser = user;
+        };
+        pihole.enable = true;
+        jenkins.enable = true;
+        portainer.enable = true;
+        nextcloud = {
+          enable = true;
+          defaultUser = user;
+        };
+      };
+    };
+
+    # Full gaming environment
+    gaming.enable = false; # FIXME: broken
+    # BBR congestion control
+    bbr.enable = true;
+    # FHS shell and nix-ld support
+    fhs.enable = true;
+    # (IPC) communication between different applications and system components.
+    dbus.enable = true;
+    # OBS with default plugins and the virtual camera feature
+    obs.enable = true;
+    # OpenRazer phereparels
+    openrazer.enable = true;
+
+    # --- Core Networking Configuration ---
+    networking = {
+      enable = true;
+      defaultGateway = {
+        address = "192.168.0.1";
+        interface = "enp4s0";
+      };
+      # Static IPs for physical interfaces
+      interfaces = {
+        "enp4s0" = ["192.168.0.111/24"];
+        "wlp0s20f0u4" = ["192.168.0.179/24"];
+      };
+    };
+
+    # Samba shares.
+    samba = {
+      enable = true;
+      # Define the drives you want to share
+      shares = [
+        {device = "sda1";}
+        {device = "sda2";}
+      ];
+    };
+
+    # Openrgb setup.
+    openrgb = {
+      enable = true;
+      motherboard = "intel"; # Explicitly set motherboard type
+      # Pass your custom package here
+      extraSystemPackages = [
+        self.packages.${pkgs.system}.toggleRGB
+      ];
+    };
+
+    # System theme
+    stylix = {
+      enable = true;
+      themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
+    };
+
+    # Persistant storage
+    impermanence = {
+      enable = true;
+      inherit user; # REQUIRED: Set your primary username
+      systemDirs = [
+        "/var/lib/my-new-service-state"
+      ];
+    };
+
+    # Secret management
+    sops = {
+      enable = true;
+      defaultSopsFile = "${builtins.toString inputs.secrets}/secrets/secrets.yaml";
+      secrets = {
+        "akib/password/root_secret".neededForUsers = true;
+        "akib/password/my_secret".neededForUsers = true;
+        "akib/wireguard/PrivateKey".neededForUsers = true;
+        "akib/cloudflared".neededForUsers = true;
+        "afif/password/my_secret".neededForUsers = true;
+      };
+    };
   };
 
   # remove bloat
@@ -161,124 +284,6 @@ in {
   services = {
     # disable password auth for openssh
     openssh.settings.PasswordAuthentication = false;
-  };
-
-  # Custom nixos modules
-  nm = {
-    # User management configuration - see modules/custom/nixos/user
-    # Per-system user configuration
-    setUser = {
-      name = user;
-      usersPath = ./users/.;
-      nixosUsers.enable = true;
-      homeUsers.enable = true;
-
-      system = {
-        inherit (system) name path;
-        inherit desktopEnvironment state-version;
-      };
-    };
-
-    # Enable Intel gpu
-    gpu = {
-      enable = true;
-      vendor = "intel";
-      kernelParams = ["i915.force_probe=4680"];
-    };
-
-    # Enable virtualisation
-    kvm.enable = true;
-
-    # kubernetes
-    k8s = {
-      enable = true;
-      role = "master";
-      defaultUser = "akib";
-      kubeMasterIP = "192.168.0.111";
-    };
-
-    # Docker
-    docker = lib.mkIf (user == "akib") {
-      enable = true;
-      ipvlan.enable = true;
-      iptables.enable = false;
-      # container
-      container = {
-        n8n = {
-          enable = true;
-          defaultUser = user;
-        };
-        pihole.enable = true;
-        jenkins.enable = true;
-        portainer.enable = true;
-        nextcloud = {
-          enable = true;
-          defaultUser = user;
-        };
-      };
-    };
-
-    # Full gaming environment
-    gaming.enable = false; # FIXME: broken
-    # BBR congestion control
-    bbr.enable = true;
-    # FHS shell and nix-ld support
-    fhs.enable = true;
-    # (IPC) communication between different applications and system components.
-    dbus.enable = true;
-    # OBS with default plugins and the virtual camera feature
-    obs.enable = true;
-    # OpenRazer phereparels
-    openrazer.enable = true;
-
-    # --- Core Networking Configuration ---
-    networking = {
-      enable = true;
-      defaultGateway = {
-        address = "192.168.0.1";
-        interface = "enp4s0";
-      };
-      # Static IPs for physical interfaces
-      interfaces = {
-        "enp4s0" = ["192.168.0.111/24"];
-        "wlp0s20f0u4" = ["192.168.0.179/24"];
-      };
-    };
-
-    # Samba shares.
-    samba = {
-      enable = true;
-      # Define the drives you want to share
-      shares = [
-        {device = "sda1";}
-        {device = "sda2";}
-      ];
-    };
-
-    # Openrgb setup.
-    openrgb = {
-      enable = true;
-      motherboard = "intel"; # Explicitly set motherboard type
-      # Pass your custom package here
-      extraSystemPackages = [
-        self.packages.${pkgs.system}.toggleRGB
-      ];
-    };
-
-    # System theme
-    stylix = {
-      enable = true;
-      themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
-    };
-
-    # Persistant storage
-    impermanence = {
-      enable = true;
-      inherit user; # REQUIRED: Set your primary username
-      systemDirs = [
-        "/var/lib/my-new-service-state"
-      ];
-    };
   };
 
   # Open ports in the firewall.

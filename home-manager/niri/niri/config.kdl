@@ -214,7 +214,7 @@ binds {
 spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
 spawn-sh-at-startup "xwayland-satellite"
 // spawn-sh-at-startup "qs" // Launch quickshell
-// spawn-sh-at-startup "udiskie" // USB Mass storage devices mounting
+spawn-sh-at-startup "udiskie" // USB Mass storage devices mounting
 spawn-sh-at-startup "nm-applet --indicator" // simple network manager indicator
 spawn-sh-at-startup "nextcloud --background" 
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store" // Stores only text data
