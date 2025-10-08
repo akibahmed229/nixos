@@ -7,27 +7,21 @@
   self,
   pkgs,
   user,
-  lib,
+  theme,
   state-version,
   system,
+  inputs,
   ...
 }: let
   # My custom lib helper functions
-  inherit (self.lib) mkImport mkRelativeToRoot;
+  inherit (self.lib) mkRelativeToRoot;
 in {
   imports =
     [(mkRelativeToRoot "home-manager/dwm")]
-    ++ mkImport {
-      path = mkRelativeToRoot "modules/predefiend/nixos";
-      ListOfPrograms =
-        [
-          "stylix"
-          "impermanence"
-        ]
-        ++ lib.optionals (user == "akib") [
-          "sops"
-        ];
-    };
+    ++ [
+      inputs.stylix.nixosModules.stylix
+      inputs.sops-nix.nixosModules.sops
+    ];
 
   users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
@@ -98,6 +92,34 @@ in {
 
     # (IPC) communication between different applications and system components.
     dbus.enable = true;
+
+    # System theme
+    stylix = {
+      enable = true;
+      themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
+    };
+
+    # Persistant storage
+    impermanence = {
+      enable = true;
+      inherit user; # REQUIRED: Set your primary username
+      systemDirs = [
+        "/var/lib/my-new-service-state"
+      ];
+    };
+
+    # Secret management
+    sops = {
+      enable = true;
+      defaultSopsFile = "${builtins.toString inputs.secrets}/secrets/secrets.yaml";
+      secrets = {
+        "akib/password/root_secret".neededForUsers = true;
+        "akib/password/my_secret".neededForUsers = true;
+        "akib/wireguard/PrivateKey".neededForUsers = true;
+        "akib/cloudflared".neededForUsers = true;
+        "afif/password/my_secret".neededForUsers = true;
+      };
+    };
   };
 
   networking.nameservers = ["8.8.8.8"];
