@@ -8,17 +8,20 @@
   config,
   lib,
   pkgs,
-  inputs,
   modulesPath,
   devicename,
+  inputs,
   ...
 }: {
-  imports =
-    [
-      inputs.disko.nixosModules.default
-      (import ../../../../modules/predefiend/nixos/disko {device = lib.mkDefault devicename;})
-    ]
-    ++ [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [
+    inputs.disko.nixosModules.default
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
+  nm.disko = {
+    enable = true;
+    device = devicename;
+  };
 
   # nixpkgs.overlays = [self.overlays.intel-latestKernel-overlay]; # Add the latest kernel overlay for my intel processor
 

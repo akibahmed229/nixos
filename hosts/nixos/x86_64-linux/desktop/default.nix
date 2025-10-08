@@ -18,10 +18,15 @@
   # My custom lib helper functions
   inherit (self.lib) mkRelativeToRoot;
 in {
-  imports = map mkRelativeToRoot [
-    "home-manager/${desktopEnvironment}"
-    "home-manager/niri"
-  ];
+  imports =
+    map mkRelativeToRoot [
+      "home-manager/${desktopEnvironment}"
+      "home-manager/niri"
+    ]
+    ++ [
+      inputs.stylix.nixosModules.stylix
+      inputs.sops-nix.nixosModules.sops
+    ];
 
   # A lightweight TUI (ncurses-like) display manager for Linux and BSD.
   services.displayManager = {

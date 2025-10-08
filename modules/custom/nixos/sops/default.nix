@@ -1,10 +1,8 @@
-# modules/sops.nix
 # Configures system-wide secret management using SOPS and sops-nix.
 {
   config,
   lib,
   pkgs,
-  inputs, # Required to import the external sops-nix module
   ...
 }:
 with lib; let
@@ -25,10 +23,11 @@ in {
   * update changes .sops.yaml file like adding age key, removing old keys etc
   * sops updatekeys secrets.yaml
   */
+
   # --- 0. Imports ---
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-  ];
+  #imports = [
+  #  inputs.sops-nix.nixosModules.sops
+  #];
 
   # --- 1. Define Options ---
   options.nm.sops = {

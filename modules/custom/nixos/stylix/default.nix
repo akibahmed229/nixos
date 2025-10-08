@@ -4,7 +4,6 @@
   config,
   lib,
   pkgs,
-  inputs, # Required to import the external stylix module
   ...
 }:
 with lib; let
@@ -27,10 +26,10 @@ with lib; let
   };
 in {
   # --- 0. Conditional Imports ---
-  imports = [
-    # Assumes 'stylix' is an input defined in your flake.nix
-    inputs.stylix.nixosModules.stylix
-  ];
+  # imports = [
+  #   # Assumes 'stylix' is an input defined in your flake.nix
+  #   inputs.stylix.nixosModules.stylix
+  # ];
 
   # --- 1. Define Options ---
   options.nm.stylix = {

@@ -7,12 +7,15 @@
   inputs,
   ...
 }: {
-  imports =
-    [
-      inputs.disko.nixosModules.default
-      (import ../../../../modules/predefiend/nixos/disko {device = lib.mkDefault "/dev/vda";})
-    ]
-    ++ [(modulesPath + "/profiles/qemu-guest.nix")];
+  imports = [
+    inputs.disko.nixosModules.default
+    (modulesPath + "/profiles/qemu-guest.nix")
+  ];
+
+  nm.disko = {
+    enable = true;
+    device = "/dev/vda";
+  };
 
   boot = {
     initrd.availableKernelModules = ["ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk"];
