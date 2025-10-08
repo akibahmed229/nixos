@@ -3,6 +3,7 @@
 {
   config,
   lib,
+  inputs,
   ...
 }: let
   cfg = config.nm.disko;
@@ -35,8 +36,12 @@
     };
   };
 in {
+  # Note: This module requires that you have imported the main disko module
+  # in your configuration.nix, like so:
+  imports = [inputs.disko.nixosModules.default];
+
   options.nm.disko = with lib; {
-    enable = mkEnableOption "disko declarative disk configuration";
+    enable = mkEnableOption "disko declarative disk configuration" // {default = false;};
 
     device = mkOption {
       type = types.str;
@@ -95,10 +100,6 @@ in {
   */
 
   config = lib.mkIf cfg.enable {
-    # Note: This module requires that you have imported the main disko module
-    # in your configuration.nix, like so:
-    # imports = [inputs.disko.nixosModules.default];
-
     disko.devices = {
       disk.main = {
         # This will throw an error if cfg.device is not set, as intended.

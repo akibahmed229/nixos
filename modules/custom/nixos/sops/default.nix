@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -25,9 +26,9 @@ in {
   */
 
   # --- 0. Imports ---
-  #imports = [
-  #  inputs.sops-nix.nixosModules.sops
-  #];
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
 
   # --- 1. Define Options ---
   options.nm.sops = {
@@ -91,11 +92,6 @@ in {
         # 3. Define the secrets needed for this host/user.
         # These definitions will be merged across all modules that configure nm.sops.secrets.
         secrets = {
-          "akib/password/root_secret".neededForUsers = true;
-          "akib/password/my_secret".neededForUsers = true;
-          "akib/wireguard/PrivateKey".neededForUsers = true;
-          "akib/cloudflared".neededForUsers = true;
-          "afif/password/my_secret".neededForUsers = true;
           # You can now add system secrets specific to this host easily:
           "host/my_service_token".path = "/run/secrets/service_token";
         };

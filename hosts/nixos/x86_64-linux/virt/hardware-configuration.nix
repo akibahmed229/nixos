@@ -7,10 +7,7 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.disko.nixosModules.default
-    (modulesPath + "/profiles/qemu-guest.nix")
-  ];
+  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
   nm.disko = {
     enable = true;

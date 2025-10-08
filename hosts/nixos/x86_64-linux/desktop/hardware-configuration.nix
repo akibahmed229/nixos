@@ -13,10 +13,7 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.disko.nixosModules.default
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   nm.disko = {
     enable = true;

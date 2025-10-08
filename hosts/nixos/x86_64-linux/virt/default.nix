@@ -16,12 +16,7 @@
   # My custom lib helper functions
   inherit (self.lib) mkRelativeToRoot;
 in {
-  imports =
-    [(mkRelativeToRoot "home-manager/dwm")]
-    ++ [
-      inputs.stylix.nixosModules.stylix
-      inputs.sops-nix.nixosModules.sops
-    ];
+  imports = [(mkRelativeToRoot "home-manager/dwm")];
 
   users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
@@ -115,9 +110,6 @@ in {
       secrets = {
         "akib/password/root_secret".neededForUsers = true;
         "akib/password/my_secret".neededForUsers = true;
-        "akib/wireguard/PrivateKey".neededForUsers = true;
-        "akib/cloudflared".neededForUsers = true;
-        "afif/password/my_secret".neededForUsers = true;
       };
     };
   };

@@ -4,14 +4,8 @@
 {
   pkgs,
   lib,
-  self,
   ...
-}: let
-  # My custom lib helper functions
-  inherit (self.lib) mkRelativeToRoot;
-in {
-  imports = [(mkRelativeToRoot "modules/predefiend/nixos/sops")];
-
+}: {
   # (Custom nixos modules)
   nm.grub.enable = lib.mkForce false;
 
