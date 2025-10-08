@@ -10,7 +10,6 @@
   pkgs,
   modulesPath,
   devicename,
-  inputs,
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
