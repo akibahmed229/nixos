@@ -2,7 +2,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -76,16 +75,18 @@ in {
 
   # --- 2. Define Configuration ---
   config = mkIf cfg.enable {
-    # Enable the main cron service
-    cron.enable = true;
+    services = {
+      # Enable the main cron service
+      cron.enable = true;
 
-    # Merge system-wide cron jobs defined as raw strings
-    # Map the structured userCronJobs option to the cron.systemCronJobs format
-    # This automatically formats the structured user data into the required string format.
-    cron.systemCronJobs =
-      cfg.systemCronJobs
-      ++ lib.optionals (cfg.userCronJobs != []) (
-        map (job: "${job.schedule} ${job.user} ${job.command}") cfg.userCronJobs
-      );
+      # Merge system-wide cron jobs defined as raw strings
+      # Map the structured userCronJobs option to the cron.systemCronJobs format
+      # This automatically formats the structured user data into the required string format.
+      cron.systemCronJobs =
+        cfg.systemCronJobs
+        ++ lib.optionals (cfg.userCronJobs != []) (
+          map (job: "${job.schedule} ${job.user} ${job.command}") cfg.userCronJobs
+        );
+    };
   };
 }

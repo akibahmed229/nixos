@@ -59,7 +59,7 @@ in {
     k8s = {
       enable = true;
       role = "master";
-      defaultUser = "akib";
+      defaultUser = user;
       kubeMasterIP = "192.168.0.111";
     };
 
@@ -68,7 +68,6 @@ in {
       enable = true;
       ipvlan.enable = true;
       iptables.enable = false;
-      # container
       container = {
         n8n = {
           enable = true;
@@ -84,18 +83,14 @@ in {
       };
     };
 
-    # Full gaming environment
+    # some utils
     gaming.enable = false; # FIXME: broken
-    # BBR congestion control
     bbr.enable = true;
-    # FHS shell and nix-ld support
     fhs.enable = true;
-    # (IPC) communication between different applications and system components.
     dbus.enable = true;
-    # OBS with default plugins and the virtual camera feature
     obs.enable = true;
-    # OpenRazer phereparels
     openrazer.enable = true;
+    flatpak.enable = true;
 
     # --- Core Networking Configuration ---
     networking = {
