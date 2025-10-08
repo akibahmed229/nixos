@@ -1,4 +1,3 @@
-# modules/kubernetes.nix
 {
   pkgs,
   lib,
