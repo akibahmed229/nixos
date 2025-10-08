@@ -10,6 +10,7 @@
   state-version,
   system, # system info like (system name,path) directly coming from mkSystem functions
   self,
+  theme,
   lib,
   ...
 }: let
@@ -24,11 +25,7 @@ in {
     ++ mkImport {
       path = mkRelativeToRoot "modules/predefiend/nixos";
       ListOfPrograms =
-        [
-          "stylix"
-          "impermanence"
-        ]
-        ++ lib.optionals (user == "akib")
+        lib.optionals (user == "akib")
         [
           "sops"
         ];
@@ -128,7 +125,7 @@ in {
     android-studio
     android-tools
     android-udev-rules
-    jdk24 # Java Development Kit
+    jdk25 # Java Development Kit
     # jetbrains.pycharm-community # Python IDE. # FIXME: broken
     # jetbrains.idea-community # Java IDE. # FIXME: broken
     postman # API development environment.
@@ -191,6 +188,7 @@ in {
 
     # Enable virtualisation
     kvm.enable = true;
+
     # kubernetes
     k8s = {
       enable = true;
@@ -198,6 +196,7 @@ in {
       defaultUser = "akib";
       kubeMasterIP = "192.168.0.111";
     };
+
     # Docker
     docker = lib.mkIf (user == "akib") {
       enable = true;
@@ -263,6 +262,21 @@ in {
       # Pass your custom package here
       extraSystemPackages = [
         self.packages.${pkgs.system}.toggleRGB
+      ];
+    };
+
+    # System theme
+    stylix = {
+      enable = true;
+      themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
+    };
+
+    # Persistant storage
+    impermanence = {
+      enable = true;
+      inherit user; # REQUIRED: Set your primary username
+      systemDirs = [
+        "/var/lib/my-new-service-state"
       ];
     };
   };
