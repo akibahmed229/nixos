@@ -29,7 +29,7 @@
 
       extraArgs = mkOption {
         type = types.listOf types.str;
-        default = ["--no-autoupdate"];
+        default = [];
         example = ["--no-autoupdate" "--protocol" "quic"];
         description = "Extra arguments to pass to the 'cloudflared tunnel run' command.";
       };
@@ -111,9 +111,10 @@ in {
             ExecStart = let
               # Combine the extra arguments into a single string.
               argsStr = lib.concatStringsSep " " tunnel.extraArgs;
+              token = lib.strings.trim (builtins.readFile "${tunnel.tokenFile}");
             in
               # The command reads the token from the specified file at runtime.
-              "${cfg.package}/bin/cloudflared tunnel run ${argsStr} --token $(cat ${tunnel.tokenFile})";
+              "${cfg.package}/bin/cloudflared tunnel run ${argsStr} --token ${token}";
             Restart = "on-failure";
           };
         })
