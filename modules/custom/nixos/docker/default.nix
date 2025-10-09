@@ -85,6 +85,14 @@ in {
 
     # 2.3. IPvlan L3 Network Setup
 
+    /*
+    * Make sure to create a routing table on your main router
+      - Network Destination: 192.168.10.0 (your Docker subnet ip address eg,. ip: 101.101.0.0)
+      - Subnet Mask: 255.255.255.0 (your Docker subnet mask              eg,. ip/16 -> subnet: 255.255.0.0)
+      - Default Gateway: (your desktop IP address, e.g., 192.168.0.111)
+      - Interface: LAN (not WAN, because the route is internal)
+    */
+
     # A. Systemd Service to Create the Docker Network
     # This service ensures the custom IPvlan network is created declaratively on boot.
     systemd.services.docker-network-ipvlan-l3 = mkIf cfg.ipvlan.enable {
