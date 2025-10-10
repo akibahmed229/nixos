@@ -18,7 +18,7 @@ with lib; let
     "/var/lib/bluetooth"
     "/etc/NetworkManager/system-connections"
     "/etc/ssh"
-    "/var/log"
+    "/var/log" # special case cleaned by tmpfiles below
     "/var/lib/systemd"
     "/var/lib/nixos"
     "/var/lib/systemd/coredump"
@@ -266,6 +266,7 @@ in {
       # ''d /persist/home/${user} 0700 "${user}" users -'' # /persist/home/<user> owned by that user
 
       "e /var/tmp 1777 root root 30d"
+      "e /var/log 1777 root root 30d"
       # Clean old contents in user home cache dir
       "e /home/${cfg.user}/.cache 755 ${cfg.user} users 7d"
       "r /home/${cfg.user}/.cache/tmp*" # remove temporary files in cache on every boot
