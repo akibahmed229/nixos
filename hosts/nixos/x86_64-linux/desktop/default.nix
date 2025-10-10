@@ -53,7 +53,7 @@ in {
     };
 
     # ---------------- kubernetes Container Orchestration ---------------------
-    k8s = {
+    k8s = lib.mkIf (user == "akib") {
       enable = true;
       role = "master";
       defaultUser = user;
@@ -145,7 +145,7 @@ in {
     impermanence = {
       enable = true;
       inherit user; # REQUIRED: Set your primary username
-      systemDirs = [
+      systemDirs = lib.mkIf (user == "akib") [
         # state for containers and orchestrators
         "/var/lib/docker"
         "/var/lib/kubernetes"
@@ -168,7 +168,7 @@ in {
     };
 
     # ------------------- Atomic Secret Provisioning  -------------------------
-    sops = {
+    sops = lib.mkIf (user == "akib") {
       enable = true;
       defaultSopsFile = "${builtins.toString inputs.secrets}/secrets/secrets.yaml";
       secrets = {
