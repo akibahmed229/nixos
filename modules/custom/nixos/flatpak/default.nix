@@ -11,7 +11,7 @@ with lib; let
 
   # Format the list of apps into a shell array string
   flatpakAppsShellArray = builtins.concatStringsSep "\n" (
-    map (app: ''"${app}"'') cfg.apps
+    map (app: ''"${app}"'') cfg.apps.lists
   );
 in {
   # --- 1. Define Options ---
@@ -80,7 +80,7 @@ in {
           )
 
           # Add Flathub remote if it doesn't exist
-          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
+          # ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 
           # --- Installation Loop: Install missing packages ---
           for package in ''${flatpaks[*]}; do

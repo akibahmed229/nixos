@@ -90,7 +90,19 @@ in {
     dbus.enable = true;
     obs.enable = true;
     openrazer.enable = true;
-    flatpak.enable = true;
+
+    flatpak = {
+      enable = true;
+
+      apps = {
+        enable = true;
+        lists = [
+          "sh.ppy.osu"
+          "app.zen_browser.zen"
+          "com.github.tchx84.Flatseal"
+        ];
+      };
+    };
 
     # --- Core Networking Configuration ---
     networking = {
@@ -196,6 +208,7 @@ in {
     # 5. Productivity
     # libreoffice # Office suite. # FIXME: broken
     figma-linux # Figma design tool.
+    drawio # For creating diagrams
     # notepadqq # Text editor.
 
     # 6. Gaming & Entertainment
