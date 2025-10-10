@@ -29,11 +29,11 @@ in {
     defaultSession = "Niri";
   };
 
-  # Custom nixos modules
+  # ---------------------------------------- Custom Nixos Modules ----------------------------------------------------
   nm = {
-    # User management configuration - see modules/custom/nixos/user
-    # Per-system user configuration
+    # ------------------- Per-system user configuration -----------------------
     setUser = {
+      # see modules/custom/nixos/user
       name = user;
       usersPath = ./users/.;
       nixosUsers.enable = true;
@@ -45,17 +45,14 @@ in {
       };
     };
 
-    # Enable Intel gpu
+    # ------------------------ Enable Intel Gpu -------------------------------
     gpu = {
       enable = true;
       vendor = "intel";
       kernelParams = ["i915.force_probe=4680"];
     };
 
-    # Enable virtualisation
-    kvm.enable = true;
-
-    # kubernetes
+    # ---------------- kubernetes Container Orchestration ---------------------
     k8s = {
       enable = true;
       role = "master";
@@ -63,7 +60,7 @@ in {
       kubeMasterIP = "192.168.0.111";
     };
 
-    # Docker
+    # ------------------- Docker Container Applications -----------------------
     docker = lib.mkIf (user == "akib") {
       enable = true;
       ipvlan.enable = true;
@@ -83,7 +80,8 @@ in {
       };
     };
 
-    # some utils
+    # ------------------------- Some Utils ------------------------------------
+    kvm.enable = true;
     gaming.enable = false; # FIXME: broken
     bbr.enable = true;
     fhs.enable = true;
@@ -91,7 +89,7 @@ in {
     obs.enable = true;
     openrazer.enable = true;
 
-    # flatpak application
+    # -------------------- Flatpak Application --------------------------------
     flatpak = {
       enable = true;
       apps = {
@@ -104,7 +102,7 @@ in {
       };
     };
 
-    # --- Core Networking Configuration ---
+    # -------------------- Core Networking Configuration ----------------------
     networking = {
       enable = true;
       defaultGateway = {
@@ -114,7 +112,7 @@ in {
       enableNetworkManager = false;
     };
 
-    # Samba shares.
+    # -------------------- Samba Shares ---------------------------------------
     samba = {
       enable = true;
       # Define the drives you want to share
@@ -124,7 +122,7 @@ in {
       ];
     };
 
-    # Openrgb setup.
+    # ---------------------- RGB Stuff ----------------------------------------
     openrgb = {
       enable = true;
       motherboard = "intel"; # Explicitly set motherboard type
@@ -134,13 +132,13 @@ in {
       ];
     };
 
-    # System theme
+    # ---------------------- System Wide Theme --------------------------------
     stylix = {
       enable = true;
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
     };
 
-    # Persistant storage
+    # ---------------------- Ephemeral Storage  -------------------------------
     impermanence = {
       enable = true;
       inherit user; # REQUIRED: Set your primary username
@@ -166,7 +164,7 @@ in {
       ];
     };
 
-    # Secret management
+    # ------------------- Atomic Secret Provisioning  -------------------------
     sops = {
       enable = true;
       defaultSopsFile = "${builtins.toString inputs.secrets}/secrets/secrets.yaml";
@@ -180,10 +178,8 @@ in {
     };
   };
 
-  # remove bloat
-  documentation.nixos.enable = true;
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # ---------------------------------------- System Stuff -----------------------------------------------------------------
+  documentation.nixos.enable = true; # remove bloat
   environment.systemPackages = with pkgs; [
     # 1. System Utilities
     htop # Interactive process viewer.
@@ -223,7 +219,7 @@ in {
     nextcloud-client # Nextcloud sync client.
 
     # 5. Productivity
-    # libreoffice # Office suite. # FIXME: broken
+    libreoffice # Office suite.
     figma-linux # Figma design tool.
     drawio # For creating diagrams
     # notepadqq # Text editor.
