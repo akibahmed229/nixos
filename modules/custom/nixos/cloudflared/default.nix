@@ -75,7 +75,7 @@ in {
         my-tunnel = {
           # This points to the file containing your tunnel token.
           # It cleanly separates the configuration from the secret.
-          tokenFile = "${builtins.toString inputs.secrets}/cloudflared/token";
+          tokenFile = config.sops.secrets."${name}/password/my_secret".path;
 
           # The `user` and `extraArgs` options will use the defaults ("root"
           # and ["--no-autoupdate"]), which perfectly match your original config.
@@ -111,10 +111,9 @@ in {
             ExecStart = let
               # Combine the extra arguments into a single string.
               argsStr = lib.concatStringsSep " " tunnel.extraArgs;
-              token = lib.strings.trim (builtins.readFile "${tunnel.tokenFile}");
             in
               # The command reads the token from the specified file at runtime.
-              "${cfg.package}/bin/cloudflared tunnel run ${argsStr} --token ${token}";
+              "${cfg.package}/bin/cloudflared tunnel run ${argsStr} --token $(cat ${tunnel.tokenFile})";
             Restart = "on-failure";
           };
         })

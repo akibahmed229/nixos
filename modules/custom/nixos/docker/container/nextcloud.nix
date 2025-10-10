@@ -3,25 +3,19 @@
 {
   lib,
   config,
-  inputs, # Assumed to be passed from the flake setup (used for default secrets path)
   ...
 }:
 with lib; let
   cfg = config.nm.docker.container.nextcloud;
-
-  # Only attempt to read secrets if enabled, to avoid errors on configuration import
-  secretsInputPath = builtins.toString cfg.secretsInput;
-  password = lib.strings.trim (builtins.readFile "${secretsInputPath}/nextcloud/pass.txt");
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.nextcloud = {
     enable = mkEnableOption "Enable the Nextcloud file synchronization and sharing stack";
 
-    secretsInput = mkOption {
-      type = types.path;
-      description = "The path to the secrets flake input containing the nextcloud password file.";
-      # Default to the 'secrets' input, assuming it's available in the calling scope
-      default = inputs.secrets;
+    password = mkOption {
+      type = types.str;
+      description = "The nextcloud password";
+      default = "123456";
     };
 
     defaultUser = mkOption {
@@ -116,10 +110,10 @@ in {
               "${cfg.mariadbRoot}:/var/lib/mysql" # Persist MariaDB data
             ];
             environment = {
-              MYSQL_ROOT_PASSWORD = password;
+              MYSQL_ROOT_PASSWORD = cfg.password;
               MYSQL_DATABASE = "nextcloud";
               MYSQL_USER = cfg.defaultUser;
-              MYSQL_PASSWORD = password;
+              MYSQL_PASSWORD = cfg.password;
             };
             workdir = cfg.mariadbRoot;
             autoStart = true;
@@ -146,7 +140,7 @@ in {
                 # Database Configuration (links to mariadb container name)
                 MYSQL_DATABASE = "nextcloud";
                 MYSQL_USER = cfg.defaultUser;
-                MYSQL_PASSWORD = password;
+                MYSQL_PASSWORD = cfg.password;
                 MYSQL_HOST = "mariadb";
 
                 # Redis Cache Configuration (links to redis container name)
@@ -154,7 +148,7 @@ in {
 
                 # Admin user setup
                 NEXTCLOUD_ADMIN_USER = cfg.defaultUser;
-                NEXTCLOUD_ADMIN_PASSWORD = password;
+                NEXTCLOUD_ADMIN_PASSWORD = cfg.password;
 
                 # Collabora Online configuration (required for Nextcloud to connect to CODE)
                 # Setting this environment variable is optional, but helps if Collabora is also enabled

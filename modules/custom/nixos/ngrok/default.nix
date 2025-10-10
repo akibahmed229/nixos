@@ -11,10 +11,7 @@ with lib; let
   cfg = config.nm.ngrok;
 
   # Function to map the list of tunnel configurations to systemd service definitions
-  ngrokServices = builtins.listToAttrs (map (tunnel: let
-      # Read and trim the domain/URL from the specified file path
-      targetDomain = strings.trim (builtins.readFile tunnel.domainFile);
-    in {
+  ngrokServices = builtins.listToAttrs (map (tunnel: {
       # The service name is used as the key for systemd.services
       name = tunnel.serviceName;
       value = {
@@ -27,7 +24,7 @@ with lib; let
 
         serviceConfig = {
           # ExecStart dynamically constructs the ngrok command
-          ExecStart = "${pkgs.ngrok}/bin/ngrok http --url=${targetDomain} ${toString tunnel.targetPort}";
+          ExecStart = "${pkgs.ngrok}/bin/ngrok http --url=$(cat ${tunnel.domainFile}) ${toString tunnel.targetPort}";
           Restart = "on-failure";
           PermissionsStartOnly = true;
           User = tunnel.runAsUser;

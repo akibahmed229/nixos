@@ -3,29 +3,14 @@
 {
   lib,
   config,
-  inputs, # Assumed to be passed from the flake setup (used for default secrets path)
   ...
 }:
 with lib; let
   cfg = config.nm.docker.container.n8n;
-
-  # --- Secret Reading ---
-  # These values are pulled from the secret files defined in your system.
-  secretsInput = builtins.toString cfg.secretsInput;
-  password = lib.strings.trim (builtins.readFile "${secretsInput}/n8n/pass.txt");
-  domain = lib.strings.trim (builtins.readFile "${secretsInput}/ngrok/domain.txt");
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.n8n = {
     enable = mkEnableOption "Enable the n8n automation tool with PostgreSQL backend via Docker containers";
-
-    # Path to the flake input that holds the secrets.
-    secretsInput = mkOption {
-      type = types.path;
-      description = "The path to the flake input containing the secrets directory (e.g., inputs.secrets).";
-      # Default to the 'secrets' input, assuming it's available in the calling scope
-      default = inputs.secrets;
-    };
 
     # Configuration options for the containers
     hostPort = mkOption {
@@ -37,7 +22,19 @@ in {
     defaultUser = mkOption {
       type = types.str;
       default = "n8n";
-      description = "The user name for the Nextcloud admin and MariaDB account.";
+      description = "The user name for the N8N admin and Postgresql account.";
+    };
+
+    dbPassword = mkOption {
+      type = types.str;
+      default = "123456";
+      description = "Passwrd for the N8N DataBase";
+    };
+
+    domain = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "The N8N_EDITOR_BASE_URL Domain";
     };
 
     postgresDataPath = mkOption {
@@ -70,7 +67,7 @@ in {
 
           environment = {
             POSTGRES_USER = cfg.defaultUser; # Reuses 'user' argument passed to module scope
-            POSTGRES_PASSWORD = password;
+            POSTGRES_PASSWORD = cfg.dbPassword;
             POSTGRES_DB = "n8n";
           };
 
@@ -108,12 +105,12 @@ in {
             DB_POSTGRESDB_HOST = "postgresqln8n"; # Docker container name acts as hostname
             DB_POSTGRESDB_PORT = "5432";
             DB_POSTGRESDB_USER = cfg.defaultUser;
-            DB_POSTGRESDB_PASSWORD = password;
+            DB_POSTGRESDB_PASSWORD = cfg.dbPassword;
             N8N_POSTGRESDB_SYNCHRONIZATION_ATTEMPTS = "10";
 
             N8N_COMMUNITY_PACKAGES_AL = "true";
-            N8N_EDITOR_BASE_URL = domain;
-            WEBHOOK_URL = domain;
+            N8N_EDITOR_BASE_URL = cfg.domain;
+            WEBHOOK_URL = cfg.domain;
             N8N_DEFAULT_BINARY_DATA_MODE = "filesystem";
           };
 
