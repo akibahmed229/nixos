@@ -35,17 +35,17 @@
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/master?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Manage your macOS using Nix
     darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin/master?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # nix-on-droid is a project to run Nix on Android
     nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/master";
+      url = "github:nix-community/nix-on-droid/master?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -59,41 +59,41 @@
     ####################  Community & Other Repositories | remote flake ####################
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
-      url = "github:Mic92/nix-index-database";
+      url = "github:Mic92/nix-index-database?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Declarative disk partitioning and formatting using nix
     disko = {
-      url = "github:nix-community/disko";
+      url = "github:nix-community/disko?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Handle persistent state on systems with ephemeral root storage
     impermanence = {
-      url = "github:nix-community/impermanence";
+      url = "github:nix-community/impermanence?shallow=1";
     };
     # Nix User Repository: User contributed nix packages
     nur = {
-      url = "github:nix-community/NUR";
+      url = "github:nix-community/NUR?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Secret management for nixos
     sops-nix = {
-      url = "github:Mic92/sops-nix";
+      url = "github:Mic92/sops-nix?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Stylix is a NixOS module which applies the same colour scheme, font and wallpaper to a range of applications and desktop environments.
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:danth/stylix?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Flexible toolkit for making desktop shells with QtQuick, for Wayland and X11
     quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Modifies Spotify using spicetify-cli. spicetify-themes are included and available.
     spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
+      url = "github:Gerg-L/spicetify-nix?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
