@@ -99,7 +99,13 @@ in {
       enable = true;
       inherit user; # REQUIRED: Set your primary username
       systemDirs = [
-        "/var/lib/my-new-service-state"
+        # state for containers and orchestrators
+        "/var/lib/docker"
+        "/var/lib/kubernetes"
+        "/var/lib/cfssl"
+        "/var/lib/kubelet"
+        "/var/lib/containerd"
+        "/var/lib/etcd"
       ];
     };
 

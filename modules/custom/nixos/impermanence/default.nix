@@ -17,35 +17,13 @@ with lib; let
     "/root/.local/share"
     "/var/lib/bluetooth"
     "/etc/NetworkManager/system-connections"
+    "/etc/ssh"
     "/var/log"
     "/var/lib/systemd"
     "/var/lib/nixos"
     "/var/lib/systemd/coredump"
-
-    # state for containers and orchestrators
-    "/var/lib/docker"
-    "/var/lib/kubernetes"
-    "/var/lib/cfssl"
-    "/var/lib/kubelet"
-    "/var/lib/containerd"
-    "/var/lib/etcd"
-    "/var/lib/flatpak"
-    # portainer docker & kubernetes management
-    "/var/lib/portainer"
-    # pihole
-    "/var/lib/pihole/"
-    # Nextcloud
-    "/var/lib/mariadb"
-    "/var/lib/nextcloud/html"
-    "/var/lib/nextcloud/data"
-    # ngnix proxy manager
-    "/var/lib/ngnixproxymanager"
-    "/var/lib/letsencrypt"
-    # n8n
-    "/var/lib/postgresqln8n"
-    "/var/lib/ollama"
-    "/var/tmp" # special case cleaned by tmpfiles below
     # other
+    "/var/lib/flatpak"
     "/var/lib/microvms"
     "/var/lib/samba/private"
     "/var/lib/waydroid"
@@ -54,7 +32,7 @@ with lib; let
     "/var/lib/postgresql"
     "/var/lib/sops-nix/"
     "/run/secrets.d/"
-    "/var/lib/jenkins/"
+    "/var/tmp" # special case cleaned by tmpfiles below
   ];
 
   # Define the default directories/files for the primary user's home
@@ -95,10 +73,6 @@ with lib; let
     }
     {
       directory = ".mozilla";
-      mode = "0700";
-    }
-    {
-      directory = ".nixops";
       mode = "0700";
     }
     {
@@ -254,8 +228,11 @@ in {
     '';
 
     # 2b. File Systems
-    fileSystems."${cfg.mountPoint}".neededForBoot = true;
-    fileSystems."/var/lib/sops-nix".neededForBoot = true;
+    fileSystems = {
+      "${cfg.mountPoint}".neededForBoot = true;
+      "/var/lib/sops-nix".neededForBoot = true;
+      "/etc/ssh".neededForBoot = true;
+    };
 
     # 2c. Impermanence persistence setup
     environment.persistence."${cfg.mountPoint}" = {

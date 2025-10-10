@@ -91,9 +91,9 @@ in {
     obs.enable = true;
     openrazer.enable = true;
 
+    # flatpak application
     flatpak = {
       enable = true;
-
       apps = {
         enable = true;
         lists = [
@@ -145,7 +145,24 @@ in {
       enable = true;
       inherit user; # REQUIRED: Set your primary username
       systemDirs = [
-        "/var/lib/my-new-service-state"
+        # state for containers and orchestrators
+        "/var/lib/docker"
+        "/var/lib/kubernetes"
+        "/var/lib/cfssl"
+        "/var/lib/kubelet"
+        "/var/lib/containerd"
+        "/var/lib/etcd"
+        # portainer docker & kubernetes management
+        "/var/lib/portainer"
+        "/var/lib/pihole/"
+        "/var/lib/mariadb"
+        "/var/lib/nextcloud/html"
+        "/var/lib/nextcloud/data"
+        "/var/lib/ngnixproxymanager"
+        "/var/lib/letsencrypt"
+        "/var/lib/postgresqln8n"
+        "/var/lib/jenkins/"
+        "/var/lib/ollama"
       ];
     };
 
