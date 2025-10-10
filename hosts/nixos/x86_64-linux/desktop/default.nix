@@ -69,6 +69,8 @@ in {
         n8n = {
           enable = true;
           defaultUser = user;
+          dbPassword = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/n8n/pass.txt");
+          domain = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/ngrok/domain.txt");
         };
         pihole.enable = true;
         jenkins.enable = true;
@@ -76,13 +78,14 @@ in {
         nextcloud = {
           enable = true;
           defaultUser = user;
+          password = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/nextcloud/pass.txt");
         };
       };
     };
 
     # ------------------------- Some Utils ------------------------------------
     kvm.enable = true;
-    gaming.enable = false; # FIXME: broken
+    gaming.enable = true;
     bbr.enable = true;
     fhs.enable = true;
     dbus.enable = true;
@@ -172,7 +175,7 @@ in {
         "akib/password/root_secret".neededForUsers = true;
         "akib/password/my_secret".neededForUsers = true;
         "akib/wireguard/PrivateKey".neededForUsers = true;
-        "akib/cloudflared".neededForUsers = true;
+        "akib/cloudflared/token".neededForUsers = true;
         "afif/password/my_secret".neededForUsers = true;
       };
     };
@@ -266,8 +269,8 @@ in {
     android-tools
     android-udev-rules
     jdk25 # Java Development Kit
-    # jetbrains.pycharm-community # Python IDE. # FIXME: broken
-    # jetbrains.idea-community # Java IDE. # FIXME: broken
+    jetbrains.pycharm-community # Python IDE.
+    jetbrains.idea-community # Java IDE.
     postman # API development environment.
     vscode # Code editor.
     # zed-editor # Code editor.
@@ -282,7 +285,7 @@ in {
     # krita # Digital painting software.
     # glaxnimate # Animation editor.
     # inkscape # Vector graphics editor.
-    # handbrake # Video transcoder. # FIXME: broken
+    handbrake # Video transcoder.
     audacity # Audio editor.
     darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
