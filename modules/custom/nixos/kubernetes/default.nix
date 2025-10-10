@@ -123,6 +123,7 @@ with lib; {
             apiserver = {
               securePort = cfg.kubeMasterAPIServerPort;
               advertiseAddress = cfg.kubeMasterIP;
+              serviceClusterIpRange = "10.10.0.0/24";
 
               # ADD the custom hostname to the API server SANs
               extraSANs = [
