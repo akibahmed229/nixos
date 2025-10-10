@@ -665,10 +665,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1759831965,
-        "narHash": "sha256-vgPm2xjOmKdZ0xKA6yLXPJpjOtQPHfaZDRtH+47XEBo=",
+        "lastModified": 1760038930,
+        "narHash": "sha256-Oncbh0UmHjSlxO7ErQDM3KM0A5/Znfofj2BSzlHLeVw=",
         "ref": "nixos-unstable",
-        "rev": "c9b6fb798541223bbb396d287d16f43520250518",
+        "rev": "0b4defa2584313f3b781240b29d61f6f9f7e0df3",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/NixOS/nixpkgs"
@@ -758,11 +758,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760107178,
-        "narHash": "sha256-lNakbjczzk2xy4MoFxl6+kdsci04/fjasoqsNigyOxU=",
+        "lastModified": 1760122325,
+        "narHash": "sha256-daOuSOrPuoNuzB5rp5KMM5hrfAlh+dnZjpvaoPiWlR0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "8b990572d1f4407d01a44b2cd2838c09db2ed6f8",
+        "rev": "dea76e4812971dc34e42061e970c9534a2ba1b24",
         "type": "github"
       },
       "original": {
@@ -830,11 +830,12 @@
         "narHash": "sha256-xQyzPkgpgjAceJKwZhLU2//Y1jAmvPGOq80svqkWFhQ=",
         "ref": "refs/heads/master",
         "rev": "3e32ae595f97bd2d2e5ed4512fb4bb25edb4eae6",
-        "revCount": 691,
+        "shallow": true,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
       },
       "original": {
+        "shallow": true,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
       }
