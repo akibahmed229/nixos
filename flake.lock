@@ -758,11 +758,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760122325,
-        "narHash": "sha256-daOuSOrPuoNuzB5rp5KMM5hrfAlh+dnZjpvaoPiWlR0=",
+        "lastModified": 1760124489,
+        "narHash": "sha256-XwrdQUXDhiW4zyObWN5xCbe2s0EUSiwE5N92iU43guY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "dea76e4812971dc34e42061e970c9534a2ba1b24",
+        "rev": "5f9d39f2292803736aaff5962cc5e982fc3950d7",
         "type": "github"
       },
       "original": {
@@ -877,10 +877,10 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1760124470,
-        "narHash": "sha256-y6jICWBUJfLWaugvGQcb/rTt75+B0e9OJ9mb5dbyyeM=",
+        "lastModified": 1760127221,
+        "narHash": "sha256-gQRBI1E2QNFR2P1AOu+K3B4XsLrJhOoWuVr0cJgStxc=",
         "ref": "main",
-        "rev": "1d4b8952342fb130c61386fc6102c3c4c3b7a449",
+        "rev": "d0bf7079b8e7d797c1d56605ca92269497377b32",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
