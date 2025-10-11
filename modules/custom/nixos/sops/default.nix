@@ -62,7 +62,12 @@ in {
 
       sshKeyPaths = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = let
+          isEd25519 = k: k.type == "ed25519";
+          getKeyPath = k: k.path;
+          keys = builtins.filter isEd25519 config.services.openssh.hostKeys;
+        in
+          map getKeyPath keys;
         description = "List of SSH host key paths to automatically import as age keys.";
       };
     };

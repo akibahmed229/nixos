@@ -80,7 +80,7 @@ in {
           )
 
           # Add Flathub remote if it doesn't exist
-          # ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
+          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 
           # --- Installation Loop: Install missing packages ---
           for package in ''${flatpaks[*]}; do
