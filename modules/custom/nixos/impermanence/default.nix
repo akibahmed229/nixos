@@ -266,7 +266,6 @@ in {
       # ''d /persist/home/${user} 0700 "${user}" users -'' # /persist/home/<user> owned by that user
 
       "e /var/tmp 1777 root root 30d"
-      "e /var/log 1777 root root 30d"
       # Clean old contents in user home cache dir
       "e /home/${cfg.user}/.cache 755 ${cfg.user} users 7d"
       "r /home/${cfg.user}/.cache/tmp*" # remove temporary files in cache on every boot
@@ -276,7 +275,13 @@ in {
       "x %h/.cache/borg" # caches checksums of file chunks for deduplication
     ];
 
-    # 2e. Programs
+    # 2e.  For System Logs
+    services.journald.extraConfig = ''
+      # Keep a maximum of 500MB of logs on disk
+      SystemMaxUse=500M
+    '';
+
+    # 2f. Programs
     programs.fuse.userAllowOther = true;
   };
 }

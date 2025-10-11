@@ -74,9 +74,9 @@
 
     kernel.sysctl = {
       # Nobara Tweaks
-      "fs.aio-max-nr" = 1000000; # defines the maximum number of asynchronous I/O requests that can be in progress at a given time.     1048576
-      "fs.inotify.max_user_watches" = 65536; # sets the maximum number of file system watches, enhancing file system monitoring capabilities.       Default: 8192  TWEAKED: 524288
-      "kernel.panic" = 5; # Reboot after 5 seconds on kernel panic                                                               Default: 0
+      "fs.aio-max-nr" = 1000000; # defines the maximum number of asynchronous I/O requests that can be in progress at a given time. Default: 1048576
+      "fs.inotify.max_user_watches" = 65536; # sets the maximum number of file system watches, enhancing file system monitoring capabilities. Default: 8192  TWEAKED: 524288
+      "kernel.panic" = 5; # Reboot after 5 seconds on kernel panic, Default: 0
       "kernel.pid_max" = 131072; # allows a large number of processes and threads to be managed
 
       # SSD tweaks: Adjust settings for an SSD to optimize performance.
