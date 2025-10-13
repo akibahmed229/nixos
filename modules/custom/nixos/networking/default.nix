@@ -92,6 +92,9 @@ in {
       nameservers = cfg.nameservers;
       domain = mkIf (cfg.domain != null) cfg.domain;
       search = mkIf (cfg.domain != null) [cfg.domain]; # Set search domain equal to the domain name
+      firewall.enable = true;
+      enableIPv6 = true;
+      enableB43Firmware = true;
     };
 
     # 2.2 NetworkManager

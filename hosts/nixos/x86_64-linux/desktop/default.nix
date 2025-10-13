@@ -23,12 +23,6 @@ in {
     "home-manager/niri"
   ];
 
-  # A lightweight TUI (ncurses-like) display manager for Linux and BSD.
-  services.displayManager = {
-    ly.enable = true;
-    defaultSession = "Niri";
-  };
-
   # ---------------------------------------- Custom Nixos Modules ----------------------------------------------------
   nm = {
     # ------------------- Per-system user configuration -----------------------
@@ -84,6 +78,7 @@ in {
     };
 
     # ------------------------- Some Utils ------------------------------------
+    ly.enable = true;
     kvm.enable = true;
     gaming.enable = true;
     bbr.enable = true;
@@ -304,16 +299,5 @@ in {
   services = {
     # disable password auth for openssh
     openssh.settings.PasswordAuthentication = false;
-  };
-
-  # Open ports in the firewall.
-  networking = {
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [3000 8090];
-      # allowedUDPPorts = [67 53];
-    };
-    enableIPv6 = true;
-    enableB43Firmware = true;
   };
 }
