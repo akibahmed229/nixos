@@ -135,7 +135,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 7d";
+      options = "-d";
     };
     optimise = {
       automatic = true;
@@ -225,7 +225,7 @@
       flags = [
         "--update-input"
         "nixpkgs"
-        "-L"
+        "--commit-lock-file"
       ];
       randomizedDelaySec = "45min";
     };
