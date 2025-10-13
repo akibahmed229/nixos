@@ -35,27 +35,6 @@ in {
     pathsToLink = ["/share/zsh" "/tmp" "/home/${user}"];
   };
 
-  programs = {
-    zsh = {
-      enable = true;
-      shellInit = ''
-        #xcompmgr &
-        #picom &
-      '';
-      ohMyZsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "sudo"
-          "terraform"
-          "systemadmin"
-          "vi-mode"
-        ];
-        theme = "agnoster";
-      };
-    };
-  };
-
   # Custom nixos modules for
   nm = {
     # User management configuration ( custom module ) - see modules/custom/nixos/user
@@ -120,22 +99,9 @@ in {
     };
   };
 
-  networking.nameservers = ["8.8.8.8"];
-
   # Enables copy / paste when running in a KVM with spice.
   services = {
     spice-vdagentd.enable = true;
     qemuGuest.enable = true;
   };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 }
