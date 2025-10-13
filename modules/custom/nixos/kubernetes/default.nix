@@ -170,8 +170,7 @@ in {
     };
 
     networking = {
-      # -- Other Worker-ONLY settings --
-      nameservers = mkIf isWorker ["8.8.8.8"];
+      nameservers = ["8.8.8.8" "1.1.1.1"];
 
       # -- Other Master-ONLY settings --
       firewall.allowedTCPPorts = mkIf isMaster [
