@@ -33,6 +33,7 @@
     unzip
     wl-clipboard
     cryptsetup
+    gptfdisk
     # for ssh
     openssh
     # for nix
@@ -47,7 +48,7 @@
     spice-vdagentd.enable = true;
     qemuGuest.enable = true;
     openssh = {
-      ports = [8080];
+      ports = [22];
       settings.PermitRootLogin = lib.mkForce "yes";
     };
   };

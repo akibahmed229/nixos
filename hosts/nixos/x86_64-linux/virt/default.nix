@@ -99,6 +99,8 @@ in {
     };
   };
 
+  services.openssh.ports = [22];
+
   # Enables copy / paste when running in a KVM with spice.
   services = {
     spice-vdagentd.enable = true;
