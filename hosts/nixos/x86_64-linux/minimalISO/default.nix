@@ -48,7 +48,7 @@
     spice-vdagentd.enable = true;
     qemuGuest.enable = true;
     openssh = {
-      ports = [22];
+      ports = lib.mkForce [22];
       settings.PermitRootLogin = lib.mkForce "yes";
     };
   };
