@@ -28,6 +28,9 @@
 
       # Extra shell environment / aliases / bindings
       envExtra = ''
+        # Only run in interactive shells (prevents scp/sftp issues)
+        [[ $- != *i* ]] && return
+
         # Startup
         colorscript random
         set -o vi
