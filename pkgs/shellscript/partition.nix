@@ -73,15 +73,15 @@ pkgs.writeShellApplication {
     sgdisk --new=4:0:0 --typecode=4:8E00 --change-name=4:root ''${DEVICE}
 
     echo -e "$C_GREEN""\n--- 3. Formatting unencrypted filesystems... ---$C_RESET"
-    mkfs.vfat -n ESP ''${DEVICE}p2
-    mkswap -L swap ''${DEVICE}p3
+    mkfs.vfat -n ESP ''${DEVICE}2
+    mkswap -L swap ''${DEVICE}3
 
     echo -e "$C_GREEN""\n--- 4. Setting up LUKS encryption and LVM... ---$C_RESET"
-    echo "Formatting LUKS container on ''${DEVICE}p4..."
-    cryptsetup luksFormat --label crypted ''${DEVICE}p4 <<< "$LUKS_PASSWORD"
+    echo "Formatting LUKS container on ''${DEVICE}4..."
+    cryptsetup luksFormat --label crypted ''${DEVICE}4 <<< "$LUKS_PASSWORD"
 
     echo "Opening LUKS container..."
-    cryptsetup open ''${DEVICE}p4 crypted <<< "$LUKS_PASSWORD"
+    cryptsetup open ''${DEVICE}4 crypted <<< "$LUKS_PASSWORD"
 
     echo "Setting up LVM on /dev/mapper/crypted..."
     pvcreate /dev/mapper/crypted
@@ -104,8 +104,8 @@ pkgs.writeShellApplication {
     mount -o subvol=nix,noatime,compress=zstd /dev/root_vg/root /mnt/nix
 
     echo -e "$C_GREEN""\n--- 7. Mounting boot partition and activating swap... ---$C_RESET"
-    mount ''${DEVICE}p2 /mnt/boot
-    swapon ''${DEVICE}p3
+    mount ''${DEVICE}2 /mnt/boot
+    swapon ''${DEVICE}3
 
     echo -e "$C_GREEN""\n--- ✅ Partitioning Complete! ---$C_RESET"
     echo "Your disk is partitioned, encrypted, and mounted at /mnt."
