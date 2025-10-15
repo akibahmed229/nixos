@@ -79,7 +79,7 @@ pkgs.writeShellApplication {
       generate_hardware_config
 
       msg "Running nixos-install..."
-      nixos-install --no-root-passwd --flake ".#$hostname"
+      nixos-install --no-root-passwd --flake "path:$flake_dir#$hostname"
       popd >/dev/null
     }
 
