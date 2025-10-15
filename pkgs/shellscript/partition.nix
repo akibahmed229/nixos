@@ -53,9 +53,9 @@ pkgs.writeShellApplication {
 
     # --- Get LUKS Passphrase ---
     echo -e "$C_YELLOW""Please enter the passphrase for disk encryption.$C_RESET"
-    read -sp "Passphrase: " LUKS_PASSWORD
+    read -rsp "Passphrase: " LUKS_PASSWORD
     echo
-    read -sp "Confirm Passphrase: " LUKS_PASSWORD_CONFIRM
+    read -rsp "Confirm Passphrase: " LUKS_PASSWORD_CONFIRM
     echo
     if [ "$LUKS_PASSWORD" != "$LUKS_PASSWORD_CONFIRM" ]; then
       echo -e "$C_RED""Error: Passphrases do not match. Aborting.$C_RESET"
@@ -77,7 +77,7 @@ pkgs.writeShellApplication {
     mkswap -L swap "$DEVICE"3
 
     echo -e "$C_GREEN""\n--- 4. Setting up LUKS encryption and LVM... ---$C_RESET"
-    echo "Formatting LUKS container on "$DEVICE"4..."
+    echo "Formatting LUKS container on $DEVICE 4..."
     cryptsetup luksFormat --label crypted "$DEVICE"4 <<< "$LUKS_PASSWORD"
 
     echo "Opening LUKS container..."
