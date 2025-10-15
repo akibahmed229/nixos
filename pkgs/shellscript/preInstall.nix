@@ -64,6 +64,7 @@ pkgs.writeShellApplication {
       fi
     }
 
+
     # --- install flake and NixOS ------------------------------------------------
     function install_flake(){
       msg "Initializing minimal flake at $flake_dir"
@@ -72,12 +73,28 @@ pkgs.writeShellApplication {
 
 
       msg "Formatting disks with declarative NixOS disk partitioning script..."
+      # Using sudo here because nixos-partition-luks needs root privileges to modify disks
       sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device"
-      nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
-      update_flake_data
-      generate_hardware_config
+
+      # Using sudo for nix flake init because the parent dir /mnt/etc is owned by root
+      sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
+
+      # The flake files are now owned by root, so subsequent commands also need sudo
+      sudo update_flake_data
+      sudo generate_hardware_config
+
+      # --- FIX STARTS HERE ---
+      # Turn the flake directory into a clean Git repository so Nix can hash it reliably.
+      msg "Committing flake to a temporary git repository"
+      sudo git init
+      sudo git add .
+      # This git user config is temporary and local to this command
+      sudo git -c user.name='NixOS Installer' -c user.email='<' commit -m 'Initial commit'
+      # --- FIX ENDS HERE ---
 
       msg "Running nixos-install..."
+      # The flake path needs to be owned by the user running nixos-install (root).
+      # The commands above ensure this.
       sudo nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
       popd >/dev/null
     }
