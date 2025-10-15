@@ -47,8 +47,8 @@ pkgs.writeShellApplication {
     function update_flake_data(){
       local file="$flake_dir/flake.nix" # <-- Use the fixed local variable
       read -rp "Change defaults in $file? (y/N): " ans
-      if [[ "$ans" =~ ^[Yy]$ ]]; then
-        [[ -f $file ]] || { msg "flake.nix not found at $file"; return; }
+      if [[ "$ans" =~ ^[Yy]$ ]]; then
+        [[ -f $file ]] || { msg "flake.nix not found at $file"; return; }
         sed -i "s/test/$username/g" "$file"
         msg "flake.nix updated"
       else
