@@ -2,13 +2,17 @@
 # Minimal NixOS pre-install shell application
 pkgs.writeShellApplication {
   name = "minimalOS";
+  runtimeInputs = with pkgs; [
+    git
+  ];
   text = ''
     #!/usr/bin/env bash
     set -euo pipefail  # fail fast, treat unset vars as errors
 
     # --- helpers ----------------------------------------------------------------
-    msg(){ printf "\n---- %s\n" "$1"; }
-    prompt(){ read -rp "$1: " "$2"; printf "\n"; }
+    function msg(){ printf "\n---- %s\n" "$1"; }
+    function prompt(){ read -rp "$1: " "$2"; printf "\n"; }
+    function die()  { echo "ERROR: $1" >&2; exit 1; }
 
     flake_dir="/mnt/etc/flake"
 
@@ -21,8 +25,13 @@ pkgs.writeShellApplication {
 
     clear
     prompt "Enter username (e.g. akib)" username
-    prompt "Enter hostname (available: desktop)" hostname
+    prompt "Enter hostname (available: desktop, virt)" hostname
+
+    msg "Available block devices:"
+    lsblk -dpno NAME,SIZE,MODEL | grep -E "/dev/"
     prompt "Enter device (e.g. /dev/sda)" device
+    [ -b "$device" ] || die "Invalid block device: $device"
+
 
     if [[ -z "$username" || -z "$hostname" || -z "$device" ]]; then
       msg "username, hostname and device are required"
@@ -36,7 +45,6 @@ pkgs.writeShellApplication {
       if [[ "$ans" =~ ^[Yy]$ ]]; then
         [[ -f $file ]] || { msg "flake.nix not found at $file"; return; }
         sed -i "s/test/$username/g" "$file"
-        sed -i "s,/dev/nvme1n1,$device,g" "$file"
         msg "flake.nix updated"
       else
         msg "Keeping defaults (you can edit flake.nix later)"
@@ -45,9 +53,9 @@ pkgs.writeShellApplication {
 
     # --- generate hardware config if needed -----------------------------------
     function generate_hardware_config(){
-      local config_dir="$flake_dir/hosts"
+      local config_dir="$flake_dir/hosts/x86_64-linux"
       mkdir -p "$config_dir"
-      if [[ "$username" == "akib" && "$hostname" == "desktop" ]]; then
+      if [[ "$username" == "akib" && "$hostname" == "desktop" || "$hostname" == "virt" ]]; then
         msg "Using bundled hardware-configuration (change later if needed)"
       else
         msg "Generating hardware-configuration.nix"
@@ -65,20 +73,16 @@ pkgs.writeShellApplication {
       nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
 
       msg "Formatting disks with declarative NixOS disk partitioning script..."
-      sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device"
+      sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device"
 
       update_flake_data
       generate_hardware_config
 
       msg "Running nixos-install..."
-      sudo nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
+      pushd "$flake_dir" >/dev/null
+      sudo nixos-install --no-root-passwd --flake "path:$flake_dir#$hostname"
       popd >/dev/null
     }
-
-    # --- main -------------------------------------------------------------------
-    if [[ -d "/mnt/home" ]]; then
-      sudo rm -rf "/home/$username"
-    fi
 
     msg "Starting minimal NixOS pre-install"
     install_flake
