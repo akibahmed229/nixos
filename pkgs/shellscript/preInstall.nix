@@ -43,7 +43,6 @@ pkgs.writeShellApplication {
       if [[ "$ans" =~ ^[Yy]$ ]]; then
         [[ -f $file ]] || { msg "flake.nix not found at $file"; return; }
         sed -i "s/test/$username/g" "$file"
-        sed -i "s,/dev/nvme1n1,$device,g" "$file"
         msg "flake.nix updated"
       else
         msg "Keeping defaults (you can edit flake.nix later)"
@@ -79,6 +78,7 @@ pkgs.writeShellApplication {
       generate_hardware_config
 
       msg "Running nixos-install..."
+      pushd "$flake_dir" >/dev/null
       nixos-install --no-root-passwd --flake "path:$flake_dir#$hostname"
       popd >/dev/null
     }
