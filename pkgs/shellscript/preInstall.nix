@@ -45,15 +45,15 @@ pkgs.writeShellApplication {
 
     # --- update flake data -----------------------------------------------------
     function update_flake_data(){
-      local file="$flake_dir/flake.nix" # <-- Use the fixed local variable
-      read -rp "Change defaults in $file? (y/N): " ans
+      local file="$flake_dir/flake.nix"
+      read -rp "Change defaults in $file? (y/N): " ans
       if [[ "$ans" =~ ^[Yy]$ ]]; then
         [[ -f $file ]] || { msg "flake.nix not found at $file"; return; }
-        sed -i "s/test/$username/g" "$file"
-        msg "flake.nix updated"
-      else
-        msg "Keeping defaults (you can edit flake.nix later)"
-      fi
+        sed -i "s/test/$username/g" "$file"
+        msg "flake.nix updated"
+      else
+        msg "Keeping defaults (you can edit flake.nix later)"
+      fi
     }
 
     # --- generate hardware config if needed -----------------------------------
@@ -81,7 +81,7 @@ pkgs.writeShellApplication {
     # --- install flake and NixOS ------------------------------------------------
     function install_flake(){
       msg "Initializing minimal flake at $flake_dir"
-      mkdir -p "$flake_dir"
+      mkdir -p "$flake_dir"
 
       msg "Formatting disks with declarative NixOS disk partitioning script..."
       # NOTE: This script is responsible for creating and mounting /mnt
@@ -102,12 +102,6 @@ pkgs.writeShellApplication {
       nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
     }
 
-    # --- main -------------------------------------------------------------------
-    # The original logic for /mnt/home is suspicious and might be wrong.
-    # It's better to rely on the partition script and nixos-install.
-    # if [[ -d "/mnt/home" ]]; then
-    #   sudo rm -rf "/home/$username" # This line seems wrong on a fresh install
-    # fi
 
     msg "Starting minimal NixOS pre-install"
     install_flake
