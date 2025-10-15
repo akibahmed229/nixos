@@ -79,6 +79,39 @@
     interval = "weekly";
   };
 
+  boot.initrd.luks = {
+    devices."crypted" = {
+      device = "/dev/disk/by-label/crypted";
+      preLVM = true;
+    };
+  };
+
+  fileSystems."/" = {
+    device = "/dev/mapper/root_vg-root";
+    fsType = "btrfs";
+    options = ["subvol=root"];
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/mapper/root_vg-root";
+    fsType = "btrfs";
+    options = ["subvol=persist"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/mapper/root_vg-root";
+    fsType = "btrfs";
+    options = ["subvol=nix"];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/ESP";
+    fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
+
+  swapDevices = [{device = "/dev/disk/by-label/swap";}];
+
   zramSwap = {
     enable = true;
     memoryPercent = 10;

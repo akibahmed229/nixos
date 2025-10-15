@@ -72,8 +72,8 @@ pkgs.writeShellApplication {
 
       nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
 
-      msg "Formatting disks with disko..."
-      sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "$flake_dir"/utils/disko.nix --arg device "\"$device\""
+      msg "Formatting disks with declarative NixOS disk partitioning script..."
+      sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device"
 
       update_flake_data
       generate_hardware_config

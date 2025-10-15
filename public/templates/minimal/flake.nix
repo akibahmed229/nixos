@@ -16,11 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     impermanence = {
       url = "github:nix-community/impermanence";
     };
@@ -32,7 +27,7 @@
 
     akibOS = {
       url = "github:akibahmed229/nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
   };
 
@@ -52,16 +47,17 @@
     # FIXME: Replace with your username
     user = "test";
     state-version = "25.11";
-    devicename = "/dev/nvme1n1";
+
+    akibLib = (import "${akibOS}/lib" {inherit (nixpkgs) lib;});
 
     # The function to generate the nixos system configuration for the supported systems only (derived from my custom lib helper function)
-    mkNixOSSystem = akibOS.lib.mkSystem {
+    mkNixOSSystem = akibLib.mkSystem {
       # must pass this args to mkSystem
       inherit nixpkgs home-manager;
 
       # Set all inputs parameters as special arguments for all submodules,
       # so you can directly use all dependencies in inputs in submodules
-      specialArgs = {inherit inputs self user state-version devicename;}; # pass args as your requirement (make sure to pass user)
+      specialArgs = {inherit inputs self user state-version;}; # pass args as your requirement (make sure to pass user)
     };
   in {
     # nixpkgs search:- https://search.nixos.org/packages
