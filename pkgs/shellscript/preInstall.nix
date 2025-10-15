@@ -64,7 +64,6 @@ pkgs.writeShellApplication {
       fi
     }
 
-
     # --- install flake and NixOS ------------------------------------------------
     function install_flake(){
       msg "Initializing minimal flake at $flake_dir"
@@ -80,8 +79,8 @@ pkgs.writeShellApplication {
       sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
 
       # The flake files are now owned by root, so subsequent commands also need sudo
-      sudo update_flake_data
-      sudo generate_hardware_config
+      update_flake_data
+      generate_hardware_config
 
       # --- FIX STARTS HERE ---
       # Turn the flake directory into a clean Git repository so Nix can hash it reliably.
