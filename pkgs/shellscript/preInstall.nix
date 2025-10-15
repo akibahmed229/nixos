@@ -65,7 +65,6 @@ pkgs.writeShellApplication {
       nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
 
       msg "Formatting disks with declarative NixOS disk partitioning script..."
-      # NOTE: This script is responsible for creating and mounting /mnt
       sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device"
 
       update_flake_data
