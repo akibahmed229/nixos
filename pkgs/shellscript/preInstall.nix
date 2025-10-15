@@ -70,11 +70,10 @@ pkgs.writeShellApplication {
       mkdir -p "$flake_dir"
       pushd "$flake_dir" >/dev/null
 
-      nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
 
       msg "Formatting disks with declarative NixOS disk partitioning script..."
       sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device"
-
+      nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
       update_flake_data
       generate_hardware_config
 
