@@ -45,7 +45,7 @@ pkgs.writeShellApplication {
     echo -e "$C_RED""This action is IRREVERSIBLE.$C_RESET"
     echo -e "$C_YELLOW""Please double-check that this is the correct disk.$C_RESET"
     lsblk
-    read -p "Type 'YES' to continue, or anything else to abort: " REPLY
+    read -rp "Type 'YES' to continue, or anything else to abort: " REPLY
     if [[ "$REPLY" != "YES" ]]; then
       echo "Aborting."
       exit 0
