@@ -38,7 +38,7 @@ pkgs.writeShellApplication {
 
     # --- update flake data -----------------------------------------------------
     function update_flake_data(){
-      local file="/home/$username/flake/flake.nix"
+      local file="/mnt/etc/nixos/flake/flake.nix"
       read -rp "Change defaults in $file? (y/N): " ans
       if [[ "$ans" =~ ^[Yy]$ ]]; then
         [[ -f $file ]] || { msg "flake.nix not found at $file"; return; }
@@ -51,7 +51,7 @@ pkgs.writeShellApplication {
 
     # --- generate hardware config if needed -----------------------------------
     function generate_hardware_config(){
-      local config_dir="/home/$username/flake/hosts/x86_64-linux"
+      local config_dir="/mnt/etc/nixos/flake/hosts/x86_64-linux"
       mkdir -p "$config_dir"
       if [[ "$username" == "akib" && "$hostname" == "desktop" || "$hostname" == "virt" ]]; then
         msg "Using bundled hardware-configuration (change later if needed)"
@@ -64,7 +64,7 @@ pkgs.writeShellApplication {
 
     # --- install flake and NixOS ------------------------------------------------
     function install_flake(){
-      local flake_dir="/home/$username/flake"
+      local flake_dir="/mnt/etc/nixos/flake"
       msg "Initializing minimal flake at $flake_dir"
       mkdir -p "$flake_dir"
       pushd "$flake_dir" >/dev/null
@@ -78,8 +78,7 @@ pkgs.writeShellApplication {
       generate_hardware_config
 
       msg "Running nixos-install..."
-      pushd "$flake_dir" >/dev/null
-      nixos-install --no-root-passwd --flake ".#$hostname"
+      nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
       popd >/dev/null
     }
 
