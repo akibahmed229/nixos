@@ -9,15 +9,9 @@
   lib,
   pkgs,
   modulesPath,
-  devicename,
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
-
-  nm.disko = {
-    enable = true;
-    device = devicename;
-  };
 
   # nixpkgs.overlays = [self.overlays.intel-latestKernel-overlay]; # Add the latest kernel overlay for my intel processor
 
@@ -109,10 +103,50 @@
     binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
-  services.btrfs.autoScrub = {
-    enable = true;
-    interval = "weekly";
+  # system file
+
+  boot.initrd.luks = {
+    devices."crypted" = {
+      device = "/dev/disk/by-label/crypted";
+      preLVM = true;
+    };
   };
+
+  fileSystems."/" = {
+    device = "/dev/mapper/root_vg-root";
+    fsType = "btrfs";
+    options = ["subvol=root"];
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/mapper/root_vg-root";
+    fsType = "btrfs";
+    options = ["subvol=persist"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/mapper/root_vg-root";
+    fsType = "btrfs";
+    options = ["subvol=nix"];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/ESP";
+    fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
+
+  swapDevices = [
+    {device = "/dev/disk/by-label/swap";}
+  ];
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 10;
+    algorithm = "lz4";
+  };
+
+  # Other File
 
   fileSystems = {
     "/mnt/samsung" = {
@@ -132,10 +166,9 @@
     };
   };
 
-  zramSwap = {
+  services.btrfs.autoScrub = {
     enable = true;
-    memoryPercent = 10;
-    algorithm = "lz4";
+    interval = "weekly";
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

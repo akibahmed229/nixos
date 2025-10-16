@@ -62,11 +62,6 @@
       url = "github:Mic92/nix-index-database?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Declarative disk partitioning and formatting using nix
-    disko = {
-      url = "github:nix-community/disko?shallow=1";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # Handle persistent state on systems with ephemeral root storage
     impermanence = {
       url = "github:nix-community/impermanence?shallow=1";
@@ -122,13 +117,12 @@
     # The system to build.
     inherit (nixpkgs) lib;
     state-version = "25.11";
-    devicename = "/dev/nvme1n1";
 
     # The user to build for.
     # Override user via env var in impure mode
     user = "akib";
     theme = "gruvbox-dark-soft"; # available options located in ./public/themes/base16Scheme
-    desktopEnvironment = "hyprland"; # available options: "gnome", "dwm", "hyprland"
+    desktopEnvironment = "niri"; # available options: "gnome", "dwm", "hyprland"
 
     # Custom library of helper functions
     myLib = import ./lib {inherit lib;};
@@ -139,7 +133,7 @@
       src = ./.;
       mkNixOSSystem = mkSystem {
         inherit nixpkgs home-manager;
-        specialArgs = {inherit inputs self user devicename desktopEnvironment theme state-version;};
+        specialArgs = {inherit inputs self user desktopEnvironment theme state-version;};
       };
       mkHomeManagerSystem = mkSystem {
         inherit nixpkgs home-manager;

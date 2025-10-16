@@ -20,7 +20,6 @@
 in {
   imports = map mkRelativeToRoot [
     "home-manager/${desktopEnvironment}"
-    "home-manager/niri"
   ];
 
   # ---------------------------------------- Custom Nixos Modules ----------------------------------------------------

@@ -79,7 +79,7 @@ pkgs.writeShellApplication {
     echo -e "$C_GREEN""\n--- 2. Creating partitions... ---$C_RESET"
     sgdisk --new=1:0:+1M --typecode=1:EF02 --change-name=1:boot "$DEVICE"
     sgdisk --new=2:0:+500M --typecode=2:EF00 --change-name=2:ESP "$DEVICE"
-    sgdisk --new=3:0:+4G --typecode=3:8200 --change-name=3:swap "$DEVICE"
+    sgdisk --new=3:0:+8G --typecode=3:8200 --change-name=3:swap "$DEVICE"
     sgdisk --new=4:0:0 --typecode=4:8E00 --change-name=4:root "$DEVICE"
 
     echo -e "$C_GREEN""\n--- 3. Formatting unencrypted filesystems... ---$C_RESET"
