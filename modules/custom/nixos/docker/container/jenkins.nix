@@ -46,7 +46,7 @@ in {
     # Custom image for Jenkins with Blue Ocean and Docker CLI pre-installed
     jenkinsImage = mkOption {
       type = types.str;
-      default = "myjenkins-blueocean:2.516.3-1";
+      default = "myjenkins-blueocean:2.528.1-1";
       description = "The name of the custom-built Jenkins image (e.g., myjenkins-blueocean:tag).";
     };
 
@@ -68,31 +68,27 @@ in {
   make sure to build the docker image for blueocean
   Dockerfile
   ```docker
-    -$   FROM jenkins/jenkins:2.516.3-jdk21
-    -$
-    -$   USER root
-    -$
-    -$   RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
-    -$       install -m 0755 -d /etc/apt/keyrings && \
-    -$       curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
-    -$       chmod a+r /etc/apt/keyrings/docker.asc && \
-    -$       echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
-    -$       https://download.docker.com/linux/debian $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" \
-    -$       | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-    -$       apt-get update && apt-get install -y docker-ce-cli && \
-    -$       apt-get clean && rm -rf /var/lib/apt/lists/*
-    -$
-    -$   # Install Python 3 and pip
-    -$   RUN apt-get update && \
-    -$       apt-get install -y python3 python3-pip python3-venv && \
-    -$       rm -rf /var/lib/apt/lists/*
-    -$
-    -$   USER jenkins
-    -$
-    -$   RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
+         FROM jenkins/jenkins:2.528.1-jdk21
+         USER root
+         RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
+             install -m 0755 -d /etc/apt/keyrings && \
+             curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
+             chmod a+r /etc/apt/keyrings/docker.asc && \
+             echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+             https://download.docker.com/linux/debian $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" \
+             | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+             apt-get update && apt-get install -y docker-ce-cli && \
+             apt-get clean && rm -rf /var/lib/apt/lists/*
+         # Install Python 3 and pip
+         RUN apt-get update && \
+             apt-get install -y python3 python3-pip python3-venv && \
+             rm -rf /var/lib/apt/lists/*
+
+         USER jenkins
+         RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
   ```
 
-  Then Build the Image with: `docker build -t myjenkins-blueocean:2.516.3-1 .`
+  Then Build the Image with: `docker build -t myjenkins-blueocean:2.528.1-1 .`
   */
 
   # --- 2. Define Configuration ---
