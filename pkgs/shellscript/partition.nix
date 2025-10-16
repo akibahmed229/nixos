@@ -40,12 +40,10 @@ pkgs.writeShellApplication {
     fi
 
     if [[ "$DEVICE" == *"nvme"* ]]; then
-      DEVICE1="$DEVICE"p1
       DEVICE2="$DEVICE"p2
       DEVICE3="$DEVICE"p3
       DEVICE4="$DEVICE"p4
     else
-      DEVICE1="$DEVICE"1
       DEVICE2="$DEVICE"2
       DEVICE3="$DEVICE"3
       DEVICE4="$DEVICE"4
