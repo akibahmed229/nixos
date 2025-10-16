@@ -1,5 +1,5 @@
 {
-  "LuaSnip": { "branch": "master", "commit": "b3104910bb5ebf40492aadffae18f2528fa757d9" },
+  "LuaSnip": { "branch": "master", "commit": "113f831c4dc5b8c4e97454a7f89bb21746fe6484" },
   "alpha-nvim": { "branch": "main", "commit": "2b3cbcdd980cae1e022409289245053f62fb50f6" },
   "better-indent-support-for-php-with-html": { "branch": "master", "commit": "e907f07b53dd6d6b7b2f6956cd18202ef3f26c24" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
