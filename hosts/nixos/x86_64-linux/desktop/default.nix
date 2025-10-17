@@ -78,7 +78,10 @@ in {
 
     # ------------------------- Some Utils ------------------------------------
     ly.enable = true;
-    kvm.enable = true;
+    kvm = {
+      enable = true;
+      bridge.enable = true;
+    };
     gaming.enable = true;
     bbr.enable = true;
     fhs.enable = true;

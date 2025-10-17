@@ -80,6 +80,13 @@ in {
     networking = lib.mkIf (cfg.bridge.enable) {
       bridges.br0.interfaces = [cfg.bridge.interface];
       firewall.trustedInterfaces = ["br0"];
+
+      # *** KEY FIX: Assign the IPv4 configuration (DHCP) to the bridge interface itself. ***
+      interfaces.br0.useDHCP = true;
+
+      # NOTE: For NetworkManager users, you may need to disable NM for 'enp4s0'
+      # by checking if networking.networkmanager.unmanagedInterfaces is relevant,
+      # but typically the declarative config overrides NM for the specified interface.
     };
 
     # 3. Kernel parameters for IOMMU based on CPU type
