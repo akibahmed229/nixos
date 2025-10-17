@@ -33,6 +33,7 @@
     "docker"
     "video"
     "audio"
+    "libvirtd"
   ];
 
   # Default packages for the user

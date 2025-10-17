@@ -102,9 +102,9 @@ in {
 
   services.openssh.ports = lib.mkForce [22];
 
-  # Enables copy / paste when running in a KVM with spice.
   services = {
-    spice-vdagentd.enable = true;
-    qemuGuest.enable = true;
+    qemuGuest.enable = true; # For guest integration (e.g., shutdown from host)
+    spice-vdagentd.enable = true; # For clipboard sharing, dynamic resolution
+    spice-webdavd.enable = true; # For folder sharing over SPICE
   };
 }

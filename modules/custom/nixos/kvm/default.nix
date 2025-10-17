@@ -12,21 +12,39 @@
   config,
   pkgs,
   ...
-}: let
+}:
+with lib; let
   cfg = config.nm.kvm;
 in {
   options = {
     nm.kvm = {
-      enable = lib.mkEnableOption "Enable KVM";
+      enable = mkEnableOption "Enable KVM";
+
+      cpu = mkOption {
+        type = types.enum ["amd" "intel"];
+        default = "intel";
+        description = "Select your CPU type to Correctly Configure KVM";
+      };
+
+      bridge = {
+        enable = mkEnableOption "Enable Bridge Network on KVM for local network expose.";
+        interface = mkOption {
+          type = types.str;
+          default = "enp4s0";
+          description = "Interfaces to use bridge network";
+        };
+      };
     };
   };
 
   config = lib.mkIf cfg.enable {
+    # 1. Essential KVM/QEMU/Libvirt packages and UEFI support
     environment.systemPackages = with pkgs; [
       bridge-utils
       guestfs-tools
       virt-manager
       virt-viewer
+      virt-what
       spice
       spice-gtk
       spice-protocol
@@ -35,7 +53,10 @@ in {
       libvirt-glib
       virtio-win
       virglrenderer
+      edk2
+      libosinfo
       virtiofsd # <binary path="/run/current-system/sw/bin/virtiofsd"/> # virtiofsd binary path for virt-manager add this in virt-manager FileSystem Share
+      OVMF # UEFI firmware for modern VMs
     ];
 
     programs.virt-manager.enable = true;
@@ -49,15 +70,38 @@ in {
           package = pkgs.qemu_kvm;
           runAsRoot = true;
           vhostUserPackages = with pkgs; [virtiofsd]; # share a folder with a guest,
-          swtpm.enable = true;
+          swtpm.enable = true; # Correctly enabled for TPM 2.0
         };
       };
       spiceUSBRedirection.enable = true;
     };
-    services = {
-      qemuGuest.enable = true;
-      spice-vdagentd.enable = true;
-      spice-webdavd.enable = true;
+
+    # 2. Networking Configuration for Bridge
+    networking = lib.mkIf (cfg.bridge.enable) {
+      bridges.br0.interfaces = [cfg.bridge.interface];
+      firewall.trustedInterfaces = ["br0"];
+    };
+
+    # 3. Kernel parameters for IOMMU based on CPU type
+    boot = {
+      kernelParams = [
+        (
+          # Selects the correct IOMMU driver and enables it
+          if cfg.cpu == "intel"
+          then "intel_iommu=on"
+          else "amd_iommu=on"
+        )
+        "iommu=pt" # set IOMMU to passthrough mode
+        "transparent_hugepage=never"
+      ];
+
+      kernel.sysctl = lib.mkDefault {
+        "vm.swappiness" = 10;
+        "vm.dirty_ratio" = 15;
+        "vm.dirty_background_ratio" = 5;
+        "kernel.sched_min_granularity_ns" = 10000000;
+        "kernel.sched_wakeup_granularity_ns" = 15000000;
+      };
     };
   };
 }
