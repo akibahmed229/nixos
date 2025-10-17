@@ -80,7 +80,7 @@ in {
     ly.enable = true;
     kvm = {
       enable = true;
-      bridge.enable = true;
+      bridge.enable = false;
     };
     gaming.enable = true;
     bbr.enable = true;
