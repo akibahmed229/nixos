@@ -74,6 +74,8 @@ pkgs.writeShellApplication {
 
     # --- Partitioning Steps ---
     echo -e "$C_GREEN""\n--- 1. Wiping disk and creating partition table on $DEVICE... ---$C_RESET"
+    # Disk uses LVM. Before wiping, it's a good practice to deactivate the volume group.
+    vgchange -a n root_vg
     sgdisk --zap-all "$DEVICE"
 
     echo -e "$C_GREEN""\n--- 2. Creating partitions... ---$C_RESET"
