@@ -1,7 +1,3 @@
-Here is a comprehensive guide based on your notes, organized into the sections you requested. I've structured the installation and modification guides as step-by-step procedures and added the command references with common examples.
-
----
-
 # NixOS with LUKS, LVM, and Btrfs: A Comprehensive Guide
 
 This guide covers the installation and management of a NixOS system using a full-disk encryption setup with LUKS, LVM for volume management, and Btrfs for the filesystem.
