@@ -72,45 +72,51 @@ in {
         # Ensure the script runs *after* basic file systems are set up
         # We give it a high priority (20) to ensure it runs
         text = ''
-          echo "=> Managing Flatpak applications..."
+          # Check if standard output (1) is NOT a TTY (terminal).
+          # This is true at boot, but false during nixos-rebuild.
+          if [ ! -t 1 ]; then
+            echo "=> Running at boot, skipping Flatpak management."
+          else
+            echo "=> Managing Flatpak applications..."
 
-          # Define the target list of desired flatpaks
-          flatpaks=(
-            ${flatpakAppsShellArray}
-          )
+            # Define the target list of desired flatpaks
+            flatpaks=(
+              ${flatpakAppsShellArray}
+            )
 
-          # Add Flathub remote if it doesn't exist
-          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
+            # Add Flathub remote if it doesn't exist
+            ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 
-          # --- Installation Loop: Install missing packages ---
-          for package in ''${flatpaks[*]}; do
-            # Check if the package is already installed
-            check=$(${pkgs.flatpak}/bin/flatpak list --app | ${pkgs.gnugrep}/bin/grep -E "\s$package\s")
-            if [[ -z "$check" ]] then
-              echo "Installing missing flatpak: $package"
-              ${pkgs.flatpak}/bin/flatpak install -y flathub $package || true
-            fi
-          done
+            # --- Installation Loop: Install missing packages ---
+            for package in ''${flatpaks[*]}; do
+              # Check if the package is already installed
+              check=$(${pkgs.flatpak}/bin/flatpak list --app | ${pkgs.gnugrep}/bin/grep -E "\s$package\s")
+              if [[ -z "$check" ]] then
+                echo "Installing missing flatpak: $package"
+                ${pkgs.flatpak}/bin/flatpak install -y flathub $package || true
+              fi
+            done
 
-          # --- Uninstallation Loop: Remove unwanted packages ---
+            # --- Uninstallation Loop: Remove unwanted packages ---
 
-          # 1. Get a list of *currently installed* application IDs
-          installed=($(${pkgs.flatpak}/bin/flatpak list --app | ${pkgs.gawk}/bin/awk '{print $2}'))
+            # 1. Get a list of *currently installed* application IDs
+            installed=($(${pkgs.flatpak}/bin/flatpak list --app | ${pkgs.gawk}/bin/awk '{print $2}'))
 
-          # 2. Iterate over installed applications
-          for remove in ''${installed[*]}; do
-            # Check if the installed app is NOT in the desired list ($flatpaks)
-            # The outer spaces ensure we match the full application ID
-            if [[ ! " ''${flatpaks[*]} " =~ " ''${remove} " ]]; then
-              echo "Uninstalling unwanted flatpak: $remove"
-              ${pkgs.flatpak}/bin/flatpak uninstall -y $remove || true
-            fi
-          done
+            # 2. Iterate over installed applications
+            for remove in ''${installed[*]}; do
+              # Check if the installed app is NOT in the desired list ($flatpaks)
+              # The outer spaces ensure we match the full application ID
+              if [[ ! " ''${flatpaks[*]} " =~ " ''${remove} " ]]; then
+                echo "Uninstalling unwanted flatpak: $remove"
+                ${pkgs.flatpak}/bin/flatpak uninstall -y $remove || true
+              fi
+            done
 
-          # Clean up unused runtimes and dependencies
-          ${pkgs.flatpak}/bin/flatpak uninstall -y --unused || true
+            # Clean up unused runtimes and dependencies
+            ${pkgs.flatpak}/bin/flatpak uninstall -y --unused || true
 
-          echo "=> Flatpak management complete."
+            echo "=> Flatpak management complete."
+          fi
         '';
       };
     };
