@@ -268,6 +268,7 @@ in {
     jdk25 # Java Development Kit
     jetbrains.pycharm-community # Python IDE.
     jetbrains.idea-community # Java IDE.
+    godot # Multi-platform 2D and 3D game engine
     postman # API development environment.
     vscode # Code editor.
     # zed-editor # Code editor.

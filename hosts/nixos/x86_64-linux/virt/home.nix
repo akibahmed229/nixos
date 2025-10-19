@@ -33,6 +33,16 @@ in {
     udiskie
   ];
 
+  home.file.".xprofile".text = ''
+    # Start dbus if not running
+    if ! pgrep -x dbus-daemon > /dev/null; then
+      eval $(dbus-launch --exit-with-session)
+    fi
+
+    # Start spice agent for clipboard & dynamic resize
+    ${pkgs.spice-vdagent}/bin/spice-vdagent &
+  '';
+
   services = {
     # For auto mounting USB devices
     udiskie = {
