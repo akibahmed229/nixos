@@ -87,28 +87,29 @@ in {
             # Add Flathub remote if it doesn't exist
             ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 
+            # Get a list of *currently installed* application IDs
+            installed=$(${pkgs.flatpak}/bin/flatpak list --app --columns=application | ${pkgs.coreutils}/bin/tail -n +1)
+
             # --- Installation Loop: Install missing packages ---
+
             for package in ''${flatpaks[*]}; do
-              # Check if the package is already installed
-              check=$(${pkgs.flatpak}/bin/flatpak list --app | ${pkgs.gnugrep}/bin/grep -E "\s$package\s")
-              if [[ -z "$check" ]] then
+              # Check if the desired app is NOT in the installed list
+              # This is a safe, non-regex string comparison
+              if [[ ! ''${installed[*]} =~ $package ]]; then
                 echo "Installing missing flatpak: $package"
-                ${pkgs.flatpak}/bin/flatpak install -y flathub $package || true
+                ${pkgs.flatpak}/bin/flatpak install -y flathub "$package" || true
               fi
             done
 
             # --- Uninstallation Loop: Remove unwanted packages ---
 
-            # 1. Get a list of *currently installed* application IDs
-            installed=($(${pkgs.flatpak}/bin/flatpak list --app | ${pkgs.gawk}/bin/awk '{print $2}'))
-
-            # 2. Iterate over installed applications
+            # Iterate over installed applications
             for remove in ''${installed[*]}; do
               # Check if the installed app is NOT in the desired list ($flatpaks)
               # The outer spaces ensure we match the full application ID
-              if [[ ! " ''${flatpaks[*]} " =~ " ''${remove} " ]]; then
+              if [[ ! ''${flatpaks[*]} =~ $remove ]]; then
                 echo "Uninstalling unwanted flatpak: $remove"
-                ${pkgs.flatpak}/bin/flatpak uninstall -y $remove || true
+                ${pkgs.flatpak}/bin/flatpak uninstall -y "$remove" || true
               fi
             done
 
