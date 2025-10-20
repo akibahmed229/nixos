@@ -13,7 +13,7 @@ lib.mkIf (user == "akib") {
     includes = [
       {inherit (config.sops.templates."git-user.conf") path;}
     ];
-    extraConfig = {
+    settings = {
       commit = {
         gpgSign = true;
       };
