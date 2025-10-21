@@ -56,14 +56,10 @@
     config = {
       common = {
         default = ["gnome" "gtk"];
-        "org.freedesktop.impl.portal.FileChooser" = "gtk";
       };
       niri = {
         # Niri-specific section to assign portals properly
         default = ["gtk" "gnome"];
-        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
-        "org.freedesktop.impl.portal.RemoteDesktop" = "gnome";
-        "org.freedesktop.impl.portal.Screenshot" = "gnome";
       };
     };
     configPackages = [config.programs.niri.package];
