@@ -11,6 +11,7 @@ in {
   # --- 1. Define Options ---
   options.nm.docker.container.nextcloud = {
     enable = mkEnableOption "Enable the Nextcloud file synchronization and sharing stack";
+    enablePort = mkEnableOption "Enable the Nextcloud Port to Access in Local Network";
 
     password = mkOption {
       type = types.str;
@@ -188,9 +189,10 @@ in {
 
     # 2.2 Open the required ports in the host firewall
     networking.firewall.allowedTCPPorts =
-      [
-        cfg.hostPort # Nextcloud Web UI
-      ]
-      ++ (optional cfg.enableCollabora cfg.collaboraHostPort);
+      optional cfg.enablePort
+      ([
+          cfg.hostPort # Nextcloud Web UI
+        ]
+        ++ (optional cfg.enableCollabora cfg.collaboraHostPort));
   };
 }

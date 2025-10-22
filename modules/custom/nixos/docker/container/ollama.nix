@@ -10,6 +10,7 @@ in {
   # --- 1. Define Options ---
   options.nm.docker.container.ollama = {
     enable = mkEnableOption "Enable the Ollama large language model service via Docker container";
+    enablePort = mkEnableOption "Enable the Ollama Service Port to Access in Local Network";
 
     image = mkOption {
       type = types.str;
@@ -96,9 +97,10 @@ in {
 
     # 2.2 Open the required ports in the host firewall
     networking.firewall.allowedTCPPorts =
-      [
-        cfg.hostPort # Ollama API
-      ]
-      ++ (optional cfg.enableWebUI cfg.webUIHostPort);
+      optional cfg.enablePort
+      ([
+          cfg.hostPort # Ollama API
+        ]
+        ++ (optional cfg.enableWebUI cfg.webUIHostPort));
   };
 }

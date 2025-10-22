@@ -65,7 +65,6 @@ in {
           dbPassword = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/n8n/pass.txt");
           domain = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/ngrok/domain.txt");
         };
-        pihole.enable = true;
         adguard.enable = true;
         jenkins.enable = true;
         portainer.enable = true;
@@ -73,6 +72,34 @@ in {
           enable = true;
           defaultUser = user;
           password = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/nextcloud/pass.txt");
+        };
+      };
+    };
+
+    # ------------------------- Reverse Proxy Setting ------------------------------------
+    ngnix = {
+      enable = true;
+      enableTLS = false; # Global setting for self-managed TLS
+      routes = {
+        "nextcloud.akibhome.lab" = {
+          target = "localhost";
+          port = 8090;
+          description = "Nextcloud Local setup";
+        };
+        "portainer.akibhome.lab" = {
+          target = "localhost";
+          port = 9443;
+          description = "Portainer Local setup";
+        };
+        "n8n.akibhome.lab" = {
+          target = "localhost";
+          port = 5678;
+          description = "N8N Local setup";
+        };
+        "jenkins.akibhome.lab" = {
+          target = "localhost";
+          port = 1010;
+          description = "N8N Local setup";
         };
       };
     };
@@ -154,7 +181,9 @@ in {
         "/var/lib/etcd"
         # portainer docker & kubernetes management
         "/var/lib/portainer"
-        "/var/lib/pihole/"
+        #"/var/lib/pihole/"
+        "/var/lib/adguardhome/work"
+        "/var/lib/adguardhome/conf"
         "/var/lib/mariadb"
         "/var/lib/nextcloud/html"
         "/var/lib/nextcloud/data"

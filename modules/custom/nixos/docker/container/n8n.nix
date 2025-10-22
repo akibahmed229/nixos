@@ -112,6 +112,7 @@ in {
             N8N_EDITOR_BASE_URL = cfg.domain;
             WEBHOOK_URL = cfg.domain;
             N8N_DEFAULT_BINARY_DATA_MODE = "filesystem";
+            N8N_SECURE_COOKIE = "false";
           };
 
           # Link explicitly for dependency and hostname resolution
