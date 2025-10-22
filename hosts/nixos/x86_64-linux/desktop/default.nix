@@ -66,6 +66,7 @@ in {
           domain = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/ngrok/domain.txt");
         };
         pihole.enable = true;
+        adguard.enable = true;
         jenkins.enable = true;
         portainer.enable = true;
         nextcloud = {
@@ -83,6 +84,7 @@ in {
       bridge.enable = false;
     };
     gaming.enable = true;
+    wireshark.enable = true;
     bbr.enable = true;
     fhs.enable = true;
     dbus.enable = true;

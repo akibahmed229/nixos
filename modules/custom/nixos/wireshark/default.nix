@@ -25,11 +25,11 @@ in {
     Wireshark is a free, open-source network protocol analyzer that captures and displays network traffic in real-time.
     By enabling this, the system installs the program and configures necessary user groups for packet capture.
     */
-    programs = {
-      wireshark = {
-        enable = true;
-        package = cfg.package;
-      };
+    programs.wireshark = {
+      enable = true;
+      package = cfg.package;
+      usbmon.enable = true; # Enable USB capture support
+      dumpcap.enable = true; # Enable network capture capability
     };
   };
 }
