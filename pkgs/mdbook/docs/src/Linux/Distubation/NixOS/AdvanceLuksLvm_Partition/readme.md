@@ -659,3 +659,133 @@ Common commands for managing Btrfs filesystems and subvolumes.
   ```bash
   btrfs check /dev/my_vg/my_lv
   ```
+
+## 7\. 🔧 System Recovery: Chrooting with a Live USB
+
+If your system fails to boot due to a broken configuration, a kernel panic, or a faulty GRUB, you can use a Live USB (like the NixOS installer) to chroot into your installation and fix it. The `nixos-enter` command is a powerful script that makes this much easier.
+
+### Prerequisites
+
+1.  Boot from a NixOS installer ISO.
+2.  Connect to the internet (if you need to download packages).
+3.  Open a terminal and get a root shell: `sudo -i`.
+
+### Step 1. Identify and Unlock LUKS Volumes
+
+First, find your encrypted partitions.
+
+```bash
+lsblk
+```
+
+You will need to identify all partitions that are part of your LVM `root_vg`. In the setup from this guide, there are two: the main `crypted` partition (e.g., `/dev/vda4`) and the extended one `crypted_ext` (e.g., `/dev/vdb1`).
+
+🚨 **Important:** You must unlock **ALL** LUKS volumes that are part of your Volume Group, otherwise LVM will fail to activate.
+
+```bash
+# Unlock the primary disk (e.g., /dev/vda4)
+cryptsetup luksOpen /dev/vda4 crypted
+
+# Unlock the extended disk (e.g., /dev/vdb1)
+cryptsetup luksOpen /dev/vdb1 crypted_ext
+```
+
+Enter your single passphrase when prompted for each.
+
+### Step 2. Activate the LVM Volume Group
+
+Tell LVM to scan for and activate the Volume Groups now available on the decrypted devices.
+
+```bash
+# Scan for and activate all volume groups
+vgchange -ay
+```
+
+You should see a message that `root_vg` is now active.
+
+### Step 3. Mount Filesystems for `nixos-enter`
+
+`nixos-enter` is smart, but it needs the root (`/`) and boot (`/boot`) partitions mounted at `/mnt`.
+
+```bash
+# 1. Mount the Btrfs root subvolume
+# This is the subvolume you set for '/' in your configuration.nix
+mount -o subvol=root /dev/mapper/root_vg-root /mnt
+
+# 2. Mount the boot (ESP) partition
+# This is VITAL for fixing GRUB. Find your ESP (e.g., /dev/vda2)
+mkdir -p /mnt/boot
+mount /dev/vda2 /mnt/boot
+```
+
+### Step 4. Chroot into Your System
+
+With the root and boot partitions mounted, you can now use `nixos-enter`. It will automatically find your `/nix` store and other subvolumes.
+
+```bash
+nixos-enter
+```
+
+Your prompt should change, and you are now "inside" your broken NixOS installation as the `root` user.
+
+### Step 5. Perform Repairs (Inside the Chroot)
+
+Here are common fixes for a broken system.
+
+#### Scenario 1: Fix a Broken `configuration.nix`
+
+This is the most common fix. You made a change, rebuilt, and now it won't boot.
+
+```bash
+# 1. Edit your configuration to fix the typo or bad option
+nano /etc/nixos/configuration.nix
+
+# 2. Rebuild the system.
+# 'nixos-rebuild switch' will build and make it the default.
+nixos-rebuild switch
+
+# If you are less confident, 'nixos-rebuild boot' will build it
+# and set it as the default, but won't activate it immediately.
+nixos-rebuild boot
+```
+
+#### Scenario 2: Roll Back to a Previous Generation
+
+If you just want to undo your last build, you can roll back.
+
+```bash
+# This will build your *previous* configuration and make it the default.
+nixos-rebuild boot --rollback
+
+# You can also list all generations and switch to a specific one:
+nix-env -p /nix/var/nix/profiles/system --list-generations
+nix-env -p /nix/var/nix/profiles/system --switch-generation 123
+```
+
+#### Scenario 3: Manually Reinstall GRUB
+
+If `nixos-rebuild` doesn't fix a "no bootable device" error, GRUB itself might be broken.
+
+```bash
+# This command reinstalls GRUB to your EFI directory.
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=nixos
+```
+
+After this, it's still a good idea to run `nixos-rebuild switch` to ensure GRUB's configuration file is also correct.
+
+### Step 6. Exit and Reboot
+
+Once you are finished, exit the chroot and unmount everything.
+
+```bash
+# 1. Exit the chroot
+exit
+
+# 2. Unmount all partitions
+umount -R /mnt
+
+# 3. Reboot the system
+reboot
+```
+
+Remove your Live USB, and your system should now boot into the fixed configuration.
