@@ -10,11 +10,11 @@
       base = {
         matches = [
           {
-            trigger = ":now";
+            trigger = "::now";
             replace = "It's {{currentdate}} {{currenttime}}";
           }
           {
-            trigger = ":gptnp";
+            trigger = "::gptnp";
             /*
             [
             with nudge phrase:-
@@ -31,7 +31,7 @@
             '';
           }
           {
-            trigger = ":gptvervc";
+            trigger = "::gptvervc";
             /*
             The Verbosity Control:-
 
@@ -55,7 +55,7 @@
             '';
           }
           {
-            trigger = ":gptop";
+            trigger = "::gptop";
             replace = ''
               You are an expert prompt engineer specializing in creating prompts for AI language models, particularly `chatgpt-5`
 
