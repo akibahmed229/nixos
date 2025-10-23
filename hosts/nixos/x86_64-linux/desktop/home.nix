@@ -25,6 +25,7 @@ in {
         "kitty"
         "thunar"
         "hypridle"
+        "espanso"
       ]
       ++ lib.optionals (user == "akib") [
         "git"
