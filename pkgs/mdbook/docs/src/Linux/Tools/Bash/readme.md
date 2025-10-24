@@ -2,6 +2,23 @@
 
 Master the Linux command line from first principles to advanced automation. This comprehensive guide organizes commands by **what you want to accomplish**, making it your go-to reference whether you're taking your first steps or optimizing complex workflows.
 
+## 🧭 Table of Contents
+
+1. [Foundations: Understanding the Command Line](#1-foundations-understanding-the-command-line)
+2. [Navigation: Finding Your Way Around](#2-navigation-finding-your-way-around)
+3. [File Operations: Creating, Moving, and Deleting](#3-file-operations-creating-moving-and-deleting)
+4. [Reading and Viewing Files](#4-reading-and-viewing-files)
+5. [Searching: Finding Files and Text](#5-searching-finding-files-and-text)
+6. [Advanced Text Processing: Power Tools](#6-advanced-text-processing-power-tools)
+7. [Users, Permissions, and Access Control](#7-users-permissions-and-access-control)
+8. [Process and System Management](#8-process-and-system-management)
+9. [Networking Essentials](#9-networking-essentials)
+10. [Archives and Compression](#10-archives-and-compression)
+11. [Bash Scripting: Automating Tasks](#11-bash-scripting-automating-tasks)
+12. [Input/Output Redirection](#12-inputoutput-redirection)
+13. [Advanced Techniques and Power User Features](#13-advanced-techniques-and-power-user-features)
+14. [Troubleshooting and Debugging](#14-troubleshooting-and-debugging)
+
 ---
 
 ## 1. Foundations: Understanding the Command Line

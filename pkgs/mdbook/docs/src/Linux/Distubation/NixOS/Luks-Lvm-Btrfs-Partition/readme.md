@@ -1,6 +1,16 @@
 # NixOS with LUKS, LVM, and Btrfs: A Comprehensive Guide
 
-This guide covers the installation and management of a NixOS system using a full-disk encryption setup with LUKS, LVM for volume management, and Btrfs for the filesystem.
+## 🧭 Table of Contents
+
+1. [💿 NixOS Installation: Manual Partitioning with LUKS + LVM + Btrfs](#1--nixos-installation-manual-partitioning-with-luks--lvm--btrfs)
+2. [➕ Extending an Encrypted LVM Volume with a New Disk](#2--extending-an-encrypted-lvm-volume-with-a-new-disk)
+3. [➖ Removing an Encrypted Disk from an LVM Volume](#3--removing-an-encrypted-disk-from-an-lvm-volume)
+4. [📚 LUKS Command Reference](#4--luks-command-reference)
+5. [📚 LVM Command Reference](#5--lvm-command-reference)
+6. [📚 Btrfs Command Reference](#6--btrfs-command-reference)
+7. [🔧 System Recovery: Chrooting with a Live USB](#7--system-recovery-chrooting-with-a-live-usb)
+
+---
 
 ## 1\. 💿 NixOS Installation: Manual Partitioning with LUKS + LVM + Btrfs
 
