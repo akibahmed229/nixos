@@ -25,13 +25,14 @@
             ]
             */
             replace = ''
-              [Paste Your Content (router nudge pharases)]
+              [Paste Your Content -router nudge pharases]
 
               Think hard about this.
+
             '';
           }
           {
-            trigger = "::gptvervc";
+            trigger = "::gptvc";
             /*
             The Verbosity Control:-
 
@@ -48,7 +49,7 @@
             High-verbosity: Provide a comprehensive and detailed breakdown (xxx-xxx words)
             */
             replace = ''
-              [Paste Your Content (verbosity control)]
+              [Paste Your Content -verbosity control]
 
               Give me the bottom line in 100 words or less, use markdown for clarity and structure
 
