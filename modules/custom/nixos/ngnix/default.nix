@@ -52,6 +52,7 @@ in {
         options = {
           target = mkOption {
             type = types.str;
+            default = "localhost";
             description = "Target host IP or hostname";
           };
 

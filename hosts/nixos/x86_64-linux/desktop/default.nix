@@ -81,25 +81,13 @@ in {
       enable = true;
       enableTLS = false; # Global setting for self-managed TLS
       routes = {
-        "nextcloud.akibhome.lab" = {
-          target = "localhost";
-          port = 8090;
-          description = "Nextcloud Local setup";
-        };
-        "portainer.akibhome.lab" = {
-          target = "localhost";
-          port = 9443;
-          description = "Portainer Local setup";
-        };
-        "n8n.akibhome.lab" = {
-          target = "localhost";
-          port = 5678;
-          description = "N8N Local setup";
-        };
-        "jenkins.akibhome.lab" = {
-          target = "localhost";
-          port = 1010;
-          description = "N8N Local setup";
+        "nextcloud.akibhome.lab" = {port = 8090;};
+        "portainer.akibhome.lab" = {port = 9443;};
+        "n8n.akibhome.lab" = {port = 5678;};
+        "jenkins.akibhome.lab" = {port = 1010;};
+        "adguard.akibhome.lab" = {
+          target = "192.168.10.122";
+          port = 80;
         };
       };
     };
