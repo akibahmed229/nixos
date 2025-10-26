@@ -283,7 +283,6 @@ in {
     # Android development tools.
     android-studio
     android-tools
-    android-udev-rules
     jdk25 # Java Development Kit
     jetbrains.pycharm-community # Python IDE.
     jetbrains.idea-community # Java IDE.
