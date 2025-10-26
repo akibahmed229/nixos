@@ -23,7 +23,10 @@ in {
   ];
 
   # ---------------------------------------- Custom Nixos Modules ----------------------------------------------------
-  nm = {
+  nm = let
+    secrets = fileName: builtins.toString inputs.secrets + fileName;
+    readSecretsFile = fileName: lib.strings.trim (builtins.readFile (secrets fileName));
+  in {
     # ------------------- Per-system user configuration -----------------------
     setUser = {
       # see modules/custom/nixos/user
@@ -62,8 +65,8 @@ in {
         n8n = {
           enable = true;
           defaultUser = user;
-          dbPassword = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/n8n/pass.txt");
-          domain = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/ngrok/domain.txt");
+          dbPassword = readSecretsFile "/n8n/pass.txt";
+          domain = readSecretsFile "/ngrok/domain.txt";
         };
         adguard.enable = true;
         jenkins.enable = true;
@@ -71,7 +74,7 @@ in {
         nextcloud = {
           enable = true;
           defaultUser = user;
-          password = lib.strings.trim (builtins.readFile "${builtins.toString inputs.secrets}/nextcloud/pass.txt");
+          password = readSecretsFile "/nextcloud/pass.txt";
         };
       };
     };
@@ -186,7 +189,7 @@ in {
     # ------------------- Atomic Secret Provisioning  -------------------------
     sops = lib.mkIf (user == "akib") {
       enable = true;
-      defaultSopsFile = "${builtins.toString inputs.secrets}/secrets/secrets.yaml";
+      defaultSopsFile = secrets "/secrets/secrets.yaml";
       secrets = {
         "akib/password/root_secret".neededForUsers = true;
         "akib/password/my_secret".neededForUsers = true;
