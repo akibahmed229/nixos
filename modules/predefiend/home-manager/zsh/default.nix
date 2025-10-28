@@ -28,9 +28,6 @@
 
       # Extra shell environment / aliases / bindings
       envExtra = ''
-        # Only run in interactive shells (prevents scp/sftp issues)
-        [[ $- != *i* ]] && return
-
         # Startup
         colorscript random
         set -o vi
@@ -59,6 +56,65 @@
         alias gs='git status'
         alias gd='git diff'
         alias ..='cd ..'
+
+        # Extract any archive:
+        extract() {
+            if [ -f $1 ]; then
+                case $1 in
+                    *.tar.bz2)   tar xjf $1     ;;
+                    *.tar.gz)    tar xzf $1     ;;
+                    *.bz2)       bunzip2 $1     ;;
+                    *.rar)       unrar x $1     ;;
+                    *.gz)        gunzip $1      ;;
+                    *.tar)       tar xf $1      ;;
+                    *.tbz2)      tar xjf $1     ;;
+                    *.tgz)       tar xzf $1     ;;
+                    *.zip)       unzip $1       ;;
+                    *.Z)         uncompress $1  ;;
+                    *.7z)        7z x $1        ;;
+                    *)           echo "'$1' cannot be extracted" ;;
+                esac
+            else
+                echo "'$1' is not a valid file"
+            fi
+        }
+
+        # Create and enter directory:
+        mkcd() {
+            mkdir -p "$1" && cd "$1"
+        }
+
+        # Quick backup:
+        backup() {
+            cp "$1" "$1.backup-$(date +%Y%m%d-%H%M%S)"
+        }
+
+        # Find and replace in files:
+        replace() {
+            grep -rl "$1" . | xargs sed -i "s/$1/$2/g"
+        }
+
+        # Show PATH one per line:
+        path() {
+            echo "$PATH" | tr ':' '\n'
+        }
+
+        # fzf-based directory finder
+        find-dir() {
+          local dir
+          dir=$(find . -type d 2>/dev/null | fzf)
+          [[ -n "$dir" ]] && cd "$dir" || cd "$(pwd)"
+        }
+
+        # fzf-based file finder with preview in bat
+        find-file() {
+          local file
+          file=$(fzf --preview 'bat --style=numbers --color=always {}' 2>/dev/null)
+
+          if [[ -n "$file" ]]; then
+            nvim "$file"
+          fi
+        }
       '';
 
       # Declarative aliases
@@ -70,6 +126,9 @@
 
       # Initialization hooks
       initContent = ''
+        # Only run in interactive shells (prevents scp/sftp issues)
+        [[ $- != *i* ]] && return
+
         # Fzf
         source <(fzf --zsh)
 
@@ -97,23 +156,6 @@
         # Key bindings
         stty -ixon                 # Disable Ctrl-S/Ctrl-Q flow control
         bindkey -s '^Q' 'clear\n'  # Ctrl-Q = clear
-
-        # fzf-based directory finder
-        function find-dir() {
-          local dir
-          dir=$(find . -type d 2>/dev/null | fzf)
-          [[ -n "$dir" ]] && cd "$dir" || cd "$(pwd)"
-        }
-
-        # fzf-based file finder with preview in bat
-        function find-file() {
-          local file
-          file=$(fzf --preview 'bat --style=numbers --color=always {}' 2>/dev/null)
-
-          if [[ -n "$file" ]]; then
-            nvim "$file"
-          fi
-        }
       '';
 
       # Syntax highlighting
