@@ -58,6 +58,7 @@ with lib; let
     ".steam"
     ".elfeed"
     ".cloudflared"
+    ".gemini"
     ".cache" # Persisted, but cleaned by tmpfiles
     {
       directory = ".gnupg";

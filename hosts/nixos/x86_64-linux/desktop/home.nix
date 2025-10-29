@@ -26,6 +26,7 @@ in {
         "thunar"
         "hypridle"
         "espanso"
+        "gemini-cli"
       ]
       ++ lib.optionals (user == "akib") [
         "git"
