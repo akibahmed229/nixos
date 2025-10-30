@@ -231,7 +231,7 @@ in {
 
     # 3. Communication & Social
     telegram-desktop # Messaging app.
-    whatsapp-for-linux # WhatsApp client for Linux.
+    wasistlos # WhatsApp client for Linux.
 
     # 4. Internet & Networking
     chromium # Web browser.
