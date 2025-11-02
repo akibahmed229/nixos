@@ -35,7 +35,7 @@
           strace
           # old GCC for kernel
           pkgsCross.aarch64-multiplatform.gcc12Stdenv.cc
-          (hiPrio gcc12)
+          (lib.hiPrio gcc12)
         ]
         ++ pkgs.linux.nativeBuildInputs);
 

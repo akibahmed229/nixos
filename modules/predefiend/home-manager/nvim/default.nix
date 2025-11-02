@@ -41,10 +41,10 @@ in {
     intelephense # PHP LSP
 
     ## Dart
-    (hiPrio dart) # Dart SDK (hiPrio avoids collisions)
+    (lib.hiPrio dart) # Dart SDK (hiPrio avoids collisions)
 
     ## Web / Frontend
-    (lowPrio prettier) # Prettier formatter (lowPrio avoids conflicts)
+    (lib.lowPrio prettier) # Prettier formatter (lowPrio avoids conflicts)
     typescript-language-server # TS/JS LSP
     vscode-langservers-extracted # HTML, CSS, JSON, ESLint
 
