@@ -31,7 +31,7 @@ in {
             enable = true;
           };
           settings.General.DisplayServer = "wayland";
-          theme = ''${self.packages.${pkgs.system}.custom_sddm.override {
+          theme = ''${self.packages.${pkgs.stdenv.hostPlatform.system}.custom_sddm.override {
               imgLink = {
                 url = "https://raw.githubusercontent.com/akibahmed229/wallpaper/main/gruv-wallhaven-4gmevq.png";
                 sha256 = "sha256-rSr0xgLC8EdshOUPzrjPvkc/Ym+1TE7Au/RPalC+QEA=";

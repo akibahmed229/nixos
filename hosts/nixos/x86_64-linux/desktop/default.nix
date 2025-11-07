@@ -148,7 +148,7 @@ in {
       motherboard = "intel"; # Explicitly set motherboard type
       # Pass your custom package here
       extraSystemPackages = [
-        self.packages.${pkgs.system}.toggleRGB
+        self.packages.${pkgs.stdenv.hostPlatform.system}.toggleRGB
       ];
     };
 
@@ -297,7 +297,7 @@ in {
     # github-desktop # Git client.
     lazygit # Git UI.
     gh # GitHub CLI.
-    # self.packages.${pkgs.system}.ciscoPacketTracer
+    # self.packages.${pkgs.stdenv.hostPlatform.system}.ciscoPacketTracer
 
     # 2. Media & Design
     gimp # Image editor.

@@ -34,7 +34,7 @@ in {
 
   home.packages = with pkgs; [
     # 1. Desktop Environment & Customization
-    self.packages.${pkgs.system}.wallpaper # Wallpaper management tool.
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpaper # Wallpaper management tool.
     nwg-look # Look and feel customization tool.
     xdg-utils # Utilities for managing desktop integration.
     tree # Command-line directory tree viewer.

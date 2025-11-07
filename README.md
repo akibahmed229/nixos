@@ -214,14 +214,14 @@ So instead of manually tracking dozens of scattered imports, I rely on these pat
   {inputs, pkgs,... }:
   {
       environment.systemPackages = with pkgs; [
-        inputs.akibOS.packages.${pkgs.system}.wallpaper # make sure you have set the env variable $WALLPAPER
-        inputs.akibOS.packages.${pkgs.system}.custom_nsxiv # my modify version of nsxiv
+        inputs.akibOS.packages.${pkgs.stdenv.hostPlatform.system}.wallpaper # make sure you have set the env variable $WALLPAPER
+        inputs.akibOS.packages.${pkgs.stdenv.hostPlatform.system}.custom_nsxiv # my modify version of nsxiv
       ];
 
       # custom pkgs for sddm theme for
       services.displayManager.sddm = {
         enable = true;
-        theme = ''${inputs.akibOS.packages.${pkgs.system}.custom_sddm.override {
+        theme = ''${inputs.akibOS.packages.${pkgs.stdenv.hostPlatform.system}.custom_sddm.override {
             imgLink = {
               url = "https://raw.githubusercontent.com/akibahmed229/nixos/main/public/wallpaper/nix-wallpaper-nineish-dark-gray.png"; # you can change the image for sddm theme
               sha256 = "07zl1dlxqh9dav9pibnhr2x1llywwnyphmzcdqaby7dz5js184ly"; # change the hash accordingly
@@ -237,8 +237,8 @@ So instead of manually tracking dozens of scattered imports, I rely on these pat
   {inputs, pkgs,... }:
   {
      home.packages  = with pkgs; [
-        inputs.akibOS.packages.${pkgs.system}.wallpaper # make sure you have set the env variable $WALLPAPER
-        inputs.akibOS.packages.${pkgs.system}.custom_nsxiv # my modify version of nsxiv
+        inputs.akibOS.packages.${pkgs.stdenv.hostPlatform.system}.wallpaper # make sure you have set the env variable $WALLPAPER
+        inputs.akibOS.packages.${pkgs.stdenv.hostPlatform.system}.custom_nsxiv # my modify version of nsxiv
       ];
   }
   ```

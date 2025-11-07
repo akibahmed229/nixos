@@ -12,7 +12,7 @@
     "x-scheme-handler/unknown" = "firefox.desktop";
   };
   home.sessionVariables = {
-    DEFAULT_BROWSER = "${pkgs.system}/bin/firefox";
+    DEFAULT_BROWSER = "${pkgs.stdenv.hostPlatform.system}/bin/firefox";
   };
 
   programs.firefox = {

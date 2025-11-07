@@ -13,7 +13,7 @@
     configDir = ./config;
 
     # additional packages to add to gjs's runtime
-    extraPackages = with inputs.ags.packages.${pkgs.system}; [
+    extraPackages = with inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}; [
       hyprland
       apps
       mpris
@@ -26,5 +26,5 @@
   };
 
   # The home-manager module does not expose the astal cli to the home environment
-  home.packages = with inputs.ags.packages.${pkgs.system}; [io notifd];
+  home.packages = with inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}; [io notifd];
 }

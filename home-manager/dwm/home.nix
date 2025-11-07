@@ -7,7 +7,7 @@
   home.packages = with pkgs; [
     cliphist
     wl-clipboard
-    self.packages.${pkgs.system}.wallpaper
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpaper
     picom
     (st.overrideAttrs {
       src = ./st;

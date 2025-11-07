@@ -24,7 +24,7 @@ in {
 
   programs.quickshell = {
     enable = true;
-    package = inputs.quickshell.packages.${pkgs.system}.default.override {
+    package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
       withJemalloc = true;
       withQtSvg = true;
       withWayland = true;
