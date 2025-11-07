@@ -16,11 +16,12 @@
       device = "/dev/disk/by-label/crypted";
       preLVM = true;
     };
-    devices."crypted_ext" = {
-      device = "/dev/disk/by-partlabel/crypted_ext";
-      preLVM = true;
-      allowDiscards = true; # Good practice for SSDs/VMs
-    };
+    # Config for Extended Lvm pertion with lukes
+    # devices."crypted_ext" = {
+    #   device = "/dev/disk/by-partlabel/crypted_ext";
+    #   preLVM = true;
+    #   allowDiscards = true; # Good practice for SSDs/VMs
+    # };
   };
 
   fileSystems."/" = {
