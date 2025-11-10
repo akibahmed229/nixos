@@ -237,6 +237,7 @@ in {
     chromium # Web browser.
     qbittorrent # BitTorrent client.
     anydesk # Remote desktop software.
+    remmina # Remote access screen
     localsend # Local file transfer tool.
     nextcloud-client # Nextcloud sync client.
 
