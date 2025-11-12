@@ -2,7 +2,7 @@
   programs.gemini-cli = {
     enable = true;
     package = pkgs.gemini-cli;
-    defaultModel = "gemini-2.5-flash";
+    # defaultModel = "gemini-2.5-flash";
     settings = {
       tools = {
         autoAccept = true;
