@@ -62,26 +62,33 @@
       }
     ];
     extraConfig = ''
-      set-option -sa terminal-overrides ",xterm*:Tc"
-      set -q -g status-utf8 on                  # expect UTF-8 (tmux < 2.2)
-      setw -q -g utf8 on
+      set -g default-terminal "tmux-256color"
+      set -ga terminal-overrides ",*:RGB"
+      set -q -g utf8 on
       set -g mouse on
+      set -g set-clipboard on
 
       unbind C-b
       set -g prefix C-Space
       bind C-Space send-prefix
 
-      # Vim style pane selection
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
+      bind '"' split-window -v -c "#{pane_current_path}"
+      bind %   split-window -h -c "#{pane_current_path}"
+
+      unbind r
+      bind r source-file $HOME/.config/tmux/tmux.conf
 
       # Start windows and panes at 1, not 0
       set -g base-index 1
       set -g pane-base-index 1
       set-window-option -g pane-base-index 1
       set-option -g renumber-windows on
+
+      # Vim style pane selection
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
 
       # Use Alt-arrow keys without prefix key to switch panes
       bind -n M-Left select-pane -L
@@ -100,13 +107,24 @@
       # set vi-mode
       set-window-option -g mode-keys vi
 
+      # Vim-like copy/paste
       # keybindings Press C-space. Press [. Navigate to the start of the text you want to copy using h, j, k, l.
+      set-window-option -g mode-keys vi
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      unbind -T copy-mode-vi MouseDragEnd1Pane
 
-      bind '"' split-window -v -c "#{pane_current_path}"
-      bind % split-window -h -c "#{pane_current_path}"
+      # Alt+number to select window
+      bind -n M-1 select-window -t 1
+      bind -n M-2 select-window -t 2
+      bind -n M-3 select-window -t 3
+      bind -n M-4 select-window -t 4
+      bind -n M-5 select-window -t 5
+      bind -n M-6 select-window -t 6
+      bind -n M-7 select-window -t 7
+      bind -n M-8 select-window -t 8
+      bind -n M-9 select-window -t 9
     '';
   };
 
