@@ -62,11 +62,10 @@
       }
     ];
     extraConfig = ''
-      set -g default-terminal "tmux-256color"
-      set -ga terminal-overrides ",*:RGB"
-      set -q -g utf8 on
+      set-option -sa terminal-overrides ",xterm*:Tc"
+      set -q -g status-utf8 on                  # expect UTF-8 (tmux < 2.2)
+      setw -q -g utf8 on
       set -g mouse on
-      set -g set-clipboard on
 
       unbind C-b
       set -g prefix C-Space
