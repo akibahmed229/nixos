@@ -13,6 +13,8 @@
   };
   home.sessionVariables = {
     DEFAULT_BROWSER = "${pkgs.stdenv.hostPlatform.system}/bin/firefox";
+    MOZ_WINDOW_OCCLUSION = "0";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 
   programs.firefox = {
@@ -356,6 +358,10 @@
           "network.dns.disablePrefetchFromHTTPS" = false;
           "dom.script_loader.bytecode_cache.strategy" = 0;
           "media.memory_caches_combined_limit_kb" = 524288;
+          "media.suspend-bkgnd-video.enabled" = false;
+          "media.resume-bkgnd-video-on-tabhover" = false;
+          "network.http.throttle.enable" = false;
+          "widget.wayland.opaque-region.enabled" = false;
           "layout.css.grid-template-masonry-value.enabled" = false;
 
           # --- Annoyances ---
