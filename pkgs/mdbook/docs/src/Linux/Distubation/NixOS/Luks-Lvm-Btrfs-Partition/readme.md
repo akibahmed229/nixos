@@ -32,7 +32,11 @@ This section guides you through a fresh installation of NixOS on a single disk.
 🚨 **Warning:** This will destroy all data on the specified disk.
 
 ```bash
+vgchange -a n root_vg # deactivate the volume group
 sgdisk --zap-all ${DEVICE}
+
+# optional, override your disk with random data, take too long, hours.
+dd if=/dev/urandom of=/dev/nvme01n bs=4096 status=progress
 ```
 
 ### Step 2. Create Partitions
@@ -74,7 +78,7 @@ This is the core of the setup. We create an encrypted container on our main part
 # 1. Create the LUKS encrypted container on the fourth partition.
 # You will be prompted to enter and confirm a strong passphrase. Remember this!
 echo "Formatting the LUKS container. Please enter your encryption passphrase."
-cryptsetup luksFormat --label crypted ${DEVICE}p4
+cryptsetup luksFormat -v -s 512 -h sha512 --label crypted ${DEVICE}p4
 
 # 2. Open the LUKS container to make it accessible.
 # This creates a decrypted "virtual" device at /dev/mapper/crypted.

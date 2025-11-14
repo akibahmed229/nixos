@@ -32,6 +32,7 @@ pkgs.writeShellApplication {
     fi
 
     DEVICE="$1"
+    SWAP_SIZE="$2"
 
     if [ ! -b "$DEVICE" ]; then
       echo -e "$C_RED""Error: The device '$DEVICE' does not exist or is not a block device.$C_RESET"
@@ -79,18 +80,16 @@ pkgs.writeShellApplication {
     sgdisk --zap-all "$DEVICE"
 
     echo -e "$C_GREEN""\n--- 2. Creating partitions... ---$C_RESET"
-    sgdisk --new=1:0:+1M --typecode=1:EF02 --change-name=1:boot "$DEVICE"
-    sgdisk --new=2:0:+500M --typecode=2:EF00 --change-name=2:ESP "$DEVICE"
-    sgdisk --new=3:0:+8G --typecode=3:8200 --change-name=3:swap "$DEVICE"
+    sgdisk --new=1:0:+500M --typecode=1:EF02 --change-name=1:boot "$DEVICE"
+    sgdisk --new=2:0:+1G --typecode=2:EF00 --change-name=2:ESP "$DEVICE"
     sgdisk --new=4:0:0 --typecode=4:8E00 --change-name=4:root "$DEVICE"
 
     echo -e "$C_GREEN""\n--- 3. Formatting unencrypted filesystems... ---$C_RESET"
     mkfs.vfat -n ESP "$DEVICE2"
-    mkswap -L swap "$DEVICE3"
 
     echo -e "$C_GREEN""\n--- 4. Setting up LUKS encryption and LVM... ---$C_RESET"
     echo "Formatting LUKS container on $DEVICE4 ..."
-    cryptsetup luksFormat --label crypted "$DEVICE4" <<< "$LUKS_PASSWORD"
+    cryptsetup luksFormat -v -s 512 -h sha512 --label crypted "$DEVICE4" <<< "$LUKS_PASSWORD"
 
     echo "Opening LUKS container..."
     cryptsetup open "$DEVICE4" crypted <<< "$LUKS_PASSWORD"
@@ -98,6 +97,7 @@ pkgs.writeShellApplication {
     echo "Setting up LVM on /dev/mapper/crypted..."
     pvcreate /dev/mapper/crypted
     vgcreate root_vg /dev/mapper/crypted
+    lvcreate -L "$SWAP_SIZE"G -n swap root_vg
     lvcreate -l 100%FREE -n root root_vg
 
     echo -e "$C_GREEN""\n--- 5. Formatting the LVM volume with Btrfs... ---$C_RESET"

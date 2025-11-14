@@ -15,6 +15,10 @@ pkgs.writeShellApplication {
     function die()  { echo "ERROR: $1" >&2; exit 1; }
 
     flake_dir="/mnt/etc/flake"
+    swap_size="$(prompt "Enter swap amount size or leave blank to use same as mem size")"
+    if [[ ! -z $swap_size   ]] then
+      swap_size=$(free -m -h | awk '/Mem:/ {print int($2)}')
+    fi
 
     # --- gather input -----------------------------------------------------------
     # Check connectivity
@@ -73,7 +77,7 @@ pkgs.writeShellApplication {
 
       msg "Formatting disks with declarative NixOS disk partitioning script..."
       # Using sudo here because nixos-partition-luks needs root privileges to modify disks
-      sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device"
+      sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device" "$swap_size"
 
       # Using sudo for nix flake init because the parent dir /mnt/etc is owned by root
       sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
