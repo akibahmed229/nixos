@@ -43,11 +43,9 @@ pkgs.writeShellApplication {
     if [[ "$DEVICE" == *"nvme"* ]]; then
       DEVICE2="$DEVICE"p2
       DEVICE3="$DEVICE"p3
-      DEVICE4="$DEVICE"p4
     else
       DEVICE2="$DEVICE"2
       DEVICE3="$DEVICE"3
-      DEVICE4="$DEVICE"4
     fi
 
     # --- THE BIG SCARY WARNING ---
@@ -88,11 +86,11 @@ pkgs.writeShellApplication {
     mkfs.vfat -n ESP "$DEVICE2"
 
     echo -e "$C_GREEN""\n--- 4. Setting up LUKS encryption and LVM... ---$C_RESET"
-    echo "Formatting LUKS container on $DEVICE4 ..."
-    cryptsetup luksFormat -v -s 512 -h sha512 --label crypted "$DEVICE4" <<< "$LUKS_PASSWORD"
+    echo "Formatting LUKS container on $DEVICE3 ..."
+    cryptsetup luksFormat -v -s 512 -h sha512 --label crypted "$DEVICE3" <<< "$LUKS_PASSWORD"
 
     echo "Opening LUKS container..."
-    cryptsetup open "$DEVICE4" crypted <<< "$LUKS_PASSWORD"
+    cryptsetup open "$DEVICE3" crypted <<< "$LUKS_PASSWORD"
 
     echo "Setting up LVM on /dev/mapper/crypted..."
     pvcreate /dev/mapper/crypted
@@ -117,7 +115,8 @@ pkgs.writeShellApplication {
 
     echo -e "$C_GREEN""\n--- 7. Mounting boot partition and activating swap... ---$C_RESET"
     mount "$DEVICE2" /mnt/boot
-    swapon "$DEVICE3"
+    mkswap /dev/mapper/root_vg-swap
+    swapon /dev/mapper/root_vg-swap
 
     echo -e "$C_GREEN""\n--- ✅ Partitioning Complete! ---$C_RESET"
     echo "Your disk is partitioned, encrypted, and mounted at /mnt."
