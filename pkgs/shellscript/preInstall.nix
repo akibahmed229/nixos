@@ -16,7 +16,7 @@ pkgs.writeShellApplication {
 
     flake_dir="/mnt/etc/flake"
     swap_size="$(prompt "Enter swap amount size or leave blank to use same as mem size")"
-    if [[ ! -z $swap_size   ]] then
+    if [[ ! -z $swap_size   ]]; then
       swap_size=$(free -m -h | awk '/Mem:/ {print int($2)}')
     fi
 
