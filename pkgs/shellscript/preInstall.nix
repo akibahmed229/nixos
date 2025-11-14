@@ -15,10 +15,6 @@ pkgs.writeShellApplication {
     function die()  { echo "ERROR: $1" >&2; exit 1; }
 
     flake_dir="/mnt/etc/flake"
-    prompt "Enter swap amount size or leave blank to use same as mem size" swap_size
-    if [[ ! -z $swap_size   ]]; then
-      swap_size=$(free -m -h | awk '/Mem:/ {print int($2)}')
-    fi
 
     # --- gather input -----------------------------------------------------------
     # Check connectivity
@@ -36,6 +32,10 @@ pkgs.writeShellApplication {
     prompt "Enter device (e.g. /dev/sda)" device
     [ -b "$device" ] || die "Invalid block device: $device"
 
+    prompt "Enter swap amount size or leave blank to use same as mem size" swap_size
+    if [[ ! -z $swap_size   ]]; then
+      swap_size=$(free -m -h | awk '/Mem:/ {print int($2)}')
+    fi
 
     if [[ -z "$username" || -z "$hostname" || -z "$device" ]]; then
       msg "username, hostname and device are required"
