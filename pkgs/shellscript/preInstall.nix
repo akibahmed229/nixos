@@ -15,7 +15,7 @@ pkgs.writeShellApplication {
     function die()  { echo "ERROR: $1" >&2; exit 1; }
 
     flake_dir="/mnt/etc/flake"
-    swap_size="$(prompt "Enter swap amount size or leave blank to use same as mem size")"
+    prompt "Enter swap amount size or leave blank to use same as mem size" swap_size
     if [[ ! -z $swap_size   ]]; then
       swap_size=$(free -m -h | awk '/Mem:/ {print int($2)}')
     fi
