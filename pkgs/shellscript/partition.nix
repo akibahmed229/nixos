@@ -25,9 +25,9 @@ pkgs.writeShellApplication {
     C_RESET='\e[0m'
 
     # --- Argument and Sanity Checks ---
-    if [ "$#" -ne 1 ]; then
-      echo -e "$C_RED""Error: You must provide exactly one argument: the target disk device.$C_RESET"
-      echo "Usage: nix run .#partition -- /dev/sdX"
+    if [ "$#" -ne 2 ]; then
+      echo -e "$C_RED""Error: You must provide exactly two argument: the target disk device & swap size.$C_RESET"
+      echo "Usage: nix run .#partition -- /dev/sdX 4"
       exit 1
     fi
 
