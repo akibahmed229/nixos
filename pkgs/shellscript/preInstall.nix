@@ -33,7 +33,7 @@ pkgs.writeShellApplication {
     [ -b "$device" ] || die "Invalid block device: $device"
 
     prompt "Enter swap amount size or leave blank to use same as mem size" swap_size
-    if [[ ! -z $swap_size   ]]; then
+    if [[ -z $swap_size   ]]; then
       swap_size=$(free -m -h | awk '/Mem:/ {print int($2)}')
     fi
 
