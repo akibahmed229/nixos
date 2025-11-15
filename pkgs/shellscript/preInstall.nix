@@ -34,7 +34,7 @@ pkgs.writeShellApplication {
 
     prompt "Enter swap amount size or leave blank to use same as mem size" swap_size
     if [[ -z $swap_size   ]]; then
-      swap_size=$(free -m -h | awk '/Mem:/ {print int($2)}')
+      swap_size=$(free -m -h | awk '/Mem:/ {print int($2) + 1}')
     fi
 
     if [[ -z "$username" || -z "$hostname" || -z "$device" ]]; then
