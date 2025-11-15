@@ -14,7 +14,7 @@ with lib; let
     wlrobs
     obs-backgroundremoval
     obs-pipewire-audio-capture
-    droidcam-obs
+    # droidcam-obs # FIXME: broken
   ];
 in {
   # --- 1. Define Options ---
