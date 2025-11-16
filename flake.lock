@@ -237,18 +237,20 @@
     "gnome-shell": {
       "flake": false,
       "locked": {
-        "lastModified": 1748186689,
-        "narHash": "sha256-UaD7Y9f8iuLBMGHXeJlRu6U1Ggw5B9JnkFs3enZlap0=",
+        "host": "gitlab.gnome.org",
+        "lastModified": 1762869044,
+        "narHash": "sha256-nwm/GJ2Syigf7VccLAZ66mFC8mZJFqpJmIxSGKl7+Ds=",
         "owner": "GNOME",
         "repo": "gnome-shell",
-        "rev": "8c88f917db0f1f0d80fa55206c863d3746fa18d0",
-        "type": "github"
+        "rev": "680e3d195a92203f28d4bf8c6e8bb537cc3ed4ad",
+        "type": "gitlab"
       },
       "original": {
+        "host": "gitlab.gnome.org",
         "owner": "GNOME",
-        "ref": "48.2",
+        "ref": "gnome-49",
         "repo": "gnome-shell",
-        "type": "github"
+        "type": "gitlab"
       }
     },
     "home-manager": {
@@ -258,11 +260,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763196705,
-        "narHash": "sha256-f6EYwIwD5U3qLwOXXBGI7UDXwc8rAOj0iA3fmP/lds0=",
+        "lastModified": 1763228015,
+        "narHash": "sha256-1rYieMVUyZ3kK/cBIr8mOusxrOEJ1/+2MsOg0oJ7b3A=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "211594c88d74a40d89aec879f57eac908fb549e6",
+        "rev": "96156a9e86281c4bfc451236bc2ddfe4317e6f39",
         "type": "github"
       },
       "original": {
@@ -790,11 +792,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763195196,
-        "narHash": "sha256-T5BL2P4kz/fZ15+V3I/u4htiReDYhmw0/sCn2UldCbg=",
+        "lastModified": 1763263042,
+        "narHash": "sha256-LzVLsF/kLiOoTxhiX30PEsUxaz8LV1+bgRdnz9+JWf0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "83220fbd6e332c028c550668a23292751b775c55",
+        "rev": "22ec9e451bec1bc1f3a7f0f61f8f5d81779f8b2f",
         "type": "github"
       },
       "original": {
@@ -858,10 +860,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1763115162,
-        "narHash": "sha256-TgHTFlFI9tZ4kp4yy8fcfy98srgcob9gcOeuKjs1Mw4=",
+        "lastModified": 1763257314,
+        "narHash": "sha256-R7HJSluErPrCQk+VXNWJrE2Pjq582VRNWDHAk6j6wQI=",
         "ref": "refs/heads/master",
-        "rev": "a00ff0394431d1fe3f33ae0934c981930e2a1efb",
+        "rev": "fdbb86a06acd6d1af6049a319c87a5c0badc22dc",
         "shallow": true,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
@@ -985,11 +987,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1762264356,
-        "narHash": "sha256-QVfC53Ri+8n3e7Ujx9kq6all3+TLBRRPRnc6No5qY5w=",
+        "lastModified": 1763245881,
+        "narHash": "sha256-0q+4x1Gx3AMIRV8MIN2/WOJOAVMtfqnkY1m3k0iIDkI=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "647bb8dd96a206a1b79c4fd714affc88b409e10b",
+        "rev": "29dc3dd858c507bfd1038716197f84f40e41f28d",
         "type": "github"
       },
       "original": {
