@@ -56,5 +56,8 @@ in {
 
     ## Lua
     lua-language-server # Lua LSP
+
+    ## Terraform
+    terraform-ls
   ];
 }
