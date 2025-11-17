@@ -40,7 +40,7 @@
 
       # 3. Multimedia & Audio
       pwvucontrol # Pipewire Volume Control.
-      # rhythmbox # Music player. # FIXME: broken
+      rhythmbox # Music player.
 
       # 4. GNOME Applications
       eog # GNOME Eye of GNOME image viewer.
