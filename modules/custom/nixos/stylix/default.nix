@@ -71,9 +71,9 @@ in {
         defaultFonts
         // {
           sizes = {
-            applications = 10;
+            applications = 11;
             terminal = 11;
-            desktop = 10;
+            desktop = 11;
             popups = 14;
           };
         };
