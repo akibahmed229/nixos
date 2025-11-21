@@ -122,7 +122,7 @@
   "browser.urlbar.untrimOnUserInteraction.featureGate" = true;
 
   # Default font size (default is usually 16)
-  "font.size.variable.x-western" = lib.mkDefault 20;
+  "font.size.variable.x-western" = lib.mkDefault 16;
 
   # Minimum font size (prevents tiny text)
   "font.minimum-size.x-western" = 14;
