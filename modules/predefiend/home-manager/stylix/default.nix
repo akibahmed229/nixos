@@ -51,7 +51,7 @@ in {
         name = "DejaVu Serif";
       };
       sizes = {
-        applications = 11;
+        applications = 10;
         terminal = 11;
         desktop = 11;
         popups = 14;
