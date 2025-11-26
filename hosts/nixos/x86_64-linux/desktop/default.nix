@@ -318,6 +318,8 @@ in {
     nmap # Network scanner.
     iperf # Network bandwidth measurement tool.
     tcpdump # Network packet analyzer.
+    netcat-gnu # command-line utility for reading and writing data across network
+    dig # Domain name server
   ];
 
   # List services that you want to enable:
