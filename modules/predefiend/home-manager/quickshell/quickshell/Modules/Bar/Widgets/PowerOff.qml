@@ -14,6 +14,7 @@ RowLayout {
     Button {
         id: poweroff
         icon.source: "./Icons/power-off.svg" // power icon
+        icon.color: "white"
         background: null
         font.pixelSize: 22
 

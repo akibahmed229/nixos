@@ -19,6 +19,7 @@ RowLayout {
         Button {
             id: notifToggle
             icon.source: "Icons/notification-bell.svg"
+            icon.color: "transparent"
             background: null
             font.pixelSize: 22
 
