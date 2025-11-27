@@ -215,7 +215,6 @@ in {
     tlrc # Command-line tool for TL;DR pages.
     nix-diff # used to compare derivations
     libnotify # Desktop notification
-    # stacer # Linux system monitoring tool. # FIXME: broken
 
     # 2. File Management
     trash-cli # Command-line trash utility.
@@ -327,4 +326,6 @@ in {
     # disable password auth for openssh
     openssh.settings.PasswordAuthentication = false;
   };
+
+  networking.firewall.allowedTCPPorts = [3500]; # impermanent
 }
