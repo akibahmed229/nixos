@@ -29,7 +29,6 @@
     systemPackages = with pkgs; [
       # 1. System Utilities
       networkmanagerapplet # Network management applet.
-      preload # Adaptive readahead daemon to speed up system load times.
       ntfs3g # Read/write driver for NTFS.
 
       # 2. Desktop Environment & Window Management
