@@ -12,6 +12,7 @@
       };
 
       general = {
+        previewFeatures = true;
         preferredEditor = "nvim";
         vimMode = true;
       };
