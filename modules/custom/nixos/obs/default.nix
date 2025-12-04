@@ -50,7 +50,7 @@ in {
     # Load the v4l2loopback module
     boot = mkIf cfg.enableVirtualCam {
       extraModulePackages = with config.boot.kernelPackages; [
-        v4l2loopback # Use pkgs.v4l2loopback instead of the potentially unavailable config.boot.kernelPackages version
+        #FIXME: broken  # v4l2loopback # Use pkgs.v4l2loopback instead of the potentially unavailable config.boot.kernelPackages version
       ];
       kernelModules = ["v4l2loopback"];
       extraModprobeConfig = ''
