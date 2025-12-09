@@ -373,11 +373,12 @@ window-rule {
     match app-id=r#"libreoffice-impress$"# 
     match app-id=r#"libreoffice-calc$"# 
     open-maximized true
+    open-focused true
     open-on-workspace "work"
 }
 window-rule {
     match app-id=r#"libreoffice-startcenter$"# 
-    open-maximized false
+    open-maximized true
     open-on-workspace "work"
 }
 
