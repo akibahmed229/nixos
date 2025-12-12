@@ -1,7 +1,7 @@
 /*
 * KVM on Linux: https://sysguides.com/install-kvm-on-linux
 
-* win-11 istallation guide: https://sysguides.com/install-a-windows-11-virtual-machine-on-kvm
+* win-11 istallation guide: https://sysguides.com/install-windows-11-on-kvm
 * File Share on Window: https://sysguides.com/share-files-between-the-kvm-host-and-windows-guest-using-virtiofs
 
 * KVM Usage Guide: https://sysguides.com/create-virtual-machines-in-kvm-virt-manager
