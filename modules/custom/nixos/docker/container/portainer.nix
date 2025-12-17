@@ -65,7 +65,7 @@ in {
 
           # Optional: Add a simple health check to monitor the container status
           extraOptions = [
-            "--health-cmd=wget --no-check-certificate --quiet --tries=1 --timeout=5 -O /dev/null https://localhost:9443/health"
+            # "--health-cmd=wget --no-check-certificate --quiet --tries=1 --timeout=5 -O /dev/null https://localhost:9443/health"
             "--health-interval=10s"
             "--health-timeout=10s"
             "--health-retries=5"
