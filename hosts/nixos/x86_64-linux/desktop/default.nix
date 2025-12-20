@@ -287,8 +287,8 @@ in {
     android-studio
     android-tools
     jdk25 # Java Development Kit
-    jetbrains.pycharm-community # Python IDE.
-    jetbrains.idea-community # Java IDE.
+    jetbrains.pycharm # Python IDE.
+    jetbrains.idea # Java IDE.
     godot # Multi-platform 2D and 3D game engine
     postman # API development environment.
     vscode # Code editor.
