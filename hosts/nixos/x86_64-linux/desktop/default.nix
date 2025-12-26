@@ -312,6 +312,8 @@ in {
     # mpv # Media player.
     kdePackages.kdenlive # Video editor.
     # davinci-resolve # Professional video editing and color grading software.
+    # freecad
+    # blender
 
     # 3. Networking Section
     nmap # Network scanner.
