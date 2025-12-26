@@ -4,12 +4,12 @@
       # For file manager
       thunar
       tumbler
-      exo
       thunar-archive-plugin
       thunar-volman
     ]
     ++ (with pkgs; [
       kdePackages.ark
+      xfce4-exo
     ]);
 
   home.file = {
