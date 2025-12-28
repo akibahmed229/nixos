@@ -1,13 +1,13 @@
 local caps = require("config.lsp.capabilities")
 
 -- Nix LSP (nixd)
-vim.lsp.config['nixd_ls'] = {
-    cmd = { 'nixd' },
+vim.lsp.config['nix_ls'] = {
+    cmd = { 'nil' },
     filetypes = { 'nix' },
     root_markers = { 'flake.nix', 'default.nix', '.git' },
     capabilities = caps,
     settings = {
-        ['nixd'] = {
+        nixd = {
             formatting = {
                 command = { "alejandra" } -- or "alejandra" if you prefer
             }
@@ -15,4 +15,4 @@ vim.lsp.config['nixd_ls'] = {
     }
 }
 
-vim.lsp.enable('nixd_ls')
+vim.lsp.enable('nix_ls')

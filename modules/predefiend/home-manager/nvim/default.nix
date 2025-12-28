@@ -18,7 +18,8 @@ in {
     git
 
     ## Nix
-    nixd # Nix language server
+    # nixd
+    nil # Nix language server
     alejandra # Nix formatter
 
     ## Python
