@@ -78,6 +78,12 @@
   nix flake update --commit-lock-file --accept-flake-config
   ```
 
+- **Update Flake Inputs**: Provide the git auth token to Updates flake dependencies and commits to `flake.lock`. (fix api rate limit)
+
+  ```bash
+  nix flake update --option access-tokens "github.com=$(gh auth token)"
+  ```
+
 - **Inspect Flake Metadata**: Shows flake metadata in JSON format.
 
   ```bash
