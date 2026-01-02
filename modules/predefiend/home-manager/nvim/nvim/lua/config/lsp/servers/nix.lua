@@ -2,7 +2,7 @@ local caps = require("config.lsp.capabilities")
 
 -- Nix LSP (nixd)
 vim.lsp.config['nix_ls'] = {
-    cmd = { 'nil' },
+    cmd = { 'nixd' },
     filetypes = { 'nix' },
     root_markers = { 'flake.nix', 'default.nix', '.git' },
     capabilities = caps,
