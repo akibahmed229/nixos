@@ -24,7 +24,7 @@ in {
 
   # ---------------------------------------- Custom Nixos Modules ----------------------------------------------------
   nm = let
-    secrets = fileName: builtins.toString inputs.secrets + fileName;
+    secrets = fileName: toString inputs.secrets + fileName;
     readSecretsFile = fileName: lib.strings.trim (builtins.readFile (secrets fileName));
   in {
     # ------------------- Per-system user configuration -----------------------

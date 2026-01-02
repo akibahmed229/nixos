@@ -26,7 +26,7 @@ in {
         "thunar"
         "hypridle"
         "espanso"
-        "gemini-cli"
+        # "gemini-cli" # FIXME: currently broken
       ]
       ++ lib.optionals (user == "akib") [
         "git"
