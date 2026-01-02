@@ -1,16 +1,16 @@
-{pkgs, ...}: {
-  home.packages = with pkgs.xfce;
+{ pkgs, ... }:
+{
+  home.packages = (
+    with pkgs;
     [
-      # For file manager
+      kdePackages.ark
+      xfce4-exo
       thunar
       tumbler
       thunar-archive-plugin
       thunar-volman
     ]
-    ++ (with pkgs; [
-      kdePackages.ark
-      xfce4-exo
-    ]);
+  );
 
   home.file = {
     ".config/Thunar" = {
