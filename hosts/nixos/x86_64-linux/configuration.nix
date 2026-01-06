@@ -51,8 +51,6 @@
   };
 
   programs = {
-    # Enable ADB for Android and other stuff.
-    adb.enable = true;
     zsh.enable = true;
     command-not-found.enable = false;
     nix-index.enable = true;
@@ -156,13 +154,6 @@
       # Add overlays your own flake exports (from overlays and pkgs dir):
       # self.overlays.discord-overlay
       inputs.nur.overlays.default # accisable through: `pkgs.nur.repos.<name>.<packages>`
-
-      # FIXME: udevil currently broken so using old gcc
-      (final: prev: {
-        udevil = prev.udevil.override {
-          stdenv = prev.gcc13Stdenv;
-        };
-      })
     ];
   };
 
