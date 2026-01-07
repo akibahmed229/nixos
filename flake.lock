@@ -260,11 +260,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767733722,
-        "narHash": "sha256-R0CZ0BiOaUqFLMDZKv7+I0sdeyzjlc40QmRR7zSwvkM=",
+        "lastModified": 1767802041,
+        "narHash": "sha256-ZhgbFGQGeJaZ/xkwyHlgUCeHuIdEDqugYkObPL0NCyo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6e94d8157c941d4dd6fc39866592699043b73668",
+        "rev": "bdaa3743831168787f528570f2b87963e72a2f23",
         "type": "github"
       },
       "original": {
@@ -275,6 +275,27 @@
       }
     },
     "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
+          "impermanence",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747978958,
+        "narHash": "sha256-pQQnbxWpY3IiZqgelXHIe/OAE/Yv4NSQq7fch7M6nXQ=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "7419250703fd5eb50e99bdfb07a86671939103ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_3": {
       "inputs": {
         "nixpkgs": [
           "nix-on-droid",
@@ -611,12 +632,16 @@
       }
     },
     "impermanence": {
+      "inputs": {
+        "home-manager": "home-manager_2",
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1737831083,
-        "narHash": "sha256-LJggUHbpyeDvNagTUrdhe/pRVp4pnS6wVKALS782gRI=",
+        "lastModified": 1767548760,
+        "narHash": "sha256-SSLzVz9l/wDyuXYd7Y4wVe36Lj1qV7u2QqvEYbFvYZ8=",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "4b3e914cdf97a5b536a889e939fb2fd2b043a170",
+        "rev": "f868c97f9e7f62879a97b4ad0e00b64782a845db",
         "type": "github"
       },
       "original": {
@@ -673,7 +698,7 @@
     },
     "nix-on-droid": {
       "inputs": {
-        "home-manager": "home-manager_2",
+        "home-manager": "home-manager_3",
         "nix-formatter-pack": "nix-formatter-pack",
         "nixpkgs": [
           "nixpkgs"
@@ -699,19 +724,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1767640445,
-        "narHash": "sha256-UWYqmD7JFBEDBHWYcqE6s6c77pWdcU/i+bwD6XxMb8A=",
-        "ref": "nixos-unstable",
-        "rev": "9f0c42f8bc7151b8e7e5840fb3bd454ad850d8c5",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixpkgs"
+        "lastModified": 1748026106,
+        "narHash": "sha256-6m1Y3/4pVw1RWTsrkAK2VMYSzG4MMIj7sqUy7o8th1o=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "063f43f2dbdef86376cc29ad646c45c46e93234c",
+        "type": "github"
       },
       "original": {
+        "owner": "nixos",
         "ref": "nixos-unstable",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixpkgs"
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs-docs": {
@@ -744,6 +768,23 @@
         "repo": "nixpkgs",
         "rev": "49ee0e94463abada1de470c9c07bfc12b36dcf40",
         "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1767767207,
+        "narHash": "sha256-Mj3d3PfwltLmukFal5i3fFt27L6NiKXdBezC1EBuZs4=",
+        "ref": "nixos-unstable",
+        "rev": "5912c1772a44e31bf1c63c0390b90501e5026886",
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/NixOS/nixpkgs"
+      },
+      "original": {
+        "ref": "nixos-unstable",
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/NixOS/nixpkgs"
       }
     },
     "nmd": {
@@ -792,11 +833,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767732622,
-        "narHash": "sha256-k2COTMWxFQzzXup4aubfzAhTsRxphoG1aiRwrquPQGY=",
+        "lastModified": 1767810917,
+        "narHash": "sha256-ZKqhk772+v/bujjhla9VABwcvz+hB2IaRyeLT6CFnT0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "47cfee526e7ec8c426be2260a36210354d9a420d",
+        "rev": "dead29c804adc928d3a69dfe7f9f12d0eec1f1a4",
         "type": "github"
       },
       "original": {
@@ -882,7 +923,7 @@
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "quickshell": "quickshell",
         "secrets": "secrets",
