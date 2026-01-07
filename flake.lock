@@ -951,10 +951,10 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1767820515,
-        "narHash": "sha256-tmI/cXDmi0iHs8V+anU7NziuH9LorRnvlUu2i7C9D2w=",
+        "lastModified": 1767820889,
+        "narHash": "sha256-5xvIgtkyG53p7y0dePhj9sDuuCB07qL/CRyWBOKpEmI=",
         "ref": "main",
-        "rev": "c499975d602bb59463e7210cf5376663f458cd5c",
+        "rev": "5218eae070a7c5e44cdcaf3914694843b70712ad",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/akibahmed/sops-secrects.git"
