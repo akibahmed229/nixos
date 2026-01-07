@@ -17,7 +17,10 @@ with lib; let
     "/root/.local/share"
     "/var/lib/bluetooth"
     "/etc/NetworkManager/system-connections"
-    "/etc/ssh"
+    {
+      directory = "/etc/ssh";
+      mode = "0755";
+    }
     "/var/log" # special case cleaned by tmpfiles below
     "/var/lib/systemd"
     "/var/lib/nixos"
@@ -30,7 +33,6 @@ with lib; let
     "/var/lib/libvirt"
     "/var/lib/mysql"
     "/var/lib/postgresql"
-    "/var/lib/sops-nix/"
     "/run/secrets.d/"
     "/var/tmp" # special case cleaned by tmpfiles below
   ];
@@ -231,8 +233,6 @@ in {
     # 2b. File Systems
     fileSystems = {
       "${cfg.mountPoint}".neededForBoot = true;
-      "/var/lib/sops-nix".neededForBoot = true;
-      "/etc/ssh".neededForBoot = true;
     };
 
     # 2c. Impermanence persistence setup

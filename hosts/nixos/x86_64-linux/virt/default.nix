@@ -76,11 +76,23 @@ in {
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
     };
 
+    # Secret management
+    sops = {
+      enable = true;
+      defaultSopsFile = "${toString inputs.secrets}/secrets/secrets.yaml";
+      secrets = {
+        "akib/password/root_secret".neededForUsers = true;
+        "akib/password/my_secret".neededForUsers = true;
+      };
+    };
+
     # Persistant storage
     impermanence = {
       enable = true;
       inherit user; # REQUIRED: Set your primary username
       systemDirs = [
+        # Sops need to be avaliable on boot check below extra section
+        "/var/lib/sops-nix"
         # state for containers and orchestrators
         "/var/lib/docker"
         "/var/lib/kubernetes"
@@ -90,15 +102,12 @@ in {
         "/var/lib/etcd"
       ];
     };
-
-    # Secret management
-    sops = {
-      enable = true;
-      defaultSopsFile = "${builtins.toString inputs.secrets}/secrets/secrets.yaml";
-      secrets = {
-        "akib/password/root_secret".neededForUsers = true;
-        "akib/password/my_secret".neededForUsers = true;
-      };
+  };
+  # impermanence extra
+  fileSystems = {
+    "/var/lib/sops-nix" = {
+      neededForBoot = true;
+      device = "/dev/mapper/root_vg-root";
     };
   };
 

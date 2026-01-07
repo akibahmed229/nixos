@@ -158,11 +158,26 @@ in {
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
     };
 
+    # ------------------- Atomic Secret Provisioning  -------------------------
+    sops = lib.mkIf (user == "akib") {
+      enable = true;
+      defaultSopsFile = secrets "/secrets/secrets.yaml";
+      secrets = {
+        "akib/password/root_secret".neededForUsers = true;
+        "akib/password/my_secret".neededForUsers = true;
+        "akib/wireguard/PrivateKey".neededForUsers = true;
+        "akib/cloudflared/token".neededForUsers = true;
+        "afif/password/my_secret".neededForUsers = true;
+      };
+    };
+
     # ---------------------- Ephemeral Storage  -------------------------------
     impermanence = {
       enable = true;
       inherit user; # REQUIRED: Set your primary username
       systemDirs = lib.mkIf (user == "akib") [
+        # Sops need to be avaliable on boot check below extra section
+        "/var/lib/sops-nix"
         # state for containers and orchestrators
         "/var/lib/docker"
         "/var/lib/kubernetes"
@@ -185,18 +200,12 @@ in {
         "/var/lib/ollama"
       ];
     };
-
-    # ------------------- Atomic Secret Provisioning  -------------------------
-    sops = lib.mkIf (user == "akib") {
-      enable = true;
-      defaultSopsFile = secrets "/secrets/secrets.yaml";
-      secrets = {
-        "akib/password/root_secret".neededForUsers = true;
-        "akib/password/my_secret".neededForUsers = true;
-        "akib/wireguard/PrivateKey".neededForUsers = true;
-        "akib/cloudflared/token".neededForUsers = true;
-        "afif/password/my_secret".neededForUsers = true;
-      };
+  };
+  # impermanence extra
+  fileSystems = {
+    "/var/lib/sops-nix" = {
+      neededForBoot = true;
+      device = "/dev/mapper/root_vg-root";
     };
   };
 
