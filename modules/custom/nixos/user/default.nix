@@ -86,7 +86,7 @@ in {
 
   config = let
     cfg = config.nm.setUser;
-    path =
+    userModulepath =
       if cfg.usersPath != null
       then cfg.usersPath
       else throw "Please set 'usersPath' in 'setUser' option.";
@@ -104,7 +104,7 @@ in {
         inherit config pkgs mkRelativeToRoot;
         inherit (cfg) system;
       }
-      path;
+      userModulepath;
 
     # Small helper to pick only users with a given boolean flag set.
     filterBy = flag: builtins.filter (u: u.${flag}) config.nm.myusers;

@@ -25,7 +25,7 @@
   droidConf ? false,
   template ? false,
   ...
-}: path: let
+}: systemPath: let
   # Importing necessary functions and utilities from the provided imports
   inherit
     (nixpkgs)
@@ -74,7 +74,7 @@
     mkConfig,
   }: let
     # Get all architecture directories like { "x86_64-linux" = "directory"; ... }
-    archDirs = getEntries path;
+    archDirs = getEntries systemPath;
 
     # For each architecture, find the configs inside.
     listOfConfigs =
@@ -87,7 +87,7 @@
           then {}
           else let
             # Get all host entries in the architecture directory first...
-            allEntriesInArch = getEntries (path + "/${archName}");
+            allEntriesInArch = getEntries (systemPath + "/${archName}");
 
             # ...then filter this set to keep ONLY the directories.
             hostDirsInArch = lib.attrsets.filterAttrs (name: value: isDirectory value) allEntriesInArch;
@@ -140,15 +140,15 @@
           specialArgs
           // {
             system = {
-              path = path + "/${archName}";
+              path = systemPath + "/${archName}";
               name = hostName;
             };
           };
         modules =
           map ifFileExists [
-            (path + "/${archName}/configuration.nix")
-            (path + "/${archName}/${hostName}/hardware-configuration.nix")
-            (path + "/${archName}/${hostName}")
+            (systemPath + "/${archName}/configuration.nix")
+            (systemPath + "/${archName}/${hostName}/hardware-configuration.nix")
+            (systemPath + "/${archName}/${hostName}")
           ]
           ++ optionals (home-manager != {}) [
             home-manager.nixosModules.home-manager
@@ -181,8 +181,8 @@
         };
         extraSpecialArgs = specialArgs // {inherit hostName;};
         modules = map ifFileExists [
-          (path + "/${archName}/home.nix")
-          (path + "/${archName}/${hostName}")
+          (systemPath + "/${archName}/home.nix")
+          (systemPath + "/${archName}/${hostName}")
         ];
       };
     };
@@ -214,14 +214,14 @@
           specialArgs
           // {
             system = {
-              path = path + "/${archName}";
+              path = systemPath + "/${archName}";
               name = hostName;
             };
           };
         modules =
           map ifFileExists [
-            (path + "/${archName}/configuration.nix")
-            (path + "/${archName}/${hostName}")
+            (systemPath + "/${archName}/configuration.nix")
+            (systemPath + "/${archName}/${hostName}")
           ]
           ++ optionals (home-manager != {}) [
             home-manager.darwinModules.home-manager
@@ -256,8 +256,8 @@
         extraSpecialArgs = specialArgs;
         modules =
           map ifFileExists [
-            (path + "/configuration.nix") # Base configuration
-            (path + "/${name}") # Host-specific configuration
+            (systemPath + "/configuration.nix") # Base configuration
+            (systemPath + "/${name}") # Host-specific configuration
           ]
           ++ [
             {
@@ -275,7 +275,7 @@
     else {
       inherit name value;
     })
-  (getEntries path);
+  (getEntries systemPath);
 
   # ── 6. Template Processor ────────────────────────────────────────────────
   # Function to process template directories
@@ -287,13 +287,13 @@
       value = {
         description = "Template for ${name} system";
         # Set path to the template
-        path = ifFileExists (path + "/${name}");
+        path = ifFileExists (systemPath + "/${name}");
       };
     }
     else {
       inherit name value;
     })
-  (getEntries path);
+  (getEntries systemPath);
 
   # Process directory contents based on the type of system being configured
   # Check if we are processing Home Manager, Nix Darwin, Nix-on-Droid, or NixOS systems
@@ -324,8 +324,8 @@
   # Check if the directory is empty and throw an error if no systems are found
   isHostsEmpty = _:
     if lists.length validList == 0
-    then throw "No systems found in ${path}"
-    else trace "systems found in: ${path}\navailable systems: ${foundHosts}" _;
+    then throw "No systems found in ${systemPath}"
+    else trace "systems found in: ${systemPath}\navailable systems: ${foundHosts}" _;
   # Return the final list of valid systems
 in
   isHostsEmpty builtins.listToAttrs validList
