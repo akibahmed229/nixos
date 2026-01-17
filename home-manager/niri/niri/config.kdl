@@ -229,7 +229,7 @@ spawn-sh-at-startup "kdeconnect-cli --refresh" // KDE Connect daemon
 spawn-sh-at-startup "kdeconnect-indicator"
 spawn-sh-at-startup "systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-gtk.service xdg-desktop-portal-wlr.service xdg-desktop-portal-gnome.service"
 
-spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/Mouse.orp && openrgb -p ~/.config/OpenRGB/Keyboard.orp" // # Loads my RGB light
+spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/mouse_new.orp && openrgb -p ~/.config/OpenRGB/Key_new.orp" // # Loads my RGB light
 spawn-at-startup "firefox"
 spawn-at-startup "spotify"
 spawn-at-startup "vesktop"
@@ -429,6 +429,8 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     QT_LOGGING_RULES "qt.qpa.wayland=false"
+    // currentlly firefox causig black screen on wayland 
+    MOZ_ENABLE_WAYLAND "0"
 }
 
 

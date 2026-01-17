@@ -41,6 +41,7 @@ in {
   # --- 2. Define Configuration ---
   config = mkIf cfg.enable {
     # Essential kernel modules for hardware communication
+    boot.kernelModules = ["i2c-dev"];
     hardware.i2c.enable = true;
 
     # Udev rules are needed so OpenRGB can access hardware without root
