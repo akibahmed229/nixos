@@ -34,8 +34,14 @@ Modules to help you handle persistent state on systems with ephemeral root stora
     umount /btrfs_tmp
   '';
 
-  fileSystems."/persist".neededForBoot = true;
-  fileSystems."/var/lib/sops-nix".neededForBoot = true;
+  fileSystems = {
+    "/persist".neededForBoot = true;
+    "/var/lib/sops-nix" = {
+      neededForBoot = true;
+      device = "/dev/mapper/root_vg-root";
+    };
+  };
+
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
