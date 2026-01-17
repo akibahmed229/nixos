@@ -54,9 +54,9 @@
     };
   };
 
-  networking = {
-    wireless.enable = false;
-  };
+  # networking = {
+  #   wireless.enable = false;
+  # };
 
   systemd = {
     services.sshd.wantedBy = lib.mkForce ["multi-user.target"];

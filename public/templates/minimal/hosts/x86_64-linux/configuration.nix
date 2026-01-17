@@ -81,8 +81,6 @@
   };
 
   programs = {
-    # Enable ADB for Android and other stuff.
-    adb.enable = true;
     zsh.enable = true;
     command-not-found.enable = false;
     nix-index.enable = true;
