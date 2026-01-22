@@ -231,7 +231,7 @@ in {
     zip
     unzip
     p7zip
-    # bleachbit # System cleaner.
+    bleachbit # System cleaner.
     obsidian # Note-taking app.
     # rclone # Cloud storage sync tool.
     fzf # Command-line fuzzy finder.
@@ -259,10 +259,10 @@ in {
     mangohud # FPS counter and system stats overlay.
     goverlay # Vulkan/OpenGL overlay manager.
     # geekbench # Benchmarking tool.
-    kdiskmark # Disk benchmarking tool.
+    # kdiskmark # Disk benchmarking tool.
     libadwaita # UI toolkit for GNOME.
     cava # Console-based audio visualizer.
-    pipes # Terminal-based game.
+    # pipes # Terminal-based game.
 
     # 7. Miscellaneous
     # gradience # GNOME customization tool.
@@ -271,7 +271,7 @@ in {
     libinput # Input device management library.
     flatpak # Application sandboxing and distribution framework.
     # mediawriter # USB writer for Fedora Media.
-    lact # Gui for Graphic card overclocking and other stuff.
+    # lact # Gui for Graphic card overclocking and other stuff.
 
     # Development Section
 
@@ -290,17 +290,17 @@ in {
     # Development environment tools.
     # devbox
     # distrobox
-    yarn # JavaScript package manager.
+    # yarn # JavaScript package manager.
     jq # JSON processor.
     # Android development tools.
     android-studio
     android-tools
     jdk25 # Java Development Kit
-    jetbrains.pycharm # Python IDE.
-    jetbrains.idea # Java IDE.
-    godot # Multi-platform 2D and 3D game engine
+    # jetbrains.pycharm # Python IDE.
+    # jetbrains.idea # Java IDE.
+    # godot # Multi-platform 2D and 3D game engine
     postman # API development environment.
-    vscode # Code editor.
+    # vscode # Code editor.
     # zed-editor # Code editor.
     git # Version control system.
     # github-desktop # Git client.
@@ -315,7 +315,7 @@ in {
     # inkscape # Vector graphics editor.
     handbrake # Video transcoder.
     audacity # Audio editor.
-    darktable # Photography workflow application.
+    # darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
     # mpv # Media player.
