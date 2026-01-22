@@ -115,7 +115,7 @@ in {
       apps = {
         enable = true;
         lists = [
-          "sh.ppy.osu"
+          # "sh.ppy.osu"
           "app.zen_browser.zen"
           "com.github.tchx84.Flatseal"
         ];
