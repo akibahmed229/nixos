@@ -833,11 +833,27 @@
         ]
       },
       "locked": {
+<<<<<<< Updated upstream
         "lastModified": 1768981686,
         "narHash": "sha256-CQp1WxId7M3g/CTcTUuDeRiZhQ6j1TTMDvBjYdIqwWE=",
         "owner": "nix-community",
         "repo": "NUR",
         "rev": "e023b9db7f2a1462a712aaa8ef61e25ff804cfb3",
+=======
+<<<<<<< Updated upstream
+        "lastModified": 1768935178,
+        "narHash": "sha256-dYcec3hVR2mogjT9oACmp5gXkT5QSvFtiwuhl3voZy0=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "d8169921c7529f8a08a8321a631812ddfa40c8ae",
+=======
+        "lastModified": 1768671781,
+        "narHash": "sha256-kW4mzy7wzuW+od/o3Gfg5ONO7nb7U7uUxvEkAyFd9cY=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "1e87169b18457a22e6ef372789e48cd86b81e2ba",
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {

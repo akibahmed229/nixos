@@ -111,7 +111,12 @@ in {
     };
   };
 
-  services.openssh.ports = lib.mkForce [22];
+  services.openssh = {
+    ports = lib.mkForce [22];
+    extraConfig = ''
+      Subsystem sftp internal-sftp
+    '';
+  };
 
   services = {
     qemuGuest.enable = true; # For guest integration (e.g., shutdown from host)
