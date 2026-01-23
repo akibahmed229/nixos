@@ -37,7 +37,7 @@
 
   # Scans a directory for .nix files and subdirs (excludes default/ and default.nix)
   mkScanPath = path:
-    builtins.map (f: "${path}/${f}") (
+    map (f: "${path}/${f}") (
       builtins.attrNames (
         lib.attrsets.filterAttrs (
           name: _type:
@@ -58,6 +58,8 @@
           name: _type:
             if (_type == "directory")
             then mkRecursiveScanPaths (path + "/${name}") # go deeper
+            else if (lib.strings.hasPrefix "_" name)
+            then []
             else if (lib.strings.hasSuffix ".nix" name)
             then path + "/${name}" # collect nix file
             else []
