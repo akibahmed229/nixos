@@ -11,29 +11,12 @@ in {
   # imports from the predefiend modules folder
   imports = mkImport {
     path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms =
-      [
-        "firefox"
-        "spotify"
-        "nvim"
-        "vencord"
-        "quickshell"
-        "wofi"
-        "swappy"
-        "emacs"
-        "alacritty"
-        "kitty"
-        "thunar"
-        "hypridle"
-        "espanso"
-        "gemini-cli"
-      ]
-      ++ lib.optionals (user == "akib") [
-        "git"
-        "sops"
-        "ssh"
-        "openrgb"
-      ];
+    ListOfPrograms = lib.optionals (user == "akib") [
+      "git"
+      "sops"
+      "ssh"
+      "openrgb"
+    ];
   };
 
   home.packages = with pkgs; [
@@ -50,6 +33,27 @@ in {
     # 5. Utility
     udiskie
   ];
+
+  hm = {
+    firefox = {
+      enable = true;
+      user = user;
+    };
+
+    nvim.enable = true;
+    quickshell.enable = true;
+    spotify.enable = true;
+    vencord.enable = true;
+    wofi.enable = true;
+    swappy.enable = true;
+    alacritty.enable = true;
+    kitty.enable = true;
+    thunar.enable = true;
+    espanso.enable = true;
+    gemini-cli.enable = true;
+    hypridle.enable = true;
+    emacs.enable = true;
+  };
 
   services = {
     # For auto mounting USB devices
