@@ -58,9 +58,7 @@
           name: _type:
             if (_type == "directory")
             then mkRecursiveScanPaths (path + "/${name}") # go deeper
-            else if (lib.strings.hasPrefix "_" name)
-            then []
-            else if (lib.strings.hasSuffix ".nix" name)
+            else if ((lib.strings.hasSuffix ".nix" name) && !(lib.strings.hasPrefix "_" name))
             then path + "/${name}" # collect nix file
             else []
         ) (builtins.readDir path)
