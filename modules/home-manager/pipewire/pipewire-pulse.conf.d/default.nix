@@ -41,7 +41,7 @@ in {
 
     sourcePath = mkOption {
       type = types.str;
-      default = "${config.home.homeDirectory}/.config/flake/modules/custom/home-manager/pipewire/10-adjustQuirkRules.conf";
+      default = "${config.home.homeDirectory}/.config/flake/modules/home-manager/pipewire/10-adjustQuirkRules.conf";
       description = ''
         Absolute path to the quirk rules file.
         Used with mkOutOfStoreSymlink for real-time editing.

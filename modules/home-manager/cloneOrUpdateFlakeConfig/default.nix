@@ -36,7 +36,7 @@ in {
 
     secretsPath = mkOption {
       type = types.str;
-      default = "${config.home.homeDirectory}/.config/flake/modules/custom/nixos/sops/config";
+      default = "${config.home.homeDirectory}/.config/flake/modules/nixos/sops/config";
       description = "Where the secrets repository should be cloned locally.";
     };
   };

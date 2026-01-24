@@ -11,7 +11,7 @@ in {
 
     sourcePath = mkOption {
       type = types.str;
-      default = "${config.home.homeDirectory}/.config/flake/modules/custom/home-manager/wireplumber/10-disable-camera.conf";
+      default = "${config.home.homeDirectory}/.config/flake/modules/home-manager/wireplumber/10-disable-camera.conf";
       description = ''
         Absolute path to the WirePlumber configuration file.
         Linked via mkOutOfStoreSymlink for easy editing.

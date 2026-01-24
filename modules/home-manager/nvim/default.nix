@@ -12,7 +12,7 @@ in {
 
     srcPath = mkOption {
       type = types.str;
-      default = "${config.home.homeDirectory}/.config/flake/modules/custom/home-manager/nvim/config";
+      default = "${config.home.homeDirectory}/.config/flake/modules/home-manager/nvim/config";
       description = "Absolute path to your Neovim config directory for live tinkering.";
     };
 

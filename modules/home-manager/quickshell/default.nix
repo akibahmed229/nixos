@@ -13,7 +13,7 @@ in {
 
     srcPath = mkOption {
       type = types.str;
-      default = "${config.home.homeDirectory}/.config/flake/modules/custom/home-manager/quickshell/config";
+      default = "${config.home.homeDirectory}/.config/flake/modules/home-manager/quickshell/config";
       description = "Absolute path to your Quickshell source for live tinkering.";
     };
 
