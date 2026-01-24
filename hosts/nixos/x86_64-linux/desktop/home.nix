@@ -54,23 +54,12 @@ in {
       in {
         enable = true;
         defaultSopsFile = "${secretsInput}/secrets/home-manager.yaml";
-
-        # Define your secrets
         secrets = {
-          "github/sshKey" = {
-            path = "${homeDirectory}/.ssh/id_ed25519_github";
-          };
-          "gitlab/sshKey" = {
-            path = "${homeDirectory}/.ssh/id_ed25519_gitlab";
-          };
-          "github/username" = {
-            path = "${homeDirectory}/.config/git/username";
-          };
-          "github/email" = {
-            path = "${homeDirectory}/.config/git/email";
-          };
+          "github/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_github";
+          "gitlab/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_gitlab";
+          "github/username".path = "${homeDirectory}/.config/git/username";
+          "github/email".path = "${homeDirectory}/.config/git/email";
         };
-
         # The dynamic Git template
         templates = {
           "git-user.conf" = {
