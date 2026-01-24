@@ -32,6 +32,7 @@
     zip
     unzip
     wl-clipboard
+    android-tools
     cryptsetup
     # for ssh
     openssh
@@ -49,7 +50,7 @@
   };
 
   networking = {
-    wireless.enable = false;
+    wireless.enable = lib.mkForce false;
   };
 
   systemd = {

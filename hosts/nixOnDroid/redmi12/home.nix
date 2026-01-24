@@ -2,12 +2,12 @@
   config,
   pkgs,
   state-version,
-  self,
   ...
 }: {
-  imports = self.lib.mkImport {
-    path = self.lib.mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["zsh" "tmux" "lf"];
+  hm = {
+    zsh.enable = true;
+    tmux.enable = true;
+    lf.enable = true;
   };
 
   home = {

@@ -38,7 +38,7 @@ in {
   # (Custom nixos modules)
   nm.grub.enable = lib.mkForce false;
   networking = {
-    wireless.enable = false;
+    wireless.enable = lib.mkForce false;
   };
 
   environment.systemPackages = with pkgs; [neovim cryptsetup spice-vdagent guestfs-tools];

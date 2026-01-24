@@ -6,15 +6,19 @@
 {
   pkgs,
   theme,
-  self,
+  user,
   ...
-}: let
-  # My custom lib helper functions
-  inherit (self.lib) mkImport mkRelativeToRoot;
-in {
-  imports = mkImport {
-    path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = ["firefox" "spicetify" "zsh" "tmux" "lf" "vencord"];
+}: {
+  hm = {
+    firefox = {
+      enable = true;
+      user = user;
+    };
+    spotify.enable = true;
+    zsh.enable = true;
+    tmux.enable = true;
+    vencord.enable = true;
+    lf.enable = true;
   };
 
   dconf.settings = {

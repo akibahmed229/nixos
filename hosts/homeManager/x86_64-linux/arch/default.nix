@@ -6,35 +6,61 @@
 */
 {
   pkgs,
-  self,
   lib,
   user,
+  inputs,
+  config,
   ...
-}: let
-  inherit (self.lib) mkImport mkRelativeToRoot;
-in {
-  # imports from the predefiend modules folder
-  imports = mkImport {
-    path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms =
-      [
-        "zsh"
-        "tmux"
-        "nvim"
-        "yazi"
-        "atuin"
-        "direnv"
-        "fastfetch"
-        "libinput"
-        "pipewire/pipewire-pulse.conf.d"
-        "pipewire/wireplumber.conf.d"
-      ]
-      ++ lib.optionals (user == "akib") [
-        "git"
-        "sops"
-        "ssh"
-      ];
-  };
+}: {
+  hm = lib.mkMerge [
+    {
+      firefox = {
+        enable = true;
+        user = user;
+      };
+      nvim.enable = true;
+      yazi.enable = true;
+      atuin.enable = true;
+      direnv.enable = true;
+      fastfetch.enable = true;
+      libinput.enable = true;
+      pipewire.enable = true;
+      wireplumber.enable = true;
+      kitty.enable = true;
+      espanso.enable = true;
+      gemini-cli.enable = true;
+    }
+
+    (lib.mkIf (user == "akib") {
+      git.enable = true;
+      ssh.enable = true;
+      sops = let
+        secretsInput = toString inputs.secrets;
+        homeDirectory = config.home.homeDirectory;
+      in {
+        enable = true;
+        defaultSopsFile = "${secretsInput}/secrets/home-manager.yaml";
+        secrets = {
+          "github/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_github";
+          "gitlab/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_gitlab";
+          "github/username".path = "${homeDirectory}/.config/git/username";
+          "github/email".path = "${homeDirectory}/.config/git/email";
+        };
+        # The dynamic Git template
+        templates = {
+          "git-user.conf" = {
+            mode = "0400";
+            content = ''
+              [user]
+                name = ${config.sops.placeholder."github/username"}
+                email = ${config.sops.placeholder."github/email"}
+                signingkey = ${config.sops.placeholder."github/email"}
+            '';
+          };
+        };
+      };
+    })
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.

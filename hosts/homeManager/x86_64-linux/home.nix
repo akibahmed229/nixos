@@ -6,11 +6,21 @@
   state-version,
   self,
   config,
+  inputs,
   ...
 }: {
   imports = [
     self.homeModules.default # Custom home-manager modules
   ];
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      # self.overlays.discord-overlay
+      inputs.nur.overlays.default # accisable through: `pkgs.nur.repos.<name>.<packages>`
+    ];
+  };
 
   targets.genericLinux.enable = true;
 

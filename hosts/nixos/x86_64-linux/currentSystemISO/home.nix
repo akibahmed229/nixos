@@ -1,25 +1,25 @@
 {
   pkgs,
   self,
+  lib,
+  user,
   ...
-}: let
-  # My custom lib helper functions
-  inherit (self.lib) mkImport mkRelativeToRoot;
-in {
-  # imports from the predefiend modules folder
-  imports = mkImport {
-    path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = [
-      "firefox"
-      "spotify"
-      "quickshell"
-      "nvim"
-      "wofi"
-      "swappy"
-      "kitty"
-      "thunar"
-    ];
-  };
+}: {
+  hm = lib.mkMerge [
+    {
+      firefox = {
+        enable = true;
+        user = user;
+      };
+      nvim.enable = true;
+      thunar.enable = true;
+      quickshell.enable = true;
+      kitty.enable = true;
+      swappy.enable = true;
+      wofi.enable = true;
+      spotify.enable = true;
+    }
+  ];
 
   home.packages = with pkgs; [
     # 1. Screenshot & Screen Tools

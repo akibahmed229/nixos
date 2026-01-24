@@ -29,7 +29,7 @@
   networking.hostName = system.name; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = lib.mkDefault true; # Easiest to use and most distros use this by default.
   # systemd.services.NetworkManager-wait-online.enable = false; # some ssystemd services may require network to be up before starting.
 
   # Set your time zone.

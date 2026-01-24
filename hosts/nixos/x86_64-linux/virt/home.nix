@@ -1,28 +1,52 @@
 # virt home-manager configuration
 {
   pkgs,
-  self,
   lib,
   user,
+  inputs,
+  config,
   ...
-}: let
-  # My custom lib helper functions
-  inherit (self.lib) mkImport mkRelativeToRoot;
-in {
-  imports = mkImport {
-    path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms =
-      [
-        "firefox"
-        "nvim"
-        "thunar"
-      ]
-      ++ lib.optionals (user == "akib") [
-        "git"
-        "sops"
-        "ssh"
-      ];
-  };
+}: {
+  hm = lib.mkMerge [
+    {
+      firefox = {
+        enable = true;
+        user = user;
+      };
+      nvim.enable = true;
+      thunar.enable = true;
+    }
+
+    (lib.mkIf (user == "akib") {
+      git.enable = true;
+      ssh.enable = true;
+      sops = let
+        secretsInput = toString inputs.secrets;
+        homeDirectory = config.home.homeDirectory;
+      in {
+        enable = true;
+        defaultSopsFile = "${secretsInput}/secrets/home-manager.yaml";
+        secrets = {
+          "github/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_github";
+          "gitlab/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_gitlab";
+          "github/username".path = "${homeDirectory}/.config/git/username";
+          "github/email".path = "${homeDirectory}/.config/git/email";
+        };
+        # The dynamic Git template
+        templates = {
+          "git-user.conf" = {
+            mode = "0400";
+            content = ''
+              [user]
+                name = ${config.sops.placeholder."github/username"}
+                email = ${config.sops.placeholder."github/email"}
+                signingkey = ${config.sops.placeholder."github/email"}
+            '';
+          };
+        };
+      };
+    })
+  ];
 
   home.packages = with pkgs; [
     # 1. Screenshot & Screen Tools

@@ -1,24 +1,16 @@
 {
   pkgs,
   user,
-  self,
   ...
-}: let
-  inherit (self.lib) mkImport mkRelativeToRoot;
-in {
-  # imports from the predefiend modules folder
-  imports = mkImport {
-    path = mkRelativeToRoot "modules/predefiend/home-manager";
-    ListOfPrograms = [
-      "zsh"
-      "starship"
-      "tmux"
-      "yazi"
-      "atuin"
-      "direnv"
-      "fastfetch"
-      "nvim"
-    ];
+}: {
+  hm = {
+    zsh.enable = true;
+    tmux.enable = true;
+    yazi.enable = true;
+    atuin.enable = true;
+    direnv.enable = true;
+    fastfetch.enable = true;
+    nvim.enable = true;
   };
 
   # ── Meta ─────────────────────────────────────────────────────────────────────

@@ -15,7 +15,6 @@ in {
         user = user;
       };
       nvim.enable = true;
-      ssh.enable = true;
       quickshell.enable = true;
       spotify.enable = true;
       vencord.enable = true;
@@ -32,6 +31,7 @@ in {
 
     (lib.mkIf (user == "akib") {
       openrgb.enable = true;
+      ssh.enable = true;
       git.enable = true;
       sops = let
         secretsInput = toString inputs.secrets;
