@@ -8,21 +8,6 @@
   ...
 }: let
 in {
-  home.packages = with pkgs; [
-    # 2. Screenshot & Screen Tools
-    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpaper
-    self.packages.${pkgs.stdenv.hostPlatform.system}.screenshot # Screenshot tool.
-    imagemagick # Image manipulation tool, often used for screenshots.
-    self.packages.${pkgs.stdenv.hostPlatform.system}.custom_nsxiv # Image viewer.
-
-    # 4. Clipboard Management
-    cliphist # Clipboard history management tool.
-    wl-clipboard # Wayland clipboard tool.
-
-    # 5. Utility
-    udiskie
-  ];
-
   hm = lib.mkMerge [
     {
       firefox = {
@@ -74,6 +59,21 @@ in {
         };
       };
     })
+  ];
+
+  home.packages = with pkgs; [
+    # 2. Screenshot & Screen Tools
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpaper
+    self.packages.${pkgs.stdenv.hostPlatform.system}.screenshot # Screenshot tool.
+    imagemagick # Image manipulation tool, often used for screenshots.
+    self.packages.${pkgs.stdenv.hostPlatform.system}.custom_nsxiv # Image viewer.
+
+    # 4. Clipboard Management
+    cliphist # Clipboard history management tool.
+    wl-clipboard # Wayland clipboard tool.
+
+    # 5. Utility
+    udiskie
   ];
 
   services = {
