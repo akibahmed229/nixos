@@ -5,32 +5,37 @@
   ...
 }: let
   # My custom lib helper functions
-  inherit (self.lib) mkImport mkRelativeToRoot;
+  inherit (self.lib) mkRelativeToRoot;
 in {
   # imports from the predefiend modules folder
-  imports =
-    [
-      self.homeModules.default # Custom home-manager modules
-      inputs.nix-index-database.homeModules.nix-index
-    ]
-    ++ mkImport {
-      path = mkRelativeToRoot "modules/predefiend/home-manager";
-      ListOfPrograms = [
-        "cloneOrUpdateFlakeConfig"
-        "stylix"
-        "zsh"
-        "starship"
-        "tmux"
-        "yazi"
-        "atuin"
-        "direnv"
-        "fastfetch"
-        "xdg"
-        "libinput"
-        "pipewire/pipewire-pulse.conf.d"
-        "pipewire/wireplumber.conf.d"
-      ];
+  imports = [
+    self.homeModules.default # Custom home-manager modules
+    inputs.nix-index-database.homeModules.nix-index
+  ];
+
+  hm = {
+    flake-sync.enable = true;
+    xdg.enable = true;
+    zsh.enable = true;
+    starship.enable = true;
+    yazi.enable = true;
+    atuin.enable = true;
+    direnv.enable = true;
+    fastfetch.enable = true;
+    libinput.enable = true;
+    pipewire.enable = true;
+    wireplumber.enable = true;
+
+    tmux = {
+      enable = true;
+      systemdEnable = true;
     };
+
+    stylix = {
+      enable = true;
+      themeScheme = mkRelativeToRoot "public/themes/base16Scheme/gruvbox-dark-soft.yaml";
+    };
+  };
 
   home.packages = with pkgs; [
     # 1. Desktop Environment & Customization

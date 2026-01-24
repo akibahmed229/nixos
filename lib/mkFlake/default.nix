@@ -53,8 +53,8 @@ in {
   formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra or {});
 
   # Reusable nixos & home-manager modules you might want to export
-  nixosModules = ifPathExistsFn "${src}/modules/custom/nixos" mkModule;
-  homeModules = ifPathExistsFn "${src}/modules/custom/home-manager" mkModule;
+  nixosModules = ifPathExistsFn "${src}/modules/nixos" mkModule;
+  homeModules = ifPathExistsFn "${src}/modules/home-manager" mkModule;
 
   # The nixos system configurations for the supported systems
   # available through "$ nixos-rebuild switch --flake .#<host>"
