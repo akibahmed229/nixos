@@ -167,7 +167,7 @@ in {
         "akib/password/my_secret".neededForUsers = true;
         "akib/wireguard/PrivateKey".neededForUsers = true;
         "akib/cloudflared/token".neededForUsers = true;
-        "afif/password/my_secret".neededForUsers = true;
+        "generic/password/my_secret".neededForUsers = true;
       };
     };
 
@@ -313,13 +313,13 @@ in {
     # krita # Digital painting software.
     # glaxnimate # Animation editor.
     # inkscape # Vector graphics editor.
-    handbrake # Video transcoder.
+    # handbrake # Video transcoder. # FIXME
     audacity # Audio editor.
     # darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
     # mpv # Media player.
-    kdePackages.kdenlive # Video editor.
+    # kdePackages.kdenlive # Video editor. # FIXME
     # davinci-resolve # Professional video editing and color grading software.
     # freecad
     # blender
