@@ -38,7 +38,7 @@
     "networkmanager"
     "wheel"
     "systemd-journal"
-    "docker"
+    # "docker"
     "kubernetes"
     "flatpak"
     "video"

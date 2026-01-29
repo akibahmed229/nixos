@@ -71,11 +71,11 @@ in {
         adguard.enable = true;
         jenkins.enable = true;
         portainer.enable = true;
-        nextcloud = {
-          enable = true;
-          defaultUser = user;
-          password = readSecretsFile "/nextcloud/pass.txt";
-        };
+        # nextcloud = {
+        #   enable = true;
+        #   defaultUser = user;
+        #   password = readSecretsFile "/nextcloud/pass.txt";
+        # };
       };
     };
 
@@ -84,7 +84,7 @@ in {
       enable = true;
       enableTLS = false; # Global setting for self-managed TLS
       routes = {
-        "nextcloud.akibhome.lab" = {port = 8090;};
+        # "nextcloud.akibhome.lab" = {port = 8090;};
         "portainer.akibhome.lab" = {port = 9443;};
         "n8n.akibhome.lab" = {port = 5678;};
         "jenkins.akibhome.lab" = {port = 1010;};
@@ -191,8 +191,8 @@ in {
         "/var/lib/adguardhome/work"
         "/var/lib/adguardhome/conf"
         "/var/lib/mariadb"
-        "/var/lib/nextcloud/html"
-        "/var/lib/nextcloud/data"
+        # "/var/lib/nextcloud/html"
+        # "/var/lib/nextcloud/data"
         "/var/lib/ngnixproxymanager"
         "/var/lib/letsencrypt"
         "/var/lib/postgresqln8n"
@@ -232,7 +232,7 @@ in {
     unzip
     p7zip
     bleachbit # System cleaner.
-    obsidian # Note-taking app.
+    # obsidian # Note-taking app. # FIXME
     # rclone # Cloud storage sync tool.
     fzf # Command-line fuzzy finder.
     fuse # Filesystem in Userspace utilities.
