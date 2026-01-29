@@ -163,5 +163,20 @@ in {
       # Allow return traffic: internet -> containers (for established connections)
       iptables -A FORWARD -i $LAN_IFACE -o docker0 -m state --state ESTABLISHED,RELATED -j ACCEPT
     '';
+
+    _module.args = {
+      # A helper to make hardened container options
+      hardenedOptions = {
+        mem ? "512m",
+        caps ? [],
+      }:
+        [
+          "--memory=${mem}"
+          "--cpu-shares=512"
+          "--cap-drop=ALL"
+          "--security-opt=no-new-privileges"
+        ]
+        ++ (map (c: "--cap-add=${c}") caps);
+    };
   };
 }
