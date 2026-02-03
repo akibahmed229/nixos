@@ -4,6 +4,32 @@
     replace = "It's {{currentdate}} {{currenttime}}";
   }
   {
+    trigger = "::gptcode";
+    replace = ''
+      Build one small piece, not the full app.
+
+      Goal:
+      (one sentence)
+
+      Rules:
+      (3 to 7 bullets)
+
+      Example:
+      (2 example: input -> output)
+
+      Edge Cases:
+      (2 cases that can break it)
+
+      Deliver:
+      - one runnable file
+      - includes tests using (node assert)
+      - print one example output
+
+      Then ask:
+      Before giving code, list the possible mistakes and confirm the rules.
+    '';
+  }
+  {
     trigger = "::gptnp";
     replace = ''
       [Paste Your Content -router nudge pharases]
