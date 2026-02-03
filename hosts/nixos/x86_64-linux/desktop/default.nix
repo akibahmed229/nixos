@@ -232,7 +232,7 @@ in {
     unzip
     p7zip
     bleachbit # System cleaner.
-    # obsidian # Note-taking app. # FIXME
+    obsidian # Note-taking app.
     # rclone # Cloud storage sync tool.
     fzf # Command-line fuzzy finder.
     fuse # Filesystem in Userspace utilities.
@@ -313,7 +313,7 @@ in {
     # krita # Digital painting software.
     # glaxnimate # Animation editor.
     # inkscape # Vector graphics editor.
-    # handbrake # Video transcoder. # FIXME
+    handbrake # Video transcoder.
     audacity # Audio editor.
     # darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.

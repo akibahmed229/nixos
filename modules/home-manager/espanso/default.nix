@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  self,
   ...
 }:
 with lib; let
@@ -36,7 +37,9 @@ in {
       matches = {
         base = {
           # Import the prompt snippets from the separate file
-          matches = (import ./_matches.nix {inherit lib;}) ++ cfg.extraMatches;
+          matches =
+            lib.flatten (self.lib.mkScanImportPath {inherit lib;} ./.)
+            ++ cfg.extraMatches;
         };
       };
     };
