@@ -59,7 +59,8 @@ in {
         typescript-language-server
         vscode-langservers-extracted
 
-        # Shell / YAML / Lua / Terraform
+        # QML / Shell / YAML / Lua / Terraform
+        kdePackages.qtdeclarative
         bash-language-server
         yaml-language-server
         lua-language-server
