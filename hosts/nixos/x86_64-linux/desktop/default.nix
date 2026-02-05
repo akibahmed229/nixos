@@ -319,7 +319,7 @@ in {
     ffmpeg-full # Multimedia framework for video/audio processing.
     gst_all_1.gstreamer # Multimedia framework.
     # mpv # Media player.
-    # kdePackages.kdenlive # Video editor. # FIXME
+    kdePackages.kdenlive # Video editor.
     # davinci-resolve # Professional video editing and color grading software.
     # freecad
     # blender
