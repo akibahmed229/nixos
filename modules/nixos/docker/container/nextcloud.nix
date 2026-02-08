@@ -98,6 +98,10 @@ in {
 
   # --- 2. Define Configuration ---
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      nextcloud-client # Nextcloud sync client.
+    ];
+
     # 2.1 Container Definitions (MariaDB, Redis, Nextcloud, and optional Collabora)
     virtualisation.oci-containers = {
       backend = "docker";
