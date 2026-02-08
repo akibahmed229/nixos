@@ -57,7 +57,7 @@ in {
     # Enable Intel gpu
     gpu = {
       enable = true;
-      vendor = "intel";
+      intel.enable = true;
     };
 
     # kubernetes  ( custom module )

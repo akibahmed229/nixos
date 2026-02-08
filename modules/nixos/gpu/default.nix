@@ -1,5 +1,3 @@
-# Configures graphic hardware support for Intel, AMD, or NVIDIA, including
-# drivers (OpenGL, Vulkan, VAAPI) and required kernel settings.
 {
   config,
   lib,
@@ -9,69 +7,80 @@
 with lib; let
   cfg = config.nm.gpu;
 
-  # Define the required packages based on the selected vendor
-  vendorPackages =
-    {
-      intel = with pkgs; {
-        # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
-        drivers = [
-          intel-media-driver
-          vpl-gpu-rt # or intel-media-sdk for QSV
-        ];
-        # For older processors. LIBVA_DRIVER_NAME=i965
-        driversLegacy = [intel-vaapi-driver];
-        # 32-bit support (usually for older or compatibility libraries)
-        drivers32 = with pkgs.pkgsi686Linux; [intel-vaapi-driver];
-        # Environment variable for VAAPI
-        sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
-        # Kernel parameters are optional for force_probe, but included here for reference
-        kernelParams = [];
-      };
-
-      # AMD usually uses open-source drivers in the kernel, but needs Vulkan/VAAPI libs
-      amd = with pkgs; {
-        drivers = [
-          amdvlk
-          libva-mesa-driver
-          mesa.drivers # Provides OpenGL and basic Vulkan support
-        ];
-        driversLegacy = [];
-        drivers32 = with pkgs.pkgsi686Linux; [
-          amdvlk
-          libva-mesa-driver
-          mesa.drivers
-        ];
-        sessionVariables = {};
-        kernelParams = ["amdgpu.vm_fragment_size=9"]; # Common optimization
-      };
-
-      # NVIDIA requires proprietary drivers for full performance
-      nvidia = {
-        drivers = [pkgs.nvidiaPackages.cuda_latest]; # Use latest CUDA for a comprehensive setup
-        driversLegacy = [];
-        drivers32 = []; # Managed by the hardware.nvidia module implicitly
-        sessionVariables = {};
-        kernelParams = [];
-      };
-    }.${
-      cfg.vendor
+  # --- Driver Definitions ---
+  # We define these separately so we can mix/match them
+  drivers = {
+    intel = {
+      extraPackages = with pkgs; [
+        intel-media-driver # Broadwell+ (iHD)
+        vpl-gpu-rt # QSV
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [intel-media-driver];
+      env = {LIBVA_DRIVER_NAME = "iHD";};
     };
+
+    amd = {
+      extraPackages = with pkgs; [
+        amdvlk
+        libva-mesa-driver
+        mesa.drivers
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        amdvlk
+        libva-mesa-driver
+        mesa.drivers
+      ];
+      env = {}; # AMD usually autodetects well
+    };
+
+    nvidia = {
+      # The main driver is handled by hardware.nvidia.package,
+      # but we might want extra tools like cuda here if needed.
+      extraPackages = [pkgs.nvidiaPackages.cuda_latest];
+      extraPackages32 = [];
+      env = {};
+    };
+  };
 in {
   # --- 1. Define Options ---
   options.nm.gpu = {
-    enable = mkEnableOption "Enable graphics hardware acceleration and drivers.";
+    enable = mkEnableOption "Enable graphics hardware acceleration and drivers";
 
-    vendor = mkOption {
-      type = types.enum ["intel" "amd" "nvidia"];
-      default = "intel";
-      description = "The primary GPU vendor to configure drivers for (intel, amd, or nvidia).";
-      example = "amd";
+    # --- Intel Config ---
+    intel = {
+      enable = mkEnableOption "Enable Intel GPU drivers (iGPU or dGPU)";
+      busId = mkOption {
+        type = types.str;
+        default = "";
+        description = "Bus ID of the Intel GPU (required for NVIDIA PRIME). Example: PCI:0@0:2:0";
+      };
     };
 
-    enableLegacyDrivers = mkOption {
-      type = types.bool;
-      default = false;
-      description = "If true, includes legacy/older drivers (e.g., intel-vaapi-driver for i965).";
+    # --- AMD Config ---
+    amd = {
+      enable = mkEnableOption "Enable AMD GPU drivers (iGPU or dGPU)";
+      busId = mkOption {
+        type = types.str;
+        default = "";
+        description = "Bus ID of the AMD GPU (required for NVIDIA PRIME). Example: PCI:5@0:0:0";
+      };
+    };
+
+    # --- NVIDIA Config ---
+    nvidia = {
+      enable = mkEnableOption "Enable NVIDIA GPU drivers";
+      busId = mkOption {
+        type = types.str;
+        default = "";
+        description = "Bus ID of the NVIDIA GPU. Example: PCI:1@0:0:0";
+      };
+
+      # Optional: Allow toggling sync vs offload
+      useSyncMode = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Use NVIDIA Sync mode (high performance, high power) instead of Offload.";
+      };
     };
 
     kernelParams = mkOption {
@@ -93,33 +102,105 @@ in {
 
   # --- 2. Define Configuration ---
   config = mkIf cfg.enable {
-    # 1. Enable core graphics stack
-    hardware.graphics.enable = true;
+    # 2.1 Core Graphics Setup
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
 
-    # 2. Add vendor-specific packages
-    hardware.graphics.extraPackages =
-      vendorPackages.drivers
-      ++ (optionals cfg.enableLegacyDrivers vendorPackages.driversLegacy);
+      # Dynamically merge drivers based on enabled flags
+      extraPackages =
+        (
+          if cfg.intel.enable
+          then drivers.intel.extraPackages
+          else []
+        )
+        ++ (
+          if cfg.amd.enable
+          then drivers.amd.extraPackages
+          else []
+        )
+        ++ (
+          if cfg.nvidia.enable
+          then drivers.nvidia.extraPackages
+          else []
+        );
 
-    # 3. Add 32-bit compatibility packages
-    hardware.graphics.extraPackages32 = vendorPackages.drivers32;
-
-    # 4. Set vendor-specific session variables (e.g., LIBVA_DRIVER_NAME)
-    environment.sessionVariables = vendorPackages.sessionVariables;
-
-    # 5. Apply kernel parameters
-    boot.kernelParams = cfg.kernelParams ++ vendorPackages.kernelParams;
-
-    # 6. Special handling for NVIDIA (requires separate module)
-    # The actual NVIDIA driver activation is handled by the dedicated hardware.nvidia module.
-    # We enable it conditionally here.
-    hardware.nvidia = mkIf (cfg.vendor == "nvidia") {
-      # Requires the 32-bit libraries for games and older apps
-      package = config.boot.kernelPackages.nvidiaPackages.production;
-      # Recommended to use the production branch for stability
-      open = true;
-      # NVIDIA devices often need additional configuration, like modesetting:
-      modesetting.enable = true;
+      extraPackages32 =
+        (
+          if cfg.intel.enable
+          then drivers.intel.extraPackages32
+          else []
+        )
+        ++ (
+          if cfg.amd.enable
+          then drivers.amd.extraPackages32
+          else []
+        )
+        ++ (
+          if cfg.nvidia.enable
+          then drivers.nvidia.extraPackages32
+          else []
+        );
     };
+
+    # 2.2 Session Variables
+    environment.sessionVariables =
+      (
+        if cfg.intel.enable
+        then drivers.intel.env
+        else {}
+      )
+      // (
+        if cfg.amd.enable
+        then drivers.amd.env
+        else {}
+      )
+      // (
+        if cfg.nvidia.enable
+        then drivers.nvidia.env
+        else {}
+      );
+
+    # 2.3 NVIDIA Specific Configuration
+    services.xserver.videoDrivers = mkIf cfg.nvidia.enable ["nvidia"];
+
+    hardware.nvidia = mkIf cfg.nvidia.enable {
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+      open = true; # Open source kernel modules (Turing+)
+      modesetting.enable = true;
+
+      powerManagement = {
+        enable = true;
+        finegrained = true; # Saves power on offload mode
+      };
+
+      # 2.4 Hybrid Graphics (PRIME) Logic
+      # Only enable PRIME if NVIDIA + (Intel OR AMD) is enabled
+      prime = lib.mkMerge [
+        {
+          # NVIDIA Bus ID is always required
+          nvidiaBusId = cfg.nvidia.busId;
+
+          # Mode Selection: Sync (Performance) vs Offload (Battery)
+          sync.enable = cfg.nvidia.useSyncMode;
+
+          offload = {
+            enable = !cfg.nvidia.useSyncMode;
+            enableOffloadCmd = !cfg.nvidia.useSyncMode;
+          };
+        }
+
+        (lib.mkIf cfg.intel.enable {
+          intelBusId = cfg.intel.busId;
+        })
+
+        (lib.mkIf cfg.amd.enable {
+          intelBusId = cfg.amd.busId;
+        })
+      ];
+    };
+
+    # 3. Apply kernel parameters
+    boot.kernelParams = cfg.kernelParams;
   };
 }

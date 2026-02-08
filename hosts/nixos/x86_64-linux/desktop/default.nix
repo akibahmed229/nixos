@@ -44,7 +44,7 @@ in {
     # ------------------------ Enable Intel Gpu -------------------------------
     gpu = {
       enable = true;
-      vendor = "intel";
+      intel.enable = true;
       kernelParams = ["i915.force_probe=4680"];
     };
 
@@ -247,7 +247,6 @@ in {
     anydesk # Remote desktop software.
     remmina # Remote access screen
     localsend # Local file transfer tool.
-    nextcloud-client # Nextcloud sync client.
 
     # 5. Productivity
     libreoffice # Office suite.
