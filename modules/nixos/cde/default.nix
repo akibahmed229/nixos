@@ -1,4 +1,12 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.nm.cde;
+
   loginDE = pkgs.writeShellScriptBin "loginDE" ''
     set -euo pipefail
 
@@ -29,52 +37,58 @@
     exec /run/current-system/sw/bin/login "$SELECTED_USER"
   '';
 in {
-  # Ensure dbus-run-session is available for the handover
-  environment.systemPackages = [pkgs.dbus pkgs.niri];
-
-  # --- Part 1: The Service (The Picker) ---
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
-  systemd.services.display-manager = {
-    description = "Custom TTY Login Manager";
-    after = ["systemd-user-sessions.service" "plymouth-quit-wait.service" "getty@tty1.service"];
-    conflicts = ["getty@tty1.service"];
-
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${loginDE}/bin/loginDE";
-      StandardInput = "tty";
-      StandardOutput = "tty";
-      TTYPath = "/dev/tty1";
-      TTYReset = "yes";
-      TTYVHangup = "yes";
-      Restart = "always";
-    };
-    wantedBy = ["graphical.target"];
+  options.nm.cde = {
+    enable = mkEnableOption "Enable Minimal Display Manager that will Let you Pick DE";
   };
 
-  # --- Part 2: The Launcher (The Puzzle Solver) ---
-  # This runs after you successfully type your password
-  environment.loginShellInit = ''
-    if [[ "$(tty)" == "/dev/tty1" ]]; then
-      SESSION_FILE="/tmp/session_choice_$(whoami)"
-      if [[ -f "$SESSION_FILE" ]]; then
-        CHOICE=$(cat "$SESSION_FILE")
-        rm -f "$SESSION_FILE" # Clean up immediately
+  config = lib.mkIf cfg.enable {
+    # Ensure dbus-run-session is available for the handover
+    environment.systemPackages = [pkgs.dbus pkgs.niri];
 
-        case "$CHOICE" in
-          "Niri")
-            exec niri-session
-            ;;
-          "Bash")
-            exec bash
-            ;;
-          "Zsh")
-            # Just let the login shell continue
-            ;;
-        esac
+    # --- Part 1: The Service (The Picker) ---
+    systemd.services."getty@tty1".enable = false;
+    systemd.services."autovt@tty1".enable = false;
+
+    systemd.services.display-manager = {
+      description = "Custom TTY Login Manager";
+      after = ["systemd-user-sessions.service" "plymouth-quit-wait.service" "getty@tty1.service"];
+      conflicts = ["getty@tty1.service"];
+
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${loginDE}/bin/loginDE";
+        StandardInput = "tty";
+        StandardOutput = "tty";
+        TTYPath = "/dev/tty1";
+        TTYReset = "yes";
+        TTYVHangup = "yes";
+        Restart = "always";
+      };
+      wantedBy = ["graphical.target"];
+    };
+
+    # --- Part 2: The Launcher (The Puzzle Solver) ---
+    # This runs after you successfully type your password
+    environment.loginShellInit = ''
+      if [[ "$(tty)" == "/dev/tty1" ]]; then
+        SESSION_FILE="/tmp/session_choice_$(whoami)"
+        if [[ -f "$SESSION_FILE" ]]; then
+          CHOICE=$(cat "$SESSION_FILE")
+          rm -f "$SESSION_FILE" # Clean up immediately
+
+          case "$CHOICE" in
+            "Niri")
+              exec niri-session
+              ;;
+            "Bash")
+              exec bash
+              ;;
+            "Zsh")
+              # Just let the login shell continue
+              ;;
+          esac
+        fi
       fi
-    fi
-  '';
+    '';
+  };
 }

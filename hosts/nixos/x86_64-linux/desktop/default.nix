@@ -96,6 +96,7 @@ in {
     };
 
     # ------------------------- Some Utils ------------------------------------
+    cde.enable = true;
     kvm = {
       enable = true;
       bridge.enable = false;
