@@ -49,10 +49,10 @@
       gnome.gnome-tweaks
       gnome.adwaita-icon-theme
       gnome-menus
+      libxcb
       xorg.xkill
       xorg.libX11
       xorg.libX11.dev
-      xorg.libxcb
       xorg.libXft
       xorg.libXinerama
       xorg.xinit

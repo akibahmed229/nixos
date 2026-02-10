@@ -41,12 +41,12 @@
     eog
     networkmanagerapplet
     # rPackages.pkgmaker # FIXME: currently broken
+    libxcb
     xorg.xrandr
     xorg.xinit
     xorg.makedepend
     xorg.libX11
     xorg.libX11.dev
-    xorg.libxcb
     xorg.libXft
     xorg.xkill
     xorg.libXinerama
