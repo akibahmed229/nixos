@@ -96,7 +96,6 @@ in {
     };
 
     # ------------------------- Some Utils ------------------------------------
-    ly.enable = true;
     kvm = {
       enable = true;
       bridge.enable = false;

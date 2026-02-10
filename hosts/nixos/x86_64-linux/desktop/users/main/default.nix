@@ -16,6 +16,7 @@
 
   # Define user type
   isNormalUser = true;
+  linger = true;
 
   # Password handling (prefer sops secret, fallback to null)
   # Create a Hased Pass whith `nix run nixpkgs#mkpasswd -- -m SHA-512 -s`
@@ -43,6 +44,7 @@
     "flatpak"
     "video"
     "audio"
+    "render"
     "scanner"
     "libvirtd"
     "kvm"
