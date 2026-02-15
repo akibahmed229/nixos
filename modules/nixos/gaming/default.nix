@@ -12,7 +12,7 @@ with lib; let
 
   # Define common dependencies for the extended Lutris setup
   lutrisExtraPkgs = with pkgs; [
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
     adwaita-icon-theme # default icons
     corefonts # MS fonts needed for some Windows applications (e.g., KSP)
@@ -68,12 +68,12 @@ in {
         protonup-qt
         bottles
         heroic
-        wineWowPackages.stable # support both 32- and 64-bit applications
+        wineWow64Packages.stable # support 64-bit applications
         wine # support 32-bit only
         (wine.override {wineBuild = "wine64";}) # support 64-bit only
-        wineWowPackages.staging # wine-staging (version with experimental features)
+        wineWow64Packages.staging # wine-staging (version with experimental features)
         winetricks
-        wineWowPackages.waylandFull # native wayland support (unstable)
+        wineWow64Packages.waylandFull # native wayland support (unstable)
 
         # 2.5 Lutris with extra packages
         (lutris.override {
