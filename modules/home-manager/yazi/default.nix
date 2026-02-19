@@ -23,6 +23,7 @@ in {
       enable = true;
       enableZshIntegration = true; # Makes 'y' or 'yy' available in zsh
       enableBashIntegration = true;
+      shellWrapperName = "y";
 
       settings = {
         manager = {
