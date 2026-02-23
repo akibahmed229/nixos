@@ -42,15 +42,15 @@
     networkmanagerapplet
     # rPackages.pkgmaker # FIXME: currently broken
     libxcb
-    xorg.xrandr
-    xorg.xinit
-    xorg.makedepend
-    xorg.libX11
-    xorg.libX11.dev
-    xorg.libXft
-    xorg.xkill
-    xorg.libXinerama
-    xorg.xrdb
+    xrandr
+    xinit
+    makedepend
+    libX11
+    libX11.dev
+    libXft
+    xkill
+    libXinerama
+    xrdb
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
