@@ -12,7 +12,7 @@
 # 1. Installation — My Version of NixOS
 
 <details>
-  <summary>NixOS setup using Flake + Home Manager. Hyprland as the default WM.</summary>
+  <summary>NixOS setup using Flake + Home Manager. Niri as the default WM.</summary>
 
 ## Overview
 
