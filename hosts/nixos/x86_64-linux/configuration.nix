@@ -152,7 +152,7 @@
     # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      # self.overlays.discord-overlay
+      self.overlays.default
       inputs.nur.overlays.default # accisable through: `pkgs.nur.repos.<name>.<packages>`
     ];
   };
