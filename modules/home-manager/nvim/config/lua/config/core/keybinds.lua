@@ -9,6 +9,10 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Keep cursor in place while moving up/
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")       -- center screen when looping search results
 vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "<leader>cs", ":nohlsearch<CR>")
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 
 -- paste and don't replace clipboard over deleted text
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -48,3 +52,10 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+-- get file path
+vim.keymap.set("n", "<leader>pa", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    print("File: ", path)
+end, { desc = "Copy full file path" })
