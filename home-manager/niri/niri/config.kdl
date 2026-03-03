@@ -355,7 +355,7 @@ window-rule {
 
 // Workspace "lounge" rules
 window-rule {
-    match app-id=r#"Spotify$"# 
+    match app-id=r#"spotify$"# 
     open-maximized true
     open-on-workspace "lounge"
 }
