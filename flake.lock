@@ -260,11 +260,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773179137,
-        "narHash": "sha256-EdW2bwzlfme0vbMOcStnNmKlOAA05Bp6su2O8VLGT0k=",
+        "lastModified": 1773422513,
+        "narHash": "sha256-MPjR48roW7CUMU6lu0+qQGqj92Kuh3paIulMWFZy+NQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3f98e2bbc661ec0aaf558d8a283d6955f05f1d09",
+        "rev": "ef12a9a2b0f77c8fa3dda1e7e494fca668909056",
         "type": "github"
       },
       "original": {
@@ -781,10 +781,10 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1772963539,
-        "narHash": "sha256-9jVDGZnvCckTGdYT53d/EfznygLskyLQXYwJLKMPsZs=",
+        "lastModified": 1773282481,
+        "narHash": "sha256-b/GV2ysM8mKHhinse2wz+uP37epUrSE+sAKXy/xvBY4=",
         "ref": "nixos-unstable",
-        "rev": "9dcb002ca1690658be4a04645215baea8b95f31d",
+        "rev": "fe416aaedd397cacb33a610b33d60ff2b431b127",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/NixOS/nixpkgs"
@@ -842,11 +842,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773250027,
-        "narHash": "sha256-JoynxPMsXa8J5YQ+jF3f4WmuA3PFRuxovxKl0wyxSyE=",
+        "lastModified": 1773481828,
+        "narHash": "sha256-coiui8nql/8sfzebnsBvvniLwlA9F0hu9WlExAs+wP4=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "357c6523269003f8fa35f695dc7412cfa905935d",
+        "rev": "67d419b8ee8eac552ed05f51d0688aa9cad5787f",
         "type": "github"
       },
       "original": {
@@ -910,10 +910,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1773129285,
-        "narHash": "sha256-7G6x33z271v/jhBC5Le7NPOZhv9902+MfCkC9poMwf0=",
+        "lastModified": 1773480707,
+        "narHash": "sha256-VkuO1LWpK7tS/YDmxJSDeONEwt1RFLPfOucQJwKnsV0=",
         "ref": "refs/heads/master",
-        "rev": "bd6217927739a79c1c4ff279051f9625cd4b2b5e",
+        "rev": "1b2519d9f3d963e575b8a1ef08fab47c7af0d1b3",
         "shallow": true,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
