@@ -108,11 +108,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773000227,
-        "narHash": "sha256-zm3ftUQw0MPumYi91HovoGhgyZBlM4o3Zy0LhPNwzXE=",
+        "lastModified": 1775023938,
+        "narHash": "sha256-0/aPuEXIIaehfP/t9icDJUTCmAu13dfS+RNKWdMV5P0=",
         "owner": "nix-darwin",
         "repo": "nix-darwin",
-        "rev": "da529ac9e46f25ed5616fd634079a5f3c579135f",
+        "rev": "5176e2f4b45de02f1c90133854634a6c675ef41b",
         "type": "github"
       },
       "original": {
@@ -260,11 +260,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774898676,
-        "narHash": "sha256-0Utnqo+FbB+0CVUi0MI3oonF0Kuzy9VcgRkxl53Euvk=",
+        "lastModified": 1774991950,
+        "narHash": "sha256-kScKj3qJDIWuN9/6PMmgy5esrTUkYinrO5VvILik/zw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a184bd2f8426087bae93f203403cd4b86c99e57d",
+        "rev": "f2d3e04e278422c7379e067e323734f3e8c585a7",
         "type": "github"
       },
       "original": {
@@ -842,11 +842,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774940514,
-        "narHash": "sha256-0nqWuWaMhSg9t/wivmZmRKa41QyQRVCAJcKSNB1bCMQ=",
+        "lastModified": 1775032079,
+        "narHash": "sha256-TRZx2fK1XsXV/9f27RyDUARwjN83qW5t9aNIP+yBybo=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "1356d83dafa384ae1a1f3e2da00aaf86fdcf9474",
+        "rev": "dbc899cb2f7bc7f6a39d3e891a2d393d48c64f2f",
         "type": "github"
       },
       "original": {
@@ -910,10 +910,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1774932128,
-        "narHash": "sha256-A8I+pyI904K2Z+vZWx8rIt5CxccbC/1VvU6wB1wb1jg=",
+        "lastModified": 1774950564,
+        "narHash": "sha256-KWU38p8zEtgFOL5KZoWeqWVv27uBFLX3N+Ih+TFs9/0=",
         "ref": "refs/heads/master",
-        "rev": "b83c39c8afd58c86af1c49a7c0e081b30c86d823",
+        "rev": "d6122277409783377059be6399004eb090a6008e",
         "shallow": true,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
