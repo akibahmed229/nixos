@@ -139,6 +139,7 @@ in {
       shares = [
         {device = "sda1";}
         {device = "sda2";}
+        {device = "samsung";}
       ];
     };
 
