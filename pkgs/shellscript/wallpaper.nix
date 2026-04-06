@@ -3,7 +3,7 @@ pkgs.writeShellApplication {
   name = "wallpaper";
 
   runtimeInputs = with pkgs; [
-    swww
+    awww
   ];
 
   text = ''
@@ -28,6 +28,6 @@ pkgs.writeShellApplication {
      cp "$RELATIVE_PATH" ~/.cache/swww/Wallpaper
 
      # Use the selected image path with swww command
-     ${pkgs.swww}/bin/swww img "$RELATIVE_PATH"  --transition-step 2 --transition-fps 75 --transition-type right
+     ${pkgs.awww}/bin/awww img "$RELATIVE_PATH"  --transition-step 2 --transition-fps 75 --transition-type right
   '';
 }

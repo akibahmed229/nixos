@@ -15,7 +15,7 @@ with lib; let
     sponsorblock
     darkreader
     youtube-shorts-block
-    dearrow
+    # dearrow # FIXME: Broken
     multi-account-containers
     facebook-container
   ];

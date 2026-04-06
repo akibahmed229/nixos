@@ -48,7 +48,7 @@ in {
     bibata-cursors # Cursor theme.
     adw-gtk3 # Adwaita theme for GTK 3.
     qt6Packages.qtstyleplugin-kvantum # Theme engine for Qt
-    swww # Sway wallpaper manager.
+    awww # Sway wallpaper manager.
 
     # 2. Multimedia & Audio
     playerctl # Music player controller.
