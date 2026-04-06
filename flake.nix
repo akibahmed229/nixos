@@ -116,7 +116,7 @@
   } @ inputs: let
     # The system to build.
     inherit (nixpkgs) lib;
-    state-version = "25.11";
+    state-version = "26.05";
 
     # The user to build for.
     # Override user via env var in impure mode
