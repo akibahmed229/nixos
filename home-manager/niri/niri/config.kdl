@@ -217,7 +217,7 @@ binds {
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
-spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
+spawn-sh-at-startup "awww-daemon" // Wallpaper daemon
 spawn-sh-at-startup "xwayland-satellite"
 // spawn-sh-at-startup "qs" // Launch quickshell
 // spawn-sh-at-startup "udiskie" // USB Mass storage devices mounting
@@ -437,7 +437,7 @@ environment {
 // https://yalter.github.io/niri/Configuration%3A-Layer-Rules.html
 
 layer-rule {
-    match namespace="^swww-daemon$"
+    match namespace="^awww-daemon$"
 
     place-within-backdrop true
 }

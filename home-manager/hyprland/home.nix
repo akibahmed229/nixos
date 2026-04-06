@@ -61,7 +61,7 @@
           # "waybar"
           # "hyprpaper"
           # "ags run"
-          "swww-daemon"
+          "awww-daemon"
           "nm-applet --indicator" # simple network manager indicator
           # "udiskie &" # USB Mass storage devices mounting
           "wl-paste --type text --watch cliphist store" #Stores only text data
