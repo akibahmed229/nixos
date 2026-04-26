@@ -101,7 +101,7 @@ in {
       enable = true;
       bridge.enable = false;
     };
-    gaming.enable = true;
+    # gaming.enable = false; # FIXME: BROKEN
     wireshark.enable = true;
     bbr.enable = true;
     fhs.enable = true;
@@ -207,6 +207,7 @@ in {
     "/var/lib/sops-nix" = {
       neededForBoot = true;
       device = "/dev/mapper/root_vg-root";
+      fsType = "btrfs";
     };
   };
 

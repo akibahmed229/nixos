@@ -23,7 +23,7 @@ in {
       alacritty.enable = true;
       kitty.enable = true;
       thunar.enable = true;
-      espanso.enable = true;
+      # espanso.enable = false; # FIXME: BROKEN
       gemini-cli.enable = true;
       hypridle.enable = true;
       emacs.enable = true;
