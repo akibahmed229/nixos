@@ -59,7 +59,7 @@
     ####################  Community & Other Repositories | remote flake ####################
     # nix-index is a tool to quickly locate the package providing a certain file in nixpkgs. It indexes built derivations found in binary caches.
     nix-index-database = {
-      url = "github:Mic92/nix-index-database?shallow=1";
+      url = "github:Mic92/nix-index-database?shallow=1&rev=dd2d0e3f6ba00af01b9498f5697173bdc2524bee"; # latest commit broken
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Handle persistent state on systems with ephemeral root storage
