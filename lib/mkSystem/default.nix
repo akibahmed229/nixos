@@ -132,9 +132,15 @@
       name = hostName;
       value = nixosSystem {
         system = archName;
+        # When provide a pre-built pkgs instance, NixOS loses the ability to apply nixpkgs.
         pkgs = import nixpkgs {
           system = archName;
-          config = {allowUnfree = true;};
+          config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [
+              "python3.12-pypdf2-3.0.1"
+            ];
+          };
         };
         specialArgs =
           specialArgs

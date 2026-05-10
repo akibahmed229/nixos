@@ -103,6 +103,7 @@ in {
     };
     # gaming.enable = false; # FIXME: BROKEN
     wireshark.enable = true;
+    postgresql.enable = true;
     bbr.enable = true;
     fhs.enable = true;
     dbus.enable = true;
@@ -241,7 +242,7 @@ in {
 
     # 3. Communication & Social
     telegram-desktop # Messaging app.
-    wasistlos # WhatsApp client for Linux.
+    # wasistlos # WhatsApp client for Linux.
 
     # 4. Internet & Networking
     chromium # Web browser.
@@ -308,6 +309,7 @@ in {
     lazygit # Git UI.
     gh # GitHub CLI.
     # self.packages.${pkgs.stdenv.hostPlatform.system}.ciscoPacketTracer
+    odoo19
 
     # 2. Media & Design
     gimp # Image editor.
