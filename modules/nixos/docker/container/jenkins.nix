@@ -46,7 +46,7 @@ in {
     # Custom image for Jenkins with Blue Ocean and Docker CLI pre-installed
     jenkinsImage = mkOption {
       type = types.str;
-      default = "myjenkins-blueocean:2.528.1-1";
+      default = "myjenkins-blueocean:2.555.2-1";
       description = "The name of the custom-built Jenkins image (e.g., myjenkins-blueocean:tag).";
     };
 
@@ -68,7 +68,7 @@ in {
   make sure to build the docker image for blueocean
   Dockerfile
   ```docker
-         FROM jenkins/jenkins:2.528.1-jdk21
+         FROM jenkins/jenkins:2.555.2-jdk21
          USER root
          RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
              install -m 0755 -d /etc/apt/keyrings && \
@@ -88,7 +88,7 @@ in {
          RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
   ```
 
-  Then Build the Image with: `docker build -t myjenkins-blueocean:2.528.1-1 .`
+  Then Build the Image with: `docker build -t myjenkins-blueocean:2.555.2-1 .`
   */
 
   # --- 2. Define Configuration ---
