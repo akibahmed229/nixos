@@ -57,6 +57,7 @@ in {
         # Web / Frontend
         (lib.lowPrio prettier)
         typescript-language-server
+        tailwindcss-language-server
         vscode-langservers-extracted
 
         # QML / Shell / YAML / Lua / Terraform

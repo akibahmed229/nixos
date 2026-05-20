@@ -4,7 +4,7 @@ require("config.lsp.core")
 
 -- Load servers
 local servers = {
-    "lua", "css", "html", "php", "ts",
+    "lua", "css", "html", "php", "ts", "tailwind",
     "nix", "c", "python", "dart",
     "rust", "bash", "yaml", "terraform", "qml"
 }
