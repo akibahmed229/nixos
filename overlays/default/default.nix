@@ -20,14 +20,14 @@ final: prev: {
   #   doCheck = false;
   # });
 
-  wireshark = prev.wireshark.overrideAttrs (oldAttrs: {
-    src = prev.fetchFromGitLab {
-      repo = "wireshark";
-      owner = "wireshark";
-      tag = "v${oldAttrs.version}";
-      hash = "sha256-Zvrwxjp4LK2J3QnxmPxKKrU01YHQvPyp54UWzeGNCjA=";
-    };
-  });
+  # wireshark = prev.wireshark.overrideAttrs (oldAttrs: {
+  #   src = prev.fetchFromGitLab {
+  #     repo = "wireshark";
+  #     owner = "wireshark";
+  #     tag = "v${oldAttrs.version}";
+  #     hash = "sha256-Zvrwxjp4LK2J3QnxmPxKKrU01YHQvPyp54UWzeGNCjA=";
+  #   };
+  # });
 
   # ===========================================================================
   # SECTION 2: SCOPED OVERRIDES (Python, Lua, etc.)
@@ -37,9 +37,9 @@ final: prev: {
   python3Packages = prev.python3Packages.overrideScope (pythonFinal: pythonPrev: {
     # CURRENT FIX: picosvg
     # We disable tests because they are currently broken upstream/in nixpkgs
-    picosvg = pythonPrev.picosvg.overridePythonAttrs (old: {
-      doCheck = false;
-    });
+    # picosvg = pythonPrev.picosvg.overridePythonAttrs (old: {
+    #   doCheck = false;
+    # });
 
     # Example: Adding a missing dependency to a python package
     # requests = pythonPrev.requests.overridePythonAttrs (old: {
