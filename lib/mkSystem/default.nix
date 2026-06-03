@@ -161,7 +161,7 @@
             {
               home-manager = {
                 backupFileExtension = "hm-bak";
-                useGlobalPkgs = true;
+                useGlobalPkgs = false;
                 useUserPackages = true;
                 extraSpecialArgs = specialArgs;
               };
