@@ -142,7 +142,7 @@ in {
     };
 
     # Systemd Boot Service
-    systemd.user.services.tmux = {
+    systemd.user.services.tmux = lib.mkIf cfg.systemdEnable {
       Unit = {
         Description = "Start the tmux server";
       };
