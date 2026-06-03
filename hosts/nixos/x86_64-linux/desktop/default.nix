@@ -69,7 +69,7 @@ in {
           domain = readSecretsFile "/ngrok/domain.txt";
         };
         adguard.enable = true;
-        jenkins.enable = true;
+        jenkins.enable = false;
         portainer.enable = true;
         # nextcloud = {
         #   enable = true;
@@ -101,7 +101,7 @@ in {
       enable = true;
       bridge.enable = false;
     };
-    # gaming.enable = false; # FIXME: BROKEN
+    gaming.enable = false;
     wireshark.enable = true;
     postgresql.enable = true;
     bbr.enable = true;
@@ -158,6 +158,9 @@ in {
     stylix = {
       enable = true;
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
+
+      # Tell Stylix to leave kmscon alone so it stops throwing the assertion error
+      targets.kmscon.enable = false;
     };
 
     # ------------------- Atomic Secret Provisioning  -------------------------

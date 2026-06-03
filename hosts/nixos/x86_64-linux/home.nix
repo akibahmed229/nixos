@@ -13,6 +13,16 @@ in {
     inputs.nix-index-database.homeModules.nix-index
   ];
 
+  nixpkgs = {
+    config.allowUnfree = true;
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      self.overlays.default
+      inputs.nur.overlays.default # accisable through: `pkgs.nur.repos.<name>.<packages>`
+    ];
+  };
+
   hm = {
     flake-sync.enable = true;
     xdg.enable = true;
