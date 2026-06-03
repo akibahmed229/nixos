@@ -22,7 +22,7 @@ in {
       enableDefaultConfig = false;
 
       # The new way: apply the setting to all hosts (*)
-      matchBlocks."*" = {
+      settings."*" = {
         addKeysToAgent = cfg.addKeysToAgent;
       };
 
