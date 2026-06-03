@@ -227,8 +227,9 @@ spawn-sh-at-startup "wl-paste --type image --watch cliphist store" // Stores onl
 spawn-sh-at-startup "kdeconnect-cli --refresh" // KDE Connect daemon
 spawn-sh-at-startup "kdeconnect-indicator"
 spawn-sh-at-startup "systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-gtk.service xdg-desktop-portal-wlr.service xdg-desktop-portal-gnome.service"
+spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/mouse_new.orp && openrgb -p ~/.config/OpenRGB/Key_new.orp"
+spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/mouse_new.orp && openrgb -p ~/.config/OpenRGB/Key_new.orp"
 
-spawn-sh-at-startup "openrgb -p ~/.config/OpenRGB/Mobo.orp && openrgb -p ~/.config/OpenRGB/mouse_new.orp && openrgb -p ~/.config/OpenRGB/Key_new.orp" // # Loads my RGB light
 spawn-at-startup "firefox"
 spawn-at-startup "spotify"
 spawn-at-startup "vesktop"
@@ -354,7 +355,7 @@ window-rule {
 
 // Workspace "lounge" rules
 window-rule {
-    match app-id=r#"spotify$"# 
+    match app-id=r#"Spotify$"# 
     open-maximized true
     open-on-workspace "lounge"
 }
