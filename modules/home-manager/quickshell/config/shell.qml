@@ -26,12 +26,6 @@ ShellRoot {
         sourceComponent: VolumeOsd {}
     }
 
-    // --- Notification panel for system/app messages
-    Loader {
-        active: true
-        sourceComponent: NotificationPanel {}
-    }
-
     // --- Logout/Shutdown/Restart menu (Wlogout replacement) & Screen Lock
     Component.onCompleted: () => {
         Wlogout.Controller.init();

@@ -25,13 +25,14 @@ RowLayout {
 
             // When clicked, toggle the visibility of the notification panel.
             onClicked: {
-                notifPanel.visible = !notifPanel.visible;
+                notifPanel.centerOpen = !notifPanel.centerOpen;
             }
         }
 
         // The notification panel that appears when the icon is clicked
-        NotificationPanel {
+        Notifications {
             id: notifPanel
+            centerOpen: false
         }
     }
 }
