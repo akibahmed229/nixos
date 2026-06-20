@@ -30,7 +30,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.gemini-cli = {
+    programs.antigravity-cli = {
       enable = true;
       package = pkgs.gemini-cli;
 
