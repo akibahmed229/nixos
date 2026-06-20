@@ -15,7 +15,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      libsForQt5.qt5.qtgraphicaleffects
+      qt5.qtgraphicaleffects
       qt6Packages.qtgraphs
       qt6Packages.qtvirtualkeyboard
       qt6Packages.qtsvg
