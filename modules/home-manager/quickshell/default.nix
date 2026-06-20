@@ -1,3 +1,8 @@
+/*
+* To develop the conig with the required pkgs which will suggest code completation.
+
+  $ nix develop github:quickshell-mirror/quickshell\#default
+*/
 {
   pkgs,
   lib,
@@ -33,7 +38,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       qt6Packages.qt5compat
-      libsForQt5.qt5.qtgraphicaleffects
+      qt5.qtgraphicaleffects
       kdePackages.qtbase
       kdePackages.qtdeclarative
       kdePackages.qtstyleplugin-kvantum
