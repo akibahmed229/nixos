@@ -29,9 +29,6 @@ Scope {
             const comment = (app.comment || "").toLowerCase();
             return name.includes(query) || comment.includes(query);
         });
-
-        // Always reset selection index back to the top item on typing
-        appListView.currentIndex = 0;
     }
 
     IpcHandler {
