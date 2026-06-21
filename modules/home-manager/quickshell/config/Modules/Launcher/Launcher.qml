@@ -11,35 +11,93 @@ Scope {
     id: root
 
     property bool launcherOpen: false
+    property string mode: "apps" // "apps" or "clipboard"
+    property var rawClipboard: []
 
-    // Logic to fetch system apps and fuzzy match the search text
-    property var filteredApps: {
+    // Unified logic to fetch list data and filter based on search input
+    property var filteredItems: {
         const query = searchInput.text.toLowerCase().trim();
-        // DesktopEntries.applications collects all valid system desktop entries
-        const allApps = Array.from(DesktopEntries.applications.values);
 
-        if (query === "") {
-            return allApps.filter(app => !app.noDisplay);
+        if (root.mode === "apps") {
+            const allApps = Array.from(DesktopEntries.applications.values);
+            const visibleApps = allApps.filter(app => !app.noDisplay);
+            if (query === "") {
+                return visibleApps;
+            }
+            return visibleApps.filter(app => {
+                const name = (app.name || "").toLowerCase();
+                const comment = (app.comment || "").toLowerCase();
+                return name.includes(query) || comment.includes(query);
+            });
+        } else {
+            // Clipboard Mode filtering
+            if (query === "") {
+                return root.rawClipboard;
+            }
+            return root.rawClipboard.filter(item => item.toLowerCase().includes(query));
+        }
+    }
+
+    // Helper process to query cliphist
+    Process {
+        id: cliphistScanner
+        command: ["cliphist", "list"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var trimmed = text.trim();
+                root.rawClipboard = trimmed !== "" ? trimmed.split("\n") : [];
+            }
+        }
+    }
+
+    // Process to safely decode and copy selection
+    Process {
+        id: cliphistDecoder
+    }
+
+    // Unified execution handler
+    function executeSelection(index) {
+        if (index < 0 || index >= root.filteredItems.length)
+            return;
+        var item = root.filteredItems[index];
+        if (!item)
+            return;
+
+        if (root.mode === "apps") {
+            item.execute();
+        } else {
+            // Decode and write back to clipboard safely using positional parameter
+            cliphistDecoder.command = ["bash", "-c", "cliphist decode <<< \"$1\" | wl-copy", "--", item];
+            cliphistDecoder.running = true;
         }
 
-        return allApps.filter(app => {
-            if (app.noDisplay)
-                return false;
-            const name = (app.name || "").toLowerCase();
-            const comment = (app.comment || "").toLowerCase();
-            return name.includes(query) || comment.includes(query);
-        });
+        root.launcherOpen = false;
+        searchInput.text = "";
     }
 
     IpcHandler {
         target: "launcher"
 
+        // Toggle app launcher mode
         function toggle(): void {
-            launcherOpen = !launcherOpen;
+            root.mode = "apps";
+            root.launcherOpen = !root.launcherOpen;
         }
         function show(): void {
+            root.mode = "apps";
             root.launcherOpen = true;
         }
+
+        // Toggle clipboard history manager mode
+        function toggleClipboard(): void {
+            root.mode = "clipboard";
+            root.launcherOpen = !root.launcherOpen;
+        }
+        function showClipboard(): void {
+            root.mode = "clipboard";
+            root.launcherOpen = true;
+        }
+
         function hide(): void {
             root.launcherOpen = false;
         }
@@ -68,6 +126,10 @@ Scope {
                 searchInput.text = "";
                 searchInput.forceActiveFocus();
                 appListView.currentIndex = 0;
+
+                if (root.mode === "clipboard") {
+                    cliphistScanner.running = true; // Fetch clipboard history
+                }
             }
         }
 
@@ -118,15 +180,15 @@ Scope {
                             spacing: 8
 
                             Text {
-                                text: "☰"
-                                font.pixelSize: 26
+                                text: root.mode === "apps" ? "☰" : "📋"
+                                font.pixelSize: 22
                                 color: Theme.get.whiteColor
                             }
 
                             TextField {
                                 id: searchInput
                                 Layout.fillWidth: true
-                                placeholderText: "Search applications..."
+                                placeholderText: root.mode === "apps" ? "Search applications..." : "Search clipboard history..."
                                 placeholderTextColor: Theme.get.textColor
                                 color: Theme.get.textColor
                                 background: null
@@ -134,35 +196,46 @@ Scope {
                                 font.pixelSize: 15
                                 selectByMouse: true
 
+                                // Reset selection back to top cleanly when search term changes
+                                onTextChanged: {
+                                    appListView.currentIndex = 0;
+                                }
+
                                 // Route keyboard navigation keys downwards directly into the list view navigation handler
                                 Keys.onPressed: event => {
                                     if (event.key === Qt.Key_Down) {
                                         if (appListView.currentIndex < appListView.count - 1) {
                                             appListView.currentIndex++;
+                                        } else {
+                                            appListView.currentIndex = 0; // Wrap around to top
                                         }
                                         event.accepted = true;
                                     } else if (event.key === Qt.Key_Up) {
                                         if (appListView.currentIndex > 0) {
                                             appListView.currentIndex--;
-                                        }
-                                        event.accepted = true;
-                                    } else if (event.key === Qt.Key_Return) {
-                                        var app = root.filteredApps[appListView.currentIndex];
-                                        console.log(app);
-                                        if (app) {
-                                            app.execute();
-                                            root.launcherOpen = false;
-                                            searchInput.text = "";
+                                        } else {
+                                            appListView.currentIndex = appListView.count - 1; // Wrap around to bottom
                                         }
                                         event.accepted = true;
                                     } else if (event.key === Qt.Key_Tab) {
-                                        appListView.currentIndex++;
+                                        if (appListView.currentIndex < appListView.count - 1) {
+                                            appListView.currentIndex++;
+                                        } else {
+                                            appListView.currentIndex = 0; // Wrap around to top
+                                        }
                                         event.accepted = true;
                                     } else if (event.key === Qt.Key_Backtab) {
-                                        appListView.currentIndex--;
+                                        if (appListView.currentIndex > 0) {
+                                            appListView.currentIndex--;
+                                        } else {
+                                            appListView.currentIndex = appListView.count - 1; // Wrap around to bottom
+                                        }
+                                        event.accepted = true;
+                                    } else if (event.key === Qt.Key_Return) {
+                                        executeSelection(appListView.currentIndex);
                                         event.accepted = true;
                                     } else if (event.key === Qt.Key_Escape) {
-                                        launcherOpen = false;
+                                        root.launcherOpen = false;
                                         event.accepted = true;
                                     }
                                 }
@@ -178,14 +251,14 @@ Scope {
                         opacity: 0.3
                     }
 
-                    // Applications View List
+                    // Applications / Clipboard View List
                     ListView {
                         id: appListView
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         clip: true
                         spacing: 4
-                        model: filteredApps
+                        model: root.filteredItems
 
                         delegate: Rectangle {
                             id: delegateItem
@@ -193,7 +266,7 @@ Scope {
                             height: 48
                             radius: 6
                             // Highlighting currently selected element
-                            color: ListView.isCurrentItem ? Theme.get.altBgColor : "transparent"
+                            color: ListView.isCurrentItem ? Theme.get.buttonHover : "transparent"
                             border.color: ListView.isCurrentItem ? Theme.get.infoColor : "transparent"
                             border.width: 1
 
@@ -203,23 +276,25 @@ Scope {
                                 anchors.rightMargin: 12
                                 spacing: 12
 
-                                // Application Icon fallback or placeholder
+                                // Application Icon (Only visible in Apps mode)
                                 Image {
+                                    id: appIconImage
                                     Layout.preferredWidth: 26
                                     Layout.preferredHeight: 26
-                                    source: modelData.icon ? "image://icon/" + modelData.icon : ""
-                                    visible: source.toString() !== ""
+                                    source: (root.mode === "apps" && modelData && modelData.icon) ? "image://icon/" + modelData.icon : ""
+                                    visible: root.mode === "apps" && source.toString() !== ""
                                 }
 
+                                // Clipboard Entry Placeholder Icon (Only visible in Clipboard mode)
                                 Text {
                                     Layout.fillWidth: true
-                                    text: modelData.name
+                                    text: root.mode === "apps" ? (modelData ? modelData.name : "") : modelData
                                     color: Theme.get.textColor
                                     font.family: "Inter, sans-serif"
                                     font.pixelSize: 14
                                     font.weight: ListView.isCurrentItem ? Font.DemiBold : Font.Normal
-                                    font.pointSize: 12
                                     verticalAlignment: Text.AlignVCenter
+                                    elide: Text.ElideRight // Clean truncation for long clipboard entries
                                 }
                             }
 
@@ -228,12 +303,7 @@ Scope {
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 onEntered: appListView.currentIndex = index
-                                // Executes the application when clicked
-                                onClicked: {
-                                    modelData.execute();
-                                    launcherOpen = false;
-                                    searchField.text = "";
-                                }
+                                onClicked: executeSelection(index)
                             }
                         }
                     }

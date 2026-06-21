@@ -7,7 +7,7 @@ import QtQuick
 import qs.Modules.Bar
 import qs.Modules.VolumeOsd
 import qs.Modules.Notification
-import qs.Modules.ApplicationLauncher
+import qs.Modules.Launcher
 import qs.Modules.Wlogout as Wlogout
 import qs.Modules.LockScreen as LockScreen
 
@@ -29,7 +29,7 @@ ShellRoot {
 
     Loader {
         active: true
-        sourceComponent: ApplicationLauncher {}
+        sourceComponent: Launcher {}
     }
 
     // --- Logout/Shutdown/Restart menu (Wlogout replacement) & Screen Lock
