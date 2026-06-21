@@ -79,7 +79,8 @@ binds {
     MOD+R                               hotkey-overlay-title="Open App Launcher: Quickshell" { spawn-sh "qs ipc call launcher toggle"; }
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
     MOD+SHIFT+W                         hotkey-overlay-title="Set Wallpaper" { spawn-sh "wallpaper"; }
-    MOD+V                               hotkey-overlay-title="ClipBoard History" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
+    // MOD+V                               hotkey-overlay-title="ClipBoard History" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
+    MOD+V                               hotkey-overlay-title="ClipBoard History" { spawn-sh "qs ipc call launcher toggleClipboard"; }
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen" { spawn-sh "qs ipc call lockscreen lock"; }
     MOD+CTRL+DELETE                     hotkey-overlay-title="Power Off Menu" { spawn-sh "qs ipc call wlogout toggle"; }
 
