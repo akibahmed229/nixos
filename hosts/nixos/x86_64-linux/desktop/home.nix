@@ -18,7 +18,6 @@ in {
       quickshell.enable = true;
       spotify.enable = true;
       vencord.enable = true;
-      wofi.enable = true;
       swappy.enable = true;
       alacritty.enable = true;
       kitty.enable = true;
