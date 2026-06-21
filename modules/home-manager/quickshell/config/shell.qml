@@ -27,6 +27,7 @@ ShellRoot {
         sourceComponent: VolumeOsd {}
     }
 
+    // --- Luancher for application and clipboard
     Loader {
         active: true
         sourceComponent: Launcher {}

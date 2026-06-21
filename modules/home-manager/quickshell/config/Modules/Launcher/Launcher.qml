@@ -20,7 +20,7 @@ Scope {
 
         if (root.mode === "apps") {
             const allApps = Array.from(DesktopEntries.applications.values);
-            const visibleApps = allApps.filter(app => !app.noDisplay);
+            const visibleApps = allApps.filter(app => !app.noDisplay).sort((a, b) => (a.name || "").localeCompare(b.name || ""));
             if (query === "") {
                 return visibleApps;
             }
