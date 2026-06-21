@@ -75,7 +75,8 @@ binds {
     // ─── Applications ───
     MOD+RETURN                          hotkey-overlay-title="Open Terminal: kitty" { spawn-sh "kitty"; }
     MOD+PRINT                           hotkey-overlay-title="Take Screenshots: custom tool" { spawn-sh "screenshot"; }
-    MOD+R                               hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
+    // MOD+R                               hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
+    MOD+R                               hotkey-overlay-title="Open App Launcher: Quickshell" { spawn-sh "qs ipc call launcher toggle"; }
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
     MOD+SHIFT+W                         hotkey-overlay-title="Set Wallpaper" { spawn-sh "wallpaper"; }
     MOD+V                               hotkey-overlay-title="ClipBoard History" { spawn-sh "cliphist list | wofi --dmenu -p 'Copy Text' | cliphist decode | wl-copy"; }
