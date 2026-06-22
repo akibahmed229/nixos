@@ -287,9 +287,9 @@ in {
     libtool # Library support tool.
     meson # Build system.
     gettext # GNU internationalization and localization library.
-    python313 # Python programming language.
-    python313Packages.uv # python uv pkgs manager.
-    nodejs_24 # JavaScript runtime.
+    python314 # Python programming language.
+    python314Packages.uv # python uv pkgs manager.
+    nodejs_26 # JavaScript runtime.
     rustc # Rust programming language and tools.
     cargo # Rust package manager.
     # Development environment tools.
