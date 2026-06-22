@@ -312,7 +312,6 @@ in {
     lazygit # Git UI.
     gh # GitHub CLI.
     # self.packages.${pkgs.stdenv.hostPlatform.system}.ciscoPacketTracer
-    odoo19
 
     # 2. Media & Design
     gimp # Image editor.
