@@ -108,6 +108,7 @@ in {
     "/var/lib/sops-nix" = {
       neededForBoot = true;
       device = "/dev/mapper/root_vg-root";
+      fsType = "btrfs";
     };
   };
 
