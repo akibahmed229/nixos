@@ -29,7 +29,7 @@
   # Install some fun packages into the VM.
   environment.systemPackages = with pkgs; [
     firefox
-    neofetch
+    fastfetch
   ];
 
   # Basic system settings.

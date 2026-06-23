@@ -31,7 +31,6 @@
   environment.systemPackages = with pkgs; [
     htop
     gnumake
-    neofetch
     pywal
     xwallpaper
     gcc
