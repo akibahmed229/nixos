@@ -73,33 +73,30 @@ pkgs.writeShellApplication {
       msg "Initializing minimal flake at $flake_dir"
       sudo mkdir -p "$flake_dir"
 
-      # 1. Format disks first
-      msg "Formatting disks..."
-      sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device" "$swap_size"
-
-      # 2. Initialize flake template
-      msg "Initializing flake template..."
-      sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes" "$flake_dir"
-
-      # 3. NOW initialize Git inside the created directory
+      # 1. Initialize Git FIRST so you can add files as you go
       pushd "$flake_dir" >/dev/null
       sudo git init
-      sudo git config --local user.name "NixOS Installer"
-      sudo git config --local user.email "installer@nixos.org"
 
-      # 4. Commit the initial template
+      msg "Formatting disks..."
+      # Use full path to the partition script or ensure it's available
+      sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device" "$swap_size"
+
+      msg "Initializing flake template..."
+      sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
+
+      # 2. Add files to Git immediately after they are created
       sudo git add .
-      sudo git commit -m 'Initial template setup'
+      sudo git -c user.name='NixOS Installer' -c user.email='<' commit -m 'Initial setup'
 
-      # 5. Update data and generate hardware config
       update_flake_data
       generate_hardware_config
 
-      # 6. Commit remaining changes
+      # 3. Commit the changes made by the helper functions
       sudo git add .
-      sudo git commit -m 'Configure hardware and user'
+      sudo git commit -m 'Configure hardware and users'
 
       msg "Running nixos-install..."
+      # Since we are already in /mnt/etc/flake, we can use --flake .
       sudo nixos-install --no-root-passwd --flake .#"$hostname"
 
       popd >/dev/null
