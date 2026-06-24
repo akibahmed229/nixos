@@ -33,9 +33,9 @@
       "acpi_osi=Linux" # Fix backlight control
       "acpi_sleep=nonvs" # specific kernel parameters to enable proper power
       "rd.udev.log_level=3" # Increase kernel log verbosity
-      "systemd.show_status=false"
-      "splash" # Show a splash screen during boot
-      "logo.nologo" # Disable the Linux logo at boot
+      # "systemd.show_status=false"
+      # "splash" # Show a splash screen during boot
+      # "logo.nologo" # Disable the Linux logo at boot
       "timer_stats=1" # Enable timer stats
     ];
 
