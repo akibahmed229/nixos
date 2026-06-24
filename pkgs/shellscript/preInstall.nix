@@ -71,34 +71,34 @@ pkgs.writeShellApplication {
     # --- install flake and NixOS ------------------------------------------------
     function install_flake(){
       msg "Initializing minimal flake at $flake_dir"
-      sudo mkdir -p "$flake_dir"
-
-      # 1. Initialize Git FIRST so you can add files as you go
+      mkdir -p "$flake_dir"
       pushd "$flake_dir" >/dev/null
-      sudo git init
 
-      msg "Formatting disks..."
-      # Use full path to the partition script or ensure it's available
+
+      msg "Formatting disks with declarative NixOS disk partitioning script..."
+      # Using sudo here because nixos-partition-luks needs root privileges to modify disks
       sudo nix --experimental-features "nix-command flakes" run github:akibahmed229/nixos#partition -- "$device" "$swap_size"
 
-      msg "Initializing flake template..."
+      # Using sudo for nix flake init because the parent dir /mnt/etc is owned by root
       sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes"
 
-      # 2. Add files to Git immediately after they are created
-      sudo git add .
-      sudo git -c user.name='NixOS Installer' -c user.email='<' commit -m 'Initial setup'
-
+      # The flake files are now owned by root, so subsequent commands also need sudo
       update_flake_data
       generate_hardware_config
 
-      # 3. Commit the changes made by the helper functions
+      # --- FIX STARTS HERE ---
+      # Turn the flake directory into a clean Git repository so Nix can hash it reliably.
+      msg "Committing flake to a temporary git repository"
+      sudo git init
       sudo git add .
-      sudo git commit -m 'Configure hardware and users'
+      # This git user config is temporary and local to this command
+      sudo git -c user.name='NixOS Installer' -c user.email='<' commit -m 'Initial commit'
+      # --- FIX ENDS HERE ---
 
       msg "Running nixos-install..."
-      # Since we are already in /mnt/etc/flake, we can use --flake .
-      sudo nixos-install --no-root-passwd --flake .#"$hostname"
-
+      # The flake path needs to be owned by the user running nixos-install (root).
+      # The commands above ensure this.
+      sudo nixos-install --no-root-passwd --flake "$flake_dir#$hostname"
       popd >/dev/null
     }
 
