@@ -39,6 +39,7 @@ Modules to help you handle persistent state on systems with ephemeral root stora
     "/var/lib/sops-nix" = {
       neededForBoot = true;
       device = "/dev/mapper/root_vg-root";
+      fsType = "btrfs";
     };
   };
 
