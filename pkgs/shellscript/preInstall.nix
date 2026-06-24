@@ -79,7 +79,7 @@ pkgs.writeShellApplication {
 
       # 2. Initialize flake template
       msg "Initializing flake template..."
-      sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes" --flake "$flake_dir"
+      sudo nix flake init -t github:akibahmed229/nixos#minimal --experimental-features "nix-command flakes" "$flake_dir"
 
       # 3. NOW initialize Git inside the created directory
       pushd "$flake_dir" >/dev/null
