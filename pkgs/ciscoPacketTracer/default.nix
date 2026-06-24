@@ -11,6 +11,7 @@
   glib,
   makeDesktopItem,
   makeWrapper,
+  qt6,
   qt5,
 }:
 stdenvNoCC.mkDerivation (args: {
@@ -37,7 +38,7 @@ stdenvNoCC.mkDerivation (args: {
     copyDesktopItems
     dpkg
     makeWrapper
-    qt5.wrapQtAppsHook
+    qt6.wrapQtAppsHook
   ];
 
   buildInputs = [
@@ -46,13 +47,13 @@ stdenvNoCC.mkDerivation (args: {
     expat
     fontconfig
     glib
-    qt5.qtbase
-    qt5.qtmultimedia
-    qt5.qtnetworkauth
+    qt6.qtbase
+    qt6.qtmultimedia
+    qt6.qtnetworkauth
     qt5.qtscript
-    qt5.qtspeech
-    qt5.qtwebengine
-    qt5.qtwebsockets
+    qt6.qtspeech
+    qt6.qtwebengine
+    qt6.qtwebsockets
   ];
 
   installPhase = ''
