@@ -8,7 +8,15 @@ vim.lsp.config['yamlls'] = {
     capabilities = caps,
     settings = {
         yaml = {
-            schemas = {},      -- add schema mappings if needed
+            -- This enables automatic schema detection
+            schemaStore = {
+                enable = true,
+                url = "https://www.schemastore.org/api/json/catalog.json",
+            },
+            schemas = {
+                -- Manually link GHA if it doesn't auto-detect
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*.{yml,yaml}",
+            },
             validate = true,   -- enable validation
             completion = true, -- enable completion suggestions
         },

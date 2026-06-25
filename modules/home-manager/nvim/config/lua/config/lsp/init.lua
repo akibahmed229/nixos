@@ -6,7 +6,7 @@ require("config.lsp.core")
 local servers = {
     "lua", "css", "html", "php", "ts", "tailwind",
     "nix", "c", "python", "dart",
-    "rust", "bash", "yaml", "terraform", "qml"
+    "rust", "bash", "yaml", "terraform", "qml", "docker"
 }
 
 for _, s in ipairs(servers) do

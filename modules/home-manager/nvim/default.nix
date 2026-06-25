@@ -35,6 +35,8 @@ in {
         # Nix
         nixd
         alejandra
+        docker-compose-language-service
+        dockerfile-language-server
 
         # Python
         pyright
