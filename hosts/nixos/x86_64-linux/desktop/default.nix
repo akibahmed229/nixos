@@ -298,7 +298,7 @@ in {
     # yarn # JavaScript package manager.
     jq # JSON processor.
     # Android development tools.
-    android-studio
+    # android-studio
     android-tools
     jdk25 # Java Development Kit
     # jetbrains.pycharm # Python IDE.
