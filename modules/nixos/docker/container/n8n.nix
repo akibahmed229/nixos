@@ -90,6 +90,9 @@ in {
           # Map the host port to the container's internal port
           ports = ["${toString cfg.hostPort}:5678"];
 
+          # Force the container to use your host's UID/GID
+          user = "1000:1000";
+
           # Use a Docker named volume for the application data
           volumes = [
             "${cfg.n8nDataVolumeName}:/home/node/.n8n"
@@ -120,13 +123,23 @@ in {
             "--link=postgresqln8n:postgresqln8n"
           ];
 
-          workdir = "/var/lib/n8n_data";
           autoStart = true;
 
           # Crucial: ensure the database container starts and is running before n8n tries to connect
           dependsOn = ["postgresqln8n"];
         };
       };
+    };
+
+    # 1. Make systemd actually retry the n8n service on failure
+    systemd.services."docker-n8n" = {
+      serviceConfig = {
+        Restart = lib.mkForce "on-failure";
+        RestartSec = "5s";
+      };
+
+      # don't let systemd give up after a handful of quick failures during boot
+      startLimitIntervalSec = 0;
     };
   };
 }
