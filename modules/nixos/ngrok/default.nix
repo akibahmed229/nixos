@@ -24,7 +24,10 @@ with lib; let
 
         serviceConfig = {
           # ExecStart dynamically constructs the ngrok command
-          ExecStart = "${pkgs.ngrok}/bin/ngrok http --url=$(cat ${tunnel.domainFile}) ${toString tunnel.targetPort}";
+          ExecStart = pkgs.writeShellScript "start-ngrok-${tunnel.serviceName}" ''
+            DOMAIN=$(cat ${tunnel.domainFile})
+            ${pkgs.ngrok}/bin/ngrok http --url="$DOMAIN" ${toString tunnel.targetPort}
+          '';
           Restart = "on-failure";
           PermissionsStartOnly = true;
           User = tunnel.runAsUser;

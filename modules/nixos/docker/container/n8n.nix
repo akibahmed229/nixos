@@ -112,8 +112,8 @@ in {
             N8N_POSTGRESDB_SYNCHRONIZATION_ATTEMPTS = "10";
 
             N8N_COMMUNITY_PACKAGES_AL = "true";
-            N8N_EDITOR_BASE_URL = cfg.domain;
-            WEBHOOK_URL = cfg.domain;
+            N8N_EDITOR_BASE_URL = "https://${cfg.domain}";
+            WEBHOOK_URL = "https://${cfg.domain}";
             N8N_DEFAULT_BINARY_DATA_MODE = "filesystem";
             N8N_SECURE_COOKIE = "false";
           };
