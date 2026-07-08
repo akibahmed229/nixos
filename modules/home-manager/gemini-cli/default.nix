@@ -18,7 +18,7 @@ in {
 
     editor = mkOption {
       type = types.str;
-      default = "nvim";
+      default = "neovim";
       description = "Preferred editor for multi-line input or editing.";
     };
 
