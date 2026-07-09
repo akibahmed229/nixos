@@ -356,5 +356,5 @@ in {
     openssh.settings.PasswordAuthentication = false;
   };
 
-  networking.firewall.allowedTCPPorts = [3500]; # impermanent
+  networking.firewall.allowedTCPPorts = [3000]; # impermanent
 }

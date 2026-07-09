@@ -73,6 +73,15 @@ in {
     udiskie
   ];
 
+  home.pointerCursor = lib.mkDefault {
+    enable = true;
+    gtk.enable = true;
+    x11.enable = true;
+    size = 24;
+    name = "Bibata-Modern-Classic";
+    package = pkgs.bibata-cursors;
+  };
+
   services = {
     # For auto mounting USB devices
     udiskie = {
