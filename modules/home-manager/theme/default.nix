@@ -26,6 +26,7 @@ in {
 
     home = lib.mkIf cfg.gtk.enable {
       pointerCursor = {
+        enable = true;
         gtk.enable = true;
         x11.enable = true;
         size = 24;
