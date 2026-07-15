@@ -170,5 +170,7 @@ in {
         name = cfg.iconTheme.name;
       };
     };
+
+    home.pointerCursor.enable = true;
   };
 }
