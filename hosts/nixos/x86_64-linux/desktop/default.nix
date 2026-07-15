@@ -143,7 +143,8 @@ in {
     };
 
     # ------------------------- Some Utils ------------------------------------
-    cde.enable = true;
+    cde.enable = true; # Display Manager (eg,.. plasma,gdm,lighdm) is bloat so i create minimal login screen
+    "1.1.1.1".enable = true;
     kvm = {
       enable = true;
       bridge.enable = false;
