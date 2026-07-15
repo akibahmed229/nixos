@@ -29,6 +29,15 @@ final: prev: {
   #   };
   # });
 
+  flannel = prev.flannel.overrideAttrs (oldAttrs: {
+    src = prev.fetchFromGitHub {
+      rev = "v0.28.5";
+      owner = "flannel-io";
+      repo = "flannel";
+      sha256 = "sha256-sqpsUAKBza96AMQMUCG94KOht5ExnHRLR7eGna3m3Xg=";
+    };
+  });
+
   # ===========================================================================
   # SECTION 2: SCOPED OVERRIDES (Python, Lua, etc.)
   # Languages with their own package managers inside Nix need 'overrideScope'.
