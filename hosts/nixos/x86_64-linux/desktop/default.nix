@@ -13,6 +13,7 @@
   theme,
   lib,
   inputs,
+  config,
   ...
 }: let
   # My custom lib helper functions
@@ -38,6 +39,19 @@ in {
       system = {
         inherit (system) name path;
         inherit desktopEnvironment state-version;
+      };
+    };
+
+    # ------------------- Atomic Secret Provisioning  -------------------------
+    sops = lib.mkIf (user == "akib") {
+      enable = true;
+      defaultSopsFile = secrets "/secrets/secrets.yaml";
+      secrets = {
+        "akib/password/root_secret".neededForUsers = true;
+        "akib/password/my_secret".neededForUsers = true;
+        "akib/wireguard/PrivateKey".neededForUsers = true;
+        "akib/cloudflared/token".neededForUsers = true;
+        "generic/password/my_secret".neededForUsers = true;
       };
     };
 
@@ -108,6 +122,26 @@ in {
       };
     };
 
+    wireguard = {
+      enable = false;
+      mode = "client"; # Set mode to client
+
+      interfaceName = "wg0";
+      address = ["10.2.0.2/32"];
+      privateKeyFile = config.sops.secrets."akib/wireguard/PrivateKey".path; # Use secret path
+
+      client = {
+        dns = ["10.2.0.1"]; # VPN's internal DNS
+
+        # Define the remote VPN endpoint peer
+        peer = {
+          publicKey = "rgPoLtUhJ946CVYPkp8r3VL8KHUYSmTIrPo7Wsw9sn4=";
+          allowedIPs = ["0.0.0.0/0" "::/0"]; # Route all traffic through the VPN
+          endpoint = "151.243.141.165:51820";
+        };
+      };
+    };
+
     # ------------------------- Some Utils ------------------------------------
     cde.enable = true;
     kvm = {
@@ -174,19 +208,6 @@ in {
 
       # Tell Stylix to leave kmscon alone so it stops throwing the assertion error
       targets.kmscon.enable = false;
-    };
-
-    # ------------------- Atomic Secret Provisioning  -------------------------
-    sops = lib.mkIf (user == "akib") {
-      enable = true;
-      defaultSopsFile = secrets "/secrets/secrets.yaml";
-      secrets = {
-        "akib/password/root_secret".neededForUsers = true;
-        "akib/password/my_secret".neededForUsers = true;
-        "akib/wireguard/PrivateKey".neededForUsers = true;
-        "akib/cloudflared/token".neededForUsers = true;
-        "generic/password/my_secret".neededForUsers = true;
-      };
     };
 
     # ---------------------- Ephemeral Storage  -------------------------------
