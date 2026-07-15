@@ -331,7 +331,7 @@ in {
     # krita # Digital painting software.
     # glaxnimate # Animation editor.
     # inkscape # Vector graphics editor.
-    handbrake # Video transcoder.
+    # handbrake # Video transcoder.
     audacity # Audio editor.
     # darktable # Photography workflow application.
     ffmpeg-full # Multimedia framework for video/audio processing.
