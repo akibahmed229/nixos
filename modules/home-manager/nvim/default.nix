@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.nvim;
 in {
   options.hm.nvim = {
-    enable = mkEnableOption "Neovim configuration with live symlinking";
+    en = mkEnableOption "Neovim configuration with live symlinking";
 
     srcPath = mkOption {
       type = types.str;
@@ -23,7 +23,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.packages = with pkgs;
       [
         ## Core

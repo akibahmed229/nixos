@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.waybar;
 in {
   options.hm.waybar = {
-    enable = mkEnableOption "Waybar status bar configuration";
+    en = mkEnableOption "Waybar status bar configuration";
 
     configPath = mkOption {
       type = types.path;
@@ -23,7 +23,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.waybar = {
       enable = true;
       package = pkgs.waybar;

@@ -43,6 +43,6 @@
   ];
 
   # Enable system + home-level configurations
-  enableSystemConf = true;
-  enableHomeConf = true;
+  enSystemConf = true;
+  enHomeConf = true;
 }

@@ -8,16 +8,16 @@
   hm = lib.mkMerge [
     {
       firefox = {
-        enable = true;
+        en = true;
         user = user;
       };
-      nvim.enable = true;
-      thunar.enable = true;
-      quickshell.enable = true;
-      kitty.enable = true;
-      swappy.enable = true;
-      wofi.enable = true;
-      spotify.enable = true;
+      nvim.en = true;
+      thunar.en = true;
+      quickshell.en = true;
+      kitty.en = true;
+      swappy.en = true;
+      wofi.en = true;
+      spotify.en = true;
     }
   ];
 

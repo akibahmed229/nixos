@@ -31,7 +31,7 @@ in {
 
   # --- 1. Define Options ---
   options.hm.stylix = {
-    enable = mkEnableOption "Stylix theming for Home Manager";
+    en = mkEnableOption "Stylix theming for Home Manager";
 
     themeScheme = mkOption {
       type = types.path;
@@ -85,7 +85,7 @@ in {
         bat.enable = true;
         btop.enable = true;
         emacs.enable = true;
-        spicetify.enable = false; # Often conflicts with custom themes
+        spicetify.enable = false; # Oftenable conflicts with custom themes
         firefox = {
           enable = true;
           profileNames = [config.home.username]; # Auto-detect user
@@ -133,7 +133,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     stylix = {
       enable = true;
       base16Scheme = cfg.themeScheme;

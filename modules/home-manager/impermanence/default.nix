@@ -9,7 +9,7 @@ with lib; let
   cfg = config.hm.impermanence;
 in {
   options.hm.impermanence = {
-    enable = mkEnableOption "Home Manager persistence configuration";
+    en = mkEnableOption "Home Manager persistence configuration";
 
     persistentStoragePath = mkOption {
       type = types.str;
@@ -24,9 +24,9 @@ in {
     };
   };
 
-  # imports = [inputs.impermanence.homeManagerModules.impermanence]; need to enable if don't use in nixos
+  # imports = [inputs.impermanence.homeManagerModules.impermanence]; need to en if don't use in nixos
 
-  # config = mkIf cfg.enable {
+  # config = mkIf cfg.en {
   #   home.persistence."${cfg.persistentStoragePath}${config.home.homeDirectory}" = {
   #     allowOther = cfg.allowOther;
 

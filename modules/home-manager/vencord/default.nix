@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.vencord;
 in {
   options.hm.vencord = {
-    enable = mkEnableOption "Vesktop/Vencord Discord configuration";
+    en = mkEnableOption "Vesktop/Vencord Discord configuration";
 
     extraSettings = mkOption {
       type = types.attrs;
@@ -19,11 +19,11 @@ in {
     extraPlugins = mkOption {
       type = types.attrs;
       default = {};
-      description = "Extra Vencord plugins to enable or configure.";
+      description = "Extra Vencord plugins to en or configure.";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Ensure vesktop is available in the environment
     home.packages = [pkgs.vesktop];
 
@@ -62,14 +62,14 @@ in {
           recursiveUpdate {
             # Core Functional Plugins
             MessageLogger = {
-              enabled = true;
+              enableabled = true;
               ignoreSelf = true;
             };
             FakeNitro = {enabled = true;};
             SilentMessageToggle = {enabled = true;};
             SilentTyping = {enabled = true;};
 
-            # UI Enhancements
+            # UI enablehancements
             MemberCount = {
               enabled = true;
               memberList = true;

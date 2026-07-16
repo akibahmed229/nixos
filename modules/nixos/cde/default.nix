@@ -38,10 +38,10 @@ with lib; let
   '';
 in {
   options.nm.cde = {
-    enable = mkEnableOption "Enable Minimal Display Manager that will Let you Pick DE";
+    en = mkEnableOption "Enable Minimal Display Manager that will Let you Pick DE";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.en {
     # Ensure dbus-run-session is available for the handover
     environment.systemPackages = [pkgs.dbus pkgs.niri];
 

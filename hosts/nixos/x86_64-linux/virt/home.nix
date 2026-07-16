@@ -10,21 +10,21 @@
   hm = lib.mkMerge [
     {
       firefox = {
-        enable = true;
+        en = true;
         user = user;
       };
-      nvim.enable = true;
-      thunar.enable = true;
+      nvim.en = true;
+      thunar.en = true;
     }
 
     (lib.mkIf (user == "akib") {
-      git.enable = true;
-      ssh.enable = true;
+      git.en = true;
+      ssh.en = true;
       sops = let
         secretsInput = toString inputs.secrets;
         homeDirectory = config.home.homeDirectory;
       in {
-        enable = true;
+        en = true;
         defaultSopsFile = "${secretsInput}/secrets/home-manager.yaml";
         secrets = {
           "github/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_github";

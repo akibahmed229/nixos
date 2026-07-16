@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.wofi;
 in {
   options.hm.wofi = {
-    enable = mkEnableOption "Wofi custom configuration";
+    en = mkEnableOption "Wofi custom configuration";
 
     terminal = mkOption {
       type = types.str;
@@ -23,7 +23,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.wofi = {
       enable = true;
       package = pkgs.wofi;

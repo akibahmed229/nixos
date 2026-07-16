@@ -25,26 +25,26 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.gaming = {
-    enable = mkEnableOption "Enable core gaming environment (Steam, Gamescope, Wine, Gamemode)";
+    en = mkEnableOption "Enable core gaming environment (Steam, Gamescope, Wine, Gamemode)";
 
-    enableMangohud = mkOption {
+    enMangohud = mkOption {
       type = types.bool;
       default = true;
       description = "Enable Mangohud (overlay for FPS, temperature, etc.).";
     };
 
-    enableDedicatedServerFirewall = mkOption {
+    enDedicatedServerFirewall = mkOption {
       type = types.bool;
       default = true;
       description = "Open firewall ports for Steam Dedicated Server (Source Engine).";
     };
 
     # Note: Xone controller support is commented out in the original and omitted here,
-    # but can be added back if it becomes stable: hardware.xone.enable
+    # but can be added back if it becomes stable: hardware.xone.en
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 System Optimization
     programs.gamemode.enable = true;
 
@@ -58,7 +58,7 @@ in {
     programs.steam = {
       enable = true;
       package = pkgs.steam;
-      dedicatedServer.openFirewall = cfg.enableDedicatedServerFirewall;
+      dedicatedServer.openFirewall = cfg.enDedicatedServerFirewall;
       gamescopeSession.enable = true;
     };
 
@@ -81,7 +81,7 @@ in {
           extraLibraries = _: lutrisExtraLibs;
         })
       ]
-      # Include Mangohud if enabled via option
-      ++ (lib.optionals cfg.enableMangohud [pkgs.mangohud]);
+      # Include Mangohud if end via option
+      ++ (lib.optionals cfg.enMangohud [pkgs.mangohud]);
   };
 }

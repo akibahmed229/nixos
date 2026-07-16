@@ -9,7 +9,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.cron = {
-    enable = mkEnableOption "Enable and configure the system cron service.";
+    en = mkEnableOption "Enable and configure the system cron service.";
 
     systemCronJobs = mkOption {
       type = types.listOf types.str;
@@ -48,7 +48,7 @@ in {
   # Example usage
   ```nix
     nm.cron = {
-      enable = true;
+      en = true;
 
       # 1. Using the classic raw string format (retains your original job)
       systemCronJobs = [
@@ -74,7 +74,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     services = {
       # Enable the main cron service
       cron.enable = true;

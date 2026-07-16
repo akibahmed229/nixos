@@ -9,8 +9,8 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.ollama = {
-    enable = mkEnableOption "Enable the Ollama large language model service via Docker container";
-    enablePort = mkEnableOption "Enable the Ollama Service Port to Access in Local Network";
+    en = mkEnableOption "Enable the Ollama large language model service via Docker container";
+    enPort = mkEnableOption "Enable the Ollama Service Port to Access in Local Network";
 
     image = mkOption {
       type = types.str;
@@ -31,7 +31,7 @@ in {
     };
 
     # Open WebUI Options
-    enableWebUI = mkEnableOption "Enable the Open WebUI frontend for Ollama";
+    enWebUI = mkEnableOption "Enable the Open WebUI frontend for Ollama";
 
     webUIImage = mkOption {
       type = types.str;
@@ -53,7 +53,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Container Definitions
     virtualisation.oci-containers = {
       backend = "docker";
@@ -72,7 +72,7 @@ in {
             autoStart = true;
           };
         }
-        // (optionalAttrs cfg.enableWebUI {
+        // (optionalAttrs cfg.enWebUI {
           # Open WebUI Frontend (Conditionally Included)
           ollama-webui = {
             image = cfg.webUIImage;
@@ -97,10 +97,10 @@ in {
 
     # 2.2 Open the required ports in the host firewall
     networking.firewall.allowedTCPPorts =
-      optional cfg.enablePort
+      optional cfg.enPort
       ([
           cfg.hostPort # Ollama API
         ]
-        ++ (optional cfg.enableWebUI cfg.webUIHostPort));
+        ++ (optional cfg.enWebUI cfg.webUIHostPort));
   };
 }

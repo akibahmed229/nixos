@@ -11,7 +11,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.openrgb = {
-    enable = mkEnableOption "Enable OpenRGB hardware lighting control and server.";
+    en = mkEnableOption "Enable OpenRGB hardware lighting control and server.";
 
     motherboard = mkOption {
       type = types.str;
@@ -39,7 +39,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Essential kernel modules for hardware communication
     boot.kernelModules = ["i2c-dev"];
     hardware.i2c.enable = true;

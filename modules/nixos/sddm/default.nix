@@ -9,11 +9,11 @@
 in {
   options = {
     nm.sddm = {
-      enable = lib.mkEnableOption "Enable SDDM";
+      en = lib.mkEnableOption "Enable SDDM";
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.en {
     environment.systemPackages = with pkgs; [
       qt5.qtgraphicaleffects
       qt6Packages.qtgraphs

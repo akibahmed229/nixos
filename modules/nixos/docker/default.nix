@@ -13,9 +13,9 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker = {
-    enable = mkEnableOption "Enable advanced Docker configuration with custom network settings";
+    en = mkEnableOption "Enable advanced Docker configuration with custom network settings";
 
-    iptables.enable = lib.mkOption {
+    iptables.en = lib.mkOption {
       type = lib.types.bool;
       default = true; # Set the default to true
       description = "Docker's automatic management of iptables rules";
@@ -23,7 +23,7 @@ in {
 
     # Options for the custom IPvlan L3 network setup
     ipvlan = {
-      enable = mkEnableOption "Enable IPvlan L3 network setup";
+      en = mkEnableOption "Enable IPvlan L3 network setup";
 
       networkName = mkOption {
         type = types.str;
@@ -52,7 +52,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1. Basic Docker Service Configuration
     virtualisation.docker = {
       enable = true;
@@ -73,7 +73,7 @@ in {
         "features" = {"containerd-snapshotter" = true;};
 
         # Disable Docker's automatic management of iptables rules
-        "iptables" = cfg.iptables.enable;
+        "iptables" = cfg.iptables.en;
       };
     };
 
@@ -95,7 +95,7 @@ in {
 
     # A. Systemd Service to Create the Docker Network
     # This service ensures the custom IPvlan network is created declaratively on boot.
-    systemd.services.docker-network-ipvlan-l3 = mkIf cfg.ipvlan.enable {
+    systemd.services.docker-network-ipvlan-l3 = mkIf cfg.ipvlan.en {
       description = "Create Docker IPvlan L3 network: ${cfg.ipvlan.networkName}";
       wantedBy = ["multi-user.target"];
       after = ["docker.service"];
@@ -125,7 +125,7 @@ in {
 
     # B. Host Configuration for Direct Container Routing
     # Creates the virtual L3 interface on the host for clean routing.
-    networking.localCommands = mkIf cfg.ipvlan.enable ''
+    networking.localCommands = mkIf cfg.ipvlan.en ''
       IFACE="ipvl-" # ipvl-enp4s0
       PARENT="${shellQuote cfg.ipvlan.parentInterface}"
       HOST_IP="${shellQuote cfg.ipvlan.hostIP}"
@@ -143,7 +143,7 @@ in {
     # C. Firewall Rules for NAT and Forwarding
     # These rules allow the Docker containers to reach the internet (MASQUERADE)
     # and allow traffic forwarding (FORWARD) between the host and container network.
-    networking.firewall.extraCommands = mkIf cfg.ipvlan.enable ''
+    networking.firewall.extraCommands = mkIf cfg.ipvlan.en ''
       # Variables for clarity in the script
       DOCKER_BASE="172.27.0.0/16"
       LAN_IFACE="${shellQuote cfg.ipvlan.parentInterface}"

@@ -10,7 +10,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.wireshark = {
-    enable = mkEnableOption "Enable and configure the Wireshark network protocol analyzer.";
+    en = mkEnableOption "Enable and configure the Wireshark network protocol analyzer.";
 
     package = mkOption {
       type = types.package;
@@ -20,7 +20,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     /*
     Wireshark is a free, open-source network protocol analyzer that captures and displays network traffic in real-time.
     By enabling this, the system installs the program and configures necessary user groups for packet capture.

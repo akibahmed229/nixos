@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.flake-sync;
 in {
   options.hm.flake-sync = {
-    enable = mkEnableOption "automated cloning and updating of the NixOS flake repository";
+    en = mkEnableOption "automated cloning and updating of the NixOS flake repository";
 
     path = mkOption {
       type = types.str;
@@ -41,7 +41,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.activation.cloneOrUpdateFlakeConfig = hm.dag.entryAfter ["writeBoundary"] ''
       function cloneOrUpdateFlakeConfig {
         local config_dir="${cfg.path}"

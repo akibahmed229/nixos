@@ -33,8 +33,8 @@ in {
       # see modules/custom/nixos/user
       name = user;
       usersPath = ./users/.;
-      nixosUsers.enable = true;
-      homeUsers.enable = true;
+      nixosUsers.en = true;
+      homeUsers.en = true;
 
       system = {
         inherit (system) name path;
@@ -44,7 +44,7 @@ in {
 
     # ------------------- Atomic Secret Provisioning  -------------------------
     sops = lib.mkIf (user == "akib") {
-      enable = true;
+      en = true;
       defaultSopsFile = secrets "/secrets/secrets.yaml";
       secrets = {
         "akib/password/root_secret".neededForUsers = true;
@@ -57,14 +57,14 @@ in {
 
     # ------------------------ Enable Intel Gpu -------------------------------
     gpu = {
-      enable = true;
-      intel.enable = true;
+      en = true;
+      intel.en = true;
       kernelParams = ["i915.force_probe=4680"];
     };
 
     # ---------------- kubernetes Container Orchestration ---------------------
     k8s = lib.mkIf (user == "akib") {
-      enable = true;
+      en = true;
       role = "master";
       defaultUser = user;
       kubeMasterIP = "192.168.0.111";
@@ -72,21 +72,21 @@ in {
 
     # ------------------- Docker Container Applications -----------------------
     docker = lib.mkIf (user == "akib") {
-      enable = true;
-      ipvlan.enable = true;
-      iptables.enable = false;
+      en = true;
+      ipvlan.en = true;
+      iptables.en = false;
       container = {
         n8n = {
-          enable = true;
+          en = true;
           defaultUser = user;
           dbPassword = readSecretsFile "/n8n/pass.txt";
           domain = readSecretsFile "/ngrok/domain.txt";
         };
-        adguard.enable = true;
-        jenkins.enable = false;
-        portainer.enable = true;
+        adguard.en = true;
+        jenkins.en = false;
+        portainer.en = true;
         # nextcloud = {
-        #   enable = true;
+        #   en = true;
         #   defaultUser = user;
         #   password = readSecretsFile "/nextcloud/pass.txt";
         # };
@@ -94,7 +94,7 @@ in {
     };
 
     ngrok = {
-      enable = true;
+      en = true;
       tunnels = [
         {
           serviceName = "ngrok_n8n";
@@ -108,8 +108,8 @@ in {
 
     # ------------------------- Reverse Proxy Setting ------------------------------------
     ngnix = {
-      enable = true;
-      enableTLS = false; # Global setting for self-managed TLS
+      en = true;
+      enTLS = false; # Global setting for self-managed TLS
       routes = {
         # "nextcloud.akibhome.lab" = {port = 8090;};
         "portainer.akibhome.lab" = {port = 9443;};
@@ -123,7 +123,7 @@ in {
     };
 
     wireguard = {
-      enable = false;
+      en = false;
       mode = "client"; # Set mode to client
 
       interfaceName = "wg0";
@@ -143,26 +143,26 @@ in {
     };
 
     # ------------------------- Some Utils ------------------------------------
-    cde.enable = true; # Display Manager (eg,.. plasma,gdm,lighdm) is bloat so i create minimal login screen
-    "1.1.1.1".enable = true;
+    cde.en = true; # Display Manager (eg,.. plasma,gdm,lighdm) is bloat so i create minimal login screen
+    "1.1.1.1".en = true;
     kvm = {
-      enable = true;
-      bridge.enable = false;
+      en = true;
+      bridge.en = false;
     };
-    gaming.enable = false;
-    wireshark.enable = true;
-    postgresql.enable = true;
-    bbr.enable = true;
-    fhs.enable = true;
-    dbus.enable = true;
-    obs.enable = true;
-    openrazer.enable = true;
+    gaming.en = false;
+    wireshark.en = true;
+    postgresql.en = true;
+    bbr.en = true;
+    fhs.en = true;
+    dbus.en = true;
+    obs.en = true;
+    openrazer.en = true;
 
     # -------------------- Flatpak Application --------------------------------
     flatpak = {
-      enable = true;
+      en = true;
       apps = {
-        enable = true;
+        en = true;
         lists = [
           # "sh.ppy.osu"
           "app.zen_browser.zen"
@@ -173,17 +173,17 @@ in {
 
     # -------------------- Core Networking Configuration ----------------------
     networking = {
-      enable = true;
+      en = true;
       defaultGateway = {
         address = "192.168.0.1";
         interface = "enp4s0";
       };
-      enableNetworkManager = false;
+      enNetworkManager = false;
     };
 
     # -------------------- Samba Shares ---------------------------------------
     samba = {
-      enable = true;
+      en = true;
       # Define the drives you want to share
       shares = [
         {device = "sda1";}
@@ -194,7 +194,7 @@ in {
 
     # ---------------------- RGB Stuff ----------------------------------------
     openrgb = {
-      enable = true;
+      en = true;
       motherboard = "intel"; # Explicitly set motherboard type
       # Pass your custom package here
       extraSystemPackages = [
@@ -204,7 +204,7 @@ in {
 
     # ---------------------- System Wide Theme --------------------------------
     stylix = {
-      enable = true;
+      en = true;
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
 
       # Tell Stylix to leave kmscon alone so it stops throwing the assertion error
@@ -213,7 +213,7 @@ in {
 
     # ---------------------- Ephemeral Storage  -------------------------------
     impermanence = {
-      enable = true;
+      en = true;
       inherit user; # REQUIRED: Set your primary username
       systemDirs = lib.mkIf (user == "akib") [
         # Sops need to be avaliable on boot check below extra section
@@ -238,6 +238,7 @@ in {
         "/var/lib/postgresqln8n"
         "/var/lib/jenkins/"
         "/var/lib/ollama"
+        "/var/lib/cloudflare-warp"
       ];
     };
   };

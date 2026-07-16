@@ -7,7 +7,7 @@ with lib; let
   cfg = config.hm.direnv;
 in {
   options.hm.direnv = {
-    enable = mkEnableOption "Direnv configuration with Nix integration";
+    en = mkEnableOption "Direnv configuration with Nix integration";
 
     silent = mkOption {
       type = types.bool;
@@ -16,7 +16,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # programs.direnv.package handles the installation; manual home.packages is removed.
     programs.direnv = {
       enable = true;
@@ -27,7 +27,7 @@ in {
 
       config = {
         global = {
-          # Suppress the "direnv: loading" spam if silent is enabled
+          # Suppress the "direnv: loading" spam if silent is end
           load_dotenv = true;
         };
       };

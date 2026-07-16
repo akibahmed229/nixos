@@ -8,11 +8,11 @@
 in {
   options = {
     nm.grub = {
-      enable = lib.mkEnableOption "Enable the GRUB boot loader";
+      en = lib.mkEnableOption "Enable the GRUB boot loader";
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.en {
     boot.loader = {
       efi = {
         canTouchEfiVariables = true;

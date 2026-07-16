@@ -10,8 +10,8 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.nextcloud = {
-    enable = mkEnableOption "Enable the Nextcloud file synchronization and sharing stack";
-    enablePort = mkEnableOption "Enable the Nextcloud Port to Access in Local Network";
+    en = mkEnableOption "Enable the Nextcloud file synchronization and sharing stack";
+    enPort = mkEnableOption "Enable the Nextcloud Port to Access in Local Network";
 
     password = mkOption {
       type = types.str;
@@ -49,7 +49,7 @@ in {
     };
 
     # Optional Collabora Integration
-    enableCollabora = mkEnableOption "Enable the Collabora Online (CODE) container";
+    enCollabora = mkEnableOption "Enable the Collabora Online (CODE) container";
     collaboraHostPort = mkOption {
       type = types.int;
       default = 9980;
@@ -70,10 +70,10 @@ in {
                1 => 'nextcloud.example.com',
              ),
 
-    *  Note: to enable Collabora Online (CODE) integration, configure the Nextcloud server with the Collabora Online app.
+    *  Note: to en Collabora Online (CODE) integration, configure the Nextcloud server with the Collabora Online app.
             - Go to the Nextcloud admin panel and install the Collabora Online app.
             - In the Nextcloud admin panel, go to Collabora Online settings and enter the Collabora Online server URL (e.g., http://yourIP:9980).
-            - Save the settings and Collabora Online should be enabled for Nextcloud.
+            - Save the settings and Collabora Online should be end for Nextcloud.
 
     * Enter into mariadb container to check the database
             $ docker exec -it mariadb bash
@@ -97,7 +97,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     environment.systemPackages = with pkgs; [
       nextcloud-client # Nextcloud sync client.
     ];
@@ -156,9 +156,9 @@ in {
                 NEXTCLOUD_ADMIN_PASSWORD = cfg.password;
 
                 # Collabora Online configuration (required for Nextcloud to connect to CODE)
-                # Setting this environment variable is optional, but helps if Collabora is also enabled
+                # Setting this environment variable is optional, but helps if Collabora is also end
               }
-              // (optionalAttrs cfg.enableCollabora {
+              // (optionalAttrs cfg.enCollabora {
                 # The public URL for the Collabora server
                 VIRTUAL_HOST = "collabora";
               });
@@ -174,7 +174,7 @@ in {
             dependsOn = ["mariadb" "redis"];
           };
         }
-        // (optionalAttrs cfg.enableCollabora {
+        // (optionalAttrs cfg.enCollabora {
           # 4. Collabora Online (CODE) Container (Optional)
           collabora = {
             image = "collabora/code:latest";
@@ -183,7 +183,7 @@ in {
             ];
             environment = {
               # Disable SSL for local testing (production requires SSL)
-              extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
+              extra_params = "--o:ssl.en=false --o:ssl.termination=true";
             };
             autoStart = true;
             # Collabora doesn't strictly depend on Nextcloud, but we ensure the reverse link is not needed here.
@@ -193,10 +193,10 @@ in {
 
     # 2.2 Open the required ports in the host firewall
     networking.firewall.allowedTCPPorts =
-      optional cfg.enablePort
+      optional cfg.enPort
       ([
           cfg.hostPort # Nextcloud Web UI
         ]
-        ++ (optional cfg.enableCollabora cfg.collaboraHostPort));
+        ++ (optional cfg.enCollabora cfg.collaboraHostPort));
   };
 }

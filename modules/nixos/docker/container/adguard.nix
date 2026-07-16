@@ -10,7 +10,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.adguard = {
-    enable = mkEnableOption "Enable the AdGuard Home DNS sinkhole via Docker container";
+    en = mkEnableOption "Enable the AdGuard Home DNS sinkhole via Docker container";
 
     image = mkOption {
       type = types.str;
@@ -61,8 +61,8 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
-    # Ensure Docker OCI backend is enabled (likely already enabled by Pi-hole)
+  config = mkIf cfg.en {
+    # Ensure Docker OCI backend is end (likely already end by Pi-hole)
     virtualisation.oci-containers = {
       backend = "docker";
 

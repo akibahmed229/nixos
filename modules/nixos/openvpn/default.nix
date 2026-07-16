@@ -14,7 +14,7 @@ in {
   # --- 1. Options (No changes needed) ---
   options.nm.openvpn = {
     # ... (this entire section is correct and requires no changes) ...
-    enable = mkEnableOption "Enable OpenVPN configuration.";
+    en = mkEnableOption "Enable OpenVPN configuration.";
     mode = mkOption {
       type = types.enum ["server" "client"];
       default = "server";
@@ -65,7 +65,7 @@ in {
         description = "List of DNS servers to push to clients.";
       };
       easy-rsa = {
-        enable = mkOption {
+        en = mkOption {
           type = types.bool;
           default = true;
           description = "Enable and manage the certificate authority with easy-rsa.";
@@ -76,12 +76,12 @@ in {
           description = "Path to the Easy-RSA Public Key Infrastructure directory.";
         };
       };
-      enableIpForward = mkOption {
+      enIpForward = mkOption {
         type = types.bool;
         default = true;
         description = "Enable IP forwarding (required for the server to act as a router).";
       };
-      enableMasquerade = mkOption {
+      enMasquerade = mkOption {
         type = types.bool;
         default = true;
         description = "Enable NAT/Masquerading for traffic from VPN clients to the internet/LAN.";
@@ -94,7 +94,7 @@ in {
     ```nix
       # openvpn
       openvpn = {
-        enable = true;
+        en = true;
         mode = "server";
         server = {
           # The virtual network for VPN clients
@@ -222,7 +222,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     environment.systemPackages = with pkgs; [openvpn easyrsa];
 
     services.openvpn.servers = lib.mkMerge [
@@ -275,10 +275,10 @@ in {
     networking.firewall.allowedUDPPorts = mkIf (isServer && cfg.server.proto == "udp") [cfg.server.port];
 
     # Enable IP Forwarding for the server
-    boot.kernel.sysctl = mkIf (isServer && cfg.server.enableIpForward) (lib.mkDefault {"net.ipv4.ip_forward" = true;});
+    boot.kernel.sysctl = mkIf (isServer && cfg.server.enIpForward) (lib.mkDefault {"net.ipv4.ip_forward" = true;});
 
     # Enable NAT/Masquerade for the server
-    networking.nat = mkIf (isServer && cfg.server.enableMasquerade) {
+    networking.nat = mkIf (isServer && cfg.server.enMasquerade) {
       enable = true;
       internalInterfaces = ["tun0"];
     };

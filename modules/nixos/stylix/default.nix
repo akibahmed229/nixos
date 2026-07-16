@@ -34,7 +34,7 @@ in {
 
   # --- 1. Define Options ---
   options.nm.stylix = {
-    enable = mkEnableOption "Enable and configure the Stylix system theming solution.";
+    en = mkEnableOption "Enable and configure the Stylix system theming solution.";
 
     themeScheme = mkOption {
       type = types.path;
@@ -95,7 +95,7 @@ in {
           transparentBackground.main = true;
         };
       };
-      description = "Integration targets for Stylix. You can override any nested option here, e.g., targets.gnome.enable = false.";
+      description = "Integration targets for Stylix. You can override any nested option here, e.g., targets.gnome.en = false.";
     };
 
     # Other settings
@@ -107,7 +107,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     stylix = {
       enable = true;
       base16Scheme = cfg.themeScheme;

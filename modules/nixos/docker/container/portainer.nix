@@ -11,7 +11,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.portainer = {
-    enable = mkEnableOption "Enable the Portainer Community Edition (CE) container management UI";
+    en = mkEnableOption "Enable the Portainer Community Edition (CE) container management UI";
 
     # Configuration options for the Portainer container
     hostPortHttp = mkOption {
@@ -34,8 +34,8 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
-    # Ensure Docker OCI backend is enabled
+  config = mkIf cfg.en {
+    # Ensure Docker OCI backend is end
     virtualisation.oci-containers = {
       backend = "docker";
 

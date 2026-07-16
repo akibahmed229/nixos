@@ -15,7 +15,7 @@ in {
 
   # --- 1. Define Options ---
   options.hm.sops = {
-    enable = mkEnableOption "Sops secrets management for Home Manager";
+    en = mkEnableOption "Sops secrets management for Home Manager";
 
     defaultSopsFile = mkOption {
       type = types.path;
@@ -53,7 +53,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Install necessary tools for managing secrets
     home.packages = with pkgs; [sops age];
 

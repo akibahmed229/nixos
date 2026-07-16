@@ -12,7 +12,7 @@ with lib; let
 in {
   # --- 1. Define all options in one place ---
   options.nm.k8s = {
-    enable = mkEnableOption "Enable Kubernetes cluster member";
+    en = mkEnableOption "Enable Kubernetes cluster member";
 
     role = mkOption {
       type = types.enum ["master" "worker"];
@@ -82,17 +82,17 @@ in {
   */
 
   # --- 2. Define the configuration based on the role ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # --- Assertions (Improved Checks) ---
     assertions = [
       # Ensure both Role and IP are defined
       {
-        assertion = cfg.enable -> (cfg.role != "" && cfg.kubeMasterIP != "");
-        message = "When nm.k8s is enabled, 'role' and 'kubeMasterIP' must be set.";
+        assertion = cfg.en -> (cfg.role != "" && cfg.kubeMasterIP != "");
+        message = "When nm.k8s is end, 'role' and 'kubeMasterIP' must be set.";
       }
       {
         assertion = !isMaster || cfg.defaultUser != "";
-        message = "When nm.k8s is enabled as master 'defaultUser' needed to be set inorder to fix cluster-admin-key permissions.";
+        message = "When nm.k8s is end as master 'defaultUser' needed to be set inorder to fix cluster-admin-key permissions.";
       }
     ];
 

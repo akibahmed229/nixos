@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.hypridle;
 in {
   options.hm.hypridle = {
-    enable = mkEnableOption "Hyprland idle daemon configuration";
+    en = mkEnableOption "Hyprland idle daemon configuration";
 
     lockTime = mkOption {
       type = types.int;
@@ -29,7 +29,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     services.hypridle = {
       enable = true;
       package = pkgs.hypridle;

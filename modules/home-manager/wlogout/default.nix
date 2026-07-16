@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.wlogout;
 in {
   options.hm.wlogout = {
-    enable = mkEnableOption "wlogout logout menu configuration";
+    en = mkEnableOption "wlogout logout menu configuration";
 
     layoutPath = mkOption {
       type = types.path;
@@ -23,7 +23,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.wlogout = {
       enable = true;
       package = pkgs.wlogout;

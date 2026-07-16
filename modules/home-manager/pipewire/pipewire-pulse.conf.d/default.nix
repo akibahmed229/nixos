@@ -37,7 +37,7 @@ with lib; let
   */
 in {
   options.hm.pipewire = {
-    enable = mkEnableOption "PipeWire client quirks and pulse configuration";
+    en = mkEnableOption "PipeWire client quirks and pulse configuration";
 
     sourcePath = mkOption {
       type = types.str;
@@ -49,7 +49,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # We use xdg.configFile to target ~/.config/pipewire/...
     xdg.configFile."pipewire/pipewire-pulse.conf.d/10-adjustQuirkRules.conf" = {
       source = config.lib.file.mkOutOfStoreSymlink cfg.sourcePath;

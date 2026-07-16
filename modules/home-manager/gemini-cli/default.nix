@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.gemini-cli;
 in {
   options.hm.gemini-cli = {
-    enable = mkEnableOption "Gemini CLI configuration";
+    en = mkEnableOption "Gemini CLI configuration";
 
     model = mkOption {
       type = types.str;
@@ -29,7 +29,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.antigravity-cli = {
       enable = true;
       package = pkgs.gemini-cli;

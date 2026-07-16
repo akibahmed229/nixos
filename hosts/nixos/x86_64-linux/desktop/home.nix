@@ -11,32 +11,32 @@ in {
   hm = lib.mkMerge [
     {
       firefox = {
-        enable = true;
+        en = true;
         user = user;
       };
-      nvim.enable = true;
-      quickshell.enable = true;
-      spotify.enable = true;
-      vencord.enable = true;
-      swappy.enable = true;
-      alacritty.enable = true;
-      kitty.enable = true;
-      thunar.enable = true;
-      espanso.enable = false; # Buggy sometime
-      gemini-cli.enable = false;
-      hypridle.enable = true;
-      emacs.enable = true;
+      nvim.en = true;
+      quickshell.en = true;
+      spotify.en = true;
+      vencord.en = true;
+      swappy.en = true;
+      alacritty.en = true;
+      kitty.en = true;
+      thunar.en = true;
+      espanso.en = false; # Buggy sometime
+      gemini-cli.en = false;
+      hypridle.en = true;
+      emacs.en = true;
     }
 
     (lib.mkIf (user == "akib") {
-      openrgb.enable = true;
-      ssh.enable = true;
-      git.enable = true;
+      openrgb.en = true;
+      ssh.en = true;
+      git.en = true;
       sops = let
         secretsInput = toString inputs.secrets;
         homeDirectory = config.home.homeDirectory;
       in {
-        enable = true;
+        en = true;
         defaultSopsFile = "${secretsInput}/secrets/home-manager.yaml";
         secrets = {
           "github/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_github";

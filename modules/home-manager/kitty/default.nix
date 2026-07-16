@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.kitty;
 in {
   options.hm.kitty = {
-    enable = mkEnableOption "Kitty terminal configuration";
+    en = mkEnableOption "Kitty terminal configuration";
 
     # Option to override or add specific settings via Nix
     extraSettings = mkOption {
@@ -18,7 +18,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.kitty = {
       enable = true;
       package = pkgs.kitty;

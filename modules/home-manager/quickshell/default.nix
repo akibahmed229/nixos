@@ -14,7 +14,7 @@ with lib; let
   cfg = config.hm.quickshell;
 in {
   options.hm.quickshell = {
-    enable = mkEnableOption "Quickshell configuration with live symlinking";
+    en = mkEnableOption "Quickshell configuration with live symlinking";
 
     srcPath = mkOption {
       type = types.str;
@@ -35,7 +35,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.packages = with pkgs; [
       qt6Packages.qt5compat
       qt5.qtgraphicaleffects

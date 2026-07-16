@@ -9,7 +9,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.createAp = {
-    enable = mkEnableOption "Enable and configure the create_ap service (hostapd wrapper).";
+    en = mkEnableOption "Enable and configure the create_ap service (hostapd wrapper).";
 
     internetIface = mkOption {
       type = types.str;
@@ -46,7 +46,7 @@ in {
   # Example usage
   ```nix
     nm.createAp = {
-      enable = true;
+      en = true;
 
       # Core settings
       internetIface = "enp4s0";
@@ -66,13 +66,13 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # --- Assertions (Improved Checks) ---
     assertions = [
       # Ensure both interfaces are defined
       {
         assertion = cfg.internetIface != "" && cfg.wifiIface != "";
-        message = "When nm.createAp is enabled, 'internetIface' and 'wifiIface' must be set.";
+        message = "When nm.createAp is end, 'internetIface' and 'wifiIface' must be set.";
       }
       # Ensure passphrase meets security minimum
       {

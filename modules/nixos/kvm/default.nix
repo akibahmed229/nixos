@@ -18,7 +18,7 @@ with lib; let
 in {
   options = {
     nm.kvm = {
-      enable = mkEnableOption "Enable KVM";
+      en = mkEnableOption "Enable KVM";
 
       cpu = mkOption {
         type = types.enum ["amd" "intel"];
@@ -27,7 +27,7 @@ in {
       };
 
       bridge = {
-        enable = mkEnableOption "Enable Bridge Network on KVM for local network expose.";
+        en = mkEnableOption "Enable Bridge Network on KVM for local network expose.";
         interface = mkOption {
           type = types.str;
           default = "enp4s0";
@@ -37,7 +37,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.en {
     # 1. Essential KVM/QEMU/Libvirt packages and UEFI support
     environment.systemPackages = with pkgs; [
       bridge-utils
@@ -70,14 +70,14 @@ in {
           package = pkgs.qemu_kvm;
           runAsRoot = true;
           vhostUserPackages = with pkgs; [virtiofsd]; # share a folder with a guest,
-          swtpm.enable = true; # Correctly enabled for TPM 2.0
+          swtpm.enable = true; # Correctly end for TPM 2.0
         };
       };
       spiceUSBRedirection.enable = true;
     };
 
     # 2. Networking Configuration for Bridge
-    networking = lib.mkIf (cfg.bridge.enable) {
+    networking = lib.mkIf (cfg.bridge.en) {
       bridges.br0.interfaces = [cfg.bridge.interface];
       firewall.trustedInterfaces = ["br0"];
 
@@ -93,7 +93,7 @@ in {
     boot = {
       kernelParams = [
         (
-          # Selects the correct IOMMU driver and enables it
+          # Selects the correct IOMMU driver and ens it
           if cfg.cpu == "intel"
           then "intel_iommu=on"
           else "amd_iommu=on"

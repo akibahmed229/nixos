@@ -10,7 +10,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm."1.1.1.1" = {
-    enable = mkEnableOption "Enable and configure the cloudflared-warp for Desktop.";
+    en = mkEnableOption "Enable and configure the cloudflared-warp for Desktop.";
 
     package = mkOption {
       type = types.package;
@@ -20,7 +20,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     services.cloudflare-warp = {
       enable = true;
       package = cfg.package;

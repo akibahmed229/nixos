@@ -41,6 +41,6 @@
   ];
 
   # Disable user/home-manager integration for afif
-  enableSystemConf = false;
-  enableHomeConf = false;
+  enSystemConf = false;
+  enHomeConf = false;
 }

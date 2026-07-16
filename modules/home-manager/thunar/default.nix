@@ -8,10 +8,10 @@ with lib; let
   cfg = config.hm.thunar;
 in {
   options.hm.thunar = {
-    enable = mkEnableOption "Thunar file manager configuration";
+    en = mkEnableOption "Thunar file manager configuration";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.packages = with pkgs; [
       thunar
       xfce4-exo

@@ -51,8 +51,8 @@ in {
           };
         };
 
-        nixosUsers.enable = mkEnableOption "Create NixOS users";
-        homeUsers.enable = mkEnableOption "Create Home Manager users";
+        nixosUsers.en = mkEnableOption "Create NixOS users";
+        homeUsers.en = mkEnableOption "Create Home Manager users";
       };
     };
     default = {};
@@ -68,11 +68,11 @@ in {
           default = [];
           description = "HM imports or inline objects";
         };
-        enableSystemConf = mkOption {
+        enSystemConf = mkOption {
           type = types.bool;
           default = false;
         };
-        enableHomeConf = mkOption {
+        enHomeConf = mkOption {
           type = types.bool;
           default = false;
         };
@@ -113,7 +113,7 @@ in {
     nm.myusers = myusers;
 
     # NixOS system users
-    users = mkIf cfg.nixosUsers.enable {
+    users = mkIf cfg.nixosUsers.en {
       # required for password to be set via sops during system activation
       mutableUsers =
         if (config.users.users.${cfg.name}.hashedPasswordFile != null)
@@ -125,15 +125,15 @@ in {
           inherit (u) name;
           value = lib.attrsets.removeAttrs u [
             "homeFile"
-            "enableSystemConf"
-            "enableHomeConf"
+            "enSystemConf"
+            "enHomeConf"
           ];
         })
-        (filterBy "enableSystemConf"));
+        (filterBy "enSystemConf"));
     };
 
     # Home-Manager users
-    home-manager = mkIf (cfg.nixosUsers.enable && cfg.homeUsers.enable) {
+    home-manager = mkIf (cfg.nixosUsers.en && cfg.homeUsers.en) {
       users = builtins.listToAttrs (map
         (u: {
           inherit (u) name;
@@ -147,7 +147,7 @@ in {
               ++ u.homeFile;
           };
         })
-        (filterBy "enableHomeConf"));
+        (filterBy "enHomeConf"));
     };
   };
 }

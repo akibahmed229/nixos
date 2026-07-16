@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.alacritty;
 in {
   options.hm.alacritty = {
-    enable = mkEnableOption "Alacritty terminal configuration";
+    en = mkEnableOption "Alacritty terminal configuration";
 
     fontSize = mkOption {
       type = types.number;
@@ -35,7 +35,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.alacritty = {
       enable = true;
       package = pkgs.alacritty;

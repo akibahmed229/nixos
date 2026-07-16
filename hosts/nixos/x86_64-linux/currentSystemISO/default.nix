@@ -25,8 +25,8 @@ in {
     setUser = {
       name = user;
       usersPath = ./users/.;
-      nixosUsers.enable = true;
-      homeUsers.enable = true;
+      nixosUsers.en = true;
+      homeUsers.en = true;
 
       system = {
         inherit (system) path name;
@@ -36,7 +36,7 @@ in {
   };
 
   # (Custom nixos modules)
-  nm.grub.enable = lib.mkForce false;
+  nm.grub.en = lib.mkForce false;
   networking = {
     wireless.enable = lib.mkForce false;
   };

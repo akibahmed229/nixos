@@ -10,7 +10,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.n8n = {
-    enable = mkEnableOption "Enable the n8n automation tool with PostgreSQL backend via Docker containers";
+    en = mkEnableOption "Enable the n8n automation tool with PostgreSQL backend via Docker containers";
 
     # Configuration options for the containers
     hostPort = mkOption {
@@ -51,7 +51,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Enable Docker OCI backend
     virtualisation.oci-containers = {
       backend = "docker";

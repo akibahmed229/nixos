@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.emacs;
 in {
   options.hm.emacs = {
-    enable = mkEnableOption "Emacs configuration and service";
+    en = mkEnableOption "Emacs configuration and service";
 
     package = mkOption {
       type = types.package;
@@ -23,7 +23,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Install the package
     home.packages = [cfg.package];
 

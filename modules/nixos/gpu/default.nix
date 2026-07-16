@@ -44,11 +44,11 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.gpu = {
-    enable = mkEnableOption "Enable graphics hardware acceleration and drivers";
+    en = mkEnableOption "Enable graphics hardware acceleration and drivers";
 
     # --- Intel Config ---
     intel = {
-      enable = mkEnableOption "Enable Intel GPU drivers (iGPU or dGPU)";
+      en = mkEnableOption "Enable Intel GPU drivers (iGPU or dGPU)";
       busId = mkOption {
         type = types.str;
         default = "";
@@ -58,7 +58,7 @@ in {
 
     # --- AMD Config ---
     amd = {
-      enable = mkEnableOption "Enable AMD GPU drivers (iGPU or dGPU)";
+      en = mkEnableOption "Enable AMD GPU drivers (iGPU or dGPU)";
       busId = mkOption {
         type = types.str;
         default = "";
@@ -68,7 +68,7 @@ in {
 
     # --- NVIDIA Config ---
     nvidia = {
-      enable = mkEnableOption "Enable NVIDIA GPU drivers";
+      en = mkEnableOption "Enable NVIDIA GPU drivers";
       busId = mkOption {
         type = types.str;
         default = "";
@@ -101,43 +101,43 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Core Graphics Setup
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
 
-      # Dynamically merge drivers based on enabled flags
+      # Dynamically merge drivers based on end flags
       extraPackages =
         (
-          if cfg.intel.enable
+          if cfg.intel.en
           then drivers.intel.extraPackages
           else []
         )
         ++ (
-          if cfg.amd.enable
+          if cfg.amd.en
           then drivers.amd.extraPackages
           else []
         )
         ++ (
-          if cfg.nvidia.enable
+          if cfg.nvidia.en
           then drivers.nvidia.extraPackages
           else []
         );
 
       extraPackages32 =
         (
-          if cfg.intel.enable
+          if cfg.intel.en
           then drivers.intel.extraPackages32
           else []
         )
         ++ (
-          if cfg.amd.enable
+          if cfg.amd.en
           then drivers.amd.extraPackages32
           else []
         )
         ++ (
-          if cfg.nvidia.enable
+          if cfg.nvidia.en
           then drivers.nvidia.extraPackages32
           else []
         );
@@ -146,25 +146,25 @@ in {
     # 2.2 Session Variables
     environment.sessionVariables =
       (
-        if cfg.intel.enable
+        if cfg.intel.en
         then drivers.intel.env
         else {}
       )
       // (
-        if cfg.amd.enable
+        if cfg.amd.en
         then drivers.amd.env
         else {}
       )
       // (
-        if cfg.nvidia.enable
+        if cfg.nvidia.en
         then drivers.nvidia.env
         else {}
       );
 
     # 2.3 NVIDIA Specific Configuration
-    services.xserver.videoDrivers = mkIf cfg.nvidia.enable ["nvidia"];
+    services.xserver.videoDrivers = mkIf cfg.nvidia.en ["nvidia"];
 
-    hardware.nvidia = mkIf cfg.nvidia.enable {
+    hardware.nvidia = mkIf cfg.nvidia.en {
       package = config.boot.kernelPackages.nvidiaPackages.production;
       open = true; # Open source kernel modules (Turing+)
       modesetting.enable = true;
@@ -175,7 +175,7 @@ in {
       };
 
       # 2.4 Hybrid Graphics (PRIME) Logic
-      # Only enable PRIME if NVIDIA + (Intel OR AMD) is enabled
+      # Only en PRIME if NVIDIA + (Intel OR AMD) is end
       prime = lib.mkMerge [
         {
           # NVIDIA Bus ID is always required
@@ -190,11 +190,11 @@ in {
           };
         }
 
-        (lib.mkIf cfg.intel.enable {
+        (lib.mkIf cfg.intel.en {
           intelBusId = cfg.intel.busId;
         })
 
-        (lib.mkIf cfg.amd.enable {
+        (lib.mkIf cfg.amd.en {
           intelBusId = cfg.amd.busId;
         })
       ];

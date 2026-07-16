@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.starship;
 in {
   options.hm.starship = {
-    enable = mkEnableOption "Starship prompt configuration";
+    en = mkEnableOption "Starship prompt configuration";
 
     configPath = mkOption {
       type = types.path;
@@ -17,7 +17,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.starship = {
       enable = true;
       package = pkgs.starship;

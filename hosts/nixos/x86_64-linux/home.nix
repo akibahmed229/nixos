@@ -27,25 +27,25 @@ in {
   };
 
   hm = {
-    flake-sync.enable = true;
-    xdg.enable = true;
-    zsh.enable = true;
-    starship.enable = true;
-    yazi.enable = true;
-    atuin.enable = true;
-    direnv.enable = true;
-    fastfetch.enable = true;
-    libinput.enable = true;
-    pipewire.enable = true;
-    wireplumber.enable = true;
+    flake-sync.en = true;
+    xdg.en = true;
+    zsh.en = true;
+    starship.en = true;
+    yazi.en = true;
+    atuin.en = true;
+    direnv.en = true;
+    fastfetch.en = true;
+    libinput.en = true;
+    pipewire.en = true;
+    wireplumber.en = true;
 
     tmux = {
-      enable = true;
-      systemdEnable = true;
+      en = true;
+      systemden = true;
     };
 
     stylix = {
-      enable = true;
+      en = true;
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/gruvbox-dark-soft.yaml";
     };
   };

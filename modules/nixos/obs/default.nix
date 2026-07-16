@@ -1,5 +1,5 @@
 # modules/obs.nix
-# Configures OBS Studio with a set of common plugins and optionally enables
+# Configures OBS Studio with a set of common plugins and optionally ens
 # the virtual camera feature using v4l2loopback and Polkit.
 {
   config,
@@ -19,9 +19,9 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.obs = {
-    enable = mkEnableOption "Enable OBS Studio and specified plugins";
+    en = mkEnableOption "Enable OBS Studio and specified plugins";
 
-    enableVirtualCam = mkOption {
+    enVirtualCam = mkOption {
       type = types.bool;
       default = true;
       description = ''
@@ -38,7 +38,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Main OBS Studio package and plugin wrapping
     environment.systemPackages = [
       (pkgs.wrapOBS {
@@ -48,7 +48,7 @@ in {
 
     # 2.2 Virtual Camera Setup (requires v4l2loopback and Polkit)
     # Load the v4l2loopback module
-    boot = mkIf cfg.enableVirtualCam {
+    boot = mkIf cfg.enVirtualCam {
       extraModulePackages = with config.boot.kernelPackages; [
         #FIXME: broken  # v4l2loopback # Use pkgs.v4l2loopback instead of the potentially unavailable config.boot.kernelPackages version
       ];

@@ -19,7 +19,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.bbr = {
-    enable = mkEnableOption "Enable TCP BBR congestion control and optimized network buffer settings";
+    en = mkEnableOption "Enable TCP BBR congestion control and optimized network buffer settings";
 
     maxBufferSizeMiB = mkOption {
       type = types.int;
@@ -34,7 +34,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Load the TCP BBR kernel module
     boot.kernelModules = [
       "tcp_bbr"

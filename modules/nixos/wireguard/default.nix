@@ -14,7 +14,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.wireguard = {
-    enable = mkEnableOption "Enable WireGuard VPN configuration.";
+    en = mkEnableOption "Enable WireGuard VPN configuration.";
 
     mode = mkOption {
       type = types.enum ["server" "client"];
@@ -76,12 +76,12 @@ in {
         default = [];
         description = "List of client peer configurations for the server.";
       };
-      enableIpForward = mkOption {
+      enIpForward = mkOption {
         type = types.bool;
         default = true;
         description = "Enable IP forwarding (required for the server to act as a router).";
       };
-      enableMasquerade = mkOption {
+      enMasquerade = mkOption {
         type = types.bool;
         default = true;
         description = "Enable NAT/Masquerading for traffic leaving the WireGuard interface onto the public interface.";
@@ -89,7 +89,7 @@ in {
 
       # DuckDNS Options
       duckdns = {
-        enable = mkOption {
+        en = mkOption {
           type = types.bool;
           default = false;
           description = "Enable automatic IP update for DuckDNS.";
@@ -110,7 +110,7 @@ in {
   #### Example 1: WireGuard Server Configuration
   ```nix
     nm.wireguard = {
-      enable = true;
+      en = true;
       mode = "server"; # Set mode to server
 
       interfaceName = "wg0";
@@ -121,7 +121,7 @@ in {
         listenPort = 51820;
 
         # Enable DuckDNS (replace domain and token with yours)
-        duckdns.enable = true;
+        duckdns.en = true;
         duckdns.domain = "your_duckduck_sub_domain";
         duckdns.token = "your_token";
 
@@ -141,7 +141,7 @@ in {
   ```nix
   {
     nm.wireguard = {
-      enable = true;
+      en = true;
       mode = "client"; # Set mode to client
 
       interfaceName = "wg0";
@@ -238,7 +238,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Base Utilities and Dependencies
     environment.systemPackages = with pkgs; [
       wireguard-tools
@@ -256,12 +256,12 @@ in {
     };
 
     # 2.3 IP Forwarding (Required for Server Mode)
-    boot.kernel.sysctl = mkIf (isServer && cfg.server.enableIpForward) (lib.mkDefault {
+    boot.kernel.sysctl = mkIf (isServer && cfg.server.enIpForward) (lib.mkDefault {
       "net.ipv4.ip_forward" = true;
     });
 
     # 2.4 NAT/Masquerade (Required for Server Mode to route internet traffic)
-    networking.nat = mkIf (isServer && cfg.server.enableMasquerade) {
+    networking.nat = mkIf (isServer && cfg.server.enMasquerade) {
       enable = true;
       # Internal network is the VPN clients
       internalInterfaces = [cfg.interfaceName];
@@ -291,14 +291,14 @@ in {
     };
 
     # 2.6 DuckDNS Service (Server-specific Feature)
-    systemd.services.duckdns = mkIf (isServer && cfg.server.duckdns.enable) {
+    systemd.services.duckdns = mkIf (isServer && cfg.server.duckdns.en) {
       description = "Update DuckDNS IP";
       serviceConfig.ExecStart = ''
         ${pkgs.curl}/bin/curl "https://www.duckdns.org/update?domains=${cfg.server.duckdns.domain}&token=${cfg.server.duckdns.token}&ip="
       '';
     };
 
-    systemd.timers.duckdns = mkIf (isServer && cfg.server.duckdns.enable) {
+    systemd.timers.duckdns = mkIf (isServer && cfg.server.duckdns.en) {
       description = "Run DuckDNS update every 5 minutes";
       wantedBy = ["timers.target"];
       timerConfig = {

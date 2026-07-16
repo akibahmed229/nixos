@@ -36,7 +36,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.vlans = {
-    enable = mkEnableOption "Enable VLAN configuration.";
+    en = mkEnableOption "Enable VLAN configuration.";
 
     definitions = mkOption {
       type = types.listOf (types.submodule ({name, ...}: {
@@ -64,7 +64,7 @@ in {
   you can use the module as follow:
     # --- VLAN Configuration ---
     nm.vlans = {
-      enable = true;
+      en = true;
       definitions = [
         {
           id = 2;
@@ -81,7 +81,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Populate networking.vlans
     networking.vlans = mapAttrs (n: v: v.vlanConfig) vlanDefinitions;
 

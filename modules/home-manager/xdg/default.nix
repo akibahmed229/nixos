@@ -7,7 +7,7 @@ with lib; let
   cfg = config.hm.xdg;
 in {
   options.hm.xdg = {
-    enable = mkEnableOption "XDG user directories and mime associations";
+    en = mkEnableOption "XDG user directories and mime associations";
 
     createDirs = mkOption {
       type = types.bool;
@@ -41,7 +41,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     xdg = {
       enable = true;
 

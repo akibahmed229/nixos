@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.yazi;
 in {
   options.hm.yazi = {
-    enable = mkEnableOption "Yazi terminal file manager configuration";
+    en = mkEnableOption "Yazi terminal file manager configuration";
 
     showHidden = mkOption {
       type = types.bool;
@@ -17,7 +17,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # We use programs.yazi.package instead of home.packages to let HM manage it
     programs.yazi = {
       enable = true;

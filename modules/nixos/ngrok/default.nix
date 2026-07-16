@@ -39,7 +39,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.ngrok = {
-    enable = mkEnableOption "Enable ngrok service configuration.";
+    en = mkEnableOption "Enable ngrok service configuration.";
 
     tunnels = mkOption {
       type = types.listOf (types.submodule ({...}: {
@@ -77,7 +77,7 @@ in {
   /*
   # Example usage of this module
   ngrok = {
-    enable = true;
+    en = true;
     tunnels = let
       secretsInput = builtins.toString inputs.secrets;
     in [
@@ -101,7 +101,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     environment.systemPackages = [pkgs.ngrok];
 
     # Apply the generated services

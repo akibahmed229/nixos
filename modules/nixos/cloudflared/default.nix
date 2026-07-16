@@ -37,7 +37,7 @@
   };
 in {
   options.nm.cloudflared = with lib; {
-    enable = mkEnableOption "Cloudflare Tunnels (cloudflared)";
+    en = mkEnableOption "Cloudflare Tunnels (cloudflared)";
 
     package = mkOption {
       type = types.package;
@@ -69,7 +69,7 @@ in {
   # Example Usage
   ```nix
     nm.cloudflared = {
-      enable = true;
+      en = true;
       tunnels = {
         # This key "my-tunnel" will be part of the systemd service name (e.g., cloudflared-my-tunnel.service)
         my-tunnel = {
@@ -85,7 +85,7 @@ in {
   ```
   */
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.en {
     # 1. Enable the base cloudflared service and add the package to the system.
     #    The base service is useful for CLI commands like `cloudflared tunnel login`.
     services.cloudflared = {

@@ -8,10 +8,10 @@ with lib; let
   cfg = config.hm.openrgb;
 in {
   options.hm.openrgb = {
-    enable = mkEnableOption "OpenRGB configuration and service";
+    en = mkEnableOption "OpenRGB configuration and service";
 
     server = {
-      enable = mkOption {
+      en = mkOption {
         type = types.bool;
         default = true;
         description = "Whether to run the OpenRGB SDK server as a background service.";
@@ -19,7 +19,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.packages = [pkgs.openrgb];
 
     # Manage the OpenRGB config folder
@@ -31,7 +31,7 @@ in {
 
     # Improvement: Run the server in the background so third-party
     # tools can control lighting automatically on boot.
-    systemd.user.services.openrgb = mkIf cfg.server.enable {
+    systemd.user.services.openrgb = mkIf cfg.server.en {
       Unit = {
         Description = "OpenRGB SDK Server";
         After = ["graphical-session.target"];

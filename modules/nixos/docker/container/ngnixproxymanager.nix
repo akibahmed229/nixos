@@ -10,7 +10,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.nginxProxyManager = {
-    enable = mkEnableOption "Enable the Nginx Proxy Manager (NPM) via Docker container";
+    en = mkEnableOption "Enable the Nginx Proxy Manager (NPM) via Docker container";
 
     image = mkOption {
       type = types.str;
@@ -52,7 +52,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Container Definition
     virtualisation.oci-containers = {
       backend = "docker";

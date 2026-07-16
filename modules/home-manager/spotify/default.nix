@@ -16,7 +16,7 @@ in {
   ];
 
   options.hm.spotify = {
-    enable = mkEnableOption "Custom Spicetify Spotify configuration";
+    en = mkEnableOption "Custom Spicetify Spotify configuration";
 
     theme = mkOption {
       type = types.attrs;
@@ -37,7 +37,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.spicetify = {
       enable = true;
 

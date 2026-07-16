@@ -7,7 +7,7 @@ with lib; let
   cfg = config.nm.ly;
 in {
   options.nm.ly = {
-    enable = mkEnableOption "Enable Ly, A lightweight TUI (ncurses-like) display manager for Linux and BSD.";
+    en = mkEnableOption "Enable Ly, A lightweight TUI (ncurses-like) display manager for Linux and BSD.";
     session = mkOption {
       type = types.str;
       default = "Niri";
@@ -15,7 +15,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.en {
     services.displayManager = {
       ly.enable = true;
       defaultSession = "Niri";

@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.git;
 in {
   options.hm.git = {
-    enable = mkEnableOption "Git configuration";
+    en = mkEnableOption "Git configuration";
 
     useSopsTemplate = mkOption {
       type = types.bool;
@@ -23,14 +23,14 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.packages = [pkgs.diff-so-fancy];
 
     programs.git = {
       enable = true;
       package = pkgs.git;
 
-      # Dynamically include the sops template if enabled
+      # Dynamically include the sops template if end
       includes = optionals (cfg.useSopsTemplate && config.sops.templates ? "git-user.conf") [
         {path = config.sops.templates."git-user.conf".path;}
       ];

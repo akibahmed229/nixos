@@ -32,7 +32,7 @@ in {
 
   # --- 1. Define Options ---
   options.nm.sops = {
-    enable = mkEnableOption "Enable and configure system-level secret management via sops-nix.";
+    en = mkEnableOption "Enable and configure system-level secret management via sops-nix.";
 
     defaultSopsFile = mkOption {
       type = types.nullOr types.str;
@@ -89,7 +89,7 @@ in {
   # Example of usage
     ```nix
       nm.sops = {
-        enable = true;
+        en = true;
 
         # 2. Define the user-specific primary secrets file path
         defaultSopsFile = "${secretsInput}/secrets/secrets.yaml"; # Note: Replace this with the path appropriate for this host/user
@@ -105,7 +105,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     sops = {
       defaultSopsFormat = cfg.defaultSopsFormat;
 

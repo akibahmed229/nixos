@@ -8,11 +8,11 @@ with lib; {
   # ── 1. OPTIONS ───────────────────────────────────────────────────────────────
   # (This section is already correct, no changes needed)
   options.nm.specialisation = {
-    enable = mkEnableOption "Enable specialisation";
+    en = mkEnableOption "Enable specialisation";
     specs = mkOption {
       type = types.attrsOf (types.submodule {
         options = {
-          enable = mkEnableOption "this specialisation" // {default = true;};
+          en = mkEnableOption "this specialisation" // {default = true;};
           description = mkOption {
             type = types.str;
             default = "No description provided.";
@@ -42,7 +42,7 @@ with lib; {
   {
     # Define ALL your specialisations in this one block
     nm.specialisation = {
-        enable = true;
+        en = true;
 
         specs = {
         "DevOPS" = {
@@ -87,7 +87,7 @@ with lib; {
 
         # Example of a defined but disabled specialisation
         "Testing" = {
-          enable = false; # This won't show up in the boot menu or switch-spec
+          en = false; # This won't show up in the boot menu or switch-spec
           description = "A temporary environment for testing new packages.";
           configuration = {
             environment.systemPackages = [ pkgs.btop ];
@@ -103,15 +103,15 @@ with lib; {
     # --- CHANGE #1: Move the `let` block inside `config` to delay evaluation ---
     let
       cfg = config.nm.specialisation;
-      enabledSpecs = attrNames (filterAttrs (name: spec: spec.enable) cfg.specs);
+      endSpecs = attrNames (filterAttrs (name: spec: spec.en) cfg.specs);
 
       # --- CHANGE #2: Explicitly format the list into a space-separated string ---
-      enabledSpecsString = concatStringsSep " " enabledSpecs;
+      endSpecsString = concatStringsSep " " endSpecs;
     in
-      lib.mkIf cfg.enable {
+      lib.mkIf cfg.en {
         specialisation = mapAttrs (name: spec: {
           inherit (spec) configuration;
-        }) (filterAttrs (name: spec: spec.enable) cfg.specs);
+        }) (filterAttrs (name: spec: spec.en) cfg.specs);
 
         environment.sessionVariables = {
           SPECIALISATION = config.specialisation.name or "base";
@@ -123,7 +123,7 @@ with lib; {
             set -euo pipefail
 
             # Create a bash array from the space-separated string
-            AVAILABLE_SPECS=(${enabledSpecsString})
+            AVAILABLE_SPECS=(${endSpecsString})
 
             usage() {
               echo "Usage: switch-spec <specialisation>"

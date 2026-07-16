@@ -36,7 +36,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.mysql = {
-    enable = mkEnableOption "Enable and configure the MySQL/MariaDB database service.";
+    en = mkEnableOption "Enable and configure the MySQL/MariaDB database service.";
 
     package = mkOption {
       type = types.package;
@@ -44,8 +44,8 @@ in {
       description = "The package to use for the MySQL server.";
     };
 
-    enableClientTools = mkEnableOption "Install the command line MySQL client package.";
-    enableWorkbench = mkEnableOption "Install MySQL Workbench for GUI management.";
+    enClientTools = mkEnableOption "Install the command line MySQL client package.";
+    enWorkbench = mkEnableOption "Install MySQL Workbench for GUI management.";
 
     peers = mkOption {
       type = types.attrsOf (types.submodule {
@@ -79,7 +79,7 @@ in {
     };
 
     replication = {
-      enable = mkEnableOption "Enable MySQL replication settings.";
+      en = mkEnableOption "Enable MySQL replication settings.";
       role = mkOption {
         type = types.enum ["master" "slave"];
         default = "master";
@@ -117,14 +117,14 @@ in {
     ];
 
     nm.mysql = {
-      enable = true;
+      en = true;
 
       # Optional: Set the package to mariadb (already the default)
       package = pkgs.mariadb;
 
       # Optional: Enable the GUI tool and CLI client
-      enableClientTools = true;
-      enableWorkbench = true;
+      enClientTools = true;
+      enWorkbench = true;
 
       # 1. Define the databases, users, and permissions using peers
       peers = {
@@ -143,7 +143,7 @@ in {
 
       # 2. Replication configuration
       replication = {
-        enable = true;
+        en = true;
         role = "master";
         slaveHost = "127.0.0.1";
         # masterUser/masterPassword automatically default to 'akib'/'123' from the 'stats' peer.
@@ -154,7 +154,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Core MySQL Service
     services.mysql = {
       package = cfg.package;
@@ -166,7 +166,7 @@ in {
       ensureUsers = ensureUsersList;
 
       # Replication settings
-      replication = mkIf cfg.replication.enable {
+      replication = mkIf cfg.replication.en {
         inherit (cfg.replication) role slaveHost;
         masterUser = cfg.replication.masterUser;
         masterPassword = cfg.replication.masterPassword;
@@ -201,10 +201,10 @@ in {
 
     # 2.3 Environment Packages
     environment.systemPackages = with pkgs;
-      optionals cfg.enableClientTools [
+      optionals cfg.enClientTools [
         cfg.package # Provides the client tools (mysql command)
       ]
-      ++ optionals cfg.enableWorkbench [
+      ++ optionals cfg.enWorkbench [
         mysql-workbench
       ];
   };

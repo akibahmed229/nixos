@@ -9,7 +9,7 @@ with lib; let
   cfg = config.hm.espanso;
 in {
   options.hm.espanso = {
-    enable = mkEnableOption "Espanso text expander configuration";
+    en = mkEnableOption "Espanso text expander configuration";
 
     isWayland = mkOption {
       type = types.bool;
@@ -24,7 +24,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     services.espanso = {
       enable = true;
       package =

@@ -8,16 +8,16 @@ with lib; let
   cfg = config.hm.atuin;
 in {
   options.hm.atuin = {
-    enable = mkEnableOption "Atuin shell history sync configuration";
+    en = mkEnableOption "Atuin shell history sync configuration";
 
     sync = mkOption {
       type = types.bool;
       default = true;
-      description = "Whether to enable Atuin's sync features.";
+      description = "Whether to en Atuin's sync features.";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.atuin = {
       enable = true;
       package = pkgs.atuin;

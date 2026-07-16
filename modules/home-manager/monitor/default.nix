@@ -32,7 +32,7 @@ in {
           type = types.int;
           default = 0;
         };
-        enabled = mkOption {
+        end = mkOption {
           type = types.bool;
           default = true;
         };
@@ -50,7 +50,7 @@ in {
         refreshRate = 100;
         x = 0;
         y = 0;
-        enabled = true;
+        end = true;
       }
     ];
   };

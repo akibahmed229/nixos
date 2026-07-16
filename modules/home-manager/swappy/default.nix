@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.swappy;
 in {
   options.hm.swappy = {
-    enable = mkEnableOption "Swappy screenshot annotation tool";
+    en = mkEnableOption "Swappy screenshot annotation tool";
 
     save_dir = mkOption {
       type = types.str;
@@ -23,7 +23,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.packages = [pkgs.swappy];
 
     # Ensure the screenshot directory exists

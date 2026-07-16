@@ -32,7 +32,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.samba = {
-    enable = mkEnableOption "Enable Samba file sharing.";
+    en = mkEnableOption "Enable Samba file sharing.";
 
     shares = mkOption {
       type = types.listOf (types.submodule ({config, ...}: {
@@ -80,7 +80,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     services.samba = {
       # Dont forget to set a password for the user with smbpasswd -a ${user}
       enable = true;

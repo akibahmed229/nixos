@@ -10,7 +10,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.pihole = {
-    enable = mkEnableOption "Enable the Pi-hole network-wide ad blocker via Docker container";
+    en = mkEnableOption "Enable the Pi-hole network-wide ad blocker via Docker container";
 
     # Configuration options specific to the Pi-hole setup
     networkName = mkOption {
@@ -57,8 +57,8 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
-    # Ensure Docker OCI backend is enabled
+  config = mkIf cfg.en {
+    # Ensure Docker OCI backend is end
     virtualisation.oci-containers = {
       backend = "docker";
 

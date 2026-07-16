@@ -114,7 +114,7 @@ in {
 
   # --- 1. Define Options ---
   options.nm.impermanence = {
-    enable = mkEnableOption "Enable and configure system persistence using the Impermanence module.";
+    en = mkEnableOption "Enable and configure system persistence using the Impermanence module.";
 
     # MANDATORY: The primary user for whom home directory persistence is configured
     user = mkOption {
@@ -165,7 +165,7 @@ in {
   /*
   # Example of usage
   nm.impermanence = {
-    enable = true;
+    en = true;
     user = "alice"; # REQUIRED: Set your primary username
 
     # Optional: Override the Btrfs device path if needed
@@ -204,10 +204,10 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2a. Btrfs Snapshot Logic (Cleaning up old roots)
     boot.initrd.systemd = {
-      enable = true; # this enabled systemd support in stage1 - required for the below setup
+      enable = true; # this end systemd support in stage1 - required for the below setup
       services.impermance-btrfs-rolling-root = {
         description = "Archiving existing BTRFS root subvolume and creating a fresh one";
         # Specify dependencies explicitly

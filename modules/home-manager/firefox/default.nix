@@ -21,7 +21,7 @@ with lib; let
   ];
 in {
   options.hm.firefox = {
-    enable = mkEnableOption "Custom Firefox configuration";
+    en = mkEnableOption "Custom Firefox configuration";
 
     user = mkOption {
       type = types.str;
@@ -38,7 +38,7 @@ in {
     isWayland = mkOption {
       type = types.bool;
       default = true;
-      description = "Whether to enable Wayland support variables.";
+      description = "Whether to en Wayland support variables.";
     };
 
     extraExtensions = mkOption {
@@ -48,7 +48,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 1. MIME Types & Default Applications
     xdg.mimeApps.defaultApplications = let
       browser = ["firefox.desktop"];

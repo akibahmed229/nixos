@@ -10,9 +10,9 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.openrazer = {
-    enable = mkEnableOption "Enable OpenRazer support for Razer devices.";
+    en = mkEnableOption "Enable OpenRazer support for Razer devices.";
 
-    enablePolychromatic = mkOption {
+    enPolychromatic = mkOption {
       type = types.bool;
       default = true;
       description = "Enable Polychromatic, the graphical interface for OpenRazer.";
@@ -61,7 +61,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 1. Enable OpenRazer hardware service
     hardware.openrazer.enable = true;
 
@@ -69,7 +69,7 @@ in {
     hardware.openrazer.users = cfg.users;
 
     # 3. Enable Polychromatic GUI (optional)
-    environment.systemPackages = mkIf cfg.enablePolychromatic [
+    environment.systemPackages = mkIf cfg.enPolychromatic [
       pkgs.polychromatic
     ];
   };

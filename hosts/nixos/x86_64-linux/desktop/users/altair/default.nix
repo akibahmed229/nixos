@@ -19,6 +19,6 @@
 
   shell = pkgs.bash;
 
-  enableSystemConf = true;
-  enableHomeConf = false;
+  enSystemConf = true;
+  enHomeConf = false;
 }

@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.swaylock;
 in {
   options.hm.swaylock = {
-    enable = mkEnableOption "Swaylock (Effects) screen locker configuration";
+    en = mkEnableOption "Swaylock (Effects) screen locker configuration";
 
     configDir = mkOption {
       type = types.path;
@@ -17,7 +17,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # We use the programs.swaylock module for better integration
     programs.swaylock = {
       enable = true;

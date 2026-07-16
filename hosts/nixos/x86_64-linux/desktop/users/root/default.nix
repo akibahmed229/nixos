@@ -39,6 +39,6 @@
   homeFile = [];
 
   # Disable user/home-manager integration for root
-  enableSystemConf = false;
-  enableHomeConf = false;
+  enSystemConf = false;
+  enHomeConf = false;
 }

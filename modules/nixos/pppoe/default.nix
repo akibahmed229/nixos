@@ -10,7 +10,7 @@ with lib; let
   # Define the structure for a single PPPoE peer connection
   peerType = types.submodule {
     options = {
-      enable = mkEnableOption "Enable this specific PPPoE peer configuration.";
+      en = mkEnableOption "Enable this specific PPPoE peer configuration.";
 
       autostart = mkOption {
         type = types.bool;
@@ -53,7 +53,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.pppd = {
-    enable = mkEnableOption "Enable and configure the pppd network service.";
+    en = mkEnableOption "Enable and configure the pppd network service.";
 
     peers = mkOption {
       type = types.attrsOf peerType;
@@ -77,12 +77,12 @@ in {
   # Example usage
   ```nix
    nm.pppd = {
-    enable = true;
+    en = true;
 
     peers = {
       # This peer replicates your original 'edpnet' configuration
       edpnet = {
-        enable = true;
+        en = true;
         username = "your_actual_username"; # Update this
         password = "your_actual_password"; # Update this
         interface = "enp4s0";
@@ -92,7 +92,7 @@ in {
 
       # Example of a second, more minimalist peer
       test_session = {
-        enable = false; # Disabled by default
+        en = false; # Disabled by default
         autostart = false;
         username = "testuser";
         password = "testpassword";
@@ -107,8 +107,8 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
-    # Main pppd service enablement
+  config = mkIf cfg.en {
+    # Main pppd service enment
     services.pppd.enable = true;
 
     # Map the modular peers configuration to the upstream service.pppd.peers structure
@@ -116,7 +116,7 @@ in {
       mapAttrs
       (name: peer: {
         # Pass through the standard options
-        enable = peer.enable;
+        en = peer.en;
         autostart = peer.autostart;
 
         # Construct the final pppd configuration file content
@@ -129,7 +129,7 @@ in {
           ${peer.configExtra}
         '';
       })
-      # Only process peers that are explicitly enabled
-      (filterAttrs (name: peer: peer.enable) cfg.peers);
+      # Only process peers that are explicitly end
+      (filterAttrs (name: peer: peer.en) cfg.peers);
   };
 }

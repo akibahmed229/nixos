@@ -9,8 +9,8 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.gitea = {
-    enable = mkEnableOption "Enable the Gitea code hosting solution via Docker container";
-    enablePort = mkEnableOption "Enable the Gitea Port to Access in Local Network";
+    en = mkEnableOption "Enable the Gitea code hosting solution via Docker container";
+    enPort = mkEnableOption "Enable the Gitea Port to Access in Local Network";
 
     # Host Ports
     hostPortWeb = mkOption {
@@ -46,7 +46,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Container Definition
     virtualisation.oci-containers = {
       backend = "docker";
@@ -76,7 +76,7 @@ in {
     };
 
     # 2.2 Open the required ports in the host firewall
-    networking.firewall.allowedTCPPorts = optional cfg.enablePort [
+    networking.firewall.allowedTCPPorts = optional cfg.enPort [
       cfg.hostPortWeb # Web UI access
       cfg.hostPortSsh # SSH access for Git
     ];

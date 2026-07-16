@@ -16,10 +16,10 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.flatpak = {
-    enable = mkEnableOption "Enable and configure the Flatpak service.";
+    en = mkEnableOption "Enable and configure the Flatpak service.";
 
     apps = {
-      enable = mkEnableOption "Enable Flatpak service to manage applications.";
+      en = mkEnableOption "Enable Flatpak service to manage applications.";
       lists = mkOption {
         type = types.listOf types.str;
         default = [];
@@ -40,11 +40,11 @@ in {
     # Example usage
   ```nix
     nm.flatpak = {
-      enable = true;
+      en = true;
 
       # Easily manage the list of all desired applications here
       apps = {
-        enable = true;
+        en = true;
         lists = [
           "sh.ppy.osu"
           "com.jgraph.drawio.desktop"
@@ -62,12 +62,12 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Enable the core Flatpak service
     services.flatpak.enable = true;
 
     # Inject the management script into the system activation phase
-    system.activationScripts = mkIf cfg.apps.enable {
+    system.activationScripts = mkIf cfg.apps.en {
       flatpak = {
         # Ensure the script runs *after* basic file systems are set up
         # We give it a high priority (20) to ensure it runs

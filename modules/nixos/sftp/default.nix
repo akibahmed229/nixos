@@ -15,7 +15,7 @@
 in {
   # Define the options that users of this module can set.
   options.nm.sftp = with lib; {
-    enable = mkEnableOption "rclone SFTP mount";
+    en = mkEnableOption "rclone SFTP mount";
 
     remoteName = mkOption {
       type = types.str;
@@ -74,7 +74,7 @@ in {
   ```nix
     # Configure the SFTP mount using the new module
     nm.sftp = {
-        enable = true;
+        en = true;
         remoteHost = "192.168.0.103";
         remotePort = 8022;
         remoteUser = "your_user_name"; # Make sure this user exists
@@ -87,7 +87,7 @@ in {
   */
 
   # Configure the system based on the options defined above.
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.en {
     # 1. Add rclone to the system packages.
     environment.systemPackages = [pkgs.rclone];
 

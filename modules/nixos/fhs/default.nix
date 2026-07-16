@@ -23,7 +23,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.fhs = {
-    enable = mkEnableOption "Enable FHS shell environment ('fhs' command) and nix-ld for non-NixOS binaries";
+    en = mkEnableOption "Enable FHS shell environment ('fhs' command) and nix-ld for non-NixOS binaries";
 
     extraFhsPackages = mkOption {
       type = types.listOf types.package;
@@ -39,7 +39,7 @@ in {
   };
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 FHS Environment (the 'fhs' command)
     # This creates a dedicated 'fhs' command that drops the user into a bash shell
     # with a conventional FHS structure, allowing most non-NixOS software to run.
@@ -66,7 +66,7 @@ in {
     # nix-ld installs a dynamic linker wrapper to run non-NixOS binaries directly
     # without needing the 'fhs' shell.
     programs.nix-ld = {
-      enable = true; # Enabled conditionally on nm.fhs.enable
+      enable = true; # Enabled conditionally on nm.fhs.en
       libraries = defaultNixLdLibraries ++ cfg.extraNixLdLibraries;
     };
   };

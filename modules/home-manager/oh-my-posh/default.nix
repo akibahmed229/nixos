@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.oh-my-posh;
 in {
   options.hm.oh-my-posh = {
-    enable = mkEnableOption "Oh My Posh prompt configuration";
+    en = mkEnableOption "Oh My Posh prompt configuration";
 
     theme = mkOption {
       type = types.str;
@@ -17,7 +17,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.oh-my-posh = {
       enable = true;
       package = pkgs.oh-my-posh;

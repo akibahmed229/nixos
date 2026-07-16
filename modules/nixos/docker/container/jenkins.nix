@@ -10,7 +10,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.docker.container.jenkins = {
-    enable = mkEnableOption "Enable the Jenkins CI/CD server with Docker-in-Docker (Dind) support";
+    en = mkEnableOption "Enable the Jenkins CI/CD server with Docker-in-Docker (Dind) support";
 
     # General configuration
     networkName = mkOption {
@@ -92,7 +92,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Container Definitions (Two containers: Dind and Jenkins App)
     virtualisation.oci-containers = {
       backend = "docker";

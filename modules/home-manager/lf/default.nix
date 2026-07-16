@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.lf;
 in {
   options.hm.lf = {
-    enable = mkEnableOption "lf terminal file manager configuration";
+    en = mkEnableOption "lf terminal file manager configuration";
 
     iconSource = mkOption {
       type = types.path;
@@ -19,7 +19,7 @@ in {
 
   # icon file
   # nix run nixpkgs#wget -- "https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example" -O icons
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Ensure icons are placed in the correct XDG config location
     xdg.configFile."lf/icons".source = cfg.iconSource;
 

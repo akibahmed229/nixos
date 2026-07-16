@@ -7,7 +7,7 @@ with lib; let
   cfg = config.hm.ssh;
 in {
   options.hm.ssh = {
-    enable = mkEnableOption "SSH client configuration";
+    en = mkEnableOption "SSH client configuration";
 
     addKeysToAgent = mkOption {
       type = types.str;
@@ -16,7 +16,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;

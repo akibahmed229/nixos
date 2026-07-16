@@ -9,10 +9,10 @@ with lib; let
   # Helper function to create a virtual host configuration
   mkVirtualHost = name: hostConfig: {
     enableACME = false;
-    forceSSL = mkIf cfg.enableTLS true;
+    forceSSL = mkIf cfg.enTLS true;
 
-    sslCertificate = mkIf cfg.enableTLS "/var/lib/fleet-ca/certs/${name}/cert.pem";
-    sslCertificateKey = mkIf cfg.enableTLS "/var/lib/fleet-ca/certs/${name}/key.pem";
+    sslCertificate = mkIf cfg.enTLS "/var/lib/fleet-ca/certs/${name}/cert.pem";
+    sslCertificateKey = mkIf cfg.enTLS "/var/lib/fleet-ca/certs/${name}/key.pem";
 
     locations."/" = {
       proxyPass = "http://${hostConfig.target}:${toString hostConfig.port}";
@@ -27,7 +27,7 @@ with lib; let
   };
 in {
   options.nm.ngnix = {
-    enable = mkEnableOption "Nginx reverse proxy";
+    en = mkEnableOption "Nginx reverse proxy";
 
     httpPort = mkOption {
       type = types.port;
@@ -41,7 +41,7 @@ in {
       description = "HTTPS port for nginx";
     };
 
-    enableTLS = mkOption {
+    enTLS = mkOption {
       type = types.bool;
       default = false;
       description = "Enable TLS/SSL for all routes";
@@ -82,8 +82,8 @@ in {
       description = "Hostname to backend mapping";
       example = {
         ngnix = {
-          enable = true;
-          enableTLS = false; # Global setting for self-managed TLS
+          en = true;
+          enTLS = false; # Global setting for self-managed TLS
           routes = {
             "jenkins.fleet.local" = {
               target = "192.168.122.55";
@@ -96,7 +96,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     services.nginx = {
       enable = true;
 
@@ -104,7 +104,7 @@ in {
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;
-      recommendedTlsSettings = mkIf cfg.enableTLS true;
+      recommendedTlsSettings = mkIf cfg.enTLS true;
 
       # Generate virtual hosts from routes
       virtualHosts = mapAttrs mkVirtualHost cfg.routes;

@@ -44,8 +44,8 @@ in {
     setUser = {
       name = user;
       usersPath = ./users/.;
-      nixosUsers.enable = true;
-      homeUsers.enable = true;
+      nixosUsers.en = true;
+      homeUsers.en = true;
 
       system = {
         desktopEnvironment = "dwm";
@@ -56,29 +56,29 @@ in {
 
     # Enable Intel gpu
     gpu = {
-      enable = true;
-      intel.enable = true;
+      en = true;
+      intel.en = true;
     };
 
     # kubernetes  ( custom module )
     k8s = {
-      enable = true;
+      en = true;
       role = "worker";
       kubeMasterIP = "192.168.0.111";
     };
 
     # (IPC) communication between different applications and system components.
-    dbus.enable = true;
+    dbus.en = true;
 
     # System theme
     stylix = {
-      enable = true;
+      en = true;
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/${theme}.yaml";
     };
 
     # Secret management
     sops = {
-      enable = true;
+      en = true;
       defaultSopsFile = "${toString inputs.secrets}/secrets/secrets.yaml";
       secrets = {
         "akib/password/root_secret".neededForUsers = true;
@@ -88,7 +88,7 @@ in {
 
     # Persistant storage
     impermanence = {
-      enable = true;
+      en = true;
       inherit user; # REQUIRED: Set your primary username
       systemDirs = [
         # Sops need to be avaliable on boot check below extra section

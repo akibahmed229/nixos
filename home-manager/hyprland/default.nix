@@ -5,7 +5,7 @@
   ...
 }: {
   # SDDM (custom module)
-  # nm.sddm.enable = true;
+  # nm.sddm.en = true;
 
   programs = {
     dconf.enable = true;
@@ -107,5 +107,5 @@
   security.pam.services.greetd.enableGnomeKeyring = true;
 
   # polkit for authentication ( from custom nixos module )
-  nm.myPolkit.enable = true;
+  nm.myPolkit.en = true;
 }

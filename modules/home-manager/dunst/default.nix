@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.dunst;
 in {
   options.hm.dunst = {
-    enable = mkEnableOption "Dunst notification daemon configuration";
+    en = mkEnableOption "Dunst notification daemon configuration";
 
     configFile = mkOption {
       type = types.path;
@@ -17,8 +17,8 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    # services.dunst.enable handles both the package and the systemd service
+  config = mkIf cfg.en {
+    # services.dunst.en handles both the package and the systemd service
     services.dunst = {
       enable = true;
       package = pkgs.dunst;

@@ -16,7 +16,7 @@ with lib; let
 in {
   # --- 1. Define Options ---
   options.nm.networking = {
-    enable = mkEnableOption "Enable core networking configuration.";
+    en = mkEnableOption "Enable core networking configuration.";
 
     defaultGateway = mkOption {
       type = types.nullOr (types.attrsOf types.str);
@@ -44,10 +44,10 @@ in {
       description = "List of DNS nameservers to use.";
     };
 
-    enableNetworkManager = mkOption {
+    enNetworkManager = mkOption {
       type = types.bool;
       default = true;
-      description = "Whether to enable NetworkManager.";
+      description = "Whether to en NetworkManager.";
     };
 
     macAddressStrategy = mkOption {
@@ -67,7 +67,7 @@ in {
   /*
   you can use the module as follow:
     nm.networking = {
-      enable = true;
+      en = true;
       domain = "${user}lab";
 
       defaultGateway = {
@@ -85,7 +85,7 @@ in {
   */
 
   # --- 2. Define Configuration ---
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # 2.1 Basic Networking and DNS
     networking = {
       defaultGateway = cfg.defaultGateway;
@@ -98,7 +98,7 @@ in {
     };
 
     # 2.2 NetworkManager
-    networking.networkmanager = mkIf (!cfg.enableNetworkManager) {
+    networking.networkmanager = mkIf (!cfg.enNetworkManager) {
       enable = true;
       wifi.macAddress = cfg.macAddressStrategy;
       ethernet.macAddress = cfg.macAddressStrategy;

@@ -8,8 +8,8 @@ with lib; let
   cfg = config.hm.tmux;
 in {
   options.hm.tmux = {
-    enable = mkEnableOption "Tmux terminal multiplexer configuration";
-    systemdEnable = mkOption {
+    en = mkEnableOption "Tmux terminal multiplexer configuration";
+    systemden = mkOption {
       type = types.bool;
       default = false;
       description = "The tmux services.";
@@ -26,7 +26,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     # Dependencies for your session management scripts
     home.packages = with pkgs; [
       moreutils
@@ -142,7 +142,7 @@ in {
     };
 
     # Systemd Boot Service
-    systemd.user.services.tmux = lib.mkIf cfg.systemdEnable {
+    systemd.user.services.tmux = lib.mkIf cfg.systemden {
       Unit = {
         Description = "Start the tmux server";
       };

@@ -8,7 +8,7 @@ with lib; let
   cfg = config.hm.zsh;
 in {
   options.hm.zsh = {
-    enable = mkEnableOption "Zsh shell configuration";
+    en = mkEnableOption "Zsh shell configuration";
 
     colorscripts = mkOption {
       type = types.bool;
@@ -23,7 +23,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.en {
     home.packages = with pkgs; [
       eza
       fzf
