@@ -4,7 +4,7 @@
   ...
 }:
 with lib; let
-  cfg = config.nm.ngnix;
+  cfg = config.nm.nginx;
 
   # Helper function to create a virtual host configuration
   mkVirtualHost = name: hostConfig: {
@@ -15,7 +15,7 @@ with lib; let
     sslCertificateKey = mkIf cfg.enTLS "/var/lib/fleet-ca/certs/${name}/key.pem";
 
     locations."/" = {
-      proxyPass = "http://${hostConfig.target}:${toString hostConfig.port}";
+      proxyPass = "${hostConfig.target}:${toString hostConfig.port}";
       proxyWebsockets = true;
       extraConfig = ''
         proxy_set_header X-Real-IP $remote_addr;
@@ -26,7 +26,7 @@ with lib; let
     };
   };
 in {
-  options.nm.ngnix = {
+  options.nm.nginx = {
     en = mkEnableOption "Nginx reverse proxy";
 
     httpPort = mkOption {
@@ -52,7 +52,7 @@ in {
         options = {
           target = mkOption {
             type = types.str;
-            default = "localhost";
+            default = "http://localhost";
             description = "Target host IP or hostname";
           };
 
