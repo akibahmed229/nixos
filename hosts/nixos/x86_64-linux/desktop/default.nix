@@ -107,16 +107,19 @@ in {
     };
 
     # ------------------------- Reverse Proxy Setting ------------------------------------
-    ngnix = {
+    nginx = {
       en = true;
       enTLS = false; # Global setting for self-managed TLS
       routes = {
         # "nextcloud.akibhome.lab" = {port = 8090;};
-        "portainer.akibhome.lab" = {port = 9443;};
         "n8n.akibhome.lab" = {port = 5678;};
         "jenkins.akibhome.lab" = {port = 1010;};
+        "portainer.akibhome.lab" = {
+          target = "https://localhost";
+          port = 9443;
+        };
         "adguard.akibhome.lab" = {
-          target = "192.168.10.122";
+          target = "http://192.168.10.122";
           port = 80;
         };
       };
