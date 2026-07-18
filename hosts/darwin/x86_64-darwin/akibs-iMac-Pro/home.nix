@@ -4,13 +4,13 @@
   ...
 }: {
   hm = {
-    zsh.enable = true;
-    tmux.enable = true;
-    yazi.enable = true;
-    atuin.enable = true;
-    direnv.enable = true;
-    fastfetch.enable = true;
-    nvim.enable = true;
+    zsh.en = true;
+    tmux.en = true;
+    yazi.en = true;
+    atuin.en = true;
+    direnv.en = true;
+    fastfetch.en = true;
+    nvim.en = true;
   };
 
   # ── Meta ─────────────────────────────────────────────────────────────────────

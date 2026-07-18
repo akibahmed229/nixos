@@ -19,10 +19,10 @@
   # Custom nixos modules
   nm = {
     # Dual Booting using grub
-    grub.enable = true;
+    grub.en = true;
 
     # Enable sound.
-    audio.enable = true;
+    audio.en = true;
   };
 
   # networking options

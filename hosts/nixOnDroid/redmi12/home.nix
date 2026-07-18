@@ -5,9 +5,9 @@
   ...
 }: {
   hm = {
-    zsh.enable = true;
-    tmux.enable = true;
-    lf.enable = true;
+    zsh.en = true;
+    tmux.en = true;
+    lf.en = true;
   };
 
   home = {

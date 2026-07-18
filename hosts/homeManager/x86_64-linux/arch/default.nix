@@ -15,30 +15,30 @@
   hm = lib.mkMerge [
     {
       firefox = {
-        enable = true;
+        en = true;
         user = user;
       };
-      nvim.enable = true;
-      yazi.enable = true;
-      atuin.enable = true;
-      direnv.enable = true;
-      fastfetch.enable = true;
-      libinput.enable = true;
-      pipewire.enable = true;
-      wireplumber.enable = true;
-      kitty.enable = true;
-      espanso.enable = true;
-      gemini-cli.enable = true;
+      nvim.en = true;
+      yazi.en = true;
+      atuin.en = true;
+      direnv.en = true;
+      fastfetch.en = true;
+      libinput.en = true;
+      pipewire.en = true;
+      wireplumber.en = true;
+      kitty.en = true;
+      espanso.en = true;
+      gemini-cli.en = true;
     }
 
     (lib.mkIf (user == "akib") {
-      git.enable = true;
-      ssh.enable = true;
+      git.en = true;
+      ssh.en = true;
       sops = let
         secretsInput = toString inputs.secrets;
         homeDirectory = config.home.homeDirectory;
       in {
-        enable = true;
+        en = true;
         defaultSopsFile = "${secretsInput}/secrets/home-manager.yaml";
         secrets = {
           "github/sshKey".path = "${homeDirectory}/.ssh/id_ed25519_github";
