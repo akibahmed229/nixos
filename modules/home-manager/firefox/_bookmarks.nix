@@ -42,6 +42,11 @@
           url = "https://chat.openai.com/";
         }
         {
+          name = "Claude";
+          keyword = "claude";
+          url = "https://claude.ai";
+        }
+        {
           name = "Bing AI";
           keyword = "bing";
           url = "https://www.bing.com/search?q=Bing+AI&showconv=1";
@@ -53,22 +58,27 @@
       bookmarks = [
         {
           name = "YouTube";
-          keyword = "yt";
+          keyword = "youtube";
           url = "https://www.youtube.com/";
         }
         {
           name = "GitHub";
-          keyword = "gh";
+          keyword = "github";
           url = "https://github.com/akibahmed229";
         }
         {
+          name = "Portfolio";
+          keyword = "portfolio";
+          url = "https://akibahmed-portfolio.vercel.app";
+        }
+        {
           name = "Reddit";
-          keyword = "r";
+          keyword = "reddit";
           url = "https://www.reddit.com/";
         }
         {
           name = "Gmail";
-          keyword = "mail";
+          keyword = "gmail";
           url = "https://mail.google.com/mail/u/0/#inbox";
         }
       ];
@@ -78,10 +88,12 @@
       bookmarks = [
         {
           name = "DIU Blender";
+          keyword = "diu blender";
           url = "https://elearn.daffodilvarsity.edu.bd/";
         }
         {
           name = "DIU Student Portal";
+          keyword = "diu portal";
           url = "http://studentportal.diu.edu.bd";
         }
       ];

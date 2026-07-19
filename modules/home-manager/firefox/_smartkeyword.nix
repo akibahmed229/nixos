@@ -34,6 +34,21 @@
     definedAliases = ["@no"];
   };
 
+  "nix home-manager options" = {
+    urls = [
+      {
+        template = "https://home-manager-options.extranix.com/";
+        params = [
+          {
+            name = "query";
+            value = "{searchTerms}";
+          }
+        ];
+      }
+    ];
+    definedAliases = ["@hm"];
+  };
+
   # --- YouTube ---
   "youtube" = {
     urls = [

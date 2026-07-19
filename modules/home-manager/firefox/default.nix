@@ -10,14 +10,17 @@ with lib; let
   # Helper to access rycee's addons easily
   addons = pkgs.nur.repos.rycee.firefox-addons;
 
+  # nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
   defaultPlugins = with addons; [
     ublock-origin
     sponsorblock
     darkreader
     youtube-shorts-block
-    # dearrow # FIXME: Broken
+    return-youtube-dislikes
+    dearrow
     multi-account-containers
     facebook-container
+    react-devtools
   ];
 in {
   options.hm.firefox = {
@@ -82,6 +85,7 @@ in {
           name = cfg.user;
           id = 0;
           isDefault = true;
+          path = cfg.user;
 
           # UI Customization
           userChrome = mkIf (builtins.pathExists ./userChrome.css) (builtins.readFile ./userChrome.css);
@@ -92,6 +96,7 @@ in {
             force = true;
             engines = import ./_smartkeyword.nix;
           };
+
           bookmarks = import ./_bookmarks.nix;
 
           # Settings merging
@@ -104,6 +109,7 @@ in {
         Guest = {
           name = "Guest";
           id = 1;
+          path = "guest";
           settings = {
             "layout.css.devPixelsPerPx" = cfg.scaling;
             "browser.privatebrowsing.autostart" = true;
