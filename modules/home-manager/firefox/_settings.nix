@@ -122,11 +122,17 @@
   "browser.urlbar.untrimOnUserInteraction.featureGate" = true;
 
   # Default font size (default is usually 16)
-  "font.size.variable.x-western" = lib.mkDefault 16;
+  "font.size.variable.x-western" = lib.mkForce 16;
 
   # Minimum font size (prevents tiny text)
   "font.minimum-size.x-western" = 14;
 
   # Optional: Ensure these settings apply
   "browser.display.use_document_fonts" = 1;
+
+  # --- Font Fallback Fixes ---
+  "font.name.serif.x-western" = lib.mkForce "JetBrains Mono";
+  "font.name.sans-serif.x-western" = lib.mkForce "JetBrains Mono"; # The font that fixed your layout
+  "font.name.monospace.x-western" = lib.mkForce "JetBrains Mono";
+  "font.name.default.x-western" = lib.mkForce "JetBrains Mono";
 }

@@ -88,8 +88,8 @@ in {
           path = cfg.user;
 
           # UI Customization
-          userChrome = mkIf (builtins.pathExists ./userChrome.css) (builtins.readFile ./userChrome.css);
-          userContent = mkIf (builtins.pathExists ./userContent.css) (builtins.readFile ./userContent.css);
+          # userChrome = mkIf (builtins.pathExists ./userChrome.css) (builtins.readFile ./userChrome.css);
+          # userContent = mkIf (builtins.pathExists ./userContent.css) (builtins.readFile ./userContent.css);
 
           # Search & Bookmarks
           search = {
@@ -100,7 +100,11 @@ in {
           bookmarks = import ./_bookmarks.nix;
 
           # Settings merging
-          settings = import ./_settings.nix {inherit lib;};
+          settings =
+            import ./_settings.nix {inherit lib;}
+            // {
+              "layout.css.devPixelsPerPx" = cfg.scaling;
+            };
 
           extensions.packages = defaultPlugins ++ cfg.extraExtensions;
         };
