@@ -147,7 +147,6 @@
   };
 
   # Other File
-
   fileSystems = {
     "/mnt/samsung" = {
       device = "/dev/disk/by-label/samsung";
@@ -156,13 +155,30 @@
     };
     "/mnt/sda1" = {
       device = "/dev/sda1";
-      fsType = "ntfs";
-      options = ["defaults"]; # Mount options (rw,exec,auto,user,async)
+      fsType = "ntfs3";
+      # Mount options (rw,exec,auto,user,async)
+      options = [
+        "defaults"
+        "nofail" # Do not block boot if drive delays
+        "x-systemd.automount" # Mount automatically when accessed in file manager
+        "x-systemd.device-timeout=5s" # Prevent long timeouts
+        "uid=1000" # Grants your user read/write access seamlessly
+        "gid=100"
+      ];
+      noCheck = true; # CRUCIAL: Disables the boot-time fsck check hanging system
     };
     "/mnt/sda2" = {
       device = "/dev/sda2";
-      fsType = "ntfs";
-      options = ["defaults"];
+      fsType = "ntfs3";
+      options = [
+        "defaults"
+        "nofail" # Do not block boot if drive delays
+        "x-systemd.automount" # Mount automatically when accessed in file manager
+        "x-systemd.device-timeout=5s" # Prevent long timeouts
+        "uid=1000" # Grants your user read/write access seamlessly
+        "gid=100"
+      ];
+      noCheck = true; # CRUCIAL: Disables the boot-time fsck check hanging system
     };
   };
 
