@@ -96,11 +96,17 @@ in {
     ngrok = {
       en = true;
       tunnels = [
+        # {
+        #   serviceName = "ngrok_n8n";
+        #   targetPort = 5678;
+        #   domainFile = secrets "/ngrok/domain.txt";
+        #   dependsOnService = "docker-n8n.service";
+        #   runAsUser = user; # Use the user variable passed to your configuration
+        # }
         {
-          serviceName = "ngrok_n8n";
-          targetPort = 5678;
+          serviceName = "ngrok_ecommerce_server";
+          targetPort = 4000;
           domainFile = secrets "/ngrok/domain.txt";
-          dependsOnService = "docker-n8n.service";
           runAsUser = user; # Use the user variable passed to your configuration
         }
       ];
