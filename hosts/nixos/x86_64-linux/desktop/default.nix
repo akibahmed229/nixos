@@ -357,6 +357,7 @@ in {
     lazygit # Git UI.
     gh # GitHub CLI.
     # self.packages.${pkgs.stdenv.hostPlatform.system}.ciscoPacketTracer
+    dotnetCorePackages.sdk_10_0
 
     # 2. Media & Design
     gimp # Image editor.
@@ -381,6 +382,17 @@ in {
     netcat-gnu # command-line utility for reading and writing data across network
     dig # Domain name server
   ];
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      zlib
+      openssl
+      icu
+      glibc
+    ];
+  };
 
   # List services that you want to enable:
   services = {

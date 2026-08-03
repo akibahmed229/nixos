@@ -9,7 +9,7 @@ return {
             require("nvim-treesitter.config").setup({
                 ensure_installed = {
                     "json", "python", "javascript", "query", "typescript",
-                    "tsx", "php", "yaml", "html", "css", "markdown",
+                    "tsx", "php", "yaml", "html", "css", "markdown", "c_sharp",
                     "markdown_inline", "bash", "lua", "vim", "vimdoc",
                     "c", "dockerfile", "gitignore", "astro", "nix",
                 },

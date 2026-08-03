@@ -30,6 +30,8 @@ in {
         neovim-unwrapped
         ripgrep
         git
+        tree-sitter
+        gcc
 
         ## Language Support & Tooling
         # Nix
@@ -47,6 +49,7 @@ in {
         clang-tools
         cmake
         bear
+        roslyn-ls # Official Microsoft Roslyn LSP Server
 
         # Rust & Go
         rust-analyzer
