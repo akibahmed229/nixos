@@ -24,9 +24,6 @@ in {
   };
 
   config = mkIf cfg.en {
-    # Ensure vesktop is available in the environment
-    home.packages = [pkgs.vesktop];
-
     programs.vesktop = {
       enable = true;
       package = pkgs.vesktop;
@@ -62,7 +59,7 @@ in {
           recursiveUpdate {
             # Core Functional Plugins
             MessageLogger = {
-              enableabled = true;
+              enabled = true;
               ignoreSelf = true;
             };
             FakeNitro = {enabled = true;};
