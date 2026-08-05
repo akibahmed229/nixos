@@ -17,8 +17,12 @@ with lib; let
   ];
 
   # Libraries required by the original nix-ld configuration (essential for C/C++ binaries)
-  defaultNixLdLibraries = [
-    pkgs.stdenv.cc.cc
+  defaultNixLdLibraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+    openssl
+    icu
+    glibc
   ];
 in {
   # --- 1. Define Options ---

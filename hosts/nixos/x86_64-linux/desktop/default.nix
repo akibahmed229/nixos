@@ -383,17 +383,6 @@ in {
     dig # Domain name server
   ];
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      stdenv.cc.cc.lib
-      zlib
-      openssl
-      icu
-      glibc
-    ];
-  };
-
   # List services that you want to enable:
   services = {
     # disable password auth for openssh
