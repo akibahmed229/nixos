@@ -160,7 +160,7 @@ in {
     };
     gaming.en = false;
     wireshark.en = true;
-    postgresql.en = true;
+    postgresql.en = false;
     bbr.en = true;
     fhs.en = true;
     dbus.en = true;
@@ -342,6 +342,7 @@ in {
     # distrobox
     # yarn # JavaScript package manager.
     jq # JSON processor.
+    sqlite
     # Android development tools.
     # android-studio
     android-tools
