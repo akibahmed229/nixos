@@ -29,6 +29,15 @@ final: prev: {
   #   };
   # });
 
+  nanoemoji = prev.nanoemoji.overrideAttrs (oldAttrs: {
+    src = prev.fetchFromGitHub {
+      owner = "googlefonts";
+      repo = "nanoemoji";
+      rev = "v${oldAttrs.version}";
+      hash = "sha256-FysyKC01XBnRiur5RR9fcsTxQqE8x0JJHSoe3q6JtKc=";
+    };
+  });
+
   # ===========================================================================
   # SECTION 2: SCOPED OVERRIDES (Python, Lua, etc.)
   # Languages with their own package managers inside Nix need 'overrideScope'.

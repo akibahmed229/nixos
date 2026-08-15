@@ -75,7 +75,7 @@
       noto-fonts-color-emoji
       font-awesome
       lohit-fonts.bengali
-      jetbrains-mono
+      # jetbrains-mono # FIXME: BROKEN
       source-han-sans
       nerd-fonts.jetbrains-mono
     ];
