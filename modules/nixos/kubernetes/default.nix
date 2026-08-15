@@ -122,7 +122,7 @@ in {
           addons.dns = {
             enable = true;
             # Fix the CoreDNS image details for AArch64 builds
-            coredns = lib.mkIf pkgs.stdenv.isAarch64 {
+            coredns = lib.mkIf pkgs.stdenv.hostPlatform.isAarch64 {
               # Use the standard Kubernetes CoreDNS tag
               finalImageTag = "v1.11.1";
               imageDigest = "sha256:1eeb4c7316bacb1d4c8ead65571cd92dd21e27359f0d4917f1a5822a73b75db1";
@@ -165,7 +165,7 @@ in {
 
     services.etcd.enable = mkIf isMaster true;
 
-    systemd.services.etcd.environment = lib.mkIf pkgs.stdenv.isAarch64 {
+    systemd.services.etcd.environment = lib.mkIf pkgs.stdenv.hostPlatform.isAarch64 {
       ETCD_UNSUPPORTED_ARCH = "arm64";
     };
 

@@ -29,12 +29,12 @@ final: prev: {
   #   };
   # });
 
-  nanoemoji = prev.nanoemoji.overrideAttrs (oldAttrs: {
+  cni-plugin-flannel = prev.cni-plugin-flannel.overrideAttrs (oldAttrs: {
     src = prev.fetchFromGitHub {
-      owner = "googlefonts";
-      repo = "nanoemoji";
+      owner = "flannel-io";
+      repo = "cni-plugin";
       rev = "v${oldAttrs.version}";
-      hash = "sha256-FysyKC01XBnRiur5RR9fcsTxQqE8x0JJHSoe3q6JtKc=";
+      sha256 = "sha256-lYn9qDmUn8g3nnD4wQqyzKjd/lPXqoER5nZuY0sVK0s=";
     };
   });
 
