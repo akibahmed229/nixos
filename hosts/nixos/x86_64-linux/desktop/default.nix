@@ -193,6 +193,8 @@ in {
     # -------------------- Samba Shares ---------------------------------------
     samba = {
       en = true;
+      validUsers = "altair";
+      invalidUsers = "guest ${user}";
       # Define the drives you want to share
       shares = [
         {device = "sda1";}

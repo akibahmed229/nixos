@@ -7,46 +7,44 @@
 with lib; let
   cfg = config.nm.samba;
 
-  # Function to generate the required services.samba.settings format
   generateShares = listToAttrs (map (drive: {
-      # The Samba share name is derived from the device name
       name = drive.device;
       value = {
-        # The share path is the drive's mount point
         path = drive.mountPoint;
         comment = "Shared Drive: ${drive.device}";
-        browseable = boolToYesNo cfg.guestOk; # Use the module default
-        "read only" = boolToYesNo cfg.readOnly; # Use the module default
-        "guest ok" = boolToYesNo cfg.guestOk; # Use the module default
+
+        # Shares MUST be browseable for logged-in users to see them
+        browseable = "yes";
+
+        "read only" = boolToYesNo cfg.readOnly;
+        "guest ok" = boolToYesNo cfg.guestOk;
         "create mask" = cfg.createMask;
         "directory mask" = cfg.directoryMask;
+        "valid users" = cfg.validUsers;
+        "invalid users" = cfg.invalidUsers;
       };
     })
     cfg.shares);
 
-  # Helper to convert Nix boolean to Samba's required "yes"/"no" string
   boolToYesNo = b:
     if b
     then "yes"
     else "no";
 in {
-  # --- 1. Define Options ---
   options.nm.samba = {
     en = mkEnableOption "Enable Samba file sharing.";
 
     shares = mkOption {
       type = types.listOf (types.submodule ({config, ...}: {
-        # Added 'config' here
         options = {
           device = mkOption {
             type = types.str;
-            description = "The device identifier (e.g., 'sda1') used as the share name and comment.";
+            description = "The device identifier (e.g., 'sda1').";
           };
           mountPoint = mkOption {
             type = types.str;
-            # Dynamic default based on the device name
             default = "/mnt/${config.device}";
-            description = "The absolute path to the mount point (e.g., '/mnt/sda1').";
+            description = "The absolute path to the mount point.";
           };
         };
       }));
@@ -56,7 +54,7 @@ in {
 
     guestOk = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Allow guest access to the shares.";
     };
 
@@ -77,16 +75,36 @@ in {
       default = "0755";
       description = "Directory creation mask (permissions).";
     };
+
+    validUsers = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "Space-separated list of valid users.";
+    };
+
+    invalidUsers = mkOption {
+      type = types.str;
+      default = "guest";
+      description = "Space-separated list of invalid users.";
+    };
   };
 
-  # --- 2. Define Configuration ---
   config = mkIf cfg.en {
     services.samba = {
-      # Dont forget to set a password for the user with smbpasswd -a ${user}
       enable = true;
-      settings = generateShares;
-      # Automatically open firewall for Samba traffic
       openFirewall = true;
+      settings =
+        # Inject global setting so Samba handles credentials strictly
+        {
+          global = {
+            "workgroup" = "WORKGROUP";
+            "server string" = "NixOS Samba Server";
+            "netbios name" = "nixos-desktop";
+            "security" = "user";
+            "map to guest" = "Bad User";
+          };
+        }
+        // generateShares;
     };
   };
 }
