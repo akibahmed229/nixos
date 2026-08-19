@@ -85,28 +85,22 @@ in {
         adguard.en = true;
         jenkins.en = false;
         portainer.en = true;
-        # nextcloud = {
-        #   en = true;
-        #   defaultUser = user;
-        #   password = readSecretsFile "/nextcloud/pass.txt";
-        # };
+        nextcloud = {
+          en = false;
+          defaultUser = user;
+          password = readSecretsFile "/nextcloud/pass.txt";
+        };
       };
     };
 
     ngrok = {
-      en = true;
+      en = false;
       tunnels = [
-        # {
-        #   serviceName = "ngrok_n8n";
-        #   targetPort = 5678;
-        #   domainFile = secrets "/ngrok/domain.txt";
-        #   dependsOnService = "docker-n8n.service";
-        #   runAsUser = user; # Use the user variable passed to your configuration
-        # }
         {
-          serviceName = "ngrok_ecommerce_server";
-          targetPort = 4000;
+          serviceName = "ngrok_n8n";
+          targetPort = 5678;
           domainFile = secrets "/ngrok/domain.txt";
+          dependsOnService = "docker-n8n.service";
           runAsUser = user; # Use the user variable passed to your configuration
         }
       ];

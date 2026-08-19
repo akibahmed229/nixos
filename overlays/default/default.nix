@@ -29,15 +29,6 @@ final: prev: {
   #   };
   # });
 
-  cni-plugin-flannel = prev.cni-plugin-flannel.overrideAttrs (oldAttrs: {
-    src = prev.fetchFromGitHub {
-      owner = "flannel-io";
-      repo = "cni-plugin";
-      rev = "v${oldAttrs.version}";
-      sha256 = "sha256-lYn9qDmUn8g3nnD4wQqyzKjd/lPXqoER5nZuY0sVK0s=";
-    };
-  });
-
   # ===========================================================================
   # SECTION 2: SCOPED OVERRIDES (Python, Lua, etc.)
   # Languages with their own package managers inside Nix need 'overrideScope'.
