@@ -247,6 +247,8 @@
                   useGlobalPkgs = true;
                   useUserPackages = true;
                   extraSpecialArgs = specialArgs;
+                  # Load all custom homeModules (where options.hm is declared) into Home Manager
+                  sharedModules = builtins.attrValues (specialArgs.inputs.self.homeModules or {});
                 };
               }
             ];
