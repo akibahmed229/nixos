@@ -38,9 +38,17 @@
       url = "github:nix-community/home-manager/master?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Manage your macOS using Nix
+    # Manage your macOS using Nix (Nixpkgs 26.05 will be the last release to support x86_64-darwin;)
+    nixdarwinpkgs = {
+      url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    };
+    darwin_x86 = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05?shallow=1";
+      inputs.nixpkgs.follows = "nixdarwinpkgs";
+    };
     darwin = {
       url = "github:nix-darwin/nix-darwin/master?shallow=1";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # nix-on-droid is a project to run Nix on Android
     nix-on-droid = {
@@ -107,8 +115,10 @@
   outputs = {
     self, # The special input named self refers to the outputs and source tree of this flake
     nixpkgs,
+    nixdarwinpkgs,
     home-manager,
     darwin,
+    darwin_x86,
     nix-on-droid,
     ...
     # inputs@ is a shorthand for passing the inputs attribute into the outputs parameters
@@ -140,7 +150,7 @@
         specialArgs = {inherit inputs self user theme state-version;};
       };
       mkNixDarwinSystem = mkSystem {
-        inherit nixpkgs darwin home-manager;
+        inherit nixpkgs nixdarwinpkgs darwin darwin_x86 home-manager;
         darwinConf = true;
         specialArgs = {inherit inputs self user theme state-version;};
       };
