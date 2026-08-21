@@ -206,49 +206,51 @@
     mkConfig = {
       archName,
       hostName,
-    }: {
+    }: let
+      isX86Darwin = darwinConf && archName == "x86_64-darwin";
+      darwinSystem =
+        if isX86Darwin
+        then darwin_x86.lib.darwinSystem
+        else darwin.lib.darwinSystem;
+      pkgsSource =
+        if isX86Darwin
+        then nixdarwinpkgs
+        else nixpkgs;
+    in {
       name = hostName;
       value =
         # Nixpkgs 26.05 will be the last release to support x86_64-darwin; see https://nixos.org/manual/nixpkgs/unstable/release-notes#x86_64-darwin-26.05
-        if darwinConf && archName == "x86_64-darwin"
-        then darwin_x86.lib.darwinSystem
-        else
-          darwin.lib.darwinSystem {
+        darwinSystem {
+          system = archName;
+          pkgs = import pkgsSource {
             system = archName;
-            pkgs =
-              import (
-                if darwinConf && archName == "x86_64-darwin"
-                then nixdarwinpkgs
-                else nixpkgs
-              ) {
-                system = archName;
-                config = {allowUnfree = true;};
-              };
-            specialArgs =
-              specialArgs
-              // {
-                system = {
-                  path = systemPath + "/${archName}";
-                  name = hostName;
-                };
-              };
-            modules =
-              map ifFileExists [
-                (systemPath + "/${archName}/configuration.nix")
-                (systemPath + "/${archName}/${hostName}")
-              ]
-              ++ optionals (home-manager != {}) [
-                home-manager.darwinModules.home-manager
-                {
-                  home-manager = {
-                    backupFileExtension = "hm-bak";
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
-                    extraSpecialArgs = specialArgs;
-                  };
-                }
-              ];
+            config = {allowUnfree = true;};
           };
+          specialArgs =
+            specialArgs
+            // {
+              system = {
+                path = systemPath + "/${archName}";
+                name = hostName;
+              };
+            };
+          modules =
+            map ifFileExists [
+              (systemPath + "/${archName}/configuration.nix")
+              (systemPath + "/${archName}/${hostName}")
+            ]
+            ++ optionals (home-manager != {}) [
+              home-manager.darwinModules.home-manager
+              {
+                home-manager = {
+                  backupFileExtension = "hm-bak";
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = specialArgs;
+                };
+              }
+            ];
+        };
     };
   };
 
