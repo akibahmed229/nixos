@@ -36,13 +36,13 @@ in
         libexif
         libwebp
       ]
-      ++ lib.optional stdenv.isDarwin libinotify-kqueue;
+      ++ lib.optional stdenv.hostPlatform.isDarwin libinotify-kqueue;
 
     postPatch = ''
       cp ${custom}/config.h config.h
     '';
 
-    env.NIX_LDFLAGS = lib.optionalString stdenv.isDarwin "-linotify";
+    env.NIX_LDFLAGS = lib.optionalString stdenv.hostPlatform.isDarwin "-linotify";
 
     makeFlags = ["CC:=$(CC)"];
 

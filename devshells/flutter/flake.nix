@@ -150,7 +150,7 @@
             flutter doctor
 
             echo -e "\n✅ Ready to build for Android, Web, and ${
-              if pkgs.stdenv.isDarwin
+              if pkgs.stdenv.hostPlatform.isDarwin
               then "macOS"
               else "Linux"
             }\n"

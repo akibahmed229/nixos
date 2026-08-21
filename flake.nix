@@ -41,7 +41,6 @@
     # Manage your macOS using Nix
     darwin = {
       url = "github:nix-darwin/nix-darwin/master?shallow=1";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     # nix-on-droid is a project to run Nix on Android
     nix-on-droid = {

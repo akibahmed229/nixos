@@ -72,7 +72,7 @@
         packages = [
           texlive-packages
           # Only include pkgs.skim if we are on a system that supports it (not i686-linux)
-          (nixpkgs.lib.optional pkgs.stdenv.isDarwin pkgs.skim)
+          (nixpkgs.lib.optional pkgs.stdenv.hostPlatform.isDarwin pkgs.skim)
           pkgs.git
           pkgs.zathura
         ];
