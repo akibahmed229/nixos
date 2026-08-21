@@ -248,7 +248,10 @@
                   useUserPackages = true;
                   extraSpecialArgs = specialArgs;
                   # Load all custom homeModules (where options.hm is declared) into Home Manager
-                  sharedModules = builtins.attrValues (specialArgs.inputs.self.homeModules or {});
+                  # Pass only the default entry point if it imports all sub-modules internally:
+                  sharedModules = [
+                    specialArgs.inputs.self.homeModules.default
+                  ];
                 };
               }
             ];
