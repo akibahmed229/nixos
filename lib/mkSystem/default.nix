@@ -149,11 +149,14 @@
             };
           };
         modules =
-          map ifFileExists [
+          [
+            (specialArgs.self.nixosModules.default or {})
+          ]
+          ++ (map ifFileExists [
             (systemPath + "/${archName}/configuration.nix")
             (systemPath + "/${archName}/${hostName}/hardware-configuration.nix")
             (systemPath + "/${archName}/${hostName}")
-          ]
+          ])
           ++ optionals (home-manager != {}) [
             home-manager.nixosModules.home-manager
             {
@@ -162,6 +165,9 @@
                 useGlobalPkgs = false;
                 useUserPackages = true;
                 extraSpecialArgs = specialArgs;
+                sharedModules = [
+                  (specialArgs.inputs.self.homeModules.default or {})
+                ];
               };
             }
           ];
@@ -184,10 +190,12 @@
           config = {allowUnfree = true;};
         };
         extraSpecialArgs = specialArgs // {inherit hostName;};
-        modules = map ifFileExists [
-          (systemPath + "/${archName}/home.nix")
-          (systemPath + "/${archName}/${hostName}")
-        ];
+        modules =
+          [(specialArgs.inputs.self.homeModules.default or {})]
+          ++ (map ifFileExists [
+            (systemPath + "/${archName}/home.nix")
+            (systemPath + "/${archName}/${hostName}")
+          ]);
       };
     };
   };
@@ -250,7 +258,7 @@
                   # Load all custom homeModules (where options.hm is declared) into Home Manager
                   # Pass only the default entry point if it imports all sub-modules internally:
                   sharedModules = [
-                    specialArgs.inputs.self.homeModules.default
+                    (specialArgs.inputs.self.homeModules.default or {})
                   ];
                 };
               }
@@ -286,6 +294,9 @@
                 backupFileExtension = "hm-bak"; # Set backup file extension
                 useGlobalPkgs = true; # Use global packages
                 extraSpecialArgs = specialArgs;
+                sharedModules = [
+                  (specialArgs.inputs.self.homeModules.default or {})
+                ];
               };
             }
           ];

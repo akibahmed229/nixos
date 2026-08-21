@@ -9,7 +9,6 @@
 in {
   # imports from the predefiend modules folder
   imports = [
-    self.homeModules.default # Custom home-manager modules
     inputs.nix-index-database.homeModules.nix-index
   ];
 

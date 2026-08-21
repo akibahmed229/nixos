@@ -4,15 +4,10 @@
   user,
   pkgs,
   state-version,
-  self,
   config,
   inputs,
   ...
 }: {
-  imports = [
-    self.homeModules.default # Custom home-manager modules
-  ];
-
   nixpkgs = {
     # You can add overlays here
     overlays = [
