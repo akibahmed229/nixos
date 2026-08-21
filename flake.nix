@@ -35,7 +35,7 @@
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
     # Home Manager is a Nix-powered tool for reproducible management of the contents of users’ home directories
     home-manager = {
-      url = "github:nix-community/home-manager/master?shallow=1";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Manage your macOS using Nix (Nixpkgs 26.05 will be the last release to support x86_64-darwin;)
