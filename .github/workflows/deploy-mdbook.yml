@@ -29,17 +29,7 @@ jobs:
       #    This creates a `./result` symlink to the built HTML site.
       - name: Build mdBook Site
         run: |
-          nix build .#mdbook \
-            --override-input home-manager github:nix-community/home-manager/master \
-            --override-input nix-on-droid github:nix-community/nix-on-droid/master \
-            --override-input darwin github:nix-darwin/nix-darwin/master \
-            --override-input darwin_x86 github:nix-darwin/nix-darwin/nix-darwin-26.05 \
-            --override-input nur github:nix-community/NUR \
-            --override-input sops-nix github:Mic92/sops-nix \
-            --override-input stylix github:danth/stylix \
-            --override-input spicetify-nix github:Gerg-L/spicetify-nix \
-            --override-input impermanence github:nix-community/impermanence \
-            --override-input nix-index-database "github:Mic92/nix-index-database"
+          nix build .#mdbook
 
       # 4. Upload the built site as an artifact for GitHub Pages.
       - name: Upload GitHub Pages artifact
