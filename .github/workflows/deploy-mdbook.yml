@@ -21,12 +21,13 @@ jobs:
 
       # 2. Install Nix and configure the binary cache for speed.
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v12
+        uses: DeterminateSystems/nix-installer-action@v22
 
       # 3. Build the mdBook site using your flake's `docs` package.
       #    This creates a `./result` symlink to the built HTML site.
       - name: Build mdBook Site
-        run: nix build .#mdbook
+        run: |
+          nix build .#mdbook
 
       # 4. Upload the built site as an artifact for GitHub Pages.
       - name: Upload GitHub Pages artifact
