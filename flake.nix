@@ -38,10 +38,8 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Manage your macOS using Nix (Nixpkgs 26.05 will be the last release to support x86_64-darwin;)
-    nixdarwinpkgs = {
-      url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
-    };
+    # Manage your macOS using Nix (NOTE: Nixpkgs 26.05 will be the last release to support x86_64-darwin;)
+    nixdarwinpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     darwin_x86 = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixdarwinpkgs";
@@ -70,12 +68,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Handle persistent state on systems with ephemeral root storage
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
+    impermanence.url = "github:nix-community/impermanence";
     # Nix User Repository: User contributed nix packages
     nur = {
-      url = "github:nix-community/NUR";
+      url = "git+https://github.com/nix-community/NUR?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Secret management for nixos
