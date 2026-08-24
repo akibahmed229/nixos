@@ -1,31 +1,22 @@
-# Data Structures Mastery Guide
+# The Algorithms Handbook
+### Roadmap, Complexity Primer, Comparison Tables, Decision Guide & Cheat Sheets
+
+---
 
 ## How This Guide Is Organized
 
-This is a multi-file textbook. Because doing every data structure justice (theory, internal working, complexities with *why*, C++ implementation, dry run, interview questions, practice problems) takes real space, each data structure gets its **own chapter file**. This file is the spine of the whole guide — the roadmap, the "which structure do I pick" decision engine, and the comparison tables you'll come back to again and again.
+Like the companion Data Structures guide, this is a multi-file textbook — each algorithm (or tight cluster of related algorithms) gets its own chapter, following a consistent 15-section template (Introduction → Intuition → Step-by-Step Working → Complexity → Advantages/Limitations → Real-World Applications → C++ Implementation → Code Walkthrough → Dry Run → Complexity Table → Common Mistakes → Interview Questions → Practice Problems → Summary). This file is the spine: the roadmap, the complexity-analysis primer every later chapter assumes, the pattern-recognition decision tree, comparison tables, and cheat sheets.
 
-**Complete table of contents (all chapters delivered):**
+**Chapters delivered so far:**
 - `00_roadmap_and_strategy.md` ← you are here
-- `01_arrays.md`
-- `02_strings.md`
-- `03_linked_lists.md`
-- `04_stack_and_queue.md`
-- `05_heaps.md`
-- `06_hash_tables.md`
-- `07_binary_tree_and_bst.md`
-- `08_avl_tree.md`
-- `09_trie.md`
-- `10_btree_overview.md`
-- `11_graphs_part1_bfs_dfs.md`
-- `12_topological_sort.md`
-- `13_minimum_spanning_tree.md`
-- `14_shortest_path.md`
-- `15_segment_tree.md`
-- `16_fenwick_tree.md`
-- `17_disjoint_set_union.md`
-- `18_skip_list.md`
-- `19_bloom_filter.md`
-- `20_lru_cache.md` ← capstone
+- `01_binary_search.md`
+- `02_simple_sorts.md` (Bubble, Selection, Insertion)
+- `03_merge_sort.md`
+- `04_quick_sort.md`
+- `05_heap_sort.md`
+
+**Coming next (say the word and I'll build them in the same depth):**
+Non-Comparison Sorts (Counting/Radix/Bucket) → Two Pointer / Sliding Window / Prefix Sum → Greedy → Backtracking → Dynamic Programming → Graph Algorithms → Tree Algorithms → String Algorithms
 
 ---
 
@@ -34,278 +25,286 @@ This is a multi-file textbook. Because doing every data structure justice (theor
 ```
 Prerequisites
 │
-├── Programming Fundamentals (variables, functions, pointers/references, memory model)
-├── Big-O Analysis (time & space complexity, best/avg/worst case, amortized analysis)
-├── Recursion (call stack, base case, recurrence relations)
+├── Programming Fundamentals
+├── Mathematics Basics (logs, combinatorics, modular arithmetic)
+├── Recursion (call stack, base/recursive case)
+├── Big-O Analysis (this file's Part 0, below)
 │
-├── Linear Data Structures
-│   ├── Array               → foundation for everything; contiguous memory
-│   ├── String               → array of chars + pattern algorithms
-│   ├── Linked List          → breaks the "contiguous" assumption
-│   ├── Stack                → LIFO discipline on top of array/list
-│   └── Queue                → FIFO discipline on top of array/list
+├── Searching
+│   ├── Linear Search           → baseline, no assumptions about data
+│   └── Binary Search            → requires sorted data, halves search space
 │
-├── Hash-Based Structures
-│   ├── Hash Table            → O(1) average lookup, needs arrays + linked lists (chaining)
-│   ├── Hash Map              → key-value variant
-│   └── Hash Set               → key-only variant
+├── Sorting
+│   ├── Bubble / Selection / Insertion   → simple, O(n²), good for teaching invariants
+│   ├── Merge Sort                        → divide & conquer, stable, O(n log n) guaranteed
+│   ├── Quick Sort                         → divide & conquer, in-place, O(n log n) average
+│   ├── Heap Sort                           → uses the Heap (Data Structures guide, Ch.5)
+│   ├── Counting / Radix / Bucket            → non-comparison sorts, O(n+k) under constraints
 │
-├── Trees
-│   ├── Binary Tree            → hierarchical data, needs recursion mastery
-│   ├── BST                    → ordered binary tree, enables O(log n) search
-│   ├── AVL Tree                → self-balancing BST, guarantees O(log n)
-│   ├── Heap                    → priority-ordered complete binary tree
-│   ├── Trie                    → prefix tree, specialized for strings
-│   └── B-Tree (Overview)        → disk-optimized generalization of BST
+├── Recursion & Divide-and-Conquer          → foundation for Merge/Quick Sort, many tree/graph algos
 │
-├── Graphs
-│   ├── Representation (adjacency list/matrix) → needs arrays + linked lists + hash maps
-│   ├── BFS                      → needs Queue
-│   ├── DFS                      → needs Stack/recursion
-│   ├── Topological Sort          → needs DFS + graph theory (DAGs)
-│   ├── MST (Kruskal/Prim)         → needs DSU + Heap
-│   └── Shortest Path (Dijkstra/Bellman-Ford) → needs Heap + Queue
+├── Array/String Techniques
+│   ├── Two Pointer                          → opposite/same direction, fast-slow
+│   ├── Sliding Window                        → fixed/variable window
+│   └── Prefix Sum                             → 1D/2D range-sum precomputation
 │
-└── Advanced Data Structures
-    ├── Segment Tree                → needs Binary Tree + recursion, for range queries
-    ├── Fenwick Tree (BIT)           → needs bit manipulation, lighter alternative to Segment Tree
-    ├── Disjoint Set Union            → needs arrays, for connectivity/MST
-    ├── Skip List                      → needs Linked List, probabilistic alternative to balanced trees
-    ├── Bloom Filter (Overview)         → needs Hashing, probabilistic set membership
-    └── LRU Cache                        → needs Hash Map + Doubly Linked List (capstone project)
+├── Greedy Algorithms                          → needs proof-of-correctness thinking (exchange argument, cut property)
+│
+├── Backtracking                                → needs recursion + state-space thinking
+│
+├── Dynamic Programming                          → needs recursion + overlapping-subproblem recognition
+│
+├── Graph Algorithms                              → needs Stack/Queue/Heap/DSU (Data Structures guide)
+│
+├── Tree Algorithms                                → needs Binary Tree/BST (Data Structures guide)
+│
+├── String Algorithms                               → needs arrays + hashing (KMP/Z/Rabin-Karp already
+│                                                        covered in the Data Structures guide, Ch.2 —
+│                                                        this guide's String chapter cross-references it)
+│
+└── Advanced Algorithms                              → Bitmask DP, DP on trees, meet-in-the-middle,
+                                                          heavy-light decomposition (overview-level)
 ```
 
 ### Why this order?
 
 | Stage | Why it comes here | Prerequisites | Learning Outcome |
 |---|---|---|---|
-| Big-O & Recursion | You cannot reason about *any* data structure's cost without Big-O, and trees/graphs are naturally recursive | Basic programming | Ability to analyze any algorithm's cost and trace recursive calls |
-| Linear structures | Simplest memory models; every later structure is built from these primitives | Big-O, Recursion | Understand contiguous vs. linked memory, LIFO/FIFO discipline |
-| Hashing | Needs arrays (buckets) + linked lists (collision chains) already understood | Arrays, Linked Lists | Understand amortized O(1) and hash collision handling |
-| Trees | Needs recursion fluency; introduces hierarchical (non-linear) thinking | Recursion, Linked Lists | Understand branching structures, balancing, ordered traversal |
-| Graphs | Generalizes trees (cycles allowed, no root); needs Queue/Stack/Heap from earlier | Trees, Stack, Queue, Hashing | Model real-world networks; traversal and optimization algorithms |
-| Advanced structures | Composed from everything above to solve specialized problems (range queries, connectivity, caching) | Trees, Arrays, Hashing, DSU concepts | Solve competitive-programming-level and system-design-level problems |
+| Big-O primer | Every later chapter's "why this complexity" section assumes fluency here | Basic programming | Ability to derive, not just quote, an algorithm's complexity |
+| Searching | Simplest possible algorithms; binary search is the first real "why does halving work" insight | Big-O | Recognize when sorted structure enables faster search |
+| Sorting | Comparison-based sorts teach recursion (merge/quick), invariants (bubble/insertion), and heap reuse (heap sort) | Big-O, arrays | Understand the O(n log n) comparison-sort lower bound and how non-comparison sorts escape it |
+| Recursion/D&C | Merge sort and quick sort are the cleanest possible teaching examples of divide-and-conquer | Recursion basics | Recognize the "divide, solve, combine" pattern everywhere |
+| Two Pointer / Sliding Window / Prefix Sum | Lightweight array techniques that solve a huge fraction of "easy/medium" interview problems | Arrays, recursion | Instant pattern recognition for a whole problem class |
+| Greedy | Needs the discipline of proving local choices lead to a global optimum | Sorting, basic proof intuition | Recognize when greedy is provably correct vs. when it's just a heuristic |
+| Backtracking | Systematic exhaustive search — a generalization of recursion with pruning | Recursion | Build state-space search with correct pruning |
+| Dynamic Programming | Requires recognizing overlapping subproblems — the single hardest pattern-recognition skill in this guide | Recursion, backtracking | Convert exponential recursion into polynomial time via memoization/tabulation |
+| Graph Algorithms | Needs Stack/Queue/Heap/DSU already built in the Data Structures guide | Data Structures Ch.3,4,5,17 | Model and solve connectivity, shortest-path, and ordering problems |
+| Tree Algorithms | Needs BST/Binary Tree fluency | Data Structures Ch.7 | Solve hierarchical structure problems (LCA, diameter, traversal-based DP) |
+| String Algorithms | Builds directly on Data Structures Ch.2 (KMP/Z/Rabin-Karp) | Data Structures Ch.2 | Recognize and apply pattern-matching techniques beyond simple search |
+| Advanced | Combines everything above in novel ways | All prior stages | Handle competitive-programming-level and system-scale problems |
 
-### Suggested Timeline (self-paced, ~10-12 weeks at 1-2 hrs/day)
+### Suggested Timeline (self-paced, ~14-16 weeks at 1-2 hrs/day)
 
 | Week | Focus | Mini Project |
 |---|---|---|
-| 1 | Big-O, Recursion, Arrays, Strings | Implement dynamic array (vector) from scratch |
-| 2 | Linked List (singly, doubly, circular) | Implement a text editor's undo feature with a linked list |
-| 3 | Stack & Queue | Balanced parentheses checker; browser history simulator |
-| 4 | Hash Table / Map / Set | Build your own HashMap with chaining + resizing |
-| 5 | Binary Tree, BST | In-order/pre/post traversal visualizer |
-| 6 | AVL Tree, Heap | Build a priority-based task scheduler |
-| 7 | Trie, B-Tree overview | Autocomplete system |
-| 8 | Graph representation, BFS, DFS | Maze solver |
-| 9 | Topological Sort, MST, Shortest Path | Course scheduler; network cost optimizer |
-| 10 | Segment Tree, Fenwick Tree, DSU | Range-sum query system; Kruskal's MST with DSU |
-| 11 | Skip List, Bloom Filter | Probabilistic membership tester |
-| 12 | LRU Cache (capstone) + full mock interviews | Production-grade LRU cache with O(1) ops |
+| 1 | Big-O primer, Linear/Binary Search | Implement binary search + all its variants (lower/upper bound, search on answer) |
+| 2 | Bubble, Selection, Insertion Sort | Visualize each sort's swap count on the same input |
+| 3 | Merge Sort, Quick Sort | Benchmark both on random vs. adversarial (sorted, reverse-sorted) input |
+| 4 | Heap Sort, Counting/Radix/Bucket Sort | Sort 1M integers with each algorithm, compare wall-clock time |
+| 5 | Two Pointer, Sliding Window | Solve 10 problems using each pattern |
+| 6 | Prefix Sum (1D and 2D) | Build a range-query answering tool for a matrix |
+| 7 | Greedy Algorithms | Implement Huffman Coding end-to-end (encode + decode a real file) |
+| 8 | Backtracking | N-Queens and Sudoku solvers with pruning visualization |
+| 9-10 | Dynamic Programming (1D, 2D, knapsack-family) | Solve the "DP 100" style progressive problem set |
+| 11 | Graph Algorithms — traversal & shortest path | Build a mini route-planner using Dijkstra |
+| 12 | Graph Algorithms — MST, topological sort, DSU | Implement Kruskal's + a build-system dependency resolver |
+| 13 | Tree Algorithms | LCA + tree diameter on a randomly generated tree |
+| 14 | String Algorithms | Implement KMP/Z/Rabin-Karp from scratch, benchmark against `std::string::find` |
+| 15-16 | Advanced topics + full mock interviews | Timed mixed problem sets across all patterns |
 
 ---
 
-## Part 3 — Comparison Tables
+## Part 0 — Complexity Analysis Primer
 
-### Array vs Linked List
+*(Every later chapter's "why does this complexity occur" explanation assumes this section.)*
 
-| Aspect | Array | Linked List |
-|---|---|---|
-| Memory layout | Contiguous | Scattered, linked via pointers |
-| Access by index | O(1) | O(n) |
-| Insert/Delete at front | O(n) (shift elements) | O(1) |
-| Insert/Delete at end | O(1) amortized (dynamic array) | O(1) if tail pointer kept |
-| Insert/Delete in middle | O(n) | O(n) to find + O(1) to link |
-| Memory overhead | Low (just data) | Higher (data + pointer(s)) |
-| Cache performance | Excellent (locality) | Poor (pointer chasing) |
-| Use case | Random access, fixed/known size ranges | Frequent insert/delete, unknown size |
+**Big-O (Ο)** describes an **upper bound** on growth rate — "this algorithm's cost grows *no faster than* this function, for large enough input." It's the most commonly cited bound because it describes the worst case guarantee.
 
-### Stack vs Queue
+**Big-Omega (Ω)** describes a **lower bound** — "this algorithm's cost grows *at least as fast as* this function." Used to prove a problem's inherent difficulty (e.g., "any comparison-based sort is Ω(n log n)").
 
-| Aspect | Stack | Queue |
-|---|---|---|
-| Discipline | LIFO (Last In, First Out) | FIFO (First In, First Out) |
-| Core ops | push, pop, peek | enqueue, dequeue, front |
-| Typical backing structure | Array or Linked List | Array (circular) or Linked List |
-| Real use | Function call stack, undo, backtracking | Task scheduling, BFS, print queue |
-
-### Queue vs Deque
-
-| Aspect | Queue | Deque (Double-Ended Queue) |
-|---|---|---|
-| Insertion/removal points | Rear (in), Front (out) only | Both ends |
-| Flexibility | Lower | Higher — can act as stack or queue |
-| Use case | Simple FIFO tasks | Sliding window problems, palindrome checks |
-
-### Hash Table vs Tree (BST)
-
-| Aspect | Hash Table | BST |
-|---|---|---|
-| Average search/insert/delete | O(1) | O(log n) |
-| Worst case | O(n) (bad hash/collisions) | O(n) (unbalanced) |
-| Ordering | No inherent order | Sorted order maintained |
-| Range queries | Not supported directly | Supported efficiently |
-| Memory overhead | Moderate (buckets + collision handling) | Moderate (pointers per node) |
-| Use case | Fast lookup, no ordering needed | Sorted data, range queries |
-
-### BST vs AVL vs Red-Black Tree
-
-| Aspect | BST | AVL Tree | Red-Black Tree |
-|---|---|---|---|
-| Balance guarantee | None | Strict (height diff ≤ 1) | Loose (path length ≤ 2× shortest) |
-| Search | O(log n) avg, O(n) worst | O(log n) guaranteed | O(log n) guaranteed |
-| Insert/Delete | O(log n) avg, O(n) worst | O(log n) but more rotations | O(log n), fewer rotations |
-| Rotation frequency | N/A | High (strict balance) | Lower |
-| Use case | Simple, small/random data | Read-heavy workloads | Write-heavy workloads (e.g., Linux CFS, std::map) |
-
-### Heap vs BST
-
-| Aspect | Heap | BST |
-|---|---|---|
-| Structure | Complete binary tree (array-backed) | Not necessarily complete |
-| Ordering | Parent ≤/≥ children only (weak order) | Left < Root < Right (strict order) |
-| Find min/max | O(1) | O(log n) (leftmost/rightmost) |
-| Find arbitrary element | O(n) | O(log n) |
-| Use case | Priority queues, scheduling | Sorted traversal, range search |
-
-### Trie vs Hash Map
-
-| Aspect | Trie | Hash Map |
-|---|---|---|
-| Key type | Strings (sequences) | Any hashable type |
-| Prefix search | O(L) — excellent | Not supported directly |
-| Memory | Higher (node per character) | Lower typically |
-| Ordered iteration | Lexicographic, natural | Not ordered |
-| Use case | Autocomplete, spell-check, IP routing | General key-value lookup |
-
-### BFS vs DFS
-
-| Aspect | BFS | DFS |
-|---|---|---|
-| Data structure used | Queue | Stack (or recursion) |
-| Explores | Level by level | Branch by branch, deep first |
-| Shortest path (unweighted) | Yes | No (not guaranteed) |
-| Memory usage | Can be high (wide graphs) | Can be high (deep graphs) |
-| Use case | Shortest path, level-order, social network "degrees of separation" | Cycle detection, topological sort, connected components |
-
-### Segment Tree vs Fenwick Tree (BIT)
-
-| Aspect | Segment Tree | Fenwick Tree |
-|---|---|---|
-| Build time | O(n) | O(n log n) or O(n) with tricks |
-| Query/Update | O(log n) | O(log n) |
-| Memory | ~4n | ~n |
-| Flexibility | Supports range min/max/gcd/custom ops | Best suited for prefix sums/frequency |
-| Code complexity | Higher | Lower, simpler to implement |
-| Use case | Complex range queries with updates | Simple prefix-sum / frequency-count problems |
-
----
-
-## Part 4 — Decision Guide: "Which Data Structure Should I Choose?"
+**Big-Theta (Θ)** describes a **tight bound** — both upper and lower simultaneously; "this algorithm's cost grows *exactly* at this rate." When people casually say "O(n log n)" for merge sort, they usually mean the tighter Θ(n log n), since merge sort's best, average, and worst case are all the same order.
 
 ```
-START: What is your primary need?
+Growth rate intuition (small → large, for input size n):
+O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ) < O(n!)
+
+Concretely, for n = 1,000,000:
+O(log n)   ≈ 20
+O(n)       = 1,000,000
+O(n log n) ≈ 20,000,000
+O(n²)      = 1,000,000,000,000        ← already impractical
+O(2ⁿ)      = astronomically larger than atoms in the universe
+```
+
+**Time Complexity** measures operations as a function of input size. **Space Complexity** measures extra memory used (beyond the input itself) as a function of input size — always ask "does this include the input, or just auxiliary space?" (convention varies; this guide always states which explicitly).
+
+**Amortized Analysis** answers "what's the *average* cost per operation across a whole sequence, even if individual operations vary wildly?" The canonical example (from the Data Structures guide): a dynamic array's `push_back` is O(n) on the rare occasion it triggers a resize, but O(1) amortized across all pushes, because resizes become exponentially rarer as the array grows — the total cost of all resizes across n pushes sums to O(n), i.e., O(1) each on average.
+
+**Why "why" matters more than "what":** knowing merge sort is "O(n log n)" is memorization. Knowing it's O(n log n) because the recursion splits the array into log n levels, and each level does O(n) total work merging — that's understanding, and it's what lets you derive the complexity of an algorithm you've never seen before, which is exactly what interviews and novel real-world problems demand.
+
+---
+
+## Part 4 — Algorithm Pattern Recognition (Decision Tree)
+
+```
+START: What does the problem look like?
 │
-├── Need fast lookup by key, don't care about order?
-│   └── Hash Map / Hash Set  → O(1) average
+├── Is the input already sorted, or can you sort it cheaply, and you need to find something?
+│   ├── Exact value → Binary Search — O(log n)
+│   ├── Boundary/count ("first index ≥ X", "count of elements ≤ X") → Lower/Upper Bound Binary Search
+│   └── The "found value" itself is monotonic in some parameter you control → Binary Search on the Answer
 │
-├── Need data kept in sorted order AND fast lookup?
-│   ├── Frequent reads, few writes → AVL Tree
-│   └── Frequent writes → Red-Black Tree (or std::map in practice)
+├── Do you need to reorder the data itself?
+│   ├── Need stability + guaranteed O(n log n) + don't mind extra memory → Merge Sort
+│   ├── Need in-place + good average case, memory-constrained → Quick Sort
+│   ├── Already have (or can build) a heap, or need O(n log n) worst-case + in-place → Heap Sort
+│   └── Keys are small integers / bounded range → Counting Sort / Radix Sort / Bucket Sort (O(n+k))
 │
-├── Need to repeatedly get the min/max element (priority)?
-│   └── Heap (Priority Queue)  → O(log n) insert/extract-min
+├── Does the problem involve a contiguous subarray/substring with a running condition?
+│   ├── Fixed-size window ("max sum of any k consecutive elements") → Sliding Window (fixed)
+│   ├── Variable-size window ("smallest window containing X") → Sliding Window (variable)
+│   └── Need repeated range-sum queries over a static array → Prefix Sum
 │
-├── Need prefix-based search (autocomplete, dictionary)?
-│   └── Trie
+├── Does the problem involve pairs/triples in a sorted array, or a cycle/midpoint in a sequence?
+│   ├── "Find pair summing to target" in sorted array → Two Pointer (opposite direction)
+│   ├── "Remove duplicates in-place", "partition" → Two Pointer (same direction)
+│   └── "Detect a cycle", "find the middle" → Fast & Slow Pointer
 │
-├── Need to process elements in the order they arrived?
-│   └── Queue (FIFO)
+├── Are you making a sequence of choices, and does picking the LOCALLY best option provably lead to
+│   the GLOBALLY best outcome (provable via exchange argument or matroid/cut-property structure)?
+│   ├── Yes, and you can prove it → Greedy
+│   └── Not provable, but choices interact / overlap → likely Dynamic Programming instead
 │
-├── Need to undo actions / match nested structures (parentheses, recursion)?
-│   └── Stack (LIFO)
+├── Do you need to explore ALL valid configurations (or find one that satisfies constraints),
+│   with the ability to abandon a branch early once it's clearly invalid?
+│   └── Backtracking (N-Queens, Sudoku, generating permutations/subsets/combinations)
 │
-├── Need frequent insert/delete at arbitrary positions, size changes a lot?
-│   └── Linked List (Doubly Linked if you need backward traversal)
+├── Does the problem ask for an optimal value (min/max/count) over choices, AND do smaller
+│   subproblems repeat/overlap when you try to solve it recursively?
+│   ├── Yes → Dynamic Programming (memoization if recursion is natural, tabulation for full control)
+│   └── No overlap → plain recursion or divide-and-conquer is enough, no DP needed
 │
-├── Need random access by index, size relatively fixed?
-│   └── Array / Dynamic Array (Vector)
+├── Does the problem involve a network of connections (vertices/edges)?
+│   ├── Need to visit everything / find connectivity → BFS or DFS
+│   ├── Need shortest path, non-negative weights → Dijkstra
+│   ├── Need shortest path, negative weights possible → Bellman-Ford
+│   ├── Need shortest path between ALL pairs → Floyd-Warshall
+│   ├── Need cheapest way to connect everything → MST (Kruskal's or Prim's)
+│   ├── Need a valid processing order given "must precede" constraints → Topological Sort
+│   └── Need to repeatedly answer "are these connected?" as edges are added → Union-Find (DSU)
 │
-├── Modeling relationships/connections (networks, maps, dependencies)?
-│   ├── Need shortest path (unweighted) → BFS
-│   ├── Need shortest path (weighted, non-negative) → Dijkstra (Heap-based)
-│   ├── Need shortest path (negative weights allowed) → Bellman-Ford
-│   ├── Need to detect cycles / order tasks by dependency → DFS + Topological Sort
-│   └── Need minimum connections to link everything → MST (Kruskal + DSU, or Prim + Heap)
+├── Does the problem involve a hierarchical (tree) structure specifically?
+│   ├── Need to visit nodes in a specific order → Tree Traversal (pre/in/post/level-order)
+│   ├── Need the common ancestor of two nodes → Lowest Common Ancestor
+│   └── Need the longest path between any two nodes → Tree Diameter
 │
-├── Need to answer "sum/min/max of range [L,R]" repeatedly, with updates?
-│   ├── Simple prefix sums, point updates → Fenwick Tree (BIT)
-│   └── Complex range queries (min, gcd, lazy propagation) → Segment Tree
-│
-├── Need to quickly check "are these two elements connected/grouped"?
-│   └── Disjoint Set Union (Union-Find)
-│
-├── Need probabilistic "have I seen this before" with minimal memory, false positives OK?
-│   └── Bloom Filter
-│
-└── Need a cache that evicts least-recently-used items in O(1)?
-    └── LRU Cache (Hash Map + Doubly Linked List)
+└── Does the problem involve matching/searching within text?
+    ├── Single pattern, need airtight worst-case guarantee → KMP or Z-Function
+    ├── Multiple patterns, or approximate/hash-based matching acceptable → Rabin-Karp / Rolling Hash
+    └── Many prefix queries against a fixed dictionary → Trie (see Data Structures guide, Ch.9)
 ```
 
 **Reasoning behind key decisions:**
-- **Hash Map over BST for pure lookup:** if you never need sorted order or range queries, paying O(log n) instead of O(1) is wasted cost.
-- **Heap over sorted array for priority queues:** maintaining a fully sorted array costs O(n) per insert; a heap only costs O(log n) because it only enforces partial order.
-- **Fenwick Tree over Segment Tree when possible:** simpler code, less memory — reach for Segment Tree only when you need operations Fenwick can't express cleanly (range min/max, complex merges, lazy propagation).
-- **DSU over BFS/DFS for connectivity queries:** if you need repeated "are A and B connected" queries with a changing graph (edges added over time), DSU answers in near O(1) amortized; recomputing BFS/DFS each time would be far more expensive.
+- **Binary Search requires monotonicity, not just sorted data** — the real requirement is "can I define a yes/no predicate that's false-then-true (or true-then-false) across the search space?" Sorted arrays are the most common such space, but "binary search on the answer" applies the same halving logic to any monotonic predicate, even without an explicit array (e.g., "can I complete all tasks within X hours?").
+- **Greedy vs. DP is the single most-tested distinction in interviews:** greedy commits to a choice and never revisits it, which only works when you can *prove* no future information could ever make an earlier greedy choice regrettable. The moment a locally-best choice can be invalidated by later context, you need DP's "try all options, remember the best" approach instead.
+- **Backtracking vs. DP:** both explore a state space, but backtracking is for *enumeration/existence* problems (find all/any valid configurations) with pruning, while DP is for *optimization/counting* problems with overlapping subproblems where memoizing repeated states turns exponential exploration into polynomial time.
 
 ---
 
-## Part 6 — Master Cheat Sheet (Complexity Recap)
+## Part 5 — Comparison Tables
 
-| Structure | Access | Search | Insert | Delete | Space |
-|---|---|---|---|---|---|
-| Array | O(1) | O(n) | O(n) | O(n) | O(n) |
-| Dynamic Array | O(1) | O(n) | O(1) amortized | O(n) | O(n) |
-| Singly Linked List | O(n) | O(n) | O(1)* | O(1)* | O(n) |
-| Doubly Linked List | O(n) | O(n) | O(1)* | O(1)* | O(n) |
-| Stack | O(n) | O(n) | O(1) | O(1) | O(n) |
-| Queue | O(n) | O(n) | O(1) | O(1) | O(n) |
-| Hash Table (avg) | — | O(1) | O(1) | O(1) | O(n) |
-| Hash Table (worst) | — | O(n) | O(n) | O(n) | O(n) |
-| BST (avg) | O(log n) | O(log n) | O(log n) | O(log n) | O(n) |
-| BST (worst) | O(n) | O(n) | O(n) | O(n) | O(n) |
-| AVL Tree | O(log n) | O(log n) | O(log n) | O(log n) | O(n) |
-| Heap | O(1) min/max | O(n) | O(log n) | O(log n) | O(n) |
-| Trie | — | O(L) | O(L) | O(L) | O(alphabet × nodes) |
-| Segment Tree | — | O(log n) | O(log n) | O(log n) | O(n) |
-| Fenwick Tree | — | O(log n) | O(log n) | O(log n) | O(n) |
-| DSU (with path compression + union by rank) | — | ~O(α(n)) | ~O(α(n)) | — | O(n) |
+### Linear Search vs. Binary Search
 
-*with pointer to node already in hand; O(n) if you must search first.
+| Aspect | Linear Search | Binary Search |
+|---|---|---|
+| Precondition | None | Data must be sorted (or monotonic predicate) |
+| Time Complexity | O(n) | O(log n) |
+| Space Complexity | O(1) | O(1) iterative, O(log n) recursive |
+| Use case | Unsorted/small data, one-off search | Repeated searches on sorted/static data |
 
-**Memory tricks:**
-- "Array = fast read, slow write in the middle." "Linked List = slow read, fast write anywhere (once located)."
-- "Heap gives you the *best* item fast, not *any* item fast."
-- "BST is sorted array + fast insert, at the cost of possible imbalance."
-- "Trie trades memory for prefix-speed."
-- "DSU: think of it as `α(n)` ≈ constant for all practical n — that's why Union-Find is called 'almost O(1)'."
+### Merge Sort vs. Quick Sort
+
+| Aspect | Merge Sort | Quick Sort |
+|---|---|---|
+| Worst-case time | O(n log n) — guaranteed | O(n²) — rare with good pivot strategy, but possible |
+| Average-case time | O(n log n) | O(n log n) |
+| Space | O(n) extra (not in-place) | O(log n) extra (in-place, recursion stack) |
+| Stability | Stable | Not stable (standard implementation) |
+| Practical speed | Slightly slower (memory allocation, copying) | Usually faster in practice (better cache locality, in-place) |
+| Use case | Need stability, guaranteed worst case, external/linked-list sorting | General-purpose, memory-constrained, average-case matters more than worst-case |
+
+### Greedy vs. Dynamic Programming
+
+| Aspect | Greedy | Dynamic Programming |
+|---|---|---|
+| Decision process | Commit to locally optimal choice, never revisit | Explore/remember all relevant sub-decisions |
+| Correctness requirement | Must PROVE local optimality → global optimality | Requires identifying overlapping subproblems + optimal substructure |
+| Time complexity | Usually faster (O(n log n) or O(n)) | Usually slower (O(n²), O(n·k), etc. depending on state space) |
+| Example | Activity Selection, Huffman Coding | Knapsack, LCS, LIS, Coin Change |
+| When greedy fails | Coin Change with arbitrary denominations (not canonical system) — greedy can give a suboptimal answer | — |
+
+### Backtracking vs. Branch and Bound
+
+| Aspect | Backtracking | Branch and Bound |
+|---|---|---|
+| Goal | Find any/all valid solutions satisfying constraints | Find the OPTIMAL solution among many valid ones |
+| Pruning criterion | Constraint violation (this branch is invalid) | Bound comparison (this branch can't beat the best found so far, even if valid) |
+| Typical problems | N-Queens, Sudoku, permutations/subsets | Traveling Salesman, job scheduling with cost bounds |
+| Complexity | Still exponential worst case, but pruning helps enormously in practice | Also exponential worst case, but bound-based pruning can eliminate huge portions of the search space |
+
+### Binary Search vs. Linear Search — see above (kept together intentionally for quick reference)
+
+### Prim's vs. Kruskal's — see the Data Structures guide, Chapter 13, for the full comparison (MST algorithms are covered there since they're graph-structure-driven)
+
+### Dijkstra's vs. Bellman-Ford's — see the Data Structures guide, Chapter 14, for the full comparison
+
+### Memoization vs. Tabulation
+
+| Aspect | Memoization (Top-Down) | Tabulation (Bottom-Up) |
+|---|---|---|
+| Direction | Start from the original problem, recurse down, cache results | Start from base cases, build up to the original problem |
+| Implementation style | Recursive + a cache (map/array) | Iterative, filling a table (usually an array) |
+| Stack usage | Uses the call stack — risk of stack overflow for deep recursion | No recursion — no stack overflow risk |
+| Solves only needed subproblems? | Yes — only computes states actually reached | No — typically computes all states up to the target, even unneeded ones |
+| Ease of writing | Often more intuitive — mirrors the natural recursive definition | Requires figuring out the correct iteration order upfront |
+| Typical performance | Slightly slower (function call overhead) | Slightly faster (no call overhead, better cache behavior) |
+
+---
+
+## Part 6 — Master Cheat Sheet
+
+### Complexity Recap Across Categories
+
+| Category | Typical Best Case | Typical Worst Case | Typical Space |
+|---|---|---|---|
+| Linear Search | O(1) | O(n) | O(1) |
+| Binary Search | O(1) | O(log n) | O(1) |
+| Bubble/Selection/Insertion Sort | O(n) or O(n²) (varies) | O(n²) | O(1) |
+| Merge Sort | O(n log n) | O(n log n) | O(n) |
+| Quick Sort | O(n log n) | O(n²) | O(log n) |
+| Heap Sort | O(n log n) | O(n log n) | O(1) |
+| Counting/Radix Sort | O(n+k) | O(n+k) | O(n+k) |
+| Two Pointer / Sliding Window | O(n) | O(n) | O(1) |
+| Prefix Sum (query after build) | O(1) query, O(n) build | O(1) query | O(n) |
+| Backtracking (general) | Problem-dependent | O(bᵏ) (branching factor b, depth k) | O(k) |
+| Dynamic Programming | O(states × transition cost) | Same (DP has no "lucky" best case typically) | O(states) or O(1D slice) with optimization |
+| BFS / DFS | O(V+E) | O(V+E) | O(V) |
+| Dijkstra's | O(E log V) | O(E log V) | O(V) |
+| Floyd-Warshall | O(V³) | O(V³) | O(V²) |
+
+### Memory Tricks
+
+- "Binary Search halves; Linear Search crawls."
+- "Merge Sort divides evenly and merges smartly (guaranteed, not in-place); Quick Sort divides unevenly around a pivot but usually wins the speed race (in-place, not guaranteed)."
+- "Greedy: prove first, then trust. DP: don't trust, try everything, remember what worked."
+- "Backtracking asks 'is this valid?' Branch and Bound asks 'can this still win?'"
+- "If subproblems overlap, memoize. If they don't, plain recursion/divide-and-conquer is already optimal."
 
 ---
 
 ## Interview Readiness Checklist (fill in as you complete each chapter)
 
-- [ ] Arrays — implemented dynamic array, solved 10+ problems
-- [ ] Strings — pattern matching (KMP/Z-function), solved 10+ problems
-- [ ] Linked Lists — reversal, cycle detection, merge, solved 10+ problems
-- [ ] Stack/Queue — monotonic stack, sliding window max, solved 10+ problems
-- [ ] Hashing — collision handling explained, solved 10+ problems
-- [ ] Trees — all traversals, balancing explained, solved 10+ problems
-- [ ] Heap — build-heap in O(n) explained, solved 10+ problems
-- [ ] Trie — autocomplete built, solved 5+ problems
-- [ ] Graphs — BFS/DFS/topo sort/MST/shortest path all implemented, solved 15+ problems
-- [ ] Advanced — Segment Tree, Fenwick, DSU implemented, solved 10+ problems
-- [ ] Capstone — LRU Cache built and can explain O(1) design in an interview
+- [ ] Searching — binary search + all boundary variants implemented, 10+ problems solved
+- [ ] Sorting — all 9 algorithms implemented, can explain stability/in-place trade-offs, 10+ problems
+- [ ] Two Pointer / Sliding Window / Prefix Sum — instant pattern recognition, 15+ problems
+- [ ] Greedy — can construct an exchange-argument proof for at least 2 classic problems
+- [ ] Backtracking — N-Queens and Sudoku implemented with pruning, 10+ problems
+- [ ] Dynamic Programming — comfortable converting recursion → memoization → tabulation → space-optimized, 20+ problems
+- [ ] Graph Algorithms — all traversal/shortest-path/MST/topo-sort algorithms implemented, 15+ problems
+- [ ] Tree Algorithms — LCA and diameter implemented, 10+ problems
+- [ ] String Algorithms — KMP/Z/Rabin-Karp implemented, 10+ problems
+- [ ] Mixed mock interviews — can identify the correct pattern within 2 minutes of reading a new problem
 
 ---
 
-**Next up:** open `01_arrays.md` for the full 15-section deep-dive chapter on Arrays, built to the exact template we'll repeat for every remaining structure. Tell me which structure you want next (String, Linked List, Stack/Queue, Hash Table, Trees, Graphs, or Advanced) and I'll build it to this same depth.
+**Next up:** open `01_binary_search.md` for the full 15-section deep-dive chapter on Binary Search, built to the exact template we'll repeat for every remaining algorithm. Tell me which cluster you want next (Non-Comparison Sorts, Two Pointer/Sliding Window/Prefix Sum, Greedy, Backtracking, Dynamic Programming, Graph Algorithms, Tree Algorithms, or String Algorithms) and I'll build it to this same depth.
