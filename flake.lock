@@ -857,10 +857,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1787856788,
-        "narHash": "sha256-3ps2uKqfNKDUFKPQedjCnKWysKwRosebRfNPfodQJaU=",
+        "lastModified": 1787862751,
+        "narHash": "sha256-uJl3PzVU5KfQzTrzKOSFK09aFVI+FshzQa47Ed2B2vM=",
         "ref": "refs/heads/main",
-        "rev": "d9d9a53aea926b915bd81e4c8a0ba1b1bc64d9ab",
+        "rev": "53e5a56742d134bd7d9c8204235ae1d5c4773eda",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/nix-community/NUR"
