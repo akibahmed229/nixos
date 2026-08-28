@@ -29,23 +29,32 @@ final: prev: {
   #   };
   # });
 
+  udisks = prev.udisks.overrideAttrs (oldAttrs: {
+    src = prev.fetchFromGitHub {
+      owner = "storaged-project";
+      repo = "udisks";
+      tag = "udisks-2.11.2";
+      hash = "sha256-bzTposLFl8jrRr+MphV8uM60TBFPuvwEKBUgVlq1YNo=";
+    };
+  });
+
   # ===========================================================================
   # SECTION 2: SCOPED OVERRIDES (Python, Lua, etc.)
   # Languages with their own package managers inside Nix need 'overrideScope'.
   # ===========================================================================
 
-  python3Packages = prev.python3Packages.overrideScope (pythonFinal: pythonPrev: {
-    # CURRENT FIX: picosvg
-    # We disable tests because they are currently broken upstream/in nixpkgs
-    # picosvg = pythonPrev.picosvg.overridePythonAttrs (old: {
-    #   doCheck = false;
-    # });
+  # python3Packages = prev.python3Packages.overrideScope (pythonFinal: pythonPrev: {
+  # CURRENT FIX: picosvg
+  # We disable tests because they are currently broken upstream/in nixpkgs
+  #   picosvg = pythonPrev.picosvg.overridePythonAttrs (old: {
+  #     doCheck = false;
+  #   });
 
-    # Example: Adding a missing dependency to a python package
-    # requests = pythonPrev.requests.overridePythonAttrs (old: {
-    #   propagatedBuildInputs = old.propagatedBuildInputs ++ [ pythonPrev.setuptools ];
-    # });
-  });
+  # Example: Adding a missing dependency to a python package
+  #   requests = pythonPrev.requests.overridePythonAttrs (old: {
+  #     propagatedBuildInputs = old.propagatedBuildInputs ++ [ pythonPrev.setuptools ];
+  #   });
+  # });
 
   # ===========================================================================
   # SECTION 3: ADDING NEW PACKAGES
