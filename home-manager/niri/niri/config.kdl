@@ -397,7 +397,9 @@ window-rule {
     match app-id=r#"com.saivert.pwvucontrol$"# 
     match app-id=r#"nm-connection-editor$"# 
     match app-id=r#"org.kde.ark$"# 
-    match app-id=r#"openrgb$"# 
+    match app-id=r#"org.openrgb.OpenRGB$"# 
+    match app-id=r#"org.gnome.Calculator$"# 
+    match app-id=r#"org.gnome.Calendar$"# 
     open-floating true
 }
 
