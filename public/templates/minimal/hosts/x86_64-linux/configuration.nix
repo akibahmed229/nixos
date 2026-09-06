@@ -142,7 +142,7 @@
 
       auto-optimise-store = true;
       # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
+      experimental-features = ["nix-command" "flakes"];
       # Opinionated: disable global registry
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574

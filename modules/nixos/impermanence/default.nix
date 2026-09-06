@@ -320,10 +320,10 @@ in {
     ];
 
     # 2e.  For System Logs
-    services.journald.extraConfig = ''
+    services.journald.settings.Journal = {
       # Keep a maximum of 500MB of logs on disk
-      SystemMaxUse=500M
-    '';
+      SystemMaxUse = "500M";
+    };
 
     # 2f. Programs
     programs.fuse.userAllowOther = true;
