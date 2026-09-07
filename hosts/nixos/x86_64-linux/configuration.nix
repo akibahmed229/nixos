@@ -15,8 +15,8 @@
     {programs.nix-index-database.comma.enable = true;}
   ];
 
-  # Custom nixos modules
-  nm = {
+  # Custom nixos modules (Disable for WSL)
+  nm = lib.mkIf (system.name != "laptop") {
     # Dual Booting using grub
     grub.en = true;
 
@@ -28,7 +28,7 @@
   networking.hostName = system.name; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = lib.mkDefault true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = lib.mkIf (system.name != "laptop") (lib.mkDefault true);
   # systemd.services.NetworkManager-wait-online.enable = false; # some ssystemd services may require network to be up before starting.
 
   # Set your time zone.
@@ -203,7 +203,7 @@
     };
   };
 
-  boot = {
+  boot = lib.mkIf (system.name != "laptop") {
     # Disable init=/bin/sh as a kernel parameter to prevent root access
     loader.systemd-boot.editor = lib.mkForce false;
 

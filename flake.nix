@@ -38,6 +38,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # NixOS on WSL
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Manage your macOS using Nix (NOTE: Nixpkgs 26.05 will be the last release to support x86_64-darwin;)
     nixdarwinpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     darwin_x86 = {

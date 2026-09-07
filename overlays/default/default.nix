@@ -29,15 +29,6 @@ final: prev: {
   #   };
   # });
 
-  udisks = prev.udisks.overrideAttrs (oldAttrs: {
-    src = prev.fetchFromGitHub {
-      owner = "storaged-project";
-      repo = "udisks";
-      tag = "udisks-2.11.2";
-      hash = "sha256-bzTposLFl8jrRr+MphV8uM60TBFPuvwEKBUgVlq1YNo=";
-    };
-  });
-
   # ===========================================================================
   # SECTION 2: SCOPED OVERRIDES (Python, Lua, etc.)
   # Languages with their own package managers inside Nix need 'overrideScope'.
