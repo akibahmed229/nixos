@@ -14,6 +14,7 @@
 
   # Basic WSL Configuration
   wsl.enable = true;
+  wsl.usbip.enable = true; # Automatically provisions required binaries for usbipd-win
   wsl.defaultUser = user; # Uses "akib" from your flake.nix
 
   # Optional but recommended for WSL:
