@@ -133,7 +133,7 @@ in {
     };
 
     # Home-Manager users
-    home-manager = mkIf (cfg.nixosUsers.en && cfg.homeUsers.en) {
+    home-manager = mkIf (cfg.homeUsers.en) {
       users = builtins.listToAttrs (map
         (u: {
           inherit (u) name;
