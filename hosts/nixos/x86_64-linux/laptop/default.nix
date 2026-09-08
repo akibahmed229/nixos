@@ -18,6 +18,7 @@
 
     usbip.autoAttach = [
       "1-15"
+      "1-6"
     ];
 
     wslConf = {
@@ -73,6 +74,7 @@
     nodejs_26
     rustc
     cargo
+    dotnetCorePackages.sdk_10_0
     jq
     sqlite
     android-tools
@@ -80,6 +82,6 @@
     git
     lazygit
     gh
-    dotnetCorePackages.sdk_10_0
+    cryptsetup
   ];
 }
