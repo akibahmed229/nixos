@@ -7,15 +7,11 @@
   ...
 }: {
   imports = [
-    # Import the wsl module directly from your flake inputs
     inputs.nixos-wsl.nixosModules.default
   ];
 
-  # ---------------------------------------- Custom Nixos Modules ----------------------------------------------------
   nm = {
-    # ------------------- Per-system user configuration -----------------------
     setUser = {
-      # see modules/custom/nixos/user
       name = user;
       usersPath = ./users/.;
       nixosUsers.en = false;
@@ -31,8 +27,8 @@
   # Basic WSL Configuration
   wsl = {
     enable = true;
-    usbip.enable = true; # Automatically provisions required binaries for usbipd-win
-    defaultUser = user; # Uses "akib" from your flake.nix
+    usbip.enable = true;
+    defaultUser = user;
 
     usbip.autoAttach = [
       "1-15"
@@ -54,51 +50,32 @@
         enabled = true;
         appendWindowsPath = true;
       };
-
-      network = {
-        hostname = system.name;
-        generateHosts = true;
-        generateResolvConf = true;
-      };
     };
 
-    environment.systemPackages = with pkgs; [
-      gcc # GNU Compiler Collection.
-      cmake # Build system.
-      gnumake # Build tool.
-      libtool # Library support tool.
-      meson # Build system.
-      gettext # GNU internationalization and localization library.
-      python314 # Python programming language.
-      python314Packages.uv # python uv pkgs manager.
-      nodejs_26 # JavaScript runtime.
-      rustc # Rust programming language and tools.
-      cargo # Rust package manager.
-      # Development environment tools.
-      # devbox
-      # distrobox
-      # yarn # JavaScript package manager.
-      jq # JSON processor.
-      sqlite
-      # Android development tools.
-      # android-studio
-      android-tools
-      jdk25 # Java Development Kit
-      # jetbrains.pycharm # Python IDE.
-      # jetbrains.idea # Java IDE.
-      # godot # Multi-platform 2D and 3D game engine
-      postman # API development environment.
-      # vscode # Code editor.
-      # zed-editor # Code editor.
-      git # Version control system.
-      # github-desktop # Git client.
-      lazygit # Git UI.
-      gh # GitHub CLI.
-      # self.packages.${pkgs.stdenv.hostPlatform.system}.ciscoPacketTracer
-      dotnetCorePackages.sdk_10_0
-    ];
+    startMenuLaunchers = true;
   };
 
-  # Optional but recommended for WSL:
-  wsl.startMenuLaunchers = true;
+  # System packages must be declared at the top level
+  environment.systemPackages = with pkgs; [
+    gcc
+    cmake
+    gnumake
+    libtool
+    meson
+    gettext
+    python314
+    python314Packages.uv
+    nodejs_26
+    rustc
+    cargo
+    jq
+    sqlite
+    android-tools
+    jdk25
+    postman
+    git
+    lazygit
+    gh
+    dotnetCorePackages.sdk_10_0
+  ];
 }
