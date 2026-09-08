@@ -53,6 +53,11 @@
         inherit state-version;
       };
     };
+
+    # ------------------------- Some Utils ------------------------------------
+    bbr.en = true;
+    fhs.en = true;
+    dbus.en = true;
   };
 
   # System packages must be declared at the top level

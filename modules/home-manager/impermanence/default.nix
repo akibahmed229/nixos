@@ -3,7 +3,6 @@
   config,
   inputs,
   ...
-  # Note: inputs is no longer strictly needed here unless used elsewhere
 }:
 with lib; let
   cfg = config.hm.impermanence;
@@ -24,12 +23,9 @@ in {
     };
   };
 
-  # imports = [inputs.impermanence.homeManagerModules.impermanence]; need to en if don't use in nixos
-
   # config = mkIf cfg.en {
-  #   home.persistence."${cfg.persistentStoragePath}${config.home.homeDirectory}" = {
-  #     allowOther = cfg.allowOther;
-
+  #   # FIX: Only use the base persistentStoragePath ("/persist")
+  #   home.persistence."${cfg.persistentStoragePath}" = {
   #     directories = [
   #       "Desktop"
   #       "Downloads"
@@ -43,6 +39,7 @@ in {
   #       "Postman"
   #       "Games"
   #       ".vscode"
+  #       ".vscode-server" # CRITICAL: Prevents VS Code Remote from breaking
   #       ".docker"
   #       ".mysql"
   #       ".rustup"

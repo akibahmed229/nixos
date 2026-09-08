@@ -31,13 +31,10 @@
     "audio"
     "render"
     "scanner"
-    "libvirtd"
-    "kvm"
     "disk"
     "input"
     "adbusers"
     "wireshark"
-    "openrazer"
   ];
 
   # Default shell
