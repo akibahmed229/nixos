@@ -45,7 +45,7 @@
     setUser = {
       name = user;
       usersPath = ./users/.;
-      nixosUsers.en = false;
+      nixosUsers.en = true;
       homeUsers.en = true;
 
       system = {
