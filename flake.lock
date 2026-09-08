@@ -748,11 +748,11 @@
     },
     "nixdarwinpkgs": {
       "locked": {
-        "lastModified": 1788645589,
-        "narHash": "sha256-efzwl1LfOTAneLY06gmqeYS4vroDR1utvBqstsdvZyQ=",
+        "lastModified": 1788807765,
+        "narHash": "sha256-J9oC0bKnkXUrMegqRTXVkyDFJ0gn2U/Qpoo9HgGMQmA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8b6d0ac8759bbc2499386ef5bcd7f11ee7f7ff52",
+        "rev": "93108a538f079596c9a16c72cf03e9322782b6dd",
         "type": "github"
       },
       "original": {
@@ -895,10 +895,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1788810939,
-        "narHash": "sha256-dSxatHvruP8pUnmyY75vdOQuylTAB2z5Tploxynzn4g=",
+        "lastModified": 1788840370,
+        "narHash": "sha256-XnjQBHag/7OZceZ9ma5UELodt7by3vdviJAlYCaFhmU=",
         "ref": "refs/heads/main",
-        "rev": "2ce3ccecbaa8b60db03902b6bac6b2f81a6e1aa7",
+        "rev": "2aa20b03e571a02c5623ed3f9064de3770b7642e",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/nix-community/NUR"
