@@ -72,7 +72,6 @@
     sqlite
     android-tools
     jdk25
-    postman
     git
     lazygit
     gh
