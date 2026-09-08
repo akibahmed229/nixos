@@ -176,9 +176,6 @@
 
     # Not officially in the specification
     XDG_BIN_HOME = "$HOME/.local/bin";
-    PATH = [
-      "$HOME/.local/bin"
-    ];
   };
 
   # Enable the OpenSSH daemon.

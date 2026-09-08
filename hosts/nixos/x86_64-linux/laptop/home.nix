@@ -11,7 +11,6 @@ in {
   hm = lib.mkMerge [
     {
       nvim.en = true;
-      emacs.en = true;
     }
 
     (lib.mkIf (user == "akib") {
