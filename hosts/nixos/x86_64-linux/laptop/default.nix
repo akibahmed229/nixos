@@ -10,20 +10,6 @@
     inputs.nixos-wsl.nixosModules.default
   ];
 
-  nm = {
-    setUser = {
-      name = user;
-      usersPath = ./users/.;
-      nixosUsers.en = false;
-      homeUsers.en = true;
-
-      system = {
-        inherit (system) name path;
-        inherit state-version;
-      };
-    };
-  };
-
   # Basic WSL Configuration
   wsl = {
     enable = true;
@@ -53,6 +39,20 @@
     };
 
     startMenuLaunchers = true;
+  };
+
+  nm = {
+    setUser = {
+      name = user;
+      usersPath = ./users/.;
+      nixosUsers.en = false;
+      homeUsers.en = true;
+
+      system = {
+        inherit (system) name path;
+        inherit state-version;
+      };
+    };
   };
 
   # System packages must be declared at the top level
