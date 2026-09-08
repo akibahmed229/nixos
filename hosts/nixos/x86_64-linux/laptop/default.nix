@@ -4,6 +4,7 @@
   system,
   state-version,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -42,7 +43,9 @@
     startMenuLaunchers = true;
   };
 
-  nm = {
+  nm = let
+    secrets = fileName: toString inputs.secrets + fileName;
+  in {
     setUser = {
       name = user;
       usersPath = ./users/.;
@@ -52,6 +55,15 @@
       system = {
         inherit (system) name path;
         inherit state-version;
+      };
+    };
+
+    # ------------------- Atomic Secret Provisioning  -------------------------
+    sops = lib.mkIf (user == "akib") {
+      en = true;
+      defaultSopsFile = secrets "/secrets/secrets.yaml";
+      secrets = {
+        "akib/password/my_secret".neededForUsers = true;
       };
     };
 
