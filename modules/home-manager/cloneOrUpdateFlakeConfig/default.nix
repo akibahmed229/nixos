@@ -85,7 +85,7 @@ in {
             if "$git" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
               if [[ -z $("$git" status -s) ]]; then
                 echo "Sync: Repo clean. Pulling main..."
-                "$git" pull --ff-only
+                "$git" pull github --ff-only
                 "$git" submodule update --init --recursive --remote
 
                 # Update secrets folder
