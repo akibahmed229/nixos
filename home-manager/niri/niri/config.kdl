@@ -278,147 +278,252 @@ animations {
     workspace-switch {
         spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
     }
+
     window-open {
         duration-ms 150
         curve "ease-out-quad"
     }
+
     window-close {
         duration-ms 150
         curve "ease-out-cubic"
     }
+
     horizontal-view-movement {
         spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
     }
+
     window-movement {
         spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
+
     window-resize {
         spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
     }
+
     config-notification-open-close {
         spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
     }
+
     screenshot-ui-open {
         duration-ms 300
         curve "ease-out-quad"
     }
+
     overview-open-close {
         spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
     }
 }
 
-// ────────────── Window Rules ──────────────
+
+// ═══════════════════════════════════════════════
+// Window Rules
+// ═══════════════════════════════════════════════
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
 
-// Workspace "dev" rules
+// ────────────── Global Window Appearance ──────────────
+
 window-rule {
-    match app-id=r#"kitty$"# 
-    match app-id=r#"code$"# 
+    geometry-corner-radius 6
+    clip-to-geometry true
+}
+
+
+// ────────────── Global Glass Effect ──────────────
+
+// Everything gets the glass effect by default.
+// Apps that should remain normal are excluded.
+
+window-rule {
+    // Browsers
+    exclude app-id=r#"^firefox$"#
+    exclude app-id=r#"^chromium-browser$"#
+
+    // Virtualization
+    exclude app-id=r#"^virt-manager$"#
+
+    // Gaming
+    exclude app-id=r#"^steam$"#
+
+    // Media
+    exclude app-id=r#"^vlc$"#
+
+    opacity 0.88
+
+    draw-border-with-background false
+
+    background-effect {
+        blur true
+        xray false
+        noise 0.05
+        saturation 1.0
+    }
+}
+
+window-rule {
+    // Browsers
+    exclude app-id=r#"^firefox$"#
+    exclude app-id=r#"^chromium-browser$"#
+
+    // Virtualization
+    exclude app-id=r#"^virt-manager$"#
+
+    // Gaming
+    exclude app-id=r#"^steam$"#
+
+    // Media
+    exclude app-id=r#"^vlc$"#
+
+    match is-active=false
+
+    opacity 0.80
+}
+
+
+// ═══════════════════════════════════════════════
+// Workspace: dev
+// ═══════════════════════════════════════════════
+
+window-rule {
+    match app-id=r#"^kitty$"#
+    match app-id=r#"^code$"#
+
     open-maximized false
     open-on-workspace "dev"
 }
+
 window-rule {
-    match app-id=r#"emacs$"# 
-    match app-id=r#"android-studio$"# 
-    match app-id=r#"Postman$"# 
-    open-maximized true 
+    match app-id=r#"^emacs$"#
+    match app-id=r#"^android-studio$"#
+    match app-id=r#"^Postman$"#
+
+    open-maximized true
     open-on-workspace "dev"
 }
 
-// Workspace "browser" rules
+
+// ═══════════════════════════════════════════════
+// Workspace: browser
+// ═══════════════════════════════════════════════
+
 window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true // Always float Firefox PiP windows
+    match app-id=r#"^firefox$"# title="^Picture-in-Picture$"
+
+    open-floating true
     open-on-workspace "browser"
 }
+
 window-rule {
-    match app-id=r#"firefox$"# 
-    open-maximized true 
+    match app-id=r#"^firefox$"#
+
+    open-maximized true
     open-on-workspace "browser"
 }
+
 window-rule {
-    match app-id=r#"chromium-browser$"# 
+    match app-id=r#"^chromium-browser$"#
+
     open-maximized false
     open-on-workspace "browser"
 }
 
-// Workspace "chat" rules
+
+// ═══════════════════════════════════════════════
+// Workspace: chat
+// ═══════════════════════════════════════════════
+
 window-rule {
-    match app-id=r#"vesktop$"# 
+    match app-id=r#"^vesktop$"#
+
     open-maximized true
     open-on-workspace "chat"
 }
+
 window-rule {
-    match app-id=r#"org.telegram.desktop$"# 
+    match app-id=r#"^org\.telegram\.desktop$"#
+
     open-maximized false
     open-on-workspace "chat"
 }
 
-// Workspace "lounge" rules
+
+// ═══════════════════════════════════════════════
+// Workspace: lounge
+// ═══════════════════════════════════════════════
+
 window-rule {
-    match app-id=r#"Spotify$"# 
+    match app-id=r#"^Spotify$"#
+
     open-maximized true
     open-on-workspace "lounge"
 }
+
 window-rule {
-    match app-id=r#"vlc$"# 
+    match app-id=r#"^vlc$"#
+
     open-maximized true
     open-focused true
     open-on-workspace "lounge"
 }
 
-// Workspace "work" rules
+
+// ═══════════════════════════════════════════════
+// Workspace: work
+// ═══════════════════════════════════════════════
+
 window-rule {
-    match app-id=r#"soffice$"# 
-    match app-id=r#"libreoffice-impress$"# 
-    match app-id=r#"libreoffice-calc$"# 
+    match app-id=r#"^soffice$"#
+    match app-id=r#"^libreoffice-impress$"#
+    match app-id=r#"^libreoffice-calc$"#
+
     open-maximized true
     open-focused true
     open-on-workspace "work"
 }
+
 window-rule {
-    match app-id=r#"libreoffice-startcenter$"# 
+    match app-id=r#"^libreoffice-startcenter$"#
+
     open-maximized true
     open-on-workspace "work"
 }
 
-// Workspace "utils" rules
+
+// ═══════════════════════════════════════════════
+// Workspace: utils
+// ═══════════════════════════════════════════════
+
 window-rule {
-    match app-id=r#".virt-manager-wrapped$"# 
+    match app-id=r#".virt-manager-wrapped$"#
+
     open-maximized false
     open-on-workspace "utils"
 }
 
-// Floating app with no workspaces defined
+
+// ═══════════════════════════════════════════════
+// Floating Applications
+// ═══════════════════════════════════════════════
+
 window-rule {
-    match app-id=r#"Alacritty$"# 
-    match app-id=r#"Nsxiv$"# 
-    match app-id=r#"com.saivert.pwvucontrol$"# 
-    match app-id=r#"nm-connection-editor$"# 
-    match app-id=r#"org.kde.ark$"# 
-    match app-id=r#"org.openrgb.OpenRGB$"# 
-    match app-id=r#"org.gnome.Calculator$"# 
-    match app-id=r#"org.gnome.Calendar$"# 
+    match app-id=r#"^Alacritty$"#
+    match app-id=r#"^Nsxiv$"#
+    match app-id=r#"^com\.saivert\.pwvucontrol$"#
+    match app-id=r#"^nm-connection-editor$"#
+    match app-id=r#"^org\.kde\.ark$"#
+    match app-id=r#"^org\.openrgb\.OpenRGB$"#
+    match app-id=r#"^org\.gnome\.Calculator$"#
+    match app-id=r#"^org\.gnome\.Calendar$"#
+
     open-floating true
 }
+
 
 window-rule {
     geometry-corner-radius 6 // Set every window radius to 12
     clip-to-geometry true
 }
-
-// Transparency and blur
-// window-rule {
-//     match is-active=true
-//     // Apply to all windows
-//     opacity 0.99
-// }
-// window-rule {
-//     match is-active=false
-//     // Apply to all windows
-//     opacity 0.98
-// }
 
 // ────────────── Environment Variables ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#environment
