@@ -78,7 +78,7 @@
     dbus = {
       implementation = "broker";
       # needed for GNOME services outside of GNOME Desktop
-      packages = [pkgs.gcr];
+      packages = [pkgs.gcr_4];
     };
     udev = {
       packages = with pkgs; [gnome-settings-daemon];
