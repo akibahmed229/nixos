@@ -302,8 +302,8 @@ in {
     # notepadqq # Text editor.
 
     # 6. Gaming & Entertainment
-    mangohud # FPS counter and system stats overlay.
-    goverlay # Vulkan/OpenGL overlay manager.
+    # mangohud # FPS counter and system stats overlay.
+    # goverlay # Vulkan/OpenGL overlay manager.
     # geekbench # Benchmarking tool.
     # kdiskmark # Disk benchmarking tool.
     libadwaita # UI toolkit for GNOME.
