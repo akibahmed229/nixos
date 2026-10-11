@@ -23,7 +23,7 @@ in {
       kitty.en = true;
       thunar.en = true;
       espanso.en = false; # Buggy sometime
-      gemini-cli.en = false;
+      antigravity-cli.en = true;
       hypridle.en = true;
       emacs.en = true;
     }

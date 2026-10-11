@@ -5,15 +5,15 @@
   ...
 }:
 with lib; let
-  cfg = config.hm.gemini-cli;
+  cfg = config.hm.antigravity-cli;
 in {
-  options.hm.gemini-cli = {
-    en = mkEnableOption "Gemini CLI configuration";
+  options.hm.antigravity-cli = {
+    en = mkEnableOption "Antigravity CLI configuration";
 
     model = mkOption {
       type = types.str;
       default = "gemini-3-flash";
-      description = "The default Gemini model to use.";
+      description = "The default model to use.";
     };
 
     editor = mkOption {
@@ -25,19 +25,14 @@ in {
     extraSettings = mkOption {
       type = types.attrs;
       default = {};
-      description = "Additional settings to merge into the gemini-cli config.";
+      description = "Additional settings to merge into the antigravity-cli config.";
     };
   };
 
   config = mkIf cfg.en {
     programs.antigravity-cli = {
       enable = true;
-      package = pkgs.gemini-cli;
-
-      # Using the option for model selection
-      # Note: Adjust the attribute name if your specific version of gemini-cli
-      # uses 'model' or 'defaultModel'
-      # defaultModel = cfg.model;
+      package = pkgs.antigravity-cli;
 
       settings =
         recursiveUpdate {
