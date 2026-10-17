@@ -28,7 +28,7 @@
       wireplumber.en = true;
       kitty.en = true;
       espanso.en = true;
-      gemini-cli.en = true;
+      antigravity-cli.en = true;
     }
 
     (lib.mkIf (user == "akib") {
