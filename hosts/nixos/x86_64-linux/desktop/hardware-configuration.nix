@@ -108,7 +108,6 @@
   boot.initrd.luks = {
     devices."crypted" = {
       device = "/dev/disk/by-label/crypted";
-      preLVM = true;
     };
   };
 

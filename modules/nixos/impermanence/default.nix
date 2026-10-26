@@ -207,7 +207,6 @@ in {
   config = mkIf cfg.en {
     # 2a. Btrfs Snapshot Logic (Cleaning up old roots)
     boot.initrd.systemd = {
-      enable = true; # this end systemd support in stage1 - required for the below setup
       services.impermance-btrfs-rolling-root = {
         description = "Archiving existing BTRFS root subvolume and creating a fresh one";
         # Specify dependencies explicitly
