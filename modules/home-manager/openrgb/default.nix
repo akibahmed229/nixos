@@ -24,10 +24,12 @@ in {
 
     # Manage the OpenRGB config folder
     # Uses the 'config' folder in the same directory as this nix file
-    xdg.configFile."OpenRGB" = {
+    xdg.configFile."OpenRGB/profiles" = {
       source = ./config;
       recursive = true;
     };
+
+    xdg.configFile."OpenRGB/local-overrides.quirk".source = ./quirk/local-overrides.quirk;
 
     # Improvement: Run the server in the background so third-party
     # tools can control lighting automatically on boot.

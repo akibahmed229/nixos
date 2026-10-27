@@ -51,6 +51,7 @@
     "disk"
     "input"
     "adbusers"
+    "i2c"
     "wireshark"
     "openrazer"
   ];

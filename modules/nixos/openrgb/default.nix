@@ -12,6 +12,7 @@ in {
   # --- 1. Define Options ---
   options.nm.openrgb = {
     en = mkEnableOption "Enable OpenRGB hardware lighting control and server.";
+    enService = mkEnableOption "Enable service from the system.";
 
     motherboard = mkOption {
       type = types.str;
@@ -21,7 +22,7 @@ in {
 
     serverPort = mkOption {
       type = types.int;
-      default = 9999;
+      default = 6742;
       description = "The network port for the OpenRGB SDK server.";
     };
 
@@ -48,12 +49,16 @@ in {
     services.udev.packages = [pkgs.openrgb];
 
     # Configure the OpenRGB service
-    services.hardware.openrgb = {
+    services.hardware.openrgb = lib.mkIf cfg.enService {
       enable = true;
       package = cfg.package;
       motherboard = cfg.motherboard;
       server.port = cfg.serverPort;
     };
+
+    # user service in home-manager now owns the server;
+    # i2c access needs group membership
+    # users.users.${user}.extraGroups = ["i2c"];
 
     # Install the extra system packages (like the toggle script)
     environment.systemPackages = cfg.extraSystemPackages;
