@@ -135,9 +135,6 @@
           system = archName;
           config = {
             allowUnfree = true;
-            permittedInsecurePackages = [
-              "python3.12-pypdf2-3.0.1"
-            ];
           };
         };
         specialArgs =
