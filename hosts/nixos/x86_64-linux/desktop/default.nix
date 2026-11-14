@@ -64,7 +64,7 @@ in {
 
     # ---------------- kubernetes Container Orchestration ---------------------
     k8s = lib.mkIf (user == "akib") {
-      en = true;
+      en = false;
       role = "master";
       defaultUser = user;
       kubeMasterIP = "192.168.0.111";
