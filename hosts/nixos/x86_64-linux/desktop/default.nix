@@ -77,12 +77,12 @@ in {
       iptables.en = false;
       container = {
         n8n = {
-          en = true;
+          en = false;
           defaultUser = user;
           dbPassword = readSecretsFile "/n8n/pass.txt";
           domain = readSecretsFile "/ngrok/domain.txt";
         };
-        adguard.en = true;
+        adguard.en = false;
         jenkins.en = false;
         portainer.en = true;
         nextcloud = {
