@@ -23,6 +23,38 @@ with lib; let
       name = "DejaVu Serif";
     };
   };
+
+  defaultTarget = {
+    gtk.enable = true;
+    qt.enable = true;
+    gnome.enable = true;
+    alacritty.enable = true;
+    bat.enable = true;
+    btop.enable = true;
+    emacs.enable = true;
+    spicetify.enable = false; # Oftenable conflicts with custom themes
+    firefox = {
+      enable = true;
+      profileNames = [config.home.username]; # Auto-detect user
+    };
+    fzf.enable = true;
+    hyprland.enable = true;
+    kitty.enable = true;
+    lazygit.enable = true;
+    mangohud.enable = true;
+    neovim.enable = true;
+    neovim.transparentBackground.main = true;
+    nixvim.enable = true;
+    nixvim.transparentBackground.main = true;
+    swaylock.enable = true;
+    swaylock.image.enable = true;
+    sxiv.enable = true;
+    tmux.enable = true;
+    vesktop.enable = true;
+    vim.enable = true;
+    wofi.enable = true;
+    yazi.enable = true;
+  };
 in {
   # --- 0. Imports ---
   imports = [
@@ -77,37 +109,6 @@ in {
     # Integration Targets
     targets = mkOption {
       type = types.attrsOf types.unspecified;
-      default = {
-        gtk.enable = true;
-        qt.enable = true;
-        gnome.enable = true;
-        alacritty.enable = true;
-        bat.enable = true;
-        btop.enable = true;
-        emacs.enable = true;
-        spicetify.enable = false; # Oftenable conflicts with custom themes
-        firefox = {
-          enable = true;
-          profileNames = [config.home.username]; # Auto-detect user
-        };
-        fzf.enable = true;
-        hyprland.enable = true;
-        kitty.enable = true;
-        lazygit.enable = true;
-        mangohud.enable = true;
-        neovim.enable = true;
-        neovim.transparentBackground.main = true;
-        nixvim.enable = true;
-        nixvim.transparentBackground.main = true;
-        swaylock.enable = true;
-        swaylock.image.enable = true;
-        sxiv.enable = true;
-        tmux.enable = true;
-        vesktop.enable = true;
-        vim.enable = true;
-        wofi.enable = true;
-        yazi.enable = true;
-      };
       description = "Enable/disable specific Stylix targets.";
     };
 
@@ -150,7 +151,7 @@ in {
       };
 
       fonts = cfg.fonts;
-      targets = cfg.targets;
+      targets = defaultTarget // cfg.targets;
 
       opacity = {
         applications = 1.0;
