@@ -46,6 +46,9 @@ in {
     stylix = {
       en = true;
       themeScheme = mkRelativeToRoot "public/themes/base16Scheme/gruvbox-dark-soft.yaml";
+      targets = {
+        wayprompt.enable = false; # Broken
+      };
     };
   };
 
